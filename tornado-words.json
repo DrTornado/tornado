@@ -1,0 +1,2809 @@
+{
+ "app": "tornado",
+ "version": 1,
+ "exportedAt": "2026-07-21T21:28:53.428Z",
+ "words": [
+  {
+   "id": 1784659612001,
+   "word": "nostrils",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "Either of the two orifices located on the nose (or on the beak of a bird); used as a passage for air and other gases to travel the nasal passages.",
+     "ar": "أي من الفتحتين الموجودتين على الأنف (أو على منقار طائر )؛ تستخدم كممر للهواء والغازات الأخرى للسفر في الممرات الأنفية."
+    }
+   ],
+   "inflections": [
+    "nostril",
+    "nostrils"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "naris",
+     "ar": "مَنْخَر"
+    },
+    {
+     "en": "nosehole",
+     "ar": "فتحة الأنف"
+    }
+   ],
+   "collocations": [],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "id": 1784659584450,
+   "word": "prologue",
+   "ipa": "/ˈpɹəʊlɒɡ/",
+   "arabicPron": "برولوق",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A speech or section used as an introduction, especially to a play or novel.",
+     "ar": "خطاب أو قسم يستخدم كمقدمة، خاصة لمسرحية أو رواية."
+    },
+    {
+     "pos": "noun",
+     "en": "One who delivers a prologue.",
+     "ar": "الشخص الذي يقدم مقدمة."
+    },
+    {
+     "pos": "verb",
+     "en": "To introduce with a formal preface, or prologue.",
+     "ar": "للتقديم بمقدمة رسمية، أو مقدمة."
+    },
+    {
+     "pos": "noun",
+     "en": "A component of a computer program that prepares the computer to execute a routine.",
+     "ar": "مكون من برنامج كمبيوتر يعد الكمبيوتر لتنفيذ روتين."
+    },
+    {
+     "pos": "verb",
+     "en": "↑ Douglas Harper (2001–2026), “prologue”, in Online Etymology Dictionary.",
+     "ar": "↑ دوغلاس هاربر (2001-2026)، \"مقدمة\"، في قاموس علم أصول اللغة عبر الإنترنت."
+    },
+    {
+     "pos": "verb",
+     "en": "↑ Michaelis, Hermann; Jones, Daniel (1913), “'proulɔg [-loug]”, in A Phonetic Dictionary of the English Language (Sammlung Phonetischer Wörterbücher; 2)‎, Hanover: Carl Meyer (Gustav Prior), →OCLC, page 344.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "prologue",
+    "prologues",
+    "prologued",
+    "prologuing"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "forespeech",
+     "ar": ""
+    }
+   ],
+   "collocations": [
+    {
+     "en": "general prologue",
+     "ar": "مقدمة عامة"
+    },
+    {
+     "en": "contents prologue",
+     "ar": "مقدمة المحتويات"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "id": 1784659545425,
+   "word": "wick",
+   "ipa": "/wɪk/",
+   "arabicPron": "ويك",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "verb",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A bundle, twist, braid, or woven strip of cord, fabric, fibre/fiber, or other porous material in a candle, oil lamp, kerosene heater, or the like, that draws up liquid fuel, such as melted tallow, wax, or the oil, delivering it to the base of the flame for conversion to gases and burning; any other length of material burned for illumination in small successive portions.",
+     "ar": "حزمة أو لف أو تجديل أو شريط منسوج من الحبل أو القماش أو الألياف/الألياف أو غيرها من المواد المسامية في شمعة أو مصباح زيت أو سخان كيروسين أو ما شابه ذلك، يسحب الوقود السائل، مثل الشحم المذاب أو الشمع أو الزيت، ويوصله إلى قاعدة اللهب لتحويله إلى غازات وحرقه ؛ أي طول آخر من المواد المحترقة للإضاءة في أجزاء صغيرة متتالية."
+    },
+    {
+     "pos": "noun",
+     "en": "Any piece of porous material that conveys liquid by capillary action, such as a strip of gauze placed in a wound to serve as a drain.",
+     "ar": "أي قطعة من مادة مسامية تنقل السائل عن طريق عمل الشعيرات الدموية، مثل شريط من الشاش يوضع في الجرح ليكون بمثابة تصريف."
+    },
+    {
+     "pos": "verb",
+     "en": "To convey or draw off (liquid) by capillary action.",
+     "ar": "لنقل أو سحب (السائل) عن طريق عمل الشعيرات الدموية."
+    },
+    {
+     "pos": "verb",
+     "en": "(of a liquid) To traverse (i.e. be conveyed by capillary action) through a wick or other porous material, as water through a sponge. Usually followed by through.",
+     "ar": "(من سائل) لاجتياز (أي يتم نقلها عن طريق العمل الشعري) من خلال الفتيل أو غيرها من المواد المسامية، مثل الماء من خلال الإسفنج. عادة ما يتبعها من خلال."
+    },
+    {
+     "pos": "noun",
+     "en": "A braid or bundle of fibre or other porous material (now generally twisted or woven cotton) in a candle, kerosene heater, oil lamp, etc., that draws up a liquid fuel (such as melted tallow or wax, or oil) at one end, to be ignited at the other end to produce a flame.",
+     "ar": "جديلة أو حزمة من الألياف أو غيرها من المواد المسامية (التي أصبحت الآن قطنًا ملتويًا أو منسوجًا بشكل عام) في شمعة أو سخان كيروسين أو مصباح زيت، وما إلى ذلك، والتي تسحب وقودًا سائلًا (مثل الشحم المذاب أو الشمع أو الزيت) في أحد الطرفين، لإشعاله في الطرف الآخر لإنتاج لهب."
+    },
+    {
+     "pos": "noun",
+     "en": "Synonym of wicking (“the material of which wicks (etymology 1, noun sense&nbsp;1) are made”).",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "wick",
+    "wicks",
+    "wicked",
+    "wicking"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "taper",
+     "ar": "شمعة رفيعة"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "chad wick",
+     "ar": "شاد ويك"
+    },
+    {
+     "en": "fen wick",
+     "ar": "فتيل فين"
+    },
+    {
+     "en": "cotton wick",
+     "ar": "فتيل من القطن"
+    }
+   ],
+   "examples": [
+    {
+     "en": "Trim the wick fairly short, so that the flame does not smoke.",
+     "ar": "قم بقص الفتيل قصيرًا إلى حد ما، بحيث لا يدخن اللهب."
+    },
+    {
+     "en": "The fabric wicks perspiration away from the body.",
+     "ar": "يمتص القماش العرق بعيدًا عن الجسم."
+    },
+    {
+     "en": "The moisture slowly wicked through the wood.",
+     "ar": "الرطوبة أفسدت ببطء من خلال الخشب."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "id": 1784659495782,
+   "word": "opaque",
+   "ipa": "/əʊˈpeɪk/",
+   "arabicPron": "وبيك",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "verb",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "An area of darkness; a place or region with no light.",
+     "ar": "منطقة مظلمة ؛ مكان أو منطقة بلا ضوء."
+    },
+    {
+     "pos": "noun",
+     "en": "Something which is opaque rather than translucent.",
+     "ar": "شيء غير شفاف بدلاً من شفاف."
+    },
+    {
+     "pos": "verb",
+     "en": "To make, render (more) opaque.",
+     "ar": "لجعلها مبهمة (أكثر)."
+    },
+    {
+     "pos": "adjective",
+     "en": "Neither reflecting nor emitting light.",
+     "ar": "لا ينعكس ولا ينبعث منه ضوء."
+    },
+    {
+     "pos": "adjective",
+     "en": "Allowing little light to pass through, not translucent or transparent.",
+     "ar": "السماح بمرور القليل من الضوء، وليس شفافًا أو شفافًا."
+    },
+    {
+     "pos": "adjective",
+     "en": "Unclear, unintelligible, hard to get or explain the meaning of.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "opaque",
+    "opaques",
+    "opaqued",
+    "opaquing"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "blur",
+     "ar": "تمويه"
+    },
+    {
+     "en": "cloud",
+     "ar": "سحابة"
+    },
+    {
+     "en": "turbid",
+     "ar": "عكر, معكر, كثيف, كدر"
+    },
+    {
+     "en": "incomprehensible",
+     "ar": "غامض, مبهم, لا يسبر غوره"
+    },
+    {
+     "en": "solid",
+     "ar": "تصديرها"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "opaque white",
+     "ar": "أبيض غير شفاف"
+    },
+    {
+     "en": "opaque glass",
+     "ar": "زُجَاجٌ مُغَشَّى"
+    },
+    {
+     "en": "opaque material",
+     "ar": "مادة معتمة"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "id": 1784657490837,
+   "word": "flume",
+   "ipa": "/fluːm/",
+   "arabicPron": "فلوم",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A ravine or gorge, usually one with water running through.",
+     "ar": "وادٍ أو ممر ضيق، عادةً ما يمر عبره الماء."
+    },
+    {
+     "pos": "noun",
+     "en": "An open channel or trough used to direct or divert liquids.",
+     "ar": "قناة مفتوحة أو حوض يستخدم لتوجيه أو تحويل السوائل."
+    },
+    {
+     "pos": "verb",
+     "en": "To transport (logs of wood) by floating them along a water-filled channel or trough.",
+     "ar": "لنقل (جذوع الخشب) عن طريق تعويمها على طول قناة مملوءة بالماء أو حوض."
+    },
+    {
+     "pos": "noun",
+     "en": "An open channel or trough used to direct or divert liquids, especially to carry materials (logs, mined material, etc) or people (as a water slide), especially (but not always) one where the walls are raised above the surrounding terrain rather than recessed like a ditch.",
+     "ar": "قناة مفتوحة أو حوض يستخدم لتوجيه أو تحويل السوائل، خاصة لحمل المواد (جذوع الأشجار، المواد الملغومة، إلخ) أو الأشخاص (كشريحة مائية)، خاصة (ولكن ليس دائمًا) حيث يتم رفع الجدران فوق التضاريس المحيطة بدلاً من التجويف مثل الخندق."
+    }
+   ],
+   "inflections": [
+    "flume",
+    "flumes",
+    "flumed",
+    "fluming"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "gulch",
+     "ar": "العقيق واد عميق, جدول, وهد, مسيل ماء"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "flume experiments",
+     "ar": "تجارب المسيل للدموع"
+    },
+    {
+     "en": "wave flume",
+     "ar": "دفق الموجة"
+    },
+    {
+     "en": "parshall flume",
+     "ar": "قناة بارشال"
+    },
+    {
+     "en": "wooden flume",
+     "ar": "مسيل خشبي"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "id": 1784655998671,
+   "word": "ranching",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "verb",
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To operate a ranch; engage in ranching.",
+     "ar": "لتشغيل مزرعة ؛ الانخراط في تربية المواشي."
+    },
+    {
+     "pos": "verb",
+     "en": "To work on a ranch",
+     "ar": "للعمل في مزرعة"
+    },
+    {
+     "pos": "noun",
+     "en": "The business or activity of operating a ranch, of farming or raising livestock.",
+     "ar": "أعمال أو نشاط تشغيل مزرعة أو تربية الماشية."
+    },
+    {
+     "pos": "noun",
+     "en": "A ranch.",
+     "ar": "أي مزرعة ؟"
+    },
+    {
+     "pos": "verb",
+     "en": "present participle and gerund of ranch",
+     "ar": "تقديم نشاط وجيروند من مزرعة"
+    }
+   ],
+   "inflections": [
+    "ranching",
+    "ranchings",
+    "ranchinged",
+    "ranchinging"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [
+    {
+     "en": "ranching country",
+     "ar": "تربية المواشي في الريف"
+    },
+    {
+     "en": "ranching operations",
+     "ar": "عمليات تربية المواشي"
+    },
+    {
+     "en": "cattle ranching",
+     "ar": "تربية الماشية"
+    }
+   ],
+   "examples": [
+    {
+     "en": "Formally the widow still ranches, but in fact she leaves all ranching to the foreman.",
+     "ar": "رسميا الأرملة لا تزال مزارع، ولكن في الواقع أنها تترك كل تربية المواشي لرئيس العمال."
+    },
+    {
+     "en": "Ranching is his way of life.",
+     "ar": "المزرعة هي طريقته في الحياة."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "id": 1784655199109,
+   "word": "vocational",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "adjective",
+     "en": "Of or pertaining to a vocation.",
+     "ar": "أو تتعلق بمهنة."
+    },
+    {
+     "pos": "adjective",
+     "en": "(of education) That provides a special skill rather than academic knowledge.",
+     "ar": "(التعليم) الذي يوفر مهارة خاصة بدلاً من المعرفة الأكاديمية."
+    },
+    {
+     "pos": "adjective",
+     "en": "That provides a special skill rather than academic knowledge.",
+     "ar": "وهذا يوفر مهارة خاصة بدلاً من المعرفة الأكاديمية."
+    }
+   ],
+   "inflections": [
+    "vocational"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [
+    {
+     "en": "vocational education",
+     "ar": "تعليم مهني"
+    },
+    {
+     "en": "vocational training",
+     "ar": "تَدْرِيبٌ مِهْنِيّ"
+    },
+    {
+     "en": "vocational guidance",
+     "ar": "توجيه مهني"
+    }
+   ],
+   "examples": [
+    {
+     "en": "vocational scheme",
+     "ar": "المخطط المهني"
+    },
+    {
+     "en": "vocational course",
+     "ar": "تعليم مهني"
+    },
+    {
+     "en": "vocational program",
+     "ar": "البرنامج المهني"
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "id": 1784654476272,
+   "word": "laboratory",
+   "ipa": "/ləˈbɔɹətɹi/",
+   "arabicPron": "لابرتوري",
+   "oxford": "3000",
+   "cefr": "B1",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A room, building or institution equipped for scientific research, experimentation or analysis.",
+     "ar": "غرفة أو مبنى أو مؤسسة مجهزة للبحث العلمي أو التجريب أو التحليل."
+    },
+    {
+     "pos": "noun",
+     "en": "A place where chemicals, drugs or microbes are prepared or manufactured.",
+     "ar": "مكان يتم فيه تحضير أو تصنيع المواد الكيميائية أو العقاقير أو الميكروبات."
+    }
+   ],
+   "inflections": [
+    "laboratory",
+    "laboratories"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "science lab",
+     "ar": "** مختبر العلوم"
+    },
+    {
+     "en": "lab",
+     "ar": "مختبر, معمل كيميائي"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "laboratory tests",
+     "ar": "اختبارات المعمل"
+    },
+    {
+     "en": "laboratory studies",
+     "ar": "الدراسات المختبرية"
+    },
+    {
+     "en": "laboratory experiments",
+     "ar": "تجارب مخبرية"
+    },
+    {
+     "en": "research laboratory",
+     "ar": "مختبر البحث, المختبر التي تحدث به الدرايات المتعلة بالبحث"
+    },
+    {
+     "en": "national laboratory",
+     "ar": "المختبر الوطني لوزارة الطاقة الأمريكية"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "id": 1784653655818,
+   "word": "bibliography",
+   "ipa": "/bɪbliɒɡɹəfi/",
+   "arabicPron": "بيبليوقرفي",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A section of a written work containing citations, not quotations, to all the books referred to in the work.",
+     "ar": "قسم من عمل مكتوب يحتوي على اقتباسات، وليس اقتباسات، لجميع الكتب المشار إليها في العمل."
+    },
+    {
+     "pos": "noun",
+     "en": "A list of books or documents relevant to a particular subject or author.",
+     "ar": "قائمة بالكتب أو الوثائق ذات الصلة بموضوع معين أو مؤلف معين."
+    },
+    {
+     "pos": "noun",
+     "en": "The study of the history of books in terms of their classification, printing and publication.",
+     "ar": "دراسة تاريخ الكتب من حيث تصنيفها وطباعتها ونشرها."
+    }
+   ],
+   "inflections": [
+    "bibliography",
+    "bibliographies"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [
+    {
+     "en": "annotated bibliography",
+     "ar": "ثبت مرجعي مشروح."
+    },
+    {
+     "en": "selected bibliography",
+     "ar": "ثبت بمراجع مختارة"
+    },
+    {
+     "en": "select bibliography",
+     "ar": "قائمةٌ منتقاة من المراجع"
+    },
+    {
+     "en": "see bibliography",
+     "ar": "(انظر الببليوغرافيا.)"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "id": 1784653163402,
+   "word": "goggles",
+   "ipa": "/ˈɡɑ.ɡəlz/",
+   "arabicPron": "قاقلز",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "Protective eyewear set in a flexible frame to fit snugly against the face.",
+     "ar": "مجموعة نظارات واقية بإطار مرن لتناسب الوجه بشكل مريح."
+    },
+    {
+     "pos": "noun",
+     "en": "Blinds for shying horses.",
+     "ar": "ستائر للخيول الخجولة."
+    }
+   ],
+   "inflections": [
+    "goggle",
+    "goggles",
+    "goggled",
+    "goggling"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "gawk",
+     "ar": "البله, الأخرق"
+    },
+    {
+     "en": "gape",
+     "ar": "تثاءب, فغر فاه, فتح فامه"
+    },
+    {
+     "en": "gawp",
+     "ar": "(الانجليزية البريطانية) فغر فاه"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "Goggles must be worn in the swimming pool.",
+     "ar": "يجب ارتداء النظارات الواقية في حمام السباحة."
+    },
+    {
+     "en": "We had to put on our goggles as it was snowing outside.",
+     "ar": "كان علينا أن نرتدي نظاراتنا الواقية بينما كان الثلج يتساقط في الخارج."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "id": 1784652215752,
+   "word": "glimpses",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "5000",
+   "cefr": "C1",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A brief look, glance, or peek.",
+     "ar": "نظرة موجزة أو نظرة خاطفة أو نظرة خاطفة."
+    },
+    {
+     "pos": "noun",
+     "en": "A sudden flash.",
+     "ar": "ومضة مفاجئة."
+    },
+    {
+     "pos": "verb",
+     "en": "To see or view briefly or incompletely.",
+     "ar": "الرؤية أو المشاهدة باختصار أو بشكل غير كامل."
+    },
+    {
+     "pos": "verb",
+     "en": "To appear by glimpses.",
+     "ar": "لتظهر من خلال لمحات."
+    }
+   ],
+   "inflections": [
+    "glimpse",
+    "glimpses",
+    "glimpsed",
+    "glimpsing"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "catch sight of",
+     "ar": "رأى, لاحظ, معد"
+    },
+    {
+     "en": "detect",
+     "ar": "كشف"
+    },
+    {
+     "en": "espy",
+     "ar": "لمح, رأى من بعيد"
+    },
+    {
+     "en": "notice",
+     "ar": "إشعار"
+    },
+    {
+     "en": "perceive",
+     "ar": "فهم, لمس, أدرك, وعى, ميز, لاحظ"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "I only got a glimpse of the car, so I can tell you the colour but not the registration number.",
+     "ar": "حصلت فقط على لمحة عن السيارة، حتى أتمكن من إخبارك باللون ولكن ليس رقم التسجيل."
+    },
+    {
+     "en": "I have only begun to glimpse the magnitude of the problem.",
+     "ar": "لقد بدأت للتو في إلقاء نظرة على حجم المشكلة."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "id": 1784651479795,
+   "word": "cultivating",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "5000",
+   "cefr": "C1",
+   "pos": [
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To grow plants, notably crops",
+     "ar": "لزراعة النباتات، ولا سيما المحاصيل"
+    },
+    {
+     "pos": "verb",
+     "en": "To nurture; to foster; to tend.",
+     "ar": "لرعاية ؛ لرعاية ؛ لرعاية."
+    },
+    {
+     "pos": "verb",
+     "en": "present participle and gerund of cultivate",
+     "ar": "تقديم الفاعلية وجيروند من زراعة"
+    }
+   ],
+   "inflections": [
+    "cultivating",
+    "cultivatings",
+    "cultivatinged",
+    "cultivatinging"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "Most farmers in this region cultivate maize.",
+     "ar": "معظم المزارعين في هذه المنطقة يزرعون الذرة."
+    },
+    {
+     "en": "They tried to cultivate an interest in learning among their students.",
+     "ar": "حاولوا تنمية الاهتمام بالتعلم بين طلابهم."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "id": 1784650954854,
+   "word": "lagerpetid",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "Any of the pterosauromorphs of the family Lagerpetidae.",
+     "ar": "أي من مجسمات التيروصور من عائلة Lagerpetidae."
+    }
+   ],
+   "inflections": [
+    "lagerpetid",
+    "lagerpetids"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "id": 1784636175360,
+   "word": "pairs",
+   "ipa": "/pɛəz/",
+   "arabicPron": "بيز",
+   "oxford": "3000",
+   "cefr": "A1",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "Two similar or identical things taken together; often followed by of.",
+     "ar": "شيئان متشابهان أو متطابقان معًا ؛ غالبًا ما يتبعهما."
+    },
+    {
+     "pos": "noun",
+     "en": "Two people in a relationship, partnership or friendship.",
+     "ar": "شخصان في علاقة أو شراكة أو صداقة."
+    },
+    {
+     "pos": "verb",
+     "en": "To group into one or more sets of two.",
+     "ar": "للتجميع في مجموعة واحدة أو أكثر من مجموعتين."
+    },
+    {
+     "pos": "verb",
+     "en": "To bring two (animals, notably dogs) together for mating.",
+     "ar": "لجلب اثنين (الحيوانات، ولا سيما الكلاب) معا للتزاوج."
+    },
+    {
+     "pos": "verb",
+     "en": "To impair, to make worse.",
+     "ar": "يضعف، ويزيد الأمر سوءًا."
+    },
+    {
+     "pos": "verb",
+     "en": "To become worse, to deteriorate.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "pairs",
+    "pairses",
+    "pairsed",
+    "pairsing"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "pair of spectacles",
+     "ar": "زوج من النظارات"
+    },
+    {
+     "en": "spectacles",
+     "ar": "نظارات"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "three pairs",
+     "ar": "ثلاثة أزواج"
+    },
+    {
+     "en": "base pairs",
+     "ar": "أزواج أساسية"
+    },
+    {
+     "en": "four pairs",
+     "ar": "أربعة أزواج"
+    }
+   ],
+   "examples": [
+    {
+     "en": "I couldn't decide which of the pair of designer shirts I preferred, so I bought the pair.",
+     "ar": "لم أتمكن من تحديد أي من القمصان المصممة التي أفضلها، لذلك اشتريت الزوج."
+    },
+    {
+     "en": "Spouses should make a great pair.",
+     "ar": "يجب أن يكون الزوجان زوجًا رائعًا."
+    },
+    {
+     "en": "The wedding guests were paired boy/girl and groom's party/bride's party.",
+     "ar": "تم إقران ضيوف الزفاف بحفلة الصبي/الفتاة وحفلة العريس/العروس."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pai/pair_/pair__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/p/pai/pair_/pair__gb_1.mp3",
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "id": 1784636145662,
+   "word": "overcome",
+   "ipa": "/ˌəʊvəˈkʌm/",
+   "arabicPron": "وڤركام",
+   "oxford": "3000",
+   "cefr": "B2",
+   "pos": [
+    "noun",
+    "verb",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "The burden or recurring theme in a song.",
+     "ar": "العبء أو السمة المتكررة في أغنية."
+    },
+    {
+     "pos": "noun",
+     "en": "A surplus.",
+     "ar": "فائض."
+    },
+    {
+     "pos": "verb",
+     "en": "To surmount (a physical or abstract obstacle); to prevail over, to get the better of.",
+     "ar": "للتغلب على (عقبة مادية أو مجردة )؛ للتغلب على، للحصول على أفضل من."
+    },
+    {
+     "pos": "verb",
+     "en": "To win or prevail in some sort of battle, contest, etc.",
+     "ar": "للفوز أو الفوز في نوع من المعارك أو المسابقات وما إلى ذلك."
+    },
+    {
+     "pos": "verb",
+     "en": "To prevail.",
+     "ar": "أن تسود."
+    },
+    {
+     "pos": "verb",
+     "en": "To recover from (a difficulty), to get over.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "overcome",
+    "overcomes",
+    "overcomed",
+    "overcoming"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "inundated",
+     "ar": "غارِق ; مَغْمُور"
+    },
+    {
+     "en": "subdue",
+     "ar": "كتم, قمع, غلب, خضع, قهر, خفض الضوء, خفف, خفض, كبت, كبح"
+    },
+    {
+     "en": "surmount",
+     "ar": "تغلب على المصاعب, تسلق, علا"
+    },
+    {
+     "en": "weak",
+     "ar": "ضعيف"
+    },
+    {
+     "en": "master",
+     "ar": "شكل رئيسي"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "to overcome enemies in battle",
+     "ar": "للتغلب على الأعداء في المعركة"
+    },
+    {
+     "en": "We shall overcome.",
+     "ar": "فإنما الغلبة لنا."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "ipaUS": "/ˌoʊvəɹˈkʌm/",
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/o/ove/overc/overcome__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/o/ove/overc/overcome__gb_1.mp3",
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "id": 1784636081936,
+   "word": "interplay",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "Interaction; reciprocal relationship.",
+     "ar": "التفاعل ؛ علاقة متبادلة."
+    },
+    {
+     "pos": "verb",
+     "en": "To interact",
+     "ar": "للتفاعل"
+    },
+    {
+     "pos": "verb",
+     "en": "To interact.",
+     "ar": "للتفاعل."
+    }
+   ],
+   "inflections": [
+    "interplay",
+    "interplays",
+    "interplayed",
+    "interplaying"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [
+    {
+     "en": "complex interplay",
+     "ar": "تفاعل معقد"
+    },
+    {
+     "en": "dynamic interplay",
+     "ar": "التفاعل الديناميكي"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784575774054,
+   "word": "blazing",
+   "ipa": "/ˈbleɪzɪŋ/",
+   "arabicPron": "بليزينق",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "verb",
+    "noun",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To be on fire, especially producing bright flames.",
+     "ar": "أن تكون مشتعلًا، خاصةً إذا أنتجت لهبًا ساطعًا."
+    },
+    {
+     "pos": "verb",
+     "en": "To send forth or reflect a bright light; shine like a flame.",
+     "ar": "لإرسال أو عكس ضوء ساطع ؛ تألق مثل اللهب."
+    },
+    {
+     "pos": "verb",
+     "en": "To blow, as from a trumpet",
+     "ar": "ينفخ، كما من بوق"
+    },
+    {
+     "pos": "verb",
+     "en": "To publish; announce publicly",
+     "ar": "ينشر ؛ يعلن علنا"
+    },
+    {
+     "pos": "noun",
+     "en": "The act of something that blazes or burns.",
+     "ar": "فعل شيء يشتعل أو يحترق."
+    },
+    {
+     "pos": "adjective",
+     "en": "Very fast.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "blazing",
+    "blazings",
+    "blazinged",
+    "blazinging"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "conspicuous",
+     "ar": "واضح, جلي, رائع, بارز, ظاهر"
+    },
+    {
+     "en": "bright",
+     "ar": "ملحوظة:"
+    },
+    {
+     "en": "blaze",
+     "ar": "شعلة, تألق, انفجار, بريق, غرة الفرس, علامة في الشجرة, لمع, حريق"
+    },
+    {
+     "en": "blatant",
+     "ar": "صراخي, وقح, صارخ, صخاب, سمج"
+    },
+    {
+     "en": "dazzling",
+     "ar": "لامع, ساطع, باهر, متلألئ, رائع"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "blazing fire",
+     "ar": "السعير"
+    },
+    {
+     "en": "blazing sun",
+     "ar": "شمس حارقة"
+    },
+    {
+     "en": "blazing star",
+     "ar": "النجم الحارق"
+    },
+    {
+     "en": "eyes blazing",
+     "ar": "عيون ملتهبة"
+    }
+   ],
+   "examples": [
+    {
+     "en": "The campfire blazed merrily.",
+     "ar": "اشتعلت نار المخيم بمرح."
+    },
+    {
+     "en": "the blazings of many fires",
+     "ar": "اشتعال العديد من الحرائق"
+    },
+    {
+     "en": "The actress, with her perfectly-curved body, was simply blazing in her new movie!",
+     "ar": "كانت الممثلة، بجسدها المنحني تمامًا، تشتعل ببساطة في فيلمها الجديد!"
+    }
+   ],
+   "differences": [],
+   "audioGen": "https://api.dictionaryapi.dev/media/pronunciations/en/blazing-au.mp3",
+   "interval": 0,
+   "due": 0,
+   "freqLabel": "Top 18,000 words"
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784574885662,
+   "word": "calorimeter",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "An apparatus for measuring the heat generated or absorbed by either a chemical reaction, change of phase or some other physical change.",
+     "ar": "جهاز لقياس الحرارة المتولدة أو الممتصة إما عن طريق تفاعل كيميائي أو تغيير في الطور أو بعض التغييرات الفيزيائية الأخرى."
+    }
+   ],
+   "inflections": [
+    "calorimeter",
+    "calorimeters"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [
+    {
+     "en": "bomb calorimeter",
+     "ar": "مِقْيَاسُ الكالوري القُلِّيّ"
+    },
+    {
+     "en": "scanning calorimeter",
+     "ar": "مسعر المسح الضوئي"
+    },
+    {
+     "en": "respiration calorimeter",
+     "ar": "مِقْيَاسُ الكالوري التَّنَفُّسِيّ"
+    },
+    {
+     "en": "ice calorimeter",
+     "ar": "مسعر جليدي"
+    },
+    {
+     "en": "throttling calorimeter",
+     "ar": "مسعر خانق"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784574299359,
+   "word": "sails",
+   "ipa": "/seɪlz/",
+   "arabicPron": "سيلز",
+   "oxford": "3000",
+   "cefr": "A2",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A piece of fabric attached to a boat and arranged such that it causes the wind to drive the boat along. The sail may be attached to the boat via a combination of mast, spars and ropes.",
+     "ar": "قطعة من القماش متصلة بقارب ومرتبة بحيث تتسبب في دفع الرياح للقارب. يمكن ربط الشراع بالقارب عبر مزيج من الصاري والصاري والحبال."
+    },
+    {
+     "pos": "noun",
+     "en": "(nautical,uncountable) The concept of a sail or sails, as if a substance.",
+     "ar": "(بحري،لا يحصى) مفهوم الشراع أو الأشرعة، كما لو كانت مادة."
+    },
+    {
+     "pos": "verb",
+     "en": "To be impelled or driven forward by the action of wind upon sails, as a ship on water; to be impelled on a body of water by steam or other power.",
+     "ar": "أن يتم دفعه أو دفعه إلى الأمام بفعل الرياح على الأشرعة، كسفينة على الماء ؛ أن يتم دفعه على جسم مائي بواسطة البخار أو أي قوة أخرى."
+    },
+    {
+     "pos": "verb",
+     "en": "To move through or on the water; to swim, as a fish or a waterfowl.",
+     "ar": "التحرك عبر الماء أو فوقه ؛ للسباحة، كسمكة أو كطيور مائية."
+    },
+    {
+     "pos": "noun",
+     "en": "plural of sail",
+     "ar": "جمع الشراع"
+    },
+    {
+     "pos": "noun",
+     "en": "The sailmaker on board ship.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "sails",
+    "sailses",
+    "sailsed",
+    "sailsing"
+   ],
+   "derivatives": [
+    {
+     "en": "sailor (noun)",
+     "ar": "ملاح, بحار, الملاح"
+    }
+   ],
+   "synonyms": [
+    {
+     "en": "sweep",
+     "ar": "يكنس"
+    },
+    {
+     "en": "voyage",
+     "ar": "رحلة"
+    },
+    {
+     "en": "canvas",
+     "ar": "لوحة"
+    },
+    {
+     "en": "navigate",
+     "ar": "يقود، أو يتعامل يشكل فعال مع وضع صعب"
+    },
+    {
+     "en": "sheet",
+     "ar": "الصفحة"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "Take in sail: a storm is coming.",
+     "ar": "خذ شراعًا: عاصفة قادمة."
+    }
+   ],
+   "differences": [],
+   "ipaUS": "/seɪlz/",
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/sai/sail_/sail__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/s/sai/sail_/sail__gb_2.mp3",
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784573942016,
+   "word": "poverty",
+   "ipa": "/ˈpɒvəti/",
+   "arabicPron": "باڤرتي",
+   "oxford": "3000",
+   "cefr": "B1",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "The quality or state of being poor; lack of money",
+     "ar": "نوعية أو حالة الرداءة ؛ قلة المال"
+    },
+    {
+     "pos": "noun",
+     "en": "Any deficiency of elements or resources that are needed or desired, or that constitute richness",
+     "ar": "أي نقص في العناصر أو الموارد اللازمة أو المرغوبة، أو التي تشكل ثراء"
+    },
+    {
+     "pos": "noun",
+     "en": "A deficiency of something needed or desired",
+     "ar": "نقص في شيء مطلوب أو مرغوب فيه"
+    }
+   ],
+   "inflections": [
+    "poverty",
+    "poverties"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "impoverishment",
+     "ar": "إفْقار"
+    },
+    {
+     "en": "poorness",
+     "ar": "فقر, عوز, عجز, حاجة, كفاف, دون المتوسط, رديء"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "poverty line",
+     "ar": "خط الفقر, الحد الأدنى لمستوى الدخل لتحديد أعداد الناس الذين يعيشون في الفقر"
+    },
+    {
+     "en": "poverty reduction",
+     "ar": "الحد من الفقر"
+    }
+   ],
+   "examples": [
+    {
+     "en": "poverty of soil",
+     "ar": "فقر التربة"
+    },
+    {
+     "en": "get into poverty",
+     "ar": "الوقوع في براثن الفقر"
+    },
+    {
+     "en": "get out of poverty",
+     "ar": "للخروج من الفقر."
+    }
+   ],
+   "differences": [],
+   "ipaUS": "/ˈpɑːvɚti/",
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pov/pover/poverty__us_3.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/p/pov/pover/poverty__gb_2.mp3",
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784531567933,
+   "word": "mutations",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "Any alteration or change.",
+     "ar": "أي تغيير أو تغيير."
+    },
+    {
+     "pos": "noun",
+     "en": "Any heritable change of the base-pair sequence of genetic material.",
+     "ar": "أي تغيير وراثي في تسلسل زوج القاعدة للمادة الوراثية."
+    },
+    {
+     "pos": "noun",
+     "en": "plural of mutation",
+     "ar": "جمع الطفرة"
+    }
+   ],
+   "inflections": [
+    "mutations",
+    "mutationses"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "sport",
+     "ar": "الرياضة"
+    },
+    {
+     "en": "mutant",
+     "ar": "طافِرَة"
+    }
+   ],
+   "collocations": [],
+   "examples": [],
+   "differences": [],
+   "interval": 0,
+   "due": 0,
+   "freqLabel": "Top 18,000 words"
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784531150409,
+   "word": "molluscs",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A soft-bodied invertebrate of the phylum Mollusca, typically with a hard shell of one or more pieces.",
+     "ar": "اللافقاريات رخوة الجسم من شعبة الرخويات، وعادة مع قشرة صلبة من قطعة واحدة أو أكثر."
+    },
+    {
+     "pos": "noun",
+     "en": "A weak-willed person.",
+     "ar": "شخص ضعيف الإرادة."
+    },
+    {
+     "pos": "noun",
+     "en": "plural of mollusc",
+     "ar": "جمع الرخويات"
+    }
+   ],
+   "inflections": [
+    "molluscs",
+    "molluscses"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "little girl",
+     "ar": "أيتها الفتاة الصغيرة"
+    },
+    {
+     "en": "nose of wax",
+     "ar": "أنف الشمع"
+    },
+    {
+     "en": "pushover",
+     "ar": "مهمة سهلة, خصم ضعيف, شخص عاجز عن مقاومة الإغراء"
+    },
+    {
+     "en": "shellfish",
+     "ar": "محار, طعام البحر"
+    },
+    {
+     "en": "mollusk",
+     "ar": "رخوي حيوان من الرخو يات كالحلزون"
+    }
+   ],
+   "collocations": [],
+   "examples": [],
+   "differences": [],
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784531083797,
+   "word": "electrodes",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "The terminal through which electric current passes between metallic and nonmetallic parts of an electric circuit",
+     "ar": "الطرف الذي يمر من خلاله التيار الكهربائي بين الأجزاء المعدنية وغير المعدنية للدائرة الكهربائية"
+    },
+    {
+     "pos": "noun",
+     "en": "A collector or emitter of electric charge in a semiconducting device",
+     "ar": "جامع أو باعث للشحنة الكهربائية في جهاز شبه موصل"
+    },
+    {
+     "pos": "noun",
+     "en": "plural of electrode",
+     "ar": "جمع القطب الكهربائي"
+    }
+   ],
+   "inflections": [
+    "electrodes",
+    "electrodeses"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [],
+   "examples": [],
+   "differences": [],
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784531064403,
+   "word": "snails",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "Any of very many animals (either hermaphroditic or nonhermaphroditic), of the class Gastropoda, having a coiled shell.",
+     "ar": "أي من العديد من الحيوانات (إما خنثى أو غير خنثى)، من فئة Gastropoda، لها قشرة ملفوفة."
+    },
+    {
+     "pos": "noun",
+     "en": "(by extension) A slow person; a sluggard.",
+     "ar": "(بالتبعية) شخص بطيء ؛ كسلان."
+    },
+    {
+     "pos": "verb",
+     "en": "To move or travel very slowly.",
+     "ar": "التحرك أو السفر ببطء شديد."
+    },
+    {
+     "pos": "noun",
+     "en": "plural of snail",
+     "ar": "جمع الحلزون"
+    },
+    {
+     "pos": "verb",
+     "en": "third-person singular simple present indicative of snail",
+     "ar": "هدية بسيطة لشخص ثالث تدل على الحلزون"
+    }
+   ],
+   "inflections": [
+    "snails",
+    "snailses",
+    "snailsed",
+    "snailsing"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "dodman",
+     "ar": "دودمان"
+    },
+    {
+     "en": "hodmandod",
+     "ar": "هودماندود"
+    },
+    {
+     "en": "escargot",
+     "ar": "حلزون, (الفرنسية) حلزون للأكل يقدم عادة مع قوقعته مع صلصة الثوم والزبدة"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "The cars were snailing along the motorway during the rush hour.",
+     "ar": "كانت السيارات تتسلل على طول الطريق السريع خلال ساعة الذروة."
+    }
+   ],
+   "differences": [],
+   "interval": 0,
+   "due": 0,
+   "freqLabel": "Top 18,000 words"
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784495900971,
+   "word": "surfer",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A person who rides a surfboard.",
+     "ar": "شخص يركب لوح تزلج."
+    },
+    {
+     "pos": "noun",
+     "en": "A person who surfs the Internet.",
+     "ar": "شخص يتصفح الإنترنت."
+    },
+    {
+     "pos": "noun",
+     "en": "A duck, the surf scoter (Melanitta perspicillata).",
+     "ar": "بطة، سكوتر ركوب الأمواج (Melanitta perspicillata)."
+    }
+   ],
+   "inflections": [
+    "surfer",
+    "surfers"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "surf rider",
+     "ar": "راكب الأمواج"
+    },
+    {
+     "en": "surfboarder",
+     "ar": "ركوب الأمواج"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "surfer girl",
+     "ar": "راكبة الأمواج"
+    },
+    {
+     "en": "web surfer",
+     "ar": "راكب الأمواج على شبكة الإنترنت"
+    },
+    {
+     "en": "silver surfer",
+     "ar": "راكب الأمواج الفضي"
+    },
+    {
+     "en": "california surfer",
+     "ar": "كاليفورنيا سيرفر"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "interval": 0,
+   "due": 0,
+   "freqLabel": "Top 18,000 words"
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784495777063,
+   "word": "hostess",
+   "ipa": "/ˈhəʊstəs/",
+   "arabicPron": "هوستس",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A female host.",
+     "ar": "مضيفة أنثى."
+    },
+    {
+     "pos": "noun",
+     "en": "A female innkeeper.",
+     "ar": "ضابطة نزل."
+    },
+    {
+     "pos": "verb",
+     "en": "To host, as a woman.",
+     "ar": "للاستضافة، كامرأة."
+    },
+    {
+     "pos": "noun",
+     "en": "Stewardess: a woman steward on an airplane.",
+     "ar": "مضيفة: امرأة مضيفة على متن طائرة."
+    }
+   ],
+   "inflections": [
+    "hostess",
+    "hostesses",
+    "hostessed",
+    "hostessing"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "hostress",
+     "ar": "مضيفة"
+    },
+    {
+     "en": "stewardess",
+     "ar": "مضيفة, صاحبة نزل"
+    },
+    {
+     "en": "air hostess",
+     "ar": "المضيفة الجوية, مضيفة في الطائرة"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "The host and hostess greeted their guests at the door.",
+     "ar": "رحب المضيف والمضيفة بضيوفهما عند الباب."
+    }
+   ],
+   "differences": [],
+   "ipaUS": "/ˈhoʊstəs/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/hostess-us.mp3",
+   "interval": 0,
+   "due": 0,
+   "freqLabel": "Top 18,000 words"
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784495753959,
+   "word": "steward",
+   "ipa": "/ˈstjuː.əd/",
+   "arabicPron": "ستورد",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A person who manages the property or affairs for another entity, particularly the chief administrator of a medieval manor.",
+     "ar": "الشخص الذي يدير الممتلكات أو الشؤون لكيان آخر، ولا سيما المدير الرئيسي لمزرعة من القرون الوسطى."
+    },
+    {
+     "pos": "noun",
+     "en": "A ship's officer who is in charge of making dining arrangements and provisions.",
+     "ar": "ضابط السفينة المسؤول عن اتخاذ ترتيبات الطعام والمؤن."
+    },
+    {
+     "pos": "verb",
+     "en": "To act as the steward or caretaker of (something)",
+     "ar": "العمل كمشرف أو راعٍ (لشيء ما)"
+    },
+    {
+     "pos": "noun",
+     "en": "A person who manages the property or affairs for another entity. A chief administrator of a medieval manor.",
+     "ar": "الشخص الذي يدير الممتلكات أو الشؤون لجهة أخرى. مدير رئيسي لمزرعة من القرون الوسطى."
+    },
+    {
+     "pos": "noun",
+     "en": "A chief administrator of a medieval manor.",
+     "ar": "مدير رئيسي لمزرعة من القرون الوسطى."
+    }
+   ],
+   "inflections": [
+    "steward",
+    "stewards",
+    "stewarded",
+    "stewarding"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "bailiff",
+     "ar": "مساعد المأمور, وكيل مزرعة, حاجب محكمة, رسول محكمة"
+    },
+    {
+     "en": "provost",
+     "ar": "رئيس كنيسة, عمدة, عميد, سجان, ناظر السجن, مدير"
+    },
+    {
+     "en": "air steward",
+     "ar": "مضيف طيران, شخص يخدم ركاب الطائرة"
+    },
+    {
+     "en": "airline steward",
+     "ar": "مضيفة طيران"
+    },
+    {
+     "en": "flight attendant",
+     "ar": "مضيفة"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "shop steward",
+     "ar": "ممثل نقابة عمالية, ممثل العمال"
+    },
+    {
+     "en": "high steward",
+     "ar": "إذا حوكم أحد اللوردات أو رجال الدولة أمام مجلس اللوردات بتهمة الخيانة أو غيرها من الجنايات، عين أحد الأعضاء اللوردات lord high steward رئيساً لجلسة المحاكمة ورئيسا مؤقتاً speaker للمجلس."
+    },
+    {
+     "en": "chief steward",
+     "ar": "كبير المضيفين"
+    },
+    {
+     "en": "lord steward",
+     "ar": "إذا حوكم أحد اللوردات أو رجال الدولة أمام مجلس اللوردات بتهمة الخيانة أو غيرها من الجنايات، عين أحد الأعضاء اللوردات lord high steward رئيساً لجلسة المحاكمة ورئيسا مؤقتاً speaker للمجلس."
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "ipaUS": "/ˈstuɚd/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/steward-us.mp3",
+   "interval": 0,
+   "due": 0,
+   "freqLabel": "Top 18,000 words"
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784495669251,
+   "word": "astronomy",
+   "ipa": "/æˈstɹɑnəˌmi/",
+   "arabicPron": "استرانمي",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "The study of the physical universe beyond the Earth's atmosphere, including the process of mapping locations and properties of the matter and radiation in the universe.",
+     "ar": "دراسة الكون المادي خارج الغلاف الجوي للأرض، بما في ذلك عملية رسم خرائط مواقع وخصائص المادة والإشعاع في الكون."
+    },
+    {
+     "pos": "noun",
+     "en": "Astrology.",
+     "ar": "التنجيم"
+    }
+   ],
+   "inflections": [
+    "astronomy",
+    "astronomies"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "stargazing",
+     "ar": "رصد النجوم"
+    },
+    {
+     "en": "uranology",
+     "ar": "علم الكون"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "radio astronomy",
+     "ar": "عِلْمُ الفَلَكِ الإشْعاعِيّ"
+    },
+    {
+     "en": "modern astronomy",
+     "ar": "علم الفلك الحديث"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "ipaUS": "/æˈstɹɑnəˌmi/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/astronomy-us.mp3",
+   "interval": 0,
+   "due": 0,
+   "freqLabel": "Top 18,000 words"
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784488534430,
+   "word": "preliminary",
+   "ipa": "/pɹɪˈlɪmɪnəɹi/",
+   "arabicPron": "بريليمينري",
+   "oxford": "5000",
+   "cefr": "C1",
+   "pos": [
+    "noun",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A preparation for a main matter; an introduction.",
+     "ar": "تحضير لمسألة رئيسية ؛ مقدمة."
+    },
+    {
+     "pos": "noun",
+     "en": "Any of a series of sports events that determine the finalists",
+     "ar": "أي من سلسلة الأحداث الرياضية التي تحدد المتأهلين للتصفيات النهائية"
+    },
+    {
+     "pos": "adjective",
+     "en": "In preparation for the main matter; initial, introductory, preparatory.",
+     "ar": "استعدادا للمسألة الرئيسية ؛ الأولية، التمهيدية، التحضيرية."
+    },
+    {
+     "pos": "noun",
+     "en": "Any of a series of sports events that determine the finalists.",
+     "ar": "أي من سلسلة الأحداث الرياضية التي تحدد المتأهلين للتصفيات النهائية."
+    },
+    {
+     "pos": "noun",
+     "en": "A relatively minor contest that precedes a major one, especially in boxing.",
+     "ar": "مسابقة صغيرة نسبيًا تسبق مسابقة رئيسية، خاصة في الملاكمة."
+    }
+   ],
+   "inflections": [
+    "preliminary",
+    "preliminaries"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "initial",
+     "ar": "مبدئي"
+    },
+    {
+     "en": "introductory",
+     "ar": "تمهيدية"
+    },
+    {
+     "en": "preparatory",
+     "ar": "إبتدائي"
+    },
+    {
+     "en": "overture",
+     "ar": "استهلال, إفتتاح جلسة, تمهيد موسيقي, اقتراح, مفاتحة, عرض, نافذة, رحابة, فتحة, شق, سياسة الإنفتاح الإقتصادي"
+    },
+    {
+     "en": "prelude",
+     "ar": ""
+    }
+   ],
+   "collocations": [
+    {
+     "en": "preliminary report",
+     "ar": "تقرير أولي ، تمهيدي"
+    },
+    {
+     "en": "preliminary results",
+     "ar": "انتخابات (برلمانية/تشريعية)"
+    },
+    {
+     "en": "preliminary study",
+     "ar": "دراسة تمهيدية"
+    }
+   ],
+   "examples": [
+    {
+     "en": "These are just the preliminary results.",
+     "ar": "هذه ليست سوى النتائج الأولية."
+    }
+   ],
+   "differences": [],
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pre/preli/preliminary__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/p/pre/preli/preliminary__gb_2.mp3",
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784487648886,
+   "word": "dwarfing",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "verb",
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To render (much) smaller, turn into a dwarf (version).",
+     "ar": "لجعلها أصغر (بكثير)، تتحول إلى قزم (نسخة)."
+    },
+    {
+     "pos": "verb",
+     "en": "To make appear (much) smaller, puny, tiny.",
+     "ar": "لجعلها تبدو أصغر (بكثير)، ضئيلة، صغيرة."
+    },
+    {
+     "pos": "verb",
+     "en": "present participle and gerund of dwarf",
+     "ar": "الحاضر الفاعل و gerund من قزم"
+    },
+    {
+     "pos": "noun",
+     "en": "The situation where something is made to seem (relatively) small or unimportant.",
+     "ar": "الحالة التي يبدو فيها شيء ما صغيرًا (نسبيًا) أو غير مهم."
+    }
+   ],
+   "inflections": [
+    "dwarfing",
+    "dwarfings",
+    "dwarfinged",
+    "dwarfinging"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "miniaturize",
+     "ar": "صَوّر أو أنْشَأ بِحَجْم صَغِير ; نَمْنَم"
+    },
+    {
+     "en": "shrink",
+     "ar": "تقليص"
+    },
+    {
+     "en": "eclipse",
+     "ar": "كسوف, خسوف"
+    },
+    {
+     "en": "outdo",
+     "ar": "فاق, برز, هزم, تغلب"
+    },
+    {
+     "en": "outmatch",
+     "ar": "فاق, بز, تجاوز, ناف"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "dwarfing rootstocks",
+     "ar": "تقزيم الجذور"
+    },
+    {
+     "en": "dwarfing effect",
+     "ar": "تأثير التقزم"
+    },
+    {
+     "en": "dwarfing genes",
+     "ar": "جينات متقزمة"
+    }
+   ],
+   "examples": [
+    {
+     "en": "The newly-built skyscraper dwarfs all older buildings in the downtown skyline.",
+     "ar": "ناطحة السحاب المبنية حديثًا تقزم جميع المباني القديمة في أفق وسط المدينة."
+    }
+   ],
+   "differences": [],
+   "interval": 0,
+   "due": 0,
+   "freqLabel": "Top 8,000 words"
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784487595225,
+   "word": "staggering",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "verb",
+    "noun",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "Sway unsteadily, reel, or totter.",
+     "ar": "يتمايل بشكل غير ثابت، أو يتدحرج، أو يترنح."
+    },
+    {
+     "pos": "verb",
+     "en": "Doubt, waver, be shocked.",
+     "ar": "الشك، التردد، الصدمة."
+    },
+    {
+     "pos": "noun",
+     "en": "The motion of one who staggers.",
+     "ar": "حركة الشخص الذي يترنح."
+    },
+    {
+     "pos": "noun",
+     "en": "That which staggers something or somebody.",
+     "ar": "ذلك الذي يترنح شيء أو شخص ما."
+    },
+    {
+     "pos": "adjective",
+     "en": "Incredible, overwhelming, amazing.",
+     "ar": "لا يصدق، ساحقة، مذهلة."
+    },
+    {
+     "pos": "verb",
+     "en": "present participle and gerund of stagger",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "staggering",
+    "staggerings",
+    "staggeringed",
+    "staggeringing"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "impressive",
+     "ar": "بَدِيع ; جَذّاب ; رائِع ; سارّ ; مُحَرّك ; مُعْجِب ; مُؤَثّر"
+    },
+    {
+     "en": "astounding",
+     "ar": "مندهش, صاعق, مدهش, مذهل"
+    },
+    {
+     "en": "unsteady",
+     "ar": "متغير, متزعزع, متقلب, متقلقل, متحول, مقلقل, غير مستقر, غير مطرد"
+    },
+    {
+     "en": "astonishing",
+     "ar": "الذهول, مدهش, مذهل"
+    },
+    {
+     "en": "stupefying",
+     "ar": "مذهل"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "staggering blow",
+     "ar": "ضربة مذهلة"
+    },
+    {
+     "en": "staggering number",
+     "ar": "رقم مذهل"
+    },
+    {
+     "en": "staggering gait",
+     "ar": "مِشْيَةٌ تَعَثُّرِيَّة"
+    }
+   ],
+   "examples": [
+    {
+     "en": "The army suffered a staggering defeat.",
+     "ar": "عانى الجيش من هزيمة مذهلة."
+    }
+   ],
+   "differences": [],
+   "interval": 0,
+   "due": 0,
+   "freqLabel": "Top 18,000 words"
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784487461009,
+   "word": "confederacy",
+   "ipa": "/kənˈfɛdəɹəsi/",
+   "arabicPron": "كنفيدرسي",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "An alliance.",
+     "ar": "-ماذا؟"
+    },
+    {
+     "pos": "noun",
+     "en": "A state where the sovereign constituent units delegate their authority to the centre. As opposed to a federation, where the central and regional governments are each equal and sovereign in their own sphere.",
+     "ar": "دولة تفوض فيها الوحدات السيادية سلطتها إلى المركز. على عكس الاتحاد، حيث تكون كل من الحكومات المركزية والإقليمية متساوية وذات سيادة في مجالها الخاص."
+    },
+    {
+     "pos": "noun",
+     "en": "A state where the sovereign constituent units delegate their authority to the centre.",
+     "ar": "دولة تفوض فيها الوحدات السيادية سلطتها إلى المركز."
+    },
+    {
+     "pos": "noun",
+     "en": "Specifically, an instance of a decentralized governing structure among the indigenous peoples of North America.",
+     "ar": "على وجه التحديد، مثال لهيكل حكم لامركزي بين الشعوب الأصلية في أمريكا الشمالية."
+    }
+   ],
+   "inflections": [
+    "confederacy",
+    "confederacies"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "federation",
+     "ar": "اتحاد"
+    },
+    {
+     "en": "conspiracy",
+     "ar": "تآمر, مؤامرة"
+    },
+    {
+     "en": "south",
+     "ar": "جَنُوب ; جَنُوبِيّ"
+    },
+    {
+     "en": "confederate states of america",
+     "ar": "ولايات التحالف ا?مريكية, تحالف ل-11 ولاية جنوبية حاولت ا?نفصال عن الولايات المتحدة في 1860-1861 بوحده ذاتية"
+    },
+    {
+     "en": "confederation",
+     "ar": "اتحاد, إتحاد كونفدرالي"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "southern confederacy",
+     "ar": "الكونفدرالية الجنوبية"
+    },
+    {
+     "en": "iroquois confederacy",
+     "ar": "اتحاد الأوريكيون"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784487423998,
+   "word": "statistically",
+   "ipa": "/stəˈtɪstɪkl̩i/",
+   "arabicPron": "ستتيستيكلي",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "adverb"
+   ],
+   "meanings": [
+    {
+     "pos": "adverb",
+     "en": "In a statistical way.",
+     "ar": "بطريقة إحصائية."
+    },
+    {
+     "pos": "adverb",
+     "en": "From a statistical point of view.",
+     "ar": "من وجهة نظر إحصائية."
+    },
+    {
+     "pos": "adverb",
+     "en": "From statistical evidence.",
+     "ar": "الدلًلة الإحصائية"
+    }
+   ],
+   "inflections": [
+    "statistically"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [
+    {
+     "en": "statistically significant",
+     "ar": "دال احصائياً"
+    },
+    {
+     "en": "statistically independent",
+     "ar": "مستقل إحصائياً"
+    },
+    {
+     "en": "statistically insignificant",
+     "ar": "عديم الأهمية من الناحية الإحصائية"
+    }
+   ],
+   "examples": [
+    {
+     "en": "He made his point statistically.",
+     "ar": "لقد أوضح وجهة نظره إحصائياً."
+    },
+    {
+     "en": "Statistically, the study was almost worthless.",
+     "ar": "من الناحية الإحصائية، كانت الدراسة عديمة القيمة تقريبًا."
+    },
+    {
+     "en": "Statistically, what he said is true.",
+     "ar": "إحصائيا، ما قاله صحيح."
+    }
+   ],
+   "differences": [],
+   "interval": 0,
+   "due": 0,
+   "freqLabel": "Top 18,000 words"
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784487105882,
+   "word": "scented",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "verb",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To detect the scent of; to discern by the sense of smell.",
+     "ar": "للكشف عن رائحة ؛ لتمييز حاسة الشم."
+    },
+    {
+     "pos": "verb",
+     "en": "To have a suspicion of.",
+     "ar": "للاشتباه به."
+    },
+    {
+     "pos": "adjective",
+     "en": "Having a pleasant aroma.",
+     "ar": "الحصول على رائحة لطيفة."
+    },
+    {
+     "pos": "adjective",
+     "en": "(chiefly in combination) Having a smell of any kind.",
+     "ar": "(بشكل رئيسي في تركيبة) وجود رائحة من أي نوع."
+    },
+    {
+     "pos": "adjective",
+     "en": "Having a smell of any kind.",
+     "ar": "وجود رائحة من أي نوع."
+    },
+    {
+     "pos": "adjective",
+     "en": "Having perfume added.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "scented",
+    "scenteds",
+    "scenteded",
+    "scenteding"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "sweet",
+     "ar": "حلو"
+    },
+    {
+     "en": "fragrant",
+     "ar": "أرج, عطر, ذو عبير, عبق, فواح"
+    },
+    {
+     "en": "odorous",
+     "ar": "ذو رائحة, عطري, معطر, عطر"
+    },
+    {
+     "en": "odoriferous",
+     "ar": "ذو رائحة"
+    },
+    {
+     "en": "sweet-smelling",
+     "ar": "أرج ; ذَكِيّ ; زَكِيّ ; عَطِر ; عاطِر"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "scented flowers",
+     "ar": "زهور معطرة"
+    },
+    {
+     "en": "scented air",
+     "ar": "هواء معطر"
+    },
+    {
+     "en": "scented water",
+     "ar": "ماء معطر"
+    },
+    {
+     "en": "sweetly scented",
+     "ar": "معطر برائحة حلوة"
+    },
+    {
+     "en": "sweet scented",
+     "ar": "طيب الرائحة, عَطِر"
+    }
+   ],
+   "examples": [
+    {
+     "en": "The hounds scented the fox in the woods.",
+     "ar": "عطرت كلاب الصيد الثعلب في الغابة."
+    },
+    {
+     "en": "I scented trouble when I saw them running down the hill towards me.",
+     "ar": "لقد شممت رائحة المتاعب عندما رأيتهم يركضون إلى أسفل التل نحوي."
+    },
+    {
+     "en": "a plant with skunk-scented leaves",
+     "ar": "نبات ذو أوراق معطرة بالظربان"
+    }
+   ],
+   "differences": [],
+   "interval": 0,
+   "due": 0,
+   "freqLabel": "Top 8,000 words"
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784486666166,
+   "word": "extremes",
+   "ipa": "/ɛkˈstɹiːmz/",
+   "arabicPron": "يكستريمز",
+   "oxford": "3000",
+   "cefr": "A2",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "The greatest or utmost point, degree or condition.",
+     "ar": "النقطة أو الدرجة أو الشرط الأكبر أو الأقصى."
+    },
+    {
+     "pos": "noun",
+     "en": "Each of the things at opposite ends of a range or scale.",
+     "ar": "كل من الأشياء على طرفي نقيض من نطاق أو مقياس."
+    },
+    {
+     "pos": "noun",
+     "en": "plural of extreme",
+     "ar": "جمع المتطرف"
+    },
+    {
+     "pos": "noun",
+     "en": "The opposite ends of a range or scale.",
+     "ar": "الأطراف المعاكسة للنطاق أو المقياس."
+    }
+   ],
+   "inflections": [
+    "extremes",
+    "extremeses"
+   ],
+   "derivatives": [
+    {
+     "en": "extremely (adv.)",
+     "ar": "جدا, بإفراط, الى أبعد الحدود, كثيرا"
+    }
+   ],
+   "synonyms": [
+    {
+     "en": "intense",
+     "ar": "شديد"
+    },
+    {
+     "en": "distant",
+     "ar": "بعيد, متباعد, المستقبل البعيد, الماضي البعيد, غير وثيق القرابة, غير ودي, بارد"
+    },
+    {
+     "en": "utmost",
+     "ar": "قصارى"
+    },
+    {
+     "en": "immoderate",
+     "ar": "مفرط, متطرف, غير معتدل"
+    },
+    {
+     "en": "uttermost",
+     "ar": "غاية"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "extremes of temperature",
+     "ar": "درجات الحرارة القصوى"
+    }
+   ],
+   "differences": [],
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/e/ext/extre/extreme__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/e/ext/extre/extreme__gb_1.mp3",
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784486426592,
+   "word": "threatened",
+   "ipa": "/ˈθɹɛt.n̩d/",
+   "arabicPron": "ثريتند",
+   "oxford": "3000",
+   "cefr": "B2",
+   "pos": [
+    "verb",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To make a threat against someone; to use threats.",
+     "ar": "لتوجيه تهديد ضد شخص ما ؛ لاستخدام التهديدات."
+    },
+    {
+     "pos": "verb",
+     "en": "To menace, or be dangerous.",
+     "ar": "للتهديد، أو أن تكون خطيرًا."
+    },
+    {
+     "pos": "adjective",
+     "en": "(of a plant or animal) At risk of becoming endangered in the near future.",
+     "ar": "(لنبات أو حيوان) معرض لخطر الانقراض في المستقبل القريب."
+    },
+    {
+     "pos": "adjective",
+     "en": "Feeling insecure or vulnerable.",
+     "ar": "الشعور بعدم الأمان أو الضعف."
+    },
+    {
+     "pos": "verb",
+     "en": "simple past and past participle of threaten",
+     "ar": "الفاعلية البسيطة للتهديد في الماضي والماضي"
+    },
+    {
+     "pos": "adjective",
+     "en": "At risk of becoming endangered in the near future.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "threatened",
+    "threateneds",
+    "threateneded",
+    "threateneding"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "vulnerable",
+     "ar": "سريع التأثر بالنقد, قابل للعطب, غير حصين, قابل للجرح, معرض للهجوم"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "He threatened me with a knife.",
+     "ar": "هددني بسكين."
+    },
+    {
+     "en": "The rocks threatened the ship's survival.",
+     "ar": "هددت الصخور بقاء السفينة."
+    }
+   ],
+   "differences": [],
+   "ipaUS": "/ˈθɹɛt.n̩d/",
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/t/thr/threa/threaten__us_2.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/t/thr/threa/threaten__gb_1.mp3",
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784485677654,
+   "word": "crustaceans",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "Any arthropod of the subphylum Crustacea, including lobsters, crabs, shrimp, barnacles and woodlice.",
+     "ar": "أي مفصليات من القشريات الفرعية، بما في ذلك الكركند وسرطان البحر والروبيان والأرنب وقمل الخشب."
+    },
+    {
+     "pos": "noun",
+     "en": "plural of crustacean",
+     "ar": "جمع القشريات"
+    }
+   ],
+   "inflections": [
+    "crustaceans",
+    "crustaceanses"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [],
+   "examples": [],
+   "differences": [],
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784485562378,
+   "word": "mollusc",
+   "ipa": "/ˈmɒləsk/",
+   "arabicPron": "مولسك",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A soft-bodied invertebrate of the phylum Mollusca, typically with a hard shell of one or more pieces.",
+     "ar": "اللافقاريات رخوة الجسم من شعبة الرخويات، وعادة مع قشرة صلبة من قطعة واحدة أو أكثر."
+    },
+    {
+     "pos": "noun",
+     "en": "A weak-willed person.",
+     "ar": "شخص ضعيف الإرادة."
+    }
+   ],
+   "inflections": [
+    "mollusc",
+    "molluscs"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "little girl",
+     "ar": "أيتها الفتاة الصغيرة"
+    },
+    {
+     "en": "nose of wax",
+     "ar": "أنف الشمع"
+    },
+    {
+     "en": "pushover",
+     "ar": "مهمة سهلة, خصم ضعيف, شخص عاجز عن مقاومة الإغراء"
+    },
+    {
+     "en": "shellfish",
+     "ar": "محار, طعام البحر"
+    },
+    {
+     "en": "mollusk",
+     "ar": "رخوي حيوان من الرخو يات كالحلزون"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "mollusc shells",
+     "ar": "أصداف الرخويات"
+    },
+    {
+     "en": "mollusc shell",
+     "ar": "قشرة الرخويات"
+    },
+    {
+     "en": "mollusc species",
+     "ar": "أنواع الرخويات"
+    },
+    {
+     "en": "bivalve mollusc",
+     "ar": "رخويات ثنائية الصمامات"
+    },
+    {
+     "en": "marine mollusc",
+     "ar": "الرخويات البحرية"
+    }
+   ],
+   "examples": [
+    {
+     "en": "bivalve molluscs",
+     "ar": "رخويات ثنائية الصدفة"
+    }
+   ],
+   "differences": [],
+   "interval": 0,
+   "due": 0
+  }
+ ]
+}
