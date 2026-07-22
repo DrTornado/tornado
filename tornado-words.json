@@ -1,8 +1,96 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T19:05:37.225Z",
+ "exportedAt": "2026-07-22T19:05:50.863Z",
  "words": [
+  {
+   "id": 1784747147345,
+   "word": "reams",
+   "ipa": "/ɹiːmz/",
+   "arabicPron": "ريمز",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "verb",
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To cream; mantle; foam; froth.",
+     "ar": "إلى كريم ؛ عباءة ؛ رغوة ؛ رغوة."
+    },
+    {
+     "pos": "verb",
+     "en": "To enlarge a hole, especially using a reamer; to bore a hole wider.",
+     "ar": "لتكبير الحفرة، خاصة باستخدام موسع الثقوب ؛ لحفر حفرة أوسع."
+    },
+    {
+     "pos": "verb",
+     "en": "To shape or form, especially using a reamer.",
+     "ar": "للتشكيل أو التشكيل، خاصة باستخدام موسع الثقوب."
+    },
+    {
+     "pos": "noun",
+     "en": "A bundle, package, or quantity of paper, nowadays usually containing 500 sheets.",
+     "ar": "حزمة أو عبوة أو كمية من الورق، في الوقت الحاضر تحتوي عادة على 500 ورقة."
+    },
+    {
+     "pos": "noun",
+     "en": "(chiefly in the plural) An abstract large amount of something.",
+     "ar": "(بشكل رئيسي في صيغة الجمع) كمية كبيرة مجردة من شيء ما."
+    }
+   ],
+   "inflections": [
+    "ream",
+    "reams",
+    "reamed",
+    "reaming"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "dig out",
+     "ar": "تصنيف, حل محل, اكتشف"
+    },
+    {
+     "en": "nail",
+     "ar": "لمع الأظافر, سمر, ثبت في مكان"
+    },
+    {
+     "en": "root",
+     "ar": "جذر"
+    },
+    {
+     "en": "tap",
+     "ar": "نقطة تفرع, حنفية, فتحة برميل, قرع, صنبور, تصنت علي التلفون, رقصة المطقطقات, صنبور يرميل, ملولب, نزيف"
+    },
+    {
+     "en": "bunch",
+     "ar": "عنقود, حزمة, باقة, ربطة حزمية, حدبة, سنام, نتوء"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "ream out",
+     "ar": "تمدد الثقب للخارج"
+    },
+    {
+     "en": "vinnie ream",
+     "ar": "فيني ريم"
+    }
+   ],
+   "examples": [
+    {
+     "en": "I can't go – I still have reams of work left.",
+     "ar": "لا أستطيع الذهاب – لا يزال لدي الكثير من العمل المتبقي."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784747132715,
    "word": "diligence",
