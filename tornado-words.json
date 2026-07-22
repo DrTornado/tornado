@@ -1,8 +1,86 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T18:41:25.843Z",
+ "exportedAt": "2026-07-22T19:01:45.486Z",
  "words": [
+  {
+   "id": 1784746900843,
+   "word": "junctures",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A place where things join, a junction.",
+     "ar": "مكان تتلاقى فيه الأشياء، تقاطع طرق."
+    },
+    {
+     "pos": "noun",
+     "en": "A critical moment in time.",
+     "ar": "لحظة حرجة في الوقت المناسب."
+    }
+   ],
+   "inflections": [
+    "juncture",
+    "junctures"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "joint",
+     "ar": "وَصْلَةٌ"
+    },
+    {
+     "en": "articulation",
+     "ar": "نطق, لفظ, صوت ساكن, الإرتباط بمفاصل, تعبير"
+    },
+    {
+     "en": "occasion",
+     "ar": "فرصة, مناسبة, احتفال, حادثة, داع"
+    },
+    {
+     "en": "crossroads",
+     "ar": "مُفترق الطرق"
+    },
+    {
+     "en": "join",
+     "ar": "ينضم"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "critical juncture",
+     "ar": "منعطف حاسم"
+    },
+    {
+     "en": "present juncture",
+     "ar": "المنعطف الحالي"
+    },
+    {
+     "en": "particular juncture",
+     "ar": "مفترق طرق معين"
+    },
+    {
+     "en": "crucial juncture",
+     "ar": "منعطف حاسم"
+    }
+   ],
+   "examples": [
+    {
+     "en": "We're at a crucial juncture in our relationship.",
+     "ar": "نحن في منعطف حاسم في علاقتنا."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784745682080,
    "word": "disproportionately",
