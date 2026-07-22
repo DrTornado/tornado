@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T10:06:45.123Z",
+ "exportedAt": "2026-07-22T10:06:48.382Z",
  "words": [
   {
    "id": 1784709625299,
@@ -3478,7 +3478,10 @@
    ],
    "differences": [],
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUK": "/ɪˈlɛktəɹət/",
+   "audioUK": "https://api.dictionaryapi.dev/media/pronunciations/en/electorate-uk.mp3",
+   "engineVersion": 1
   },
   {
    "right": 0,
