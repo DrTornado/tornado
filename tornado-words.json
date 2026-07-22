@@ -1,8 +1,97 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T15:26:16.532Z",
+ "exportedAt": "2026-07-22T15:26:31.279Z",
  "words": [
+  {
+   "id": 1784733987627,
+   "word": "turf",
+   "ipa": "/tɜːf/",
+   "arabicPron": "تف",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A layer of earth covered with grass; sod.",
+     "ar": "طبقة من الأرض مغطاة بالعشب."
+    },
+    {
+     "pos": "noun",
+     "en": "A piece of such a layer cut from the soil. May be used as sod to make a lawn, dried for peat, stacked to form earthen structures, etc.",
+     "ar": "قطعة من هذه الطبقة مقطوعة من التربة. يمكن استخدامها كترسبات لصنع العشب، وتجفيفها للخث، وتكديسها لتشكيل هياكل ترابية، وما إلى ذلك."
+    },
+    {
+     "pos": "verb",
+     "en": "To cover with turf; to create a lawn by laying turfs.",
+     "ar": "للتغطية بالعشب ؛ لإنشاء حديقة عن طريق وضع العشب."
+    },
+    {
+     "pos": "verb",
+     "en": "(Ultimate Frisbee) To throw a frisbee well short of its intended target, usually causing it to hit the ground within 10 yards of its release.",
+     "ar": "(الطبق الطائر النهائي) لرمي الطبق الطائر أقل بكثير من الهدف المقصود، وعادة ما يتسبب في اصطدامه بالأرض في غضون 10 ياردات من إطلاقه."
+    },
+    {
+     "pos": "noun",
+     "en": "A block of peat used as fuel.",
+     "ar": "كتلة من الخث تستخدم كوقود."
+    },
+    {
+     "pos": "verb",
+     "en": "To throw a frisbee well short of its intended target, usually causing it to hit the ground within 10 yards of its release.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "turf",
+    "turfs",
+    "turfed",
+    "turfing"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "sod",
+     "ar": "أحمق, أبله, حقير"
+    },
+    {
+     "en": "greensward",
+     "ar": "رَوْضَة ; مَخْضَرَة ; مَرْج"
+    },
+    {
+     "en": "sward",
+     "ar": "مَخْضَرَة, مرج"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "turf club",
+     "ar": "نادي العشب"
+    },
+    {
+     "en": "green turf",
+     "ar": "العشب الأخضر"
+    },
+    {
+     "en": "home turf",
+     "ar": "العشب المنزلي"
+    }
+   ],
+   "examples": [
+    {
+     "en": "Eight managers were turfed after the merger of the two companies.",
+     "ar": "تم إقالة ثمانية مديرين بعد اندماج الشركتين."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784733972020,
    "word": "thatch",
