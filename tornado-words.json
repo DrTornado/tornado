@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T10:06:48.382Z",
+ "exportedAt": "2026-07-22T10:06:52.351Z",
  "words": [
   {
    "id": 1784709625299,
@@ -3518,6 +3518,11 @@
      "pos": "adjective",
      "en": "Approaching each other at a point; convergent.",
      "ar": "الاقتراب من بعضهما البعض عند نقطة ؛ متقاربة."
+    },
+    {
+     "pos": "verb",
+     "en": "present participle and gerund of converge",
+     "ar": "الحاضر الفاعل و gerund من التقارب"
     }
    ],
    "inflections": [
@@ -3554,7 +3559,8 @@
    "examples": [],
    "differences": [],
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "engineVersion": 1
   }
  ],
  "tombstones": [
