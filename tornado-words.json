@@ -1,8 +1,552 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T19:39:06.222Z",
+ "exportedAt": "2026-07-22T20:16:19.659Z",
  "words": [
+  {
+   "id": 1784751340235,
+   "word": "undoubtedly",
+   "ipa": "/ʌnˈdaʊtɪdli/",
+   "arabicPron": "انداوتيدلي",
+   "oxford": "5000",
+   "cefr": "C1",
+   "pos": [
+    "adverb"
+   ],
+   "meanings": [
+    {
+     "pos": "adverb",
+     "en": "Without doubt; definitely.",
+     "ar": "بلا شك ؛ بالتأكيد."
+    }
+   ],
+   "inflections": [
+    "undoubtedly"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "doubtlessly",
+     "ar": "بدون شك, أكيد"
+    },
+    {
+     "en": "indubitably",
+     "ar": "لا شك فيه, مما لاشك فيه, من دون شك, من الواضح"
+    },
+    {
+     "en": "undoubtably",
+     "ar": "مما لا شك فيه"
+    },
+    {
+     "en": "unquestionably",
+     "ar": "بلا جدال"
+    },
+    {
+     "en": "without a doubt",
+     "ar": "بلا شك"
+    }
+   ],
+   "collocations": [],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
+  {
+   "id": 1784751235995,
+   "word": "prosperity",
+   "ipa": "/pɹɒˈspɛɹ.ɪ.ti/",
+   "arabicPron": "براسبيريتي",
+   "oxford": "5000",
+   "cefr": "C1",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "The condition of being prosperous, of having good fortune",
+     "ar": "شرط أن تكون مزدهرًا، وأن يكون لديك ثروة جيدة"
+    },
+    {
+     "pos": "noun",
+     "en": "The condition of being prosperous: having good fortune and a fortune.",
+     "ar": "شرط أن تكون مزدهرًا: امتلاك ثروة جيدة وثروة."
+    }
+   ],
+   "inflections": [
+    "prosperity",
+    "prosperities"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "affluence",
+     "ar": "وفرة, فيض, تدفق, غنى, بحبوحة, ترف"
+    },
+    {
+     "en": "richdom",
+     "ar": "ريتشدوم"
+    },
+    {
+     "en": "weal",
+     "ar": "مصلحة, سراء, سعادة"
+    },
+    {
+     "en": "welfare",
+     "ar": "فائدة, خير, شؤون اجتماعية, رفاهة, سعادة, صالح, الإنعاش"
+    },
+    {
+     "en": "well-being",
+     "ar": "مرحبا ، اسمي نيستور ميركادال مع مجلس اعتماد تحليل السلوك التطبيقي المؤهل (QABA). أكتب إليكم لأعرفكم على QABA وللتأكيد على أهمية ضمان وجود ممارسين أكفاء وذوي جودة عالية في مجال تحليل السلوك التطبيقي (ABA) ، لا سيما في سياق علاج الأفراد المصابين بالتوحد."
+    }
+   ],
+   "collocations": [
+    {
+     "en": "economic prosperity",
+     "ar": "الرخاء الاقتصادي"
+    },
+    {
+     "en": "material prosperity",
+     "ar": "الرخاء المادي"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
+  {
+   "id": 1784751098241,
+   "word": "dietary",
+   "ipa": "/ˈdaɪətɹi/",
+   "arabicPron": "دايتري",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A regulated diet.",
+     "ar": "نظام غذائي منظم."
+    },
+    {
+     "pos": "adjective",
+     "en": "Of, or relating to diet.",
+     "ar": "من، أو فيما يتعلق بالنظام الغذائي."
+    },
+    {
+     "pos": "adjective",
+     "en": "Comprising a food source.",
+     "ar": "يتكون من مصدر غذائي."
+    },
+    {
+     "pos": "noun",
+     "en": "A regulated diet that excludes or constrains certain types of food, especially for health reasons; also, a book or similar setting out such regulations. .mw-parser-output .defdate{font-size:smaller}",
+     "ar": "نظام غذائي منظم يستبعد أو يقيد أنواعًا معينة من الطعام، خاصة لأسباب صحية ؛ أيضًا، كتاب أو ما شابه يحدد مثل هذه اللوائح. .mw - parser - output .defdate {font - size:smaller}"
+    },
+    {
+     "pos": "noun",
+     "en": "A prescribed meal plan setting out how the inhabitants of an institution (such as a prison, hospital etc.) should be fed, and on what foods.",
+     "ar": "خطة وجبات محددة تحدد كيفية إطعام سكان المؤسسة (مثل السجن والمستشفى وما إلى ذلك)، وما هي الأطعمة."
+    },
+    {
+     "pos": "adjective",
+     "en": "Pertaining to a prescribed diet; , relating to what a person or animal eats.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "dietary",
+    "dietaries"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "dietetic",
+     "ar": "جراية"
+    },
+    {
+     "en": "dietetical",
+     "ar": "متعلق بالنظام الغذائي"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "dietary intake",
+     "ar": "استيعاب الجسم من الأغذية"
+    },
+    {
+     "en": "dietary fiber",
+     "ar": "الألياف الغذائية"
+    },
+    {
+     "en": "dietary fat",
+     "ar": "الدهون الغذائية"
+    },
+    {
+     "en": "recommended dietary",
+     "ar": "النظام الغذائي الموصى به"
+    }
+   ],
+   "examples": [
+    {
+     "en": "If you have any dietary requirements, please inform the kitchen staff.",
+     "ar": "إذا كان لديك أي متطلبات غذائية، يرجى إبلاغ موظفي المطبخ."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
+  {
+   "id": 1784750865167,
+   "word": "emanating",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To come from a source; issue from.",
+     "ar": "أن يأتي من مصدر ؛ يصدر من."
+    },
+    {
+     "pos": "verb",
+     "en": "To send or give out; manifest.",
+     "ar": "لإرسال أو إعطاء ؛ بيان."
+    },
+    {
+     "pos": "verb",
+     "en": "present participle and gerund of emanate",
+     "ar": "يقدم الفاعل والمرشد من المنبثق"
+    }
+   ],
+   "inflections": [
+    "emanating",
+    "emanatings",
+    "emanatinged",
+    "emanatinging"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [
+    {
+     "en": "emanating power",
+     "ar": "القدرة المنبثقة"
+    },
+    {
+     "en": "emanating directly",
+     "ar": "المنبثقة بشكل مباشر"
+    },
+    {
+     "en": "emanating out",
+     "ar": "انبثاق"
+    },
+    {
+     "en": "light emanating",
+     "ar": "ضوء ينبعث"
+    },
+    {
+     "en": "rays emanating",
+     "ar": "أشعة منبعثة"
+    }
+   ],
+   "examples": [
+    {
+     "en": "Fragrance emanates from flowers.",
+     "ar": "العطر ينبع من الزهور."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
+  {
+   "id": 1784750796136,
+   "word": "dainty",
+   "ipa": "/ˈdeɪnti/",
+   "arabicPron": "دينتي",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A delicacy (in taste).",
+     "ar": "شهية (في المذاق)."
+    },
+    {
+     "pos": "noun",
+     "en": "Esteem, honour.",
+     "ar": ""
+    },
+    {
+     "pos": "adjective",
+     "en": "Excellent; valuable, fine.",
+     "ar": "ممتاز ؛ ثمين، جيد."
+    },
+    {
+     "pos": "adjective",
+     "en": "Elegant; delicately small and pretty.",
+     "ar": "أنيقة ؛ صغيرة وجميلة بدقة."
+    },
+    {
+     "pos": "adjective",
+     "en": "Fastidious and fussy, especially when eating.",
+     "ar": "صعب المراس وصعب الإرضاء، خاصة عند تناول الطعام."
+    },
+    {
+     "pos": "noun",
+     "en": "A delicacy (choice or pleasing food).",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "dainty",
+    "dainties"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "neat",
+     "ar": "مهندم, بارع, أنيق, نظيف, ناعم, نقي, منظم, متقن, خالي من الماء"
+    },
+    {
+     "en": "petite",
+     "ar": "صغيرة, صغيرتي, حبيبات"
+    },
+    {
+     "en": "delicate",
+     "ar": "شهي, رقيق, مرهف, ضعيف, ناعم, دقيق, ذو كياسة, بالغ الرقة, لطيف"
+    },
+    {
+     "en": "fastidious",
+     "ar": "نيف صعب إرضاؤه, شديد الحساسية"
+    },
+    {
+     "en": "exquisite",
+     "ar": "فاتن, متقن, طريف, حاد, مختار بعناية, رائع, فاخر, شديد الحساسية, رفيع التهذيب, مختار, ممتاز"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "dainty little",
+     "ar": ""
+    },
+    {
+     "en": "dainty white",
+     "ar": ""
+    },
+    {
+     "en": "dainty feet",
+     "ar": ""
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
+  {
+   "id": 1784750284468,
+   "word": "signifies",
+   "ipa": "/ˈsɪɡnɪfaɪz/",
+   "arabicPron": "سيقنيفايز",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To create a sign out of something.",
+     "ar": "لإنشاء علامة خروج من شيء ما."
+    },
+    {
+     "pos": "verb",
+     "en": "To give (something) a meaning or an importance.",
+     "ar": "لإعطاء (شيء) معنى أو أهمية."
+    }
+   ],
+   "inflections": [
+    "signify",
+    "signifies",
+    "signified",
+    "signifying"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "betoken",
+     "ar": "دل, أنذر ب, إستدل على"
+    },
+    {
+     "en": "mean",
+     "ar": "قصد"
+    },
+    {
+     "en": "intend",
+     "ar": "قصد, اعتزم, نوى, أراد, أعد لغرض"
+    },
+    {
+     "en": "stand for",
+     "ar": "دافع, مثل, أيد, رمز"
+    }
+   ],
+   "collocations": [],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
+  {
+   "id": 1784750256150,
+   "word": "heralded",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To proclaim or announce an event.",
+     "ar": "لإعلان أو الإعلان عن حدث."
+    },
+    {
+     "pos": "verb",
+     "en": "(usually passive) To greet something with excitement; to hail.",
+     "ar": "(عادة ما يكون سلبيًا) لتحية شيء ما بإثارة ؛ للترحيب."
+    },
+    {
+     "pos": "verb",
+     "en": "simple past and past participle of herald",
+     "ar": "بسيطة الماضي والماضي الفاعل من هيرالد"
+    }
+   ],
+   "inflections": [
+    "heralded",
+    "heraldeds",
+    "heraldeded",
+    "heraldeding"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "disclose",
+     "ar": "كشف عن, فضح, أبدى للعيان, أفشى سرا, كشف"
+    },
+    {
+     "en": "make known",
+     "ar": ""
+    },
+    {
+     "en": "publicized",
+     "ar": "مَنْشُور ; مُذَاع ; مُرَوّج ; مُعَمّم"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "Daffodils herald the Spring.",
+     "ar": "النرجس يبشر بالربيع."
+    },
+    {
+     "en": "The film was heralded by critics.",
+     "ar": "وقد بشر النقاد بالفيلم."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
+  {
+   "id": 1784749340767,
+   "word": "doctrines",
+   "ipa": "/ˈdɒktɹɪnz/",
+   "arabicPron": "داكترينز",
+   "oxford": "5000",
+   "cefr": "C1",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A belief or tenet, especially about philosophical or theological matters.",
+     "ar": "معتقد أو عقيدة، خاصة حول المسائل الفلسفية أو اللاهوتية."
+    },
+    {
+     "pos": "noun",
+     "en": "The body of teachings of an ideology, most often a religion, or of an ideological or religious leader, organization, group or text.",
+     "ar": "مجموعة تعاليم أيديولوجية، غالبًا ما تكون دينًا، أو زعيمًا أو منظمة أو مجموعة أو نصًا أيديولوجيًا أو دينيًا."
+    }
+   ],
+   "inflections": [
+    "doctrine",
+    "doctrines"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "philosophy",
+     "ar": "علم الفلسفة"
+    },
+    {
+     "en": "ism",
+     "ar": "الأيزم مذهب مميز"
+    },
+    {
+     "en": "school of thought",
+     "ar": "مدرسة تفكيرية, مكان للتعلم, مكان للنقاش الفكري"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "christian doctrine",
+     "ar": "المذهب المسيحي, تعاليم الديانة المسيحية"
+    },
+    {
+     "en": "monroe doctrine",
+     "ar": "مذهب مونرو, مبدأ سياسي تم وضعه عام 1823 من قبل الرئيس جيمس مونرو لمعارضة تدخل القوي الأوروبية في القارة الأمريكية"
+    }
+   ],
+   "examples": [
+    {
+     "en": "The four noble truths summarise the main doctrines of Buddhism.",
+     "ar": "تلخص الحقائق النبيلة الأربع المذاهب الرئيسية للبوذية."
+    },
+    {
+     "en": "What is the understanding of marriage and family in orthodox Marxist doctrine?",
+     "ar": "ما هو فهم الزواج والأسرة في العقيدة الماركسية الأرثوذكسية ؟"
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784749142603,
    "word": "inexplicit",
