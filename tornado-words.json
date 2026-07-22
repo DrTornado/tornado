@@ -1,8 +1,86 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T15:15:26.945Z",
+ "exportedAt": "2026-07-22T15:26:16.532Z",
  "words": [
+  {
+   "id": 1784733972020,
+   "word": "thatch",
+   "ipa": "/θætʃ/",
+   "arabicPron": "ثاتش",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "Straw, rushes, or similar, used for making or covering the roofs of buildings, or of stacks of hay or grain.",
+     "ar": "القش أو الاندفاع أو ما شابه ذلك، يستخدم لصنع أو تغطية أسطح المباني أو أكوام القش أو الحبوب."
+    },
+    {
+     "pos": "noun",
+     "en": "Any of several kinds of palm, the leaves of which are used for thatching.",
+     "ar": "أي من عدة أنواع من النخيل، وتستخدم أوراقها للقش."
+    },
+    {
+     "pos": "noun",
+     "en": "A buildup of cut grass, stolons or other material on the soil in a lawn.",
+     "ar": "تراكم العشب المقطوع أو الأحواض أو غيرها من المواد على التربة في العشب."
+    },
+    {
+     "pos": "verb",
+     "en": "To cover the roof with straw, reed, leaves, etc.",
+     "ar": "لتغطية السقف بالقش والقصب والأوراق وما إلى ذلك."
+    }
+   ],
+   "inflections": [
+    "thatch",
+    "thatches",
+    "thatched",
+    "thatching"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "haulm",
+     "ar": "قش"
+    },
+    {
+     "en": "teach",
+     "ar": "علم, درس, لقن"
+    },
+    {
+     "en": "edward thatch",
+     "ar": "إدوارد ثاتش"
+    },
+    {
+     "en": "edward teach",
+     "ar": "( ( إدوارد تيتش !"
+    },
+    {
+     "en": "blackbeard",
+     "ar": "\" ذو اللحيّة السوداء \""
+    }
+   ],
+   "collocations": [
+    {
+     "en": "thatch roof",
+     "ar": "سقف من القش"
+    },
+    {
+     "en": "thatch roofs",
+     "ar": "أسطح من القش"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784733322423,
    "word": "laughter",
