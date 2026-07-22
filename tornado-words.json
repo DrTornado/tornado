@@ -1,8 +1,75 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T19:05:50.863Z",
+ "exportedAt": "2026-07-22T19:39:06.222Z",
  "words": [
+  {
+   "id": 1784749142603,
+   "word": "inexplicit",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "adjective",
+     "en": "Not explicit.",
+     "ar": "غير صريح."
+    }
+   ],
+   "inflections": [
+    "inexplicit"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "implicit",
+     "ar": "ضمنيا"
+    },
+    {
+     "en": "tacit",
+     "ar": "صامت, ضمني, مفهوم ضمنا, مضمر, مقدر"
+    },
+    {
+     "en": "inherent",
+     "ar": "ملازم, متأصل, صلبي, متضمن في صلب, كامن, فطري"
+    },
+    {
+     "en": "silent",
+     "ar": "صامت"
+    },
+    {
+     "en": "implied",
+     "ar": "ضمني"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "inexplicit references",
+     "ar": "مراجع غير واضحة"
+    },
+    {
+     "en": "inexplicit way",
+     "ar": "بطريقة غير واضحة"
+    },
+    {
+     "en": "inexplicit reference",
+     "ar": "مرجع غير واضح"
+    },
+    {
+     "en": "left inexplicit",
+     "ar": "تُرك غير واضح"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784747147345,
    "word": "reams",
