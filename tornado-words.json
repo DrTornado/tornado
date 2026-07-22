@@ -1,8 +1,65 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T16:30:59.807Z",
+ "exportedAt": "2026-07-22T16:31:04.065Z",
  "words": [
+  {
+   "id": 1784737860691,
+   "word": "scenery",
+   "ipa": "/ˈsiːnəɹi/",
+   "arabicPron": "سينري",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "View, natural features, landscape.",
+     "ar": "المنظر والميزات الطبيعية والمناظر الطبيعية."
+    },
+    {
+     "pos": "noun",
+     "en": "Stage backdrops, property and other items on a stage that give the impression of the location of the scene.",
+     "ar": "قم بوضع الخلفيات والممتلكات وغيرها من العناصر على خشبة المسرح التي تعطي انطباعًا عن موقع المشهد."
+    }
+   ],
+   "inflections": [
+    "scenery",
+    "sceneries"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "scene",
+     "ar": "المشهد"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "beautiful scenery",
+     "ar": "منقذة اللحظات الجميلة"
+    },
+    {
+     "en": "mountain scenery",
+     "ar": "المناظر الطبيعية الجبلية"
+    },
+    {
+     "en": "natural scenery",
+     "ar": "منظر طبيعي"
+    },
+    {
+     "en": "magnificent scenery",
+     "ar": "مناظر خلابة"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784709625299,
    "word": "tornado",
