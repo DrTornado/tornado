@@ -1,957 +1,11 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T08:06:52.113Z",
+ "exportedAt": "2026-07-22T08:07:02.232Z",
  "words": [
   {
-   "id": 1784707590156,
-   "word": "girl",
-   "ipa": "/ɡɵːl/",
-   "arabicPron": "قيرل",
-   "oxford": "3000",
-   "cefr": "A1",
-   "pos": [
-    "noun",
-    "verb"
-   ],
-   "meanings": [
-    {
-     "pos": "noun",
-     "en": "A female child, adolescent, or a young woman.",
-     "ar": ""
-    },
-    {
-     "pos": "noun",
-     "en": "A young female animal.",
-     "ar": ""
-    },
-    {
-     "pos": "verb",
-     "en": "To feminize or girlify; to gender as a girl or as for girls.",
-     "ar": ""
-    },
-    {
-     "pos": "verb",
-     "en": "(somewhat informal) To staff with or as a girl or girls.",
-     "ar": ""
-    },
-    {
-     "pos": "noun",
-     "en": "A female child.",
-     "ar": ""
-    },
-    {
-     "pos": "noun",
-     "en": "A woman, especially a young and often attractive woman.",
-     "ar": ""
-    }
-   ],
-   "inflections": [
-    "girl",
-    "girls",
-    "girled",
-    "girling"
-   ],
-   "derivatives": [],
-   "synonyms": [
-    {
-     "en": "daughter",
-     "ar": ""
-    },
-    {
-     "en": "girlie",
-     "ar": ""
-    },
-    {
-     "en": "lass",
-     "ar": ""
-    },
-    {
-     "en": "lassie",
-     "ar": ""
-    },
-    {
-     "en": "char",
-     "ar": ""
-    }
-   ],
-   "collocations": [
-    {
-     "en": "little girl",
-     "ar": ""
-    },
-    {
-     "en": "young girl",
-     "ar": ""
-    },
-    {
-     "en": "old girl",
-     "ar": ""
-    },
-    {
-     "en": "poor girl",
-     "ar": ""
-    }
-   ],
-   "examples": [
-    {
-     "en": "I saw a little girl feeding, brushing, and talking to a heifer.",
-     "ar": ""
-    },
-    {
-     "en": "He has a crush on a girl at work. We were kidding with him yesterday about his work crush.",
-     "ar": ""
-    }
-   ],
-   "differences": [],
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "interval": 0,
-   "due": 0,
-   "ipaUS": "/ɡɝl/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/g/gir/girl_/girl__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/g/gir/girl_/girl__gb_2.mp3",
-   "engineVersion": 1
-  },
-  {
-   "id": 1784707365586,
-   "word": "man",
-   "ipa": "[mɛn]",
-   "arabicPron": "مان",
-   "oxford": "3000",
-   "cefr": "A1",
-   "pos": [
-    "noun",
-    "interjection",
-    "symbol",
-    "pronoun",
-    "verb",
-    "proper noun"
-   ],
-   "meanings": [
-    {
-     "pos": "noun",
-     "en": "An adult male human.",
-     "ar": ""
-    },
-    {
-     "pos": "noun",
-     "en": "(collective) All human males collectively: mankind.",
-     "ar": ""
-    },
-    {
-     "pos": "interjection",
-     "en": "Used to place emphasis upon something or someone; sometimes, but not always, when actually addressing a man.",
-     "ar": ""
-    },
-    {
-     "pos": "symbol",
-     "en": "ISO 639-2 &amp; ISO 639-3 language code for Mandingo.",
-     "ar": ""
-    },
-    {
-     "pos": "noun",
-     "en": "All human males collectively: mankind.",
-     "ar": ""
-    },
-    {
-     "pos": "noun",
-     "en": "An adult male who belongs to a particular group: an employee, a representative, etc.",
-     "ar": ""
-    }
-   ],
-   "inflections": [
-    "man",
-    "mans",
-    "manned",
-    "manning"
-   ],
-   "derivatives": [],
-   "synonyms": [
-    {
-     "en": "male",
-     "ar": ""
-    },
-    {
-     "en": "omi",
-     "ar": ""
-    },
-    {
-     "en": "human",
-     "ar": ""
-    },
-    {
-     "en": "person",
-     "ar": ""
-    },
-    {
-     "en": "world",
-     "ar": ""
-    }
-   ],
-   "collocations": [
-    {
-     "en": "young man",
-     "ar": ""
-    },
-    {
-     "en": "old man",
-     "ar": ""
-    }
-   ],
-   "examples": [
-    {
-     "en": "The show is especially popular with middle-aged men.",
-     "ar": ""
-    },
-    {
-     "en": "Man, that was a great catch!",
-     "ar": ""
-    },
-    {
-     "en": "Man's got some new creps.",
-     "ar": ""
-    }
-   ],
-   "differences": [],
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "interval": 0,
-   "due": 0,
-   "ipaUS": "/mæn/",
-   "ipaUK": "/mæn/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/m/man/man__/man__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/m/man/man__/man__gb_2.mp3",
-   "engineVersion": 1
-  },
-  {
-   "id": 1784707276441,
-   "word": "hello",
-   "ipa": "/həˈloʊ/",
-   "arabicPron": "هلو",
-   "oxford": "3000",
-   "cefr": "A1",
-   "pos": [
-    "noun",
-    "verb",
-    "interjection"
-   ],
-   "meanings": [
-    {
-     "pos": "noun",
-     "en": "\"Hello!\" or an equivalent greeting.",
-     "ar": ""
-    },
-    {
-     "pos": "verb",
-     "en": "To greet with \"hello\".",
-     "ar": ""
-    },
-    {
-     "pos": "interjection",
-     "en": "A greeting (salutation) said when meeting someone or acknowledging someone’s arrival or presence.",
-     "ar": ""
-    },
-    {
-     "pos": "interjection",
-     "en": "A greeting used when answering the telephone.",
-     "ar": ""
-    },
-    {
-     "pos": "interjection",
-     "en": "A call for response if it is not clear if anyone is present or listening, or if a telephone conversation may have been disconnected.",
-     "ar": ""
-    },
-    {
-     "pos": "verb",
-     "en": "To greet (someone) with \"hello\".",
-     "ar": ""
-    }
-   ],
-   "inflections": [
-    "hello",
-    "helloes",
-    "helloed",
-    "helloing"
-   ],
-   "derivatives": [],
-   "synonyms": [
-    {
-     "en": "greeting",
-     "ar": ""
-    },
-    {
-     "en": "hullo",
-     "ar": ""
-    },
-    {
-     "en": "how-do-you-do",
-     "ar": ""
-    },
-    {
-     "en": "hi",
-     "ar": ""
-    },
-    {
-     "en": "howdy",
-     "ar": ""
-    }
-   ],
-   "collocations": [
-    {
-     "en": "hello world",
-     "ar": ""
-    },
-    {
-     "en": "hello again",
-     "ar": ""
-    },
-    {
-     "en": "hello kitty",
-     "ar": ""
-    },
-    {
-     "en": "say hello",
-     "ar": ""
-    },
-    {
-     "en": "said hello",
-     "ar": ""
-    }
-   ],
-   "examples": [
-    {
-     "en": "Hello, everyone.",
-     "ar": ""
-    },
-    {
-     "en": "Hello? How may I help you?",
-     "ar": ""
-    },
-    {
-     "en": "Hello? Is anyone there?",
-     "ar": ""
-    }
-   ],
-   "differences": [],
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "ipaUK": "/həˈləʊ/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/h/hel/hello/hello__us_1_rr.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/h/hel/hello/hello__gb_1.mp3",
-   "audioGen": "https://api.dictionaryapi.dev/media/pronunciations/en/hello-au.mp3",
-   "engineVersion": 1,
-   "interval": 0,
-   "due": 0
-  },
-  {
-   "id": 1784707188529,
-   "word": "hi",
-   "ipa": "/haɪ/",
-   "arabicPron": "هاي",
-   "oxford": "3000",
-   "cefr": "A1",
-   "pos": [
-    "noun",
-    "interjection",
-    "symbol",
-    "adjective"
-   ],
-   "meanings": [
-    {
-     "pos": "noun",
-     "en": "The word \"hi\" used as a greeting.",
-     "ar": ""
-    },
-    {
-     "pos": "interjection",
-     "en": "A friendly, informal, casual greeting said when meeting someone.",
-     "ar": ""
-    },
-    {
-     "pos": "interjection",
-     "en": "An exclamation to call attention.",
-     "ar": ""
-    },
-    {
-     "pos": "symbol",
-     "en": "ISO 639-1 language code for Hindi.",
-     "ar": ""
-    },
-    {
-     "pos": "interjection",
-     "en": "A friendly, informal, casual greeting said upon someone's arrival.",
-     "ar": ""
-    },
-    {
-     "pos": "interjection",
-     "en": "Expressing wonder or derision.",
-     "ar": ""
-    }
-   ],
-   "inflections": [
-    "hi",
-    "his"
-   ],
-   "derivatives": [],
-   "synonyms": [
-    {
-     "en": "greeting",
-     "ar": ""
-    },
-    {
-     "en": "hello",
-     "ar": ""
-    },
-    {
-     "en": "greetings",
-     "ar": ""
-    },
-    {
-     "en": "hullo",
-     "ar": ""
-    },
-    {
-     "en": "how-do-you-do",
-     "ar": ""
-    }
-   ],
-   "collocations": [
-    {
-     "en": "chapter hi",
-     "ar": ""
-    },
-    {
-     "en": "part hi",
-     "ar": ""
-    }
-   ],
-   "examples": [
-    {
-     "en": "I didn't even get a hi.",
-     "ar": ""
-    },
-    {
-     "en": "Hi, how are you?",
-     "ar": ""
-    },
-    {
-     "en": "I just dropped by to say “hi”.",
-     "ar": ""
-    }
-   ],
-   "differences": [],
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "ipaUS": "/haɪ/",
-   "ipaUK": "/haɪ/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/h/hi_/hi__u/hi__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/h/hi_/hi__g/hi__gb_1.mp3",
-   "engineVersion": 1,
-   "interval": 0,
-   "due": 0
-  },
-  {
-   "id": 1784706745622,
-   "word": "sync",
-   "ipa": "/sɪŋk/",
-   "arabicPron": "سينك",
-   "oxford": "",
-   "cefr": "",
-   "pos": [
-    "noun",
-    "verb"
-   ],
-   "meanings": [
-    {
-     "pos": "noun",
-     "en": "Harmony.",
-     "ar": ""
-    },
-    {
-     "pos": "noun",
-     "en": "A music synchronization license, allowing the music to be synchronized with visual media such as films.",
-     "ar": ""
-    },
-    {
-     "pos": "verb",
-     "en": "To synchronize, especially in the senses of data synchronization, time synchronization, or synchronizing music with video.",
-     "ar": ""
-    },
-    {
-     "pos": "verb",
-     "en": "To flush all pending I/O operations to disk.",
-     "ar": ""
-    },
-    {
-     "pos": "noun",
-     "en": "The state or property of being synchronized.",
-     "ar": ""
-    },
-    {
-     "pos": "noun",
-     "en": "The arrangement of military actions in time, space, and purpose to produce maximum relative combat power at a decisive place and time.",
-     "ar": ""
-    }
-   ],
-   "inflections": [
-    "sync",
-    "syncs",
-    "synced",
-    "syncing"
-   ],
-   "derivatives": [],
-   "synonyms": [
-    {
-     "en": "synchroneity",
-     "ar": ""
-    },
-    {
-     "en": "synchronicity",
-     "ar": ""
-    },
-    {
-     "en": "synchronize",
-     "ar": ""
-    }
-   ],
-   "collocations": [
-    {
-     "en": "sync pulses",
-     "ar": ""
-    },
-    {
-     "en": "sync pulse",
-     "ar": ""
-    },
-    {
-     "en": "sync signal",
-     "ar": ""
-    },
-    {
-     "en": "horizontal sync",
-     "ar": ""
-    },
-    {
-     "en": "vertical sync",
-     "ar": ""
-    }
-   ],
-   "examples": [
-    {
-     "en": "Our cloud storage automatically syncs your files to all your devices.",
-     "ar": ""
-    },
-    {
-     "en": "The generator went off line when it lost synchronization with the power line.",
-     "ar": ""
-    },
-    {
-     "en": "He synced his phone to the laptop to transfer data about the field trip.",
-     "ar": ""
-    }
-   ],
-   "differences": [],
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "freqLabel": "Top 8,000 words",
-   "estCefr": "B1",
-   "engineVersion": 1,
-   "interval": 0,
-   "due": 0
-  },
-  {
-   "id": 1784659612001,
-   "word": "nostrils",
-   "ipa": "",
-   "arabicPron": "",
-   "oxford": "",
-   "cefr": "",
-   "pos": [
-    "noun"
-   ],
-   "meanings": [
-    {
-     "pos": "noun",
-     "en": "Either of the two orifices located on the nose (or on the beak of a bird); used as a passage for air and other gases to travel the nasal passages.",
-     "ar": "أي من الفتحتين الموجودتين على الأنف (أو على منقار طائر )؛ تستخدم كممر للهواء والغازات الأخرى للسفر في الممرات الأنفية."
-    }
-   ],
-   "inflections": [
-    "nostril",
-    "nostrils"
-   ],
-   "derivatives": [],
-   "synonyms": [
-    {
-     "en": "naris",
-     "ar": "مَنْخَر"
-    },
-    {
-     "en": "nosehole",
-     "ar": "فتحة الأنف"
-    }
-   ],
-   "collocations": [],
-   "examples": [],
-   "differences": [],
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "interval": 0,
-   "due": 0,
-   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/nostrils-us.mp3",
-   "engineVersion": 1
-  },
-  {
-   "id": 1784659584450,
-   "word": "prologue",
-   "ipa": "/ˈpɹəʊlɒɡ/",
-   "arabicPron": "برولوق",
-   "oxford": "",
-   "cefr": "",
-   "pos": [
-    "noun",
-    "verb"
-   ],
-   "meanings": [
-    {
-     "pos": "noun",
-     "en": "A speech or section used as an introduction, especially to a play or novel.",
-     "ar": "خطاب أو قسم يستخدم كمقدمة، خاصة لمسرحية أو رواية."
-    },
-    {
-     "pos": "noun",
-     "en": "One who delivers a prologue.",
-     "ar": "الشخص الذي يقدم مقدمة."
-    },
-    {
-     "pos": "verb",
-     "en": "To introduce with a formal preface, or prologue.",
-     "ar": "للتقديم بمقدمة رسمية، أو مقدمة."
-    },
-    {
-     "pos": "noun",
-     "en": "A component of a computer program that prepares the computer to execute a routine.",
-     "ar": "مكون من برنامج كمبيوتر يعد الكمبيوتر لتنفيذ روتين."
-    },
-    {
-     "pos": "verb",
-     "en": "↑ Douglas Harper (2001–2026), “prologue”, in Online Etymology Dictionary.",
-     "ar": "↑ دوغلاس هاربر (2001-2026)، \"مقدمة\"، في قاموس علم أصول اللغة عبر الإنترنت."
-    },
-    {
-     "pos": "verb",
-     "en": "↑ Michaelis, Hermann; Jones, Daniel (1913), “'proulɔg [-loug]”, in A Phonetic Dictionary of the English Language (Sammlung Phonetischer Wörterbücher; 2)‎, Hanover: Carl Meyer (Gustav Prior), →OCLC, page 344.",
-     "ar": ""
-    }
-   ],
-   "inflections": [
-    "prologue",
-    "prologues",
-    "prologued",
-    "prologuing"
-   ],
-   "derivatives": [],
-   "synonyms": [
-    {
-     "en": "forespeech",
-     "ar": ""
-    }
-   ],
-   "collocations": [
-    {
-     "en": "general prologue",
-     "ar": "مقدمة عامة"
-    },
-    {
-     "en": "contents prologue",
-     "ar": "مقدمة المحتويات"
-    }
-   ],
-   "examples": [],
-   "differences": [],
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "interval": 0,
-   "due": 0,
-   "engineVersion": 1
-  },
-  {
-   "id": 1784659545425,
-   "word": "wick",
-   "ipa": "/wɪk/",
-   "arabicPron": "ويك",
-   "oxford": "",
-   "cefr": "",
-   "pos": [
-    "noun",
-    "verb",
-    "adjective"
-   ],
-   "meanings": [
-    {
-     "pos": "noun",
-     "en": "A bundle, twist, braid, or woven strip of cord, fabric, fibre/fiber, or other porous material in a candle, oil lamp, kerosene heater, or the like, that draws up liquid fuel, such as melted tallow, wax, or the oil, delivering it to the base of the flame for conversion to gases and burning; any other length of material burned for illumination in small successive portions.",
-     "ar": "حزمة أو لف أو تجديل أو شريط منسوج من الحبل أو القماش أو الألياف/الألياف أو غيرها من المواد المسامية في شمعة أو مصباح زيت أو سخان كيروسين أو ما شابه ذلك، يسحب الوقود السائل، مثل الشحم المذاب أو الشمع أو الزيت، ويوصله إلى قاعدة اللهب لتحويله إلى غازات وحرقه ؛ أي طول آخر من المواد المحترقة للإضاءة في أجزاء صغيرة متتالية."
-    },
-    {
-     "pos": "noun",
-     "en": "Any piece of porous material that conveys liquid by capillary action, such as a strip of gauze placed in a wound to serve as a drain.",
-     "ar": "أي قطعة من مادة مسامية تنقل السائل عن طريق عمل الشعيرات الدموية، مثل شريط من الشاش يوضع في الجرح ليكون بمثابة تصريف."
-    },
-    {
-     "pos": "verb",
-     "en": "To convey or draw off (liquid) by capillary action.",
-     "ar": "لنقل أو سحب (السائل) عن طريق عمل الشعيرات الدموية."
-    },
-    {
-     "pos": "verb",
-     "en": "(of a liquid) To traverse (i.e. be conveyed by capillary action) through a wick or other porous material, as water through a sponge. Usually followed by through.",
-     "ar": "(من سائل) لاجتياز (أي يتم نقلها عن طريق العمل الشعري) من خلال الفتيل أو غيرها من المواد المسامية، مثل الماء من خلال الإسفنج. عادة ما يتبعها من خلال."
-    },
-    {
-     "pos": "noun",
-     "en": "A braid or bundle of fibre or other porous material (now generally twisted or woven cotton) in a candle, kerosene heater, oil lamp, etc., that draws up a liquid fuel (such as melted tallow or wax, or oil) at one end, to be ignited at the other end to produce a flame.",
-     "ar": "جديلة أو حزمة من الألياف أو غيرها من المواد المسامية (التي أصبحت الآن قطنًا ملتويًا أو منسوجًا بشكل عام) في شمعة أو سخان كيروسين أو مصباح زيت، وما إلى ذلك، والتي تسحب وقودًا سائلًا (مثل الشحم المذاب أو الشمع أو الزيت) في أحد الطرفين، لإشعاله في الطرف الآخر لإنتاج لهب."
-    },
-    {
-     "pos": "noun",
-     "en": "Synonym of wicking (“the material of which wicks (etymology 1, noun sense&nbsp;1) are made”).",
-     "ar": ""
-    }
-   ],
-   "inflections": [
-    "wick",
-    "wicks",
-    "wicked",
-    "wicking"
-   ],
-   "derivatives": [],
-   "synonyms": [
-    {
-     "en": "taper",
-     "ar": "شمعة رفيعة"
-    }
-   ],
-   "collocations": [
-    {
-     "en": "chad wick",
-     "ar": "شاد ويك"
-    },
-    {
-     "en": "fen wick",
-     "ar": "فتيل فين"
-    },
-    {
-     "en": "cotton wick",
-     "ar": "فتيل من القطن"
-    }
-   ],
-   "examples": [
-    {
-     "en": "Trim the wick fairly short, so that the flame does not smoke.",
-     "ar": ""
-    },
-    {
-     "en": "The fabric wicks perspiration away from the body.",
-     "ar": ""
-    },
-    {
-     "en": "The moisture slowly wicked through the wood.",
-     "ar": ""
-    }
-   ],
-   "differences": [],
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "interval": 0,
-   "due": 0,
-   "audioGen": "https://api.dictionaryapi.dev/media/pronunciations/en/wick-au.mp3",
-   "freqLabel": "Top 18,000 words",
-   "estCefr": "C1",
-   "engineVersion": 1
-  },
-  {
-   "id": 1784659495782,
-   "word": "opaque",
-   "ipa": "/əʊˈpeɪk/",
-   "arabicPron": "وبيك",
-   "oxford": "",
-   "cefr": "",
-   "pos": [
-    "noun",
-    "verb",
-    "adjective"
-   ],
-   "meanings": [
-    {
-     "pos": "noun",
-     "en": "An area of darkness; a place or region with no light.",
-     "ar": "منطقة مظلمة ؛ مكان أو منطقة بلا ضوء."
-    },
-    {
-     "pos": "noun",
-     "en": "Something which is opaque rather than translucent.",
-     "ar": "شيء غير شفاف بدلاً من شفاف."
-    },
-    {
-     "pos": "verb",
-     "en": "To make, render (more) opaque.",
-     "ar": "لجعلها مبهمة (أكثر)."
-    },
-    {
-     "pos": "adjective",
-     "en": "Neither reflecting nor emitting light.",
-     "ar": "لا ينعكس ولا ينبعث منه ضوء."
-    },
-    {
-     "pos": "adjective",
-     "en": "Allowing little light to pass through, not translucent or transparent.",
-     "ar": "السماح بمرور القليل من الضوء، وليس شفافًا أو شفافًا."
-    },
-    {
-     "pos": "adjective",
-     "en": "Unclear, unintelligible, hard to get or explain the meaning of.",
-     "ar": ""
-    }
-   ],
-   "inflections": [
-    "opaque",
-    "opaques",
-    "opaqued",
-    "opaquing"
-   ],
-   "derivatives": [],
-   "synonyms": [
-    {
-     "en": "blur",
-     "ar": "تمويه"
-    },
-    {
-     "en": "cloud",
-     "ar": "سحابة"
-    },
-    {
-     "en": "turbid",
-     "ar": "عكر, معكر, كثيف, كدر"
-    },
-    {
-     "en": "incomprehensible",
-     "ar": "غامض, مبهم, لا يسبر غوره"
-    },
-    {
-     "en": "solid",
-     "ar": "تصديرها"
-    }
-   ],
-   "collocations": [
-    {
-     "en": "opaque white",
-     "ar": "أبيض غير شفاف"
-    },
-    {
-     "en": "opaque glass",
-     "ar": "زُجَاجٌ مُغَشَّى"
-    },
-    {
-     "en": "opaque material",
-     "ar": "مادة معتمة"
-    }
-   ],
-   "examples": [],
-   "differences": [],
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "interval": 0,
-   "due": 0,
-   "engineVersion": 1
-  },
-  {
-   "id": 1784657490837,
-   "word": "flume",
-   "ipa": "/fluːm/",
-   "arabicPron": "فلوم",
-   "oxford": "",
-   "cefr": "",
-   "pos": [
-    "noun",
-    "verb"
-   ],
-   "meanings": [
-    {
-     "pos": "noun",
-     "en": "A ravine or gorge, usually one with water running through.",
-     "ar": "وادٍ أو ممر ضيق، عادةً ما يمر عبره الماء."
-    },
-    {
-     "pos": "noun",
-     "en": "An open channel or trough used to direct or divert liquids.",
-     "ar": "قناة مفتوحة أو حوض يستخدم لتوجيه أو تحويل السوائل."
-    },
-    {
-     "pos": "verb",
-     "en": "To transport (logs of wood) by floating them along a water-filled channel or trough.",
-     "ar": "لنقل (جذوع الخشب) عن طريق تعويمها على طول قناة مملوءة بالماء أو حوض."
-    },
-    {
-     "pos": "noun",
-     "en": "An open channel or trough used to direct or divert liquids, especially to carry materials (logs, mined material, etc) or people (as a water slide), especially (but not always) one where the walls are raised above the surrounding terrain rather than recessed like a ditch.",
-     "ar": "قناة مفتوحة أو حوض يستخدم لتوجيه أو تحويل السوائل، خاصة لحمل المواد (جذوع الأشجار، المواد الملغومة، إلخ) أو الأشخاص (كشريحة مائية)، خاصة (ولكن ليس دائمًا) حيث يتم رفع الجدران فوق التضاريس المحيطة بدلاً من التجويف مثل الخندق."
-    }
-   ],
-   "inflections": [
-    "flume",
-    "flumes",
-    "flumed",
-    "fluming"
-   ],
-   "derivatives": [],
-   "synonyms": [
-    {
-     "en": "gulch",
-     "ar": "العقيق واد عميق, جدول, وهد, مسيل ماء"
-    }
-   ],
-   "collocations": [
-    {
-     "en": "flume experiments",
-     "ar": "تجارب المسيل للدموع"
-    },
-    {
-     "en": "wave flume",
-     "ar": "دفق الموجة"
-    },
-    {
-     "en": "parshall flume",
-     "ar": "قناة بارشال"
-    },
-    {
-     "en": "wooden flume",
-     "ar": "مسيل خشبي"
-    }
-   ],
-   "examples": [],
-   "differences": [],
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "interval": 0,
-   "due": 0,
-   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/flume-us.mp3",
-   "engineVersion": 1
-  },
-  {
-   "id": 1784655998671,
-   "word": "ranching",
+   "id": 1784663410864,
+   "word": "blogging",
    "ipa": "",
    "arabicPron": "",
    "oxford": "",
@@ -963,499 +17,47 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To operate a ranch; engage in ranching.",
-     "ar": "لتشغيل مزرعة ؛ الانخراط في تربية المواشي."
+     "en": "To contribute to a blog.",
+     "ar": "للمساهمة في مدونة."
     },
     {
      "pos": "verb",
-     "en": "To work on a ranch",
-     "ar": "للعمل في مزرعة"
-    },
-    {
-     "pos": "noun",
-     "en": "The business or activity of operating a ranch, of farming or raising livestock.",
-     "ar": "أعمال أو نشاط تشغيل مزرعة أو تربية الماشية."
-    },
-    {
-     "pos": "noun",
-     "en": "A ranch.",
-     "ar": "أي مزرعة ؟"
+     "en": "To blag, to steal something; to acquire something illegally.",
+     "ar": "التباهي، وسرقة شيء ما ؛ للحصول على شيء ما بشكل غير قانوني."
     },
     {
      "pos": "verb",
-     "en": "present participle and gerund of ranch",
-     "ar": "تقديم نشاط وجيروند من مزرعة"
-    }
-   ],
-   "inflections": [
-    "ranching",
-    "ranchings",
-    "ranchinged",
-    "ranchinging"
-   ],
-   "derivatives": [],
-   "synonyms": [],
-   "collocations": [
-    {
-     "en": "ranching country",
-     "ar": "تربية المواشي في الريف"
-    },
-    {
-     "en": "ranching operations",
-     "ar": "عمليات تربية المواشي"
-    },
-    {
-     "en": "cattle ranching",
-     "ar": "تربية الماشية"
-    }
-   ],
-   "examples": [
-    {
-     "en": "Formally the widow still ranches, but in fact she leaves all ranching to the foreman.",
-     "ar": ""
-    },
-    {
-     "en": "Ranching is his way of life.",
-     "ar": ""
-    }
-   ],
-   "differences": [],
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "interval": 0,
-   "due": 0,
-   "freqLabel": "Top 8,000 words",
-   "estCefr": "B1",
-   "engineVersion": 1
-  },
-  {
-   "id": 1784655199109,
-   "word": "vocational",
-   "ipa": "",
-   "arabicPron": "",
-   "oxford": "",
-   "cefr": "",
-   "pos": [
-    "adjective"
-   ],
-   "meanings": [
-    {
-     "pos": "adjective",
-     "en": "Of or pertaining to a vocation.",
-     "ar": "أو تتعلق بمهنة."
-    },
-    {
-     "pos": "adjective",
-     "en": "(of education) That provides a special skill rather than academic knowledge.",
-     "ar": "(التعليم) الذي يوفر مهارة خاصة بدلاً من المعرفة الأكاديمية."
-    },
-    {
-     "pos": "adjective",
-     "en": "That provides a special skill rather than academic knowledge.",
-     "ar": "وهذا يوفر مهارة خاصة بدلاً من المعرفة الأكاديمية."
-    }
-   ],
-   "inflections": [
-    "vocational"
-   ],
-   "derivatives": [],
-   "synonyms": [],
-   "collocations": [
-    {
-     "en": "vocational education",
-     "ar": "تعليم مهني"
-    },
-    {
-     "en": "vocational training",
-     "ar": "تَدْرِيبٌ مِهْنِيّ"
-    },
-    {
-     "en": "vocational guidance",
-     "ar": "توجيه مهني"
-    }
-   ],
-   "examples": [
-    {
-     "en": "vocational scheme",
-     "ar": ""
-    },
-    {
-     "en": "vocational course",
-     "ar": ""
-    },
-    {
-     "en": "vocational program",
-     "ar": ""
-    }
-   ],
-   "differences": [],
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "interval": 0,
-   "due": 0,
-   "engineVersion": 1
-  },
-  {
-   "id": 1784654476272,
-   "word": "laboratory",
-   "ipa": "/ləˈbɔɹətɹi/",
-   "arabicPron": "لابرتوري",
-   "oxford": "3000",
-   "cefr": "B1",
-   "pos": [
-    "noun"
-   ],
-   "meanings": [
-    {
-     "pos": "noun",
-     "en": "A room, building or institution equipped for scientific research, experimentation or analysis.",
-     "ar": "غرفة أو مبنى أو مؤسسة مجهزة للبحث العلمي أو التجريب أو التحليل."
+     "en": "To look sullen or sulky",
+     "ar": "أن تبدو متجهمًا أو عابسًا"
     },
     {
      "pos": "noun",
-     "en": "A place where chemicals, drugs or microbes are prepared or manufactured.",
-     "ar": "مكان يتم فيه تحضير أو تصنيع المواد الكيميائية أو العقاقير أو الميكروبات."
+     "en": "The design and editing of a blog; weblogging.",
+     "ar": "تصميم وتحرير مدونة ؛ التدوين على شبكة الإنترنت."
+    },
+    {
+     "pos": "verb",
+     "en": "present participle and gerund of blog",
+     "ar": "تقديم الفاعلية وجيروند من بلوق"
     }
    ],
    "inflections": [
-    "laboratory",
-    "laboratories"
+    "blogging",
+    "bloggings",
+    "blogginged",
+    "blogginging"
    ],
    "derivatives": [],
    "synonyms": [
     {
-     "en": "science lab",
-     "ar": "** مختبر العلوم"
-    },
-    {
-     "en": "lab",
-     "ar": "مختبر, معمل كيميائي"
-    }
-   ],
-   "collocations": [
-    {
-     "en": "laboratory tests",
-     "ar": "اختبارات المعمل"
-    },
-    {
-     "en": "laboratory studies",
-     "ar": "الدراسات المختبرية"
-    },
-    {
-     "en": "laboratory experiments",
-     "ar": "تجارب مخبرية"
-    },
-    {
-     "en": "research laboratory",
-     "ar": "مختبر البحث, المختبر التي تحدث به الدرايات المتعلة بالبحث"
-    },
-    {
-     "en": "national laboratory",
-     "ar": "المختبر الوطني لوزارة الطاقة الأمريكية"
-    }
-   ],
-   "examples": [],
-   "differences": [],
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "interval": 0,
-   "due": 0,
-   "ipaUS": "/ˈlæb(ə)ɹəˌtɔɹi/",
-   "ipaUK": "/ləˈbɒɹət(ə)ɹiː/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/l/lab/labor/laboratory__us_2.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/l/lab/labor/laboratory__gb_2.mp3",
-   "engineVersion": 1
-  },
-  {
-   "id": 1784653655818,
-   "word": "bibliography",
-   "ipa": "/bɪbliɒɡɹəfi/",
-   "arabicPron": "بيبليوقرفي",
-   "oxford": "",
-   "cefr": "",
-   "pos": [
-    "noun"
-   ],
-   "meanings": [
-    {
-     "pos": "noun",
-     "en": "A section of a written work containing citations, not quotations, to all the books referred to in the work.",
-     "ar": "قسم من عمل مكتوب يحتوي على اقتباسات، وليس اقتباسات، لجميع الكتب المشار إليها في العمل."
-    },
-    {
-     "pos": "noun",
-     "en": "A list of books or documents relevant to a particular subject or author.",
-     "ar": "قائمة بالكتب أو الوثائق ذات الصلة بموضوع معين أو مؤلف معين."
-    },
-    {
-     "pos": "noun",
-     "en": "The study of the history of books in terms of their classification, printing and publication.",
-     "ar": "دراسة تاريخ الكتب من حيث تصنيفها وطباعتها ونشرها."
-    }
-   ],
-   "inflections": [
-    "bibliography",
-    "bibliographies"
-   ],
-   "derivatives": [],
-   "synonyms": [],
-   "collocations": [
-    {
-     "en": "annotated bibliography",
-     "ar": "ثبت مرجعي مشروح."
-    },
-    {
-     "en": "selected bibliography",
-     "ar": "ثبت بمراجع مختارة"
-    },
-    {
-     "en": "select bibliography",
-     "ar": "قائمةٌ منتقاة من المراجع"
-    },
-    {
-     "en": "see bibliography",
-     "ar": "(انظر الببليوغرافيا.)"
-    }
-   ],
-   "examples": [],
-   "differences": [],
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "interval": 0,
-   "due": 0,
-   "engineVersion": 1
-  },
-  {
-   "id": 1784653163402,
-   "word": "goggles",
-   "ipa": "/ˈɡɑ.ɡəlz/",
-   "arabicPron": "قاقلز",
-   "oxford": "",
-   "cefr": "",
-   "pos": [
-    "noun",
-    "verb"
-   ],
-   "meanings": [
-    {
-     "pos": "noun",
-     "en": "Protective eyewear set in a flexible frame to fit snugly against the face.",
-     "ar": "مجموعة نظارات واقية بإطار مرن لتناسب الوجه بشكل مريح."
-    },
-    {
-     "pos": "noun",
-     "en": "Blinds for shying horses.",
-     "ar": "ستائر للخيول الخجولة."
-    }
-   ],
-   "inflections": [
-    "goggle",
-    "goggles",
-    "goggled",
-    "goggling"
-   ],
-   "derivatives": [],
-   "synonyms": [
-    {
-     "en": "gawk",
-     "ar": "البله, الأخرق"
-    },
-    {
-     "en": "gape",
-     "ar": "تثاءب, فغر فاه, فتح فامه"
-    },
-    {
-     "en": "gawp",
-     "ar": "(الانجليزية البريطانية) فغر فاه"
-    }
-   ],
-   "collocations": [],
-   "examples": [
-    {
-     "en": "Goggles must be worn in the swimming pool.",
+     "en": "bloggage",
      "ar": ""
     },
     {
-     "en": "We had to put on our goggles as it was snowing outside.",
-     "ar": ""
+     "en": "bloggery",
+     "ar": "التدوين"
     }
    ],
-   "differences": [],
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "interval": 0,
-   "due": 0,
-   "ipaUS": "/ˈɡɑ.ɡəlz/",
-   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/goggles-us.mp3",
-   "engineVersion": 1
-  },
-  {
-   "id": 1784652215752,
-   "word": "glimpses",
-   "ipa": "",
-   "arabicPron": "",
-   "oxford": "5000",
-   "cefr": "C1",
-   "pos": [
-    "noun",
-    "verb"
-   ],
-   "meanings": [
-    {
-     "pos": "noun",
-     "en": "A brief look, glance, or peek.",
-     "ar": "نظرة موجزة أو نظرة خاطفة أو نظرة خاطفة."
-    },
-    {
-     "pos": "noun",
-     "en": "A sudden flash.",
-     "ar": "ومضة مفاجئة."
-    },
-    {
-     "pos": "verb",
-     "en": "To see or view briefly or incompletely.",
-     "ar": "الرؤية أو المشاهدة باختصار أو بشكل غير كامل."
-    },
-    {
-     "pos": "verb",
-     "en": "To appear by glimpses.",
-     "ar": "لتظهر من خلال لمحات."
-    }
-   ],
-   "inflections": [
-    "glimpse",
-    "glimpses",
-    "glimpsed",
-    "glimpsing"
-   ],
-   "derivatives": [],
-   "synonyms": [
-    {
-     "en": "catch sight of",
-     "ar": "رأى, لاحظ, معد"
-    },
-    {
-     "en": "detect",
-     "ar": "كشف"
-    },
-    {
-     "en": "espy",
-     "ar": "لمح, رأى من بعيد"
-    },
-    {
-     "en": "notice",
-     "ar": "إشعار"
-    },
-    {
-     "en": "perceive",
-     "ar": "فهم, لمس, أدرك, وعى, ميز, لاحظ"
-    }
-   ],
-   "collocations": [],
-   "examples": [
-    {
-     "en": "I only got a glimpse of the car, so I can tell you the colour but not the registration number.",
-     "ar": ""
-    },
-    {
-     "en": "I have only begun to glimpse the magnitude of the problem.",
-     "ar": ""
-    }
-   ],
-   "differences": [],
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "interval": 0,
-   "due": 0,
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/g/gli/glimp/glimpse__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/g/gli/glimp/glimpse__gb_1.mp3",
-   "engineVersion": 1
-  },
-  {
-   "id": 1784651479795,
-   "word": "cultivating",
-   "ipa": "",
-   "arabicPron": "",
-   "oxford": "5000",
-   "cefr": "C1",
-   "pos": [
-    "verb"
-   ],
-   "meanings": [
-    {
-     "pos": "verb",
-     "en": "To grow plants, notably crops",
-     "ar": "لزراعة النباتات، ولا سيما المحاصيل"
-    },
-    {
-     "pos": "verb",
-     "en": "To nurture; to foster; to tend.",
-     "ar": "لرعاية ؛ لرعاية ؛ لرعاية."
-    },
-    {
-     "pos": "verb",
-     "en": "present participle and gerund of cultivate",
-     "ar": "تقديم الفاعلية وجيروند من زراعة"
-    }
-   ],
-   "inflections": [
-    "cultivating",
-    "cultivatings",
-    "cultivatinged",
-    "cultivatinging"
-   ],
-   "derivatives": [],
-   "synonyms": [],
-   "collocations": [],
-   "examples": [
-    {
-     "en": "Most farmers in this region cultivate maize.",
-     "ar": ""
-    },
-    {
-     "en": "They tried to cultivate an interest in learning among their students.",
-     "ar": ""
-    }
-   ],
-   "differences": [],
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "interval": 0,
-   "due": 0,
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cul/culti/cultivate__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/cul/culti/cultivate__gb_1.mp3",
-   "engineVersion": 1
-  },
-  {
-   "id": 1784650954854,
-   "word": "lagerpetid",
-   "ipa": "",
-   "arabicPron": "",
-   "oxford": "",
-   "cefr": "",
-   "pos": [
-    "noun"
-   ],
-   "meanings": [
-    {
-     "pos": "noun",
-     "en": "Any of the pterosauromorphs of the family Lagerpetidae.",
-     "ar": "أي من مجسمات التيروصور من عائلة Lagerpetidae."
-    }
-   ],
-   "inflections": [
-    "lagerpetid",
-    "lagerpetids"
-   ],
-   "derivatives": [],
-   "synonyms": [],
    "collocations": [],
    "examples": [],
    "differences": [],
@@ -1467,203 +69,187 @@
    "engineVersion": 1
   },
   {
-   "id": 1784636175360,
-   "word": "pairs",
-   "ipa": "/pɛəz/",
-   "arabicPron": "بيز",
-   "oxford": "3000",
-   "cefr": "A1",
-   "pos": [
-    "noun",
-    "verb"
-   ],
-   "meanings": [
-    {
-     "pos": "noun",
-     "en": "Two similar or identical things taken together; often followed by of.",
-     "ar": "شيئان متشابهان أو متطابقان معًا ؛ غالبًا ما يتبعهما."
-    },
-    {
-     "pos": "noun",
-     "en": "Two people in a relationship, partnership or friendship.",
-     "ar": "شخصان في علاقة أو شراكة أو صداقة."
-    },
-    {
-     "pos": "verb",
-     "en": "To group into one or more sets of two.",
-     "ar": "للتجميع في مجموعة واحدة أو أكثر من مجموعتين."
-    },
-    {
-     "pos": "verb",
-     "en": "To bring two (animals, notably dogs) together for mating.",
-     "ar": "لجلب اثنين (الحيوانات، ولا سيما الكلاب) معا للتزاوج."
-    },
-    {
-     "pos": "verb",
-     "en": "To impair, to make worse.",
-     "ar": "يضعف، ويزيد الأمر سوءًا."
-    },
-    {
-     "pos": "verb",
-     "en": "To become worse, to deteriorate.",
-     "ar": ""
-    }
-   ],
-   "inflections": [
-    "pairs",
-    "pairses",
-    "pairsed",
-    "pairsing"
-   ],
-   "derivatives": [],
-   "synonyms": [
-    {
-     "en": "pair of spectacles",
-     "ar": "زوج من النظارات"
-    },
-    {
-     "en": "spectacles",
-     "ar": "نظارات"
-    }
-   ],
-   "collocations": [
-    {
-     "en": "three pairs",
-     "ar": "ثلاثة أزواج"
-    },
-    {
-     "en": "base pairs",
-     "ar": "أزواج أساسية"
-    },
-    {
-     "en": "four pairs",
-     "ar": "أربعة أزواج"
-    }
-   ],
-   "examples": [
-    {
-     "en": "I couldn't decide which of the pair of designer shirts I preferred, so I bought the pair.",
-     "ar": ""
-    },
-    {
-     "en": "Spouses should make a great pair.",
-     "ar": ""
-    },
-    {
-     "en": "The wedding guests were paired boy/girl and groom's party/bride's party.",
-     "ar": ""
-    }
-   ],
-   "differences": [],
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pai/pair_/pair__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/p/pai/pair_/pair__gb_1.mp3",
-   "interval": 0,
-   "due": 0,
-   "engineVersion": 1
-  },
-  {
-   "id": 1784636145662,
-   "word": "overcome",
-   "ipa": "/ˌəʊvəˈkʌm/",
-   "arabicPron": "وڤركام",
+   "id": 1784662312122,
+   "word": "deliberate",
+   "ipa": "",
+   "arabicPron": "",
    "oxford": "3000",
    "cefr": "B2",
    "pos": [
-    "noun",
     "verb",
     "adjective"
    ],
    "meanings": [
     {
-     "pos": "noun",
-     "en": "The burden or recurring theme in a song.",
-     "ar": "العبء أو السمة المتكررة في أغنية."
-    },
-    {
-     "pos": "noun",
-     "en": "A surplus.",
-     "ar": "فائض."
+     "pos": "verb",
+     "en": "To consider carefully; to weigh well in the mind.",
+     "ar": "للتفكير بعناية ؛ لوزن جيد في العقل."
     },
     {
      "pos": "verb",
-     "en": "To surmount (a physical or abstract obstacle); to prevail over, to get the better of.",
-     "ar": "للتغلب على (عقبة مادية أو مجردة )؛ للتغلب على، للحصول على أفضل من."
+     "en": "To consider the reasons for and against anything; to reflect.",
+     "ar": "النظر في الأسباب المؤيدة والمعارضة لأي شيء ؛ والتفكير."
     },
     {
-     "pos": "verb",
-     "en": "To win or prevail in some sort of battle, contest, etc.",
-     "ar": "للفوز أو الفوز في نوع من المعارك أو المسابقات وما إلى ذلك."
+     "pos": "adjective",
+     "en": "Done on purpose; intentional.",
+     "ar": "تم عن قصد ؛ متعمد."
     },
     {
-     "pos": "verb",
-     "en": "To prevail.",
-     "ar": "أن تسود."
+     "pos": "adjective",
+     "en": "Of a person, weighing facts and arguments with a view to a choice or decision; carefully considering the probable consequences of a step; slow in determining.",
+     "ar": "من شخص، يزن الحقائق والحجج بهدف الاختيار أو القرار ؛ النظر بعناية في العواقب المحتملة لخطوة ؛ بطيئة في التحديد."
     },
     {
-     "pos": "verb",
-     "en": "To recover from (a difficulty), to get over.",
-     "ar": ""
+     "pos": "adjective",
+     "en": "Formed with deliberation; carefully considered; not sudden or rash.",
+     "ar": "تم تشكيلها بمداولات ؛ مدروسة بعناية ؛ ليست مفاجئة أو متسرعة."
     }
    ],
    "inflections": [
-    "overcome",
-    "overcomes",
-    "overcomed",
-    "overcoming"
+    "deliberate",
+    "deliberates",
+    "deliberated",
+    "deliberating"
    ],
-   "derivatives": [],
-   "synonyms": [
+   "derivatives": [
     {
-     "en": "inundated",
-     "ar": "غارِق ; مَغْمُور"
-    },
-    {
-     "en": "subdue",
-     "ar": "كتم, قمع, غلب, خضع, قهر, خفض الضوء, خفف, خفض, كبت, كبح"
-    },
-    {
-     "en": "surmount",
-     "ar": "تغلب على المصاعب, تسلق, علا"
-    },
-    {
-     "en": "weak",
-     "ar": "ضعيف"
-    },
-    {
-     "en": "master",
-     "ar": "شكل رئيسي"
+     "en": "deliberately (adv.)",
+     "ar": "بتعمد"
     }
    ],
-   "collocations": [],
-   "examples": [
+   "synonyms": [
     {
-     "en": "to overcome enemies in battle",
-     "ar": ""
+     "en": "purposeful",
+     "ar": "ذو عزم, عرف ما يريد, متأني"
     },
     {
-     "en": "We shall overcome.",
-     "ar": ""
+     "en": "volitional",
+     "ar": "اختياري"
+    },
+    {
+     "en": "circumspect",
+     "ar": "محترس, واع, يقظ, حريص"
+    },
+    {
+     "en": "thoughtful",
+     "ar": "كثير التفكير, عميق التفكير, وقور, رصين, مدروس"
+    },
+    {
+     "en": "careful",
+     "ar": "التشريعية"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "deliberate attempt",
+     "ar": "محاولة متعمدة"
+    },
+    {
+     "en": "deliberate policy",
+     "ar": "سياسة متعمدة"
+    },
+    {
+     "en": "deliberate choice",
+     "ar": "اختيار متعمد"
+    }
+   ],
+   "examples": [
+    {
+     "en": "It is now time for the jury to deliberate the guilt of the defendant.",
+     "ar": "لقد حان الوقت الآن لكي تتداول هيئة المحلفين ذنب المدعى عليه."
+    },
+    {
+     "en": "Tripping me was deliberate action.",
+     "ar": "تعريتي كان عملاً متعمداً."
+    },
+    {
+     "en": "The jury took eight hours to come to its deliberate verdict.",
+     "ar": "استغرقت هيئة المحلفين ثماني ساعات للتوصل إلى حكمها المتعمد."
     }
    ],
    "differences": [],
    "right": 0,
    "wrong": 0,
    "last": null,
-   "ipaUS": "/ˌoʊvəɹˈkʌm/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/o/ove/overc/overcome__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/o/ove/overc/overcome__gb_1.mp3",
    "interval": 0,
    "due": 0,
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/d/del/delib/deliberate__us_2_rr.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/d/del/delib/deliberate__gb_4.mp3",
    "engineVersion": 1
   },
   {
-   "id": 1784636081936,
-   "word": "interplay",
-   "ipa": "",
-   "arabicPron": "",
+   "id": 1784662047598,
+   "word": "creatures",
+   "ipa": "/ˈkɹiːt͡ʃəz/",
+   "arabicPron": "كريتشرز",
+   "oxford": "3000",
+   "cefr": "B2",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A living being; an animal or (sometimes derogatory) a human.",
+     "ar": "كائن حي ؛ حيوان أو (في بعض الأحيان مهين) إنسان."
+    },
+    {
+     "pos": "noun",
+     "en": "A created thing, whether animate or inanimate; a creation.",
+     "ar": "شيء مخلوق، سواء كان حيًّا أو غير حيّ ؛ خلق."
+    }
+   ],
+   "inflections": [
+    "creature",
+    "creatures"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "brute",
+     "ar": "بهيمي, وحشي, غاشم"
+    },
+    {
+     "en": "beast",
+     "ar": "مدرس, بهيمة, عجماء, شخص حقير, شخص بهيمي"
+    },
+    {
+     "en": "tool",
+     "ar": "أداة"
+    },
+    {
+     "en": "animal",
+     "ar": "حيواني"
+    },
+    {
+     "en": "puppet",
+     "ar": "دمية, لعبة الأطفال, دمية متحركة, شخص أشبه بالألعوبة"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "He's a creature of habit.   insects and other creatures",
+     "ar": "إنه مخلوق من العادة.   الحشرات والمخلوقات الأخرى"
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "interval": 0,
+   "due": 0,
+   "ipaUS": "/ˈkɹit͡ʃɚz/",
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cre/creat/creature__us_2.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/cre/creat/creature__gb_1.mp3",
+   "engineVersion": 1
+  },
+  {
+   "id": 1784646739633,
+   "word": "dispatch",
+   "ipa": "/dəˈspætʃ/",
+   "arabicPron": "ديسباتش",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -1673,40 +259,81 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "Interaction; reciprocal relationship.",
-     "ar": "التفاعل ؛ علاقة متبادلة."
+     "en": "A message sent quickly, as a shipment, a prompt settlement of a business, or an important official message sent by a diplomat, or military officer.",
+     "ar": "يرسل"
+    },
+    {
+     "pos": "noun",
+     "en": "The act of doing something quickly.",
+     "ar": "فعل شيء بسرعة."
     },
     {
      "pos": "verb",
-     "en": "To interact",
-     "ar": "للتفاعل"
+     "en": "To send (a shipment) with promptness.",
+     "ar": "لإرسال (شحنة) على وجه السرعة."
+    },
+    {
+     "pos": "verb",
+     "en": "To send (a person) away hastily.",
+     "ar": "لإبعاد (شخص) على عجل."
+    },
+    {
+     "pos": "verb",
+     "en": "To send (an important official message) promptly, by means of a diplomat or military officer.",
+     "ar": "إرسال (رسالة رسمية مهمة) على وجه السرعة، عن طريق دبلوماسي أو ضابط عسكري."
+    },
+    {
+     "pos": "noun",
+     "en": "A message sent quickly, as a shipment, a prompt settlement of a business, or an important official message sent by a diplomat, government official, military officer, etc.",
+     "ar": ""
     }
    ],
    "inflections": [
-    "interplay",
-    "interplays",
-    "interplayed",
-    "interplaying"
+    "dispatch",
+    "dispatches",
+    "dispatched",
+    "dispatching"
    ],
    "derivatives": [],
-   "synonyms": [],
-   "collocations": [
+   "synonyms": [
     {
-     "en": "complex interplay",
-     "ar": "تفاعل معقد"
+     "en": "haste",
+     "ar": ""
     },
     {
-     "en": "dynamic interplay",
-     "ar": "التفاعل الديناميكي"
+     "en": "hurry",
+     "ar": ""
+    },
+    {
+     "en": "rapidity",
+     "ar": ""
+    },
+    {
+     "en": "destroy",
+     "ar": ""
+    },
+    {
+     "en": "kill",
+     "ar": ""
     }
    ],
-   "examples": [],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "We must act with dispatch in this matter.",
+     "ar": ""
+    }
+   ],
    "differences": [],
    "right": 0,
    "wrong": 0,
    "last": null,
+   "ipaUS": "/dɪˈspætʃ/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/dispatch-us.mp3",
+   "freqLabel": "Top 8,000 words",
    "interval": 0,
    "due": 0,
+   "estCefr": "B2",
    "engineVersion": 1
   },
   {
@@ -3387,60 +2014,475 @@
    "right": 0,
    "wrong": 0,
    "last": null,
-   "id": 1784663410864,
-   "word": "blogging",
+   "id": 1784636175360,
+   "word": "pairs",
+   "ipa": "/pɛəz/",
+   "arabicPron": "بيز",
+   "oxford": "3000",
+   "cefr": "A1",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "Two similar or identical things taken together; often followed by of.",
+     "ar": "شيئان متشابهان أو متطابقان معًا ؛ غالبًا ما يتبعهما."
+    },
+    {
+     "pos": "noun",
+     "en": "Two people in a relationship, partnership or friendship.",
+     "ar": "شخصان في علاقة أو شراكة أو صداقة."
+    },
+    {
+     "pos": "verb",
+     "en": "To group into one or more sets of two.",
+     "ar": "للتجميع في مجموعة واحدة أو أكثر من مجموعتين."
+    },
+    {
+     "pos": "verb",
+     "en": "To bring two (animals, notably dogs) together for mating.",
+     "ar": "لجلب اثنين (الحيوانات، ولا سيما الكلاب) معا للتزاوج."
+    },
+    {
+     "pos": "verb",
+     "en": "To impair, to make worse.",
+     "ar": "يضعف، ويزيد الأمر سوءًا."
+    },
+    {
+     "pos": "verb",
+     "en": "To become worse, to deteriorate.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "pairs",
+    "pairses",
+    "pairsed",
+    "pairsing"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "pair of spectacles",
+     "ar": "زوج من النظارات"
+    },
+    {
+     "en": "spectacles",
+     "ar": "نظارات"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "three pairs",
+     "ar": "ثلاثة أزواج"
+    },
+    {
+     "en": "base pairs",
+     "ar": "أزواج أساسية"
+    },
+    {
+     "en": "four pairs",
+     "ar": "أربعة أزواج"
+    }
+   ],
+   "examples": [
+    {
+     "en": "I couldn't decide which of the pair of designer shirts I preferred, so I bought the pair.",
+     "ar": ""
+    },
+    {
+     "en": "Spouses should make a great pair.",
+     "ar": ""
+    },
+    {
+     "en": "The wedding guests were paired boy/girl and groom's party/bride's party.",
+     "ar": ""
+    }
+   ],
+   "differences": [],
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pai/pair_/pair__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/p/pai/pair_/pair__gb_1.mp3",
+   "interval": 0,
+   "due": 0,
+   "engineVersion": 1
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784636145662,
+   "word": "overcome",
+   "ipa": "/ˌəʊvəˈkʌm/",
+   "arabicPron": "وڤركام",
+   "oxford": "3000",
+   "cefr": "B2",
+   "pos": [
+    "noun",
+    "verb",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "The burden or recurring theme in a song.",
+     "ar": "العبء أو السمة المتكررة في أغنية."
+    },
+    {
+     "pos": "noun",
+     "en": "A surplus.",
+     "ar": "فائض."
+    },
+    {
+     "pos": "verb",
+     "en": "To surmount (a physical or abstract obstacle); to prevail over, to get the better of.",
+     "ar": "للتغلب على (عقبة مادية أو مجردة )؛ للتغلب على، للحصول على أفضل من."
+    },
+    {
+     "pos": "verb",
+     "en": "To win or prevail in some sort of battle, contest, etc.",
+     "ar": "للفوز أو الفوز في نوع من المعارك أو المسابقات وما إلى ذلك."
+    },
+    {
+     "pos": "verb",
+     "en": "To prevail.",
+     "ar": "أن تسود."
+    },
+    {
+     "pos": "verb",
+     "en": "To recover from (a difficulty), to get over.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "overcome",
+    "overcomes",
+    "overcomed",
+    "overcoming"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "inundated",
+     "ar": "غارِق ; مَغْمُور"
+    },
+    {
+     "en": "subdue",
+     "ar": "كتم, قمع, غلب, خضع, قهر, خفض الضوء, خفف, خفض, كبت, كبح"
+    },
+    {
+     "en": "surmount",
+     "ar": "تغلب على المصاعب, تسلق, علا"
+    },
+    {
+     "en": "weak",
+     "ar": "ضعيف"
+    },
+    {
+     "en": "master",
+     "ar": "شكل رئيسي"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "to overcome enemies in battle",
+     "ar": ""
+    },
+    {
+     "en": "We shall overcome.",
+     "ar": ""
+    }
+   ],
+   "differences": [],
+   "ipaUS": "/ˌoʊvəɹˈkʌm/",
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/o/ove/overc/overcome__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/o/ove/overc/overcome__gb_1.mp3",
+   "interval": 0,
+   "due": 0,
+   "engineVersion": 1
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784636081936,
+   "word": "interplay",
    "ipa": "",
    "arabicPron": "",
    "oxford": "",
    "cefr": "",
    "pos": [
-    "verb",
-    "noun"
+    "noun",
+    "verb"
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "To contribute to a blog.",
-     "ar": "للمساهمة في مدونة."
-    },
-    {
-     "pos": "verb",
-     "en": "To blag, to steal something; to acquire something illegally.",
-     "ar": "التباهي، وسرقة شيء ما ؛ للحصول على شيء ما بشكل غير قانوني."
-    },
-    {
-     "pos": "verb",
-     "en": "To look sullen or sulky",
-     "ar": "أن تبدو متجهمًا أو عابسًا"
-    },
-    {
      "pos": "noun",
-     "en": "The design and editing of a blog; weblogging.",
-     "ar": "تصميم وتحرير مدونة ؛ التدوين على شبكة الإنترنت."
+     "en": "Interaction; reciprocal relationship.",
+     "ar": "التفاعل ؛ علاقة متبادلة."
     },
     {
      "pos": "verb",
-     "en": "present participle and gerund of blog",
-     "ar": "تقديم الفاعلية وجيروند من بلوق"
+     "en": "To interact",
+     "ar": "للتفاعل"
     }
    ],
    "inflections": [
-    "blogging",
-    "bloggings",
-    "blogginged",
-    "blogginging"
+    "interplay",
+    "interplays",
+    "interplayed",
+    "interplaying"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [
+    {
+     "en": "complex interplay",
+     "ar": "تفاعل معقد"
+    },
+    {
+     "en": "dynamic interplay",
+     "ar": "التفاعل الديناميكي"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "interval": 0,
+   "due": 0,
+   "engineVersion": 1
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784653163402,
+   "word": "goggles",
+   "ipa": "/ˈɡɑ.ɡəlz/",
+   "arabicPron": "قاقلز",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "Protective eyewear set in a flexible frame to fit snugly against the face.",
+     "ar": "مجموعة نظارات واقية بإطار مرن لتناسب الوجه بشكل مريح."
+    },
+    {
+     "pos": "noun",
+     "en": "Blinds for shying horses.",
+     "ar": "ستائر للخيول الخجولة."
+    }
+   ],
+   "inflections": [
+    "goggle",
+    "goggles",
+    "goggled",
+    "goggling"
    ],
    "derivatives": [],
    "synonyms": [
     {
-     "en": "bloggage",
+     "en": "gawk",
+     "ar": "البله, الأخرق"
+    },
+    {
+     "en": "gape",
+     "ar": "تثاءب, فغر فاه, فتح فامه"
+    },
+    {
+     "en": "gawp",
+     "ar": "(الانجليزية البريطانية) فغر فاه"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "Goggles must be worn in the swimming pool.",
      "ar": ""
     },
     {
-     "en": "bloggery",
-     "ar": "التدوين"
+     "en": "We had to put on our goggles as it was snowing outside.",
+     "ar": ""
     }
    ],
+   "differences": [],
+   "interval": 0,
+   "due": 0,
+   "ipaUS": "/ˈɡɑ.ɡəlz/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/goggles-us.mp3",
+   "engineVersion": 1
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784652215752,
+   "word": "glimpses",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "5000",
+   "cefr": "C1",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A brief look, glance, or peek.",
+     "ar": "نظرة موجزة أو نظرة خاطفة أو نظرة خاطفة."
+    },
+    {
+     "pos": "noun",
+     "en": "A sudden flash.",
+     "ar": "ومضة مفاجئة."
+    },
+    {
+     "pos": "verb",
+     "en": "To see or view briefly or incompletely.",
+     "ar": "الرؤية أو المشاهدة باختصار أو بشكل غير كامل."
+    },
+    {
+     "pos": "verb",
+     "en": "To appear by glimpses.",
+     "ar": "لتظهر من خلال لمحات."
+    }
+   ],
+   "inflections": [
+    "glimpse",
+    "glimpses",
+    "glimpsed",
+    "glimpsing"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "catch sight of",
+     "ar": "رأى, لاحظ, معد"
+    },
+    {
+     "en": "detect",
+     "ar": "كشف"
+    },
+    {
+     "en": "espy",
+     "ar": "لمح, رأى من بعيد"
+    },
+    {
+     "en": "notice",
+     "ar": "إشعار"
+    },
+    {
+     "en": "perceive",
+     "ar": "فهم, لمس, أدرك, وعى, ميز, لاحظ"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "I only got a glimpse of the car, so I can tell you the colour but not the registration number.",
+     "ar": ""
+    },
+    {
+     "en": "I have only begun to glimpse the magnitude of the problem.",
+     "ar": ""
+    }
+   ],
+   "differences": [],
+   "interval": 0,
+   "due": 0,
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/g/gli/glimp/glimpse__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/g/gli/glimp/glimpse__gb_1.mp3",
+   "engineVersion": 1
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784651479795,
+   "word": "cultivating",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "5000",
+   "cefr": "C1",
+   "pos": [
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To grow plants, notably crops",
+     "ar": "لزراعة النباتات، ولا سيما المحاصيل"
+    },
+    {
+     "pos": "verb",
+     "en": "To nurture; to foster; to tend.",
+     "ar": "لرعاية ؛ لرعاية ؛ لرعاية."
+    },
+    {
+     "pos": "verb",
+     "en": "present participle and gerund of cultivate",
+     "ar": "تقديم الفاعلية وجيروند من زراعة"
+    }
+   ],
+   "inflections": [
+    "cultivating",
+    "cultivatings",
+    "cultivatinged",
+    "cultivatinging"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "Most farmers in this region cultivate maize.",
+     "ar": ""
+    },
+    {
+     "en": "They tried to cultivate an interest in learning among their students.",
+     "ar": ""
+    }
+   ],
+   "differences": [],
+   "interval": 0,
+   "due": 0,
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cul/culti/cultivate__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/cul/culti/cultivate__gb_1.mp3",
+   "engineVersion": 1
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784650954854,
+   "word": "lagerpetid",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "Any of the pterosauromorphs of the family Lagerpetidae.",
+     "ar": "أي من مجسمات التيروصور من عائلة Lagerpetidae."
+    }
+   ],
+   "inflections": [
+    "lagerpetid",
+    "lagerpetids"
+   ],
+   "derivatives": [],
+   "synonyms": [],
    "collocations": [],
    "examples": [],
    "differences": [],
@@ -3452,187 +2494,113 @@
    "right": 0,
    "wrong": 0,
    "last": null,
-   "id": 1784662312122,
-   "word": "deliberate",
-   "ipa": "",
-   "arabicPron": "",
-   "oxford": "3000",
-   "cefr": "B2",
-   "pos": [
-    "verb",
-    "adjective"
-   ],
-   "meanings": [
-    {
-     "pos": "verb",
-     "en": "To consider carefully; to weigh well in the mind.",
-     "ar": "للتفكير بعناية ؛ لوزن جيد في العقل."
-    },
-    {
-     "pos": "verb",
-     "en": "To consider the reasons for and against anything; to reflect.",
-     "ar": "النظر في الأسباب المؤيدة والمعارضة لأي شيء ؛ والتفكير."
-    },
-    {
-     "pos": "adjective",
-     "en": "Done on purpose; intentional.",
-     "ar": "تم عن قصد ؛ متعمد."
-    },
-    {
-     "pos": "adjective",
-     "en": "Of a person, weighing facts and arguments with a view to a choice or decision; carefully considering the probable consequences of a step; slow in determining.",
-     "ar": "من شخص، يزن الحقائق والحجج بهدف الاختيار أو القرار ؛ النظر بعناية في العواقب المحتملة لخطوة ؛ بطيئة في التحديد."
-    },
-    {
-     "pos": "adjective",
-     "en": "Formed with deliberation; carefully considered; not sudden or rash.",
-     "ar": "تم تشكيلها بمداولات ؛ مدروسة بعناية ؛ ليست مفاجئة أو متسرعة."
-    }
-   ],
-   "inflections": [
-    "deliberate",
-    "deliberates",
-    "deliberated",
-    "deliberating"
-   ],
-   "derivatives": [
-    {
-     "en": "deliberately (adv.)",
-     "ar": "بتعمد"
-    }
-   ],
-   "synonyms": [
-    {
-     "en": "purposeful",
-     "ar": "ذو عزم, عرف ما يريد, متأني"
-    },
-    {
-     "en": "volitional",
-     "ar": "اختياري"
-    },
-    {
-     "en": "circumspect",
-     "ar": "محترس, واع, يقظ, حريص"
-    },
-    {
-     "en": "thoughtful",
-     "ar": "كثير التفكير, عميق التفكير, وقور, رصين, مدروس"
-    },
-    {
-     "en": "careful",
-     "ar": "التشريعية"
-    }
-   ],
-   "collocations": [
-    {
-     "en": "deliberate attempt",
-     "ar": "محاولة متعمدة"
-    },
-    {
-     "en": "deliberate policy",
-     "ar": "سياسة متعمدة"
-    },
-    {
-     "en": "deliberate choice",
-     "ar": "اختيار متعمد"
-    }
-   ],
-   "examples": [
-    {
-     "en": "It is now time for the jury to deliberate the guilt of the defendant.",
-     "ar": ""
-    },
-    {
-     "en": "Tripping me was deliberate action.",
-     "ar": ""
-    },
-    {
-     "en": "The jury took eight hours to come to its deliberate verdict.",
-     "ar": ""
-    }
-   ],
-   "differences": [],
-   "interval": 0,
-   "due": 0,
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/d/del/delib/deliberate__us_2_rr.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/d/del/delib/deliberate__gb_4.mp3",
-   "engineVersion": 1
-  },
-  {
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "id": 1784662047598,
-   "word": "creatures",
-   "ipa": "/ˈkɹiːt͡ʃəz/",
-   "arabicPron": "كريتشرز",
-   "oxford": "3000",
-   "cefr": "B2",
+   "id": 1784653655818,
+   "word": "bibliography",
+   "ipa": "/bɪbliɒɡɹəfi/",
+   "arabicPron": "بيبليوقرفي",
+   "oxford": "",
+   "cefr": "",
    "pos": [
     "noun"
    ],
    "meanings": [
     {
      "pos": "noun",
-     "en": "A living being; an animal or (sometimes derogatory) a human.",
-     "ar": "كائن حي ؛ حيوان أو (في بعض الأحيان مهين) إنسان."
+     "en": "A section of a written work containing citations, not quotations, to all the books referred to in the work.",
+     "ar": "قسم من عمل مكتوب يحتوي على اقتباسات، وليس اقتباسات، لجميع الكتب المشار إليها في العمل."
     },
     {
      "pos": "noun",
-     "en": "A created thing, whether animate or inanimate; a creation.",
-     "ar": "شيء مخلوق، سواء كان حيًّا أو غير حيّ ؛ خلق."
+     "en": "A list of books or documents relevant to a particular subject or author.",
+     "ar": "قائمة بالكتب أو الوثائق ذات الصلة بموضوع معين أو مؤلف معين."
+    },
+    {
+     "pos": "noun",
+     "en": "The study of the history of books in terms of their classification, printing and publication.",
+     "ar": "دراسة تاريخ الكتب من حيث تصنيفها وطباعتها ونشرها."
     }
    ],
    "inflections": [
-    "creature",
-    "creatures"
+    "bibliography",
+    "bibliographies"
    ],
    "derivatives": [],
-   "synonyms": [
+   "synonyms": [],
+   "collocations": [
     {
-     "en": "brute",
-     "ar": "بهيمي, وحشي, غاشم"
+     "en": "annotated bibliography",
+     "ar": "ثبت مرجعي مشروح."
     },
     {
-     "en": "beast",
-     "ar": "مدرس, بهيمة, عجماء, شخص حقير, شخص بهيمي"
+     "en": "selected bibliography",
+     "ar": "ثبت بمراجع مختارة"
     },
     {
-     "en": "tool",
-     "ar": "أداة"
+     "en": "select bibliography",
+     "ar": "قائمةٌ منتقاة من المراجع"
     },
     {
-     "en": "animal",
-     "ar": "حيواني"
-    },
-    {
-     "en": "puppet",
-     "ar": "دمية, لعبة الأطفال, دمية متحركة, شخص أشبه بالألعوبة"
+     "en": "see bibliography",
+     "ar": "(انظر الببليوغرافيا.)"
     }
    ],
-   "collocations": [],
-   "examples": [
-    {
-     "en": "He's a creature of habit.   insects and other creatures",
-     "ar": ""
-    }
-   ],
+   "examples": [],
    "differences": [],
    "interval": 0,
    "due": 0,
-   "ipaUS": "/ˈkɹit͡ʃɚz/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cre/creat/creature__us_2.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/cre/creat/creature__gb_1.mp3",
    "engineVersion": 1
   },
   {
    "right": 0,
    "wrong": 0,
    "last": null,
-   "id": 1784646739633,
-   "word": "dispatch",
-   "ipa": "/dəˈspætʃ/",
-   "arabicPron": "ديسباتش",
+   "id": 1784659612001,
+   "word": "nostrils",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "Either of the two orifices located on the nose (or on the beak of a bird); used as a passage for air and other gases to travel the nasal passages.",
+     "ar": "أي من الفتحتين الموجودتين على الأنف (أو على منقار طائر )؛ تستخدم كممر للهواء والغازات الأخرى للسفر في الممرات الأنفية."
+    }
+   ],
+   "inflections": [
+    "nostril",
+    "nostrils"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "naris",
+     "ar": "مَنْخَر"
+    },
+    {
+     "en": "nosehole",
+     "ar": "فتحة الأنف"
+    }
+   ],
+   "collocations": [],
+   "examples": [],
+   "differences": [],
+   "interval": 0,
+   "due": 0,
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/nostrils-us.mp3",
+   "engineVersion": 1
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784659584450,
+   "word": "prologue",
+   "ipa": "/ˈpɹəʊlɒɡ/",
+   "arabicPron": "برولوق",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -3642,78 +2610,1110 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A message sent quickly, as a shipment, a prompt settlement of a business, or an important official message sent by a diplomat, or military officer.",
-     "ar": "رسالة يتم إرسالها بسرعة، كشحنة، أو تسوية فورية لنشاط تجاري، أو رسالة رسمية مهمة يرسلها دبلوماسي أو ضابط عسكري."
+     "en": "A speech or section used as an introduction, especially to a play or novel.",
+     "ar": "خطاب أو قسم يستخدم كمقدمة، خاصة لمسرحية أو رواية."
     },
     {
      "pos": "noun",
-     "en": "The act of doing something quickly.",
-     "ar": "فعل شيء بسرعة."
+     "en": "One who delivers a prologue.",
+     "ar": "الشخص الذي يقدم مقدمة."
     },
     {
      "pos": "verb",
-     "en": "To send (a shipment) with promptness.",
-     "ar": "لإرسال (شحنة) على وجه السرعة."
-    },
-    {
-     "pos": "verb",
-     "en": "To send (a person) away hastily.",
-     "ar": "لإبعاد (شخص) على عجل."
-    },
-    {
-     "pos": "verb",
-     "en": "To send (an important official message) promptly, by means of a diplomat or military officer.",
-     "ar": "إرسال (رسالة رسمية مهمة) على وجه السرعة، عن طريق دبلوماسي أو ضابط عسكري."
+     "en": "To introduce with a formal preface, or prologue.",
+     "ar": "للتقديم بمقدمة رسمية، أو مقدمة."
     },
     {
      "pos": "noun",
-     "en": "A message sent quickly, as a shipment, a prompt settlement of a business, or an important official message sent by a diplomat, government official, military officer, etc.",
+     "en": "A component of a computer program that prepares the computer to execute a routine.",
+     "ar": "مكون من برنامج كمبيوتر يعد الكمبيوتر لتنفيذ روتين."
+    },
+    {
+     "pos": "verb",
+     "en": "↑ Douglas Harper (2001–2026), “prologue”, in Online Etymology Dictionary.",
+     "ar": "↑ دوغلاس هاربر (2001-2026)، \"مقدمة\"، في قاموس علم أصول اللغة عبر الإنترنت."
+    },
+    {
+     "pos": "verb",
+     "en": "↑ Michaelis, Hermann; Jones, Daniel (1913), “'proulɔg [-loug]”, in A Phonetic Dictionary of the English Language (Sammlung Phonetischer Wörterbücher; 2)‎, Hanover: Carl Meyer (Gustav Prior), →OCLC, page 344.",
      "ar": ""
     }
    ],
    "inflections": [
-    "dispatch",
-    "dispatches",
-    "dispatched",
-    "dispatching"
+    "prologue",
+    "prologues",
+    "prologued",
+    "prologuing"
    ],
    "derivatives": [],
    "synonyms": [
     {
-     "en": "haste",
-     "ar": ""
-    },
-    {
-     "en": "hurry",
-     "ar": ""
-    },
-    {
-     "en": "rapidity",
-     "ar": ""
-    },
-    {
-     "en": "destroy",
-     "ar": ""
-    },
-    {
-     "en": "kill",
+     "en": "forespeech",
      "ar": ""
     }
    ],
-   "collocations": [],
+   "collocations": [
+    {
+     "en": "general prologue",
+     "ar": "مقدمة عامة"
+    },
+    {
+     "en": "contents prologue",
+     "ar": "مقدمة المحتويات"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "interval": 0,
+   "due": 0,
+   "engineVersion": 1
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784659545425,
+   "word": "wick",
+   "ipa": "/wɪk/",
+   "arabicPron": "ويك",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "verb",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A bundle, twist, braid, or woven strip of cord, fabric, fibre/fiber, or other porous material in a candle, oil lamp, kerosene heater, or the like, that draws up liquid fuel, such as melted tallow, wax, or the oil, delivering it to the base of the flame for conversion to gases and burning; any other length of material burned for illumination in small successive portions.",
+     "ar": "حزمة أو لف أو تجديل أو شريط منسوج من الحبل أو القماش أو الألياف/الألياف أو غيرها من المواد المسامية في شمعة أو مصباح زيت أو سخان كيروسين أو ما شابه ذلك، يسحب الوقود السائل، مثل الشحم المذاب أو الشمع أو الزيت، ويوصله إلى قاعدة اللهب لتحويله إلى غازات وحرقه ؛ أي طول آخر من المواد المحترقة للإضاءة في أجزاء صغيرة متتالية."
+    },
+    {
+     "pos": "noun",
+     "en": "Any piece of porous material that conveys liquid by capillary action, such as a strip of gauze placed in a wound to serve as a drain.",
+     "ar": "أي قطعة من مادة مسامية تنقل السائل عن طريق عمل الشعيرات الدموية، مثل شريط من الشاش يوضع في الجرح ليكون بمثابة تصريف."
+    },
+    {
+     "pos": "verb",
+     "en": "To convey or draw off (liquid) by capillary action.",
+     "ar": "لنقل أو سحب (السائل) عن طريق عمل الشعيرات الدموية."
+    },
+    {
+     "pos": "verb",
+     "en": "(of a liquid) To traverse (i.e. be conveyed by capillary action) through a wick or other porous material, as water through a sponge. Usually followed by through.",
+     "ar": "(من سائل) لاجتياز (أي يتم نقلها عن طريق العمل الشعري) من خلال الفتيل أو غيرها من المواد المسامية، مثل الماء من خلال الإسفنج. عادة ما يتبعها من خلال."
+    },
+    {
+     "pos": "noun",
+     "en": "A braid or bundle of fibre or other porous material (now generally twisted or woven cotton) in a candle, kerosene heater, oil lamp, etc., that draws up a liquid fuel (such as melted tallow or wax, or oil) at one end, to be ignited at the other end to produce a flame.",
+     "ar": "جديلة أو حزمة من الألياف أو غيرها من المواد المسامية (التي أصبحت الآن قطنًا ملتويًا أو منسوجًا بشكل عام) في شمعة أو سخان كيروسين أو مصباح زيت، وما إلى ذلك، والتي تسحب وقودًا سائلًا (مثل الشحم المذاب أو الشمع أو الزيت) في أحد الطرفين، لإشعاله في الطرف الآخر لإنتاج لهب."
+    },
+    {
+     "pos": "noun",
+     "en": "Synonym of wicking (“the material of which wicks (etymology 1, noun sense&nbsp;1) are made”).",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "wick",
+    "wicks",
+    "wicked",
+    "wicking"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "taper",
+     "ar": "شمعة رفيعة"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "chad wick",
+     "ar": "شاد ويك"
+    },
+    {
+     "en": "fen wick",
+     "ar": "فتيل فين"
+    },
+    {
+     "en": "cotton wick",
+     "ar": "فتيل من القطن"
+    }
+   ],
    "examples": [
     {
-     "en": "We must act with dispatch in this matter.",
+     "en": "Trim the wick fairly short, so that the flame does not smoke.",
+     "ar": ""
+    },
+    {
+     "en": "The fabric wicks perspiration away from the body.",
+     "ar": ""
+    },
+    {
+     "en": "The moisture slowly wicked through the wood.",
      "ar": ""
     }
    ],
    "differences": [],
-   "ipaUS": "/dɪˈspætʃ/",
-   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/dispatch-us.mp3",
-   "freqLabel": "Top 8,000 words",
    "interval": 0,
    "due": 0,
-   "estCefr": "B2",
+   "audioGen": "https://api.dictionaryapi.dev/media/pronunciations/en/wick-au.mp3",
+   "freqLabel": "Top 18,000 words",
+   "estCefr": "C1",
+   "engineVersion": 1
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784659495782,
+   "word": "opaque",
+   "ipa": "/əʊˈpeɪk/",
+   "arabicPron": "وبيك",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "verb",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "An area of darkness; a place or region with no light.",
+     "ar": "منطقة مظلمة ؛ مكان أو منطقة بلا ضوء."
+    },
+    {
+     "pos": "noun",
+     "en": "Something which is opaque rather than translucent.",
+     "ar": "شيء غير شفاف بدلاً من شفاف."
+    },
+    {
+     "pos": "verb",
+     "en": "To make, render (more) opaque.",
+     "ar": "لجعلها مبهمة (أكثر)."
+    },
+    {
+     "pos": "adjective",
+     "en": "Neither reflecting nor emitting light.",
+     "ar": "لا ينعكس ولا ينبعث منه ضوء."
+    },
+    {
+     "pos": "adjective",
+     "en": "Allowing little light to pass through, not translucent or transparent.",
+     "ar": "السماح بمرور القليل من الضوء، وليس شفافًا أو شفافًا."
+    },
+    {
+     "pos": "adjective",
+     "en": "Unclear, unintelligible, hard to get or explain the meaning of.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "opaque",
+    "opaques",
+    "opaqued",
+    "opaquing"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "blur",
+     "ar": "تمويه"
+    },
+    {
+     "en": "cloud",
+     "ar": "سحابة"
+    },
+    {
+     "en": "turbid",
+     "ar": "عكر, معكر, كثيف, كدر"
+    },
+    {
+     "en": "incomprehensible",
+     "ar": "غامض, مبهم, لا يسبر غوره"
+    },
+    {
+     "en": "solid",
+     "ar": "تصديرها"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "opaque white",
+     "ar": "أبيض غير شفاف"
+    },
+    {
+     "en": "opaque glass",
+     "ar": "زُجَاجٌ مُغَشَّى"
+    },
+    {
+     "en": "opaque material",
+     "ar": "مادة معتمة"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "interval": 0,
+   "due": 0,
+   "engineVersion": 1
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784657490837,
+   "word": "flume",
+   "ipa": "/fluːm/",
+   "arabicPron": "فلوم",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A ravine or gorge, usually one with water running through.",
+     "ar": "وادٍ أو ممر ضيق، عادةً ما يمر عبره الماء."
+    },
+    {
+     "pos": "noun",
+     "en": "An open channel or trough used to direct or divert liquids.",
+     "ar": "قناة مفتوحة أو حوض يستخدم لتوجيه أو تحويل السوائل."
+    },
+    {
+     "pos": "verb",
+     "en": "To transport (logs of wood) by floating them along a water-filled channel or trough.",
+     "ar": "لنقل (جذوع الخشب) عن طريق تعويمها على طول قناة مملوءة بالماء أو حوض."
+    },
+    {
+     "pos": "noun",
+     "en": "An open channel or trough used to direct or divert liquids, especially to carry materials (logs, mined material, etc) or people (as a water slide), especially (but not always) one where the walls are raised above the surrounding terrain rather than recessed like a ditch.",
+     "ar": "قناة مفتوحة أو حوض يستخدم لتوجيه أو تحويل السوائل، خاصة لحمل المواد (جذوع الأشجار، المواد الملغومة، إلخ) أو الأشخاص (كشريحة مائية)، خاصة (ولكن ليس دائمًا) حيث يتم رفع الجدران فوق التضاريس المحيطة بدلاً من التجويف مثل الخندق."
+    }
+   ],
+   "inflections": [
+    "flume",
+    "flumes",
+    "flumed",
+    "fluming"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "gulch",
+     "ar": "العقيق واد عميق, جدول, وهد, مسيل ماء"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "flume experiments",
+     "ar": "تجارب المسيل للدموع"
+    },
+    {
+     "en": "wave flume",
+     "ar": "دفق الموجة"
+    },
+    {
+     "en": "parshall flume",
+     "ar": "قناة بارشال"
+    },
+    {
+     "en": "wooden flume",
+     "ar": "مسيل خشبي"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "interval": 0,
+   "due": 0,
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/flume-us.mp3",
+   "engineVersion": 1
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784655998671,
+   "word": "ranching",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "verb",
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To operate a ranch; engage in ranching.",
+     "ar": "لتشغيل مزرعة ؛ الانخراط في تربية المواشي."
+    },
+    {
+     "pos": "verb",
+     "en": "To work on a ranch",
+     "ar": "للعمل في مزرعة"
+    },
+    {
+     "pos": "noun",
+     "en": "The business or activity of operating a ranch, of farming or raising livestock.",
+     "ar": "أعمال أو نشاط تشغيل مزرعة أو تربية الماشية."
+    },
+    {
+     "pos": "noun",
+     "en": "A ranch.",
+     "ar": "أي مزرعة ؟"
+    },
+    {
+     "pos": "verb",
+     "en": "present participle and gerund of ranch",
+     "ar": "تقديم نشاط وجيروند من مزرعة"
+    }
+   ],
+   "inflections": [
+    "ranching",
+    "ranchings",
+    "ranchinged",
+    "ranchinging"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [
+    {
+     "en": "ranching country",
+     "ar": "تربية المواشي في الريف"
+    },
+    {
+     "en": "ranching operations",
+     "ar": "عمليات تربية المواشي"
+    },
+    {
+     "en": "cattle ranching",
+     "ar": "تربية الماشية"
+    }
+   ],
+   "examples": [
+    {
+     "en": "Formally the widow still ranches, but in fact she leaves all ranching to the foreman.",
+     "ar": ""
+    },
+    {
+     "en": "Ranching is his way of life.",
+     "ar": ""
+    }
+   ],
+   "differences": [],
+   "interval": 0,
+   "due": 0,
+   "freqLabel": "Top 8,000 words",
+   "estCefr": "B1",
+   "engineVersion": 1
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784655199109,
+   "word": "vocational",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "adjective",
+     "en": "Of or pertaining to a vocation.",
+     "ar": "أو تتعلق بمهنة."
+    },
+    {
+     "pos": "adjective",
+     "en": "(of education) That provides a special skill rather than academic knowledge.",
+     "ar": "(التعليم) الذي يوفر مهارة خاصة بدلاً من المعرفة الأكاديمية."
+    },
+    {
+     "pos": "adjective",
+     "en": "That provides a special skill rather than academic knowledge.",
+     "ar": "وهذا يوفر مهارة خاصة بدلاً من المعرفة الأكاديمية."
+    }
+   ],
+   "inflections": [
+    "vocational"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [
+    {
+     "en": "vocational education",
+     "ar": "تعليم مهني"
+    },
+    {
+     "en": "vocational training",
+     "ar": "تَدْرِيبٌ مِهْنِيّ"
+    },
+    {
+     "en": "vocational guidance",
+     "ar": "توجيه مهني"
+    }
+   ],
+   "examples": [
+    {
+     "en": "vocational scheme",
+     "ar": ""
+    },
+    {
+     "en": "vocational course",
+     "ar": ""
+    },
+    {
+     "en": "vocational program",
+     "ar": ""
+    }
+   ],
+   "differences": [],
+   "interval": 0,
+   "due": 0,
+   "engineVersion": 1
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784654476272,
+   "word": "laboratory",
+   "ipa": "/ləˈbɔɹətɹi/",
+   "arabicPron": "لابرتوري",
+   "oxford": "3000",
+   "cefr": "B1",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A room, building or institution equipped for scientific research, experimentation or analysis.",
+     "ar": "غرفة أو مبنى أو مؤسسة مجهزة للبحث العلمي أو التجريب أو التحليل."
+    },
+    {
+     "pos": "noun",
+     "en": "A place where chemicals, drugs or microbes are prepared or manufactured.",
+     "ar": "مكان يتم فيه تحضير أو تصنيع المواد الكيميائية أو العقاقير أو الميكروبات."
+    }
+   ],
+   "inflections": [
+    "laboratory",
+    "laboratories"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "science lab",
+     "ar": "** مختبر العلوم"
+    },
+    {
+     "en": "lab",
+     "ar": "مختبر, معمل كيميائي"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "laboratory tests",
+     "ar": "اختبارات المعمل"
+    },
+    {
+     "en": "laboratory studies",
+     "ar": "الدراسات المختبرية"
+    },
+    {
+     "en": "laboratory experiments",
+     "ar": "تجارب مخبرية"
+    },
+    {
+     "en": "research laboratory",
+     "ar": "مختبر البحث, المختبر التي تحدث به الدرايات المتعلة بالبحث"
+    },
+    {
+     "en": "national laboratory",
+     "ar": "المختبر الوطني لوزارة الطاقة الأمريكية"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "interval": 0,
+   "due": 0,
+   "ipaUS": "/ˈlæb(ə)ɹəˌtɔɹi/",
+   "ipaUK": "/ləˈbɒɹət(ə)ɹiː/",
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/l/lab/labor/laboratory__us_2.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/l/lab/labor/laboratory__gb_2.mp3",
+   "engineVersion": 1
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784706745622,
+   "word": "sync",
+   "ipa": "/sɪŋk/",
+   "arabicPron": "سينك",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "Harmony.",
+     "ar": "التناسق والانسجام"
+    },
+    {
+     "pos": "noun",
+     "en": "A music synchronization license, allowing the music to be synchronized with visual media such as films.",
+     "ar": "ترخيص مزامنة الموسيقى، مما يسمح بمزامنة الموسيقى مع الوسائط المرئية مثل الأفلام."
+    },
+    {
+     "pos": "verb",
+     "en": "To synchronize, especially in the senses of data synchronization, time synchronization, or synchronizing music with video.",
+     "ar": "للمزامنة، خاصة فيما يتعلق بمزامنة البيانات أو مزامنة الوقت أو مزامنة الموسيقى مع الفيديو."
+    },
+    {
+     "pos": "verb",
+     "en": "To flush all pending I/O operations to disk.",
+     "ar": "لطرد جميع عمليات الإدخال/الإخراج المعلقة إلى القرص."
+    },
+    {
+     "pos": "noun",
+     "en": "The state or property of being synchronized.",
+     "ar": "حالة أو خاصية المزامنة."
+    },
+    {
+     "pos": "noun",
+     "en": "The arrangement of military actions in time, space, and purpose to produce maximum relative combat power at a decisive place and time.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "sync",
+    "syncs",
+    "synced",
+    "syncing"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "synchroneity",
+     "ar": ""
+    },
+    {
+     "en": "synchronicity",
+     "ar": ""
+    },
+    {
+     "en": "synchronize",
+     "ar": ""
+    }
+   ],
+   "collocations": [
+    {
+     "en": "sync pulses",
+     "ar": ""
+    },
+    {
+     "en": "sync pulse",
+     "ar": ""
+    },
+    {
+     "en": "sync signal",
+     "ar": ""
+    },
+    {
+     "en": "horizontal sync",
+     "ar": ""
+    },
+    {
+     "en": "vertical sync",
+     "ar": ""
+    }
+   ],
+   "examples": [
+    {
+     "en": "Our cloud storage automatically syncs your files to all your devices.",
+     "ar": "يقوم التخزين السحابي لدينا بمزامنة ملفاتك تلقائيًا مع جميع أجهزتك."
+    },
+    {
+     "en": "The generator went off line when it lost synchronization with the power line.",
+     "ar": "توقف المولد عن العمل عندما فقد المزامنة مع خط الطاقة."
+    },
+    {
+     "en": "He synced his phone to the laptop to transfer data about the field trip.",
+     "ar": "قام بمزامنة هاتفه مع الكمبيوتر المحمول لنقل البيانات حول الرحلة الميدانية."
+    }
+   ],
+   "differences": [],
+   "freqLabel": "Top 8,000 words",
+   "estCefr": "B1",
+   "engineVersion": 1,
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784707365586,
+   "word": "man",
+   "ipa": "[mɛn]",
+   "arabicPron": "مان",
+   "oxford": "3000",
+   "cefr": "A1",
+   "pos": [
+    "noun",
+    "interjection",
+    "symbol",
+    "pronoun",
+    "verb",
+    "proper noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "An adult male human.",
+     "ar": "ذكر بشري بالغ."
+    },
+    {
+     "pos": "noun",
+     "en": "(collective) All human males collectively: mankind.",
+     "ar": "(جماعي) جميع الذكور البشرية مجتمعة: البشرية."
+    },
+    {
+     "pos": "interjection",
+     "en": "Used to place emphasis upon something or someone; sometimes, but not always, when actually addressing a man.",
+     "ar": "اعتاد التركيز على شيء ما أو شخص ما ؛ في بعض الأحيان، ولكن ليس دائمًا، عند مخاطبة رجل بالفعل."
+    },
+    {
+     "pos": "symbol",
+     "en": "ISO 639-2 &amp; ISO 639-3 language code for Mandingo.",
+     "ar": "ISO 639-2 و ISO 639-3 رمز اللغة للماندينغو."
+    },
+    {
+     "pos": "noun",
+     "en": "All human males collectively: mankind.",
+     "ar": "جميع الذكور البشرية مجتمعة: البشرية."
+    },
+    {
+     "pos": "noun",
+     "en": "An adult male who belongs to a particular group: an employee, a representative, etc.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "man",
+    "mans",
+    "manned",
+    "manning"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "male",
+     "ar": ""
+    },
+    {
+     "en": "omi",
+     "ar": ""
+    },
+    {
+     "en": "human",
+     "ar": ""
+    },
+    {
+     "en": "person",
+     "ar": ""
+    },
+    {
+     "en": "world",
+     "ar": ""
+    }
+   ],
+   "collocations": [
+    {
+     "en": "young man",
+     "ar": ""
+    },
+    {
+     "en": "old man",
+     "ar": ""
+    }
+   ],
+   "examples": [
+    {
+     "en": "The show is especially popular with middle-aged men.",
+     "ar": "يحظى العرض بشعبية خاصة بين الرجال في منتصف العمر."
+    },
+    {
+     "en": "Man, that was a great catch!",
+     "ar": "كان ذلك ألتقاطا عظيما!"
+    },
+    {
+     "en": "Man's got some new creps.",
+     "ar": "حصل الرجل على بعض المقرمشات الجديدة."
+    }
+   ],
+   "differences": [],
+   "ipaUS": "/mæn/",
+   "ipaUK": "/mæn/",
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/m/man/man__/man__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/m/man/man__/man__gb_2.mp3",
+   "engineVersion": 1,
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784707276441,
+   "word": "hello",
+   "ipa": "/həˈloʊ/",
+   "arabicPron": "هلو",
+   "oxford": "3000",
+   "cefr": "A1",
+   "pos": [
+    "noun",
+    "verb",
+    "interjection"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "\"Hello!\" or an equivalent greeting.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "To greet with \"hello\".",
+     "ar": ""
+    },
+    {
+     "pos": "interjection",
+     "en": "A greeting (salutation) said when meeting someone or acknowledging someone’s arrival or presence.",
+     "ar": ""
+    },
+    {
+     "pos": "interjection",
+     "en": "A greeting used when answering the telephone.",
+     "ar": ""
+    },
+    {
+     "pos": "interjection",
+     "en": "A call for response if it is not clear if anyone is present or listening, or if a telephone conversation may have been disconnected.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "To greet (someone) with \"hello\".",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "hello",
+    "helloes",
+    "helloed",
+    "helloing"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "greeting",
+     "ar": ""
+    },
+    {
+     "en": "hullo",
+     "ar": ""
+    },
+    {
+     "en": "how-do-you-do",
+     "ar": ""
+    },
+    {
+     "en": "hi",
+     "ar": ""
+    },
+    {
+     "en": "howdy",
+     "ar": ""
+    }
+   ],
+   "collocations": [
+    {
+     "en": "hello world",
+     "ar": ""
+    },
+    {
+     "en": "hello again",
+     "ar": ""
+    },
+    {
+     "en": "hello kitty",
+     "ar": ""
+    },
+    {
+     "en": "say hello",
+     "ar": ""
+    },
+    {
+     "en": "said hello",
+     "ar": ""
+    }
+   ],
+   "examples": [
+    {
+     "en": "Hello, everyone.",
+     "ar": ""
+    },
+    {
+     "en": "Hello? How may I help you?",
+     "ar": ""
+    },
+    {
+     "en": "Hello? Is anyone there?",
+     "ar": ""
+    }
+   ],
+   "differences": [],
+   "ipaUK": "/həˈləʊ/",
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/h/hel/hello/hello__us_1_rr.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/h/hel/hello/hello__gb_1.mp3",
+   "audioGen": "https://api.dictionaryapi.dev/media/pronunciations/en/hello-au.mp3",
+   "engineVersion": 1,
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784707188529,
+   "word": "hi",
+   "ipa": "/haɪ/",
+   "arabicPron": "هاي",
+   "oxford": "3000",
+   "cefr": "A1",
+   "pos": [
+    "noun",
+    "interjection",
+    "symbol",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "The word \"hi\" used as a greeting.",
+     "ar": ""
+    },
+    {
+     "pos": "interjection",
+     "en": "A friendly, informal, casual greeting said when meeting someone.",
+     "ar": ""
+    },
+    {
+     "pos": "interjection",
+     "en": "An exclamation to call attention.",
+     "ar": ""
+    },
+    {
+     "pos": "symbol",
+     "en": "ISO 639-1 language code for Hindi.",
+     "ar": ""
+    },
+    {
+     "pos": "interjection",
+     "en": "A friendly, informal, casual greeting said upon someone's arrival.",
+     "ar": ""
+    },
+    {
+     "pos": "interjection",
+     "en": "Expressing wonder or derision.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "hi",
+    "his"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "greeting",
+     "ar": ""
+    },
+    {
+     "en": "hello",
+     "ar": ""
+    },
+    {
+     "en": "greetings",
+     "ar": ""
+    },
+    {
+     "en": "hullo",
+     "ar": ""
+    },
+    {
+     "en": "how-do-you-do",
+     "ar": ""
+    }
+   ],
+   "collocations": [
+    {
+     "en": "chapter hi",
+     "ar": ""
+    },
+    {
+     "en": "part hi",
+     "ar": ""
+    }
+   ],
+   "examples": [
+    {
+     "en": "I didn't even get a hi.",
+     "ar": ""
+    },
+    {
+     "en": "Hi, how are you?",
+     "ar": ""
+    },
+    {
+     "en": "I just dropped by to say “hi”.",
+     "ar": ""
+    }
+   ],
+   "differences": [],
+   "ipaUS": "/haɪ/",
+   "ipaUK": "/haɪ/",
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/h/hi_/hi__u/hi__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/h/hi_/hi__g/hi__gb_1.mp3",
+   "engineVersion": 1,
+   "interval": 0,
+   "due": 0
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784707590156,
+   "word": "girl",
+   "ipa": "/ɡɵːl/",
+   "arabicPron": "قيرل",
+   "oxford": "3000",
+   "cefr": "A1",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A female child, adolescent, or a young woman.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "A young female animal.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "To feminize or girlify; to gender as a girl or as for girls.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "(somewhat informal) To staff with or as a girl or girls.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "A female child.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "A woman, especially a young and often attractive woman.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "girl",
+    "girls",
+    "girled",
+    "girling"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "daughter",
+     "ar": ""
+    },
+    {
+     "en": "girlie",
+     "ar": ""
+    },
+    {
+     "en": "lass",
+     "ar": ""
+    },
+    {
+     "en": "lassie",
+     "ar": ""
+    },
+    {
+     "en": "char",
+     "ar": ""
+    }
+   ],
+   "collocations": [
+    {
+     "en": "little girl",
+     "ar": ""
+    },
+    {
+     "en": "young girl",
+     "ar": ""
+    },
+    {
+     "en": "old girl",
+     "ar": ""
+    },
+    {
+     "en": "poor girl",
+     "ar": ""
+    }
+   ],
+   "examples": [
+    {
+     "en": "I saw a little girl feeding, brushing, and talking to a heifer.",
+     "ar": ""
+    },
+    {
+     "en": "He has a crush on a girl at work. We were kidding with him yesterday about his work crush.",
+     "ar": ""
+    }
+   ],
+   "differences": [],
+   "interval": 0,
+   "due": 0,
+   "ipaUS": "/ɡɝl/",
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/g/gir/girl_/girl__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/g/gir/girl_/girl__gb_2.mp3",
    "engineVersion": 1
   }
  ]
