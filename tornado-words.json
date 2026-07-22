@@ -1,8 +1,113 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T08:01:43.733Z",
+ "exportedAt": "2026-07-22T08:02:50.645Z",
  "words": [
+  {
+   "id": 1784707365586,
+   "word": "man",
+   "ipa": "[mɛn]",
+   "arabicPron": "مان",
+   "oxford": "3000",
+   "cefr": "A1",
+   "pos": [
+    "noun",
+    "interjection",
+    "symbol",
+    "pronoun",
+    "verb",
+    "proper noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "An adult male human.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "(collective) All human males collectively: mankind.",
+     "ar": ""
+    },
+    {
+     "pos": "interjection",
+     "en": "Used to place emphasis upon something or someone; sometimes, but not always, when actually addressing a man.",
+     "ar": ""
+    },
+    {
+     "pos": "symbol",
+     "en": "ISO 639-2 &amp; ISO 639-3 language code for Mandingo.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "All human males collectively: mankind.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "An adult male who belongs to a particular group: an employee, a representative, etc.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "man",
+    "mans",
+    "manned",
+    "manning"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "male",
+     "ar": ""
+    },
+    {
+     "en": "omi",
+     "ar": ""
+    },
+    {
+     "en": "human",
+     "ar": ""
+    },
+    {
+     "en": "person",
+     "ar": ""
+    },
+    {
+     "en": "world",
+     "ar": ""
+    }
+   ],
+   "collocations": [
+    {
+     "en": "young man",
+     "ar": ""
+    },
+    {
+     "en": "old man",
+     "ar": ""
+    }
+   ],
+   "examples": [
+    {
+     "en": "The show is especially popular with middle-aged men.",
+     "ar": ""
+    },
+    {
+     "en": "Man, that was a great catch!",
+     "ar": ""
+    },
+    {
+     "en": "Man's got some new creps.",
+     "ar": ""
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784707276441,
    "word": "hello",
