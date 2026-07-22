@@ -1,8 +1,113 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T08:06:22.357Z",
+ "exportedAt": "2026-07-22T08:06:33.935Z",
  "words": [
+  {
+   "id": 1784707590156,
+   "word": "girl",
+   "ipa": "/ɡɵːl/",
+   "arabicPron": "قيرل",
+   "oxford": "3000",
+   "cefr": "A1",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A female child, adolescent, or a young woman.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "A young female animal.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "To feminize or girlify; to gender as a girl or as for girls.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "(somewhat informal) To staff with or as a girl or girls.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "A female child.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "A woman, especially a young and often attractive woman.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "girl",
+    "girls",
+    "girled",
+    "girling"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "daughter",
+     "ar": ""
+    },
+    {
+     "en": "girlie",
+     "ar": ""
+    },
+    {
+     "en": "lass",
+     "ar": ""
+    },
+    {
+     "en": "lassie",
+     "ar": ""
+    },
+    {
+     "en": "char",
+     "ar": ""
+    }
+   ],
+   "collocations": [
+    {
+     "en": "little girl",
+     "ar": ""
+    },
+    {
+     "en": "young girl",
+     "ar": ""
+    },
+    {
+     "en": "old girl",
+     "ar": ""
+    },
+    {
+     "en": "poor girl",
+     "ar": ""
+    }
+   ],
+   "examples": [
+    {
+     "en": "I saw a little girl feeding, brushing, and talking to a heifer.",
+     "ar": ""
+    },
+    {
+     "en": "He has a crush on a girl at work. We were kidding with him yesterday about his work crush.",
+     "ar": ""
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784707365586,
    "word": "man",
