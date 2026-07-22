@@ -1,8 +1,70 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T20:36:50.997Z",
+ "exportedAt": "2026-07-22T20:45:08.271Z",
  "words": [
+  {
+   "id": 1784753085143,
+   "word": "downside",
+   "ipa": "/ˈdaʊnˌsaɪd/",
+   "arabicPron": "داونسايد",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A disadvantageous aspect of something that is normally advantageous.",
+     "ar": "جانب سلبي لشيء مفيد عادة."
+    },
+    {
+     "pos": "noun",
+     "en": "A downward tendency, especially in the price of shares etc.",
+     "ar": "اتجاه هبوطي، خاصة في سعر الأسهم وما إلى ذلك."
+    },
+    {
+     "pos": "noun",
+     "en": "The side of something that is at the bottom, or that is intended to face downward.",
+     "ar": "جانب شيء موجود في القاع، أو يهدف إلى مواجهته لأسفل."
+    }
+   ],
+   "inflections": [
+    "downside",
+    "downsides"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [
+    {
+     "en": "downside risk",
+     "ar": ""
+    },
+    {
+     "en": "downside review",
+     "ar": ""
+    },
+    {
+     "en": "downside risks",
+     "ar": "مخاطر الجانب السلبي"
+    },
+    {
+     "en": "potential downside",
+     "ar": ""
+    }
+   ],
+   "examples": [
+    {
+     "en": "The downside of obtaining a higher rank is that far more work is expected.",
+     "ar": "الجانب السلبي للحصول على رتبة أعلى هو توقع المزيد من العمل."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784752604761,
    "word": "gratification",
