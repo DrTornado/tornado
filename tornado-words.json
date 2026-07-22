@@ -1,8 +1,50 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T18:15:07.012Z",
+ "exportedAt": "2026-07-22T18:41:25.843Z",
  "words": [
+  {
+   "id": 1784745682080,
+   "word": "disproportionately",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "adverb"
+   ],
+   "meanings": [
+    {
+     "pos": "adverb",
+     "en": "In a disproportionate manner",
+     "ar": "بطريقة غير متناسبة"
+    }
+   ],
+   "inflections": [
+    "disproportionately"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [
+    {
+     "en": "disproportionately large",
+     "ar": "كبيرة بشكل غير متناسب"
+    },
+    {
+     "en": "disproportionately high",
+     "ar": "مرتفعة بشكل غير متناسب"
+    },
+    {
+     "en": "disproportionately represented",
+     "ar": "ممثلة بشكل غير متناسب"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784744102628,
    "word": "attuned",
