@@ -1,8 +1,74 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T19:04:20.398Z",
+ "exportedAt": "2026-07-22T19:05:37.225Z",
  "words": [
+  {
+   "id": 1784747132715,
+   "word": "diligence",
+   "ipa": "/ˈdɪlɪdʒəns/",
+   "arabicPron": "ديليجنس",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "Steady application; industry; careful work involving long-term effort.",
+     "ar": "التطبيق الثابت ؛ الصناعة ؛ العمل الدقيق الذي ينطوي على جهد طويل الأجل."
+    },
+    {
+     "pos": "noun",
+     "en": "The qualities of a hard worker, including conscientiousness, determination, and perseverance.",
+     "ar": "صفات العامل المجتهد، بما في ذلك الضمير والتصميم والمثابرة."
+    },
+    {
+     "pos": "noun",
+     "en": "Carefulness, in particular, the necessary care appropriate to a particular task or responsibility.",
+     "ar": "العناية، على وجه الخصوص، الرعاية اللازمة المناسبة لمهمة أو مسؤولية معينة."
+    }
+   ],
+   "inflections": [
+    "diligence",
+    "diligences"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "worksomeness",
+     "ar": "العمل"
+    },
+    {
+     "en": "application",
+     "ar": "طلب (أو الشروع في دعوى)،"
+    },
+    {
+     "en": "industriousness",
+     "ar": "إجْتِهَاد"
+    },
+    {
+     "en": "industry",
+     "ar": "الخبرة القطاعية"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "due diligence",
+     "ar": "الفحص الواجب"
+    },
+    {
+     "en": "reasonable diligence",
+     "ar": "الاجتهاد المعقول"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784747055982,
    "word": "infallible",
