@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T15:49:06.147Z",
+ "exportedAt": "2026-07-22T15:49:15.556Z",
  "words": [
   {
    "id": 1784709625299,
@@ -3649,7 +3649,13 @@
      "ar": "تم إقالة ثمانية مديرين بعد اندماج الشركتين."
     }
    ],
-   "differences": []
+   "differences": [],
+   "audioGen": "https://api.dictionaryapi.dev/media/pronunciations/en/turf-au.mp3",
+   "freqLabel": "Top 18,000 words",
+   "estCefr": "B2",
+   "engineVersion": 1,
+   "interval": 0,
+   "due": 0
   },
   {
    "right": 0,
@@ -3727,7 +3733,12 @@
     }
    ],
    "examples": [],
-   "differences": []
+   "differences": [],
+   "ipaUS": "/θætʃ/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/thatch-us.mp3",
+   "engineVersion": 1,
+   "interval": 0,
+   "due": 0
   },
   {
    "right": 0,
@@ -3777,7 +3788,13 @@
      "ar": "ضحكتهم الصاخبة خانت وجودهم."
     }
    ],
-   "differences": []
+   "differences": [],
+   "ipaUS": "/ˈlæftɚ/",
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/l/lau/laugh/laughter__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/l/lau/laugh/laughter__gb_1.mp3",
+   "engineVersion": 1,
+   "interval": 0,
+   "due": 0
   }
  ],
  "tombstones": [
