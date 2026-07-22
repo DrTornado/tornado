@@ -1,8 +1,65 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T08:40:00.628Z",
+ "exportedAt": "2026-07-22T08:40:28.950Z",
  "words": [
+  {
+   "id": 1784709625299,
+   "word": "tornado",
+   "ipa": "/tɔː(ɹ)ˈneɪ.dəʊ/",
+   "arabicPron": "تورنيدو",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A violent windstorm characterized by a mobile, twisting, funnel-shaped cloud.",
+     "ar": "عاصفة رياح عنيفة تتميز بسحابة متحركة ملتوية على شكل قمع."
+    },
+    {
+     "pos": "noun",
+     "en": "A violent wind in the form of a mobile, rapidly rotating, funnel cloud that has contacted the ground.",
+     "ar": "رياح عنيفة على شكل سحابة قمعية متحركة سريعة الدوران تلامس الأرض."
+    },
+    {
+     "pos": "verb",
+     "en": "To sweep through something violently.",
+     "ar": "لاكتساح شيء ما بعنف."
+    }
+   ],
+   "inflections": [
+    "tornado",
+    "tornadoes",
+    "tornadoed",
+    "tornadoing"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "twister",
+     "ar": "مهمة عسيرة"
+    },
+    {
+     "en": "whirling void",
+     "ar": "فراغ دوامي"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "A tornado is a rotating column of air.",
+     "ar": "الإعصار هو عمود هواء دوار."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784663410864,
    "word": "blogging",
