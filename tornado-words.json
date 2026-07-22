@@ -1,8 +1,82 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T21:53:53.273Z",
+ "exportedAt": "2026-07-22T22:17:00.255Z",
  "words": [
+  {
+   "id": 1784758615136,
+   "word": "pathologies",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "The branch of medicine concerned with the study of the nature of disease and its causes, processes, development, and consequences.",
+     "ar": "فرع الطب المعني بدراسة طبيعة المرض وأسبابه وعملياته وتطوره وعواقبه."
+    },
+    {
+     "pos": "noun",
+     "en": "The medical specialty that provides microscopy and other laboratory services (e.g., cytology, histology) to clinicians.",
+     "ar": "التخصص الطبي الذي يوفر الفحص المجهري والخدمات المختبرية الأخرى (على سبيل المثال، علم الخلايا والأنسجة) للأطباء."
+    }
+   ],
+   "inflections": [
+    "pathology",
+    "pathologies"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "abnormality",
+     "ar": "غير طبيعية"
+    },
+    {
+     "en": "disease",
+     "ar": "مزمن"
+    },
+    {
+     "en": "illness",
+     "ar": "‎ عِلَّة‎"
+    },
+    {
+     "en": "pathosis",
+     "ar": "حالَةٌ مَرَضِيَّة"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "plant pathology",
+     "ar": "الباثولوجيا النَّباتِيَّة"
+    },
+    {
+     "en": "social pathology",
+     "ar": "علم الإمراض الاجتماعية"
+    },
+    {
+     "en": "clinical pathology",
+     "ar": "الباثولوجيا السَّريرِيَّة"
+    },
+    {
+     "en": "speech pathology",
+     "ar": "بَاثولوجيا الكَلاَم"
+    }
+   ],
+   "examples": [
+    {
+     "en": "The surgeon sent a specimen of the cyst to the pathology department for staining and analysis to determine its histologic subtype.",
+     "ar": "أرسل الجراح عينة من الكيس إلى قسم علم الأمراض لتلطيخه وتحليله لتحديد نوعه الفرعي النسيجي."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784757229581,
    "word": "counterfactuals",
