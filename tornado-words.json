@@ -1,8 +1,65 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T21:52:23.649Z",
+ "exportedAt": "2026-07-22T21:53:53.273Z",
  "words": [
+  {
+   "id": 1784757229581,
+   "word": "counterfactuals",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A claim, hypothesis, or other belief that is contrary to the facts.",
+     "ar": "ادعاء أو فرضية أو اعتقاد آخر يتعارض مع الحقائق."
+    },
+    {
+     "pos": "noun",
+     "en": "A hypothetical state of the world, used to assess the impact of an action.",
+     "ar": "حالة افتراضية للعالم، تُستخدم لتقييم تأثير الإجراء."
+    }
+   ],
+   "inflections": [
+    "counterfactual",
+    "counterfactuals"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "conditional",
+     "ar": "شرطي"
+    },
+    {
+     "en": "contrary to fact",
+     "ar": "مخالف"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "counterfactual conditionals",
+     "ar": "شروط معاكسة للواقع"
+    },
+    {
+     "en": "counterfactual thinking",
+     "ar": "التفكير المغاير."
+    },
+    {
+     "en": "counterfactual conditional",
+     "ar": "الشرطي المضاد للواقع"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784757139188,
    "word": "contenders",
