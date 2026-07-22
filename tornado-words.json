@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T16:30:55.233Z",
+ "exportedAt": "2026-07-22T16:30:59.807Z",
  "words": [
   {
    "id": 1784709625299,
@@ -3875,7 +3875,10 @@
      "ar": "بقيت في مستشفى النقاهة لمدة أسبوعين قبل العودة إلى المنزل."
     }
    ],
-   "differences": []
+   "differences": [],
+   "engineVersion": 1,
+   "interval": 0,
+   "due": 0
   }
  ],
  "tombstones": [
