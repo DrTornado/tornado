@@ -1,8 +1,81 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T21:20:05.951Z",
+ "exportedAt": "2026-07-22T21:52:23.649Z",
  "words": [
+  {
+   "id": 1784757139188,
+   "word": "contenders",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "5000",
+   "cefr": "C1",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "Someone who competes with one or more other people.",
+     "ar": "شخص يتنافس مع شخص آخر أو أكثر."
+    },
+    {
+     "pos": "noun",
+     "en": "Someone who has a viable chance of winning a competition.",
+     "ar": "شخص لديه فرصة قابلة للتطبيق للفوز في مسابقة."
+    }
+   ],
+   "inflections": [
+    "contender",
+    "contenders"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "competition",
+     "ar": "المنافسة"
+    },
+    {
+     "en": "rival",
+     "ar": "ند, متنافس"
+    },
+    {
+     "en": "competitor",
+     "ar": "منافس"
+    },
+    {
+     "en": "challenger",
+     "ar": "متحد مستفز"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "serious contender",
+     "ar": "منافس جاد"
+    },
+    {
+     "en": "leading contender",
+     "ar": "أبرز المنافسين؟"
+    },
+    {
+     "en": "strong contender",
+     "ar": "منافس قوي"
+    },
+    {
+     "en": "presidential contender",
+     "ar": "منافس رئاسي"
+    },
+    {
+     "en": "major contender",
+     "ar": "المنافس الرئيسي"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784755200333,
    "word": "afterwards",
