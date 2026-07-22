@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T07:14:36.868Z",
+ "exportedAt": "2026-07-22T07:34:47.841Z",
  "words": [
   {
    "id": 1784663410864,
@@ -2199,11 +2199,6 @@
      "pos": "verb",
      "en": "To interact",
      "ar": "للتفاعل"
-    },
-    {
-     "pos": "verb",
-     "en": "To interact.",
-     "ar": "للتفاعل."
     }
    ],
    "inflections": [
@@ -2289,7 +2284,9 @@
    ],
    "differences": [],
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "/ˈɡɑ.ɡəlz/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/goggles-us.mp3"
   },
   {
    "right": 0,
@@ -2360,16 +2357,18 @@
    "examples": [
     {
      "en": "I only got a glimpse of the car, so I can tell you the colour but not the registration number.",
-     "ar": "حصلت فقط على لمحة عن السيارة، حتى أتمكن من إخبارك باللون ولكن ليس رقم التسجيل."
+     "ar": ""
     },
     {
      "en": "I have only begun to glimpse the magnitude of the problem.",
-     "ar": "لقد بدأت للتو في إلقاء نظرة على حجم المشكلة."
+     "ar": ""
     }
    ],
    "differences": [],
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/g/gli/glimp/glimpse__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/g/gli/glimp/glimpse__gb_1.mp3"
   },
   {
    "right": 0,
