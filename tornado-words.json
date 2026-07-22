@@ -1,8 +1,79 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T08:58:58.544Z",
+ "exportedAt": "2026-07-22T09:15:53.826Z",
  "words": [
+  {
+   "id": 1784711749205,
+   "word": "converging",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "verb",
+    "noun",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "Of two or more entities, to approach each other; to get closer and closer.",
+     "ar": "من بين كيانين أو أكثر، الاقتراب من بعضهما البعض ؛ الاقتراب أكثر فأكثر."
+    },
+    {
+     "pos": "verb",
+     "en": "Of a sequence, to have a limit.",
+     "ar": "من تسلسل، أن يكون لها حد."
+    },
+    {
+     "pos": "noun",
+     "en": "Convergence",
+     "ar": "التطابق"
+    },
+    {
+     "pos": "adjective",
+     "en": "Approaching each other at a point; convergent.",
+     "ar": "الاقتراب من بعضهما البعض عند نقطة ؛ متقاربة."
+    }
+   ],
+   "inflections": [
+    "converging",
+    "convergings",
+    "converginged",
+    "converginging"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "convergence",
+     "ar": "تجمع, التقاء, نقطة إلتقاء"
+    },
+    {
+     "en": "convergency",
+     "ar": "تقارب, عملية التقارب, التجميع"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "converging lens",
+     "ar": "عَدَسَةٌ لَامَّة"
+    },
+    {
+     "en": "converging lines",
+     "ar": "خطوط متقاربة"
+    },
+    {
+     "en": "converging towards",
+     "ar": "تتقارب نحو"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784706745622,
    "word": "sync",
