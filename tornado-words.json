@@ -1,8 +1,102 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T19:01:45.486Z",
+ "exportedAt": "2026-07-22T19:04:20.398Z",
  "words": [
+  {
+   "id": 1784747055982,
+   "word": "infallible",
+   "ipa": "/ɪnˈfa.lɪ.b(ə)l/",
+   "arabicPron": "ينفالبل",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "adjective",
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "adjective",
+     "en": "Without fault or weakness; incapable of error or fallacy.",
+     "ar": "دون خطأ أو ضعف ؛ غير قادر على الخطأ أو المغالطة."
+    },
+    {
+     "pos": "adjective",
+     "en": "Certain to produce the intended effect, sure.",
+     "ar": "من المؤكد أن تنتج التأثير المقصود، بالتأكيد."
+    },
+    {
+     "pos": "noun",
+     "en": "A person who, or an object or process that, is taken as being infallible.",
+     "ar": "الشخص الذي، أو كائن أو عملية، يؤخذ على أنه معصوم."
+    },
+    {
+     "pos": "adjective",
+     "en": "Certain to produce the intended effect; sure.",
+     "ar": "من المؤكد أن تنتج التأثير المقصود ؛ بالتأكيد."
+    },
+    {
+     "pos": "adjective",
+     "en": "Certain to result from a specific cause; inevitable.",
+     "ar": "من المؤكد أنه ناتج عن سبب محدد ؛ لا مفر منه."
+    }
+   ],
+   "inflections": [
+    "infallible",
+    "infallibles"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "faultless",
+     "ar": "لا عيب فيه, غير ناقص"
+    },
+    {
+     "en": "indefective",
+     "ar": "غير معيب"
+    },
+    {
+     "en": "perfect",
+     "ar": "كامل"
+    },
+    {
+     "en": "foolproof",
+     "ar": "غير خطر, سهل جدا"
+    },
+    {
+     "en": "unerring",
+     "ar": "معصوم, سديد, لا يخطئ"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "infallible guide",
+     "ar": "دليل معصوم"
+    },
+    {
+     "en": "infallible authority",
+     "ar": "السلطة المعصومة من الخطأ"
+    },
+    {
+     "en": "infallible church",
+     "ar": "كنيسة معصومة عن الخطأ"
+    }
+   ],
+   "examples": [
+    {
+     "en": "He knows about many things, but even he is not infallible.",
+     "ar": "إنه يعرف أشياء كثيرة، ولكن حتى هو ليس معصومًا من الخطأ."
+    },
+    {
+     "en": "Try this infallible cure for hiccups.",
+     "ar": "جرب هذا العلاج المعصوم للفواق."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784746900843,
    "word": "junctures",
