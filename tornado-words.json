@@ -1,8 +1,80 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T21:13:11.488Z",
+ "exportedAt": "2026-07-22T21:20:05.951Z",
  "words": [
+  {
+   "id": 1784755200333,
+   "word": "afterwards",
+   "ipa": "/ˈɑːftə.wədz/",
+   "arabicPron": "افتروردز",
+   "oxford": "3000",
+   "cefr": "B2",
+   "pos": [
+    "adverb"
+   ],
+   "meanings": [
+    {
+     "pos": "adverb",
+     "en": "(temporal location) At a later or succeeding time.",
+     "ar": "(الموقع الزمني) في وقت لاحق أو لاحق."
+    },
+    {
+     "pos": "adverb",
+     "en": "At a later or succeeding time; after that;",
+     "ar": "في وقت لاحق أو لاحق ؛ بعد ذلك ؛"
+    }
+   ],
+   "inflections": [
+    "afterwards"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "afterhand",
+     "ar": "بعد ذلك"
+    },
+    {
+     "en": "afterward",
+     "ar": "فيما بعد"
+    },
+    {
+     "en": "subsequently",
+     "ar": "بعد ذلك, من ثم, بالتالي"
+    },
+    {
+     "en": "after",
+     "ar": "بعد"
+    },
+    {
+     "en": "later",
+     "ar": "فيما بعد"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "afterwards became",
+     "ar": "بعد ذلك أصبح"
+    },
+    {
+     "en": "soon afterwards",
+     "ar": "بعد ذلك بوقت قصير"
+    },
+    {
+     "en": "shortly afterwards",
+     "ar": "بعده بوقت قصير, بعد فترة قصيرة من الزمن, قريبا"
+    },
+    {
+     "en": "years afterwards",
+     "ar": "سنوات بعد ذلك"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784754761850,
    "word": "mending",
