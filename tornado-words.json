@@ -1,8 +1,85 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T17:25:22.173Z",
+ "exportedAt": "2026-07-22T17:39:39.839Z",
  "words": [
+  {
+   "id": 1784741976331,
+   "word": "strung",
+   "ipa": "/ˈstɹʌŋ/",
+   "arabicPron": "سترانق",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To put (items) on a string.",
+     "ar": "لوضع (عناصر) على سلسلة."
+    },
+    {
+     "pos": "verb",
+     "en": "To put strings on (something).",
+     "ar": "لوضع الخيوط على (شيء ما)."
+    },
+    {
+     "pos": "verb",
+     "en": "simple past and past participle of string",
+     "ar": "مشاركة بسيطة في الماضي والماضي من السلسلة"
+    }
+   ],
+   "inflections": [
+    "strung",
+    "strungs",
+    "strunged",
+    "strunging"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "lace",
+     "ar": "شريط زينة, رباط الحذاء, تخريم, مخرمات, صانع التخاريم"
+    },
+    {
+     "en": "thread",
+     "ar": "محادثة نصيةمحادثة"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "strung out",
+     "ar": "مدمن مخدرات"
+    },
+    {
+     "en": "strung together",
+     "ar": "وتعلقوا معًا"
+    },
+    {
+     "en": "strung along",
+     "ar": "معلقة على طول"
+    },
+    {
+     "en": "highly strung",
+     "ar": "حساس جدا, شديد الحساسية, عصبي المزاج"
+    }
+   ],
+   "examples": [
+    {
+     "en": "You can string these beads on to this cord to make a colorful necklace.",
+     "ar": "يمكنك ربط هذه الخرزات على هذا الحبل لصنع قلادة ملونة."
+    },
+    {
+     "en": "It is difficult to string a tennis racket properly.",
+     "ar": "من الصعب ربط مضرب التنس بشكل صحيح."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784741118527,
    "word": "untangling",
