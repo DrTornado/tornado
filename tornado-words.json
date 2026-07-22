@@ -1,8 +1,58 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T15:09:44.843Z",
+ "exportedAt": "2026-07-22T15:15:26.945Z",
  "words": [
+  {
+   "id": 1784733322423,
+   "word": "laughter",
+   "ipa": "/ˈlɑːftə/",
+   "arabicPron": "لافتر",
+   "oxford": "3000",
+   "cefr": "A2",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "The sound of laughing, produced by air so expelled; any similar sound.",
+     "ar": "صوت الضحك، الذي ينتجه الهواء حتى يطرد ؛ أي صوت مماثل."
+    },
+    {
+     "pos": "noun",
+     "en": "A movement (usually involuntary) of the muscles of the laughing face, particularly of the lips, and of the whole body, with a peculiar expression of the eyes, indicating merriment, satisfaction or derision, and usually attended by a sonorous and interrupted expulsion of air from the lungs.",
+     "ar": "حركة (عادة لا إرادية) لعضلات الوجه الضاحك، وخاصة الشفاه، والجسم كله، مع تعبير غريب عن العينين، مما يشير إلى الفرح أو الرضا أو السخرية، وعادة ما يحضره طرد رنان ومتقطع للهواء من الرئتين."
+    },
+    {
+     "pos": "noun",
+     "en": "A reason for merriment.",
+     "ar": "سبب للفرح."
+    }
+   ],
+   "inflections": [
+    "laughter",
+    "laughters"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "laugh",
+     "ar": "‎ ضَحِك, يَضْحَك‎"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "Their loud laughter betrayed their presence.",
+     "ar": "ضحكتهم الصاخبة خانت وجودهم."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784712683838,
    "word": "exemplified",
