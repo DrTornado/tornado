@@ -1,8 +1,104 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T09:15:53.826Z",
+ "exportedAt": "2026-07-22T09:22:57.570Z",
  "words": [
+  {
+   "id": 1784712173434,
+   "word": "electorate",
+   "ipa": "/ɪˈlɛktəɹət/",
+   "arabicPron": "يليكترت",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "The dominion of an Elector in the Holy Roman Empire.",
+     "ar": "سيادة ناخب في الإمبراطورية الرومانية المقدسة."
+    },
+    {
+     "pos": "noun",
+     "en": "The collective people of a country, state, or electoral district who are entitled to vote.",
+     "ar": "الشعب الجماعي لبلد أو ولاية أو دائرة انتخابية الذي يحق له التصويت."
+    },
+    {
+     "pos": "noun",
+     "en": "The office, or area of dominion, of an Elector (“a German prince entitled to elect the emperor of the Holy Roman Empire”); an electorship.",
+     "ar": "منصب أو منطقة سيطرة الناخب (\" أمير ألماني يحق له انتخاب إمبراطور الإمبراطورية الرومانية المقدسة \")؛ هيئة انتخابية."
+    },
+    {
+     "pos": "noun",
+     "en": "A geographical area represented by one or more elected officials; a constituency, an electoral district.",
+     "ar": "منطقة جغرافية يمثلها واحد أو أكثر من المسؤولين المنتخبين ؛ دائرة انتخابية، دائرة انتخابية."
+    }
+   ],
+   "inflections": [
+    "electorate",
+    "electorates"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "constituency",
+     "ar": "دائرة إنتخابية"
+    },
+    {
+     "en": "district",
+     "ar": "المنطقة"
+    },
+    {
+     "en": "division",
+     "ar": "فرع/ قسم"
+    },
+    {
+     "en": "electoral district",
+     "ar": "دائِرَةٌ انْتِخابِيّة"
+    },
+    {
+     "en": "riding",
+     "ar": "ركوب الخيل, دائرة إنتخابية, قسم إداري, راكب"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "american electorate",
+     "ar": "الناخبون الأمريكيون"
+    },
+    {
+     "en": "total electorate",
+     "ar": "المجموع الكلي للناخبين"
+    },
+    {
+     "en": "separate electorate",
+     "ar": "ناخبون منفصلون"
+    },
+    {
+     "en": "british electorate",
+     "ar": "ناخبون بريطانيون"
+    },
+    {
+     "en": "white electorate",
+     "ar": "الناخبون البيض"
+    }
+   ],
+   "examples": [
+    {
+     "en": "The votes have been counted and the electorate has spoken.",
+     "ar": "تم فرز الأصوات وتحدث الناخبون."
+    },
+    {
+     "en": "The electorate of Finchley borders on the electorate of Much-Binding-in-the-Marsh, splitting the new housing estate of Royal Cupolas.",
+     "ar": "يحد ناخبو فينشلي من ناخبي الكثير الملزم في الأهوار، مما يقسم العقارات السكنية الجديدة في رويال كابولاس."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784711749205,
    "word": "converging",
