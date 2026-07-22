@@ -1,8 +1,154 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T20:45:08.271Z",
+ "exportedAt": "2026-07-22T21:13:11.488Z",
  "words": [
+  {
+   "id": 1784754761850,
+   "word": "mending",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "verb",
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To repair, as anything that is torn, broken, defaced, decayed, or the like; to restore from partial decay, injury, or defacement.",
+     "ar": "لإصلاح، مثل أي شيء ممزق أو مكسور أو مشوه أو متحلل أو ما شابه ذلك ؛ لاستعادة من الاضمحلال الجزئي أو الإصابة أو التشوه."
+    },
+    {
+     "pos": "verb",
+     "en": "To alter for the better; to set right; to reform; hence, to quicken; as, to mend one's manners or pace.",
+     "ar": "أن يغير للأفضل ؛ أن يصحح ؛ أن يصلح ؛ وبالتالي، أن يسرع ؛ كما، أن يصلح أخلاقه أو وتيرته."
+    },
+    {
+     "pos": "noun",
+     "en": "The act by which something is mended or repaired.",
+     "ar": "الفعل الذي يتم من خلاله إصلاح شيء ما أو إصلاحه."
+    },
+    {
+     "pos": "verb",
+     "en": "present participle and gerund of mend",
+     "ar": "الحاضر الفاعل و gerund من إصلاح"
+    }
+   ],
+   "inflections": [
+    "mending",
+    "mendings",
+    "mendinged",
+    "mendinging"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "reparation",
+     "ar": "تعويض, ترميم, إصلاح"
+    },
+    {
+     "en": "repair",
+     "ar": "بسداد"
+    },
+    {
+     "en": "fix",
+     "ar": "إصلاح"
+    },
+    {
+     "en": "fixing",
+     "ar": "تثبيت, تحديد, ترسيخ, اصطحاب, مرافقة"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "My trousers have a big rip in them and need mending.",
+     "ar": "سروالي ممزق بشكل كبير ويحتاج إلى إصلاح."
+    },
+    {
+     "en": "Her stutter was mended by a speech therapist.",
+     "ar": "تم إصلاح تلعثمها من قبل معالج النطق."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
+  {
+   "id": 1784753652740,
+   "word": "induce",
+   "ipa": "/ɪnˈdjuːs/",
+   "arabicPron": "يندوس",
+   "oxford": "5000",
+   "cefr": "C1",
+   "pos": [
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To lead by persuasion or influence; incite or prevail upon.",
+     "ar": "القيادة عن طريق الإقناع أو التأثير ؛ التحريض أو التغلب عليها."
+    },
+    {
+     "pos": "verb",
+     "en": "To cause, bring about, lead to.",
+     "ar": "للتسبب، وإحداث، وتؤدي إلى."
+    },
+    {
+     "pos": "verb",
+     "en": "To induce the labour of (a pregnant woman).",
+     "ar": "للحث على عمل (المرأة الحامل)."
+    }
+   ],
+   "inflections": [
+    "induce",
+    "induces",
+    "induced",
+    "inducing"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "entice",
+     "ar": "أغرى, غوى, جذب, لفت"
+    },
+    {
+     "en": "inveigle",
+     "ar": "أغرى, ضلل"
+    },
+    {
+     "en": "put someone up to something",
+     "ar": "وضع شخص ما في شيء ما"
+    },
+    {
+     "en": "bring about",
+     "ar": "أدى, سبب"
+    },
+    {
+     "en": "instigate",
+     "ar": "بادر, شجع, حرض, أثار, دفع"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "His meditation induced a compromise.   Opium induces sleep.",
+     "ar": "أدى تأمله إلى حل وسط.   الأفيون يحفز النوم."
+    },
+    {
+     "en": "His meditation induced a compromise.&nbsp;&nbsp; Opium induces sleep.",
+     "ar": "أدى تأمله إلى حل وسط.   الأفيون يحفز النوم."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784753085143,
    "word": "downside",
