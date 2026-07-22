@@ -1,8 +1,419 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T20:16:19.659Z",
+ "exportedAt": "2026-07-22T20:36:50.997Z",
  "words": [
+  {
+   "id": 1784752604761,
+   "word": "gratification",
+   "ipa": "/ˌɡɹætɪfɪˈkeɪʃən/",
+   "arabicPron": "قراتيفيكيشن",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "The act of gratifying, or pleasing, either the mind, the taste, or the appetite.",
+     "ar": "فعل إرضاء، أو إرضاء، إما العقل أو الذوق أو الشهية."
+    },
+    {
+     "pos": "noun",
+     "en": "A feeling of pleasure; satisfaction",
+     "ar": "الشعور بالسعادة والرضا"
+    },
+    {
+     "pos": "noun",
+     "en": "The act of gratifying or pleasing, either the mind, or the appetite or taste.",
+     "ar": "فعل إرضاء أو إرضاء، إما العقل، أو الشهية أو الذوق."
+    },
+    {
+     "pos": "noun",
+     "en": "A gratuity; a reward.",
+     "ar": "مكافأة."
+    }
+   ],
+   "inflections": [
+    "gratification",
+    "gratifications"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "delight",
+     "ar": "السرور"
+    },
+    {
+     "en": "enjoyment",
+     "ar": "المدرَكة"
+    },
+    {
+     "en": "fruition",
+     "ar": "استمتاع, إثمار, تحقيق, تمتع, تحقق"
+    },
+    {
+     "en": "gladness",
+     "ar": "سعادة, فرح, سرور, بهجة"
+    },
+    {
+     "en": "satisfaction",
+     "ar": "الرضا"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "sexual gratification",
+     "ar": "الإشباع الجنسي"
+    },
+    {
+     "en": "immediate gratification",
+     "ar": "الإشباع الفوري"
+    },
+    {
+     "en": "instant gratification",
+     "ar": "الرضا الفوري"
+    },
+    {
+     "en": "personal gratification",
+     "ar": "الإشباع الشخصي"
+    }
+   ],
+   "examples": [
+    {
+     "en": "the gratification of the heart",
+     "ar": "إرضاء القلب"
+    },
+    {
+     "en": "gratification of the heart gratification of the palate",
+     "ar": "إرضاء القلب إرضاء الحنك"
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
+  {
+   "id": 1784752076144,
+   "word": "incompatible",
+   "ipa": "/ˌɪŋkəmˈpætɪbəl/",
+   "arabicPron": "ينكمباتيبل",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "(chiefly in the plural) An incompatible substance; one of a group of things that cannot be placed or used together because of a change of chemical composition or opposing medicinal qualities.",
+     "ar": "متضارب"
+    },
+    {
+     "pos": "noun",
+     "en": "A consequent of a contrary.",
+     "ar": "نتيجة لعكس ذلك."
+    },
+    {
+     "pos": "adjective",
+     "en": "Of two things: that cannot coexist; not congruous because of differences",
+     "ar": "من أمرين: لا يمكن أن يتعايش ؛ غير متطابق بسبب الاختلافات"
+    },
+    {
+     "pos": "adjective",
+     "en": "Incapable of being together without mutual reaction or decomposition, as certain medicines.",
+     "ar": "عدم القدرة على البقاء معًا دون رد فعل متبادل أو تحلل، كأدوية معينة."
+    },
+    {
+     "pos": "adjective",
+     "en": "Of two or more things: that cannot coexist; not congruous because of differences; unable to function together due to dissimilarities.",
+     "ar": "من شيئين أو أكثر: لا يمكن أن يتعايش ؛ غير متطابق بسبب الاختلافات ؛ غير قادر على العمل معًا بسبب الاختلافات."
+    },
+    {
+     "pos": "noun",
+     "en": "An incompatible substance; one of a group of things that cannot be placed or used together because of a change of chemical composition or opposing medicinal qualities.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "incompatible",
+    "incompatibles"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "irreconcilable",
+     "ar": ""
+    },
+    {
+     "en": "incongruous",
+     "ar": ""
+    },
+    {
+     "en": "antagonistic",
+     "ar": "مخاصم, مضاد, معاد"
+    },
+    {
+     "en": "contrastive",
+     "ar": "مختلف"
+    },
+    {
+     "en": "contradictory",
+     "ar": "متناقض, مختلف"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "incompatible elements",
+     "ar": ""
+    },
+    {
+     "en": "incompatible blood",
+     "ar": ""
+    },
+    {
+     "en": "incompatible goals",
+     "ar": ""
+    }
+   ],
+   "examples": [
+    {
+     "en": "the incompatibles of iron",
+     "ar": "غير المتوافقين مع الحديد"
+    },
+    {
+     "en": "My phone is incompatible with the latest version of this app.",
+     "ar": "هاتفي غير متوافق مع أحدث إصدار من هذا التطبيق."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
+  {
+   "id": 1784752004146,
+   "word": "refutes",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To prove (something) to be false or incorrect.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "To deny the truth or correctness of (something).",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "refute",
+    "refutes",
+    "refuted",
+    "refuting"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "debunk",
+     "ar": ""
+    },
+    {
+     "en": "disprove",
+     "ar": ""
+    },
+    {
+     "en": "rebut",
+     "ar": ""
+    },
+    {
+     "en": "deny",
+     "ar": ""
+    },
+    {
+     "en": "gainsay",
+     "ar": ""
+    }
+   ],
+   "collocations": [],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
+  {
+   "id": 1784751768137,
+   "word": "contributory",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "adjective",
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "adjective",
+     "en": "Of, pertaining to, or involving a contribution",
+     "ar": "من أو تتعلق أو تنطوي على مساهمة"
+    },
+    {
+     "pos": "adjective",
+     "en": "Tending to contribute to a result",
+     "ar": "الميل إلى المساهمة في تحقيق نتيجة"
+    },
+    {
+     "pos": "adjective",
+     "en": "Paying tribute, tributary.",
+     "ar": "دفع الجزية، الروافد."
+    },
+    {
+     "pos": "noun",
+     "en": "A person or thing that contributes.",
+     "ar": "شخص أو شيء يساهم."
+    }
+   ],
+   "inflections": [
+    "contributory",
+    "contributories"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "causative",
+     "ar": "مسبب, سببي"
+    },
+    {
+     "en": "conducive",
+     "ar": ""
+    },
+    {
+     "en": "contributing",
+     "ar": ""
+    },
+    {
+     "en": "contributive",
+     "ar": ""
+    }
+   ],
+   "collocations": [
+    {
+     "en": "contributory negligence",
+     "ar": ""
+    },
+    {
+     "en": "contributory factor",
+     "ar": ""
+    },
+    {
+     "en": "contributory factors",
+     "ar": "العوامل المساهمة"
+    },
+    {
+     "en": "important contributory",
+     "ar": ""
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
+  {
+   "id": 1784751447873,
+   "word": "condense",
+   "ipa": "/kənˈdɛns/",
+   "arabicPron": "كندينس",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "verb",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To concentrate toward the essence by making more close, compact, or dense, thereby decreasing size or volume.",
+     "ar": "التركيز على الجوهر عن طريق جعله أكثر قربًا أو ضغطًا أو كثافة، وبالتالي تقليل الحجم أو الحجم."
+    },
+    {
+     "pos": "verb",
+     "en": "To transform from a gaseous state into a liquid state via condensation.",
+     "ar": "للتحول من حالة غازية إلى حالة سائلة عن طريق التكثيف."
+    },
+    {
+     "pos": "adjective",
+     "en": "Condensed; compact; dense.",
+     "ar": "مكثف ؛ مضغوط ؛ كثيف."
+    },
+    {
+     "pos": "verb",
+     "en": "To be transformed from a gaseous state into a liquid state.",
+     "ar": "أن تتحول من حالة غازية إلى حالة سائلة."
+    }
+   ],
+   "inflections": [
+    "condense",
+    "condenses",
+    "condensed",
+    "condensing"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "reduce",
+     "ar": "يصغّر"
+    },
+    {
+     "en": "simplify",
+     "ar": "بسط, يسر"
+    },
+    {
+     "en": "thicken",
+     "ar": "ثخن, سمن, كثف, فقد رشاقته, غلظ, تضخم, تكاثف"
+    },
+    {
+     "en": "contract",
+     "ar": "العقد"
+    },
+    {
+     "en": "concentrate",
+     "ar": "شكل مركز"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "An abridged dictionary can be further condensed to pocket size.",
+     "ar": "يمكن تكثيف القاموس المختصر إلى حجم الجيب."
+    },
+    {
+     "en": "Boiling off water condenses a thin sauce into a soupier mixture.",
+     "ar": "يؤدي غلي الماء إلى تكثيف الصلصة الرقيقة إلى خليط من الحساء."
+    },
+    {
+     "en": "Water condenses on the window on cold days because of the warm air inside.",
+     "ar": "يتكثف الماء على النافذة في الأيام الباردة بسبب الهواء الدافئ في الداخل."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784751340235,
    "word": "undoubtedly",
