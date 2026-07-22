@@ -1,8 +1,50 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T09:22:57.570Z",
+ "exportedAt": "2026-07-22T09:31:38.709Z",
  "words": [
+  {
+   "id": 1784712683838,
+   "word": "exemplified",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To show or illustrate by example.",
+     "ar": "لإظهار أو توضيح بالقدوة."
+    },
+    {
+     "pos": "verb",
+     "en": "To be an instance of or serve as an example.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "simple past and past participle of exemplify",
+     "ar": "المشاركة البسيطة في الماضي والماضي من سبيل المثال"
+    }
+   ],
+   "inflections": [
+    "exemplified",
+    "exemplifieds",
+    "exemplifieded",
+    "exemplifieding"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784712173434,
    "word": "electorate",
