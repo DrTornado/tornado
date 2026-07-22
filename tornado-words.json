@@ -1,8 +1,79 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T17:43:09.236Z",
+ "exportedAt": "2026-07-22T18:15:07.012Z",
  "words": [
+  {
+   "id": 1784744102628,
+   "word": "attuned",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "verb",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To bring into musical accord.",
+     "ar": "لتحقيق التوافق الموسيقي."
+    },
+    {
+     "pos": "verb",
+     "en": "To tune (an instrument).",
+     "ar": "لضبط (أداة)."
+    },
+    {
+     "pos": "adjective",
+     "en": "(of a musical instrument) Tuned to the correct pitch.",
+     "ar": "(لآلة موسيقية) مضبوطة على النغمة الصحيحة."
+    },
+    {
+     "pos": "adjective",
+     "en": "Brought into harmony; harmonized.",
+     "ar": "جلبت في وئام ؛ منسقة."
+    },
+    {
+     "pos": "verb",
+     "en": "simple past and past participle of attune",
+     "ar": "مشاركة بسيطة للماضي والماضي في التناغم"
+    },
+    {
+     "pos": "adjective",
+     "en": "Tuned to the correct pitch.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "attuned",
+    "attuneds",
+    "attuneded",
+    "attuneding"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "keyed",
+     "ar": "مزود بمفاتيح, مغلق, مربوط بمفتاح, مقوى بمفتاح"
+    },
+    {
+     "en": "adjusted",
+     "ar": "سُوّيَ ; ضُبِطَ ; قُوّمَ ; مَضْبُوط ; مُتَأقْلِم ; مُتَبَلّد ; مُتَعَوّد ; مُتَكَيّف ; مُصَحّح ; مُعَدّل ; مُقَوّم ; مُكَيَّف ; مُنَظّم"
+    },
+    {
+     "en": "tuned",
+     "ar": "مَضْبُوط ; مُعَدّل ; مُنَظّم"
+    }
+   ],
+   "collocations": [],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784742185522,
    "word": "nutrients",
