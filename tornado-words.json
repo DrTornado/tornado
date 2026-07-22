@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-21T21:39:22.932Z",
+ "exportedAt": "2026-07-22T07:14:36.868Z",
  "words": [
   {
    "id": 1784663410864,
@@ -63,7 +63,9 @@
    "differences": [],
    "right": 0,
    "wrong": 0,
-   "last": null
+   "last": null,
+   "interval": 0,
+   "due": 0
   },
   {
    "id": 1784662312122,
@@ -168,7 +170,11 @@
    "differences": [],
    "right": 0,
    "wrong": 0,
-   "last": null
+   "last": null,
+   "interval": 0,
+   "due": 0,
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/d/del/delib/deliberate__us_2_rr.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/d/del/delib/deliberate__gb_4.mp3"
   },
   {
    "id": 1784662047598,
@@ -229,7 +235,12 @@
    "differences": [],
    "right": 0,
    "wrong": 0,
-   "last": null
+   "last": null,
+   "interval": 0,
+   "due": 0,
+   "ipaUS": "/ˈkɹit͡ʃɚz/",
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cre/creat/creature__us_2.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/cre/creat/creature__gb_1.mp3"
   },
   {
    "id": 1784646739633,
@@ -307,7 +318,7 @@
    "examples": [
     {
      "en": "We must act with dispatch in this matter.",
-     "ar": ""
+     "ar": "يجب أن نتصرف بسرعة في هذه المسألة."
     }
    ],
    "differences": [],
@@ -526,13 +537,8 @@
     },
     {
      "pos": "noun",
-     "en": "plural of sail",
-     "ar": "جمع الشراع"
-    },
-    {
-     "pos": "noun",
      "en": "The sailmaker on board ship.",
-     "ar": ""
+     "ar": "صانع الشراع على متن السفينة."
     }
    ],
    "inflections": [
@@ -682,11 +688,6 @@
      "pos": "noun",
      "en": "Any heritable change of the base-pair sequence of genetic material.",
      "ar": "أي تغيير وراثي في تسلسل زوج القاعدة للمادة الوراثية."
-    },
-    {
-     "pos": "noun",
-     "en": "plural of mutation",
-     "ar": "جمع الطفرة"
     }
    ],
    "inflections": [
@@ -735,11 +736,6 @@
      "pos": "noun",
      "en": "A weak-willed person.",
      "ar": "شخص ضعيف الإرادة."
-    },
-    {
-     "pos": "noun",
-     "en": "plural of mollusc",
-     "ar": "جمع الرخويات"
     }
    ],
    "inflections": [
@@ -798,11 +794,6 @@
      "pos": "noun",
      "en": "A collector or emitter of electric charge in a semiconducting device",
      "ar": "جامع أو باعث للشحنة الكهربائية في جهاز شبه موصل"
-    },
-    {
-     "pos": "noun",
-     "en": "plural of electrode",
-     "ar": "جمع القطب الكهربائي"
     }
    ],
    "inflections": [
@@ -846,16 +837,6 @@
      "pos": "verb",
      "en": "To move or travel very slowly.",
      "ar": "التحرك أو السفر ببطء شديد."
-    },
-    {
-     "pos": "noun",
-     "en": "plural of snail",
-     "ar": "جمع الحلزون"
-    },
-    {
-     "pos": "verb",
-     "en": "third-person singular simple present indicative of snail",
-     "ar": "هدية بسيطة لشخص ثالث تدل على الحلزون"
     }
    ],
    "inflections": [
@@ -1219,11 +1200,6 @@
      "pos": "adjective",
      "en": "In preparation for the main matter; initial, introductory, preparatory.",
      "ar": "استعدادا للمسألة الرئيسية ؛ الأولية، التمهيدية، التحضيرية."
-    },
-    {
-     "pos": "noun",
-     "en": "Any of a series of sports events that determine the finalists.",
-     "ar": "أي من سلسلة الأحداث الرياضية التي تحدد المتأهلين للتصفيات النهائية."
     },
     {
      "pos": "noun",
@@ -1766,11 +1742,6 @@
     },
     {
      "pos": "noun",
-     "en": "plural of extreme",
-     "ar": "جمع المتطرف"
-    },
-    {
-     "pos": "noun",
      "en": "The opposite ends of a range or scale.",
      "ar": "الأطراف المعاكسة للنطاق أو المقياس."
     }
@@ -1915,11 +1886,6 @@
      "pos": "noun",
      "en": "Any arthropod of the subphylum Crustacea, including lobsters, crabs, shrimp, barnacles and woodlice.",
      "ar": "أي مفصليات من القشريات الفرعية، بما في ذلك الكركند وسرطان البحر والروبيان والأرنب وقمل الخشب."
-    },
-    {
-     "pos": "noun",
-     "en": "plural of crustacean",
-     "ar": "جمع القشريات"
     }
    ],
    "inflections": [
@@ -2588,7 +2554,8 @@
    "examples": [],
    "differences": [],
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/nostrils-us.mp3"
   },
   {
    "right": 0,
@@ -2754,7 +2721,10 @@
    ],
    "differences": [],
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "audioGen": "https://api.dictionaryapi.dev/media/pronunciations/en/wick-au.mp3",
+   "freqLabel": "Top 18,000 words",
+   "estCefr": "C1"
   },
   {
    "right": 0,
@@ -2921,7 +2891,8 @@
    "examples": [],
    "differences": [],
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/flume-us.mp3"
   },
   {
    "right": 0,
@@ -2998,7 +2969,9 @@
    ],
    "differences": [],
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "freqLabel": "Top 8,000 words",
+   "estCefr": "B1"
   },
   {
    "right": 0,
@@ -3132,7 +3105,11 @@
    "examples": [],
    "differences": [],
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "/ˈlæb(ə)ɹəˌtɔɹi/",
+   "ipaUK": "/ləˈbɒɹət(ə)ɹiː/",
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/l/lab/labor/laboratory__us_2.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/l/lab/labor/laboratory__gb_2.mp3"
   }
  ]
 }
