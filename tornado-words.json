@@ -1,8 +1,72 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T17:39:39.839Z",
+ "exportedAt": "2026-07-22T17:43:09.236Z",
  "words": [
+  {
+   "id": 1784742185522,
+   "word": "nutrients",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A source of nourishment, such as food, that can be metabolized by an organism to give energy and build tissue.",
+     "ar": "مصدر للتغذية، مثل الطعام، يمكن استقلابه بواسطة كائن حي لإعطاء الطاقة وبناء الأنسجة."
+    }
+   ],
+   "inflections": [
+    "nutrient",
+    "nutrients"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "nutriment",
+     "ar": "غذاء, قوت"
+    },
+    {
+     "en": "nourishing",
+     "ar": "مغذ"
+    },
+    {
+     "en": "wholesome",
+     "ar": "صحي, مفيد"
+    },
+    {
+     "en": "food",
+     "ar": "طعام"
+    },
+    {
+     "en": "alimentary",
+     "ar": "غذائي, مغذ, متعلق بالغذاء"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "nutrient solution",
+     "ar": "محلول مغذي"
+    },
+    {
+     "en": "nutrient content",
+     "ar": "مُحتوى غذائيّ"
+    },
+    {
+     "en": "nutrient requirements",
+     "ar": "الاحتياجات من المغذيات"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784741976331,
    "word": "strung",
