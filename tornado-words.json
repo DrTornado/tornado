@@ -1,8 +1,82 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-22T17:21:13.014Z",
+ "exportedAt": "2026-07-22T17:25:22.173Z",
  "words": [
+  {
+   "id": 1784741118527,
+   "word": "untangling",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "verb",
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To remove tangles or knots from.",
+     "ar": "لإزالة التشابكات أو العقد."
+    },
+    {
+     "pos": "verb",
+     "en": "(by extension) To remove confusion or mystery from.",
+     "ar": "(بالتبعية) لإزالة الارتباك أو الغموض من."
+    },
+    {
+     "pos": "verb",
+     "en": "present participle and gerund of untangle",
+     "ar": "الحاضر الفاعل والمرتفع من فك التشابك"
+    },
+    {
+     "pos": "noun",
+     "en": "The process by which something is untangled.",
+     "ar": "العملية التي يتم من خلالها فك تشابك شيء ما."
+    }
+   ],
+   "inflections": [
+    "untangling",
+    "untanglings",
+    "untanglinged",
+    "untanglinging"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "disentangle",
+     "ar": "حل, فك, فصل, نحل"
+    },
+    {
+     "en": "disentanglement",
+     "ar": "الحل"
+    },
+    {
+     "en": "extrication",
+     "ar": "إنقاذ"
+    },
+    {
+     "en": "unsnarling",
+     "ar": ""
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "With gentle combing, untangle your hair.",
+     "ar": "مع تمشيط لطيف، فك شعرك."
+    },
+    {
+     "en": "It took a while, but he finally untangled the problem.",
+     "ar": "استغرق الأمر بعض الوقت، لكنه حل المشكلة أخيرًا."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784740869341,
    "word": "furious",
