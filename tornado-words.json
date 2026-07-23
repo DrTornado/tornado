@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T07:10:22.055Z",
+ "exportedAt": "2026-07-23T07:10:26.848Z",
  "words": [
   {
    "id": 1784737860691,
@@ -4407,7 +4407,12 @@
    ],
    "differences": [],
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "/ˈdaʊnˌsaɪd/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/downside-us.mp3",
+   "freqLabel": "Top 18,000 words",
+   "estCefr": "C1",
+   "engineVersion": 1
   },
   {
    "right": 0,
@@ -4501,7 +4506,8 @@
    ],
    "differences": [],
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "engineVersion": 1
   },
   {
    "right": 0,
