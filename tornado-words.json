@@ -1,8 +1,57 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T13:27:50.572Z",
+ "exportedAt": "2026-07-23T13:32:11.587Z",
  "words": [
+  {
+   "id": 1784813527523,
+   "word": "respectability",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "The quality of being respectable.",
+     "ar": "جودة أن تكون محترماً."
+    },
+    {
+     "pos": "noun",
+     "en": "The class of respectable people.",
+     "ar": "فئة الأشخاص المحترمين."
+    }
+   ],
+   "inflections": [
+    "respectability",
+    "respectabilities"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "reputability",
+     "ar": "السمعة الحسنة, الصيت الطيب, شهرة, مكانة مرموقة, احترام"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "social respectability",
+     "ar": "الاحترام الاجتماعي"
+    },
+    {
+     "en": "class respectability",
+     "ar": "الاحترام الطبقي"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784813265764,
    "word": "evidently",
