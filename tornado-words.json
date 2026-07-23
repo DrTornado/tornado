@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T10:44:14.150Z",
+ "exportedAt": "2026-07-23T10:44:18.097Z",
  "words": [
   {
    "id": 1784758615136,
@@ -1792,7 +1792,11 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "/ɪnˈfæ.lə.bəl/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/infallible-us.mp3",
+   "audioGen": "https://api.dictionaryapi.dev/media/pronunciations/en/infallible-au.mp3",
+   "engineVersion": 1
   },
   {
    "id": 1784746900843,
