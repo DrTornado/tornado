@@ -1,8 +1,64 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T10:59:05.982Z",
+ "exportedAt": "2026-07-23T11:03:14.434Z",
  "words": [
+  {
+   "id": 1784804589585,
+   "word": "physicist",
+   "ipa": "/ˈfɪz.ɪ.sɪst/",
+   "arabicPron": "فيزيسيست",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A person whose occupation specializes in the science of physics, especially at a professional level.",
+     "ar": "الشخص الذي تتخصص مهنته في علم الفيزياء، خاصة على المستوى المهني."
+    },
+    {
+     "pos": "noun",
+     "en": "A believer in the theory that the fundamental phenomena of life are to be explained upon purely chemical and physical principles (opposed to vitalist).",
+     "ar": "مؤمن بالنظرية القائلة بأن الظواهر الأساسية للحياة يجب أن تفسر على مبادئ كيميائية وفيزيائية بحتة (معارضة للحيوية)."
+    }
+   ],
+   "inflections": [
+    "physicist",
+    "physicists"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [
+    {
+     "en": "german physicist",
+     "ar": "-الفيزيائي الألماني\" .\""
+    },
+    {
+     "en": "theoretical physicist",
+     "ar": "فيزيائي نظري"
+    },
+    {
+     "en": "american physicist",
+     "ar": "فيزيائي أمريكي"
+    },
+    {
+     "en": "french physicist",
+     "ar": "فيزيائي فرنسي"
+    },
+    {
+     "en": "nuclear physicist",
+     "ar": "فيزيائي نووي"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784804340574,
    "word": "showmanship",
