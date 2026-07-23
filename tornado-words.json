@@ -1,8 +1,74 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T11:59:09.410Z",
+ "exportedAt": "2026-07-23T13:01:53.898Z",
  "words": [
+  {
+   "id": 1784811704077,
+   "word": "articulation",
+   "ipa": "/ɑːˌtɪk.jəˈleɪ.ʃən/",
+   "arabicPron": "ارتيكيليشن",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A joint or the collection of joints at which something is articulated, or hinged, for bending.",
+     "ar": "مفصل أو مجموعة من المفاصل التي يتم فيها توضيح شيء ما، أو تعليقه، للانحناء."
+    },
+    {
+     "pos": "noun",
+     "en": "A manner or method by which elements of a system are connected.",
+     "ar": "طريقة أو طريقة يتم من خلالها توصيل عناصر النظام."
+    },
+    {
+     "pos": "noun",
+     "en": "Such a joint in an animalian body, as for example between bones or between exoskeleton segments.",
+     "ar": "مثل هذا المفصل في جسم حيواني، على سبيل المثال بين العظام أو بين أجزاء الهيكل الخارجي."
+    }
+   ],
+   "inflections": [
+    "articulation",
+    "articulations"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "joint",
+     "ar": "وَصْلَةٌ"
+    },
+    {
+     "en": "juncture",
+     "ar": "مرحلة, تحول, نقطة إتصال, ظرف حال, رباط"
+    },
+    {
+     "en": "join",
+     "ar": "ينضم"
+    },
+    {
+     "en": "articulatio",
+     "ar": "‎ مَفْصِل:مَوصِلٌ عَظْمِيّ‎"
+    },
+    {
+     "en": "junction",
+     "ar": "ملتقى طرق, وصلة, ملتقى الأنهار, تقاطع, نقطة إتصال"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "The articulation allowed the robot to move around corners.",
+     "ar": "سمح النطق للروبوت بالتحرك حول الزوايا."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784807944973,
    "word": "lubricant",
