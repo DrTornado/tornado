@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T07:10:48.674Z",
+ "exportedAt": "2026-07-23T07:10:50.857Z",
  "words": [
   {
    "id": 1784737860691,
@@ -5155,7 +5155,7 @@
     {
      "pos": "noun",
      "en": "Esteem, honour.",
-     "ar": ""
+     "ar": "التقدير والشرف."
     },
     {
      "pos": "adjective",
@@ -5222,7 +5222,10 @@
    "examples": [],
    "differences": [],
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "/ˈdeɪnti/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/dainty-us.mp3",
+   "engineVersion": 1
   },
   {
    "right": 0,
