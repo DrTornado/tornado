@@ -1,8 +1,77 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T10:48:06.552Z",
+ "exportedAt": "2026-07-23T10:50:50.581Z",
  "words": [
+  {
+   "id": 1784803845911,
+   "word": "apothecaries",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A person who makes and provides/sells drugs and/or medicines.",
+     "ar": "الشخص الذي يصنع ويقدم/يبيع الأدوية و/أو الأدوية."
+    },
+    {
+     "pos": "noun",
+     "en": "A drugstore or pharmacy.",
+     "ar": "صيدلية أو صيدلية."
+    }
+   ],
+   "inflections": [
+    "apothecary",
+    "apothecaries"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "chemist",
+     "ar": "كيميائي"
+    },
+    {
+     "en": "druggist",
+     "ar": "صيدلي, عطار, تاجر الأدوية"
+    },
+    {
+     "en": "pharmacist",
+     "ar": "صيدلية إمرأة"
+    },
+    {
+     "en": "apothecary's",
+     "ar": "صيدلي"
+    },
+    {
+     "en": "apothecary's shop",
+     "ar": "محل صيدلي"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "apothecary shop",
+     "ar": "متجر صيدليات"
+    },
+    {
+     "en": "old apothecary",
+     "ar": "صيدلي قديم"
+    },
+    {
+     "en": "local apothecary",
+     "ar": "صيدلي محلي"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784803681860,
    "word": "conflate",
