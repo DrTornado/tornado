@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T10:43:34.016Z",
+ "exportedAt": "2026-07-23T10:43:48.827Z",
  "words": [
   {
    "id": 1784758615136,
@@ -583,7 +583,7 @@
     {
      "pos": "noun",
      "en": "(chiefly in the plural) An incompatible substance; one of a group of things that cannot be placed or used together because of a change of chemical composition or opposing medicinal qualities.",
-     "ar": "متضارب"
+     "ar": "(بشكل رئيسي في صيغة الجمع) مادة غير متوافقة ؛ واحدة من مجموعة من الأشياء التي لا يمكن وضعها أو استخدامها معًا بسبب تغيير التركيب الكيميائي أو معارضة الصفات الطبية."
     },
     {
      "pos": "noun",
@@ -667,7 +667,10 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "/ˌɪŋkəmˈpætɪbəl/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/incompatible-us.mp3",
+   "engineVersion": 1
   },
   {
    "id": 1784752004146,
@@ -683,12 +686,12 @@
     {
      "pos": "verb",
      "en": "To prove (something) to be false or incorrect.",
-     "ar": ""
+     "ar": "لإثبات (شيء) أنه خاطئ أو غير صحيح."
     },
     {
      "pos": "verb",
      "en": "To deny the truth or correctness of (something).",
-     "ar": ""
+     "ar": "أن ينكر حقيقة أو صحة (شيء)."
     }
    ],
    "inflections": [
@@ -727,7 +730,8 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "engineVersion": 1
   },
   {
    "id": 1784751768137,
@@ -809,7 +813,8 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "engineVersion": 1
   },
   {
    "id": 1784751447873,
@@ -893,7 +898,10 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "/kənˈdɛns/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/condense-us.mp3",
+   "engineVersion": 1
   },
   {
    "id": 1784751340235,
@@ -945,7 +953,11 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "/ʌnˈdaʊtɪdli/",
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/u/und/undou/undoubtedly__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/u/und/undou/undoubtedly__gb_3.mp3",
+   "engineVersion": 1
   },
   {
    "id": 1784751235995,
@@ -1012,7 +1024,11 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "/pɹɑˈspɛɹ.ɪ.ti/",
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pro/prosp/prosperity__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/p/pro/prosp/prosperity__gb_1.mp3",
+   "engineVersion": 1
   },
   {
    "id": 1784751098241,
