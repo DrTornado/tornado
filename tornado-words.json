@@ -1,8 +1,52 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T10:54:50.473Z",
+ "exportedAt": "2026-07-23T10:59:05.982Z",
  "words": [
+  {
+   "id": 1784804340574,
+   "word": "showmanship",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "The quality or skill of giving an engaging or compelling performance; a stage presence.",
+     "ar": "جودة أو مهارة تقديم أداء جذاب أو مقنع ؛ حضور مسرحي."
+    }
+   ],
+   "inflections": [
+    "showmanship",
+    "showmanships"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [
+    {
+     "en": "junior showmanship",
+     "ar": "فن العرض للناشئين"
+    },
+    {
+     "en": "good showmanship",
+     "ar": "فن العرض الجيد"
+    }
+   ],
+   "examples": [
+    {
+     "en": "The act was clean and well-rehearsed, but the performers lacked the showmanship that would have made it great.",
+     "ar": "كان العرض نظيفًا ومدروسًا جيدًا، لكن فناني الأداء افتقروا إلى البراعة التي كانت ستجعله رائعًا."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784804074316,
    "word": "tranquility",
