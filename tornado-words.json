@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T10:44:07.747Z",
+ "exportedAt": "2026-07-23T10:44:14.150Z",
  "words": [
   {
    "id": 1784758615136,
@@ -1542,7 +1542,8 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "engineVersion": 1
   },
   {
    "id": 1784747147345,
@@ -1623,7 +1624,10 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUK": "/ɹiːmz/",
+   "audioUK": "https://api.dictionaryapi.dev/media/pronunciations/en/reams-uk.mp3",
+   "engineVersion": 1
   },
   {
    "id": 1784747132715,
@@ -1691,7 +1695,8 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "engineVersion": 1
   },
   {
    "id": 1784747055982,
