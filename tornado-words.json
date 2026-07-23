@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T13:19:19.900Z",
+ "exportedAt": "2026-07-23T13:19:24.757Z",
  "words": [
   {
    "id": 1784737860691,
@@ -6703,7 +6703,9 @@
      "ar": "أطلق النار بسهولة على الهدف المطمئن."
     }
    ],
-   "differences": []
+   "differences": [],
+   "interval": 0,
+   "due": 0
   },
   {
    "right": 0,
@@ -6931,7 +6933,9 @@
      "ar": "كان يأمل في الفوز بقلب الأميرة عن طريق خلط جرعة الحب التي قدمتها له الساحرة في شرابها."
     }
    ],
-   "differences": []
+   "differences": [],
+   "interval": 0,
+   "due": 0
   },
   {
    "right": 0,
@@ -7075,7 +7079,12 @@
      "ar": "\"كان بيكون مستشارًا لإنجلترا وأول أوروبي يجرب البارود. \"-\" لا، أنت تخلط بين فرانسيس بيكون وروجر بيكون. \""
     }
    ],
-   "differences": []
+   "differences": [],
+   "ipaUS": "/kənˈfleɪt/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/conflate-us.mp3",
+   "engineVersion": 1,
+   "interval": 0,
+   "due": 0
   }
  ],
  "tombstones": [
