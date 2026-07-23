@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T10:44:36.959Z",
+ "exportedAt": "2026-07-23T10:44:48.298Z",
  "words": [
   {
    "id": 1784758615136,
@@ -2347,7 +2347,8 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "engineVersion": 1
   },
   {
    "id": 1784733987627,
@@ -2438,7 +2439,11 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "audioGen": "https://api.dictionaryapi.dev/media/pronunciations/en/turf-au.mp3",
+   "freqLabel": "Top 18,000 words",
+   "estCefr": "B2",
+   "engineVersion": 1
   },
   {
    "id": 1784733972020,
@@ -2518,7 +2523,10 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "/θætʃ/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/thatch-us.mp3",
+   "engineVersion": 1
   },
   {
    "id": 1784733322423,
@@ -2570,7 +2578,11 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "/ˈlæftɚ/",
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/l/lau/laugh/laughter__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/l/lau/laugh/laughter__gb_1.mp3",
+   "engineVersion": 1
   },
   {
    "id": 1784712683838,
