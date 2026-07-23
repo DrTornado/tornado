@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T07:10:29.861Z",
+ "exportedAt": "2026-07-23T07:10:34.540Z",
  "words": [
   {
    "id": 1784737860691,
@@ -4630,12 +4630,12 @@
     {
      "pos": "verb",
      "en": "To prove (something) to be false or incorrect.",
-     "ar": ""
+     "ar": "لإثبات (شيء) أنه خاطئ أو غير صحيح."
     },
     {
      "pos": "verb",
      "en": "To deny the truth or correctness of (something).",
-     "ar": ""
+     "ar": "أن ينكر حقيقة أو صحة (شيء)."
     }
    ],
    "inflections": [
@@ -4671,7 +4671,8 @@
    "examples": [],
    "differences": [],
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "engineVersion": 1
   },
   {
    "right": 0,
@@ -4753,7 +4754,8 @@
    "examples": [],
    "differences": [],
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "engineVersion": 1
   },
   {
    "right": 0,
