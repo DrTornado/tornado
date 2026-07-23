@@ -1,8 +1,69 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T11:15:05.528Z",
+ "exportedAt": "2026-07-23T11:18:33.596Z",
  "words": [
+  {
+   "id": 1784805509427,
+   "word": "sculptures",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "3000",
+   "cefr": "B1",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A three dimensional work of art created by shaping malleable objects and letting them harden or by chipping away pieces from a rock (sculpting).",
+     "ar": "عمل فني ثلاثي الأبعاد تم إنشاؤه عن طريق تشكيل الأشياء المرنة وتركها تتصلب أو عن طريق تقطيع القطع من الصخر (النحت)."
+    },
+    {
+     "pos": "noun",
+     "en": "Works of art created by sculpting, as a group.",
+     "ar": "الأعمال الفنية التي تم إنشاؤها عن طريق النحت، كمجموعة."
+    },
+    {
+     "pos": "verb",
+     "en": "To fashion something into a three-dimensional figure.",
+     "ar": "لصياغة شيء ما في شكل ثلاثي الأبعاد."
+    },
+    {
+     "pos": "verb",
+     "en": "To represent something in sculpture.",
+     "ar": "لتمثيل شيء ما في النحت."
+    }
+   ],
+   "inflections": [
+    "sculpture",
+    "sculptures",
+    "sculptured",
+    "sculpturing"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "sculpt",
+     "ar": "نحت, مثل"
+    },
+    {
+     "en": "carving",
+     "ar": "نحت, نقش, حفر, شىء منقوش, شىء منحوت, منقوش"
+    },
+    {
+     "en": "grave",
+     "ar": "قبر, حرج خطير, حفرة, رمس, ضريح"
+    }
+   ],
+   "collocations": [],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784805301233,
    "word": "rotunda",
