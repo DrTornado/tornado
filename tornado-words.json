@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T07:10:26.848Z",
+ "exportedAt": "2026-07-23T07:10:29.861Z",
  "words": [
   {
    "id": 1784737860691,
@@ -4527,7 +4527,7 @@
     {
      "pos": "noun",
      "en": "(chiefly in the plural) An incompatible substance; one of a group of things that cannot be placed or used together because of a change of chemical composition or opposing medicinal qualities.",
-     "ar": "متضارب"
+     "ar": "(بشكل رئيسي في صيغة الجمع) مادة غير متوافقة ؛ واحدة من مجموعة من الأشياء التي لا يمكن وضعها أو استخدامها معًا بسبب تغيير التركيب الكيميائي أو معارضة الصفات الطبية."
     },
     {
      "pos": "noun",
@@ -4608,7 +4608,10 @@
    ],
    "differences": [],
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "/ˌɪŋkəmˈpætɪbəl/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/incompatible-us.mp3",
+   "engineVersion": 1
   },
   {
    "right": 0,
