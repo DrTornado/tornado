@@ -1,8 +1,83 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T11:22:17.457Z",
+ "exportedAt": "2026-07-23T11:41:47.960Z",
  "words": [
+  {
+   "id": 1784806902887,
+   "word": "lettuce",
+   "ipa": "/ˈlɛtəs/",
+   "arabicPron": "ليتس",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "An edible plant, Lactuca sativa and its close relatives, having a head of green and/or purple leaves.",
+     "ar": "نبات صالح للأكل، لاكتوكا ساتيفا وأقاربه المقربون، له رأس من الأوراق الخضراء و/أو الأرجوانية."
+    },
+    {
+     "pos": "noun",
+     "en": "The leaves of the lettuce plant, eaten as a vegetable; as a dish often mixed with other ingredients, dressing etc.",
+     "ar": "أوراق نبات الخس، تؤكل كخضروات ؛ كطبق غالبًا ما يخلط مع مكونات أخرى، صلصة وما إلى ذلك."
+    },
+    {
+     "pos": "noun",
+     "en": "An edible plant, Lactuca sativa and its close relatives, having a head of green or purple leaves.",
+     "ar": "نبات صالح للأكل، لاكتوكا ساتيفا وأقاربه المقربون، له رأس من الأوراق الخضراء أو الأرجوانية."
+    }
+   ],
+   "inflections": [
+    "lettuce",
+    "lettuces"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "cabbage",
+     "ar": "ملفوف, كرنب ملفوف, حلوى, كرنب"
+    },
+    {
+     "en": "greenback",
+     "ar": "خضراء الظهر ورقة نقدية أميركية"
+    },
+    {
+     "en": "sleepwort",
+     "ar": "نبتة النوم"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "lettuce leaves",
+     "ar": "أوراق الخس"
+    },
+    {
+     "en": "lettuce leaf",
+     "ar": "أوراق الخس"
+    },
+    {
+     "en": "romaine lettuce",
+     "ar": "خسة, نوع من الخس ذات الأوراق الخضراء الطويلة"
+    },
+    {
+     "en": "iceberg lettuce",
+     "ar": "خس الجليد, نوع من الخس له أوراق مستديرة تشكل رأس مستديرة"
+    }
+   ],
+   "examples": [
+    {
+     "en": "I’ll have a ham sandwich with lettuce and tomato.",
+     "ar": "سآخذ شطيرة لحم خنزير مع الخس والطماطم."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784805733158,
    "word": "abide",
