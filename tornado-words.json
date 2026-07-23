@@ -1,8 +1,113 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T19:21:47.834Z",
+ "exportedAt": "2026-07-23T19:22:06.259Z",
  "words": [
+  {
+   "id": 1784834525872,
+   "word": "man",
+   "ipa": "[mɛn]",
+   "arabicPron": "مان",
+   "oxford": "3000",
+   "cefr": "A1",
+   "pos": [
+    "noun",
+    "interjection",
+    "symbol",
+    "pronoun",
+    "verb",
+    "proper noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "An adult male human.",
+     "ar": "ذكر بشري بالغ."
+    },
+    {
+     "pos": "noun",
+     "en": "(collective) All human males collectively: mankind.",
+     "ar": "(جماعي) جميع الذكور البشرية مجتمعة: البشرية."
+    },
+    {
+     "pos": "interjection",
+     "en": "Used to place emphasis upon something or someone; sometimes, but not always, when actually addressing a man.",
+     "ar": "اعتاد التركيز على شيء ما أو شخص ما ؛ في بعض الأحيان، ولكن ليس دائمًا، عند مخاطبة رجل بالفعل."
+    },
+    {
+     "pos": "symbol",
+     "en": "ISO 639-2 &amp; ISO 639-3 language code for Mandingo.",
+     "ar": "ISO 639-2 و ISO 639-3 رمز اللغة للماندينغو."
+    },
+    {
+     "pos": "noun",
+     "en": "All human males collectively: mankind.",
+     "ar": "جميع الذكور البشرية مجتمعة: البشرية."
+    },
+    {
+     "pos": "noun",
+     "en": "An adult male who belongs to a particular group: an employee, a representative, etc.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "man",
+    "mans",
+    "manned",
+    "manning"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "male",
+     "ar": "ذكر"
+    },
+    {
+     "en": "omi",
+     "ar": "الواجهة"
+    },
+    {
+     "en": "human",
+     "ar": "بشري"
+    },
+    {
+     "en": "person",
+     "ar": "الشخص"
+    },
+    {
+     "en": "world",
+     "ar": "العالم"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "young man",
+     "ar": "فتي, شاب, فتى"
+    },
+    {
+     "en": "old man",
+     "ar": "هرم"
+    }
+   ],
+   "examples": [
+    {
+     "en": "The show is especially popular with middle-aged men.",
+     "ar": "يحظى العرض بشعبية خاصة بين الرجال في منتصف العمر."
+    },
+    {
+     "en": "Man, that was a great catch!",
+     "ar": "كان ذلك ألتقاطا عظيما!"
+    },
+    {
+     "en": "Man's got some new creps.",
+     "ar": "حصل الرجل على بعض المقرمشات الجديدة."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784737860691,
    "word": "scenery",
@@ -7108,27 +7213,27 @@
     {
      "pos": "noun",
      "en": "A prayer; petition.",
-     "ar": "بركة, هبة, نعمة, هدية"
+     "ar": "صلاة ؛ عريضة."
     },
     {
      "pos": "noun",
      "en": "That which is asked or granted as a benefit or favor; a gift or benefaction.",
-     "ar": ""
+     "ar": "ما يتم طلبه أو منحه كمنفعة أو خدمة ؛ هدية أو إحسان."
     },
     {
      "pos": "noun",
      "en": "A good thing; a thing to be thankful for or to appreciate duly.",
-     "ar": ""
+     "ar": "شيء جيد ؛ شيء يجب أن تكون ممتنًا له أو أن تقدره على النحو الواجب."
     },
     {
      "pos": "adjective",
      "en": "Gay; merry; jovial; convivial.",
-     "ar": ""
+     "ar": "مثلي الجنس ؛ مرح ؛ مرح ؛ مرح."
     },
     {
      "pos": "adjective",
      "en": "Kind; bountiful; benign.",
-     "ar": ""
+     "ar": "لطيف ؛ وفير ؛ حميد."
     },
     {
      "pos": "adjective",
@@ -7180,18 +7285,23 @@
    "examples": [
     {
      "en": "Finding the dry cave was a boon to the weary travellers.",
-     "ar": ""
+     "ar": "كان العثور على الكهف الجاف نعمة للمسافرين المرهقين."
     },
     {
      "en": "Anaesthetics are a great boon to modern surgery.",
-     "ar": ""
+     "ar": "التخدير هو نعمة كبيرة للجراحة الحديثة."
     },
     {
      "en": "boon voyage",
-     "ar": ""
+     "ar": "بون فويدج"
     }
    ],
-   "differences": []
+   "differences": [],
+   "freqLabel": "Top 18,000 words",
+   "estCefr": "C1",
+   "engineVersion": 1,
+   "interval": 0,
+   "due": 0
   },
   {
    "right": 0,
@@ -7276,7 +7386,12 @@
     }
    ],
    "examples": [],
-   "differences": []
+   "differences": [],
+   "freqLabel": "Top 18,000 words",
+   "estCefr": "C1",
+   "engineVersion": 1,
+   "interval": 0,
+   "due": 0
   },
   {
    "right": 0,
@@ -7325,7 +7440,10 @@
     }
    ],
    "examples": [],
-   "differences": []
+   "differences": [],
+   "engineVersion": 1,
+   "interval": 0,
+   "due": 0
   },
   {
    "right": 0,
@@ -7390,7 +7508,13 @@
    ],
    "collocations": [],
    "examples": [],
-   "differences": []
+   "differences": [],
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/evidently-us.mp3",
+   "freqLabel": "Top 18,000 words",
+   "estCefr": "B2",
+   "engineVersion": 1,
+   "interval": 0,
+   "due": 0
   }
  ],
  "tombstones": [
