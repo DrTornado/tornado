@@ -1,8 +1,64 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T11:03:22.124Z",
+ "exportedAt": "2026-07-23T11:15:05.528Z",
  "words": [
+  {
+   "id": 1784805301233,
+   "word": "rotunda",
+   "ipa": "/ɹə(ʊ)ˈtʌndə/",
+   "arabicPron": "روتاند",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A round building, usually small, often with a dome",
+     "ar": "مبنى دائري، عادة ما يكون صغيرًا، وغالبًا ما يحتوي على قبة"
+    },
+    {
+     "pos": "noun",
+     "en": "(frequently capitalized) A Gothic typeface used in early printed books in Northern Italy, based on a rounded script developed in the 13th cent.; the manuscript hand on which this typeface was based",
+     "ar": "(غالبًا ما يتم الكتابة بأحرف كبيرة) خط قوطي مستخدم في الكتب المطبوعة المبكرة في شمال إيطاليا، استنادًا إلى نص مستدير تم تطويره في القرن الثالث عشر ؛ يد المخطوطة التي استند إليها هذا الخط"
+    }
+   ],
+   "inflections": [
+    "rotunda",
+    "rotundas"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [
+    {
+     "en": "rotunda hospital",
+     "ar": "مستشفى روتوندا"
+    },
+    {
+     "en": "fenestra rotunda",
+     "ar": "النافذة المستديرة، النافذة القوقعية"
+    },
+    {
+     "en": "capitol rotunda",
+     "ar": "مبنى الكابيتول الدائري"
+    },
+    {
+     "en": "central rotunda",
+     "ar": "مستدير مركزي"
+    },
+    {
+     "en": "great rotunda",
+     "ar": "غريت روتوندا"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784804597691,
    "word": "unsuspecting",
