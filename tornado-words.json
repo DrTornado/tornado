@@ -1,8 +1,69 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T11:41:47.960Z",
+ "exportedAt": "2026-07-23T11:59:09.410Z",
  "words": [
+  {
+   "id": 1784807944973,
+   "word": "lubricant",
+   "ipa": "/ˈlubɹəkənt/",
+   "arabicPron": "لوبركنت",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A substance used to reduce friction between objects or surfaces.",
+     "ar": "مادة تستخدم لتقليل الاحتكاك بين الأشياء أو الأسطح."
+    },
+    {
+     "pos": "noun",
+     "en": "A personal lubricant.",
+     "ar": "مادة تشحيم شخصية."
+    }
+   ],
+   "inflections": [
+    "lubricant",
+    "lubricants"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "lube",
+     "ar": "مُزَلِّق ; مُزَيِّت ; مُشَحِّم"
+    },
+    {
+     "en": "lubricator",
+     "ar": "المزلقة أداة للتزييت"
+    },
+    {
+     "en": "lubricating substance",
+     "ar": "مادة التشحيم"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "lubricant film",
+     "ar": "الغشاء الزيتي المزلق"
+    },
+    {
+     "en": "soluble lubricant",
+     "ar": "مادة تشحيم قابلة للذوبان"
+    },
+    {
+     "en": "solid lubricant",
+     "ar": "مادة تشحيم صلبة"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784806902887,
    "word": "lettuce",
