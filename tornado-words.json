@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T07:10:34.540Z",
+ "exportedAt": "2026-07-23T07:10:39.776Z",
  "words": [
   {
    "id": 1784737860691,
@@ -4839,7 +4839,10 @@
    ],
    "differences": [],
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "/kənˈdɛns/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/condense-us.mp3",
+   "engineVersion": 1
   },
   {
    "right": 0,
@@ -4891,7 +4894,11 @@
    "examples": [],
    "differences": [],
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "/ʌnˈdaʊtɪdli/",
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/u/und/undou/undoubtedly__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/u/und/undou/undoubtedly__gb_3.mp3",
+   "engineVersion": 1
   },
   {
    "right": 0,
