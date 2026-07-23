@@ -1,8 +1,93 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T10:44:51.425Z",
+ "exportedAt": "2026-07-23T10:48:06.552Z",
  "words": [
+  {
+   "id": 1784803681860,
+   "word": "conflate",
+   "ipa": "/kɒnˈfleɪt/",
+   "arabicPron": "كنفليت",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "verb",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "(biblical criticism) A conflate text, one which conflates multiple version of a text together.",
+     "ar": "(نقد كتابي) نص مختلط، نص يخلط بين نسخة متعددة من النص معًا."
+    },
+    {
+     "pos": "verb",
+     "en": "To bring (things) together and fuse (them) into a single entity.",
+     "ar": "لجمع (الأشياء) معًا ودمجها في كيان واحد."
+    },
+    {
+     "pos": "verb",
+     "en": "To mix together different elements.",
+     "ar": "لخلط العناصر المختلفة معًا."
+    },
+    {
+     "pos": "adjective",
+     "en": "(biblical criticism) Combining elements from multiple versions of the same text.",
+     "ar": "(نقد كتابي) الجمع بين عناصر من نسخ متعددة من نفس النص."
+    },
+    {
+     "pos": "verb",
+     "en": "To combine or mix together.",
+     "ar": "للجمع أو المزج معًا."
+    },
+    {
+     "pos": "verb",
+     "en": "To fail to properly distinguish or keep separate (things); to mistakenly treat (them) as equivalent.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "conflate",
+    "conflates",
+    "conflated",
+    "conflating"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "fuse",
+     "ar": "fuse مصهر"
+    },
+    {
+     "en": "meld",
+     "ar": "إظهار البطاقات, عمليات إعلان وإظهار البطاقات (في لعبة البطاقات)"
+    },
+    {
+     "en": "amalgamate",
+     "ar": "دمج, تملغم, اندمج, ملغم"
+    },
+    {
+     "en": "blend",
+     "ar": "مزيج"
+    },
+    {
+     "en": "coalesce",
+     "ar": "يدمج"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "“Bacon was Lord Chancellor of England and the first European to experiment with gunpowder.” — “No, you are conflating Francis Bacon and Roger Bacon.”",
+     "ar": "\"كان بيكون مستشارًا لإنجلترا وأول أوروبي يجرب البارود. \"-\" لا، أنت تخلط بين فرانسيس بيكون وروجر بيكون. \""
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784758615136,
    "word": "pathologies",
