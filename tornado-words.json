@@ -1,8 +1,111 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T13:44:21.343Z",
+ "exportedAt": "2026-07-23T13:45:02.599Z",
  "words": [
+  {
+   "id": 1784814298913,
+   "word": "boon",
+   "ipa": "/buːn/",
+   "arabicPron": "بون",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A prayer; petition.",
+     "ar": "بركة, هبة, نعمة, هدية"
+    },
+    {
+     "pos": "noun",
+     "en": "That which is asked or granted as a benefit or favor; a gift or benefaction.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "A good thing; a thing to be thankful for or to appreciate duly.",
+     "ar": ""
+    },
+    {
+     "pos": "adjective",
+     "en": "Gay; merry; jovial; convivial.",
+     "ar": ""
+    },
+    {
+     "pos": "adjective",
+     "en": "Kind; bountiful; benign.",
+     "ar": ""
+    },
+    {
+     "pos": "adjective",
+     "en": "Good; prosperous.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "boon",
+    "boons"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "benefit",
+     "ar": ""
+    },
+    {
+     "en": "blessing",
+     "ar": ""
+    },
+    {
+     "en": "favor",
+     "ar": ""
+    },
+    {
+     "en": "gift",
+     "ar": ""
+    },
+    {
+     "en": "close",
+     "ar": ""
+    }
+   ],
+   "collocations": [
+    {
+     "en": "boon companions",
+     "ar": ""
+    },
+    {
+     "en": "boon companion",
+     "ar": ""
+    },
+    {
+     "en": "great boon",
+     "ar": ""
+    }
+   ],
+   "examples": [
+    {
+     "en": "Finding the dry cave was a boon to the weary travellers.",
+     "ar": ""
+    },
+    {
+     "en": "Anaesthetics are a great boon to modern surgery.",
+     "ar": ""
+    },
+    {
+     "en": "boon voyage",
+     "ar": ""
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784814256605,
    "word": "provocative",
