@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T09:35:58.347Z",
+ "exportedAt": "2026-07-23T09:36:02.180Z",
  "words": [
   {
    "id": 1784737860691,
@@ -6201,7 +6201,11 @@
    ],
    "differences": [],
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "/ˈfjɝ.i.əs/",
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/f/fur/furio/furious__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/f/fur/furio/furious__gb_1.mp3",
+   "engineVersion": 1
   }
  ],
  "tombstones": [
