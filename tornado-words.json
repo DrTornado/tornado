@@ -1,8 +1,90 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T11:18:33.596Z",
+ "exportedAt": "2026-07-23T11:22:17.457Z",
  "words": [
+  {
+   "id": 1784805733158,
+   "word": "abide",
+   "ipa": "/əˈbaɪd/",
+   "arabicPron": "بايد",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To endure without yielding; to withstand; await defiantly; to encounter; to persevere.",
+     "ar": "التحمل دون الخضوع ؛ الصمود ؛ الانتظار بتحد ؛ المواجهة ؛ المثابرة."
+    },
+    {
+     "pos": "verb",
+     "en": "To bear patiently; to tolerate; to put up with; stand.",
+     "ar": "يتحمل بصبر ؛ يتحمل ؛ يتحمل ؛ يقف."
+    },
+    {
+     "pos": "verb",
+     "en": "To endure without yielding; to withstand. .mw-parser-output .defdate{font-size:smaller}",
+     "ar": "لتحمل دون الخضوع ؛ لتحمل. .mw - parser - output .defdate {font - size:smaller}"
+    },
+    {
+     "pos": "verb",
+     "en": "To bear patiently.",
+     "ar": "التحمل بصبر."
+    },
+    {
+     "pos": "verb",
+     "en": "To pay for; to stand the consequences of.",
+     "ar": "لدفع ثمن ؛ لتحمل عواقب."
+    }
+   ],
+   "inflections": [
+    "abide",
+    "abides",
+    "abided",
+    "abiding"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "brook",
+     "ar": "جدول, غدير, جدول نهر صغير"
+    },
+    {
+     "en": "put up with",
+     "ar": "تابع, تحمل"
+    },
+    {
+     "en": "hold on",
+     "ar": "استمر, واصل"
+    },
+    {
+     "en": "resist",
+     "ar": "المقاومة مادة يطلى بها لمقاومة التآكل ونحوه"
+    },
+    {
+     "en": "dwell",
+     "ar": "أقام, قطن, سكن أقام, يوجد, كمن, وقع, معن النظر في, كان ب, أسهب في التفكير, سكن"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "The old oak tree abides the wind endlessly.",
+     "ar": "شجرة البلوط القديمة تحافظ على الريح إلى ما لا نهاية."
+    },
+    {
+     "en": "\"I never could abide shoemakers,\" said an old servant,—and it ended in her marrying one.",
+     "ar": "قالت خادمة عجوز: \"لم أستطع أبدًا الالتزام بصانعي الأحذية\"، وانتهى الأمر بزواجها من أحدهم."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784805509427,
    "word": "sculptures",
