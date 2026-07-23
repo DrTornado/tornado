@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T13:05:39.853Z",
+ "exportedAt": "2026-07-23T13:19:19.900Z",
  "words": [
   {
    "id": 1784737860691,
@@ -6833,7 +6833,7 @@
     {
      "pos": "noun",
      "en": "The state of being tranquil",
-     "ar": "حالة الهدوء"
+     "ar": "راحة بال, طمأنينة, هدوء"
     },
     {
      "pos": "noun",
@@ -6888,7 +6888,10 @@
     }
    ],
    "examples": [],
-   "differences": []
+   "differences": [],
+   "engineVersion": 1,
+   "interval": 0,
+   "due": 0
   },
   {
    "right": 0,
@@ -6984,7 +6987,10 @@
    ],
    "collocations": [],
    "examples": [],
-   "differences": []
+   "differences": [],
+   "engineVersion": 1,
+   "interval": 0,
+   "due": 0
   },
   {
    "right": 0,
