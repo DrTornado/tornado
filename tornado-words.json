@@ -1,8 +1,65 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T10:50:50.581Z",
+ "exportedAt": "2026-07-23T10:51:33.943Z",
  "words": [
+  {
+   "id": 1784803884474,
+   "word": "potions",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A small portion or dose of a liquid which is medicinal, poisonous, or magical.",
+     "ar": "جزء صغير أو جرعة صغيرة من سائل طبي أو سام أو سحري."
+    }
+   ],
+   "inflections": [
+    "potion",
+    "potions"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "lib",
+     "ar": ""
+    }
+   ],
+   "collocations": [
+    {
+     "en": "love potion",
+     "ar": "جرعة الحب, خليط سحري يسبب لمن يشربه أن يقع بالحب"
+    },
+    {
+     "en": "magic potion",
+     "ar": "جرعة سحرية"
+    },
+    {
+     "en": "sleeping potion",
+     "ar": "جرعة النوم"
+    },
+    {
+     "en": "bitter potion",
+     "ar": "جرعة مريرة"
+    }
+   ],
+   "examples": [
+    {
+     "en": "He hoped to win the princess's heart by mixing the love potion the witch gave him into her drink.",
+     "ar": "كان يأمل في الفوز بقلب الأميرة عن طريق خلط جرعة الحب التي قدمتها له الساحرة في شرابها."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784803845911,
    "word": "apothecaries",
