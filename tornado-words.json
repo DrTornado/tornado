@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T13:05:27.624Z",
+ "exportedAt": "2026-07-23T13:05:39.853Z",
  "words": [
   {
    "id": 1784737860691,
@@ -6759,7 +6759,14 @@
     }
    ],
    "examples": [],
-   "differences": []
+   "differences": [],
+   "ipaUS": "/ˈfɪz.ɪ.sɪst/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/physicist-us.mp3",
+   "freqLabel": "Top 18,000 words",
+   "estCefr": "C1",
+   "engineVersion": 1,
+   "interval": 0,
+   "due": 0
   },
   {
    "right": 0,
@@ -6803,7 +6810,11 @@
      "ar": "كان العرض نظيفًا ومدروسًا جيدًا، لكن فناني الأداء افتقروا إلى البراعة التي كانت ستجعله رائعًا."
     }
    ],
-   "differences": []
+   "differences": [],
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/showmanship-us.mp3",
+   "engineVersion": 1,
+   "interval": 0,
+   "due": 0
   },
   {
    "right": 0,
