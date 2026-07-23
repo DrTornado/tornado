@@ -1,8 +1,72 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T11:03:14.434Z",
+ "exportedAt": "2026-07-23T11:03:22.124Z",
  "words": [
+  {
+   "id": 1784804597691,
+   "word": "unsuspecting",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "adjective",
+     "en": "Not suspecting; without any suspicion.",
+     "ar": "عدم الاشتباه ؛ دون أي اشتباه."
+    }
+   ],
+   "inflections": [
+    "unsuspecting"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "unaware",
+     "ar": "لا شعوريا, من غير قصد, جاهل, غير مدرك"
+    },
+    {
+     "en": "trustful",
+     "ar": "مفعم بالثقة, واثق بالآخرين, نزاع للثقة بالآخرين"
+    },
+    {
+     "en": "trusting",
+     "ar": "واثق ب, شديد الثقة ب"
+    },
+    {
+     "en": "unsuspicious",
+     "ar": "ليس به ما يثير الشك"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "unsuspecting victim",
+     "ar": "ضحية مطمئنة."
+    },
+    {
+     "en": "unsuspecting public",
+     "ar": "الجمهور المطمئن"
+    },
+    {
+     "en": "unsuspecting victims",
+     "ar": "ضحايا غير مرتابين"
+    }
+   ],
+   "examples": [
+    {
+     "en": "He easily shot the unsuspecting target.",
+     "ar": "أطلق النار بسهولة على الهدف المطمئن."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784804589585,
    "word": "physicist",
