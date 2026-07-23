@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T10:43:24.105Z",
+ "exportedAt": "2026-07-23T10:43:34.016Z",
  "words": [
   {
    "id": 1784758615136,
@@ -321,7 +321,10 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "freqLabel": "Top 18,000 words",
+   "estCefr": "B2",
+   "engineVersion": 1
   },
   {
    "id": 1784753652740,
@@ -395,7 +398,11 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "/ɪnˈduːs/",
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/i/ind/induc/induce__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/i/ind/induc/induce__gb_1.mp3",
+   "engineVersion": 1
   },
   {
    "id": 1784753085143,
@@ -459,7 +466,12 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "/ˈdaʊnˌsaɪd/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/downside-us.mp3",
+   "freqLabel": "Top 18,000 words",
+   "estCefr": "C1",
+   "engineVersion": 1
   },
   {
    "id": 1784752604761,
@@ -553,7 +565,8 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "engineVersion": 1
   },
   {
    "id": 1784752076144,
