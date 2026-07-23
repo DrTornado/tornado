@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T13:04:41.458Z",
+ "exportedAt": "2026-07-23T13:05:27.624Z",
  "words": [
   {
    "id": 1784737860691,
@@ -6271,7 +6271,13 @@
      "ar": "سمح النطق للروبوت بالتحرك حول الزوايا."
     }
    ],
-   "differences": []
+   "differences": [],
+   "ipaUS": "/ɑɹˌtɪk.jəˈleɪ.ʃən/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/articulation-us.mp3",
+   "audioGen": "https://api.dictionaryapi.dev/media/pronunciations/en/articulation-au.mp3",
+   "engineVersion": 1,
+   "interval": 0,
+   "due": 0
   },
   {
    "right": 0,
@@ -6332,7 +6338,12 @@
     }
    ],
    "examples": [],
-   "differences": []
+   "differences": [],
+   "ipaUK": "/ˈljuːbɹɪkənt/",
+   "audioUK": "https://api.dictionaryapi.dev/media/pronunciations/en/lubricant-uk.mp3",
+   "engineVersion": 1,
+   "interval": 0,
+   "due": 0
   },
   {
    "right": 0,
@@ -6407,7 +6418,14 @@
      "ar": "سآخذ شطيرة لحم خنزير مع الخس والطماطم."
     }
    ],
-   "differences": []
+   "differences": [],
+   "ipaUS": "/ˈlɛtəs/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/lettuce-us.mp3",
+   "freqLabel": "Top 18,000 words",
+   "estCefr": "C1",
+   "engineVersion": 1,
+   "interval": 0,
+   "due": 0
   },
   {
    "right": 0,
@@ -6489,7 +6507,14 @@
      "ar": "قالت خادمة عجوز: \"لم أستطع أبدًا الالتزام بصانعي الأحذية\"، وانتهى الأمر بزواجها من أحدهم."
     }
    ],
-   "differences": []
+   "differences": [],
+   "ipaUS": "/əˈbaɪd/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/abide-us.mp3",
+   "freqLabel": "Top 18,000 words",
+   "estCefr": "C1",
+   "engineVersion": 1,
+   "interval": 0,
+   "due": 0
   },
   {
    "right": 0,
@@ -6550,7 +6575,12 @@
    ],
    "collocations": [],
    "examples": [],
-   "differences": []
+   "differences": [],
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/scu/sculp/sculpture__us_2.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/s/scu/sculp/sculpture__gb_1.mp3",
+   "engineVersion": 1,
+   "interval": 0,
+   "due": 0
   },
   {
    "right": 0,
@@ -6606,7 +6636,10 @@
     }
    ],
    "examples": [],
-   "differences": []
+   "differences": [],
+   "engineVersion": 1,
+   "interval": 0,
+   "due": 0
   },
   {
    "right": 0,
