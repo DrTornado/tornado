@@ -1,8 +1,82 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T10:51:33.943Z",
+ "exportedAt": "2026-07-23T10:54:50.473Z",
  "words": [
+  {
+   "id": 1784804074316,
+   "word": "tranquility",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "The state of being tranquil",
+     "ar": "حالة الهدوء"
+    },
+    {
+     "pos": "noun",
+     "en": "The absence of disturbance; peacefulness",
+     "ar": "غياب الاضطراب ؛ الهدوء"
+    },
+    {
+     "pos": "noun",
+     "en": "American standard spelling of tranquillity.",
+     "ar": "التهجئة القياسية الأمريكية للهدوء."
+    }
+   ],
+   "inflections": [
+    "tranquility",
+    "tranquilities"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "repose",
+     "ar": "راحة, سكون, استرخاء, استراحة, اطمئنان, طمأنينة, رباطة جأش"
+    },
+    {
+     "en": "quietude",
+     "ar": "هدوء, سكون"
+    },
+    {
+     "en": "placidity",
+     "ar": "هدوء, رباطة جأش, سكون, وداعة"
+    },
+    {
+     "en": "quiet",
+     "ar": "بالكامل"
+    },
+    {
+     "en": "quietness",
+     "ar": "هدوء, صمت, سكينة"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "domestic tranquility",
+     "ar": "الهدوء المنزلي"
+    },
+    {
+     "en": "public tranquility",
+     "ar": "الهدوء العام"
+    },
+    {
+     "en": "relative tranquility",
+     "ar": "الهدوء النسبي"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784803884474,
    "word": "potions",
