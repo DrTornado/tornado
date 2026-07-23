@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T07:11:22.604Z",
+ "exportedAt": "2026-07-23T09:35:58.347Z",
  "words": [
   {
    "id": 1784737860691,
@@ -6053,7 +6053,12 @@
    ],
    "differences": [],
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUK": "/ˈstɹʌŋ/",
+   "audioUK": "https://api.dictionaryapi.dev/media/pronunciations/en/strung-uk.mp3",
+   "freqLabel": "Top 18,000 words",
+   "estCefr": "C1",
+   "engineVersion": 1
   },
   {
    "right": 0,
@@ -6129,7 +6134,8 @@
    ],
    "differences": [],
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "engineVersion": 1
   },
   {
    "right": 0,
