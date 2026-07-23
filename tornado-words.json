@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T10:43:48.827Z",
+ "exportedAt": "2026-07-23T10:44:07.747Z",
  "words": [
   {
    "id": 1784758615136,
@@ -1117,7 +1117,8 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "engineVersion": 1
   },
   {
    "id": 1784750865167,
@@ -1187,7 +1188,8 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "engineVersion": 1
   },
   {
    "id": 1784750796136,
@@ -1209,7 +1211,7 @@
     {
      "pos": "noun",
      "en": "Esteem, honour.",
-     "ar": ""
+     "ar": "التقدير والشرف."
     },
     {
      "pos": "adjective",
@@ -1279,7 +1281,10 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "/ˈdeɪnti/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/dainty-us.mp3",
+   "engineVersion": 1
   },
   {
    "id": 1784750284468,
@@ -1335,7 +1340,8 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "engineVersion": 1
   },
   {
    "id": 1784750256150,
@@ -1401,7 +1407,10 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "freqLabel": "Top 18,000 words",
+   "estCefr": "C1",
+   "engineVersion": 1
   },
   {
    "id": 1784749340767,
@@ -1460,7 +1469,11 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "/ˈdɑktɹɪnz/",
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/d/doc/doctr/doctrine__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/d/doc/doctr/doctrine__gb_2.mp3",
+   "engineVersion": 1
   },
   {
    "id": 1784749142603,
