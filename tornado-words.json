@@ -1,8 +1,93 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-23T13:32:11.587Z",
+ "exportedAt": "2026-07-23T13:44:21.343Z",
  "words": [
+  {
+   "id": 1784814256605,
+   "word": "provocative",
+   "ipa": "/pɹəˈvɒk.ə.tɪv/",
+   "arabicPron": "برڤوكتيڤ",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "(obsolescent) Something that provokes an appetite, especially a sexual appetite; an aphrodisiac.",
+     "ar": "(زائل) شيء يثير الشهية، وخاصة الشهية الجنسية ؛ مثير للشهوة الجنسية."
+    },
+    {
+     "pos": "adjective",
+     "en": "Serving or tending to elicit a strong, often negative sentiment in another person; exasperating.",
+     "ar": "خدمة أو الميل إلى إثارة مشاعر قوية وسلبية في كثير من الأحيان في شخص آخر ؛ مزعجة."
+    },
+    {
+     "pos": "adjective",
+     "en": "Serving or tending to excite, stimulate or arouse sexual interest; sexy.",
+     "ar": "تقديم أو الميل إلى إثارة أو تحفيز أو إثارة الاهتمام الجنسي ؛ مثير."
+    },
+    {
+     "pos": "adjective",
+     "en": "Provoking or triggering any response.",
+     "ar": "استفزاز أو إثارة أي استجابة."
+    },
+    {
+     "pos": "noun",
+     "en": "Something that provokes an appetite, especially a sexual appetite; an aphrodisiac. .mw-parser-output .defdate{font-size:smaller}",
+     "ar": "شيء يثير الشهية، وخاصة الشهية الجنسية ؛ مثير للشهوة الجنسية. .mw - parser - output .defdate {font - size:smaller}"
+    }
+   ],
+   "inflections": [
+    "provocative",
+    "provocatives"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "sexy",
+     "ar": "مثير للشهوة, جنسي, مثير للغريزة الجنسية, ودي"
+    },
+    {
+     "en": "challenging",
+     "ar": "مُحْتَجّ ; مُعْتَرِض"
+    },
+    {
+     "en": "intriguing",
+     "ar": "مثيرة للاهتمام"
+    },
+    {
+     "en": "exciting",
+     "ar": "اهتياج"
+    },
+    {
+     "en": "incendiary",
+     "ar": "مهيج, تحريض, الاحراق عمدا, أداة الإحراق"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "provocative questions",
+     "ar": "المسألة الإستفزازية."
+    },
+    {
+     "en": "provocative book",
+     "ar": "كتاب استفزازي"
+    },
+    {
+     "en": "provocative question",
+     "ar": "سؤال استفزازي"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784813527523,
    "word": "respectability",
