@@ -1,8 +1,85 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-24T13:08:38.028Z",
+ "exportedAt": "2026-07-24T13:19:01.024Z",
  "words": [
+  {
+   "id": 1784899135706,
+   "word": "speculative",
+   "ipa": "/ˈspɛkjuləˌtɪv/",
+   "arabicPron": "سبيكيولتيڤ",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "adjective",
+     "en": "Characterized by speculation; based on guessing, unfounded opinions, or extrapolation.",
+     "ar": "تتميز بالتكهنات ؛ بناءً على التخمين أو الآراء التي لا أساس لها أو الاستقراء."
+    },
+    {
+     "pos": "adjective",
+     "en": "Pursued as a gamble, with possible large profits or losses; risky.",
+     "ar": "يتم متابعتها كمقامرة، مع أرباح أو خسائر كبيرة محتملة ؛ محفوفة بالمخاطر."
+    },
+    {
+     "pos": "adjective",
+     "en": "Pertaining to financial speculation; Involving or resulting from high-risk investments or trade.",
+     "ar": "فيما يتعلق بالمضاربة المالية ؛ التي تنطوي على أو تنتج عن استثمارات أو تجارة عالية المخاطر."
+    }
+   ],
+   "inflections": [
+    "speculative"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "inquisitive",
+     "ar": "فضولي, محب للإستطلاع, محقق, محب للتحقيق, باحث"
+    },
+    {
+     "en": "curious",
+     "ar": "شخص غريب الأطوار, فضولي, غريب الأطوار, طريف, محب للاطلاع, بذيء"
+    },
+    {
+     "en": "bad",
+     "ar": "سيئ"
+    },
+    {
+     "en": "theoretical",
+     "ar": "نظري"
+    },
+    {
+     "en": "questioning",
+     "ar": "سائل, مستفهم, مستطلع"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "speculative philosophy",
+     "ar": "فلسفة المضاربة"
+    },
+    {
+     "en": "speculative thought",
+     "ar": "الفكر التخميني"
+    },
+    {
+     "en": "speculative reason",
+     "ar": "سبب تخميني"
+    },
+    {
+     "en": "highly speculative",
+     "ar": "محفوف بالمخاطر بدرجة عالية"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784898512946,
    "word": "underlying",
