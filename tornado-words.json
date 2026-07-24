@@ -1,8 +1,91 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-24T13:19:01.024Z",
+ "exportedAt": "2026-07-24T13:20:20.166Z",
  "words": [
+  {
+   "id": 1784899215964,
+   "word": "influential",
+   "ipa": "/ɪnfluˈɛnʃəl/",
+   "arabicPron": "ينفلوينشل",
+   "oxford": "5000",
+   "cefr": "C1",
+   "pos": [
+    "noun",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A person who has influence",
+     "ar": "الشخص الذي له تأثير"
+    },
+    {
+     "pos": "adjective",
+     "en": "Having or exerting influence.",
+     "ar": "وجود أو ممارسة النفوذ."
+    }
+   ],
+   "inflections": [
+    "influential",
+    "influentials"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "swayful",
+     "ar": "متمايل"
+    },
+    {
+     "en": "potent",
+     "ar": "قحل, قوي, فعال, فحل, قدير, مفحم, واسع السلطة"
+    },
+    {
+     "en": "cogent",
+     "ar": "مقنع, قوى, مفحم"
+    },
+    {
+     "en": "important",
+     "ar": ""
+    },
+    {
+     "en": "powerful",
+     "ar": "قوية"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "influential people",
+     "ar": "أهْلُ الحَلّ والرّبْط"
+    },
+    {
+     "en": "influential men",
+     "ar": "رجال ذوو نفوذ"
+    },
+    {
+     "en": "influential members",
+     "ar": "الأعضاء المؤثرون"
+    },
+    {
+     "en": "highly influential",
+     "ar": "<g id=\"2\">مؤثر</g><g id=\"1\"> للغاية </g>"
+    }
+   ],
+   "examples": [
+    {
+     "en": "Jane was very influential in getting the motion passed.",
+     "ar": "كان لجين تأثير كبير في تمرير الاقتراح."
+    },
+    {
+     "en": "John Lennon was a very influential person in music, as well as in politics, fashion and general culture.",
+     "ar": "كان جون لينون شخصًا مؤثرًا جدًا في الموسيقى، وكذلك في السياسة والأزياء والثقافة العامة."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784899135706,
    "word": "speculative",
