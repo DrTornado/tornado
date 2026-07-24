@@ -1,119 +1,121 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-24T12:31:24.684Z",
+ "exportedAt": "2026-07-24T13:08:38.028Z",
  "words": [
   {
-   "id": 1784834525872,
-   "word": "man",
-   "ipa": "[mɛn]",
-   "arabicPron": "مان",
-   "oxford": "3000",
-   "cefr": "A1",
+   "id": 1784898512946,
+   "word": "underlying",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "5000",
+   "cefr": "C1",
    "pos": [
-    "noun",
-    "interjection",
-    "symbol",
-    "pronoun",
     "verb",
-    "proper noun"
+    "noun",
+    "adjective"
    ],
    "meanings": [
     {
-     "pos": "noun",
-     "en": "An adult male human.",
-     "ar": "ذكر بشري بالغ."
+     "pos": "verb",
+     "en": "To lie in a position directly beneath.",
+     "ar": "الاستلقاء في وضع تحته مباشرة."
+    },
+    {
+     "pos": "verb",
+     "en": "To lie under or beneath.",
+     "ar": "الاستلقاء تحتها أو تحتها."
     },
     {
      "pos": "noun",
-     "en": "(collective) All human males collectively: mankind.",
-     "ar": "(جماعي) جميع الذكور البشرية مجتمعة: البشرية."
+     "en": "The entity from whose performance a derivative derives its value.",
+     "ar": "الجهة التي يستمد من أدائها المشتق قيمته."
     },
     {
-     "pos": "interjection",
-     "en": "Used to place emphasis upon something or someone; sometimes, but not always, when actually addressing a man.",
-     "ar": "اعتاد التركيز على شيء ما أو شخص ما ؛ في بعض الأحيان، ولكن ليس دائمًا، عند مخاطبة رجل بالفعل."
+     "pos": "adjective",
+     "en": "Lying underneath",
+     "ar": "الاستلقاء تحت"
     },
     {
-     "pos": "symbol",
-     "en": "ISO 639-2 &amp; ISO 639-3 language code for Mandingo.",
-     "ar": "ISO 639-2 و ISO 639-3 رمز اللغة للماندينغو."
+     "pos": "adjective",
+     "en": "Basic or fundamental",
+     "ar": "أساسي أو أساسي"
     },
     {
-     "pos": "noun",
-     "en": "All human males collectively: mankind.",
-     "ar": "جميع الذكور البشرية مجتمعة: البشرية."
-    },
-    {
-     "pos": "noun",
-     "en": "An adult male who belongs to a particular group: an employee, a representative, etc.",
+     "pos": "adjective",
+     "en": "Implicit.",
      "ar": ""
     }
    ],
    "inflections": [
-    "man",
-    "mans",
-    "manned",
-    "manning"
+    "underlying",
+    "underlyings",
+    "underlyinged",
+    "underlyinging"
    ],
    "derivatives": [],
    "synonyms": [
     {
-     "en": "male",
-     "ar": "ذكر"
+     "en": "fundamental",
+     "ar": "النغمة الأساسية, الأساس"
     },
     {
-     "en": "omi",
-     "ar": "الواجهة"
+     "en": "implicit",
+     "ar": "ضمنيا"
     },
     {
-     "en": "human",
-     "ar": "بشري"
+     "en": "rudimentary",
+     "ar": "بدائي, غير متطور, ابتدائي, أولي, أثري غير متطور"
     },
     {
-     "en": "person",
-     "ar": "الشخص"
+     "en": "inherent",
+     "ar": "ملازم, متأصل, صلبي, متضمن في صلب, كامن, فطري"
     },
     {
-     "en": "world",
-     "ar": "العالم"
+     "en": "basic",
+     "ar": "أساس"
     }
    ],
    "collocations": [
     {
-     "en": "young man",
-     "ar": "فتي, شاب, فتى"
+     "en": "underlying cause",
+     "ar": "سَبَبٌ دَفين"
     },
     {
-     "en": "old man",
-     "ar": "هرم"
+     "en": "underlying causes",
+     "ar": "القضايا الاولية (الاسباب الخفية)"
+    },
+    {
+     "en": "underlying principles",
+     "ar": "المبادئ الأساسية"
+    },
+    {
+     "en": "principles underlying",
+     "ar": "المبادئ الأساسية"
+    },
+    {
+     "en": "assumptions underlying",
+     "ar": "الافتراضات الأساسية"
     }
    ],
    "examples": [
     {
-     "en": "The show is especially popular with middle-aged men.",
-     "ar": "يحظى العرض بشعبية خاصة بين الرجال في منتصف العمر."
+     "en": "A stratum of clay underlies the surface gravel.",
+     "ar": "توجد طبقة من الطين تحت الحصى السطحي."
     },
     {
-     "en": "Man, that was a great catch!",
-     "ar": "كان ذلك ألتقاطا عظيما!"
+     "en": "We dug down to the underlying rock.",
+     "ar": "وحفرنا وصولاً إلى الصخرة الكامنة."
     },
     {
-     "en": "Man's got some new creps.",
-     "ar": "حصل الرجل على بعض المقرمشات الجديدة."
+     "en": "Points and straight lines are underlying elements of geometry.",
+     "ar": "النقاط والخطوط المستقيمة هي العناصر الأساسية للهندسة."
     }
    ],
    "differences": [],
    "right": 0,
    "wrong": 0,
-   "last": null,
-   "interval": 0,
-   "due": 0,
-   "ipaUS": "/mæn/",
-   "ipaUK": "/mæn/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/m/man/man__/man__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/m/man/man__/man__gb_2.mp3",
-   "engineVersion": 1
+   "last": null
   },
   {
    "id": 1784737860691,
@@ -7544,6 +7546,11 @@
    "id": 1784707365586,
    "word": "man",
    "deletedAt": 1784709596959
+  },
+  {
+   "id": 1784834525872,
+   "word": "man",
+   "deletedAt": 1784896291996
   }
  ]
 }
