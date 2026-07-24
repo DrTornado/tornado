@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-24T21:32:14.150Z",
+ "exportedAt": "2026-07-24T21:32:22.704Z",
  "words": [
   {
    "id": 1784899215964,
@@ -86,7 +86,10 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/i/inf/influ/influential__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/i/inf/influ/influential__gb_1.mp3",
+   "engineVersion": 1
   },
   {
    "id": 1784899135706,
@@ -165,7 +168,8 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "engineVersion": 1
   },
   {
    "id": 1784898512946,
@@ -281,7 +285,10 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/u/und/under/underlying__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/u/und/under/underlying__gb_3.mp3",
+   "engineVersion": 1
   },
   {
    "id": 1784737860691,
