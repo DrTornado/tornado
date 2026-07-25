@@ -1,8 +1,59 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-25T10:15:48.208Z",
+ "exportedAt": "2026-07-25T10:19:36.975Z",
  "words": [
+  {
+   "id": 1784974772189,
+   "word": "sapiens",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A human being (Homo sapiens).",
+     "ar": "إنسان (الإنسان العاقل)."
+    }
+   ],
+   "inflections": [
+    "sapiens",
+    "sapienses"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [
+    {
+     "en": "sapiens sapiens",
+     "ar": ""
+    },
+    {
+     "en": "homo sapiens",
+     "ar": "الإِنْسانُ العاقِل"
+    },
+    {
+     "en": "sapiens sapiens",
+     "ar": ""
+    },
+    {
+     "en": "archaic sapiens",
+     "ar": "حكميون عتيقون"
+    },
+    {
+     "en": "species sapiens",
+     "ar": "الأنواع العاقله"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784974543897,
    "word": "glaciers",
