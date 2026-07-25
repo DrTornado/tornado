@@ -1,8 +1,102 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-25T15:00:35.240Z",
+ "exportedAt": "2026-07-25T15:01:39.953Z",
  "words": [
+  {
+   "id": 1784991696190,
+   "word": "clinging",
+   "ipa": "/ˈklɪŋɪŋ/",
+   "arabicPron": "كلينقينق",
+   "oxford": "5000",
+   "cefr": "C1",
+   "pos": [
+    "verb",
+    "noun",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To hold very tightly, as to not fall off.",
+     "ar": "التمسك بإحكام شديد، حتى لا تسقط."
+    },
+    {
+     "pos": "verb",
+     "en": "To adhere to an object, without being affixed, in such a way as to follow its contours. Used especially of fabrics and films.",
+     "ar": "التمسك بشيء ما، دون أن يتم لصقه، بطريقة تتبع ملامحه. تستخدم بشكل خاص من الأقمشة والأفلام."
+    },
+    {
+     "pos": "verb",
+     "en": "To produce a high-pitched ringing sound, like a small bell.",
+     "ar": "لإنتاج صوت رنين عالي النبرة، مثل جرس صغير."
+    },
+    {
+     "pos": "noun",
+     "en": "The act of one who clings.",
+     "ar": "فعل من يتشبث."
+    },
+    {
+     "pos": "adjective",
+     "en": "Clingy.",
+     "ar": "لزج, دبق"
+    },
+    {
+     "pos": "verb",
+     "en": "present participle and gerund of cling",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "clinging",
+    "clingings",
+    "clinginged",
+    "clinginging"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "cleave",
+     "ar": "تشقق, تعلق, شق, اخترق, انفلع, انشق, انفسخ, إلتصق ب, خلص, فلع"
+    },
+    {
+     "en": "stick",
+     "ar": "عود"
+    },
+    {
+     "en": "clinch",
+     "ar": "تثبيت بمسمار ملوى الرأس, إمساك بقوة"
+    },
+    {
+     "en": "grip",
+     "ar": "قبضة, مقبض, حقيبة سفر, مسكة"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "clinging together",
+     "ar": "التشبث ببعضها البعض"
+    },
+    {
+     "en": "clinging desperately",
+     "ar": "التشبث بشكل يائس"
+    },
+    {
+     "en": "still clinging",
+     "ar": "لا يزال يتشبث"
+    }
+   ],
+   "examples": [
+    {
+     "en": "Seaweed clung to the anchor.",
+     "ar": "تشبثت الأعشاب البحرية بالمرساة."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784991631873,
    "word": "burrs",
