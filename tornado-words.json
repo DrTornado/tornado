@@ -1,8 +1,60 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-25T10:11:28.053Z",
+ "exportedAt": "2026-07-25T10:15:48.208Z",
  "words": [
+  {
+   "id": 1784974543897,
+   "word": "glaciers",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A large body of ice which flows under its own mass, usually downhill.",
+     "ar": "جسم كبير من الجليد يتدفق تحت كتلته الخاصة، وعادة ما يكون منحدرًا."
+    }
+   ],
+   "inflections": [
+    "glacier",
+    "glaciers"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [
+    {
+     "en": "glacier national",
+     "ar": "نهر جليدي وطني"
+    },
+    {
+     "en": "glacier bay",
+     "ar": "خليج جليدي"
+    },
+    {
+     "en": "glacier ice",
+     "ar": "الجليد الجليدي"
+    },
+    {
+     "en": "great glacier",
+     "ar": "نهر جليدي كبير"
+    }
+   ],
+   "examples": [
+    {
+     "en": "They warned that the effects of glacier melting on water resources are becoming “increasingly serious” for China.",
+     "ar": "وحذروا من أن آثار ذوبان الأنهار الجليدية على الموارد المائية أصبحت \"خطيرة بشكل متزايد\" بالنسبة للصين."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784814298913,
    "word": "boon",
