@@ -1,8 +1,83 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-25T10:19:36.975Z",
+ "exportedAt": "2026-07-25T11:18:31.317Z",
  "words": [
+  {
+   "id": 1784978307444,
+   "word": "foraging",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "verb",
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To search for and gather food for animals, particularly cattle and horses.",
+     "ar": "للبحث عن الطعام للحيوانات وجمعه، وخاصة الماشية والخيول."
+    },
+    {
+     "pos": "verb",
+     "en": "To rampage through, gathering and destroying as one goes.",
+     "ar": "الهيجان والجمع والتدمير كما يذهب المرء."
+    },
+    {
+     "pos": "noun",
+     "en": "The act of searching for food.",
+     "ar": "فعل البحث عن الطعام."
+    },
+    {
+     "pos": "verb",
+     "en": "present participle and gerund of forage",
+     "ar": "مجرى العلف الحالي وجيروند العلف"
+    },
+    {
+     "pos": "noun",
+     "en": "The act of searching for food or other items.",
+     "ar": "فعل البحث عن طعام أو مواد أخرى."
+    }
+   ],
+   "inflections": [
+    "foraging",
+    "foragings",
+    "foraginged",
+    "foraginging"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "forage",
+     "ar": "علف الماشية, التماس للعلف"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "foraging parties",
+     "ar": "حفلات البحث عن الطعام"
+    },
+    {
+     "en": "foraging behavior",
+     "ar": "سلوك البحث عن الطعام"
+    },
+    {
+     "en": "foraging behaviour",
+     "ar": "سلوك البحث عن الطعام"
+    },
+    {
+     "en": "optimal foraging",
+     "ar": "البحث الأمثل عن الطعام"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784974772189,
    "word": "sapiens",
