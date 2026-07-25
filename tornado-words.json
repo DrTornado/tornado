@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-25T09:05:57.361Z",
+ "exportedAt": "2026-07-25T09:06:04.354Z",
  "words": [
   {
    "id": 1784814298913,
@@ -694,7 +694,10 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/scu/sculp/sculpture__us_2.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/s/scu/sculp/sculpture__gb_1.mp3",
+   "engineVersion": 1
   },
   {
    "id": 1784805301233,
@@ -752,7 +755,8 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "engineVersion": 1
   },
   {
    "id": 1784804597691,
