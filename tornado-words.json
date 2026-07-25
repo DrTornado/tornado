@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-25T09:06:11.553Z",
+ "exportedAt": "2026-07-25T09:06:17.652Z",
  "words": [
   {
    "id": 1784814298913,
@@ -932,7 +932,9 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/showmanship-us.mp3",
+   "engineVersion": 1
   },
   {
    "id": 1784804074316,
@@ -1008,7 +1010,8 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "engineVersion": 1
   },
   {
    "id": 1784803884474,
