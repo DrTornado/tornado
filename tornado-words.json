@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-25T13:26:43.742Z",
+ "exportedAt": "2026-07-25T13:26:50.367Z",
  "words": [
   {
    "id": 1784978307444,
@@ -78,7 +78,8 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "engineVersion": 1
   },
   {
    "id": 1784974772189,
@@ -105,16 +106,8 @@
    "synonyms": [],
    "collocations": [
     {
-     "en": "sapiens sapiens",
-     "ar": ""
-    },
-    {
      "en": "homo sapiens",
      "ar": "الإِنْسانُ العاقِل"
-    },
-    {
-     "en": "sapiens sapiens",
-     "ar": ""
     },
     {
      "en": "archaic sapiens",
@@ -131,7 +124,8 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "engineVersion": 1
   },
   {
    "id": 1784974543897,
@@ -156,24 +150,7 @@
    ],
    "derivatives": [],
    "synonyms": [],
-   "collocations": [
-    {
-     "en": "glacier national",
-     "ar": "نهر جليدي وطني"
-    },
-    {
-     "en": "glacier bay",
-     "ar": "خليج جليدي"
-    },
-    {
-     "en": "glacier ice",
-     "ar": "الجليد الجليدي"
-    },
-    {
-     "en": "great glacier",
-     "ar": "نهر جليدي كبير"
-    }
-   ],
+   "collocations": [],
    "examples": [
     {
      "en": "They warned that the effects of glacier melting on water resources are becoming “increasingly serious” for China.",
@@ -185,7 +162,10 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "freqLabel": "Top 18,000 words",
+   "estCefr": "C1",
+   "engineVersion": 1
   },
   {
    "id": 1784814298913,
