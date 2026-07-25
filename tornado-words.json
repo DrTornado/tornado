@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-25T09:06:23.499Z",
+ "exportedAt": "2026-07-25T09:06:29.403Z",
  "words": [
   {
    "id": 1784814298913,
@@ -1202,7 +1202,10 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "/kənˈfleɪt/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/conflate-us.mp3",
+   "engineVersion": 1
   },
   {
    "id": 1784758615136,
