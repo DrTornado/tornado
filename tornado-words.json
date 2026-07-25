@@ -1,8 +1,73 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-25T15:05:41.174Z",
+ "exportedAt": "2026-07-25T17:19:39.394Z",
  "words": [
+  {
+   "id": 1784999975523,
+   "word": "Exterminator",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "Someone or something that exterminates.",
+     "ar": "شخص أو شيء يبيد."
+    },
+    {
+     "pos": "noun",
+     "en": "Specifically, a person whose job it is to kill insects and other pests in a building.",
+     "ar": "على وجه التحديد، الشخص الذي تتمثل مهمته في قتل الحشرات والآفات الأخرى في المبنى."
+    }
+   ],
+   "inflections": [
+    "exterminator",
+    "exterminators"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "terminator",
+     "ar": "منهي"
+    },
+    {
+     "en": "eradicator",
+     "ar": "هدام, شخص أو شيء يهدم, شخص أو شيء يزيل"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "professional exterminator",
+     "ar": "مبيد محترف"
+    },
+    {
+     "en": "pest exterminator",
+     "ar": "مبيد الآفات"
+    },
+    {
+     "en": "insect exterminator",
+     "ar": "مبيد الحشرات"
+    },
+    {
+     "en": "bug exterminator",
+     "ar": "مبيد الحشرات"
+    },
+    {
+     "en": "rat exterminator",
+     "ar": "مبيد الفئران"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784991936913,
    "word": "ripples",
