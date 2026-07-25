@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-25T11:18:31.317Z",
+ "exportedAt": "2026-07-25T13:26:40.508Z",
  "words": [
   {
    "id": 1784978307444,
@@ -76,7 +76,9 @@
    "differences": [],
    "right": 0,
    "wrong": 0,
-   "last": null
+   "last": null,
+   "interval": 0,
+   "due": 0
   },
   {
    "id": 1784974772189,
@@ -127,7 +129,9 @@
    "differences": [],
    "right": 0,
    "wrong": 0,
-   "last": null
+   "last": null,
+   "interval": 0,
+   "due": 0
   },
   {
    "id": 1784974543897,
@@ -179,7 +183,9 @@
    "differences": [],
    "right": 0,
    "wrong": 0,
-   "last": null
+   "last": null,
+   "interval": 0,
+   "due": 0
   },
   {
    "id": 1784814298913,
