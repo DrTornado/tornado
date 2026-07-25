@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-25T09:05:47.062Z",
+ "exportedAt": "2026-07-25T09:05:50.193Z",
  "words": [
   {
    "id": 1784814298913,
@@ -457,7 +457,10 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUK": "/ˈljuːbɹɪkənt/",
+   "audioUK": "https://api.dictionaryapi.dev/media/pronunciations/en/lubricant-uk.mp3",
+   "engineVersion": 1
   },
   {
    "id": 1784806902887,
