@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-25T09:05:41.833Z",
+ "exportedAt": "2026-07-25T09:05:45.014Z",
  "words": [
   {
    "id": 1784814298913,
@@ -318,7 +318,11 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/evidently-us.mp3",
+   "freqLabel": "Top 18,000 words",
+   "estCefr": "B2",
+   "engineVersion": 1
   },
   {
    "id": 1784811704077,
