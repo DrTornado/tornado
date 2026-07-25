@@ -1,8 +1,77 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-25T17:19:39.394Z",
+ "exportedAt": "2026-07-25T17:27:44.796Z",
  "words": [
+  {
+   "id": 1785000460857,
+   "word": "discourage",
+   "ipa": "/dɪsˈkʌɹɪd͡ʒ/",
+   "arabicPron": "ديسكيريدج",
+   "oxford": "3000",
+   "cefr": "B2",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "Lack of courage",
+     "ar": "<g id=\"1\">عدم التحلي بالشجاعة.</g>"
+    },
+    {
+     "pos": "verb",
+     "en": "To extinguish the courage of; to dishearten; to depress the spirits of; to deprive of confidence; to deject.",
+     "ar": "لإخماد شجاعة ؛ تثبيط ؛ لإحباط أرواح ؛ للحرمان من الثقة ؛ للاكتئاب."
+    },
+    {
+     "pos": "verb",
+     "en": "To persuade somebody not to do (something).",
+     "ar": "لإقناع شخص ما بعدم القيام (بشيء ما)."
+    }
+   ],
+   "inflections": [
+    "discourage",
+    "discourages",
+    "discouraged",
+    "discouraging"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "cowardliness",
+     "ar": "جُبْن ; خَوْف"
+    },
+    {
+     "en": "becourage",
+     "ar": "بيكوريج"
+    },
+    {
+     "en": "deter",
+     "ar": "ردع, ثنى, حول, منع, عاق"
+    },
+    {
+     "en": "dissuade",
+     "ar": "نصح بالعدول, ثنى"
+    },
+    {
+     "en": "admonish",
+     "ar": "حث, ذكر, لام, عاتب, نصح, حذر"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "Don't be discouraged by the amount of work left to do: you'll finish it in good time.",
+     "ar": "لا تشعر بالإحباط من مقدار العمل المتبقي للقيام به: ستنتهي منه في الوقت المناسب."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784999975523,
    "word": "Exterminator",
