@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-25T09:05:53.228Z",
+ "exportedAt": "2026-07-25T09:05:57.361Z",
  "words": [
   {
    "id": 1784814298913,
@@ -626,7 +626,12 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "/əˈbaɪd/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/abide-us.mp3",
+   "freqLabel": "Top 18,000 words",
+   "estCefr": "C1",
+   "engineVersion": 1
   },
   {
    "id": 1784805509427,
