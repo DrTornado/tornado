@@ -1,8 +1,88 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-25T15:01:39.953Z",
+ "exportedAt": "2026-07-25T15:05:41.174Z",
  "words": [
+  {
+   "id": 1784991936913,
+   "word": "ripples",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A moving disturbance, or undulation, in the surface of a fluid.",
+     "ar": "اضطراب متحرك، أو تموج، في سطح السائل."
+    },
+    {
+     "pos": "noun",
+     "en": "A sound similar to that of undulating water.",
+     "ar": "صوت مشابه لصوت الماء المتموج."
+    },
+    {
+     "pos": "verb",
+     "en": "To move like the undulating surface of a body of water; to undulate.",
+     "ar": "للتحرك مثل السطح المتموج لجسم مائي ؛ للتموج."
+    },
+    {
+     "pos": "verb",
+     "en": "To propagate like a moving wave.",
+     "ar": "للانتشار مثل موجة متحركة."
+    },
+    {
+     "pos": "verb",
+     "en": "To scratch, tear, or break slightly; graze",
+     "ar": "يخدش أو يمزق أو ينكسر قليلاً ؛ يخدش"
+    },
+    {
+     "pos": "noun",
+     "en": "An implement, with teeth like those of a comb, for removing the seeds and seed vessels from flax, broom corn, etc.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "ripples",
+    "rippleses",
+    "ripplesed",
+    "ripplesing"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [
+    {
+     "en": "like ripples",
+     "ar": "مثل التموجات"
+    },
+    {
+     "en": "current ripples",
+     "ar": "التموجات الحالية"
+    },
+    {
+     "en": "little ripples",
+     "ar": "تموجات صغيرة"
+    },
+    {
+     "en": "small ripples",
+     "ar": "تموجات صغيرة"
+    }
+   ],
+   "examples": [
+    {
+     "en": "I dropped a small stone into the pond and watched the ripples spread.",
+     "ar": "أسقطت حجرًا صغيرًا في البركة وشاهدت انتشار التموجات."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784991696190,
    "word": "clinging",
