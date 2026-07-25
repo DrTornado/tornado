@@ -1,8 +1,81 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-25T15:00:23.035Z",
+ "exportedAt": "2026-07-25T15:00:35.240Z",
  "words": [
+  {
+   "id": 1784991631873,
+   "word": "burrs",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A tree growth in which the grain has grown in a deformed manner.",
+     "ar": "نمو شجرة نمت فيها الحبوب بطريقة مشوهة."
+    },
+    {
+     "pos": "noun",
+     "en": "Wood of a mottled veneer, usually cut from such a growth.",
+     "ar": "خشب من قشرة مرقطة، عادة ما يكون مقطوعًا من مثل هذا النمو."
+    },
+    {
+     "pos": "noun",
+     "en": "A sharp, pointy object, such as a sliver or splinter.",
+     "ar": "جسم حاد ومدبب، مثل الشظية أو الشظية."
+    },
+    {
+     "pos": "noun",
+     "en": "A bur; a seed pod with sharp features that stick in fur or clothing.",
+     "ar": "مثقب ؛ كبسولة بذور ذات ملامح حادة تلتصق بالفراء أو الملابس."
+    },
+    {
+     "pos": "noun",
+     "en": "A rough humming sound.",
+     "ar": "صوت طنين خشن."
+    },
+    {
+     "pos": "noun",
+     "en": "A uvular \"r\".",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "burrs",
+    "burrses"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "bur",
+     "ar": "حافة خشنة"
+    },
+    {
+     "en": "sticker",
+     "ar": "ملصق"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "like burrs",
+     "ar": "مثل النتوءات"
+    },
+    {
+     "en": "remove burrs",
+     "ar": "إزالة الحواف الخشنة"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1784899215964,
    "word": "influential",
