@@ -23386,12 +23386,8 @@ const HELP = {
       <li>Reading speed: Slow / Normal / Fast</li>
     </ul>
     <p>Player controls: ⏮ previous, ▶/⏸ play or pause, ⏭ next. Tap any word in the list below the player to jump straight to it.</p>
-    <h4>Real audio, works with the screen off</h4>
-    <p>The first time you play or export audio, Tornado quietly downloads real offline voice models (English and Arabic) and switches to them automatically — no button to press, nothing to configure. Once ready, each word's full explanation is built into one continuous audio file before playback starts, so the phone's audio system plays it start to finish on its own — this is what actually lets it survive your screen turning off, since no ongoing app activity is needed once it starts.</p>
-    <p>If a specific voice repeatedly fails, only that voice is disabled — others keep working normally. If real audio can't be built at all for a word (rare), Tornado falls back to the older built-in reading voice for that word instead, which does stop when the screen turns off.</p>
-    <h4>📥 Export as a real audio file</h4>
-    <p>Downloads an actual <b>.wav</b> audio file of the narration — plays in any music player, car system, or phone speaker, no special app needed. If the real voices haven't finished downloading yet, this automatically exports a text file instead, for use in a text-to-speech reader app (such as <b>@Voice</b>).</p>
-    <p>Choose what to export: <b>this playlist</b> (whatever's currently filtered), <b>all words</b>, or <b>choose words</b> yourself from a checklist with Select all / Select none shortcuts.</p>`,
+    <h4>Real audio</h4>
+    <p>The first time you play audio, Tornado quietly downloads a real offline English voice and switches to it automatically — no button to press, nothing to configure. Each word's explanation is built into one continuous audio file before playback starts. Arabic meanings are shown on screen but not spoken.</p>`,
   tips: `
     <h3>Honest limits — please read</h3>
     <p>Tornado's dictionary engine is completely free: it uses open dictionaries, a built-in Oxford word list, and a free translation service. No paid account, no API key, ever.</p>
@@ -25340,30 +25336,6 @@ function renderAudio() {
     </div>
 
     ${playlist.length ? `
-    <div class="optbox">
-      <div class="opttitle">🎵 Download as audio file (best for screen-off)</div>
-      <div style="font-size:12px;color:#8A93A3;margin-bottom:10px;line-height:1.6;">
-        Creates one real <b>.wav</b> audio file of all the English narration. Play it in any music player app — it keeps playing with the screen off, like a song. This is the most reliable way to listen hands-free.
-      </div>
-      <div class="chips" id="export-chips" style="margin-bottom:${exportScope==='custom'?'10px':'0'};">
-        <button class="chip ${exportScope==='playlist'?'on':''}" data-ex="playlist"><span>This playlist (${playlist.length})</span></button>
-        <button class="chip ${exportScope==='all'?'on':''}" data-ex="all"><span>All words (${words.length})</span></button>
-        <button class="chip ${exportScope==='custom'?'on':''}" data-ex="custom"><span>Choose${exportSelected.size?` (${exportSelected.size})`:''}</span></button>
-      </div>
-      ${exportScope==='custom' ? `
-      <div style="max-height:220px;overflow-y:auto;background:#242B36;border-radius:8px;padding:8px;margin-bottom:10px;">
-        <div style="display:flex;gap:8px;margin-bottom:8px;">
-          <button class="btn" id="exp-all" style="flex:1;background:#3A4453;color:#E8E4DA;font-size:12px;padding:6px;">Select all</button>
-          <button class="btn" id="exp-none" style="flex:1;background:#3A4453;color:#E8E4DA;font-size:12px;padding:6px;">Select none</button>
-        </div>
-        ${words.map(w => `
-          <label style="display:flex;align-items:center;gap:8px;padding:6px 4px;border-left:3px solid ${COLORS[statusOf(w)]};cursor:pointer;">
-            <input type="checkbox" data-expw="${w.id}" ${exportSelected.has(w.id)?'checked':''} style="width:18px;height:18px;accent-color:#E8B04B;flex:none;">
-            <span style="font-size:14px;">${esc(w.word)}</span>
-          </label>`).join('')}
-      </div>` : ''}
-      <button class="btn" id="export-btn" style="width:100%;background:#2A3140;color:#E8B04B;border:1px solid #3A4453;">${piperEnabled ? '🎵 Create audio file now' : '📥 Export text file (audio engine not ready)'}</button>
-    </div>
 
     <div class="optbox">
       <div class="opttitle">2 — What to play</div>
@@ -25443,17 +25415,6 @@ function renderAudio() {
   document.getElementById('scope-list').onclick = () => { stopAudio(); playScope = 'list'; buildPlaylist(); renderAudio(); };
   document.getElementById('scope-single').onclick = () => { stopAudio(); playScope = 'single'; buildPlaylist(); renderAudio(); };
   document.getElementById('playpause').onclick = () => playing ? stopAudio() : startAudio(trackIdx);
-  const expBtn = document.getElementById('export-btn');
-  if (expBtn) expBtn.onclick = exportPlaylist;
-  pane.querySelectorAll('[data-ex]').forEach(b => b.onclick = () => { exportScope = b.dataset.ex; renderAudio(); });
-  const expAll = document.getElementById('exp-all');
-  if (expAll) expAll.onclick = () => { words.forEach(w => exportSelected.add(w.id)); renderAudio(); };
-  const expNone = document.getElementById('exp-none');
-  if (expNone) expNone.onclick = () => { exportSelected.clear(); renderAudio(); };
-  pane.querySelectorAll('[data-expw]').forEach(cb => cb.onchange = () => {
-    const id = Number(cb.dataset.expw);
-    if (cb.checked) exportSelected.add(id); else exportSelected.delete(id);
-  });
   document.getElementById('next').onclick = () => jumpTo((trackIdx+1) % playlist.length);
   document.getElementById('prev').onclick = () => jumpTo((trackIdx-1+playlist.length) % playlist.length);
   const lrep = document.getElementById('lrep');
