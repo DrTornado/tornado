@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:14:32.709Z",
+ "exportedAt": "2026-07-26T09:14:37.985Z",
  "words": [
   {
    "id": 1784978307444,
@@ -1050,7 +1050,7 @@
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/physicist-us.mp3",
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784804340574,
@@ -1098,7 +1098,7 @@
    "interval": 0,
    "due": 0,
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/showmanship-us.mp3",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784804074316,
