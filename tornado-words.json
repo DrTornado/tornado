@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T07:20:34.043Z",
+ "exportedAt": "2026-07-26T07:20:56.438Z",
  "words": [
   {
    "id": 1785000460857,
@@ -401,7 +401,10 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "freqLabel": "Top 18,000 words",
+   "estCefr": "C1",
+   "engineVersion": 1
   },
   {
    "id": 1784899215964,
