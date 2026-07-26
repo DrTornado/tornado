@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:15:25.926Z",
+ "exportedAt": "2026-07-26T09:15:32.627Z",
  "words": [
   {
    "id": 1784978307444,
@@ -2023,11 +2023,11 @@
    "examples": [
     {
      "en": "the incompatibles of iron",
-     "ar": "غير المتوافقين مع الحديد"
+     "ar": ""
     },
     {
      "en": "My phone is incompatible with the latest version of this app.",
-     "ar": "هاتفي غير متوافق مع أحدث إصدار من هذا التطبيق."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -2038,7 +2038,7 @@
    "due": 0,
    "ipaUS": "/ˌɪŋkəmˈpætɪbəl/",
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/incompatible-us.mp3",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784752004146,
@@ -2099,7 +2099,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784751768137,
@@ -2182,7 +2182,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784751447873,
