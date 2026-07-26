@@ -24883,6 +24883,19 @@ const say = async (p, prefixEn) => {
   if (p.ar) { await speak(p.ar, 'ar-SA'); }
 };
 
+// دمج المقاطع المتتالية من نفس اللغة في نداء واحد — يقلّص عدد عمليات التوليد من ~١٨ إلى ٣-٤ لكل كلمة
+function mergeSegments(segs) {
+  const out = [];
+  segs.forEach(s => {
+    const last = out[out.length - 1];
+    if (last && last.lang === s.lang && (last.text.length + s.text.length) < 400) last.text += ' ' + s.text;
+    else out.push({ text: s.text, lang: s.lang });
+  });
+  return out;
+}
+const AUDIO_CACHE = new Map(); // ذاكرة صوت مؤقتة لكل كلمة — إعادة التشغيل تصير فورية بلا أي توليد
+function cacheKey(card) { return card.id + '|' + (detailedAudio?'d':'s') + '|' + wordRepeat + '|' + ENGINE_VERSION; }
+
 async function buildSegmentsAudio(segs, label) {
   // يبني ملف WAV واحداً متواصلاً من كل مقاطع البطاقة — يشغَّل دفعة واحدة بلا أي حاجة لجافاسكريبت أثناء التشغيل نفسه، فيستمر مع إطفاء الشاشة
   const pcmChunks = [];
@@ -24904,15 +24917,25 @@ async function buildSegmentsAudio(segs, label) {
   piperStatus(skipped ? `▶️ Playing real audio (${skipped} part${skipped>1?'s':''} skipped — voice unavailable)` : '▶️ Playing real audio');
   return buildWav(fmt, pcmChunks);
 }
+// يبني صوت بطاقة واحدة (مع تخزين مؤقت) — لا يشغّل شيئاً، فقط يعيد ملف WAV جاهزاً
+async function buildCardAudio(card) {
+  if (!piperEnabled) return null;
+  const key = cacheKey(card);
+  if (AUDIO_CACHE.has(key)) return AUDIO_CACHE.get(key); // مولَّد سابقاً؟ فوري تماماً بلا أي انتظار
+  const all = narrationSegments(card, wordRepeat, detailedAudio);
+  // العربية مستبعدة من الصوت بناءً على طلبك: النطق الناتج غير مقبول، والترجمة تبقى كاملة على الشاشة وفي التصدير النصي
+  const segs = mergeSegments(all.filter(s => String(s.lang || '').slice(0,2).toLowerCase() !== 'ar'));
+  if (!segs.length) return null;
+  const wav = await buildSegmentsAudio(segs, `"${card.word}"`);
+  if (wav) {
+    AUDIO_CACHE.set(key, wav);
+    if (AUDIO_CACHE.size > 40) AUDIO_CACHE.delete(AUDIO_CACHE.keys().next().value); // سقف معقول للذاكرة
+  }
+  return wav;
+}
 async function playCardGapless(card) {
   // المحاولة الأولى: صوت حقيقي متواصل بالكامل — الوحيد القادر فعلياً على الاستمرار مع إطفاء الشاشة
-  if (!piperEnabled) return false;
-  const all = narrationSegments(card, wordRepeat, detailedAudio);
-  // نستبعد المقاطع العربية من الصوت: محرك النطق مفتوح المصدر لا يملك بيانات عربية حقيقية،
-  // فينتج إما فشلاً أو نطقاً مشوَّهاً بأسماء الحروف. العربية تبقى كاملة في النص وفي التصدير النصي.
-  const segs = all; // العربية مشمولة الآن: المحوّل الخاص يوفّر رموزها الصوتية مباشرة للنموذج
-  if (!segs.length) return false;
-  const wav = await buildSegmentsAudio(segs, `"${card.word}"`);
+  const wav = await buildCardAudio(card);
   if (!wav || stopped) return false;
   const el = getPiperAudioEl('main');
   el.playbackRate = speed;
@@ -25009,20 +25032,49 @@ async function runPlayback(startAt) {
     trackIdx = startAt; renderAudio(); updateMediaSession(playlist[startAt].word);
     await playTrack(playlist[startAt]);
   } else {
-    // وضع القائمة الكاملة
-    let pass = 0;
-    let i = startAt;
-    while (!stopped) {
-      if (!playlist.length) break;
-      if (i >= playlist.length) {
-        pass++;
-        if (pass >= listRepeat) break;
-        i = 0;
+    // وضع القائمة الكاملة: نبني ملفاً صوتياً واحداً متواصلاً لكل الكلمات ثم نشغّله دفعة واحدة.
+    // هذا هو الحل الجذري للتشغيل بالخلفية: بمجرد بدء التشغيل لا يحتاج النظام لأي جافاسكريبت
+    // للانتقال بين الكلمات، فيستمر كاملاً حتى مع إطفاء الشاشة تماماً كمشغّل الموسيقى.
+    const chunks = [];
+    let fmt = null;
+    const words2 = playlist.slice(startAt).concat(playlist.slice(0, startAt));
+    for (let n = 0; n < words2.length && !stopped; n++) {
+      const idx = playlist.indexOf(words2[n]);
+      trackIdx = idx >= 0 ? idx : n; renderAudio();
+      piperStatus(`🎧 Building continuous audio — word ${n + 1} of ${words2.length}…`);
+      const wav = await buildCardAudio(words2[n]);
+      if (!wav) continue;
+      const parsed = parseWav(await wav.arrayBuffer());
+      if (!parsed) continue;
+      if (!fmt) fmt = parsed.fmt;
+      chunks.push(parsed.data, silenceBytes(fmt, 900));
+    }
+    if (stopped) { /* ألغى المستخدم أثناء البناء */ }
+    else if (fmt && chunks.length) {
+      const full = buildWav(fmt, chunks);
+      const el = getPiperAudioEl('main');
+      el.playbackRate = speed;
+      el.loop = (listRepeat === Infinity);
+      el.src = URL.createObjectURL(full);
+      updateMediaSession(playlist[trackIdx] ? playlist[trackIdx].word : 'Tornado');
+      piperStatus('▶️ Playing full playlist (continues with screen off)');
+      await new Promise(res => {
+        let done = false; const finish = () => { if (!done) { done = true; res(); } };
+        el.onended = finish; el.onerror = finish;
+        el.play().catch(finish);
+      });
+      el.loop = false;
+      URL.revokeObjectURL(el.src);
+    } else {
+      // تعذّر بناء الصوت الحقيقي كلياً — نرجع للتشغيل التقليدي كلمة بكلمة
+      let i = startAt;
+      while (!stopped && playlist.length) {
+        if (i >= playlist.length) break;
+        trackIdx = i; renderAudio(); updateMediaSession(playlist[i].word);
+        await playTrackSegmented(playlist[i]);
+        if (stopped) break;
+        i++;
       }
-      trackIdx = i; renderAudio(); updateMediaSession(playlist[i].word);
-      await playTrack(playlist[i]);
-      if (stopped) break;
-      i++;
     }
   }
   stopped = true; playing = false; releaseWakeLock(); renderAudio();
