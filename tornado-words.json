@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:12:55.742Z",
+ "exportedAt": "2026-07-26T09:13:06.132Z",
  "words": [
   {
    "id": 1785000460857,
@@ -1403,7 +1403,7 @@
    "examples": [
     {
      "en": "Take in sail: a storm is coming.",
-     "ar": ""
+     "ar": "خذ شراعًا: عاصفة قادمة."
     }
    ],
    "differences": [],
@@ -1412,7 +1412,7 @@
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/s/sai/sail_/sail__gb_2.mp3",
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
@@ -1472,15 +1472,15 @@
    "examples": [
     {
      "en": "poverty of soil",
-     "ar": ""
+     "ar": "فقر التربة"
     },
     {
      "en": "get into poverty",
-     "ar": ""
+     "ar": "الوقوع في براثن الفقر"
     },
     {
      "en": "get out of poverty",
-     "ar": ""
+     "ar": "للخروج من الفقر."
     }
    ],
    "differences": [],
@@ -1489,7 +1489,7 @@
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/p/pov/pover/poverty__gb_2.mp3",
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
