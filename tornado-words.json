@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:12:06.424Z",
+ "exportedAt": "2026-07-26T09:12:12.613Z",
  "words": [
   {
    "id": 1785000460857,
@@ -492,7 +492,7 @@
    "due": 0,
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/i/inf/influ/influential__us_1.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/i/inf/influ/influential__gb_1.mp3",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784899135706,
