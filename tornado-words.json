@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:23:49.957Z",
+ "exportedAt": "2026-07-26T09:26:21.034Z",
  "words": [
   {
    "id": 1785000460857,
@@ -6091,11 +6091,11 @@
    "examples": [
     {
      "en": "The four noble truths summarise the main doctrines of Buddhism.",
-     "ar": "تلخص الحقائق النبيلة الأربع المذاهب الرئيسية للبوذية."
+     "ar": ""
     },
     {
      "en": "What is the understanding of marriage and family in orthodox Marxist doctrine?",
-     "ar": "ما هو فهم الزواج والأسرة في العقيدة الماركسية الأرثوذكسية ؟"
+     "ar": ""
     }
    ],
    "differences": [],
@@ -6104,7 +6104,7 @@
    "ipaUS": "/ˈdɑktɹɪnz/",
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/d/doc/doctr/doctrine__us_1.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/d/doc/doctr/doctrine__gb_2.mp3",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
@@ -6174,7 +6174,7 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
