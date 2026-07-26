@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:14:41.261Z",
+ "exportedAt": "2026-07-26T09:14:56.938Z",
  "words": [
   {
    "id": 1784978307444,
@@ -1220,7 +1220,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "B2",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784803845911,
@@ -1279,7 +1279,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784803681860,
@@ -1297,7 +1297,7 @@
     {
      "pos": "noun",
      "en": "(biblical criticism) A conflate text, one which conflates multiple version of a text together.",
-     "ar": "(نقد كتابي) نص مختلط، نص يخلط بين نسخة متعددة من النص معًا."
+     "ar": "خلط, مركب, مخلوط (أثنان مخلوطان في واحد)"
     },
     {
      "pos": "verb",
@@ -1358,7 +1358,7 @@
    "examples": [
     {
      "en": "“Bacon was Lord Chancellor of England and the first European to experiment with gunpowder.” — “No, you are conflating Francis Bacon and Roger Bacon.”",
-     "ar": "\"كان بيكون مستشارًا لإنجلترا وأول أوروبي يجرب البارود. \"-\" لا، أنت تخلط بين فرانسيس بيكون وروجر بيكون. \""
+     "ar": ""
     }
    ],
    "differences": [],
@@ -1369,7 +1369,7 @@
    "due": 0,
    "ipaUS": "/kənˈfleɪt/",
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/conflate-us.mp3",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784758615136,
@@ -1420,7 +1420,7 @@
    "examples": [
     {
      "en": "The surgeon sent a specimen of the cyst to the pathology department for staining and analysis to determine its histologic subtype.",
-     "ar": "أرسل الجراح عينة من الكيس إلى قسم علم الأمراض لتلطيخه وتحليله لتحديد نوعه الفرعي النسيجي."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -1431,7 +1431,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784757229581,
