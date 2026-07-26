@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:15:35.962Z",
+ "exportedAt": "2026-07-26T09:15:46.439Z",
  "words": [
   {
    "id": 1784978307444,
@@ -2325,7 +2325,7 @@
    "ipaUS": "/ʌnˈdaʊtɪdli/",
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/u/und/undou/undoubtedly__us_1.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/u/und/undou/undoubtedly__gb_3.mp3",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784751235995,
@@ -2396,7 +2396,7 @@
    "ipaUS": "/pɹɑˈspɛɹ.ɪ.ti/",
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pro/prosp/prosperity__us_1.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/p/pro/prosp/prosperity__gb_1.mp3",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784751098241,
@@ -2477,7 +2477,7 @@
    "examples": [
     {
      "en": "If you have any dietary requirements, please inform the kitchen staff.",
-     "ar": "إذا كان لديك أي متطلبات غذائية، يرجى إبلاغ موظفي المطبخ."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -2486,7 +2486,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784750865167,
@@ -2548,7 +2548,7 @@
    "examples": [
     {
      "en": "Fragrance emanates from flowers.",
-     "ar": "العطر ينبع من الزهور."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -2557,7 +2557,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784750796136,
@@ -2652,7 +2652,7 @@
    "due": 0,
    "ipaUS": "/ˈdeɪnti/",
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/dainty-us.mp3",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784750284468,
