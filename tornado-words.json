@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:15:13.052Z",
+ "exportedAt": "2026-07-26T09:15:21.047Z",
  "words": [
   {
    "id": 1784978307444,
@@ -1613,7 +1613,7 @@
    "ipaUS": "/ˈæf.tɚ.wɚdz/",
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/a/aft/after/afterwards__us_2.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/a/aft/after/afterwards__gb_3.mp3",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784754761850,
@@ -1677,11 +1677,11 @@
    "examples": [
     {
      "en": "My trousers have a big rip in them and need mending.",
-     "ar": "سروالي ممزق بشكل كبير ويحتاج إلى إصلاح."
+     "ar": ""
     },
     {
      "en": "Her stutter was mended by a speech therapist.",
-     "ar": "تم إصلاح تلعثمها من قبل معالج النطق."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -1692,7 +1692,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "B2",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784753652740,
@@ -1754,11 +1754,11 @@
    "examples": [
     {
      "en": "His meditation induced a compromise.   Opium induces sleep.",
-     "ar": "أدى تأمله إلى حل وسط.   الأفيون يحفز النوم."
+     "ar": ""
     },
     {
      "en": "His meditation induced a compromise.&nbsp;&nbsp; Opium induces sleep.",
-     "ar": "أدى تأمله إلى حل وسط.   الأفيون يحفز النوم."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -1770,7 +1770,7 @@
    "ipaUS": "/ɪnˈduːs/",
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/i/ind/induc/induce__us_1.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/i/ind/induc/induce__gb_1.mp3",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784753085143,
