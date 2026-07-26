@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:26:26.185Z",
+ "exportedAt": "2026-07-26T09:28:11.924Z",
  "words": [
   {
    "id": 1785000460857,
@@ -6414,11 +6414,11 @@
    "examples": [
     {
      "en": "He knows about many things, but even he is not infallible.",
-     "ar": "إنه يعرف أشياء كثيرة، ولكن حتى هو ليس معصومًا من الخطأ."
+     "ar": ""
     },
     {
      "en": "Try this infallible cure for hiccups.",
-     "ar": "جرب هذا العلاج المعصوم للفواق."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -6427,7 +6427,7 @@
    "ipaUS": "/ɪnˈfæ.lə.bəl/",
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/infallible-us.mp3",
    "audioGen": "https://api.dictionaryapi.dev/media/pronunciations/en/infallible-au.mp3",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
@@ -6485,13 +6485,13 @@
    "examples": [
     {
      "en": "We're at a crucial juncture in our relationship.",
-     "ar": "نحن في منعطف حاسم في علاقتنا."
+     "ar": ""
     }
    ],
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
