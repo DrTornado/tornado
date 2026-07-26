@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:23:45.407Z",
+ "exportedAt": "2026-07-26T09:23:49.957Z",
  "words": [
   {
    "id": 1785000460857,
@@ -6029,11 +6029,11 @@
    "examples": [
     {
      "en": "Daffodils herald the Spring.",
-     "ar": "النرجس يبشر بالربيع."
+     "ar": ""
     },
     {
      "en": "The film was heralded by critics.",
-     "ar": "وقد بشر النقاد بالفيلم."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -6041,7 +6041,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
