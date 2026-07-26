@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:29:06.378Z",
+ "exportedAt": "2026-07-26T09:29:16.684Z",
  "words": [
   {
    "id": 1785000460857,
@@ -7268,7 +7268,7 @@
    "differences": [],
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/scu/sculp/sculpture__us_2.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/s/scu/sculp/sculpture__gb_1.mp3",
-   "engineVersion": 1,
+   "engineVersion": 2,
    "interval": 0,
    "due": 0
   },
@@ -7327,7 +7327,7 @@
    ],
    "examples": [],
    "differences": [],
-   "engineVersion": 1,
+   "engineVersion": 2,
    "interval": 0,
    "due": 0
   },
@@ -7390,13 +7390,13 @@
    "examples": [
     {
      "en": "He easily shot the unsuspecting target.",
-     "ar": "أطلق النار بسهولة على الهدف المطمئن."
+     "ar": ""
     }
    ],
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
