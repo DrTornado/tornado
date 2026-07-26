@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:10:24.768Z",
+ "exportedAt": "2026-07-26T09:11:54.874Z",
  "words": [
   {
    "id": 1785000460857,
@@ -18,7 +18,7 @@
     {
      "pos": "noun",
      "en": "Lack of courage",
-     "ar": "<g id=\"1\">عدم التحلي بالشجاعة.</g>"
+     "ar": "عدم التحلي بالشجاعة."
     },
     {
      "pos": "verb",
@@ -76,7 +76,7 @@
    "ipaUS": "/dɪsˈkɝɪd͡ʒ/",
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/d/dis/disco/discourage__us_1.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/d/dis/disco/discourage__gb_3.mp3",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784999975523,
