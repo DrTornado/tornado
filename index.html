@@ -24826,11 +24826,21 @@ async function piperGenerate(text, lang) {
   return null;
 }
 const SILENT_WAV = 'data:audio/wav;base64,UklGRiYAAABXQVZFZm10IBAAAAABAAEAIlYAAESsAAACABAAZGF0YQIAAAAAAA==';
+let unlockEl = null;
 function unlockPiperAudio() {
-  // نشغّل مقطعاً صامتاً متزامناً فور الضغطة مباشرة — يُبقي عنصري الصوت "مصرَّح لهما" بنظر المتصفح حتى بعد تأخر التوليد الفعلي لاحقاً (تحميل النموذج قد يأخذ ثوانٍ أو دقائق)
-  [getPiperAudioEl('main'), getPiperAudioEl('pron')].forEach(el => {
-    try { el.src = SILENT_WAV; el.play().catch(() => {}); } catch(e) {}
-  });
+  // نشغّل مقطعاً صامتاً على عنصر مخصَّص منفصل تماماً — لمس عنصر التشغيل الحقيقي كان يقاطع
+  // تحميله لاحقاً ويسبب خطأ إحباط يُلغي الصوت كلياً. سياسة التشغيل التلقائي تُفتح للأصل كله لا لعنصر بعينه.
+  try {
+    if (!unlockEl) {
+      unlockEl = document.createElement('audio');
+      unlockEl.setAttribute('playsinline', 'true');
+      unlockEl.style.display = 'none';
+      document.body.appendChild(unlockEl);
+      unlockEl.src = SILENT_WAV;
+    }
+    unlockEl.currentTime = 0;
+    unlockEl.play().catch(() => {});
+  } catch(e) {}
 }
 async function piperSpeak(text, lang, channel) {
   const wav = await piperGenerate(text, lang);
@@ -24960,15 +24970,25 @@ async function playCardGapless(card) {
   if (!wav || stopped) return false;
   const el = getPiperAudioEl('main');
   el.playbackRate = speed;
-  el.src = URL.createObjectURL(wav);
+  const url = URL.createObjectURL(wav);
+  el.src = url;
   bindMediaSession(el, card.word);
-  let ok = true;
+  let ok = true, started = false;
   await new Promise(res => {
     let done = false; const finish = () => { if (!done) { done = true; res(); } };
-    el.onended = finish; el.onerror = finish;
-    el.play().catch(e => { ok = false; console.log('[Piper] gapless playback blocked: ' + (e && e.message)); finish(); });
+    el.onended = () => { piperStatus('✅ Finished playing'); finish(); };
+    el.onerror = () => { piperStatus('⚠️ Audio element error — file could not be played'); ok = false; finish(); };
+    el.onplaying = () => { started = true; piperStatus(`🔊 Playing "${card.word}" (${Math.round((wav.size||0)/1024)} KB)`); };
+    el.play().then(() => {
+      // نتحقق بعد لحظة أن التشغيل بدأ فعلياً — قد ينجح الوعد بلا صوت في بعض الحالات
+      setTimeout(() => { if (!started && el.paused) { piperStatus('⚠️ Audio did not start — tap Play again'); ok = false; finish(); } }, 1500);
+    }).catch(e => {
+      ok = false;
+      piperStatus('⚠️ Playback blocked: ' + (e && e.message ? e.message : 'unknown'));
+      finish();
+    });
   });
-  URL.revokeObjectURL(el.src);
+  URL.revokeObjectURL(url);
   return ok;
 }
 async function playTrack(card) {
@@ -25149,6 +25169,8 @@ function startAudio(at) {
 function stopAudio() {
   stopped = true; playing = false;
   releaseWakeLock();
+  // إيقاف عنصر الصوت الحقيقي فعلياً — كان الإيقاف يعالج النطق الآلي فقط ويترك الصوت الحقيقي يعمل
+  [piperAudioEl, piperPronEl].forEach(el => { try { if (el) { el.pause(); } } catch(e) {} });
   if (ttsReady) window.speechSynthesis.cancel();
   if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
   if (tab === 'audio') renderAudio();
