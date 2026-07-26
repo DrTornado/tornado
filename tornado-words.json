@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:15:32.627Z",
+ "exportedAt": "2026-07-26T09:15:35.962Z",
  "words": [
   {
    "id": 1784978307444,
@@ -2250,15 +2250,15 @@
    "examples": [
     {
      "en": "An abridged dictionary can be further condensed to pocket size.",
-     "ar": "يمكن تكثيف القاموس المختصر إلى حجم الجيب."
+     "ar": ""
     },
     {
      "en": "Boiling off water condenses a thin sauce into a soupier mixture.",
-     "ar": "يؤدي غلي الماء إلى تكثيف الصلصة الرقيقة إلى خليط من الحساء."
+     "ar": ""
     },
     {
      "en": "Water condenses on the window on cold days because of the warm air inside.",
-     "ar": "يتكثف الماء على النافذة في الأيام الباردة بسبب الهواء الدافئ في الداخل."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -2269,7 +2269,7 @@
    "due": 0,
    "ipaUS": "/kənˈdɛns/",
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/condense-us.mp3",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784751340235,
