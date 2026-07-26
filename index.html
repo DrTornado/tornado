@@ -24961,7 +24961,7 @@ async function playCardGapless(card) {
   const el = getPiperAudioEl('main');
   el.playbackRate = speed;
   el.src = URL.createObjectURL(wav);
-  updateMediaSession(card.word);
+  bindMediaSession(el, card.word);
   let ok = true;
   await new Promise(res => {
     let done = false; const finish = () => { if (!done) { done = true; res(); } };
@@ -25077,7 +25077,7 @@ async function runPlayback(startAt) {
       el.playbackRate = speed;
       el.loop = (listRepeat === Infinity);
       el.src = URL.createObjectURL(full);
-      updateMediaSession(playlist[trackIdx] ? playlist[trackIdx].word : 'Tornado');
+      bindMediaSession(el, playlist[trackIdx] ? playlist[trackIdx].word : 'Tornado');
       piperStatus('▶️ Playing full playlist (continues with screen off)');
       await new Promise(res => {
         let done = false; const finish = () => { if (!done) { done = true; res(); } };
@@ -25104,15 +25104,39 @@ async function runPlayback(startAt) {
 function updateMediaSession(word) {
   if (!('mediaSession' in navigator)) return;
   try {
+    // الأيقونة ضرورية: بدونها لا يعرض أندرويد إشعار تشغيل حقيقياً، وبدون الإشعار لا يُمنح الصوت امتياز الخلفية
     navigator.mediaSession.metadata = new MediaMetadata({
-      title: word, artist: 'Tornado', album: playScope === 'single' ? 'Single word' : (playlistFilter === 'all' ? 'All words' : NAMES[playlistFilter] + ' list'),
+      title: word || 'Tornado',
+      artist: 'Tornado — English vocabulary',
+      album: playScope === 'single' ? 'Single word' : (playlistFilter === 'all' ? 'All words' : NAMES[playlistFilter] + ' list'),
+      artwork: [
+        { src: './icon-192.png', sizes: '192x192', type: 'image/png' },
+        { src: './icon-512.png', sizes: '512x512', type: 'image/png' },
+      ],
     });
-    navigator.mediaSession.playbackState = playing ? 'playing' : 'paused';
-    navigator.mediaSession.setActionHandler('play', () => startAudio(trackIdx));
-    navigator.mediaSession.setActionHandler('pause', stopAudio);
-    navigator.mediaSession.setActionHandler('previoustrack', () => jumpTo((trackIdx - 1 + playlist.length) % playlist.length));
-    navigator.mediaSession.setActionHandler('nexttrack', () => jumpTo((trackIdx + 1) % playlist.length));
   } catch(e) {}
+}
+// يربط مشغّل النظام مباشرة بعنصر الصوت الجاري — أزرار شاشة القفل تتحكم بالصوت نفسه
+// لا تعيد بناء أي شيء، وحالة التشغيل تُشتق من أحداث العنصر الحقيقية لا من متغيرات داخلية.
+function bindMediaSession(el, title) {
+  updateMediaSession(title);
+  if (!('mediaSession' in navigator)) return;
+  const ms = navigator.mediaSession;
+  const setState = () => { try { ms.playbackState = el.paused ? 'paused' : 'playing'; } catch(e) {} };
+  el.onplay = setState;
+  el.onpause = setState;
+  el.onplaying = setState;
+  try {
+    ms.setActionHandler('play', () => { el.play().catch(()=>{}); });
+    ms.setActionHandler('pause', () => { el.pause(); });
+    ms.setActionHandler('stop', () => { el.pause(); stopAudio(); });
+    ms.setActionHandler('seekbackward', d => { el.currentTime = Math.max(0, el.currentTime - ((d && d.seekOffset) || 10)); });
+    ms.setActionHandler('seekforward', d => { el.currentTime = Math.min(el.duration || 1e9, el.currentTime + ((d && d.seekOffset) || 10)); });
+    ms.setActionHandler('seekto', d => { if (d && d.seekTime != null) el.currentTime = d.seekTime; });
+    ms.setActionHandler('previoustrack', () => { el.currentTime = Math.max(0, el.currentTime - 30); });
+    ms.setActionHandler('nexttrack', () => { el.currentTime = Math.min(el.duration || 1e9, el.currentTime + 30); });
+  } catch(e) {}
+  setState();
 }
 function startAudio(at) {
   if (!playlist.length) { flash('No words in this playlist'); return; }
