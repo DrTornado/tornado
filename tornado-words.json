@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:18:08.743Z",
+ "exportedAt": "2026-07-26T09:18:16.244Z",
  "words": [
   {
    "id": 1784978307444,
@@ -7507,7 +7507,7 @@
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/tornado-us.mp3",
    "freqLabel": "Top 18,000 words",
    "estCefr": "B2",
-   "engineVersion": 1,
+   "engineVersion": 2,
    "interval": 0,
    "due": 0
   },
@@ -7571,7 +7571,7 @@
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/scenery-us.mp3",
    "freqLabel": "Top 18,000 words",
    "estCefr": "B2",
-   "engineVersion": 1,
+   "engineVersion": 2,
    "interval": 0,
    "due": 0
   },
@@ -7649,11 +7649,11 @@
    "examples": [
     {
      "en": "Jane was very influential in getting the motion passed.",
-     "ar": "كان لجين تأثير كبير في تمرير الاقتراح."
+     "ar": ""
     },
     {
      "en": "John Lennon was a very influential person in music, as well as in politics, fashion and general culture.",
-     "ar": "كان جون لينون شخصًا مؤثرًا جدًا في الموسيقى، وكذلك في السياسة والأزياء والثقافة العامة."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -7661,7 +7661,7 @@
    "due": 0,
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/i/inf/influ/influential__us_1.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/i/inf/influ/influential__gb_1.mp3",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
