@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:31:06.357Z",
+ "exportedAt": "2026-07-26T09:31:17.512Z",
  "words": [
   {
    "id": 1785000460857,
@@ -8208,22 +8208,22 @@
    "collocations": [
     {
      "en": "homo sapiens",
-     "ar": "الإِنْسانُ العاقِل"
+     "ar": ""
     },
     {
      "en": "archaic sapiens",
-     "ar": "حكميون عتيقون"
+     "ar": ""
     },
     {
      "en": "species sapiens",
-     "ar": "الأنواع العاقله"
+     "ar": ""
     }
    ],
    "examples": [],
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
@@ -8255,7 +8255,7 @@
    "examples": [
     {
      "en": "They warned that the effects of glacier melting on water resources are becoming “increasingly serious” for China.",
-     "ar": "وحذروا من أن آثار ذوبان الأنهار الجليدية على الموارد المائية أصبحت \"خطيرة بشكل متزايد\" بالنسبة للصين."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -8263,7 +8263,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 1
+   "engineVersion": 2
   }
  ],
  "tombstones": [
