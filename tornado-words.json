@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:12:46.285Z",
+ "exportedAt": "2026-07-26T09:12:52.466Z",
  "words": [
   {
    "id": 1785000460857,
@@ -1078,7 +1078,7 @@
     {
      "pos": "noun",
      "en": "A message sent quickly, as a shipment, a prompt settlement of a business, or an important official message sent by a diplomat, or military officer.",
-     "ar": "يرسل"
+     "ar": "رسالة يتم إرسالها بسرعة، كشحنة، أو تسوية فورية لنشاط تجاري، أو رسالة رسمية مهمة يرسلها دبلوماسي أو ضابط عسكري."
     },
     {
      "pos": "noun",
@@ -1139,7 +1139,7 @@
    "examples": [
     {
      "en": "We must act with dispatch in this matter.",
-     "ar": ""
+     "ar": "يجب أن نتصرف بسرعة في هذه المسألة."
     }
    ],
    "differences": [],
@@ -1152,7 +1152,7 @@
    "interval": 0,
    "due": 0,
    "estCefr": "B2",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
@@ -1251,15 +1251,15 @@
    "examples": [
     {
      "en": "The campfire blazed merrily.",
-     "ar": ""
+     "ar": "اشتعلت نار المخيم بمرح."
     },
     {
      "en": "the blazings of many fires",
-     "ar": ""
+     "ar": "اشتعال العديد من الحرائق"
     },
     {
      "en": "The actress, with her perfectly-curved body, was simply blazing in her new movie!",
-     "ar": ""
+     "ar": "كانت الممثلة، بجسدها المنحني تمامًا، تشتعل ببساطة في فيلمها الجديد!"
     }
    ],
    "differences": [],
@@ -1268,7 +1268,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
