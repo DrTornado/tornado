@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:18:37.900Z",
+ "exportedAt": "2026-07-26T09:18:54.362Z",
  "words": [
   {
    "id": 1784978307444,
@@ -8080,13 +8080,13 @@
    "examples": [
     {
      "en": "I dropped a small stone into the pond and watched the ripples spread.",
-     "ar": "أسقطت حجرًا صغيرًا في البركة وشاهدت انتشار التموجات."
+     "ar": ""
     }
    ],
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
@@ -8177,7 +8177,7 @@
    "examples": [
     {
      "en": "Seaweed clung to the anchor.",
-     "ar": "تشبثت الأعشاب البحرية بالمرساة."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -8185,7 +8185,7 @@
    "due": 0,
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cli/cling/cling__us_1.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/cli/cling/cling__gb_1.mp3",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
@@ -8263,7 +8263,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 1
+   "engineVersion": 2
   }
  ],
  "tombstones": [
