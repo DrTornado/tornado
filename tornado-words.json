@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:28:32.838Z",
+ "exportedAt": "2026-07-26T09:28:47.035Z",
  "words": [
   {
    "id": 1785000460857,
@@ -6815,17 +6815,17 @@
    "examples": [
     {
      "en": "With gentle combing, untangle your hair.",
-     "ar": "مع تمشيط لطيف، فك شعرك."
+     "ar": ""
     },
     {
      "en": "It took a while, but he finally untangled the problem.",
-     "ar": "استغرق الأمر بعض الوقت، لكنه حل المشكلة أخيرًا."
+     "ar": ""
     }
    ],
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
