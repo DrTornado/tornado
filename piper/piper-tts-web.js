@@ -386,7 +386,7 @@ setupWasmPaths_fn = async function(fallbackStrategy) {
     }
     if (strategy === "cdn") {
       // نوجّه المحرك لملفات WASM المستضافة محلياً في مجلد piper — لا جلب من أي خادم خارجي
-      __privateGet(this, _ort).env.wasm.wasmPaths = "./"; // مسار نسبي للوحدة نفسها (الوحدة داخل مجلد piper أصلاً) — "./piper/" كانت تنتج piper/piper/ المكرر الخاطئ
+      __privateGet(this, _ort).env.wasm.wasmPaths = new URL("./piper/", document.baseURI).href; // مسار مطلق كامل: المسارات النسبية تُفسَّر بطريقتين مختلفتين (الاستيراد نسبةً للوحدة، والجلب نسبةً للصفحة) فيفشل أحدهما دائماً
       __privateGet(this, _ort).env.wasm.numThreads = 1; // GitHub Pages لا يوفّر ترويسات العزل المطلوبة للخيوط المتعددة — خيط واحد هو الوضع الصحيح والمستقر هنا
       (_b = __privateGet(this, _logger)) == null ? void 0 : _b.call(this, "Using local WASM paths (./piper/)");
       return;
