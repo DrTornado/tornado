@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:11:54.874Z",
+ "exportedAt": "2026-07-26T09:12:06.424Z",
  "words": [
   {
    "id": 1785000460857,
@@ -144,7 +144,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784991936913,
@@ -227,7 +227,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784991696190,
@@ -326,7 +326,7 @@
    "due": 0,
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cli/cling/cling__us_1.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/cli/cling/cling__gb_1.mp3",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784991631873,
@@ -404,7 +404,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784899215964,
