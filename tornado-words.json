@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:13:53.821Z",
+ "exportedAt": "2026-07-26T09:14:17.818Z",
  "words": [
   {
    "id": 1784978307444,
@@ -706,7 +706,7 @@
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/lettuce-us.mp3",
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784805733158,
