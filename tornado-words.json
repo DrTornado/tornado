@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:28:47.035Z",
+ "exportedAt": "2026-07-26T09:28:53.722Z",
  "words": [
   {
    "id": 1785000460857,
@@ -6882,11 +6882,11 @@
    "examples": [
     {
      "en": "a furious animal; parent furious at their child's behaviour",
-     "ar": "حيوان غاضب ؛ والداه غاضبان من سلوك طفلهما"
+     "ar": ""
     },
     {
      "en": "a furious stream; a furious wind or storm",
-     "ar": "تيار غاضب ؛ رياح أو عاصفة غاضبة"
+     "ar": ""
     }
    ],
    "differences": [],
@@ -6895,7 +6895,7 @@
    "ipaUS": "/ˈfjɝ.i.əs/",
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/f/fur/furio/furious__us_1.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/f/fur/furio/furious__gb_1.mp3",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
@@ -6958,14 +6958,14 @@
    "examples": [
     {
      "en": "The articulation allowed the robot to move around corners.",
-     "ar": "سمح النطق للروبوت بالتحرك حول الزوايا."
+     "ar": ""
     }
    ],
    "differences": [],
    "ipaUS": "/ɑɹˌtɪk.jəˈleɪ.ʃən/",
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/articulation-us.mp3",
    "audioGen": "https://api.dictionaryapi.dev/media/pronunciations/en/articulation-au.mp3",
-   "engineVersion": 1,
+   "engineVersion": 2,
    "interval": 0,
    "due": 0
   },
@@ -7031,7 +7031,7 @@
    "differences": [],
    "ipaUK": "/ˈljuːbɹɪkənt/",
    "audioUK": "https://api.dictionaryapi.dev/media/pronunciations/en/lubricant-uk.mp3",
-   "engineVersion": 1,
+   "engineVersion": 2,
    "interval": 0,
    "due": 0
   },
