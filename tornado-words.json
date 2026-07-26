@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:30:09.556Z",
+ "exportedAt": "2026-07-26T09:30:17.260Z",
  "words": [
   {
    "id": 1785000460857,
@@ -7870,21 +7870,21 @@
    "examples": [
     {
      "en": "Finding the dry cave was a boon to the weary travellers.",
-     "ar": "كان العثور على الكهف الجاف نعمة للمسافرين المرهقين."
+     "ar": ""
     },
     {
      "en": "Anaesthetics are a great boon to modern surgery.",
-     "ar": "التخدير هو نعمة كبيرة للجراحة الحديثة."
+     "ar": ""
     },
     {
      "en": "boon voyage",
-     "ar": "بون فويدج"
+     "ar": ""
     }
    ],
    "differences": [],
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 1,
+   "engineVersion": 2,
    "interval": 0,
    "due": 0
   },
