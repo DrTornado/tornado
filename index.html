@@ -24808,21 +24808,22 @@ const say = async (p, prefixEn) => {
 async function buildSegmentsAudio(segs, label) {
   // يبني ملف WAV واحداً متواصلاً من كل مقاطع البطاقة — يشغَّل دفعة واحدة بلا أي حاجة لجافاسكريبت أثناء التشغيل نفسه، فيستمر مع إطفاء الشاشة
   const pcmChunks = [];
-  let fmt = null;
+  let fmt = null, okCount = 0, skipped = 0;
   for (let i = 0; i < segs.length; i++) {
     const seg = segs[i];
     if (stopped) return null;
     piperStatus(`🎧 Preparing ${label || 'audio'} — part ${i + 1} of ${segs.length}… (first run downloads voices, please wait)`);
     const wav = await piperGenerate(seg.text, seg.lang);
-    if (!wav) return null; // أي مقطع يفشل يلغي كامل البناء المجمَّع فوراً — نسقط للطريقة القديمة بدل ملف ناقص
+    if (!wav) { skipped++; continue; } // مقطع تعذّر توليده (لغة غير متاحة مثلاً)؟ نتخطاه بصمت ونكمل — لا نلغي الصوت كله ولا نلجأ لنطق آلي مشوَّه
     const parsed = parseWav(await wav.arrayBuffer());
-    if (!parsed) return null;
+    if (!parsed) { skipped++; continue; }
     if (!fmt) fmt = parsed.fmt;
     pcmChunks.push(parsed.data);
     pcmChunks.push(silenceBytes(fmt, 280));
+    okCount++;
   }
-  if (!fmt || !pcmChunks.length) return null;
-  piperStatus('▶️ Playing real audio');
+  if (!fmt || !okCount) return null; // لم ينجح ولا مقطع واحد — عندها فقط نعتبرها فشلاً كاملاً
+  piperStatus(skipped ? `▶️ Playing real audio (${skipped} part${skipped>1?'s':''} skipped — voice unavailable)` : '▶️ Playing real audio');
   return buildWav(fmt, pcmChunks);
 }
 async function playCardGapless(card) {
