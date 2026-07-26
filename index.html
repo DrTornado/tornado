@@ -24773,11 +24773,13 @@ async function piperSpeak(text, lang, channel) {
 
 async function speak(text, lang) {
   if (!text) return;
+  const langPrefix0 = String(lang || '').slice(0,2).toLowerCase();
+  if (langPrefix0 === 'ar') return; // العربية مستبعدة من الصوت كلياً: محرك النطق لا يملك بيانات عربية حقيقية، والنطق الآلي يقرأها بأسماء الحروف
   if (piperEnabled && PIPER_VOICES[lang] && stopped !== true) {
     try { if (await piperSpeak(text, lang)) return; } catch(e) {}
   }
   if (!ttsReady) return;
-  const langPrefix = String(lang || '').slice(0,2).toLowerCase();
+  const langPrefix = langPrefix0;
   if (langPrefix === 'ar') {
     console.log('[TTS] Arabic requested but real voice unavailable — skipping (system TTS is never used for Arabic)');
     return; // قاعدة قاطعة: لا نستخدم صوت النظام للعربية إطلاقاً — ينتج تشويهاً ("أرابيك عين") على أغلب الأجهزة
@@ -24829,7 +24831,11 @@ async function buildSegmentsAudio(segs, label) {
 async function playCardGapless(card) {
   // المحاولة الأولى: صوت حقيقي متواصل بالكامل — الوحيد القادر فعلياً على الاستمرار مع إطفاء الشاشة
   if (!piperEnabled) return false;
-  const segs = narrationSegments(card, wordRepeat, detailedAudio);
+  const all = narrationSegments(card, wordRepeat, detailedAudio);
+  // نستبعد المقاطع العربية من الصوت: محرك النطق مفتوح المصدر لا يملك بيانات عربية حقيقية،
+  // فينتج إما فشلاً أو نطقاً مشوَّهاً بأسماء الحروف. العربية تبقى كاملة في النص وفي التصدير النصي.
+  const segs = all.filter(s => String(s.lang || '').slice(0,2).toLowerCase() !== 'ar');
+  if (!segs.length) return false;
   const wav = await buildSegmentsAudio(segs, `"${card.word}"`);
   if (!wav || stopped) return false;
   const el = getPiperAudioEl('main');
