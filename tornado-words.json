@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:18:16.244Z",
+ "exportedAt": "2026-07-26T09:18:37.900Z",
  "words": [
   {
    "id": 1784978307444,
@@ -7741,7 +7741,7 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
@@ -7844,15 +7844,15 @@
    "examples": [
     {
      "en": "A stratum of clay underlies the surface gravel.",
-     "ar": "توجد طبقة من الطين تحت الحصى السطحي."
+     "ar": ""
     },
     {
      "en": "We dug down to the underlying rock.",
-     "ar": "وحفرنا وصولاً إلى الصخرة الكامنة."
+     "ar": ""
     },
     {
      "en": "Points and straight lines are underlying elements of geometry.",
-     "ar": "النقاط والخطوط المستقيمة هي العناصر الأساسية للهندسة."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -7860,7 +7860,7 @@
    "due": 0,
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/u/und/under/underlying__us_1.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/u/und/under/underlying__gb_3.mp3",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
@@ -7926,7 +7926,7 @@
    "examples": [
     {
      "en": "Don't be discouraged by the amount of work left to do: you'll finish it in good time.",
-     "ar": "لا تشعر بالإحباط من مقدار العمل المتبقي للقيام به: ستنتهي منه في الوقت المناسب."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -7935,7 +7935,7 @@
    "ipaUS": "/dɪsˈkɝɪd͡ʒ/",
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/d/dis/disco/discourage__us_1.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/d/dis/disco/discourage__gb_3.mp3",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
@@ -8003,7 +8003,7 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
