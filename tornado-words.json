@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:29:30.726Z",
+ "exportedAt": "2026-07-26T09:29:57.064Z",
  "words": [
   {
    "id": 1785000460857,
@@ -7686,7 +7686,7 @@
    "collocations": [],
    "examples": [],
    "differences": [],
-   "engineVersion": 1,
+   "engineVersion": 2,
    "interval": 0,
    "due": 0
   },
