@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:28:17.943Z",
+ "exportedAt": "2026-07-26T09:28:32.838Z",
  "words": [
   {
    "id": 1785000460857,
@@ -6610,7 +6610,7 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
@@ -6664,7 +6664,7 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
@@ -6734,11 +6734,11 @@
    "examples": [
     {
      "en": "You can string these beads on to this cord to make a colorful necklace.",
-     "ar": "يمكنك ربط هذه الخرزات على هذا الحبل لصنع قلادة ملونة."
+     "ar": ""
     },
     {
      "en": "It is difficult to string a tennis racket properly.",
-     "ar": "من الصعب ربط مضرب التنس بشكل صحيح."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -6748,7 +6748,7 @@
    "audioUK": "https://api.dictionaryapi.dev/media/pronunciations/en/strung-uk.mp3",
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
