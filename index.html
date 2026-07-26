@@ -24755,8 +24755,18 @@ async function loadPiper() {
   return piperLoadPromise;
 }
 function getPiperAudioEl(channel) {
-  if (channel === 'pron') { if (!piperPronEl) { piperPronEl = new Audio(); piperPronEl.setAttribute('playsinline', 'true'); } return piperPronEl; }
-  if (!piperAudioEl) { piperAudioEl = new Audio(); piperAudioEl.setAttribute('playsinline', 'true'); }
+  // حاسم: العنصر يجب أن يكون داخل المستند فعلياً — كروم أندرويد لا يمنح العناصر المنفصلة
+  // امتيازات تشغيل الوسائط بالخلفية ولا تكامل مشغّل النظام، فيتوقف الصوت فور إطفاء الشاشة.
+  const mkAudio = () => {
+    const a = document.createElement('audio');
+    a.setAttribute('playsinline', 'true');
+    a.preload = 'auto';
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    return a;
+  };
+  if (channel === 'pron') { if (!piperPronEl) piperPronEl = mkAudio(); return piperPronEl; }
+  if (!piperAudioEl) piperAudioEl = mkAudio();
   return piperAudioEl;
 }
 let piperVoiceReady = new Set(); // أصوات أُكِّد نجاح تحميلها سابقاً — مكالماتها التالية تحصل مهلة قصيرة فقط (استدلال محض، لا تحميل)
