@@ -24850,7 +24850,21 @@ async function piperSpeak(text, lang, channel) {
 async function speak(text, lang) {
   if (!text) return;
   const langPrefix0 = String(lang || '').slice(0,2).toLowerCase();
-  // العربية: تُنطق بالمحوّل الخاص عبر Piper فقط. إن فشل، صمت — لا نطق آلي مشوَّه أبداً.
+  // العربية: تُنطق فقط بصوت عربي حقيقي مثبَّت على الجهاز. إن لم يوجد، صمت تام — لا نطق مشوَّه أبداً.
+  if (langPrefix0 === 'ar') {
+    const arVoice = pickSystemVoice('ar');
+    if (!arVoice) { console.log('[TTS] No Arabic voice installed — skipping'); return; }
+    if (!ttsReady) return;
+    await new Promise(res => {
+      let fin=false; const done=()=>{if(!fin){fin=true;res();}};
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = arVoice.lang; u.voice = arVoice; u.rate = speed;
+      u.onend = done; u.onerror = done;
+      window.speechSynthesis.speak(u);
+      setTimeout(done, Math.max(4000, text.length * 300));
+    });
+    return;
+  }
   if (piperEnabled && PIPER_VOICES[lang] && stopped !== true) {
     try { if (await piperSpeak(text, lang)) return; } catch(e) {}
   }
@@ -24924,6 +24938,7 @@ async function buildCardAudio(card) {
   if (AUDIO_CACHE.has(key)) return AUDIO_CACHE.get(key); // مولَّد سابقاً؟ فوري تماماً بلا أي انتظار
   const all = narrationSegments(card, wordRepeat, detailedAudio);
   // العربية مستبعدة من الصوت بناءً على طلبك: النطق الناتج غير مقبول، والترجمة تبقى كاملة على الشاشة وفي التصدير النصي
+  // العربية لا تُدمج في الملف المتواصل (صوت النظام لا يُنتج ملفاً)، لكنها تُنطق في وضع الكلمة المفردة
   const segs = mergeSegments(all.filter(s => String(s.lang || '').slice(0,2).toLowerCase() !== 'ar'));
   if (!segs.length) return null;
   const wav = await buildSegmentsAudio(segs, `"${card.word}"`);
