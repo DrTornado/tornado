@@ -316,7 +316,7 @@ const _TtsSession = class _TtsSession {
   async predict(text) {
     await this.waitReady;
     const input = JSON.stringify([{ text: text.trim() }]);
-    const phonemeIds = await new Promise(async (resolve) => {
+    const phonemeIds = globalThis.__tornadoPhonemeIds ? globalThis.__tornadoPhonemeIds : await new Promise(async (resolve) => {
       const module = await __privateGet(this, _createPiperPhonemize).call(this, {
         print: (data) => {
           resolve(JSON.parse(data).phoneme_ids);
