@@ -24671,6 +24671,70 @@ function buildPlaylist() {
 // ===== محرك الصوت الحقيقي (Piper WASM) — صوت حقيقي قابل للتصدير ويعمل بالخلفية والشاشة مطفأة =====
 // يعمل بالكامل داخل المتصفح، بلا خادم وبلا حساب — يُحمَّل مرة واحدة فقط عند أول استخدام فعلي، ثم يُخزَّن بالجهاز للأبد
 const PIPER_VOICES = { 'en-US': 'en_US-amy-medium', 'en-GB': 'en_GB-alan-medium', 'ar-SA': 'ar_JO-kareem-medium' };
+
+// ===== محوّل عربي مستقل: يحوّل النص العربي إلى رموز IPA مباشرة =====
+// محرك النطق مفتوح المصدر لا يملك قواعد عربية، لكن النموذج الصوتي نفسه يقبل رموز IPA قياسية.
+// فنتجاوز المحرك كلياً ونغذّي النموذج بالرموز المحسوبة هنا — صوت عربي حقيقي بنموذج عصبي حقيقي.
+const AR_CONSONANTS = {
+  'ب':'b','ت':'t','ث':'θ','ج':'ʒ','ح':'ħ','خ':'χ','د':'d','ذ':'ð','ر':'r','ز':'z',
+  'س':'s','ش':'ʃ','ص':'sˤ','ض':'dˤ','ط':'tˤ','ظ':'ðˤ','ع':'ʕ','غ':'ʁ','ف':'f','ق':'q',
+  'ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'j','ء':'ʔ','أ':'ʔ','إ':'ʔ',
+  'آ':'ʔ','ؤ':'ʔ','ئ':'ʔ','ة':'t','ى':'a','ٱ':'ʔ','پ':'b','چ':'ʒ','ڤ':'f','گ':'ɡ'
+};
+const AR_SHORT = { 'َ':'a', 'ِ':'i', 'ُ':'u' };          // الحركات القصيرة
+const AR_TANWEEN = { 'ً':'an', 'ٍ':'in', 'ٌ':'un' };      // التنوين
+const AR_SUKUN = 'ْ', AR_SHADDA = 'ّ';
+function arabicToPhonemes(text) {
+  const out = [];
+  const s = String(text || '').replace(/[ـ]/g, ''); // حذف التطويل
+  for (let i = 0; i < s.length; i++) {
+    const ch = s[i], next = s[i+1] || '';
+    if (ch === ' ' || /[\s،.؟!:؛]/.test(ch)) { if (out[out.length-1] !== ' ') out.push(' '); continue; }
+    if (AR_SHORT[ch] || AR_TANWEEN[ch] || ch === AR_SUKUN || ch === AR_SHADDA) continue; // تُعالَج مع الحرف السابق
+    if (/[0-9٠-٩]/.test(ch)) { out.push('r','a','q','a','m',' '); continue; } // الأرقام تُنطق كلمة "رقم" تفادياً للتشويه
+    // الألف تُعالَج أولاً: ليست في جدول الحروف الساكنة، وإسقاطها كان يحذف ألف "ال" التعريف
+    if (ch === 'ا' || ch === 'آ') { out.push('a','ː'); continue; }
+    const c = AR_CONSONANTS[ch];
+    if (!c) continue; // أي محرف غير عربي يُتجاهل
+    for (const p of c.split('')) out.push(p);
+    if (next === AR_SHADDA) { for (const p of c.split('')) out.push(p); } // الشدة = تضعيف الحرف
+    // نبحث عن حركة صريحة، وإلا نضع فتحة افتراضية (النصوص العربية عادة بلا تشكيل)
+    let vowel = null;
+    for (let k = i+1; k < Math.min(i+3, s.length); k++) {
+      if (AR_SHORT[s[k]]) { vowel = AR_SHORT[s[k]]; break; }
+      if (AR_TANWEEN[s[k]]) { vowel = AR_TANWEEN[s[k]]; break; }
+      if (s[k] === AR_SUKUN) { vowel = ''; break; }
+      if (s[k] !== AR_SHADDA) break;
+    }
+    if (vowel === null) {
+      // بلا تشكيل: مدّ طويل إن تبعه حرف مدّ، وإلا فتحة قصيرة افتراضية
+      if (next === 'ا') { out.push('a','ː'); i++; }
+      else if (next === 'و') { out.push('u','ː'); i++; }
+      else if (next === 'ي') { out.push('i','ː'); i++; }
+      else if (next && next !== ' ' && AR_CONSONANTS[next]) out.push('a');
+    } else if (vowel) { for (const p of vowel.split('')) out.push(p); }
+  }
+  return out;
+}
+function phonemesToIds(phonemes, idMap) {
+  const PAD = idMap['_'] ?? 0, BOS = idMap['^'] ?? 1, EOS = idMap['$'] ?? 2;
+  const ids = [BOS, PAD];
+  phonemes.forEach(p => { const id = idMap[p]; if (id != null) { ids.push(id, PAD); } });
+  ids.push(EOS);
+  return ids;
+}
+let AR_ID_MAP = null;
+async function getArabicIdMap() {
+  if (AR_ID_MAP) return AR_ID_MAP;
+  try {
+    const r = await fetch('./voices/ar/ar_JO/kareem/medium/ar_JO-kareem-medium.onnx.json');
+    const cfg = await r.json();
+    AR_ID_MAP = cfg.phoneme_id_map || null;
+    // خريطة النموذج تعطي مصفوفات، نأخذ أول معرّف لكل رمز
+    if (AR_ID_MAP) Object.keys(AR_ID_MAP).forEach(k => { if (Array.isArray(AR_ID_MAP[k])) AR_ID_MAP[k] = AR_ID_MAP[k][0]; });
+    return AR_ID_MAP;
+  } catch(e) { return null; }
+}
 let piperMod = null, piperLoadPromise = null, piperEnabled = true; // piperEnabled يُقفَل تلقائياً بلا رجعة لهذي الجلسة لو فشل التحميل مرة
 let piperAudioEl = null, piperPronEl = null;
 function piperStatus(msg) {
@@ -24711,6 +24775,16 @@ async function piperGenerate(text, lang) {
     if (stopped) return null;
     try {
       const mod = await loadPiper();
+      // العربية: نحسب الرموز الصوتية بأنفسنا ونمررها للنموذج مباشرة، متجاوزين محرك النطق العاجز عن العربية
+      let usedOverride = false;
+      if (String(lang || '').slice(0,2).toLowerCase() === 'ar') {
+        const idMap = await getArabicIdMap();
+        if (idMap) {
+          const ids = phonemesToIds(arabicToPhonemes(text), idMap);
+          if (ids.length > 4) { globalThis.__tornadoPhonemeIds = ids; usedOverride = true; }
+        }
+        if (!usedOverride) return null; // تعذّر تحويل النص العربي؟ صمت بدل تشويه
+      }
       const wav = await Promise.race([
         mod.predict({
           text, voiceId,
@@ -24723,12 +24797,14 @@ async function piperGenerate(text, lang) {
         }),
         new Promise((_, rej) => setTimeout(() => rej(new Error('Piper generate timeout')), timeoutMs)),
       ]);
+      globalThis.__tornadoPhonemeIds = null; // تنظيف فوري: لا يتسرب للمقاطع الإنجليزية التالية
       console.log(`[Piper] SUCCESS for voiceId="${voiceId}" (attempt ${attempt}) — blob size: ${wav && wav.size}`);
       piperStatus(`✅ Last used: ${voiceId} (${lang})`);
       piperVoiceReady.add(voiceId);
       piperFailCounts[voiceId] = 0;
       return wav; // Blob صوتي حقيقي (WAV)
     } catch(e) {
+      globalThis.__tornadoPhonemeIds = null; // تنظيف عند الفشل أيضاً
       lastErr = e;
       console.log(`[Piper] attempt ${attempt}/${maxAttempts} FAILED for voiceId="${voiceId}": ${e && e.message}`);
       if (attempt < maxAttempts) {
@@ -24774,7 +24850,7 @@ async function piperSpeak(text, lang, channel) {
 async function speak(text, lang) {
   if (!text) return;
   const langPrefix0 = String(lang || '').slice(0,2).toLowerCase();
-  if (langPrefix0 === 'ar') return; // العربية مستبعدة من الصوت كلياً: محرك النطق لا يملك بيانات عربية حقيقية، والنطق الآلي يقرأها بأسماء الحروف
+  // العربية: تُنطق بالمحوّل الخاص عبر Piper فقط. إن فشل، صمت — لا نطق آلي مشوَّه أبداً.
   if (piperEnabled && PIPER_VOICES[lang] && stopped !== true) {
     try { if (await piperSpeak(text, lang)) return; } catch(e) {}
   }
@@ -24834,7 +24910,7 @@ async function playCardGapless(card) {
   const all = narrationSegments(card, wordRepeat, detailedAudio);
   // نستبعد المقاطع العربية من الصوت: محرك النطق مفتوح المصدر لا يملك بيانات عربية حقيقية،
   // فينتج إما فشلاً أو نطقاً مشوَّهاً بأسماء الحروف. العربية تبقى كاملة في النص وفي التصدير النصي.
-  const segs = all.filter(s => String(s.lang || '').slice(0,2).toLowerCase() !== 'ar');
+  const segs = all; // العربية مشمولة الآن: المحوّل الخاص يوفّر رموزها الصوتية مباشرة للنموذج
   if (!segs.length) return false;
   const wav = await buildSegmentsAudio(segs, `"${card.word}"`);
   if (!wav || stopped) return false;
