@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:28:58.898Z",
+ "exportedAt": "2026-07-26T09:29:06.378Z",
  "words": [
   {
    "id": 1785000460857,
@@ -7105,7 +7105,7 @@
    "examples": [
     {
      "en": "I’ll have a ham sandwich with lettuce and tomato.",
-     "ar": "سآخذ شطيرة لحم خنزير مع الخس والطماطم."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -7113,7 +7113,7 @@
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/lettuce-us.mp3",
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 1,
+   "engineVersion": 2,
    "interval": 0,
    "due": 0
   },
@@ -7190,11 +7190,11 @@
    "examples": [
     {
      "en": "The old oak tree abides the wind endlessly.",
-     "ar": "شجرة البلوط القديمة تحافظ على الريح إلى ما لا نهاية."
+     "ar": ""
     },
     {
      "en": "\"I never could abide shoemakers,\" said an old servant,—and it ended in her marrying one.",
-     "ar": "قالت خادمة عجوز: \"لم أستطع أبدًا الالتزام بصانعي الأحذية\"، وانتهى الأمر بزواجها من أحدهم."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -7202,7 +7202,7 @@
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/abide-us.mp3",
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 1,
+   "engineVersion": 2,
    "interval": 0,
    "due": 0
   },
