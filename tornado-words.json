@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:15:21.047Z",
+ "exportedAt": "2026-07-26T09:15:25.926Z",
  "words": [
   {
    "id": 1784978307444,
@@ -1826,7 +1826,7 @@
    "examples": [
     {
      "en": "The downside of obtaining a higher rank is that far more work is expected.",
-     "ar": "الجانب السلبي للحصول على رتبة أعلى هو توقع المزيد من العمل."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -1839,7 +1839,7 @@
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/downside-us.mp3",
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784752604761,
@@ -1921,11 +1921,11 @@
    "examples": [
     {
      "en": "the gratification of the heart",
-     "ar": "إرضاء القلب"
+     "ar": ""
     },
     {
      "en": "gratification of the heart gratification of the palate",
-     "ar": "إرضاء القلب إرضاء الحنك"
+     "ar": ""
     }
    ],
    "differences": [],
@@ -1934,7 +1934,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "id": 1784752076144,
