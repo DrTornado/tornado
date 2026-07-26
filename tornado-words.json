@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:29:57.064Z",
+ "exportedAt": "2026-07-26T09:30:09.556Z",
  "words": [
   {
    "id": 1785000460857,
@@ -7770,13 +7770,13 @@
    "examples": [
     {
      "en": "“Bacon was Lord Chancellor of England and the first European to experiment with gunpowder.” — “No, you are conflating Francis Bacon and Roger Bacon.”",
-     "ar": "\"كان بيكون مستشارًا لإنجلترا وأول أوروبي يجرب البارود. \"-\" لا، أنت تخلط بين فرانسيس بيكون وروجر بيكون. \""
+     "ar": ""
     }
    ],
    "differences": [],
    "ipaUS": "/kənˈfleɪt/",
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/conflate-us.mp3",
-   "engineVersion": 1,
+   "engineVersion": 2,
    "interval": 0,
    "due": 0
   },
