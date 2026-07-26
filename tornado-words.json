@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-26T09:17:47.995Z",
+ "exportedAt": "2026-07-26T09:18:08.743Z",
  "words": [
   {
    "id": 1784978307444,
@@ -6840,7 +6840,7 @@
    "due": 0,
    "freqLabel": "Top 8,000 words",
    "estCefr": "B2",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
@@ -6916,7 +6916,7 @@
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/e/ext/extre/extreme__gb_1.mp3",
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
@@ -6994,7 +6994,7 @@
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/t/thr/threa/threaten__gb_1.mp3",
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
@@ -7027,7 +7027,7 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
@@ -7112,7 +7112,7 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
@@ -7177,7 +7177,7 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
@@ -7287,7 +7287,7 @@
    "due": 0,
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/d/del/delib/deliberate__us_2_rr.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/d/del/delib/deliberate__gb_4.mp3",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
@@ -7354,7 +7354,7 @@
    "ipaUS": "/ˈkɹit͡ʃɚz/",
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cre/creat/creature__us_2.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/cre/creat/creature__gb_1.mp3",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
@@ -7445,7 +7445,7 @@
    "interval": 0,
    "due": 0,
    "estCefr": "B2",
-   "engineVersion": 1
+   "engineVersion": 2
   },
   {
    "right": 0,
