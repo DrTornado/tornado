@@ -24875,8 +24875,9 @@ async function piperSpeak(text, lang, channel) {
   const wav = await piperGenerate(text, lang);
   if (!wav) return false;
   const el = getPiperAudioEl(channel);
-  el.playbackRate = speed;
   el.src = URL.createObjectURL(wav);
+  el.onloadedmetadata = () => { el.playbackRate = speed; };
+  el.playbackRate = speed;
   let blocked = false;
   await new Promise(res => {
     let done = false; const finish = () => { if (!done) { done = true; res(); } };
@@ -24951,18 +24952,18 @@ function mergeSegments(segs) {
     const last = out[out.length - 1];
     // لا ندمج أبداً عبر وقفة طويلة (≥600): تلك الوقفات هي ما يمنح النطق بنيته المفهومة
     const bigPause = last && last.pause >= 600;
-    const isLabel = /:$/.test(s.text); // عنوان قسم جديد ("Synonyms:") لا يُدمج مع ما قبله
+    const isLabel = s.label === true; // عنوان قسم جديد: يبدأ كتلة مستقلة دائماً
     if (last && last.lang === s.lang && !bigPause && !isLabel && (last.text.length + s.text.length) < 220) {
       last.text += ' ' + s.text;
       last.pause = s.pause; // الوقفة الفعلية هي وقفة آخر جزء مدموج
-    } else out.push({ text: s.text, lang: s.lang, pause: s.pause });
+    } else out.push({ text: s.text, lang: s.lang, pause: s.pause, label: s.label });
   });
   return out;
 }
 const AUDIO_CACHE = new Map(); // ذاكرة سريعة داخل الجلسة
 // رقم إصدار الصوت: يُرفع مع أي تغيير في طريقة التوليد (وقفات، تقطيع، سرعة).
 // بدونه يبقى الصوت القديم المخزَّن يُشغَّل للأبد ولا يظهر أي إصلاح إطلاقاً.
-const AUDIO_VERSION = 4;
+const AUDIO_VERSION = 6;
 function cacheKey(card) { return card.id + '|' + (detailedAudio?'d':'s') + '|' + wordRepeat + '|' + ENGINE_VERSION + '|a' + AUDIO_VERSION; }
 
 // ===== تخزين دائم للصوت المولَّد =====
@@ -25050,9 +25051,11 @@ async function playCardGapless(card) {
   const wav = await buildCardAudio(card);
   if (!wav || stopped) return false;
   const el = getPiperAudioEl('main');
-  el.playbackRate = speed;
   const url = URL.createObjectURL(wav);
   el.src = url;
+  // حاسم: السرعة تُضبط بعد تحميل المصدر — ضبطها قبله يُلغى تلقائياً ويعود لـ1.0
+  el.onloadedmetadata = () => { el.playbackRate = speed; };
+  el.playbackRate = speed;
   bindMediaSession(el, card.word);
   let ok = true, started = false;
   await new Promise(res => {
@@ -25187,9 +25190,10 @@ async function runPlayback(startAt) {
     else if (fmt && chunks.length) {
       const full = buildWav(fmt, chunks);
       const el = getPiperAudioEl('main');
-      el.playbackRate = speed;
       el.loop = (listRepeat === Infinity);
       el.src = URL.createObjectURL(full);
+      el.onloadedmetadata = () => { el.playbackRate = speed; }; // بعد التحميل، وإلا يُلغى
+      el.playbackRate = speed;
       bindMediaSession(el, playlist[trackIdx] ? playlist[trackIdx].word : 'Tornado');
       // تتبّع الكلمة الجارية أثناء التشغيل المتواصل وتحديث الواجهة ومشغّل النظام
       el.ontimeupdate = () => {
@@ -25292,14 +25296,14 @@ function narrationSegments(card, rep, detailed) {
   const L = [];
   // pause = مدة الصمت بعد المقطع بالمللي ثانية — تُحدَّد حسب دور المقطع لا حسب طوله،
   // فيسمع المتعلّم بنية واضحة: كلمة … نوعها … معنى أول … مثال، بدل تيار متصل بلا فواصل.
-  const push = (text, lang, pause) => {
+  const push = (text, lang, pause, isLabel) => {
     if (!text) return;
     const t = String(text).replace(/\.{2,}$/, '.').trim();
-    L.push({ text: t, lang: lang || (isAr(t) ? 'ar-SA' : 'en-US'), pause: pause == null ? 450 : pause });
+    L.push({ text: t, lang: lang || (isAr(t) ? 'ar-SA' : 'en-US'), pause: pause == null ? 450 : pause, label: !!isLabel });
   };
   for (let r = 0; r < rep; r++) push(card.word + '.', 'en-US', 1300); // الكلمة نفسها: أطول وقفة
   if (card.arabicPron) push(card.arabicPron, 'ar-SA');
-  if (arr(card.pos).length) push(card.pos.join(' and ') + '.', 'en-US', 900);
+  if (arr(card.pos).length) push('It is a ' + card.pos.join(', or a ') + '.', 'en-US', 1000);
   const ms = arr(card.meanings);
   const pushPair = (m) => {
     for (let r = 0; r < rep; r++) {
@@ -25308,29 +25312,29 @@ function narrationSegments(card, rep, detailed) {
     }
   };
   if (ms.length === 1) {
-    push('It means:', 'en-US', 350);
+    push('It means.', 'en-US', 500, true);
     pushPair(ms[0]);
   } else if (ms.length > 1) {
-    push('This word has ' + ms.length + ' meanings.', 'en-US', 800);
+    push('It has ' + ms.length + ' meanings.', 'en-US', 1000);
     ms.forEach((m, i) => {
       const posBit = (typeof m !== 'string' && m.pos) ? ', as a ' + m.pos : '';
-      push('Meaning ' + (ORD_EN[i] || String(i+1)) + posBit + ':', 'en-US', 350);
+      push('Number ' + (i+1) + posBit + '.', 'en-US', 600);
       pushPair(m);
     });
   }
   if (!detailed) return L; // يطابق التشغيل القديم بالضبط: بلا شرح كامل = الكلمة والمعاني فقط، بلا تصريفات/مرادفات/متلازمات/أمثلة/فروق
-  if (arr(card.inflections).length) push('Inflections: ' + card.inflections.join(', ') + '.', 'en-US', 900);
+  if (arr(card.inflections).length) { push('Its forms are.', 'en-US', 500, true); push(card.inflections.join(', ') + '.', 'en-US', 1000); }
   if (arr(card.synonyms).length) {
-    push('Synonyms:', 'en-US', 350);
+    push('Similar words.', 'en-US', 500, true);
     card.synonyms.forEach(s => { push((s.en || s) + '.', 'en-US'); if (s.ar) push(s.ar + '.', 'ar-SA'); });
   }
   if (arr(card.collocations).length) {
-    push('Common collocations:', 'en-US', 350);
+    push('Common combinations.', 'en-US', 500, true);
     card.collocations.forEach(c => { push((c.en || c) + '.', 'en-US'); if (c.ar) push(c.ar + '.', 'ar-SA'); });
   }
   const exs = arr(card.examples).slice(0, 2);
   if (exs.length) {
-    push(exs.length > 1 ? 'Examples:' : 'Example:', 'en-US', 350);
+    push(exs.length > 1 ? 'Examples.' : 'Example.', 'en-US', 500, true);
     exs.forEach(ex => pushPair(ex));
   }
   arr(card.differences).forEach(d => { push('Note the difference: ' + (d.en || d) + '.', 'en-US'); if (d.ar) push(d.ar + '.', 'ar-SA'); });
