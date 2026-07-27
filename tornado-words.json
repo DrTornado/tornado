@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-27T00:23:40.773Z",
+ "exportedAt": "2026-07-27T00:23:45.098Z",
  "words": [
   {
    "id": 1785000460857,
@@ -1053,11 +1053,11 @@
     }
    ],
    "differences": [],
-   "right": 0,
+   "right": 1,
    "wrong": 0,
-   "last": null,
-   "interval": 0,
-   "due": 0,
+   "last": "right",
+   "interval": 1,
+   "due": 1785198224349,
    "ipaUS": "/ˈkɹit͡ʃɚz/",
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cre/creat/creature__us_2.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/cre/creat/creature__gb_1.mp3",
@@ -3369,9 +3369,9 @@
    "engineVersion": 2
   },
   {
-   "right": 0,
+   "right": 1,
    "wrong": 0,
-   "last": null,
+   "last": "right",
    "id": 1784659612001,
    "word": "nostrils",
    "ipa": "",
@@ -3406,8 +3406,8 @@
    "collocations": [],
    "examples": [],
    "differences": [],
-   "interval": 0,
-   "due": 0,
+   "interval": 1,
+   "due": 1785198221330,
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/nostrils-us.mp3",
    "engineVersion": 2
   },
