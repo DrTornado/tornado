@@ -23159,7 +23159,7 @@ let exportScope = 'playlist'; // 'playlist' = القائمة الحالية | 'a
 let exportSelected = new Set(); // معرّفات الكلمات المختارة يدوياً للتصدير
 let listRepeat = 1;        // whole-list repeats: 1 / 2 / 3 / Infinity
 let wordRepeat = 1;        // how many times each word's explanation is repeated: 1 / 2 / 3
-let shuffle = false, speed = 0.9, detailedAudio = true;
+let shuffle = false, speed = 0.8, detailedAudio = true; // أبطأ قليلاً افتراضياً: أوضح للمتعلّم
 
 // ===== TTS =====
 function pickSystemVoice(lang) {
@@ -24770,7 +24770,18 @@ function getPiperAudioEl(channel) {
 let piperVoiceReady = new Set(); // أصوات أُكِّد نجاح تحميلها سابقاً — مكالماتها التالية تحصل مهلة قصيرة فقط (استدلال محض، لا تحميل)
 let piperVoiceDisabled = new Set(); // أصوات فشلت مرتين متتاليتين — تُعطَّل هي وحدها، لا تؤثر على بقية الأصوات إطلاقاً
 let piperFailCounts = {}; // عداد فشل مستقل لكل صوت (voiceId) على حدة
+// قفل تسلسلي: المحرك لا يحتمل عمليتين متزامنتين — التحضير الخلفي وضغطة المستخدم كانا
+// يتصادمان فيفشل الاثنان معاً. الآن كل طلب ينتظر دوره، والطلبات ذات الأولوية تتقدّم الصف.
+let piperQueue = Promise.resolve();
+function piperLock(fn) {
+  const run = piperQueue.then(fn, fn);
+  piperQueue = run.catch(() => {});
+  return run;
+}
 async function piperGenerate(text, lang) {
+  return piperLock(() => piperGenerateInner(text, lang));
+}
+async function piperGenerateInner(text, lang) {
   const voiceId = PIPER_VOICES[lang];
   if (!voiceId || !piperEnabled || !text || piperVoiceDisabled.has(voiceId)) return null;
   const firstTime = !piperVoiceReady.has(voiceId);
@@ -24917,11 +24928,15 @@ const say = async (p, prefixEn) => {
 
 // دمج المقاطع المتتالية من نفس اللغة في نداء واحد — يقلّص عدد عمليات التوليد من ~١٨ إلى ٣-٤ لكل كلمة
 function mergeSegments(segs) {
+  // ندمج فقط العناصر الطويلة المتشابهة (قوائم المرادفات والأمثلة) للتسريع،
+  // ونُبقي العناوين والكلمة نفسها مقاطعَ مستقلة — فتحصل على وقفة طبيعية بعد كل منها.
   const out = [];
   segs.forEach(s => {
     const last = out[out.length - 1];
-    if (last && last.lang === s.lang && (last.text.length + s.text.length) < 400) last.text += ' ' + s.text;
-    else out.push({ text: s.text, lang: s.lang });
+    const shortLabel = s.text.length < 28 || (last && last.text.length < 28); // عنوان أو كلمة مفردة: لا يُدمج
+    if (last && last.lang === s.lang && !shortLabel && (last.text.length + s.text.length) < 220) {
+      last.text += ' ' + s.text;
+    } else out.push({ text: s.text, lang: s.lang });
   });
   return out;
 }
@@ -24976,7 +24991,8 @@ async function buildSegmentsAudio(segs, label) {
     if (!parsed) { skipped++; continue; }
     if (!fmt) fmt = parsed.fmt;
     pcmChunks.push(parsed.data);
-    pcmChunks.push(silenceBytes(fmt, 280));
+    // وقفة أطول بعد المقاطع القصيرة (الكلمة نفسها، العناوين) وأقصر بين جمل القوائم
+    pcmChunks.push(silenceBytes(fmt, seg.text.length < 28 ? 700 : 420));
     okCount++;
   }
   if (!fmt || !okCount) return null; // لم ينجح ولا مقطع واحد — عندها فقط نعتبرها فشلاً كاملاً
@@ -25230,7 +25246,11 @@ function narrationSegments(card, rep, detailed) {
   rep = Math.max(1, rep || 1);
   if (detailed == null) detailed = true; // التصدير النصي/الصوتي يشمل كل شيء دائماً؛ التشغيل المباشر وحده يمرّر إعداد المستخدم الفعلي
   const L = [];
-  const push = (text, lang) => { if (text) L.push({ text, lang: lang || (isAr(text) ? 'ar-SA' : 'en-US') }); };
+  const push = (text, lang) => {
+    if (!text) return;
+    const t = String(text).replace(/\.{2,}$/, '.').trim(); // منع النقطة المزدوجة حين ينتهي النص بنقطة أصلاً
+    L.push({ text: t, lang: lang || (isAr(t) ? 'ar-SA' : 'en-US') });
+  };
   for (let r = 0; r < rep; r++) push(card.word + '.', 'en-US');
   if (card.arabicPron) push(card.arabicPron, 'ar-SA');
   if (arr(card.pos).length) push(card.pos.join(' and ') + '.', 'en-US');
