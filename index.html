@@ -72,12 +72,12 @@
   #fp-mean { font-size:19px; color:#C7D2DE; line-height:1.7; }
   #fp-bottom { background:linear-gradient(180deg,#1E4A5F 0%,#3E8CA8 100%); padding:18px 16px 26px; }
   /* سطر أفقي واحد: لا التفاف، وتمرير جانبي إن ضاقت الشاشة */
-  #fp-pills { display:flex; gap:8px; justify-content:flex-start; flex-wrap:nowrap; margin-bottom:18px;
-    overflow-x:auto; padding:2px 2px 6px; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
-  #fp-pills::-webkit-scrollbar { display:none; height:0; }
-  .fp-pill { flex:0 0 auto; white-space:nowrap; background:transparent; color:#fff;
-    border:1.5px solid rgba(255,255,255,.65); border-radius:22px;
-    padding:8px 14px; font-family:inherit; font-size:13px; cursor:pointer; }
+  /* سطر واحد ثابت: خمسة أزرار تتقاسم العرض بالتساوي بلا تمرير ولا التفاف */
+  #fp-pills { display:flex; gap:6px; margin-bottom:18px; padding:0 2px; }
+  .fp-pill { flex:1 1 0; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.6); border-radius:20px;
+    padding:9px 4px; font-family:inherit; font-size:12px; cursor:pointer; text-align:center; }
+  .fp-pill.on { background:rgba(255,255,255,.9); color:#2C6B84; border-color:#fff; font-weight:700; }
   .fp-pill:active { background:rgba(255,255,255,.15); }
   #fp-seek { height:4px; background:rgba(255,255,255,.35); border-radius:2px; position:relative; margin:0 6px 6px; cursor:pointer; }
   #fp-seekfill { height:100%; background:#fff; border-radius:2px; width:0%; }
@@ -24821,11 +24821,17 @@ function updateFullPlayer() {
     fpEl('fp-counter').textContent = (Math.min(trackIdx, playlist.length-1) + 1) + ' / ' + playlist.length;
   }
   fpEl('fp-speed').textContent = SPD_LABEL[speed] || (speed + 'X');
-  fpEl('fp-detail').textContent = detailedAudio ? 'Full' : 'Short';
-  fpEl('fp-order').textContent = shuffle ? 'Shuffle' : 'In order';
-  fpEl('fp-repeat').textContent = 'Say x' + wordRepeat; // كم مرة يُكرَّر شرح كل كلمة
+  const dt = fpEl('fp-detail');
+  dt.textContent = detailedAudio ? 'Full' : 'Short';
+  dt.classList.toggle('on', detailedAudio); // مضيء = الوضع الحالي، وليس ما سيتحول إليه
+  const or = fpEl('fp-order');
+  or.textContent = shuffle ? 'Shuffle' : 'Order';
+  or.classList.toggle('on', shuffle);
+  const rp = fpEl('fp-repeat');
+  rp.textContent = 'Say x' + wordRepeat; // كم مرة يُكرَّر شرح كل كلمة
+  rp.classList.toggle('on', wordRepeat !== 1);
   const lp = fpEl('fp-loop');
-  if (lp) lp.textContent = listRepeat === Infinity ? 'Loop ∞' : (listRepeat === 1 ? 'Once' : listRepeat + ' times');
+  if (lp) { lp.textContent = listRepeat === Infinity ? 'Loop ∞' : 'List x' + listRepeat; lp.classList.toggle('on', listRepeat !== 1); }
   fpEl('fp-play').textContent = playing ? '⏸' : '▶';
   const el = piperAudioEl;
   const d = el && el.duration && isFinite(el.duration) ? el.duration : 0;
@@ -25340,7 +25346,9 @@ async function playTrackSegmented(card) {
   await wait(900);
 }
 
+let playbackGen = 0; // معرّف جلسة تشغيل: يمنع الجلسة القديمة من إيقاف الجديدة عند انتهائها
 async function runPlayback(startAt) {
+  const myGen = ++playbackGen;
   stopped = false; playing = true;
   if (playScope === 'single') {
     // وضع الكلمة الواحدة: يشغّل الكلمة المحددة فقط (بعدد تكرار الشرح) ثم يتوقف
@@ -25354,7 +25362,7 @@ async function runPlayback(startAt) {
     let fmt = null, totalBytes = 0;
     playlistMarks = []; const wordMarks = playlistMarks;
     const words2 = playlist.slice(startAt).concat(playlist.slice(0, startAt));
-    for (let n = 0; n < words2.length && !stopped; n++) {
+    for (let n = 0; n < words2.length && !stopped && myGen === playbackGen; n++) {
       const idx = playlist.indexOf(words2[n]);
       trackIdx = idx >= 0 ? idx : n; renderAudio();
       piperStatus(`🎧 Building continuous audio — word ${n + 1} of ${words2.length}…`);
@@ -25376,7 +25384,7 @@ async function runPlayback(startAt) {
         break;
       }
     }
-    if (stopped) { /* ألغى المستخدم أثناء البناء */ }
+    if (stopped || myGen !== playbackGen) { /* أُلغيت أو بدأت جلسة أحدث */ }
     else if (fmt && chunks.length) {
       const full = buildWav(fmt, chunks);
       const el = getPiperAudioEl('main');
@@ -25426,7 +25434,8 @@ async function runPlayback(startAt) {
       }
     }
   }
-  stopped = true; playing = false; releaseWakeLock(); renderAudio();
+  if (myGen !== playbackGen) return; // جلسة أحدث بدأت: لا نلمس الحالة إطلاقاً
+  stopped = true; playing = false; releaseWakeLock(); renderAudio(); updateFullPlayer();
   setTimeout(() => prepareAudioInBackground(), 3000); // استئناف التحضير بعد انتهاء التشغيل
 }
 
