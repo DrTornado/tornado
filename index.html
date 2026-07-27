@@ -24735,6 +24735,22 @@ async function getArabicIdMap() {
 }
 let piperMod = null, piperLoadPromise = null, piperEnabled = true; // piperEnabled يُقفَل تلقائياً بلا رجعة لهذي الجلسة لو فشل التحميل مرة
 let piperAudioEl = null, piperPronEl = null;
+let playlistMarks = []; // مواضع الكلمات بالثواني داخل الملف الموحّد — أساس التنقل الفوري
+// تنقل حقيقي داخل الملف الجاري: قفزة بالثواني، بلا إعادة بناء ولا تعليق
+function seekToWord(i) {
+  const el = piperAudioEl;
+  if (!el || !playlistMarks.length || !el.src) return false;
+  const m = playlistMarks.find(x => x.idx === i) || playlistMarks[Math.max(0, Math.min(i, playlistMarks.length - 1))];
+  if (!m) return false;
+  try { el.currentTime = m.time; if (el.paused) el.play().catch(()=>{}); trackIdx = m.idx; renderAudio(); return true; } catch(e) { return false; }
+}
+function currentWordFromTime() {
+  const el = piperAudioEl;
+  if (!el || !playlistMarks.length) return -1;
+  let cur = playlistMarks[0];
+  for (const m of playlistMarks) { if (m.time <= el.currentTime + 0.05) cur = m; else break; }
+  return cur.idx;
+}
 function piperStatus(msg) {
   const el = document.getElementById('piper-status');
   if (el) el.textContent = msg || '';
@@ -25133,6 +25149,7 @@ async function runPlayback(startAt) {
     // للانتقال بين الكلمات، فيستمر كاملاً حتى مع إطفاء الشاشة تماماً كمشغّل الموسيقى.
     const chunks = [];
     let fmt = null, totalBytes = 0;
+    playlistMarks = []; const wordMarks = playlistMarks;
     const words2 = playlist.slice(startAt).concat(playlist.slice(0, startAt));
     for (let n = 0; n < words2.length && !stopped; n++) {
       const idx = playlist.indexOf(words2[n]);
@@ -25143,8 +25160,10 @@ async function runPlayback(startAt) {
       const parsed = parseWav(await wav.arrayBuffer());
       if (!parsed) continue;
       if (!fmt) fmt = parsed.fmt;
+      // نسجّل زمن بداية كل كلمة داخل الملف الموحّد — يتيح التنقل بينها بالثواني بدل إعادة البناء
+      wordMarks.push({ idx: idx >= 0 ? idx : n, time: totalBytes / (fmt.sampleRate * fmt.blockAlign) });
       chunks.push(parsed.data, silenceBytes(fmt, 900));
-      totalBytes += parsed.data.length;
+      totalBytes += parsed.data.length + silenceBytes(fmt, 900).length;
       // حماية الذاكرة: ملف واحد ضخم جداً قد يفشل بناؤه على الجوال ويظهر كأن الصوت لا يعمل.
       // نتوقف عند حد آمن ونشغّل ما بنيناه — يكفي لعشرات الدقائق من الاستماع المتواصل.
       if (totalBytes > 28 * 1024 * 1024) {
@@ -25160,6 +25179,15 @@ async function runPlayback(startAt) {
       el.loop = (listRepeat === Infinity);
       el.src = URL.createObjectURL(full);
       bindMediaSession(el, playlist[trackIdx] ? playlist[trackIdx].word : 'Tornado');
+      // تتبّع الكلمة الجارية أثناء التشغيل المتواصل وتحديث الواجهة ومشغّل النظام
+      el.ontimeupdate = () => {
+        const w = currentWordFromTime();
+        if (w >= 0 && w !== trackIdx) {
+          trackIdx = w;
+          if (tab === 'audio') renderAudio();
+          if (playlist[w]) updateMediaSession(playlist[w].word);
+        }
+      };
       piperStatus('▶️ Playing full playlist (continues with screen off)');
       await new Promise(res => {
         let done = false; const finish = () => { if (!done) { done = true; res(); } };
@@ -25239,7 +25267,11 @@ function stopAudio() {
   if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
   if (tab === 'audio') renderAudio();
 }
-function jumpTo(i) { stopAudio(); trackIdx = i; setTimeout(() => startAudio(i), 150); }
+function jumpTo(i) {
+  // إن كان الملف الموحّد يعمل: قفزة فورية بالثواني بلا أي إعادة بناء (كان هذا سبب التعليق)
+  if (seekToWord(i)) return;
+  stopAudio(); trackIdx = i; setTimeout(() => startAudio(i), 150);
+}
 
 // ===== تصدير القائمة كنص سردي لتشغيله في تطبيقات القراءة الصوتية (تعمل بالخلفية والشاشة مطفأة) =====
 function narrationSegments(card, rep, detailed) {
