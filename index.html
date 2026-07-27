@@ -24818,7 +24818,7 @@ function updateFullPlayer() {
   fpEl('fp-speed').textContent = SPD_LABEL[speed] || (speed + 'X');
   fpEl('fp-detail').textContent = detailedAudio ? 'Full' : 'Short';
   fpEl('fp-order').textContent = shuffle ? 'Shuffle' : 'In order';
-  fpEl('fp-repeat').textContent = listRepeat === Infinity ? 'Loop' : 'x' + listRepeat;
+  fpEl('fp-repeat').textContent = 'Say x' + wordRepeat; // كم مرة يُكرَّر شرح كل كلمة
   fpEl('fp-play').textContent = playing ? '⏸' : '▶';
   const el = piperAudioEl;
   const d = el && el.duration && isFinite(el.duration) ? el.duration : 0;
@@ -24853,12 +24853,11 @@ document.addEventListener('DOMContentLoaded', () => {}, { once: true });
   };
   on('fp-detail', () => { detailedAudio = !detailedAudio; rebuildIfPlaying(); });
   on('fp-order', () => { shuffle = !shuffle; buildPlaylist(); rebuildIfPlaying(); });
+  // تكرار شرح كل كلمة: يغيّر محتوى الصوت نفسه فيلزم إعادة بناء (سريعة — الأصوات مخزَّنة)
   on('fp-repeat', () => {
-    const o = [1, 2, 3, Infinity];
-    listRepeat = o[(o.indexOf(listRepeat) + 1) % o.length];
-    // يسري فوراً على التشغيل الجاري بلا إعادة بناء
-    loopsLeft = (listRepeat === Infinity) ? Infinity : Math.max(0, listRepeat - 1);
-    updateFullPlayer(); if (tab==='audio') renderAudio();
+    const o = [1, 2, 3];
+    wordRepeat = o[(o.indexOf(wordRepeat) + 1) % o.length];
+    rebuildIfPlaying();
   });
   const seek = fpEl('fp-seek');
   if (seek) seek.onclick = ev => {
@@ -25709,7 +25708,7 @@ function renderAudio() {
         <button class="pillbtn" id="spd-cycle">${speed===0.7?'0.7x':speed===0.8?'0.8x':speed===0.9?'0.9x':speed===1?'1.0x':'1.2x'}</button>
         <button class="pillbtn" id="det-cycle">${detailedAudio?'Full':'Short'}</button>
         <button class="pillbtn" id="shuf-cycle">${shuffle?'Shuffle':'In order'}</button>
-        <button class="pillbtn" id="rep-cycle">${listRepeat===Infinity?'Loop ∞':'x'+listRepeat}</button>
+        <button class="pillbtn" id="rep-cycle">Say x${wordRepeat}</button>
       </div>
 
       <div id="seekwrap" style="padding:0 4px;margin-bottom:6px;cursor:pointer;">
@@ -25793,10 +25792,10 @@ function renderAudio() {
   if (shufBtn) shufBtn.onclick = () => { shuffle = !shuffle; buildPlaylist(); renderAudio(); };
   const repBtn = document.getElementById('rep-cycle');
   if (repBtn) repBtn.onclick = () => {
-    const opts = [1, 2, 3, Infinity];
-    listRepeat = opts[(opts.indexOf(listRepeat) + 1) % opts.length];
-    if (piperAudioEl) piperAudioEl.loop = (listRepeat === Infinity);
+    const opts = [1, 2, 3];
+    wordRepeat = opts[(opts.indexOf(wordRepeat) + 1) % opts.length]; // تكرار شرح كل كلمة
     renderAudio();
+    if (playing) { const at = trackIdx; stopAudio(); setTimeout(() => startAudio(at), 120); }
   };
 
   document.getElementById('next').onclick = () => jumpTo((trackIdx+1) % playlist.length);
