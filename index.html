@@ -71,9 +71,13 @@
   #fp-word { font-size:38px; font-weight:800; line-height:1.25; margin-bottom:14px; }
   #fp-mean { font-size:19px; color:#C7D2DE; line-height:1.7; }
   #fp-bottom { background:linear-gradient(180deg,#1E4A5F 0%,#3E8CA8 100%); padding:18px 16px 26px; }
-  #fp-pills { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:18px; }
-  .fp-pill { background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.65); border-radius:22px;
-    padding:8px 16px; font-family:inherit; font-size:13.5px; cursor:pointer; }
+  /* سطر أفقي واحد: لا التفاف، وتمرير جانبي إن ضاقت الشاشة */
+  #fp-pills { display:flex; gap:8px; justify-content:flex-start; flex-wrap:nowrap; margin-bottom:18px;
+    overflow-x:auto; padding:2px 2px 6px; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+  #fp-pills::-webkit-scrollbar { display:none; height:0; }
+  .fp-pill { flex:0 0 auto; white-space:nowrap; background:transparent; color:#fff;
+    border:1.5px solid rgba(255,255,255,.65); border-radius:22px;
+    padding:8px 14px; font-family:inherit; font-size:13px; cursor:pointer; }
   .fp-pill:active { background:rgba(255,255,255,.15); }
   #fp-seek { height:4px; background:rgba(255,255,255,.35); border-radius:2px; position:relative; margin:0 6px 6px; cursor:pointer; }
   #fp-seekfill { height:100%; background:#fff; border-radius:2px; width:0%; }
@@ -84,7 +88,7 @@
   .fp-ctrl { background:none; border:none; color:#fff; font-size:30px; cursor:pointer; padding:4px; line-height:1; }
   #fp-play { width:76px; height:76px; border-radius:50%; background:#fff; color:#2C6B84; border:none;
     font-size:30px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 14px rgba(0,0,0,.3); }
-  .pillbtn { background:#242B36; color:#B9C2D0; border:1px solid #3A4453; border-radius:16px; padding:6px 14px; font-family:inherit; font-size:12.5px; cursor:pointer; }
+  .pillbtn { flex:0 0 auto; white-space:nowrap; background:#242B36; color:#B9C2D0; border:1px solid #3A4453; border-radius:16px; padding:6px 14px; font-family:inherit; font-size:12.5px; cursor:pointer; }
   .pillbtn:active { background:#2F3846; }
   .playbtn { width:64px; height:64px; border-radius:50%; background:#E8B04B; color:#242B36; border:none; font-size:24px; cursor:pointer; }
   .ctrlbtn { width:48px; height:48px; border-radius:50%; background:#3A4453; color:#E8E4DA; border:none; font-size:18px; cursor:pointer; }
@@ -24851,10 +24855,16 @@ document.addEventListener('DOMContentLoaded', () => {}, { once: true });
   // سريعة لأن صوت كل كلمة مخزَّن دائماً — لا توليد من جديد، مجرد إعادة تجميع.
   // هذه الخيارات تغيّر محتوى الصوت نفسه، وإعادة بناء الملف كاملاً تستغرق وقتاً طويلاً.
   // لذلك لا نقطع الاستماع الجاري إطلاقاً — التغيير يُحفظ ويسري عند التشغيل التالي.
+  // إعادة البناء صارت سريعة (المقاطع مخزَّنة)، فنطبّق التغيير فوراً على التشغيل الجاري
   const rebuildIfPlaying = () => {
     updateFullPlayer();
     if (tab === 'audio') renderAudio();
-    if (playing) fpNote('Saved — applies when you start playing again');
+    if (playing) {
+      const at = trackIdx;
+      fpNote('Applying…');
+      stopAudio();
+      setTimeout(() => startAudio(at), 100);
+    }
   };
   function fpNote(msg) {
     const el = fpEl('fp-mean');
@@ -25157,6 +25167,29 @@ const ADB = {
 };
 
 let silentBuild = false; // أثناء التحضير الخلفي: لا رسائل تفصيلية مزعجة، فقط العدّاد الصغير
+// ===== تخزين على مستوى المقطع =====
+// جوهر الحل: نخزّن صوت كل جملة على حدة لا الكلمة كاملة. فتغيير Short/Full أو التكرار
+// يعيد تجميع نفس المقاطع المخزَّنة فوراً — بلا أي توليد جديد ولا انتظار.
+function segKey(text, lang) {
+  let h = 0;
+  const str = lang + '|' + text;
+  for (let i = 0; i < str.length; i++) { h = ((h << 5) - h + str.charCodeAt(i)) | 0; }
+  return 's' + h + '_' + str.length + '_a' + AUDIO_VERSION;
+}
+const SEG_CACHE = new Map();
+async function getSegmentAudio(text, lang) {
+  const k = segKey(text, lang);
+  if (SEG_CACHE.has(k)) return SEG_CACHE.get(k);
+  const stored = await ADB.get(k);
+  if (stored) { SEG_CACHE.set(k, stored); return stored; }
+  const wav = await piperGenerate(text, lang);
+  if (wav) {
+    SEG_CACHE.set(k, wav);
+    if (SEG_CACHE.size > 400) SEG_CACHE.delete(SEG_CACHE.keys().next().value);
+    ADB.set(k, wav);
+  }
+  return wav;
+}
 async function buildSegmentsAudio(segs, label) {
   // يبني ملف WAV واحداً متواصلاً من كل مقاطع البطاقة — يشغَّل دفعة واحدة بلا أي حاجة لجافاسكريبت أثناء التشغيل نفسه، فيستمر مع إطفاء الشاشة
   const pcmChunks = [];
@@ -25165,8 +25198,8 @@ async function buildSegmentsAudio(segs, label) {
     const seg = segs[i];
     if (stopped) return null;
     if (!silentBuild) piperStatus(`🎧 Preparing ${label || 'audio'} — part ${i + 1} of ${segs.length}…`);
-    const wav = await piperGenerate(seg.text, seg.lang);
-    if (!wav) { skipped++; continue; } // مقطع تعذّر توليده (لغة غير متاحة مثلاً)؟ نتخطاه بصمت ونكمل — لا نلغي الصوت كله ولا نلجأ لنطق آلي مشوَّه
+    const wav = await getSegmentAudio(seg.text, seg.lang); // من المخزن إن وُجد، وإلا يُولَّد ويُخزَّن
+    if (!wav) { skipped++; continue; } // مقطع تعذّر توليده؟ نتخطاه بصمت ونكمل — لا نلغي الصوت كله ولا نلجأ لنطق آلي مشوَّه
     const parsed = parseWav(await wav.arrayBuffer());
     if (!parsed) { skipped++; continue; }
     if (!fmt) fmt = parsed.fmt;
@@ -25473,7 +25506,7 @@ function narrationSegments(card, rep, detailed) {
   };
   for (let r = 0; r < rep; r++) push(card.word + '.', 'en-US', 1300); // الكلمة نفسها: أطول وقفة
   if (card.arabicPron) push(card.arabicPron, 'ar-SA');
-  if (arr(card.pos).length) push('It is a ' + card.pos.join(', or a ') + '.', 'en-US', 1000);
+  if (detailed && arr(card.pos).length) push('It is a ' + card.pos.join(', or a ') + '.', 'en-US', 1000);
   const ms = arr(card.meanings);
   const pushPair = (m) => {
     for (let r = 0; r < rep; r++) {
@@ -25481,7 +25514,10 @@ function narrationSegments(card, rep, detailed) {
       if (typeof m !== 'string' && m.ar) push(m.ar + '.', 'ar-SA');
     }
   };
-  if (ms.length === 1) {
+  if (!detailed) {
+    // المختصر: الكلمة ثم معانيها مباشرة — بلا أي عبارات تمهيدية
+    ms.forEach(m => pushPair(m));
+  } else if (ms.length === 1) {
     push('It means.', 'en-US', 500, true);
     pushPair(ms[0]);
   } else if (ms.length > 1) {
@@ -25696,7 +25732,7 @@ function renderAudio() {
       <div class="bigw" style="font-size:30px;font-weight:800;margin:10px 0 4px;line-height:1.25;">${esc(t.word)}</div>
       <div class="ar arline2" style="font-size:16px;color:#B9C2D0;margin-bottom:14px;line-height:1.6;">${esc(firstMeaningLine(t))}</div>
 
-      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;">
+      <div style="display:flex;gap:7px;justify-content:flex-start;flex-wrap:nowrap;margin-bottom:14px;overflow-x:auto;padding-bottom:4px;">
         <button class="pillbtn" id="spd-cycle">${speed===0.7?'0.7x':speed===0.8?'0.8x':speed===0.9?'0.9x':speed===1?'1.0x':'1.2x'}</button>
         <button class="pillbtn" id="det-cycle">${detailedAudio?'Full':'Short'}</button>
         <button class="pillbtn" id="shuf-cycle">${shuffle?'Shuffle':'In order'}</button>
