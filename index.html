@@ -101,6 +101,7 @@
   <div id="top-link-status" style="font-size:11.5px;color:#8A93A3;margin-top:6px;text-align:center;"></div>
   <div id="bg-upgrade-status" style="font-size:11px;color:#5B9E6F;margin-top:4px;text-align:center;"></div>
   <div id="piper-status" style="font-size:11px;color:#E8B04B;margin-top:4px;text-align:center;"></div>
+  <div id="audio-prep-status" style="font-size:11px;color:#5B8DD9;margin-top:2px;text-align:center;"></div>
   <div id="gh-box" class="hidden" style="background:#1B212B;border-radius:10px;padding:12px;margin-top:8px;">
     <p id="gh-intro" style="font-size:12.5px;color:#8A93A3;margin:0 0 8px;line-height:1.7;"></p>
     <input class="inp" id="gh-token" type="password" placeholder="Fine-grained token (repo: Contents R/W)" style="font-size:13px;margin-bottom:6px;">
@@ -24133,6 +24134,7 @@ function pronBtns(card, small) {
 }
 let readingFull = false;
 async function readCardFull(card) {
+  audioPrepAbort = true; // إيقاف التحضير الخلفي أثناء التشغيل المباشر
   unlockPiperAudio();
   stopAudio(); // إيقاف أي تشغيل جارٍ نظيفاً أولاً (يشمل تشغيل تبويب Listen إن كان قائماً)
   await new Promise(r => setTimeout(r, 60)); // مهلة صغيرة تضمن انتهاء الإلغاء قبل البدء
@@ -24923,8 +24925,42 @@ function mergeSegments(segs) {
   });
   return out;
 }
-const AUDIO_CACHE = new Map(); // ذاكرة صوت مؤقتة لكل كلمة — إعادة التشغيل تصير فورية بلا أي توليد
+const AUDIO_CACHE = new Map(); // ذاكرة سريعة داخل الجلسة
 function cacheKey(card) { return card.id + '|' + (detailedAudio?'d':'s') + '|' + wordRepeat + '|' + ENGINE_VERSION; }
+
+// ===== تخزين دائم للصوت المولَّد =====
+// جوهر الحل النهائي للتأخير: كل كلمة تُولَّد مرة واحدة فقط في عمر التطبيق، ثم تُحفظ في قاعدة
+// بيانات المتصفح. كل تشغيل لاحق يقرأ الملف الجاهز فوراً — بلا أي توليد ولا انتظار ولا إنترنت.
+const ADB = {
+  db: null,
+  open() {
+    return new Promise((res, rej) => {
+      if (this.db) return res(this.db);
+      const q = indexedDB.open('tornado-audio', 1);
+      q.onupgradeneeded = () => { if (!q.result.objectStoreNames.contains('wav')) q.result.createObjectStore('wav'); };
+      q.onsuccess = () => { this.db = q.result; res(this.db); };
+      q.onerror = () => rej(q.error);
+    });
+  },
+  async get(k) {
+    try { const db = await this.open(); return await new Promise(res => {
+      const t = db.transaction('wav').objectStore('wav').get(k);
+      t.onsuccess = () => res(t.result || null); t.onerror = () => res(null);
+    }); } catch(e) { return null; }
+  },
+  async set(k, blob) {
+    try { const db = await this.open(); return await new Promise(res => {
+      const t = db.transaction('wav','readwrite').objectStore('wav').put(blob, k);
+      t.onsuccess = () => res(true); t.onerror = () => res(false);
+    }); } catch(e) { return false; }
+  },
+  async countKeys() {
+    try { const db = await this.open(); return await new Promise(res => {
+      const t = db.transaction('wav').objectStore('wav').count();
+      t.onsuccess = () => res(t.result || 0); t.onerror = () => res(0);
+    }); } catch(e) { return 0; }
+  },
+};
 
 async function buildSegmentsAudio(segs, label) {
   // يبني ملف WAV واحداً متواصلاً من كل مقاطع البطاقة — يشغَّل دفعة واحدة بلا أي حاجة لجافاسكريبت أثناء التشغيل نفسه، فيستمر مع إطفاء الشاشة
@@ -24951,7 +24987,9 @@ async function buildSegmentsAudio(segs, label) {
 async function buildCardAudio(card) {
   if (!piperEnabled) return null;
   const key = cacheKey(card);
-  if (AUDIO_CACHE.has(key)) return AUDIO_CACHE.get(key); // مولَّد سابقاً؟ فوري تماماً بلا أي انتظار
+  if (AUDIO_CACHE.has(key)) return AUDIO_CACHE.get(key); // موجود في ذاكرة الجلسة؟ فوري
+  const stored = await ADB.get(key); // موجود في التخزين الدائم؟ فوري أيضاً بلا أي توليد
+  if (stored) { AUDIO_CACHE.set(key, stored); return stored; }
   const all = narrationSegments(card, wordRepeat, detailedAudio);
   // العربية مستبعدة من الصوت بناءً على طلبك: النطق الناتج غير مقبول، والترجمة تبقى كاملة على الشاشة وفي التصدير النصي
   // العربية لا تُدمج في الملف المتواصل (صوت النظام لا يُنتج ملفاً)، لكنها تُنطق في وضع الكلمة المفردة
@@ -24960,7 +24998,8 @@ async function buildCardAudio(card) {
   const wav = await buildSegmentsAudio(segs, `"${card.word}"`);
   if (wav) {
     AUDIO_CACHE.set(key, wav);
-    if (AUDIO_CACHE.size > 40) AUDIO_CACHE.delete(AUDIO_CACHE.keys().next().value); // سقف معقول للذاكرة
+    if (AUDIO_CACHE.size > 40) AUDIO_CACHE.delete(AUDIO_CACHE.keys().next().value); // سقف ذاكرة الجلسة
+    ADB.set(key, wav); // حفظ دائم: لن يُولَّد هذا الصوت مرة أخرى أبداً
   }
   return wav;
 }
@@ -25119,6 +25158,7 @@ async function runPlayback(startAt) {
     }
   }
   stopped = true; playing = false; releaseWakeLock(); renderAudio();
+  setTimeout(() => prepareAudioInBackground(), 3000); // استئناف التحضير بعد انتهاء التشغيل
 }
 
 function updateMediaSession(word) {
@@ -25161,6 +25201,7 @@ function bindMediaSession(el, title) {
 function startAudio(at) {
   if (!playlist.length) { flash('No words in this playlist'); return; }
   if (!ttsReady) { flash('Audio unavailable here — see the notice above'); return; }
+  audioPrepAbort = true; // نوقف التحضير الخلفي فوراً: لا ننافس التشغيل على معالج الجوال
   unlockPiperAudio();
   window.speechSynthesis.cancel();
   startWakeKeeper();
@@ -25485,6 +25526,29 @@ function renderAudio() {
 // تسجيل عامل الخدمة للتثبيت كتطبيق (يتجاهل بصمت في الملف المحلي)
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) { try { navigator.serviceWorker.register('sw.js').catch(() => {}); } catch(e) {} }
 
+// ===== تحضير الصوت تلقائياً بالخلفية =====
+// يولّد صوت كل كلمة بهدوء أثناء استخدامك العادي للتطبيق، ويخزّنه دائماً.
+// النتيجة: حين تضغط تشغيل، الصوت جاهز مسبقاً — بلا أي انتظار.
+let audioPrepActive = false, audioPrepAbort = false;
+async function prepareAudioInBackground() {
+  if (audioPrepActive || !piperEnabled || !words.length) return;
+  audioPrepActive = true; audioPrepAbort = false;
+  const statusEl = document.getElementById('audio-prep-status');
+  let done = 0, made = 0;
+  for (const w of words) {
+    if (audioPrepAbort || !piperEnabled) break;
+    done++;
+    const key = cacheKey(w);
+    if (AUDIO_CACHE.has(key) || await ADB.get(key)) continue; // جاهز سلفاً
+    if (statusEl) statusEl.textContent = `🎧 Preparing audio in background… ${done}/${words.length}`;
+    try { if (await buildCardAudio(w)) made++; } catch(e) {}
+    await new Promise(r => setTimeout(r, 400)); // مهلة تُبقي التطبيق سلساً أثناء العمل
+  }
+  audioPrepActive = false;
+  if (statusEl) statusEl.textContent = made ? `✅ Audio ready for ${made} more word${made>1?'s':''}` : '';
+  if (statusEl && made) setTimeout(() => { if (statusEl) statusEl.textContent = ''; }, 6000);
+}
+
 async function autoPullOnStartup() {
   // نتأكد من أحدث نسخة تلقائياً عند كل فتح للتطبيق — بلا أي ضغطة، وبلا أي نافذة تصفح تحتاج تفاعل المستخدم أصلاً
   if (ghConf()) {
@@ -25510,6 +25574,7 @@ load().then(async () => {
   if (fsSupported) { await getLinkedHandle(); updateLinkStatus(); }
   await autoPullOnStartup(); // نتأكد أولاً أننا على أحدث نسخة قبل بدء أي مواكبة خلفية
   backgroundUpgrade(); // تبدأ بصمت بلا أي ضغطة — لا await حتى لا تؤخر ظهور الصفحة
+  setTimeout(() => prepareAudioInBackground(), 8000); // تحضير الصوت يبدأ بعد استقرار التطبيق
 });
 </script>
 </body>
