@@ -1,8 +1,88 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-27T20:43:34.873Z",
+ "exportedAt": "2026-07-27T20:43:55.543Z",
  "words": [
+  {
+   "id": 1785185030316,
+   "word": "compulsory",
+   "ipa": "/kəmˈpʌlsəri/",
+   "arabicPron": "كمبالسري",
+   "oxford": "3000",
+   "cefr": "B2",
+   "pos": [
+    "noun",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "Something that is compulsory or required.",
+     "ar": "شيء إلزامي أو إلزامي."
+    },
+    {
+     "pos": "adjective",
+     "en": "Required; obligatory; mandatory.",
+     "ar": "مطلوب ؛ إلزامي ؛ إلزامي."
+    },
+    {
+     "pos": "adjective",
+     "en": "Having the power of compulsion; constraining.",
+     "ar": "امتلاك قوة الإكراه ؛ التقييد."
+    }
+   ],
+   "inflections": [
+    "compulsory",
+    "compulsories"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "mandatory",
+     "ar": "المطبقة"
+    },
+    {
+     "en": "obligatory",
+     "ar": "إلزامية"
+    },
+    {
+     "en": "required",
+     "ar": "مطلوب"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "compulsory education",
+     "ar": "تعليم الزامي"
+    },
+    {
+     "en": "compulsory arbitration",
+     "ar": "تحكيم إجباري"
+    },
+    {
+     "en": "compulsory military",
+     "ar": "الجيش الإجباري"
+    },
+    {
+     "en": "made compulsory",
+     "ar": "إلزامية التنمية المهنية المستمرة"
+    }
+   ],
+   "examples": [
+    {
+     "en": "The ten-dollar fee was compulsory.",
+     "ar": "كانت الرسوم البالغة عشرة دولارات إلزامية."
+    },
+    {
+     "en": "Such compulsory measures are limited.",
+     "ar": "وهذه التدابير الإلزامية محدودة."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1785084977101,
    "word": "skiing",
