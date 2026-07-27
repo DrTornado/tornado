@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-27T00:23:45.098Z",
+ "exportedAt": "2026-07-27T00:24:13.286Z",
  "words": [
   {
    "id": 1785000460857,
@@ -7781,9 +7781,9 @@
    "due": 0
   },
   {
-   "right": 0,
+   "right": 1,
    "wrong": 0,
-   "last": null,
+   "last": "right",
    "id": 1784814298913,
    "word": "boon",
    "ipa": "/buːn/",
@@ -7885,8 +7885,8 @@
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
    "engineVersion": 2,
-   "interval": 0,
-   "due": 0
+   "interval": 1,
+   "due": 1785198249705
   },
   {
    "right": 0,
