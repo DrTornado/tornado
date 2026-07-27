@@ -24965,6 +24965,8 @@ function mergeSegments(segs) {
 const AUDIO_CACHE = new Map(); // ذاكرة سريعة داخل الجلسة
 // رقم إصدار الصوت: يُرفع مع أي تغيير في طريقة التوليد (وقفات، تقطيع، سرعة).
 // بدونه يبقى الصوت القديم المخزَّن يُشغَّل للأبد ولا يظهر أي إصلاح إطلاقاً.
+// ⚠️ لا تُرفع هذه القيمة إلا لضرورة قصوى: رفعها يمسح كل الأصوات المولَّدة ويجبر
+// المستخدم على انتظار توليدها كاملة من جديد. مثبَّتة عمداً.
 const AUDIO_VERSION = 6;
 function cacheKey(card) { return card.id + '|' + (detailedAudio?'d':'s') + '|' + wordRepeat + '|' + ENGINE_VERSION + '|a' + AUDIO_VERSION; }
 
@@ -25002,6 +25004,7 @@ const ADB = {
   },
 };
 
+let silentBuild = false; // أثناء التحضير الخلفي: لا رسائل تفصيلية مزعجة، فقط العدّاد الصغير
 async function buildSegmentsAudio(segs, label) {
   // يبني ملف WAV واحداً متواصلاً من كل مقاطع البطاقة — يشغَّل دفعة واحدة بلا أي حاجة لجافاسكريبت أثناء التشغيل نفسه، فيستمر مع إطفاء الشاشة
   const pcmChunks = [];
@@ -25009,7 +25012,7 @@ async function buildSegmentsAudio(segs, label) {
   for (let i = 0; i < segs.length; i++) {
     const seg = segs[i];
     if (stopped) return null;
-    piperStatus(`🎧 Preparing ${label || 'audio'} — part ${i + 1} of ${segs.length}… (first run downloads voices, please wait)`);
+    if (!silentBuild) piperStatus(`🎧 Preparing ${label || 'audio'} — part ${i + 1} of ${segs.length}…`);
     const wav = await piperGenerate(seg.text, seg.lang);
     if (!wav) { skipped++; continue; } // مقطع تعذّر توليده (لغة غير متاحة مثلاً)؟ نتخطاه بصمت ونكمل — لا نلغي الصوت كله ولا نلجأ لنطق آلي مشوَّه
     const parsed = parseWav(await wav.arrayBuffer());
@@ -25025,7 +25028,7 @@ async function buildSegmentsAudio(segs, label) {
     okCount++;
   }
   if (!fmt || !okCount) return null; // لم ينجح ولا مقطع واحد — عندها فقط نعتبرها فشلاً كاملاً
-  piperStatus(skipped ? `▶️ Playing real audio (${skipped} part${skipped>1?'s':''} skipped — voice unavailable)` : '▶️ Playing real audio');
+  if (!silentBuild) piperStatus('');
   return buildWav(fmt, pcmChunks);
 }
 // يبني صوت بطاقة واحدة (مع تخزين مؤقت) — لا يشغّل شيئاً، فقط يعيد ملف WAV جاهزاً
@@ -25685,8 +25688,10 @@ async function prepareAudioInBackground() {
     const key = cacheKey(w);
     if (AUDIO_CACHE.has(key) || await ADB.get(key)) continue; // جاهز سلفاً
     if (statusEl) statusEl.textContent = `🎧 Preparing audio in background… ${done}/${words.length}`;
+    silentBuild = true;
     try { if (await buildCardAudio(w)) made++; } catch(e) {}
-    await new Promise(r => setTimeout(r, 400)); // مهلة تُبقي التطبيق سلساً أثناء العمل
+    silentBuild = false;
+    await new Promise(r => setTimeout(r, 120)); // مهلة قصيرة تكفي لبقاء الواجهة سلسة
   }
   audioPrepActive = false;
   if (statusEl) statusEl.textContent = made ? `✅ Audio ready for ${made} more word${made>1?'s':''}` : '';
@@ -25718,7 +25723,7 @@ load().then(async () => {
   if (fsSupported) { await getLinkedHandle(); updateLinkStatus(); }
   await autoPullOnStartup(); // نتأكد أولاً أننا على أحدث نسخة قبل بدء أي مواكبة خلفية
   backgroundUpgrade(); // تبدأ بصمت بلا أي ضغطة — لا await حتى لا تؤخر ظهور الصفحة
-  setTimeout(() => prepareAudioInBackground(), 8000); // تحضير الصوت يبدأ بعد استقرار التطبيق
+  setTimeout(() => prepareAudioInBackground(), 3000); // يبدأ مبكراً حتى ينتهي بأسرع ما يمكن
 });
 </script>
 </body>
