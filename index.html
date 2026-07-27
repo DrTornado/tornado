@@ -24949,17 +24949,20 @@ function mergeSegments(segs) {
   const out = [];
   segs.forEach(s => {
     const last = out[out.length - 1];
-    const shortLabel = s.text.length < 28 || (last && last.text.length < 28); // عنوان أو كلمة مفردة: لا يُدمج
-    if (last && last.lang === s.lang && !shortLabel && (last.text.length + s.text.length) < 220) {
+    // لا ندمج أبداً عبر وقفة طويلة (≥600): تلك الوقفات هي ما يمنح النطق بنيته المفهومة
+    const bigPause = last && last.pause >= 600;
+    const isLabel = /:$/.test(s.text); // عنوان قسم جديد ("Synonyms:") لا يُدمج مع ما قبله
+    if (last && last.lang === s.lang && !bigPause && !isLabel && (last.text.length + s.text.length) < 220) {
       last.text += ' ' + s.text;
-    } else out.push({ text: s.text, lang: s.lang });
+      last.pause = s.pause; // الوقفة الفعلية هي وقفة آخر جزء مدموج
+    } else out.push({ text: s.text, lang: s.lang, pause: s.pause });
   });
   return out;
 }
 const AUDIO_CACHE = new Map(); // ذاكرة سريعة داخل الجلسة
 // رقم إصدار الصوت: يُرفع مع أي تغيير في طريقة التوليد (وقفات، تقطيع، سرعة).
 // بدونه يبقى الصوت القديم المخزَّن يُشغَّل للأبد ولا يظهر أي إصلاح إطلاقاً.
-const AUDIO_VERSION = 3;
+const AUDIO_VERSION = 4;
 function cacheKey(card) { return card.id + '|' + (detailedAudio?'d':'s') + '|' + wordRepeat + '|' + ENGINE_VERSION + '|a' + AUDIO_VERSION; }
 
 // ===== تخزين دائم للصوت المولَّد =====
@@ -25015,8 +25018,7 @@ async function buildSegmentsAudio(segs, label) {
     // ضمان محاذاة بيانات المقطع نفسه لحدود الإطار
     if (parsed.data.length % fmt.blockAlign) parsed.data = parsed.data.subarray(0, parsed.data.length - (parsed.data.length % fmt.blockAlign));
     pcmChunks.push(parsed.data);
-    // وقفة أطول بعد المقاطع القصيرة (الكلمة نفسها، العناوين) وأقصر بين جمل القوائم
-    pcmChunks.push(silenceBytes(fmt, seg.text.length < 28 ? 700 : 420));
+    pcmChunks.push(silenceBytes(fmt, seg.pause != null ? seg.pause : 450)); // الوقفة المحددة لدور هذا المقطع
     okCount++;
   }
   if (!fmt || !okCount) return null; // لم ينجح ولا مقطع واحد — عندها فقط نعتبرها فشلاً كاملاً
@@ -25288,45 +25290,47 @@ function narrationSegments(card, rep, detailed) {
   rep = Math.max(1, rep || 1);
   if (detailed == null) detailed = true; // التصدير النصي/الصوتي يشمل كل شيء دائماً؛ التشغيل المباشر وحده يمرّر إعداد المستخدم الفعلي
   const L = [];
-  const push = (text, lang) => {
+  // pause = مدة الصمت بعد المقطع بالمللي ثانية — تُحدَّد حسب دور المقطع لا حسب طوله،
+  // فيسمع المتعلّم بنية واضحة: كلمة … نوعها … معنى أول … مثال، بدل تيار متصل بلا فواصل.
+  const push = (text, lang, pause) => {
     if (!text) return;
-    const t = String(text).replace(/\.{2,}$/, '.').trim(); // منع النقطة المزدوجة حين ينتهي النص بنقطة أصلاً
-    L.push({ text: t, lang: lang || (isAr(t) ? 'ar-SA' : 'en-US') });
+    const t = String(text).replace(/\.{2,}$/, '.').trim();
+    L.push({ text: t, lang: lang || (isAr(t) ? 'ar-SA' : 'en-US'), pause: pause == null ? 450 : pause });
   };
-  for (let r = 0; r < rep; r++) push(card.word + '.', 'en-US');
+  for (let r = 0; r < rep; r++) push(card.word + '.', 'en-US', 1300); // الكلمة نفسها: أطول وقفة
   if (card.arabicPron) push(card.arabicPron, 'ar-SA');
-  if (arr(card.pos).length) push(card.pos.join(' and ') + '.', 'en-US');
+  if (arr(card.pos).length) push(card.pos.join(' and ') + '.', 'en-US', 900);
   const ms = arr(card.meanings);
   const pushPair = (m) => {
     for (let r = 0; r < rep; r++) {
-      push((typeof m === 'string' ? m : (m.en || '')) + '.', 'en-US');
+      push((typeof m === 'string' ? m : (m.en || '')) + '.', 'en-US', 900); // نهاية معنى كامل
       if (typeof m !== 'string' && m.ar) push(m.ar + '.', 'ar-SA');
     }
   };
   if (ms.length === 1) {
-    push('It means:', 'en-US');
+    push('It means:', 'en-US', 350);
     pushPair(ms[0]);
   } else if (ms.length > 1) {
-    push('This word has ' + ms.length + ' meanings.', 'en-US');
+    push('This word has ' + ms.length + ' meanings.', 'en-US', 800);
     ms.forEach((m, i) => {
       const posBit = (typeof m !== 'string' && m.pos) ? ', as a ' + m.pos : '';
-      push('Meaning ' + (ORD_EN[i] || String(i+1)) + posBit + ':', 'en-US');
+      push('Meaning ' + (ORD_EN[i] || String(i+1)) + posBit + ':', 'en-US', 350);
       pushPair(m);
     });
   }
   if (!detailed) return L; // يطابق التشغيل القديم بالضبط: بلا شرح كامل = الكلمة والمعاني فقط، بلا تصريفات/مرادفات/متلازمات/أمثلة/فروق
-  if (arr(card.inflections).length) push('Inflections: ' + card.inflections.join(', ') + '.', 'en-US');
+  if (arr(card.inflections).length) push('Inflections: ' + card.inflections.join(', ') + '.', 'en-US', 900);
   if (arr(card.synonyms).length) {
-    push('Synonyms:', 'en-US');
+    push('Synonyms:', 'en-US', 350);
     card.synonyms.forEach(s => { push((s.en || s) + '.', 'en-US'); if (s.ar) push(s.ar + '.', 'ar-SA'); });
   }
   if (arr(card.collocations).length) {
-    push('Common collocations:', 'en-US');
+    push('Common collocations:', 'en-US', 350);
     card.collocations.forEach(c => { push((c.en || c) + '.', 'en-US'); if (c.ar) push(c.ar + '.', 'ar-SA'); });
   }
   const exs = arr(card.examples).slice(0, 2);
   if (exs.length) {
-    push(exs.length > 1 ? 'Examples:' : 'Example:', 'en-US');
+    push(exs.length > 1 ? 'Examples:' : 'Example:', 'en-US', 350);
     exs.forEach(ex => pushPair(ex));
   }
   arr(card.differences).forEach(d => { push('Note the difference: ' + (d.en || d) + '.', 'en-US'); if (d.ar) push(d.ar + '.', 'ar-SA'); });
