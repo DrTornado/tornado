@@ -25116,7 +25116,7 @@ async function runPlayback(startAt) {
     // هذا هو الحل الجذري للتشغيل بالخلفية: بمجرد بدء التشغيل لا يحتاج النظام لأي جافاسكريبت
     // للانتقال بين الكلمات، فيستمر كاملاً حتى مع إطفاء الشاشة تماماً كمشغّل الموسيقى.
     const chunks = [];
-    let fmt = null;
+    let fmt = null, totalBytes = 0;
     const words2 = playlist.slice(startAt).concat(playlist.slice(0, startAt));
     for (let n = 0; n < words2.length && !stopped; n++) {
       const idx = playlist.indexOf(words2[n]);
@@ -25128,6 +25128,13 @@ async function runPlayback(startAt) {
       if (!parsed) continue;
       if (!fmt) fmt = parsed.fmt;
       chunks.push(parsed.data, silenceBytes(fmt, 900));
+      totalBytes += parsed.data.length;
+      // حماية الذاكرة: ملف واحد ضخم جداً قد يفشل بناؤه على الجوال ويظهر كأن الصوت لا يعمل.
+      // نتوقف عند حد آمن ونشغّل ما بنيناه — يكفي لعشرات الدقائق من الاستماع المتواصل.
+      if (totalBytes > 28 * 1024 * 1024) {
+        piperStatus(`▶️ Playing ${n} words continuously (memory limit reached)`);
+        break;
+      }
     }
     if (stopped) { /* ألغى المستخدم أثناء البناء */ }
     else if (fmt && chunks.length) {
