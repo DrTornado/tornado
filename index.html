@@ -59,7 +59,9 @@
   .bigword { font-size:32px; font-weight:800; letter-spacing:-.01em; text-align:center; word-break:break-word; z-index:1; color:#1B212B; }
   .facelabel { position:absolute; top:14px; left:14px; font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#8A7A50; background:#F1E9D2; border-radius:10px; padding:4px 10px; z-index:1; }
   .facebadge { background:#EFE7D0; border:1px solid #D9CBA0; border-radius:6px; padding:3px 9px; font-size:11.5px; color:#6B5B3E; font-weight:600; }
-  .player { background:#1B212B; border-radius:12px; padding:20px 16px; text-align:center; margin-bottom:14px; }
+  .player { background:linear-gradient(180deg,#1B212B,#161B23); border-radius:16px; padding:22px 16px 18px; text-align:center; margin-bottom:14px; box-shadow:0 4px 16px rgba(0,0,0,.25); }
+  .pillbtn { background:#242B36; color:#B9C2D0; border:1px solid #3A4453; border-radius:16px; padding:6px 14px; font-family:inherit; font-size:12.5px; cursor:pointer; }
+  .pillbtn:active { background:#2F3846; }
   .playbtn { width:64px; height:64px; border-radius:50%; background:#E8B04B; color:#242B36; border:none; font-size:24px; cursor:pointer; }
   .ctrlbtn { width:48px; height:48px; border-radius:50%; background:#3A4453; color:#E8E4DA; border:none; font-size:18px; cursor:pointer; }
   .modebtn { background:#3A4453; border:1px solid #3A4453; color:#8A93A3; border-radius:8px; padding:9px 12px; font-family:inherit; font-size:13px; cursor:pointer; }
@@ -25545,19 +25547,34 @@ function renderAudio() {
     </div>
 
     <div class="player">
-      <div class="${playing?'pulse':''}" style="font-size:13px;color:#8A93A3;margin-bottom:4px;">
-        ${playing ? 'Now playing' : 'Stopped'} — ${playScope==='single' ? 'Single word' : plName} — ${Math.min(trackIdx,playlist.length-1)+1} of ${playlist.length}
+      <div style="font-size:12px;color:#8A93A3;margin-bottom:2px;">
+        ${Math.min(trackIdx,playlist.length-1)+1} / ${playlist.length} — ${playScope==='single' ? 'Single word' : plName}
       </div>
-      ${playing ? `<div style="font-size:11px;margin-bottom:4px;color:${wakeStatus==='on' ? '#5B9E6F' : '#D96A5B'};">
-        ${wakeStatus==='on' ? '🔆 Screen will stay on' : wakeStatus==='unsupported' ? '⚠️ Keep-screen-on not supported by this browser — raise your screen timeout in phone settings' : '⚠️ Keep-screen-on inactive'}
-      </div>` : ''}
-      <div style="font-size:26px;font-weight:700;margin:6px 0;">${esc(t.word)}</div>
-      <div class="ar" style="font-size:15px;color:#8A93A3;margin-bottom:16px;">${esc(firstMeaningLine(t))}</div>
-      <div style="display:flex;justify-content:center;align-items:center;gap:16px;">
+      <div style="font-size:30px;font-weight:800;margin:10px 0 4px;line-height:1.25;">${esc(t.word)}</div>
+      <div class="ar" style="font-size:16px;color:#B9C2D0;margin-bottom:14px;line-height:1.6;">${esc(firstMeaningLine(t))}</div>
+
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;">
+        <button class="pillbtn" id="spd-cycle">${speed===0.7?'0.7x':speed===0.8?'0.8x':speed===0.9?'0.9x':speed===1?'1.0x':'1.2x'}</button>
+        <button class="pillbtn" id="det-cycle">${detailedAudio?'Full':'Short'}</button>
+        <button class="pillbtn" id="shuf-cycle">${shuffle?'Shuffle':'In order'}</button>
+        <button class="pillbtn" id="rep-cycle">${listRepeat===Infinity?'Loop ∞':'x'+listRepeat}</button>
+      </div>
+
+      <div id="seekwrap" style="padding:0 4px;margin-bottom:6px;cursor:pointer;">
+        <div style="height:6px;background:#3A4453;border-radius:3px;overflow:hidden;">
+          <div id="seekfill" style="height:100%;width:0%;background:linear-gradient(90deg,#E8B04B,#D9973A);border-radius:3px;"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:#8A93A3;margin-top:4px;">
+          <span id="tcur">0:00</span><span id="tdur">0:00</span>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:center;align-items:center;gap:22px;margin-top:6px;">
         <button class="ctrlbtn" id="prev">⏮</button>
         <button class="playbtn" id="playpause">${playing ? '⏸' : '▶'}</button>
         <button class="ctrlbtn" id="next">⏭</button>
       </div>
+      ${playing && wakeStatus!=='on' ? `<div style="font-size:11px;margin-top:8px;color:#8A93A3;">Screen may turn off — audio continues</div>` : ''}
     </div>
 
     <div style="font-size:13px;color:#8A93A3;margin-bottom:8px;">${playScope==='single' ? 'Tap ▶ to select and play a word — tap the word itself to read its card without interrupting playback:' : 'Tap ▶ to jump playback to a word — tap the word itself to read its card without interrupting playback:'}</div>
@@ -25582,12 +25599,59 @@ function renderAudio() {
   document.getElementById('scope-list').onclick = () => { stopAudio(); playScope = 'list'; buildPlaylist(); renderAudio(); };
   document.getElementById('scope-single').onclick = () => { stopAudio(); playScope = 'single'; buildPlaylist(); renderAudio(); };
   document.getElementById('playpause').onclick = () => playing ? stopAudio() : startAudio(trackIdx);
+  // ===== أزرار الواجهة الجديدة =====
+  const seekEl = document.getElementById('seekwrap');
+  const fillEl = document.getElementById('seekfill');
+  const curEl = document.getElementById('tcur'), durEl = document.getElementById('tdur');
+  const fmtT = sec => { sec = Math.max(0, Math.floor(sec||0)); return Math.floor(sec/60) + ':' + String(sec%60).padStart(2,'0'); };
+  if (seekEl) seekEl.onclick = ev => {
+    const el = piperAudioEl;
+    if (!el || !el.duration || !isFinite(el.duration)) return;
+    const r = seekEl.getBoundingClientRect();
+    el.currentTime = Math.max(0, Math.min(1, (ev.clientX - r.left) / r.width)) * el.duration;
+  };
+  // تحديث شريط التقدم بشكل مستمر أثناء التشغيل
+  if (window.__seekTimer) clearInterval(window.__seekTimer);
+  window.__seekTimer = setInterval(() => {
+    const el = piperAudioEl, f = document.getElementById('seekfill');
+    if (!el || !f) return;
+    const d = el.duration && isFinite(el.duration) ? el.duration : 0;
+    f.style.width = d ? ((el.currentTime / d) * 100) + '%' : '0%';
+    const c = document.getElementById('tcur'), du = document.getElementById('tdur');
+    if (c) c.textContent = fmtT(el.currentTime);
+    if (du) du.textContent = fmtT(d);
+  }, 500);
+
+  const spdBtn = document.getElementById('spd-cycle');
+  if (spdBtn) spdBtn.onclick = () => {
+    const opts = [0.7, 0.8, 0.9, 1.0, 1.2];
+    speed = opts[(opts.indexOf(speed) + 1) % opts.length];
+    [piperAudioEl, piperPronEl].forEach(el => { try { if (el) el.playbackRate = speed; } catch(e) {} }); // فوري أثناء التشغيل
+    renderAudio();
+  };
+  const detBtn = document.getElementById('det-cycle');
+  if (detBtn) detBtn.onclick = () => { detailedAudio = !detailedAudio; renderAudio(); };
+  const shufBtn = document.getElementById('shuf-cycle');
+  if (shufBtn) shufBtn.onclick = () => { shuffle = !shuffle; buildPlaylist(); renderAudio(); };
+  const repBtn = document.getElementById('rep-cycle');
+  if (repBtn) repBtn.onclick = () => {
+    const opts = [1, 2, 3, Infinity];
+    listRepeat = opts[(opts.indexOf(listRepeat) + 1) % opts.length];
+    if (piperAudioEl) piperAudioEl.loop = (listRepeat === Infinity);
+    renderAudio();
+  };
+
   document.getElementById('next').onclick = () => jumpTo((trackIdx+1) % playlist.length);
   document.getElementById('prev').onclick = () => jumpTo((trackIdx-1+playlist.length) % playlist.length);
   const lrep = document.getElementById('lrep');
   if (lrep) lrep.onchange = e => listRepeat = e.target.value === 'Infinity' ? Infinity : Number(e.target.value);
   document.getElementById('wrep').onchange = e => wordRepeat = Number(e.target.value);
-  document.getElementById('spd').onchange = e => speed = Number(e.target.value);
+  document.getElementById('spd').onchange = e => {
+    speed = Number(e.target.value);
+    // تطبيق فوري على الصوت الجاري — بلا إعادة تشغيل ولا انتظار
+    [piperAudioEl, piperPronEl].forEach(el => { try { if (el) el.playbackRate = speed; } catch(e2) {} });
+    if (tab === 'audio') renderAudio();
+  };
   document.getElementById('det').onchange = e => detailedAudio = e.target.checked;
   const shufEl = document.getElementById('shuf');
   if (shufEl) shufEl.onchange = e => { shuffle = e.target.checked; const was = playing; stopAudio(); buildPlaylist(); trackIdx = 0; renderAudio(); if (was) setTimeout(() => startAudio(0),150); };
