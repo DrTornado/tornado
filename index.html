@@ -25676,34 +25676,6 @@ function renderAudio() {
         : 'Plays only the word selected below, then stops.'}</div>
     </div>
 
-    <div class="optbox">
-      <div class="opttitle">3 — Repeat settings</div>
-      ${playScope==='list' ? `
-      <div class="row"><span>Repeat the whole playlist</span>
-        <select class="inp" id="lrep">
-          <option value="1" ${listRepeat===1?'selected':''}>Once</option>
-          <option value="2" ${listRepeat===2?'selected':''}>Twice</option>
-          <option value="3" ${listRepeat===3?'selected':''}>3 times</option>
-          <option value="Infinity" ${listRepeat===Infinity?'selected':''}>Loop ∞</option>
-        </select></div>` : ''}
-      <div class="row"><span>Repeat meanings &amp; examples</span>
-        <select class="inp" id="wrep">
-          <option value="1" ${wordRepeat===1?'selected':''}>Once</option>
-          <option value="2" ${wordRepeat===2?'selected':''}>Twice</option>
-          <option value="3" ${wordRepeat===3?'selected':''}>3 times</option>
-        </select></div>
-      <div class="row"><span>Speech speed</span>
-        <select class="inp" id="spd">
-          <option value="0.7" ${speed===0.7?'selected':''}>Slow</option>
-          <option value="0.9" ${speed===0.9?'selected':''}>Normal</option>
-          <option value="1.1" ${speed===1.1?'selected':''}>Fast</option>
-        </select></div>
-      <div class="row"><span>Full explanation (synonyms, collocations, examples)</span>
-        <input type="checkbox" id="det" ${detailedAudio?'checked':''} style="width:20px;height:20px;accent-color:#E8B04B;"></div>
-      ${playScope==='list' ? `
-      <div class="row"><span>Shuffle order</span>
-        <input type="checkbox" id="shuf" ${shuffle?'checked':''} style="width:20px;height:20px;accent-color:#E8B04B;"></div>` : ''}
-    </div>
 
     `}
 
@@ -25810,18 +25782,6 @@ function renderAudio() {
 
   document.getElementById('next').onclick = () => jumpTo((trackIdx+1) % playlist.length);
   document.getElementById('prev').onclick = () => jumpTo((trackIdx-1+playlist.length) % playlist.length);
-  const lrep = document.getElementById('lrep');
-  if (lrep) lrep.onchange = e => listRepeat = e.target.value === 'Infinity' ? Infinity : Number(e.target.value);
-  document.getElementById('wrep').onchange = e => wordRepeat = Number(e.target.value);
-  document.getElementById('spd').onchange = e => {
-    speed = Number(e.target.value);
-    // تطبيق فوري على الصوت الجاري — بلا إعادة تشغيل ولا انتظار
-    [piperAudioEl, piperPronEl].forEach(el => { try { if (el) el.playbackRate = speed; } catch(e2) {} });
-    if (tab === 'audio') renderAudio();
-  };
-  document.getElementById('det').onchange = e => detailedAudio = e.target.checked;
-  const shufEl = document.getElementById('shuf');
-  if (shufEl) shufEl.onchange = e => { shuffle = e.target.checked; const was = playing; stopAudio(); buildPlaylist(); trackIdx = 0; renderAudio(); if (was) setTimeout(() => startAudio(0),150); };
   pane.querySelectorAll('[data-jump]').forEach(b => b.onclick = () => {
     const i = Number(b.dataset.jump);
     if (playScope === 'single') { stopAudio(); trackIdx = i; setTimeout(() => startAudio(i), 150); }
