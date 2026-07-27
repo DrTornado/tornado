@@ -60,11 +60,28 @@
   .facelabel { position:absolute; top:14px; left:14px; font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#8A7A50; background:#F1E9D2; border-radius:10px; padding:4px 10px; z-index:1; }
   .facebadge { background:#EFE7D0; border:1px solid #D9CBA0; border-radius:6px; padding:3px 9px; font-size:11.5px; color:#6B5B3E; font-weight:600; }
   .player { background:linear-gradient(180deg,#1B212B,#161B23); border-radius:16px; padding:22px 16px 18px; text-align:center; margin-bottom:14px; box-shadow:0 4px 16px rgba(0,0,0,.25); }
-  /* وضع التركيز: مشغّل بملء الشاشة، الكلمة في المنتصف والتحكم أسفلها — كتطبيقات الاستماع */
-  .player.focus { min-height:78vh; display:flex; flex-direction:column; justify-content:center;
-    background:linear-gradient(180deg,#171C24 0%,#1E2733 55%,#24506B 100%); border-radius:20px; padding:28px 18px; }
-  .player.focus .bigw { font-size:40px !important; margin:0 0 10px !important; }
-  .player.focus .arline2 { font-size:19px !important; margin-bottom:26px !important; }
+  /* ===== شاشة المشغّل الكاملة: تفتح تلقائياً عند التشغيل ===== */
+  #fullplayer { position:fixed; inset:0; z-index:120; display:flex; flex-direction:column;
+    background:#0B0E12; color:#fff; }
+  #fp-top { display:flex; align-items:center; gap:14px; padding:14px 16px; font-size:15px; color:#DCE3EC; }
+  #fp-top .fp-back { background:none; border:none; color:#fff; font-size:26px; cursor:pointer; padding:0 4px; line-height:1; }
+  #fp-mid { flex:1 1 auto; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px 24px; text-align:center; }
+  #fp-word { font-size:38px; font-weight:800; line-height:1.25; margin-bottom:14px; }
+  #fp-mean { font-size:19px; color:#C7D2DE; line-height:1.7; }
+  #fp-bottom { background:linear-gradient(180deg,#1E4A5F 0%,#3E8CA8 100%); padding:18px 16px 26px; }
+  #fp-pills { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:18px; }
+  .fp-pill { background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.65); border-radius:22px;
+    padding:8px 16px; font-family:inherit; font-size:13.5px; cursor:pointer; }
+  .fp-pill:active { background:rgba(255,255,255,.15); }
+  #fp-seek { height:4px; background:rgba(255,255,255,.35); border-radius:2px; position:relative; margin:0 6px 6px; cursor:pointer; }
+  #fp-seekfill { height:100%; background:#fff; border-radius:2px; width:0%; }
+  #fp-knob { position:absolute; top:50%; width:18px; height:18px; background:#fff; border-radius:50%;
+    transform:translate(-50%,-50%); left:0%; box-shadow:0 1px 4px rgba(0,0,0,.4); }
+  #fp-times { display:flex; justify-content:space-between; font-size:13px; color:#EAF2F7; margin:0 6px 16px; }
+  #fp-ctrls { display:flex; align-items:center; justify-content:center; gap:30px; }
+  .fp-ctrl { background:none; border:none; color:#fff; font-size:30px; cursor:pointer; padding:4px; line-height:1; }
+  #fp-play { width:76px; height:76px; border-radius:50%; background:#fff; color:#2C6B84; border:none;
+    font-size:30px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 14px rgba(0,0,0,.3); }
   .pillbtn { background:#242B36; color:#B9C2D0; border:1px solid #3A4453; border-radius:16px; padding:6px 14px; font-family:inherit; font-size:12.5px; cursor:pointer; }
   .pillbtn:active { background:#2F3846; }
   .playbtn { width:64px; height:64px; border-radius:50%; background:#E8B04B; color:#242B36; border:none; font-size:24px; cursor:pointer; }
@@ -145,6 +162,34 @@
   </div>
 
   <div id="notice" class="notice hidden"></div>
+
+  <div id="fullplayer" class="hidden">
+    <div id="fp-top">
+      <button class="fp-back" id="fp-close">‹</button>
+      <span id="fp-counter">1 / 1</span>
+      <span style="flex:1;text-align:center;font-weight:600;">TORNADO</span>
+      <span style="width:28px;"></span>
+    </div>
+    <div id="fp-mid">
+      <div id="fp-word">—</div>
+      <div id="fp-mean"></div>
+    </div>
+    <div id="fp-bottom">
+      <div id="fp-pills">
+        <button class="fp-pill" id="fp-speed">1.0X</button>
+        <button class="fp-pill" id="fp-detail">Full</button>
+        <button class="fp-pill" id="fp-order">In order</button>
+        <button class="fp-pill" id="fp-repeat">x1</button>
+      </div>
+      <div id="fp-seek"><div id="fp-seekfill"></div><div id="fp-knob"></div></div>
+      <div id="fp-times"><span id="fp-cur">0:00</span><span id="fp-dur">0:00</span></div>
+      <div id="fp-ctrls">
+        <button class="fp-ctrl" id="fp-prev">⏮</button>
+        <button id="fp-play">⏸</button>
+        <button class="fp-ctrl" id="fp-next">⏭</button>
+      </div>
+    </div>
+  </div>
 
   <div id="pane-add">
     <div style="display:flex;gap:8px;margin-bottom:16px;">
@@ -24743,7 +24788,78 @@ async function getArabicIdMap() {
 let piperMod = null, piperLoadPromise = null, piperEnabled = true; // piperEnabled يُقفَل تلقائياً بلا رجعة لهذي الجلسة لو فشل التحميل مرة
 let piperAudioEl = null, piperPronEl = null;
 let playlistMarks = []; // مواضع الكلمات بالثواني داخل الملف الموحّد — أساس التنقل الفوري
-let playerFocus = false; // وضع المشغّل الكامل: شاشة نظيفة بلا إعدادات ولا قوائم
+// ===== شاشة المشغّل الكاملة: تفتح تلقائياً عند بدء التشغيل =====
+const SPD_LABEL = { 0.7:'0.7X', 0.8:'0.8X', 0.9:'0.9X', 1:'1.0X', 1.2:'1.2X' };
+function fpEl(id) { return document.getElementById(id); }
+function openFullPlayer() {
+  const fp = fpEl('fullplayer');
+  if (!fp) return;
+  fp.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  updateFullPlayer();
+}
+function closeFullPlayer() {
+  const fp = fpEl('fullplayer');
+  if (!fp) return;
+  fp.classList.add('hidden');
+  document.body.style.overflow = '';
+}
+function updateFullPlayer() {
+  const fp = fpEl('fullplayer');
+  if (!fp || fp.classList.contains('hidden')) return;
+  const t = playlist[Math.min(trackIdx, playlist.length - 1)];
+  if (t) {
+    fpEl('fp-word').textContent = t.word;
+    fpEl('fp-mean').textContent = firstMeaningLine(t);
+    fpEl('fp-counter').textContent = (Math.min(trackIdx, playlist.length-1) + 1) + ' / ' + playlist.length;
+  }
+  fpEl('fp-speed').textContent = SPD_LABEL[speed] || (speed + 'X');
+  fpEl('fp-detail').textContent = detailedAudio ? 'Full' : 'Short';
+  fpEl('fp-order').textContent = shuffle ? 'Shuffle' : 'In order';
+  fpEl('fp-repeat').textContent = listRepeat === Infinity ? 'Loop' : 'x' + listRepeat;
+  fpEl('fp-play').textContent = playing ? '⏸' : '▶';
+  const el = piperAudioEl;
+  const d = el && el.duration && isFinite(el.duration) ? el.duration : 0;
+  const pct = d ? (el.currentTime / d) * 100 : 0;
+  fpEl('fp-seekfill').style.width = pct + '%';
+  fpEl('fp-knob').style.left = pct + '%';
+  const f = sec => { sec = Math.max(0, Math.floor(sec||0)); return Math.floor(sec/60) + ':' + String(sec%60).padStart(2,'0'); };
+  fpEl('fp-cur').textContent = f(el ? el.currentTime : 0);
+  fpEl('fp-dur').textContent = f(d);
+}
+setInterval(updateFullPlayer, 400); // تحديث مستمر أثناء التشغيل
+document.addEventListener('DOMContentLoaded', () => {}, { once: true });
+// ربط أزرار الشاشة الكاملة مرة واحدة (العناصر ثابتة لا تُعاد بناؤها)
+(function bindFullPlayer() {
+  const on = (id, fn) => { const e = fpEl(id); if (e) e.onclick = fn; };
+  on('fp-close', () => closeFullPlayer());
+  on('fp-play', () => { playing ? stopAudio() : startAudio(trackIdx); setTimeout(updateFullPlayer, 100); });
+  on('fp-next', () => { jumpTo((trackIdx + 1) % playlist.length); setTimeout(updateFullPlayer, 100); });
+  on('fp-prev', () => { jumpTo((trackIdx - 1 + playlist.length) % playlist.length); setTimeout(updateFullPlayer, 100); });
+  on('fp-speed', () => {
+    const o = [0.7, 0.8, 0.9, 1.0, 1.2];
+    speed = o[(o.indexOf(speed) + 1) % o.length];
+    [piperAudioEl, piperPronEl].forEach(el => { try { if (el) el.playbackRate = speed; } catch(e) {} });
+    updateFullPlayer(); if (tab === 'audio') renderAudio();
+  });
+  on('fp-detail', () => { detailedAudio = !detailedAudio; updateFullPlayer(); if (tab==='audio') renderAudio(); });
+  on('fp-order', () => { shuffle = !shuffle; buildPlaylist(); updateFullPlayer(); if (tab==='audio') renderAudio(); });
+  on('fp-repeat', () => {
+    const o = [1, 2, 3, Infinity];
+    listRepeat = o[(o.indexOf(listRepeat) + 1) % o.length];
+    if (piperAudioEl) piperAudioEl.loop = (listRepeat === Infinity);
+    updateFullPlayer(); if (tab==='audio') renderAudio();
+  });
+  const seek = fpEl('fp-seek');
+  if (seek) seek.onclick = ev => {
+    const el = piperAudioEl;
+    if (!el || !el.duration || !isFinite(el.duration)) return;
+    const r = seek.getBoundingClientRect();
+    el.currentTime = Math.max(0, Math.min(1, (ev.clientX - r.left) / r.width)) * el.duration;
+    updateFullPlayer();
+  };
+})();
+let playerFocus = false;
 // تنقل حقيقي داخل الملف الجاري: قفزة بالثواني، بلا إعادة بناء ولا تعليق
 function seekToWord(i) {
   const el = piperAudioEl;
@@ -25212,6 +25328,7 @@ async function runPlayback(startAt) {
         if (w >= 0 && w !== trackIdx) {
           trackIdx = w;
           if (tab === 'audio') renderAudio();
+          updateFullPlayer();
           if (playlist[w]) updateMediaSession(playlist[w].word);
         }
       };
@@ -25280,6 +25397,7 @@ function startAudio(at) {
   if (!playlist.length) { flash('No words in this playlist'); return; }
   if (!ttsReady) { flash('Audio unavailable here — see the notice above'); return; }
   audioPrepAbort = true; // نوقف التحضير الخلفي فوراً: لا ننافس التشغيل على معالج الجوال
+  openFullPlayer(); // شاشة المشغّل الكاملة تفتح تلقائياً مع بدء التشغيل
   unlockPiperAudio();
   window.speechSynthesis.cancel();
   startWakeKeeper();
