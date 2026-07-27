@@ -60,6 +60,11 @@
   .facelabel { position:absolute; top:14px; left:14px; font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#8A7A50; background:#F1E9D2; border-radius:10px; padding:4px 10px; z-index:1; }
   .facebadge { background:#EFE7D0; border:1px solid #D9CBA0; border-radius:6px; padding:3px 9px; font-size:11.5px; color:#6B5B3E; font-weight:600; }
   .player { background:linear-gradient(180deg,#1B212B,#161B23); border-radius:16px; padding:22px 16px 18px; text-align:center; margin-bottom:14px; box-shadow:0 4px 16px rgba(0,0,0,.25); }
+  /* وضع التركيز: مشغّل بملء الشاشة، الكلمة في المنتصف والتحكم أسفلها — كتطبيقات الاستماع */
+  .player.focus { min-height:78vh; display:flex; flex-direction:column; justify-content:center;
+    background:linear-gradient(180deg,#171C24 0%,#1E2733 55%,#24506B 100%); border-radius:20px; padding:28px 18px; }
+  .player.focus .bigw { font-size:40px !important; margin:0 0 10px !important; }
+  .player.focus .arline2 { font-size:19px !important; margin-bottom:26px !important; }
   .pillbtn { background:#242B36; color:#B9C2D0; border:1px solid #3A4453; border-radius:16px; padding:6px 14px; font-family:inherit; font-size:12.5px; cursor:pointer; }
   .pillbtn:active { background:#2F3846; }
   .playbtn { width:64px; height:64px; border-radius:50%; background:#E8B04B; color:#242B36; border:none; font-size:24px; cursor:pointer; }
@@ -24738,6 +24743,7 @@ async function getArabicIdMap() {
 let piperMod = null, piperLoadPromise = null, piperEnabled = true; // piperEnabled يُقفَل تلقائياً بلا رجعة لهذي الجلسة لو فشل التحميل مرة
 let piperAudioEl = null, piperPronEl = null;
 let playlistMarks = []; // مواضع الكلمات بالثواني داخل الملف الموحّد — أساس التنقل الفوري
+let playerFocus = false; // وضع المشغّل الكامل: شاشة نظيفة بلا إعدادات ولا قوائم
 // تنقل حقيقي داخل الملف الجاري: قفزة بالثواني، بلا إعادة بناء ولا تعليق
 function seekToWord(i) {
   const el = piperAudioEl;
@@ -25508,6 +25514,7 @@ function renderAudio() {
     </div>
 
     ${playlist.length ? `
+    ${playerFocus ? '' : `
 
     <div class="optbox">
       <div class="opttitle">2 — What to play</div>
@@ -25549,12 +25556,14 @@ function renderAudio() {
         <input type="checkbox" id="shuf" ${shuffle?'checked':''} style="width:20px;height:20px;accent-color:#E8B04B;"></div>` : ''}
     </div>
 
-    <div class="player">
+    `}
+
+    <div class="player ${playerFocus?'focus':''}">
       <div style="font-size:12px;color:#8A93A3;margin-bottom:2px;">
         ${Math.min(trackIdx,playlist.length-1)+1} / ${playlist.length} — ${playScope==='single' ? 'Single word' : plName}
       </div>
-      <div style="font-size:30px;font-weight:800;margin:10px 0 4px;line-height:1.25;">${esc(t.word)}</div>
-      <div class="ar" style="font-size:16px;color:#B9C2D0;margin-bottom:14px;line-height:1.6;">${esc(firstMeaningLine(t))}</div>
+      <div class="bigw" style="font-size:30px;font-weight:800;margin:10px 0 4px;line-height:1.25;">${esc(t.word)}</div>
+      <div class="ar arline2" style="font-size:16px;color:#B9C2D0;margin-bottom:14px;line-height:1.6;">${esc(firstMeaningLine(t))}</div>
 
       <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;">
         <button class="pillbtn" id="spd-cycle">${speed===0.7?'0.7x':speed===0.8?'0.8x':speed===0.9?'0.9x':speed===1?'1.0x':'1.2x'}</button>
@@ -25577,9 +25586,13 @@ function renderAudio() {
         <button class="playbtn" id="playpause">${playing ? '⏸' : '▶'}</button>
         <button class="ctrlbtn" id="next">⏭</button>
       </div>
+      <div style="margin-top:14px;">
+        <button class="pillbtn" id="focus-toggle">${playerFocus ? '⚙️ Show settings' : '🎧 Focus mode'}</button>
+      </div>
       ${playing && wakeStatus!=='on' ? `<div style="font-size:11px;margin-top:8px;color:#8A93A3;">Screen may turn off — audio continues</div>` : ''}
     </div>
 
+    ${playerFocus ? '' : `
     <div style="font-size:13px;color:#8A93A3;margin-bottom:8px;">${playScope==='single' ? 'Tap ▶ to select and play a word — tap the word itself to read its card without interrupting playback:' : 'Tap ▶ to jump playback to a word — tap the word itself to read its card without interrupting playback:'}</div>
     <div>
       ${playlist.map((x,i) => `
@@ -25591,7 +25604,7 @@ function renderAudio() {
           </div>
           ${audioExpanded.has(x.id) ? `<div class="actions" style="margin-top:2px;">${entryHtml(x)}</div>` : ''}
         </div>`).join('')}
-    </div>`
+    </div>`}`
     : `<p class="muted">No words in ${plName} yet.</p>`}`;
 
   pane.querySelectorAll('[data-pf]').forEach(c => c.onclick = () => {
@@ -25625,6 +25638,8 @@ function renderAudio() {
     if (du) du.textContent = fmtT(d);
   }, 500);
 
+  const focusBtn = document.getElementById('focus-toggle');
+  if (focusBtn) focusBtn.onclick = () => { playerFocus = !playerFocus; renderAudio(); window.scrollTo({top:0,behavior:'instant'}); };
   const spdBtn = document.getElementById('spd-cycle');
   if (spdBtn) spdBtn.onclick = () => {
     const opts = [0.7, 0.8, 0.9, 1.0, 1.2];
