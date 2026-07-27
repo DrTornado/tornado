@@ -24957,7 +24957,10 @@ function mergeSegments(segs) {
   return out;
 }
 const AUDIO_CACHE = new Map(); // ذاكرة سريعة داخل الجلسة
-function cacheKey(card) { return card.id + '|' + (detailedAudio?'d':'s') + '|' + wordRepeat + '|' + ENGINE_VERSION; }
+// رقم إصدار الصوت: يُرفع مع أي تغيير في طريقة التوليد (وقفات، تقطيع، سرعة).
+// بدونه يبقى الصوت القديم المخزَّن يُشغَّل للأبد ولا يظهر أي إصلاح إطلاقاً.
+const AUDIO_VERSION = 3;
+function cacheKey(card) { return card.id + '|' + (detailedAudio?'d':'s') + '|' + wordRepeat + '|' + ENGINE_VERSION + '|a' + AUDIO_VERSION; }
 
 // ===== تخزين دائم للصوت المولَّد =====
 // جوهر الحل النهائي للتأخير: كل كلمة تُولَّد مرة واحدة فقط في عمر التطبيق، ثم تُحفظ في قاعدة
@@ -25006,6 +25009,11 @@ async function buildSegmentsAudio(segs, label) {
     const parsed = parseWav(await wav.arrayBuffer());
     if (!parsed) { skipped++; continue; }
     if (!fmt) fmt = parsed.fmt;
+    // رفض أي مقطع بصيغة صوتية مختلفة — دمجه يفسد الملف كله ويحوّله لضجيج
+    else if (parsed.fmt.sampleRate !== fmt.sampleRate || parsed.fmt.blockAlign !== fmt.blockAlign
+             || parsed.fmt.bitsPerSample !== fmt.bitsPerSample || parsed.fmt.channels !== fmt.channels) { skipped++; continue; }
+    // ضمان محاذاة بيانات المقطع نفسه لحدود الإطار
+    if (parsed.data.length % fmt.blockAlign) parsed.data = parsed.data.subarray(0, parsed.data.length - (parsed.data.length % fmt.blockAlign));
     pcmChunks.push(parsed.data);
     // وقفة أطول بعد المقاطع القصيرة (الكلمة نفسها، العناوين) وأقصر بين جمل القوائم
     pcmChunks.push(silenceBytes(fmt, seg.text.length < 28 ? 700 : 420));
@@ -25160,6 +25168,8 @@ async function runPlayback(startAt) {
       const parsed = parseWav(await wav.arrayBuffer());
       if (!parsed) continue;
       if (!fmt) fmt = parsed.fmt;
+      else if (parsed.fmt.sampleRate !== fmt.sampleRate || parsed.fmt.blockAlign !== fmt.blockAlign) continue; // صيغة مختلفة تفسد الملف
+      if (parsed.data.length % fmt.blockAlign) parsed.data = parsed.data.subarray(0, parsed.data.length - (parsed.data.length % fmt.blockAlign));
       // نسجّل زمن بداية كل كلمة داخل الملف الموحّد — يتيح التنقل بينها بالثواني بدل إعادة البناء
       wordMarks.push({ idx: idx >= 0 ? idx : n, time: totalBytes / (fmt.sampleRate * fmt.blockAlign) });
       chunks.push(parsed.data, silenceBytes(fmt, 900));
@@ -25340,8 +25350,11 @@ function parseWav(buf) {
   return { fmt, data: new Uint8Array(buf, dataOffset, Math.min(dataLength, buf.byteLength - dataOffset)) };
 }
 function silenceBytes(fmt, ms) {
-  const bytes = Math.round(fmt.sampleRate * fmt.blockAlign * ms / 1000);
-  return new Uint8Array(bytes); // أصفار = صمت رقمي تام (يعمل مع PCM موقّع وغير موقّع بلا فرق مسموع)
+  let bytes = Math.round(fmt.sampleRate * fmt.blockAlign * ms / 1000);
+  // حاسم: الطول يجب أن يكون مضاعفاً تاماً لحجم الإطار. أي بايت زائد يُزيح كل الصوت التالي
+  // بمقدار نصف عيّنة فيتحول الكلام إلى ضجيج آلي غير مفهوم ("بب بب بب").
+  bytes -= bytes % fmt.blockAlign;
+  return new Uint8Array(bytes); // أصفار = صمت رقمي تام
 }
 function buildWav(fmt, chunks) {
   const totalLen = chunks.reduce((s, c) => s + c.length, 0);
