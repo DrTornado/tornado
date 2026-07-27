@@ -24791,7 +24791,7 @@ let piperMod = null, piperLoadPromise = null, piperEnabled = true; // piperEnabl
 let piperAudioEl = null, piperPronEl = null;
 let playlistMarks = []; // مواضع الكلمات بالثواني داخل الملف الموحّد — أساس التنقل الفوري
 // ===== شاشة المشغّل الكاملة: تفتح تلقائياً عند بدء التشغيل =====
-const SPD_LABEL = { 0.7:'0.7X', 0.8:'0.8X', 0.9:'0.9X', 1:'1.0X', 1.2:'1.2X' };
+const SPD_LABEL = { 0.8:'0.8X', 0.9:'0.9X', 1:'1.0X', 1.1:'1.1X', 1.2:'1.2X' };
 function fpEl(id) { return document.getElementById(id); }
 function openFullPlayer() {
   const fp = fpEl('fullplayer');
@@ -24839,17 +24839,25 @@ document.addEventListener('DOMContentLoaded', () => {}, { once: true });
   on('fp-next', () => { jumpTo((trackIdx + 1) % playlist.length); setTimeout(updateFullPlayer, 100); });
   on('fp-prev', () => { jumpTo((trackIdx - 1 + playlist.length) % playlist.length); setTimeout(updateFullPlayer, 100); });
   on('fp-speed', () => {
-    const o = [0.7, 0.8, 0.9, 1.0, 1.2];
+    const o = [0.8, 0.9, 1.0, 1.1, 1.2];
     speed = o[(o.indexOf(speed) + 1) % o.length];
     [piperAudioEl, piperPronEl].forEach(el => { try { if (el) el.playbackRate = speed; } catch(e) {} });
     updateFullPlayer(); if (tab === 'audio') renderAudio();
   });
-  on('fp-detail', () => { detailedAudio = !detailedAudio; updateFullPlayer(); if (tab==='audio') renderAudio(); });
-  on('fp-order', () => { shuffle = !shuffle; buildPlaylist(); updateFullPlayer(); if (tab==='audio') renderAudio(); });
+  // Full/Short و Shuffle يغيّران محتوى الصوت نفسه، فيلزم إعادة بناء الملف.
+  // سريعة لأن صوت كل كلمة مخزَّن دائماً — لا توليد من جديد، مجرد إعادة تجميع.
+  const rebuildIfPlaying = () => {
+    updateFullPlayer();
+    if (tab === 'audio') renderAudio();
+    if (playing) { const at = trackIdx; stopAudio(); setTimeout(() => startAudio(at), 120); }
+  };
+  on('fp-detail', () => { detailedAudio = !detailedAudio; rebuildIfPlaying(); });
+  on('fp-order', () => { shuffle = !shuffle; buildPlaylist(); rebuildIfPlaying(); });
   on('fp-repeat', () => {
     const o = [1, 2, 3, Infinity];
     listRepeat = o[(o.indexOf(listRepeat) + 1) % o.length];
-    if (piperAudioEl) piperAudioEl.loop = (listRepeat === Infinity);
+    // يسري فوراً على التشغيل الجاري بلا إعادة بناء
+    loopsLeft = (listRepeat === Infinity) ? Infinity : Math.max(0, listRepeat - 1);
     updateFullPlayer(); if (tab==='audio') renderAudio();
   });
   const seek = fpEl('fp-seek');
@@ -24862,6 +24870,7 @@ document.addEventListener('DOMContentLoaded', () => {}, { once: true });
   };
 })();
 let playerFocus = false;
+let loopsLeft = 0; // عدد مرات إعادة تشغيل الملف المتواصل المتبقية (x2 / x3)
 // تنقل حقيقي داخل الملف الجاري: قفزة بالثواني، بلا إعادة بناء ولا تعليق
 function seekToWord(i) {
   const el = piperAudioEl;
@@ -25335,9 +25344,20 @@ async function runPlayback(startAt) {
         }
       };
       piperStatus('▶️ Playing full playlist (continues with screen off)');
+      loopsLeft = (listRepeat === Infinity) ? Infinity : Math.max(0, listRepeat - 1);
       await new Promise(res => {
         let done = false; const finish = () => { if (!done) { done = true; res(); } };
-        el.onended = finish; el.onerror = finish;
+        el.onended = () => {
+          // تكرار حقيقي: نعيد تشغيل نفس الملف بعدد المرات المطلوب (x2 / x3) بلا إعادة بناء
+          if (loopsLeft === Infinity || loopsLeft > 0) {
+            if (loopsLeft !== Infinity) loopsLeft--;
+            el.currentTime = 0;
+            el.play().catch(finish);
+            return;
+          }
+          finish();
+        };
+        el.onerror = finish;
         el.play().catch(finish);
       });
       el.loop = false;
@@ -25762,7 +25782,7 @@ function renderAudio() {
   if (focusBtn) focusBtn.onclick = () => { playerFocus = !playerFocus; renderAudio(); window.scrollTo({top:0,behavior:'instant'}); };
   const spdBtn = document.getElementById('spd-cycle');
   if (spdBtn) spdBtn.onclick = () => {
-    const opts = [0.7, 0.8, 0.9, 1.0, 1.2];
+    const opts = [0.8, 0.9, 1.0, 1.1, 1.2];
     speed = opts[(opts.indexOf(speed) + 1) % opts.length];
     [piperAudioEl, piperPronEl].forEach(el => { try { if (el) el.playbackRate = speed; } catch(e) {} }); // فوري أثناء التشغيل
     renderAudio();
