@@ -24834,19 +24834,13 @@ function updateFullPlayer() {
   if (lp) { lp.textContent = listRepeat === Infinity ? 'Loop' : 'List ' + listRepeat; lp.classList.toggle('on', listRepeat !== 1); }
   fpEl('fp-play').textContent = playing ? '⏸' : '▶';
   const el = piperAudioEl;
-  const total = el && el.duration && isFinite(el.duration) ? el.duration : 0;
-  // شريط التقدم يخصّ الكلمة الجارية وحدها لا الملف كله — نحسب حدودها من المواضع المسجّلة
-  let wStart = 0, wEnd = total;
-  if (playlistMarks.length && el) {
-    const i = playlistMarks.findIndex(m => m.idx === trackIdx);
-    if (i >= 0) {
-      wStart = playlistMarks[i].time;
-      wEnd = (i + 1 < playlistMarks.length) ? playlistMarks[i + 1].time : total;
-    }
-  }
-  const wDur = Math.max(0.1, wEnd - wStart);
-  const wCur = Math.max(0, Math.min(wDur, (el ? el.currentTime : 0) - wStart));
-  const pct = (wCur / wDur) * 100;
+  // الملف الآن يخصّ كلمة واحدة، فالمدة والوقت طبيعيان مباشرة.
+  // ونقسم على السرعة: تشغيل أسرع = وقت فعلي أقصر، فينعكس التغيير على الأرقام فوراً.
+  const raw = el && el.duration && isFinite(el.duration) ? el.duration : 0;
+  const rate = speed || 1;
+  const wDur = raw / rate;
+  const wCur = el ? (el.currentTime / rate) : 0;
+  const pct = wDur ? (wCur / wDur) * 100 : 0;
   fpEl('fp-seekfill').style.width = pct + '%';
   fpEl('fp-knob').style.left = pct + '%';
   const f = sec => { sec = Math.max(0, Math.floor(sec||0)); return Math.floor(sec/60) + ':' + String(sec%60).padStart(2,'0'); };
@@ -24873,14 +24867,15 @@ document.addEventListener('DOMContentLoaded', () => {}, { once: true });
   // هذه الخيارات تغيّر محتوى الصوت نفسه، وإعادة بناء الملف كاملاً تستغرق وقتاً طويلاً.
   // لذلك لا نقطع الاستماع الجاري إطلاقاً — التغيير يُحفظ ويسري عند التشغيل التالي.
   // إعادة البناء صارت سريعة (المقاطع مخزَّنة)، فنطبّق التغيير فوراً على التشغيل الجاري
+  // التشغيل صار كلمة بكلمة: يكفي إعادة تشغيل الكلمة الجارية بالإعداد الجديد،
+  // بلا إعادة بناء القائمة ولا قفز إلى كلمة أخرى.
   const rebuildIfPlaying = () => {
     updateFullPlayer();
     if (tab === 'audio') renderAudio();
     if (playing) {
-      const at = trackIdx;
-      fpNote('Applying…');
+      const at = trackIdx; // نبقى على نفس الكلمة تماماً
       stopAudio();
-      setTimeout(() => startAudio(at), 100);
+      setTimeout(() => startAudio(at), 80);
     }
   };
   function fpNote(msg) {
@@ -24910,12 +24905,9 @@ document.addEventListener('DOMContentLoaded', () => {}, { once: true });
   if (seek) seek.onclick = ev => {
     const el = piperAudioEl;
     if (!el || !el.duration || !isFinite(el.duration)) return;
-    let wStart = 0, wEnd = el.duration;
-    const i = playlistMarks.findIndex(m => m.idx === trackIdx);
-    if (i >= 0) { wStart = playlistMarks[i].time; wEnd = (i+1 < playlistMarks.length) ? playlistMarks[i+1].time : el.duration; }
     const r = seek.getBoundingClientRect();
     const frac = Math.max(0, Math.min(1, (ev.clientX - r.left) / r.width));
-    el.currentTime = wStart + frac * (wEnd - wStart); // التنقل داخل الكلمة الحالية
+    el.currentTime = frac * el.duration; // التنقل داخل شرح الكلمة الجارية
     updateFullPlayer();
   };
 })();
@@ -25370,83 +25362,41 @@ async function runPlayback(startAt) {
     trackIdx = startAt; renderAudio(); updateMediaSession(playlist[startAt].word);
     await playTrack(playlist[startAt]);
   } else {
-    // وضع القائمة الكاملة: نبني ملفاً صوتياً واحداً متواصلاً لكل الكلمات ثم نشغّله دفعة واحدة.
-    // هذا هو الحل الجذري للتشغيل بالخلفية: بمجرد بدء التشغيل لا يحتاج النظام لأي جافاسكريبت
-    // للانتقال بين الكلمات، فيستمر كاملاً حتى مع إطفاء الشاشة تماماً كمشغّل الموسيقى.
-    const chunks = [];
-    let fmt = null, totalBytes = 0;
-    playlistMarks = []; const wordMarks = playlistMarks;
-    const words2 = playlist.slice(startAt).concat(playlist.slice(0, startAt));
-    for (let n = 0; n < words2.length && !stopped && myGen === playbackGen; n++) {
-      const idx = playlist.indexOf(words2[n]);
-      trackIdx = idx >= 0 ? idx : n; renderAudio();
-      piperStatus(`🎧 Building continuous audio — word ${n + 1} of ${words2.length}…`);
-      const wav = await buildCardAudio(words2[n]);
-      if (!wav) continue;
-      const parsed = parseWav(await wav.arrayBuffer());
-      if (!parsed) continue;
-      if (!fmt) fmt = parsed.fmt;
-      else if (parsed.fmt.sampleRate !== fmt.sampleRate || parsed.fmt.blockAlign !== fmt.blockAlign) continue; // صيغة مختلفة تفسد الملف
-      if (parsed.data.length % fmt.blockAlign) parsed.data = parsed.data.subarray(0, parsed.data.length - (parsed.data.length % fmt.blockAlign));
-      // نسجّل زمن بداية كل كلمة داخل الملف الموحّد — يتيح التنقل بينها بالثواني بدل إعادة البناء
-      wordMarks.push({ idx: idx >= 0 ? idx : n, time: totalBytes / (fmt.sampleRate * fmt.blockAlign) });
-      chunks.push(parsed.data, silenceBytes(fmt, 900));
-      totalBytes += parsed.data.length + silenceBytes(fmt, 900).length;
-      // حماية الذاكرة: ملف واحد ضخم جداً قد يفشل بناؤه على الجوال ويظهر كأن الصوت لا يعمل.
-      // نتوقف عند حد آمن ونشغّل ما بنيناه — يكفي لعشرات الدقائق من الاستماع المتواصل.
-      if (totalBytes > 28 * 1024 * 1024) {
-        piperStatus(`▶️ Playing ${n} words continuously (memory limit reached)`);
-        break;
+    // تشغيل متسلسل كلمة بكلمة: كل كلمة ملف صوتي مستقل يُشغَّل ثم يليه التالي فوراً.
+    // هذا يدعم القائمة كاملة مهما كبرت (لا حد ذاكرة)، ويجعل شريط التقدم يخص الكلمة الجارية
+    // طبيعياً، والسرعة تنعكس على الوقت المعروض مباشرة.
+    let pass = 0;
+    let i = startAt;
+    while (!stopped && myGen === playbackGen) {
+      if (!playlist.length) break;
+      if (i >= playlist.length) {
+        pass++;
+        if (listRepeat !== Infinity && pass >= listRepeat) break;
+        i = 0;
       }
-    }
-    if (stopped || myGen !== playbackGen) { /* أُلغيت أو بدأت جلسة أحدث */ }
-    else if (fmt && chunks.length) {
-      const full = buildWav(fmt, chunks);
-      const el = getPiperAudioEl('main');
-      el.loop = (listRepeat === Infinity);
-      el.src = URL.createObjectURL(full);
-      el.onloadedmetadata = () => { el.playbackRate = speed; }; // بعد التحميل، وإلا يُلغى
-      el.playbackRate = speed;
-      bindMediaSession(el, playlist[trackIdx] ? playlist[trackIdx].word : 'Tornado');
-      // تتبّع الكلمة الجارية أثناء التشغيل المتواصل وتحديث الواجهة ومشغّل النظام
-      el.ontimeupdate = () => {
-        const w = currentWordFromTime();
-        if (w >= 0 && w !== trackIdx) {
-          trackIdx = w;
-          if (tab === 'audio') renderAudio();
-          updateFullPlayer();
-          if (playlist[w]) updateMediaSession(playlist[w].word);
-        }
-      };
-      piperStatus('▶️ Playing full playlist (continues with screen off)');
-      loopsLeft = (listRepeat === Infinity) ? Infinity : Math.max(0, listRepeat - 1);
-      await new Promise(res => {
-        let done = false; const finish = () => { if (!done) { done = true; res(); } };
-        el.onended = () => {
-          // تكرار حقيقي: نعيد تشغيل نفس الملف بعدد المرات المطلوب (x2 / x3) بلا إعادة بناء
-          if (loopsLeft === Infinity || loopsLeft > 0) {
-            if (loopsLeft !== Infinity) loopsLeft--;
-            el.currentTime = 0;
-            el.play().catch(finish);
-            return;
-          }
-          finish();
-        };
-        el.onerror = finish;
-        el.play().catch(finish);
-      });
-      el.loop = false;
-      URL.revokeObjectURL(el.src);
-    } else {
-      // تعذّر بناء الصوت الحقيقي كلياً — نرجع للتشغيل التقليدي كلمة بكلمة
-      let i = startAt;
-      while (!stopped && playlist.length) {
-        if (i >= playlist.length) break;
-        trackIdx = i; renderAudio(); updateMediaSession(playlist[i].word);
-        await playTrackSegmented(playlist[i]);
-        if (stopped) break;
-        i++;
+      trackIdx = i; renderAudio(); updateFullPlayer();
+      const card = playlist[i];
+      const wav = await buildCardAudio(card);
+      if (stopped || myGen !== playbackGen) break;
+      if (wav) {
+        const el = getPiperAudioEl('main');
+        const url = URL.createObjectURL(wav);
+        el.src = url;
+        el.onloadedmetadata = () => { el.playbackRate = speed; };
+        el.playbackRate = speed;
+        bindMediaSession(el, card.word);
+        el.ontimeupdate = () => updateFullPlayer(); // شريط التقدم يعكس الكلمة الجارية لحظياً
+        await new Promise(res => {
+          let done = false; const fin = () => { if (!done) { done = true; res(); } };
+          el.onended = fin; el.onerror = fin;
+          el.play().catch(fin);
+        });
+        URL.revokeObjectURL(url);
+      } else {
+        await playTrackSegmented(card); // تعذّر الصوت الحقيقي لهذه الكلمة
       }
+      if (stopped || myGen !== playbackGen) break;
+      i++;
     }
   }
   if (myGen !== playbackGen) return; // جلسة أحدث بدأت: لا نلمس الحالة إطلاقاً
@@ -25857,7 +25807,7 @@ function renderAudio() {
     const opts = [1, 2, 3];
     wordRepeat = opts[(opts.indexOf(wordRepeat) + 1) % opts.length]; // تكرار شرح كل كلمة
     renderAudio();
-    if (playing) flash('Saved — applies when you start playing again');
+    if (playing) { const at = trackIdx; stopAudio(); setTimeout(() => startAudio(at), 80); }
   };
 
   document.getElementById('next').onclick = () => jumpTo((trackIdx+1) % playlist.length);
