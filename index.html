@@ -88,7 +88,7 @@
   .fp-ctrl { background:none; border:none; color:#fff; font-size:30px; cursor:pointer; padding:4px; line-height:1; }
   #fp-play { width:76px; height:76px; border-radius:50%; background:#fff; color:#2C6B84; border:none;
     font-size:30px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 14px rgba(0,0,0,.3); }
-  .pillbtn { flex:0 0 auto; white-space:nowrap; background:#242B36; color:#B9C2D0; border:1px solid #3A4453; border-radius:16px; padding:6px 14px; font-family:inherit; font-size:12.5px; cursor:pointer; }
+  .pillbtn { flex:1 1 0; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; text-align:center; background:#242B36; color:#B9C2D0; border:1px solid #3A4453; border-radius:16px; padding:6px 14px; font-family:inherit; font-size:12.5px; cursor:pointer; }
   .pillbtn:active { background:#2F3846; }
   .playbtn { width:64px; height:64px; border-radius:50%; background:#E8B04B; color:#242B36; border:none; font-size:24px; cursor:pointer; }
   .ctrlbtn { width:48px; height:48px; border-radius:50%; background:#3A4453; color:#E8E4DA; border:none; font-size:18px; cursor:pointer; }
@@ -24822,25 +24822,36 @@ function updateFullPlayer() {
   }
   fpEl('fp-speed').textContent = SPD_LABEL[speed] || (speed + 'X');
   const dt = fpEl('fp-detail');
-  dt.textContent = detailedAudio ? 'Full' : 'Short';
+  dt.textContent = detailedAudio ? 'Full' : 'Brief';
   dt.classList.toggle('on', detailedAudio); // مضيء = الوضع الحالي، وليس ما سيتحول إليه
   const or = fpEl('fp-order');
-  or.textContent = shuffle ? 'Shuffle' : 'Order';
+  or.textContent = shuffle ? 'Mixed' : 'Order';
   or.classList.toggle('on', shuffle);
   const rp = fpEl('fp-repeat');
-  rp.textContent = 'Say x' + wordRepeat; // كم مرة يُكرَّر شرح كل كلمة
+  rp.textContent = 'Say ' + wordRepeat; // كم مرة يُكرَّر شرح كل كلمة
   rp.classList.toggle('on', wordRepeat !== 1);
   const lp = fpEl('fp-loop');
-  if (lp) { lp.textContent = listRepeat === Infinity ? 'Loop ∞' : 'List x' + listRepeat; lp.classList.toggle('on', listRepeat !== 1); }
+  if (lp) { lp.textContent = listRepeat === Infinity ? 'Loop' : 'List ' + listRepeat; lp.classList.toggle('on', listRepeat !== 1); }
   fpEl('fp-play').textContent = playing ? '⏸' : '▶';
   const el = piperAudioEl;
-  const d = el && el.duration && isFinite(el.duration) ? el.duration : 0;
-  const pct = d ? (el.currentTime / d) * 100 : 0;
+  const total = el && el.duration && isFinite(el.duration) ? el.duration : 0;
+  // شريط التقدم يخصّ الكلمة الجارية وحدها لا الملف كله — نحسب حدودها من المواضع المسجّلة
+  let wStart = 0, wEnd = total;
+  if (playlistMarks.length && el) {
+    const i = playlistMarks.findIndex(m => m.idx === trackIdx);
+    if (i >= 0) {
+      wStart = playlistMarks[i].time;
+      wEnd = (i + 1 < playlistMarks.length) ? playlistMarks[i + 1].time : total;
+    }
+  }
+  const wDur = Math.max(0.1, wEnd - wStart);
+  const wCur = Math.max(0, Math.min(wDur, (el ? el.currentTime : 0) - wStart));
+  const pct = (wCur / wDur) * 100;
   fpEl('fp-seekfill').style.width = pct + '%';
   fpEl('fp-knob').style.left = pct + '%';
   const f = sec => { sec = Math.max(0, Math.floor(sec||0)); return Math.floor(sec/60) + ':' + String(sec%60).padStart(2,'0'); };
-  fpEl('fp-cur').textContent = f(el ? el.currentTime : 0);
-  fpEl('fp-dur').textContent = f(d);
+  fpEl('fp-cur').textContent = f(wCur);
+  fpEl('fp-dur').textContent = f(wDur);
 }
 setInterval(updateFullPlayer, 400); // تحديث مستمر أثناء التشغيل
 document.addEventListener('DOMContentLoaded', () => {}, { once: true });
@@ -24899,8 +24910,12 @@ document.addEventListener('DOMContentLoaded', () => {}, { once: true });
   if (seek) seek.onclick = ev => {
     const el = piperAudioEl;
     if (!el || !el.duration || !isFinite(el.duration)) return;
+    let wStart = 0, wEnd = el.duration;
+    const i = playlistMarks.findIndex(m => m.idx === trackIdx);
+    if (i >= 0) { wStart = playlistMarks[i].time; wEnd = (i+1 < playlistMarks.length) ? playlistMarks[i+1].time : el.duration; }
     const r = seek.getBoundingClientRect();
-    el.currentTime = Math.max(0, Math.min(1, (ev.clientX - r.left) / r.width)) * el.duration;
+    const frac = Math.max(0, Math.min(1, (ev.clientX - r.left) / r.width));
+    el.currentTime = wStart + frac * (wEnd - wStart); // التنقل داخل الكلمة الحالية
     updateFullPlayer();
   };
 })();
@@ -25489,8 +25504,10 @@ function startAudio(at) {
 function stopAudio() {
   stopped = true; playing = false;
   releaseWakeLock();
-  // إيقاف عنصر الصوت الحقيقي فعلياً — كان الإيقاف يعالج النطق الآلي فقط ويترك الصوت الحقيقي يعمل
-  [piperAudioEl, piperPronEl].forEach(el => { try { if (el) { el.pause(); } } catch(e) {} });
+  // إيقاف عنصر الصوت الحقيقي وإزالة متتبّع الوقت القديم — بقاؤه كان يسبب قفزاً عشوائياً
+  // بين الكلمات لأنه يقرأ مواضع ملف قديم بعد بناء ملف جديد.
+  [piperAudioEl, piperPronEl].forEach(el => { try { if (el) { el.ontimeupdate = null; el.onended = null; el.pause(); } } catch(e) {} });
+  playlistMarks = [];
   if (ttsReady) window.speechSynthesis.cancel();
   if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
   if (tab === 'audio') renderAudio();
@@ -25741,12 +25758,12 @@ function renderAudio() {
       <div class="bigw" style="font-size:30px;font-weight:800;margin:10px 0 4px;line-height:1.25;">${esc(t.word)}</div>
       <div class="ar arline2" style="font-size:16px;color:#B9C2D0;margin-bottom:14px;line-height:1.6;">${esc(firstMeaningLine(t))}</div>
 
-      <div style="display:flex;gap:7px;justify-content:flex-start;flex-wrap:nowrap;margin-bottom:14px;overflow-x:auto;padding-bottom:4px;">
+      <div style="display:flex;gap:6px;margin-bottom:14px;">
         <button class="pillbtn" id="spd-cycle">${speed===0.7?'0.7x':speed===0.8?'0.8x':speed===0.9?'0.9x':speed===1?'1.0x':'1.2x'}</button>
-        <button class="pillbtn" id="det-cycle">${detailedAudio?'Full':'Short'}</button>
-        <button class="pillbtn" id="shuf-cycle">${shuffle?'Shuffle':'In order'}</button>
-        <button class="pillbtn" id="rep-cycle">Say x${wordRepeat}</button>
-        <button class="pillbtn" id="loop-cycle">${listRepeat===Infinity?'Loop ∞':(listRepeat===1?'Once':listRepeat+' times')}</button>
+        <button class="pillbtn" id="det-cycle">${detailedAudio?'Full':'Brief'}</button>
+        <button class="pillbtn" id="shuf-cycle">${shuffle?'Mixed':'Order'}</button>
+        <button class="pillbtn" id="rep-cycle">Say ${wordRepeat}</button>
+        <button class="pillbtn" id="loop-cycle">${listRepeat===Infinity?'Loop':'List '+listRepeat}</button>
       </div>
 
       <div id="seekwrap" style="padding:0 4px;margin-bottom:6px;cursor:pointer;">
