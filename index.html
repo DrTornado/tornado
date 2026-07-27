@@ -182,6 +182,7 @@
         <button class="fp-pill" id="fp-detail">Full</button>
         <button class="fp-pill" id="fp-order">In order</button>
         <button class="fp-pill" id="fp-repeat">x1</button>
+        <button class="fp-pill" id="fp-loop">Once</button>
       </div>
       <div id="fp-seek"><div id="fp-seekfill"></div><div id="fp-knob"></div></div>
       <div id="fp-times"><span id="fp-cur">0:00</span><span id="fp-dur">0:00</span></div>
@@ -24819,6 +24820,8 @@ function updateFullPlayer() {
   fpEl('fp-detail').textContent = detailedAudio ? 'Full' : 'Short';
   fpEl('fp-order').textContent = shuffle ? 'Shuffle' : 'In order';
   fpEl('fp-repeat').textContent = 'Say x' + wordRepeat; // كم مرة يُكرَّر شرح كل كلمة
+  const lp = fpEl('fp-loop');
+  if (lp) lp.textContent = listRepeat === Infinity ? 'Loop ∞' : (listRepeat === 1 ? 'Once' : listRepeat + ' times');
   fpEl('fp-play').textContent = playing ? '⏸' : '▶';
   const el = piperAudioEl;
   const d = el && el.duration && isFinite(el.duration) ? el.duration : 0;
@@ -24868,6 +24871,13 @@ document.addEventListener('DOMContentLoaded', () => {}, { once: true });
     const o = [1, 2, 3];
     wordRepeat = o[(o.indexOf(wordRepeat) + 1) % o.length];
     rebuildIfPlaying();
+  });
+  // تكرار القائمة كاملة: يسري فوراً على التشغيل الجاري — لا يغيّر محتوى الملف، فقط عدد إعادات تشغيله
+  on('fp-loop', () => {
+    const o = [1, 2, 3, Infinity];
+    listRepeat = o[(o.indexOf(listRepeat) + 1) % o.length];
+    loopsLeft = (listRepeat === Infinity) ? Infinity : Math.max(0, listRepeat - 1);
+    updateFullPlayer(); if (tab === 'audio') renderAudio();
   });
   const seek = fpEl('fp-seek');
   if (seek) seek.onclick = ev => {
@@ -25691,6 +25701,7 @@ function renderAudio() {
         <button class="pillbtn" id="det-cycle">${detailedAudio?'Full':'Short'}</button>
         <button class="pillbtn" id="shuf-cycle">${shuffle?'Shuffle':'In order'}</button>
         <button class="pillbtn" id="rep-cycle">Say x${wordRepeat}</button>
+        <button class="pillbtn" id="loop-cycle">${listRepeat===Infinity?'Loop ∞':(listRepeat===1?'Once':listRepeat+' times')}</button>
       </div>
 
       <div id="seekwrap" style="padding:0 4px;margin-bottom:6px;cursor:pointer;">
@@ -25772,6 +25783,13 @@ function renderAudio() {
   if (detBtn) detBtn.onclick = () => { detailedAudio = !detailedAudio; renderAudio(); };
   const shufBtn = document.getElementById('shuf-cycle');
   if (shufBtn) shufBtn.onclick = () => { shuffle = !shuffle; buildPlaylist(); renderAudio(); };
+  const loopBtn = document.getElementById('loop-cycle');
+  if (loopBtn) loopBtn.onclick = () => {
+    const o = [1, 2, 3, Infinity];
+    listRepeat = o[(o.indexOf(listRepeat) + 1) % o.length];
+    loopsLeft = (listRepeat === Infinity) ? Infinity : Math.max(0, listRepeat - 1);
+    renderAudio();
+  };
   const repBtn = document.getElementById('rep-cycle');
   if (repBtn) repBtn.onclick = () => {
     const opts = [1, 2, 3];
