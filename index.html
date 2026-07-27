@@ -24846,11 +24846,21 @@ document.addEventListener('DOMContentLoaded', () => {}, { once: true });
   });
   // Full/Short و Shuffle يغيّران محتوى الصوت نفسه، فيلزم إعادة بناء الملف.
   // سريعة لأن صوت كل كلمة مخزَّن دائماً — لا توليد من جديد، مجرد إعادة تجميع.
+  // هذه الخيارات تغيّر محتوى الصوت نفسه، وإعادة بناء الملف كاملاً تستغرق وقتاً طويلاً.
+  // لذلك لا نقطع الاستماع الجاري إطلاقاً — التغيير يُحفظ ويسري عند التشغيل التالي.
   const rebuildIfPlaying = () => {
     updateFullPlayer();
     if (tab === 'audio') renderAudio();
-    if (playing) { const at = trackIdx; stopAudio(); setTimeout(() => startAudio(at), 120); }
+    if (playing) fpNote('Saved — applies when you start playing again');
   };
+  function fpNote(msg) {
+    const el = fpEl('fp-mean');
+    if (!el) return;
+    const old = el.textContent;
+    el.textContent = msg;
+    clearTimeout(window.__fpNoteT);
+    window.__fpNoteT = setTimeout(() => { updateFullPlayer(); }, 2200);
+  }
   on('fp-detail', () => { detailedAudio = !detailedAudio; rebuildIfPlaying(); });
   on('fp-order', () => { shuffle = !shuffle; buildPlaylist(); rebuildIfPlaying(); });
   // تكرار شرح كل كلمة: يغيّر محتوى الصوت نفسه فيلزم إعادة بناء (سريعة — الأصوات مخزَّنة)
@@ -25795,7 +25805,7 @@ function renderAudio() {
     const opts = [1, 2, 3];
     wordRepeat = opts[(opts.indexOf(wordRepeat) + 1) % opts.length]; // تكرار شرح كل كلمة
     renderAudio();
-    if (playing) { const at = trackIdx; stopAudio(); setTimeout(() => startAudio(at), 120); }
+    if (playing) flash('Saved — applies when you start playing again');
   };
 
   document.getElementById('next').onclick = () => jumpTo((trackIdx+1) % playlist.length);
