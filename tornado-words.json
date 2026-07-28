@@ -1,8 +1,90 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-28T23:58:42.215Z",
+ "exportedAt": "2026-07-28T23:59:17.990Z",
  "words": [
+  {
+   "id": 1785283154245,
+   "word": "book",
+   "ipa": "/buːk/",
+   "arabicPron": "بوك",
+   "oxford": "3000",
+   "cefr": "A1",
+   "pos": [
+    "noun",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A collection of sheets of paper bound together to hinge at one edge, containing printed or written material, pictures, etc.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "A long work fit for publication, typically prose, such as a novel or textbook, and typically published as such a bound collection of sheets, but now sometimes electronically as an e-book.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "To reserve (something) for future use.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "To write down, to register or record in a book or as in a book.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "bake",
+    "bakes",
+    "baked",
+    "baking"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "account",
+     "ar": ""
+    },
+    {
+     "en": "record",
+     "ar": ""
+    },
+    {
+     "en": "booklet",
+     "ar": ""
+    },
+    {
+     "en": "libretto",
+     "ar": ""
+    },
+    {
+     "en": "tome",
+     "ar": ""
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "He was frustrated because he couldn't find anything about dinosaurs in the book.",
+     "ar": ""
+    },
+    {
+     "en": "I have three copies of his first book.",
+     "ar": ""
+    },
+    {
+     "en": "She opened the book to page 37 and began to read aloud.",
+     "ar": ""
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1785185030316,
    "word": "compulsory",
