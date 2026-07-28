@@ -1,227 +1,8 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-28T21:02:13.671Z",
+ "exportedAt": "2026-07-28T21:02:27.872Z",
  "words": [
-  {
-   "id": 1785272351882,
-   "word": "no",
-   "ipa": "/nəʊ/",
-   "arabicPron": "نو",
-   "oxford": "3000",
-   "cefr": "A1",
-   "pos": [
-    "noun",
-    "adverb",
-    "preposition",
-    "symbol",
-    "determiner",
-    "particle",
-    "verb"
-   ],
-   "meanings": [
-    {
-     "pos": "noun",
-     "en": "A negating expression; an answer that shows disagreement or disapproval",
-     "ar": "تعبير نافي ؛ إجابة تظهر عدم الموافقة أو الرفض"
-    },
-    {
-     "pos": "noun",
-     "en": "A vote not in favor, or opposing a proposition",
-     "ar": "تصويت ليس مؤيدًا أو معارضًا لاقتراح ما"
-    },
-    {
-     "pos": "adverb",
-     "en": "(now only used with different, with comparatives more and less, and informally with certain other adjectives such as good and fun) Not, not at all.",
-     "ar": "(تستخدم الآن فقط مع مختلف، مع مقارنات أكثر وأقل، وبشكل غير رسمي مع بعض الصفات الأخرى مثل الخير والمرح) لا، لا على الإطلاق."
-    },
-    {
-     "pos": "preposition",
-     "en": "Without",
-     "ar": "فدون"
-    },
-    {
-     "pos": "preposition",
-     "en": "Like",
-     "ar": "[ترجمة المصطلح: Like]"
-    },
-    {
-     "pos": "symbol",
-     "en": "ISO 639-1 language code for Norwegian.",
-     "ar": ""
-    }
-   ],
-   "inflections": [
-    "no",
-    "noes",
-    "noed",
-    "noing"
-   ],
-   "derivatives": [
-    {
-     "en": "notion (noun)",
-     "ar": "فكرة, نظرية, مفهوم, نية, رأى, معلومات, مهرفة"
-    }
-   ],
-   "synonyms": [
-    {
-     "en": "nay",
-     "ar": "لا بل, ولو"
-    },
-    {
-     "en": "nope",
-     "ar": "ورباعي ترجم دي العربي"
-    },
-    {
-     "en": "no more",
-     "ar": "لا مزيد"
-    },
-    {
-     "en": "nobelium",
-     "ar": "النُّوبِلْيُوم"
-    },
-    {
-     "en": "atomic number 102",
-     "ar": "العدد الذري"
-    }
-   ],
-   "collocations": [
-    {
-     "en": "no longer",
-     "ar": "ليس بعد"
-    },
-    {
-     "en": "no doubt",
-     "ar": "بِلاَ شَكّ ; لا جَرَمَ ; لا شَكّ ; مِنْ دُونِ شَكّ ; بِلاَ رَيْب"
-    },
-    {
-     "en": "no matter",
-     "ar": "حَيْثُمَا"
-    }
-   ],
-   "examples": [
-    {
-     "en": "The workers voted on whether to strike, and there were thirty \"yeses\" and two \"nos\".",
-     "ar": "صوّت العمال على ما إذا كانوا سيضربون، وكان هناك ثلاثون \"نعم\" واثنان \"لا\"."
-    },
-    {
-     "en": "I just want to find out whether she's coming or no. (Scotland)",
-     "ar": "أريد فقط معرفة ما إذا كانت قادمة أم لا. (اسكتلندا)"
-    },
-    {
-     "en": "There is no water left.",
-     "ar": "لا يوجد ماء"
-    }
-   ],
-   "differences": [],
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "ipaUS": "/noʊ/",
-   "ipaUK": "/nəʊ/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/n/no_/no__u/no__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/n/no_/no__g/no__gb_1.mp3",
-   "engineVersion": 2,
-   "interval": 0,
-   "due": 0
-  },
-  {
-   "id": 1785272342774,
-   "word": "how",
-   "ipa": "/hæŏ/",
-   "arabicPron": "هاو",
-   "oxford": "3000",
-   "cefr": "A1",
-   "pos": [
-    "noun",
-    "adverb",
-    "conjunction",
-    "symbol",
-    "interjection"
-   ],
-   "meanings": [
-    {
-     "pos": "noun",
-     "en": "The means by which something is accomplished.",
-     "ar": "الوسائل التي يتم بها إنجاز شيء ما."
-    },
-    {
-     "pos": "adverb",
-     "en": "To what degree.",
-     "ar": "- إلى أي درجة"
-    },
-    {
-     "pos": "adverb",
-     "en": "In what manner.",
-     "ar": "بأيّ نمط؟"
-    },
-    {
-     "pos": "conjunction",
-     "en": "The manner or way that.",
-     "ar": "الطريقة أو الطريقة التي يتم بها ذلك."
-    },
-    {
-     "pos": "conjunction",
-     "en": "That, the fact that, the way that.",
-     "ar": "هذا، حقيقة ذلك، الطريقة التي."
-    },
-    {
-     "pos": "symbol",
-     "en": "ISO 639-3 language code for Honi.",
-     "ar": ""
-    }
-   ],
-   "inflections": [
-    "how",
-    "hows"
-   ],
-   "derivatives": [],
-   "synonyms": [
-    {
-     "en": "however",
-     "ar": ""
-    }
-   ],
-   "collocations": [
-    {
-     "en": "know how",
-     "ar": "متعلم, خبرة, براعة, مهارة, حذق"
-    },
-    {
-     "en": "see how",
-     "ar": "شاهد الطريقة"
-    },
-    {
-     "en": "matter how",
-     "ar": "مهما حدث"
-    }
-   ],
-   "examples": [
-    {
-     "en": "I am not interested in the why, but in the how.",
-     "ar": "أنا لست مهتمًا بالسبب، ولكن بالكيفية."
-    },
-    {
-     "en": "How often do you practice?",
-     "ar": ""
-    },
-    {
-     "en": "How do you solve this puzzle?",
-     "ar": "كيف تحل هذا اللغز ؟"
-    }
-   ],
-   "differences": [],
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "interval": 0,
-   "due": 0,
-   "ipaUS": "/haʊ/",
-   "ipaUK": "/haʊ/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/h/how/how__/how__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/h/how/how__/how__gb_1.mp3",
-   "engineVersion": 2
-  },
   {
    "id": 1785272332318,
    "word": "why",
@@ -9241,6 +9022,16 @@
    "id": 1785271830582,
    "word": "girl",
    "deletedAt": 1785271878566
+  },
+  {
+   "id": 1785272351882,
+   "word": "no",
+   "deletedAt": 1785272544040
+  },
+  {
+   "id": 1785272342774,
+   "word": "how",
+   "deletedAt": 1785272546950
   }
  ]
 }
