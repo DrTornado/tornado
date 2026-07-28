@@ -1,8 +1,82 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-28T20:57:30.703Z",
+ "exportedAt": "2026-07-28T20:58:46.946Z",
  "words": [
+  {
+   "id": 1785272322860,
+   "word": "she",
+   "ipa": "/ʃiː/",
+   "arabicPron": "شي",
+   "oxford": "3000",
+   "cefr": "A1",
+   "pos": [
+    "noun",
+    "pronoun",
+    "symbol",
+    "verb",
+    "determiner"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A female.",
+     "ar": "أنثى!"
+    },
+    {
+     "pos": "pronoun",
+     "en": "(personal) The female person or animal previously mentioned or implied.",
+     "ar": "(شخصي) الأنثى أو الحيوان الذي سبق ذكره أو ضمنا."
+    },
+    {
+     "pos": "pronoun",
+     "en": "(personal, sometimes affectionate) A ship or boat.",
+     "ar": "(شخصيًا، وأحيانًا حنونًا) سفينة أو قارب."
+    },
+    {
+     "pos": "symbol",
+     "en": "ISO 639-3 language code for Sheko.",
+     "ar": "رمز لغة ISO 639-3 لشيكو."
+    },
+    {
+     "pos": "pronoun",
+     "en": "The female (typically) person or animal previously mentioned or implied.",
+     "ar": "الأنثى (عادة) الشخص أو الحيوان المذكور أو الضمني سابقًا."
+    },
+    {
+     "pos": "pronoun",
+     "en": "A ship or boat.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "she",
+    "shes",
+    "shed",
+    "shing"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "Pat is definitely a she.",
+     "ar": "بات هي بالتأكيد أنثى."
+    },
+    {
+     "en": "After the cat killed a mouse, she left it on our doorstep.",
+     "ar": "بعد أن قتلت القطة فأرًا، تركته على عتبة بابنا."
+    },
+    {
+     "en": "She could do forty knots in good weather.",
+     "ar": "يمكنها القيام بأربعين عقدة في الطقس الجيد."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1785272007491,
    "word": "girl",
