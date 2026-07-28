@@ -1,8 +1,85 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-28T20:58:46.946Z",
+ "exportedAt": "2026-07-28T20:58:52.204Z",
  "words": [
+  {
+   "id": 1785272327996,
+   "word": "it",
+   "ipa": "/ɪt/",
+   "arabicPron": "يت",
+   "oxford": "3000",
+   "cefr": "A1",
+   "pos": [
+    "noun",
+    "adjective",
+    "pronoun",
+    "symbol",
+    "determiner"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "One who is neither a he nor a she; a creature; a dehumanized being.",
+     "ar": "الذي ليس هو ولا هي ؛ مخلوق ؛ كائن منزوع الإنسانية."
+    },
+    {
+     "pos": "noun",
+     "en": "The person who chases and tries to catch the other players in the playground game of tag.",
+     "ar": "الشخص الذي يطارد ويحاول اللحاق باللاعبين الآخرين في لعبة العلامة في الملعب."
+    },
+    {
+     "pos": "adjective",
+     "en": "Most fashionable.",
+     "ar": "الأكثر عصرية."
+    },
+    {
+     "pos": "pronoun",
+     "en": "The third-person singular personal pronoun that is normally used to refer to an inanimate object or abstract entity, also often used to refer to animals.",
+     "ar": "الضمير الشخصي المفرد للشخص الثالث الذي يستخدم عادة للإشارة إلى كائن غير حي أو كيان مجرد، وغالبًا ما يستخدم أيضًا للإشارة إلى الحيوانات."
+    },
+    {
+     "pos": "pronoun",
+     "en": "A third-person singular personal pronoun used to refer to a child, especially of unknown gender.",
+     "ar": "ضمير شخصي مفرد لشخص ثالث يستخدم للإشارة إلى طفل، خاصة من جنس غير معروف."
+    },
+    {
+     "pos": "symbol",
+     "en": "ISO 639-1 language code for Italian.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "it",
+    "its"
+   ],
+   "derivatives": [
+    {
+     "en": "unit (adj./verb)",
+     "ar": "وحدة القياس"
+    }
+   ],
+   "synonyms": [],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "In the next game, Adam and Tom will be it…",
+     "ar": "في المباراة التالية، سيكون آدم وتوم..."
+    },
+    {
+     "en": "I heard the sound of the school bus - it was early today.",
+     "ar": "سمعت صوت الحافلة المدرسية - كان الوقت مبكرًا اليوم."
+    },
+    {
+     "en": "She took the baby and held it in her arms.",
+     "ar": "أخذت الطفل وحملته بين ذراعيها."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1785272322860,
    "word": "she",
