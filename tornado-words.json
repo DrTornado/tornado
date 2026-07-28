@@ -1,8 +1,98 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-28T20:58:56.187Z",
+ "exportedAt": "2026-07-28T20:59:06.837Z",
  "words": [
+  {
+   "id": 1785272342774,
+   "word": "how",
+   "ipa": "/hæŏ/",
+   "arabicPron": "هاو",
+   "oxford": "3000",
+   "cefr": "A1",
+   "pos": [
+    "noun",
+    "adverb",
+    "conjunction",
+    "symbol",
+    "interjection"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "The means by which something is accomplished.",
+     "ar": "الوسائل التي يتم بها إنجاز شيء ما."
+    },
+    {
+     "pos": "adverb",
+     "en": "To what degree.",
+     "ar": "- إلى أي درجة"
+    },
+    {
+     "pos": "adverb",
+     "en": "In what manner.",
+     "ar": "بأيّ نمط؟"
+    },
+    {
+     "pos": "conjunction",
+     "en": "The manner or way that.",
+     "ar": "الطريقة أو الطريقة التي يتم بها ذلك."
+    },
+    {
+     "pos": "conjunction",
+     "en": "That, the fact that, the way that.",
+     "ar": "هذا، حقيقة ذلك، الطريقة التي."
+    },
+    {
+     "pos": "symbol",
+     "en": "ISO 639-3 language code for Honi.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "how",
+    "hows"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "however",
+     "ar": ""
+    }
+   ],
+   "collocations": [
+    {
+     "en": "know how",
+     "ar": "متعلم, خبرة, براعة, مهارة, حذق"
+    },
+    {
+     "en": "see how",
+     "ar": "شاهد الطريقة"
+    },
+    {
+     "en": "matter how",
+     "ar": "مهما حدث"
+    }
+   ],
+   "examples": [
+    {
+     "en": "I am not interested in the why, but in the how.",
+     "ar": "أنا لست مهتمًا بالسبب، ولكن بالكيفية."
+    },
+    {
+     "en": "How often do you practice?",
+     "ar": ""
+    },
+    {
+     "en": "How do you solve this puzzle?",
+     "ar": "كيف تحل هذا اللغز ؟"
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1785272332318,
    "word": "why",
