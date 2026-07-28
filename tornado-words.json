@@ -1,8 +1,115 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-28T20:58:52.204Z",
+ "exportedAt": "2026-07-28T20:58:56.187Z",
  "words": [
+  {
+   "id": 1785272332318,
+   "word": "why",
+   "ipa": "/waɪ/",
+   "arabicPron": "واي",
+   "oxford": "3000",
+   "cefr": "A1",
+   "pos": [
+    "noun",
+    "adverb",
+    "interjection",
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "Reason",
+     "ar": "السبب"
+    },
+    {
+     "pos": "adverb",
+     "en": "For what cause, reason, or purpose (interrogative adverb).",
+     "ar": "لأي سبب أو سبب أو غرض (ظرف استفساري)."
+    },
+    {
+     "pos": "adverb",
+     "en": "For which cause, reason, or purpose (relative adverb).",
+     "ar": "لأي سبب أو سبب أو غرض (ظرف نسبي)."
+    },
+    {
+     "pos": "interjection",
+     "en": "An exclamation used to express indignation, mild surprise, or impatience.",
+     "ar": "تعجب يستخدم للتعبير عن السخط أو المفاجأة الخفيفة أو نفاد الصبر."
+    },
+    {
+     "pos": "adverb",
+     "en": "For what cause, reason, or purpose. Introducing a complete question.",
+     "ar": "لأي سبب أو سبب أو غرض. تقديم سؤال كامل."
+    },
+    {
+     "pos": "adverb",
+     "en": "Introducing a complete question.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "why",
+    "whies",
+    "whied",
+    "whying"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "wherefore",
+     "ar": "سبب"
+    },
+    {
+     "en": "how come",
+     "ar": "كيف لا؟"
+    },
+    {
+     "en": "to what end",
+     "ar": "الي أي نهاية, لأي سبب؟"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "reason why",
+     "ar": "الشخصي عن لماذا تود"
+    },
+    {
+     "en": "explain why",
+     "ar": "اشرح لماذا"
+    },
+    {
+     "en": "reasons why",
+     "ar": "الأسباب (لماذا)"
+    },
+    {
+     "en": "know why",
+     "ar": "لماذا تعرف"
+    },
+    {
+     "en": "understand why",
+     "ar": "فهم السبب"
+    }
+   ],
+   "examples": [
+    {
+     "en": "A good article will cover the who, the what, the when, the where, the why and the how.",
+     "ar": "ستغطي المقالة الجيدة من وماذا ومتى وأين ولماذا وكيف."
+    },
+    {
+     "en": "That's the reason why I did that.",
+     "ar": "هذا هو السبب في أنني فعلت ذلك."
+    },
+    {
+     "en": "Why is the sky blue?",
+     "ar": "لماذا تظهر السماء بلون أزرق؟"
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1785272327996,
    "word": "it",
