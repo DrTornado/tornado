@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-28T08:28:39.450Z",
+ "exportedAt": "2026-07-28T08:28:44.576Z",
  "words": [
   {
    "id": 1785000460857,
@@ -8414,7 +8414,12 @@
      "ar": "وهذه التدابير الإلزامية محدودة."
     }
    ],
-   "differences": []
+   "differences": [],
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/com/compu/compulsory__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/com/compu/compulsory__gb_1.mp3",
+   "engineVersion": 2,
+   "interval": 0,
+   "due": 0
   }
  ],
  "tombstones": [
