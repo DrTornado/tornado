@@ -1,0 +1,17 @@
+{
+ "app": "tornado",
+ "kind": "notes",
+ "version": 1,
+ "exportedAt": "2026-07-29T12:02:27.843507Z",
+ "notes": [
+  {
+   "id": 1785326546969,
+   "title": "Essay 02",
+   "text": "Topic X has emerged as a crucial societal concern. A debate persists among experts and researchers over two key dimensions of this issue: its widespread nature and the solutions proposed to address it. This essay will explore both aspects of this matter, as elaborated below.\n\nTo begin with, the first dimension provides a range of substantial supporting points. This is primarily because of [reason]. In particular, a groundbreaking U.S. government publication stated that 78% of society is directly affected by this issue in their daily lives. As a result, this aspect demonstrates a stronger alignment with the community and is therefore supported.\n\nFurthermore, the solutions involve a range of practical proposals to address this issue. These include [solutions]. According to a recent paper published by the Arab Research Centre (ARC), 65% of relevant cases showed measurable improvement after adopting these measures. These findings reinforce the practicality of these measures in resolving the issue.\n\nIn conclusion, regarding [Topic], [both dimensions] of this issue warrant serious consideration, as each plays a significant role in shaping the outcomes for the community. The overall evidence clearly supports the importance of addressing this matter, given its wider scope and broader relevance.",
+   "createdAt": 1785326546969,
+   "updatedAt": 1785326546969,
+   "lastChunk": 0,
+   "favorite": false
+  }
+ ]
+}
