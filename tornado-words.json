@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-07-30T09:23:09.170Z",
+ "exportedAt": "2026-07-30T09:23:12.952Z",
  "words": [
   {
    "id": 1785185030316,
@@ -982,23 +982,23 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A three dimensional work of art created by shaping malleable objects and letting them harden or by chipping away pieces from a rock (sculpting",
-     "ar": "عمل فني ثلاثي الأبعاد تم إنشاؤه عن طريق تشكيل الأشياء المرنة وتركها تتصلب أو عن طريق تقطيع القطع من الصخر (النحت)"
+     "en": "A three dimensional work of art created by shaping malleable objects and letting them harden or by chipping away pieces from a rock (sculpting).",
+     "ar": "عمل فني ثلاثي الأبعاد تم إنشاؤه عن طريق تشكيل الأشياء المرنة وتركها تتصلب أو عن طريق تقطيع القطع من الصخر (النحت)."
     },
     {
      "pos": "noun",
-     "en": "Works of art created by sculpting, as a group",
-     "ar": "الأعمال الفنية التي تم إنشاؤها عن طريق النحت، كمجموعة"
+     "en": "Works of art created by sculpting, as a group.",
+     "ar": "الأعمال الفنية التي تم إنشاؤها عن طريق النحت، كمجموعة."
     },
     {
      "pos": "verb",
-     "en": "To fashion something into a three-dimensional figure",
-     "ar": "لصياغة شيء ما في شكل ثلاثي الأبعاد"
+     "en": "To fashion something into a three-dimensional figure.",
+     "ar": "لصياغة شيء ما في شكل ثلاثي الأبعاد."
     },
     {
      "pos": "verb",
-     "en": "To represent something in sculpture",
-     "ar": "لتمثيل شيء ما في النحت"
+     "en": "To represent something in sculpture.",
+     "ar": "لتمثيل شيء ما في النحت."
     }
    ],
    "inflections": [
@@ -1045,7 +1045,7 @@
    "due": 0,
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/scu/sculp/sculpture__us_2.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/s/scu/sculp/sculpture__gb_1.mp3",
-   "engineVersion": 3,
+   "engineVersion": 2,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
