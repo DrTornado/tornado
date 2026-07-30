@@ -151,6 +151,7 @@
     <button class="tab on" id="tab-add">Add</button>
     <button class="tab" id="tab-review">Quiz</button>
     <button class="tab" id="tab-audio">Listen 🎧</button>
+    <button class="tab" id="tab-notes">Notes 📝</button>
     <button class="tab" id="tab-list">My Words (<span id="count">0</span>)</button>
   </nav>
 
@@ -224,6 +225,14 @@
 
   <div id="pane-review" class="hidden"></div>
   <div id="pane-audio" class="hidden"></div>
+  <!--
+    الملاحظات الصوتية.
+
+    نصوص طويلة تُلصق هنا على الكمبيوتر وتُسمع على الجوال بمشغّله الخلفي. تُحفظ
+    في tornado-notes.json داخل نفس المستودع وبنفس الرمز الذي تحفظ به الكلمات —
+    فلا إعداد جديد ولا حساب ثانٍ.
+  -->
+  <div id="pane-notes" class="hidden"></div>
 
   <div id="pane-list" class="hidden">
     <input type="file" id="restore-file" accept=".json,application/json" class="hidden">
@@ -23280,7 +23289,7 @@ function flash(msg) {
 }
 
 // ===== Tabs =====
-const panes = ['add','review','audio','list','help'];
+const panes = ['add','review','audio','notes','list','help'];
 panes.forEach(p => {
   document.getElementById('tab-'+p).onclick = () => {
     stopAudio();
@@ -23298,6 +23307,139 @@ function switchTab(p) {
   if (ghBox) ghBox.classList.add('hidden'); // لوحة Integration ليست جزءاً من نظام التبويبات — نغلقها يدوياً عند أي تنقل
   if (p === 'list') { expandedIds.clear(); confirmingId = null; renderList(); }
   if (p === 'audio') { buildPlaylist(); renderAudio(); }
+  if (p === 'notes') renderNotes();
+}
+
+// ===== Audio Notes =====
+/*
+ * نصوص طويلة تُكتب هنا وتُسمع على الجوال.
+ *
+ * تشترك مع الكلمات في المستودع والرمز وآلية المزامنة، وتختلف عنها في كل ما
+ * عداه: لا معنى ولا نطق ولا مراجعة متباعدة — نصّ يُقرأ من أوّله إلى آخره.
+ *
+ * والملف منفصل عن ملف الكلمات عمداً: خلطهما كان سيجعل كل حفظ لملاحظة يعيد
+ * كتابة المكتبة كلها، وكل تعارض في أحدهما يهدّد الآخر.
+ */
+let notes = [];
+const NOTES_PATH = 'tornado-notes.json';
+
+function notesPayload() {
+  return JSON.stringify({
+    app: 'tornado', kind: 'notes', version: 1,
+    exportedAt: new Date().toISOString(), notes
+  }, null, 1);
+}
+
+async function ghNotesRequest(opts) {
+  const conf = ghConf();
+  if (!conf || !conf.token || !conf.repo) { const e = new Error('not configured'); e.kind = 'noconf'; throw e; }
+  return fetch(`https://api.github.com/repos/${conf.repo}/contents/${NOTES_PATH}`, {
+    cache: 'no-store',
+    ...opts,
+    headers: { 'Authorization': 'Bearer ' + conf.token, 'Accept': 'application/vnd.github+json', ...(opts && opts.headers) },
+  });
+}
+
+async function notesPull() {
+  const r = await ghNotesRequest({});
+  if (r.status === 404) return false;          // لا ملف بعد — ليس خطأً
+  if (!r.ok) throw new Error('pull failed');
+  const d = await r.json();
+  // نستعمل مساعدَي الترميز الموجودين: atob وحده يكسر أي حرف عربي في النص
+  const parsed = JSON.parse(base64ToUtf8(d.content || ''));
+  notes = Array.isArray(parsed.notes) ? parsed.notes : [];
+  return true;
+}
+
+async function notesPush() {
+  let sha = null;
+  const r1 = await ghNotesRequest({});
+  if (r1.ok) { const d = await r1.json(); sha = d.sha; }
+  const body = utf8ToBase64(notesPayload());
+  const r2 = await ghNotesRequest({
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: 'Tornado notes from computer', content: body, ...(sha ? { sha } : {}) })
+  });
+  if (!r2.ok) throw new Error('push failed');
+}
+
+/** تقدير عدد المقاطع — نفس حدّ التطبيق تماماً حتى لا يختلف الرقمان */
+function noteParts(text) {
+  return Math.max(1, Math.ceil((text || '').replace(/\s+/g, ' ').trim().length / 1200));
+}
+
+function noteTitleFrom(text) {
+  const first = (text || '').split('\n').map(s => s.trim()).find(s => s) || '';
+  if (first && first.length <= 60) return first;
+  return first.slice(0, 57).replace(/\s+\S*$/, '') + '…';
+}
+
+function renderNotes() {
+  const pane = document.getElementById('pane-notes');
+  const list = notes.slice().sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
+  pane.innerHTML = `
+    <div class="card" style="margin-bottom:12px;">
+      <div style="font-weight:700;margin-bottom:6px;">New audio note</div>
+      <input class="inp" id="note-title" placeholder="Title (optional)" style="margin-bottom:6px;">
+      <textarea class="inp" id="note-text" rows="8"
+        placeholder="Paste an article, a chapter, or your own notes — it will play on your phone."
+        style="resize:vertical;font-family:inherit;"></textarea>
+      <div id="note-stats" style="font-size:12px;color:#8A93A3;margin:6px 0;"></div>
+      <button class="btn" id="note-save">Save note</button>
+    </div>
+    <div style="font-size:13px;color:#8A93A3;margin:10px 0 6px;">
+      ${list.length ? list.length + ' note' + (list.length > 1 ? 's' : '') : 'No notes yet'}
+    </div>
+    ${list.map(n => `
+      <div class="card" style="margin-bottom:8px;">
+        <div style="display:flex;align-items:flex-start;gap:8px;">
+          <div style="flex:1;min-width:0;">
+            <div style="font-weight:700;">${esc(n.title || 'Note')}</div>
+            <div style="font-size:12px;color:#8A93A3;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+              ${esc((n.text || '').slice(0, 120))}
+            </div>
+            <div style="font-size:12px;color:#E8B04B;margin-top:4px;">
+              ${(n.text || '').split(/\s+/).filter(Boolean).length} words · ${noteParts(n.text)} parts
+            </div>
+          </div>
+          <button class="btn" data-del="${n.id}"
+            style="width:auto;background:none;border:1px solid #D96A5B;color:#D96A5B;padding:4px 10px;font-size:12px;">Delete</button>
+        </div>
+      </div>`).join('')}
+  `;
+
+  const ta = document.getElementById('note-text');
+  const stats = document.getElementById('note-stats');
+  const updateStats = () => {
+    const t = ta.value.trim();
+    stats.textContent = t.length < 20 ? '' :
+      `${t.split(/\s+/).filter(Boolean).length} words · ${noteParts(t)} parts`;
+  };
+  ta.oninput = updateStats;
+  updateStats();
+
+  document.getElementById('note-save').onclick = async () => {
+    const text = ta.value.trim();
+    if (text.length < 20) { flash('Paste a longer text first'); return; }
+    const now = Date.now();
+    notes.push({
+      id: now,
+      title: (document.getElementById('note-title').value || '').trim() || noteTitleFrom(text),
+      text, createdAt: now, updatedAt: now, lastChunk: 0, favorite: false
+    });
+    try { await notesPush(); flash('Note saved — it will reach your phone'); }
+    catch (e) { flash('Saved locally — sync failed'); }
+    renderNotes();
+  };
+
+  pane.querySelectorAll('[data-del]').forEach(b => {
+    b.onclick = async () => {
+      notes = notes.filter(n => String(n.id) !== b.dataset.del);
+      try { await notesPush(); } catch (e) { /* الحذف محلي على كل حال */ }
+      renderNotes();
+    };
+  });
 }
 
 // ===== Card entry rendering (shared by Add preview & My Words) =====
@@ -23720,6 +23862,16 @@ async function doSync() {
     btn.textContent = '🔄 Syncing…';
     await doManualRestore(); // يجلب ويدمج أحدث نسخة — عبر GitHub إن كان مفعّلاً، وإلا الملف المحلي/المشاركة كالمعتاد
     await doManualBackup();  // يحفظ فوراً — يشمل أي تحسينات جمعتها المواكبة الخلفية منذ آخر مزامنة
+    /*
+     * الملاحظات تسافر مع الكلمات في نفس الضغطة.
+     *
+     * زرّ مزامنة يحمل نصف المحتوى يترك النصف الآخر يتفرّع بين الجهازين بلا أن
+     * يلاحظ المستخدم — وهو أسوأ من غياب المزامنة أصلاً لأنه يمنح ثقة كاذبة.
+     */
+    if (ghConf()) {
+      try { await notesPull(); await notesPush(); if (tab === 'notes') renderNotes(); }
+      catch(e) { /* لا ملف بعد أو انقطاع — الكلمات نجحت ولا داعي لإفزاع المستخدم */ }
+    }
     flash('✅ Synced');
   } catch(e) {
     flash('⚠️ Sync had an issue — check the messages above for details');
@@ -25855,6 +26007,8 @@ async function prepareAudioInBackground() {
 async function autoPullOnStartup() {
   // نتأكد من أحدث نسخة تلقائياً عند كل فتح للتطبيق — بلا أي ضغطة، وبلا أي نافذة تصفح تحتاج تفاعل المستخدم أصلاً
   if (ghConf()) {
+    // الملاحظات تُسحب مع الكلمات في نفس الفتحة — إعداد واحد لمحتويين
+    try { await notesPull(); } catch(e) { /* لا ملف بعد أو انقطاع — صمت */ }
     try { await applyRestoredData(await ghRestore(), true); return; }
     catch(e) { /* أول مرة (لا ملف بعد) أو مشكلة اتصال — صمت تام، ما نزعج المستخدم بكل فتح */ }
     return;
