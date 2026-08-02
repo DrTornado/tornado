@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:13:49.371Z",
+ "exportedAt": "2026-08-02T21:13:57.647Z",
  "words": [
   {
    "id": 1785000460857,
@@ -2076,7 +2076,7 @@
    "id": 1784495777063,
    "word": "hostess",
    "ipa": "/ˈhəʊstəs/",
-   "arabicPron": "هوستس",
+   "arabicPron": "هوستيس",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -2095,14 +2095,14 @@
      "ar": "ضابطة نزل."
     },
     {
-     "pos": "verb",
-     "en": "To host, as a woman.",
-     "ar": "للاستضافة، كامرأة."
-    },
-    {
      "pos": "noun",
      "en": "Stewardess: a woman steward on an airplane.",
      "ar": "مضيفة: امرأة مضيفة على متن طائرة."
+    },
+    {
+     "pos": "verb",
+     "en": "To host, as a woman.",
+     "ar": "للاستضافة، كامرأة."
     }
    ],
    "inflections": [
@@ -2134,13 +2134,15 @@
     }
    ],
    "differences": [],
-   "ipaUS": "/ˈhoʊstəs/",
-   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/hostess-us.mp3",
+   "ipaUS": "/ˈhoʊstɪs/",
+   "audioUS": "-us",
    "interval": 0,
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "B2",
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUK": "/ˈhəʊstəs/",
+   "audioUK": "-uk"
   },
   {
    "right": 0,
