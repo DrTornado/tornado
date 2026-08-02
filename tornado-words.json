@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:16:56.736Z",
+ "exportedAt": "2026-08-02T21:17:01.029Z",
  "words": [
   {
    "id": 1785705257083,
@@ -1826,7 +1826,7 @@
    "last": null,
    "id": 1784531150409,
    "word": "mollusc",
-   "ipa": "",
+   "ipa": "/ˈmɒləsk/",
    "arabicPron": "مالسك",
    "oxford": "",
    "cefr": "",
@@ -1837,22 +1837,22 @@
     {
      "pos": "noun",
      "en": "A soft-bodied invertebrate of the phylum Mollusca, typically with a hard shell of one or more pieces.",
-     "ar": "اللافقاريات رخوة الجسم من شعبة الرخويات، وعادة مع قشرة صلبة من قطعة واحدة أو أكثر."
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "(figuratively) A weak-willed person.",
-     "ar": "(مجازياً) شخص ضعيف الإرادة."
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "A weak-willed person.",
-     "ar": "شخص ضعيف الإرادة."
+     "ar": ""
     }
    ],
    "inflections": [
-    "molluscs",
-    "molluscses"
+    "mollusc",
+    "molluscs"
    ],
    "derivatives": [],
    "synonyms": [
@@ -1902,7 +1902,7 @@
    "examples": [
     {
      "en": "bivalve molluscs",
-     "ar": "رخويات ثنائية الصدفة"
+     "ar": ""
     }
    ],
    "differences": [],
