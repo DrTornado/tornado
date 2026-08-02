@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T17:10:42.467Z",
+ "exportedAt": "2026-08-02T17:10:46.522Z",
  "words": [
   {
    "id": 1785185030316,
@@ -8097,13 +8097,13 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "View, natural features, landscape",
-     "ar": "المنظر والميزات الطبيعية والمناظر الطبيعية"
+     "en": "View, natural features, landscape.",
+     "ar": "المنظر والميزات الطبيعية والمناظر الطبيعية."
     },
     {
      "pos": "noun",
-     "en": "Stage backdrops, property and other items on a stage that give the impression of the location of the scene",
-     "ar": "قم بوضع الخلفيات والممتلكات وغيرها من العناصر على خشبة المسرح التي تعطي انطباعًا عن موقع المشهد"
+     "en": "Stage backdrops, property and other items on a stage that give the impression of the location of the scene.",
+     "ar": "قم بوضع الخلفيات والممتلكات وغيرها من العناصر على خشبة المسرح التي تعطي انطباعًا عن موقع المشهد."
     }
    ],
    "inflections": [
@@ -8154,7 +8154,7 @@
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/scenery-us.mp3",
    "freqLabel": "Top 18,000 words",
    "estCefr": "B2",
-   "engineVersion": 5,
+   "engineVersion": 2,
    "interval": 0,
    "due": 0,
    "ipaUK": "",
