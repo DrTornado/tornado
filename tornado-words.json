@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:13:21.355Z",
+ "exportedAt": "2026-08-02T21:13:25.256Z",
  "words": [
   {
    "id": 1785000460857,
@@ -1481,23 +1481,8 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A piece of fabric attached to a boat and arranged such that it causes the wind to drive the boat along. The sail may be attached to the boat via a combination of mast, spars and ropes.",
-     "ar": "قطعة من القماش متصلة بقارب ومرتبة بحيث تتسبب في دفع الرياح للقارب. يمكن ربط الشراع بالقارب عبر مزيج من الصاري والصاري والحبال."
-    },
-    {
-     "pos": "noun",
-     "en": "(nautical,uncountable) The concept of a sail or sails, as if a substance.",
-     "ar": "(بحري،لا يحصى) مفهوم الشراع أو الأشرعة، كما لو كانت مادة."
-    },
-    {
-     "pos": "verb",
-     "en": "To be impelled or driven forward by the action of wind upon sails, as a ship on water; to be impelled on a body of water by steam or other power.",
-     "ar": "أن يتم دفعه أو دفعه إلى الأمام بفعل الرياح على الأشرعة، كسفينة على الماء ؛ أن يتم دفعه على جسم مائي بواسطة البخار أو أي قوة أخرى."
-    },
-    {
-     "pos": "verb",
-     "en": "To move through or on the water; to swim, as a fish or a waterfowl.",
-     "ar": "التحرك عبر الماء أو فوقه ؛ للسباحة، كسمكة أو كطيور مائية."
+     "en": "(nautical, slang) The sailmaker on board ship.",
+     "ar": "صانع الشراع على متن السفينة."
     },
     {
      "pos": "noun",
@@ -1552,7 +1537,7 @@
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/s/sai/sail_/sail__gb_2.mp3",
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "right": 0,
