@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:13:15.922Z",
+ "exportedAt": "2026-08-02T21:13:18.868Z",
  "words": [
   {
    "id": 1785000460857,
@@ -1309,23 +1309,23 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To be on fire, especially producing bright flames.",
-     "ar": "أن تكون مشتعلًا، خاصةً إذا أنتجت لهبًا ساطعًا."
+     "en": "present participle and gerund of blaze",
+     "ar": "الحاضر الفاعل و gerund من اللهب"
     },
     {
-     "pos": "verb",
-     "en": "To send forth or reflect a bright light; shine like a flame.",
-     "ar": "لإرسال أو عكس ضوء ساطع ؛ تألق مثل اللهب."
+     "pos": "adjective",
+     "en": "Of tremendous intensity, heat (thermal energy) or fervor; white-hot.",
+     "ar": "ذات كثافة هائلة، حرارة (طاقة حرارية) أو حماسة ؛ بيضاء ساخنة."
     },
     {
-     "pos": "verb",
-     "en": "To blow, as from a trumpet",
-     "ar": "ينفخ، كما من بوق"
+     "pos": "adjective",
+     "en": "(informal) Very fast.",
+     "ar": "(غير رسمي) بسرعة كبيرة."
     },
     {
-     "pos": "verb",
-     "en": "To publish; announce publicly",
-     "ar": "ينشر ؛ يعلن علنا"
+     "pos": "adjective",
+     "en": "(informal) Exceedingly angry.",
+     "ar": "(غير رسمي) غاضب بشكل مفرط."
     },
     {
      "pos": "noun",
@@ -1387,16 +1387,12 @@
    ],
    "examples": [
     {
-     "en": "The campfire blazed merrily.",
-     "ar": "اشتعلت نار المخيم بمرح."
+     "en": "The divorced couple had a blazing row.",
+     "ar": "كان الزوجان المطلقان يتشاجران بشدة."
     },
     {
      "en": "the blazings of many fires",
      "ar": "اشتعال العديد من الحرائق"
-    },
-    {
-     "en": "The actress, with her perfectly-curved body, was simply blazing in her new movie!",
-     "ar": "كانت الممثلة، بجسدها المنحني تمامًا، تشتعل ببساطة في فيلمها الجديد!"
     }
    ],
    "differences": [],
@@ -1405,7 +1401,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "right": 0,
