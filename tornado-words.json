@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:14:04.464Z",
+ "exportedAt": "2026-08-02T21:14:08.915Z",
  "words": [
   {
    "id": 1785000460857,
@@ -2341,7 +2341,7 @@
    "id": 1784488534430,
    "word": "preliminary",
    "ipa": "/pɹɪˈlɪmɪnəɹi/",
-   "arabicPron": "بريليمينري",
+   "arabicPron": "بريليمينيري",
    "oxford": "5000",
    "cefr": "C1",
    "pos": [
@@ -2349,6 +2349,11 @@
     "adjective"
    ],
    "meanings": [
+    {
+     "pos": "adjective",
+     "en": "In preparation for the main matter; initial, introductory, preparatory.",
+     "ar": "استعدادا للمسألة الرئيسية ؛ الأولية، التمهيدية، التحضيرية."
+    },
     {
      "pos": "noun",
      "en": "A preparation for a main matter; an introduction.",
@@ -2360,14 +2365,9 @@
      "ar": "أي من سلسلة الأحداث الرياضية التي تحدد المتأهلين للتصفيات النهائية"
     },
     {
-     "pos": "adjective",
-     "en": "In preparation for the main matter; initial, introductory, preparatory.",
-     "ar": "استعدادا للمسألة الرئيسية ؛ الأولية، التمهيدية، التحضيرية."
-    },
-    {
      "pos": "noun",
-     "en": "A relatively minor contest that precedes a major one, especially in boxing.",
-     "ar": "مسابقة صغيرة نسبيًا تسبق مسابقة رئيسية، خاصة في الملاكمة."
+     "en": "A relatively minor contest that precedes a major one, especially in boxing",
+     "ar": "مسابقة صغيرة نسبيًا تسبق مسابقة كبيرة، خاصة في الملاكمة"
     }
    ],
    "inflections": [
@@ -2418,11 +2418,13 @@
     }
    ],
    "differences": [],
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pre/preli/preliminary__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/p/pre/preli/preliminary__gb_2.mp3",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUS": "/pɹɪˈlɪmɪnɛɹi/",
+   "ipaUK": "/pɹɪˈlɪmɪn(ə)ɹi/"
   },
   {
    "right": 0,
@@ -2439,16 +2441,6 @@
     "noun"
    ],
    "meanings": [
-    {
-     "pos": "verb",
-     "en": "To render (much) smaller, turn into a dwarf (version).",
-     "ar": "لجعلها أصغر (بكثير)، تتحول إلى قزم (نسخة)."
-    },
-    {
-     "pos": "verb",
-     "en": "To make appear (much) smaller, puny, tiny.",
-     "ar": "لجعلها تبدو أصغر (بكثير)، ضئيلة، صغيرة."
-    },
     {
      "pos": "verb",
      "en": "present participle and gerund of dwarf",
@@ -2514,7 +2506,7 @@
    "due": 0,
    "freqLabel": "Top 8,000 words",
    "estCefr": "B2",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "right": 0,
