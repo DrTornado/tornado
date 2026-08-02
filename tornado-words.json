@@ -1,8 +1,82 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:14:15.263Z",
+ "exportedAt": "2026-08-02T21:14:20.365Z",
  "words": [
+  {
+   "id": 1785705257083,
+   "word": "Fuck",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "verb",
+    "noun",
+    "interjection",
+    "adverb",
+    "particle"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "To have sexual intercourse; to copulate.",
+     "ar": "أن يمارسوا الجنس ؛ أن يتزاوجوا."
+    },
+    {
+     "pos": "verb",
+     "en": "To have sexual intercourse with.",
+     "ar": "أن تمارس الجنس معه."
+    },
+    {
+     "pos": "verb",
+     "en": "To have penetrative sex (as opposed to oral sex, etc.).",
+     "ar": "ممارسة الجنس الاختراقي (على عكس الجنس الفموي، وما إلى ذلك)."
+    },
+    {
+     "pos": "noun",
+     "en": "An act of sexual intercourse.",
+     "ar": "فعل الاتصال الجنسي."
+    },
+    {
+     "pos": "noun",
+     "en": "A sexual partner, especially a casual one.",
+     "ar": "شريك جنسي، وخاصة شريك غير رسمي."
+    },
+    {
+     "pos": "noun",
+     "en": "A highly contemptible person.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "fuck",
+    "fucks",
+    "fucked",
+    "fucking"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "It's just common courtesy to help clean up after fucking .",
+     "ar": "إنها مجرد مجاملة شائعة للمساعدة في التنظيف بعد ممارسة الجنس ."
+    },
+    {
+     "en": "I really enjoyed fucking my girlfriend last night.",
+     "ar": "لقد استمتعت حقًا بمضاجعة صديقتي الليلة الماضية."
+    },
+    {
+     "en": "We've done oral, but never fucked.",
+     "ar": "لقد فعلنا ذلك عن طريق الفم، ولكن لم يمارس الجنس."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1785000460857,
    "word": "discourage",
@@ -2616,9 +2690,9 @@
    "wrong": 0,
    "last": null,
    "id": 1784487461009,
-   "word": "confederacy",
-   "ipa": "/kənˈfɛdəɹəsi/",
-   "arabicPron": "كنفيدرسي",
+   "word": "statistically",
+   "ipa": "/stəˈtɪs.tɪ.kə.li/",
+   "arabicPron": "ستتيستيكلي",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -2626,24 +2700,19 @@
    ],
    "meanings": [
     {
-     "pos": "noun",
-     "en": "An alliance.",
-     "ar": "-ماذا؟"
+     "pos": "adverb",
+     "en": "From a statistical point of view.",
+     "ar": "من وجهة نظر إحصائية."
     },
     {
-     "pos": "noun",
-     "en": "(politics) A state where the sovereign constituent units delegate their authority to the centre. As opposed to a federation, where the central and regional governments are each equal and sovereign in their own sphere.",
-     "ar": "(السياسة) دولة تفوض فيها الوحدات التأسيسية السيادية سلطتها إلى المركز. على عكس الاتحاد، حيث تكون كل من الحكومات المركزية والإقليمية متساوية وذات سيادة في مجالها الخاص."
+     "pos": "adverb",
+     "en": "From statistical evidence.",
+     "ar": "الدلًلة الإحصائية"
     },
     {
-     "pos": "noun",
-     "en": "Specifically, an instance of a decentralized governing structure among the indigenous peoples of North America.",
-     "ar": "على وجه التحديد، مثال لهيكل حكم لامركزي بين الشعوب الأصلية في أمريكا الشمالية."
-    },
-    {
-     "pos": "noun",
-     "en": "A state where the sovereign constituent units delegate their authority to the centre.",
-     "ar": "دولة تفوض فيها الوحدات السيادية سلطتها إلى المركز."
+     "pos": "adverb",
+     "en": "In a statistical way.",
+     "ar": "بطريقة إحصائية."
     }
    ],
    "inflections": [
@@ -2675,24 +2744,38 @@
    ],
    "collocations": [
     {
-     "en": "southern confederacy",
-     "ar": "الكونفدرالية الجنوبية"
+     "en": "statistically significant",
+     "ar": "دال احصائياً"
     },
     {
-     "en": "iroquois confederacy",
-     "ar": "اتحاد الأوريكيون"
+     "en": "statistically independent",
+     "ar": "مستقل إحصائياً"
+    },
+    {
+     "en": "statistically insignificant",
+     "ar": "عديم الأهمية من الناحية الإحصائية"
     }
    ],
    "examples": [
     {
-     "en": "The Blackfoot, Iroquois, and Sioux peoples all were governed as confederacies. There were also multi-ethnic confederacies, such as the Iron Confederacy made up of the Plains Cree, Assiniboine, Stoney, and Saulteaux.",
-     "ar": "حُكمت شعوب بلاكفوت وإيروكوا وسيوكس جميعًا ككونفدراليات. كانت هناك أيضًا كونفدراليات متعددة الأعراق، مثل الكونفدرالية الحديدية المكونة من Plains Cree و Assiniboine و Stoney و Saulteaux."
+     "en": "He made his point statistically.",
+     "ar": "لقد أوضح وجهة نظره إحصائياً."
+    },
+    {
+     "en": "Statistically, the study was almost worthless.",
+     "ar": "من الناحية الإحصائية، كانت الدراسة عديمة القيمة تقريبًا."
+    },
+    {
+     "en": "Statistically, what he said is true.",
+     "ar": "إحصائيا، ما قاله صحيح."
     }
    ],
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 3
+   "engineVersion": 3,
+   "freqLabel": "Top 18,000 words",
+   "estCefr": "C1"
   },
   {
    "right": 0,
