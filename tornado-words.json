@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:13:35.011Z",
+ "exportedAt": "2026-08-02T21:13:39.391Z",
  "words": [
   {
    "id": 1785000460857,
@@ -1708,9 +1708,9 @@
    "wrong": 0,
    "last": null,
    "id": 1784531150409,
-   "word": "molluscs",
+   "word": "mollusc",
    "ipa": "",
-   "arabicPron": "",
+   "arabicPron": "مالسك",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -1720,7 +1720,12 @@
     {
      "pos": "noun",
      "en": "A soft-bodied invertebrate of the phylum Mollusca, typically with a hard shell of one or more pieces.",
-     "ar": "اللافقاريات رخوة الجسم من شعبة الرخويات، وعادة مع قشرة صلبة من قطعة واحدة أو أكثر"
+     "ar": "اللافقاريات رخوة الجسم من شعبة الرخويات، وعادة مع قشرة صلبة من قطعة واحدة أو أكثر."
+    },
+    {
+     "pos": "noun",
+     "en": "(figuratively) A weak-willed person.",
+     "ar": "(مجازياً) شخص ضعيف الإرادة."
     },
     {
      "pos": "noun",
@@ -1755,31 +1760,44 @@
      "ar": "رخوي حيوان من الرخو يات كالحلزون"
     }
    ],
-   "collocations": [],
+   "collocations": [
+    {
+     "en": "mollusc shells",
+     "ar": "أصداف الرخويات"
+    },
+    {
+     "en": "mollusc shell",
+     "ar": "قشرة الرخويات"
+    },
+    {
+     "en": "mollusc species",
+     "ar": "أنواع الرخويات"
+    },
+    {
+     "en": "bivalve mollusc",
+     "ar": "رخويات ثنائية الصمامات"
+    },
+    {
+     "en": "marine mollusc",
+     "ar": "الرخويات البحرية"
+    }
+   ],
    "examples": [
     {
-     "en": "Are mussels molluscs?",
-     "ar": ""
-    },
-    {
-     "en": "Snails are slow-moving molluscs.",
-     "ar": ""
-    },
-    {
-     "en": "Snails are molluscs which move slowly.",
-     "ar": ""
+     "en": "bivalve molluscs",
+     "ar": "رخويات ثنائية الصدفة"
     }
    ],
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2,
-   "ipaUS": "",
-   "ipaUK": "",
+   "engineVersion": 3,
+   "ipaUS": "/ˈmɑləsk/",
+   "ipaUK": "/ˈmɒləsk/",
    "estCefr": "",
    "freqLabel": "",
-   "audioUS": "",
-   "audioUK": "",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "audioGen": "",
    "favorite": "false"
   },
@@ -1788,9 +1806,9 @@
    "wrong": 0,
    "last": null,
    "id": 1784531083797,
-   "word": "electrodes",
+   "word": "electrode",
    "ipa": "",
-   "arabicPron": "",
+   "arabicPron": "ليكترود",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -1799,13 +1817,13 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "The terminal through which electric current passes between metallic and nonmetallic parts of an electric circuit",
-     "ar": "الطرف الذي يمر من خلاله التيار الكهربائي بين الأجزاء المعدنية وغير المعدنية للدائرة الكهربائية"
+     "en": "The terminal through which electric current passes between metallic and nonmetallic parts of an electric circuit.",
+     "ar": "الطرف الذي يمر من خلاله التيار الكهربائي بين الأجزاء المعدنية وغير المعدنية للدائرة الكهربائية."
     },
     {
      "pos": "noun",
-     "en": "A collector or emitter of electric charge in a semiconducting device",
-     "ar": "جامع أو باعث للشحنة الكهربائية في جهاز شبه موصل"
+     "en": "A collector or emitter of electric charge in a semiconducting device.",
+     "ar": "مجمع أو باعث للشحنة الكهربائية في جهاز شبه موصل."
     }
    ],
    "inflections": [
@@ -1814,7 +1832,28 @@
    ],
    "derivatives": [],
    "synonyms": [],
-   "collocations": [],
+   "collocations": [
+    {
+     "en": "electrode potential",
+     "ar": "كُمُونُ الْمَسْرَى"
+    },
+    {
+     "en": "electrode surface",
+     "ar": "سطح القطب الكهربائي"
+    },
+    {
+     "en": "reference electrode",
+     "ar": "مَسْرَى مُقَارَنَةٍ"
+    },
+    {
+     "en": "negative electrode",
+     "ar": "مِكْهر سالب"
+    },
+    {
+     "en": "positive electrode",
+     "ar": "مكهرموجب"
+    }
+   ],
    "examples": [
     {
      "en": "The positive electrode is called the cathode.",
@@ -1832,13 +1871,13 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2,
+   "engineVersion": 3,
    "ipaUS": "",
-   "ipaUK": "",
+   "ipaUK": "/əˈlɛk.tɹəʊd/",
    "estCefr": "",
    "freqLabel": "",
    "audioUS": "",
-   "audioUK": "",
+   "audioUK": "-uk",
    "audioGen": "",
    "favorite": "false"
   },
