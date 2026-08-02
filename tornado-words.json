@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:12:54.296Z",
+ "exportedAt": "2026-08-02T21:12:58.544Z",
  "words": [
   {
    "id": 1785000460857,
@@ -668,33 +668,33 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "To lie in a position directly beneath.",
-     "ar": "الاستلقاء في وضع تحته مباشرة."
-    },
-    {
-     "pos": "verb",
-     "en": "To lie under or beneath.",
-     "ar": "الاستلقاء تحتها أو تحتها."
-    },
-    {
-     "pos": "noun",
-     "en": "The entity from whose performance a derivative derives its value.",
-     "ar": "الجهة التي يستمد من أدائها المشتق قيمته."
-    },
-    {
      "pos": "adjective",
-     "en": "Lying underneath",
-     "ar": "الاستلقاء تحت"
-    },
-    {
-     "pos": "adjective",
-     "en": "Basic or fundamental",
+     "en": "basic or fundamental",
      "ar": "أساسي أو أساسي"
     },
     {
      "pos": "adjective",
-     "en": "Implicit.",
+     "en": "(literal) lying underneath",
+     "ar": "(حرفيًا) مستلقيًا تحته"
+    },
+    {
+     "pos": "adjective",
+     "en": "implicit",
+     "ar": "ضمنيا"
+    },
+    {
+     "pos": "noun",
+     "en": "(finance) The entity from whose performance a derivative derives its value.",
+     "ar": "(المالية) الكيان الذي يستمد من أدائه المشتق قيمته."
+    },
+    {
+     "pos": "verb",
+     "en": "present participle and gerund of underlie",
+     "ar": "الحاضر الفاعل و gerund من الكامنة"
+    },
+    {
+     "pos": "adjective",
+     "en": "Lying underneath.",
      "ar": ""
     }
    ],
@@ -751,16 +751,16 @@
    ],
    "examples": [
     {
-     "en": "A stratum of clay underlies the surface gravel.",
-     "ar": "توجد طبقة من الطين تحت الحصى السطحي."
-    },
-    {
      "en": "We dug down to the underlying rock.",
      "ar": "وحفرنا وصولاً إلى الصخرة الكامنة."
     },
     {
      "en": "Points and straight lines are underlying elements of geometry.",
      "ar": "النقاط والخطوط المستقيمة هي العناصر الأساسية للهندسة."
+    },
+    {
+     "en": "Many nursery rhymes have an underlying meaning.",
+     "ar": "العديد من أغاني الأطفال لها معنى كامن."
     }
    ],
    "differences": [],
@@ -771,7 +771,7 @@
    "due": 0,
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/u/und/under/underlying__us_1.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/u/und/under/underlying__gb_3.mp3",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "id": 1784737860691,
@@ -846,7 +846,7 @@
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/scenery-us.mp3",
    "freqLabel": "Top 18,000 words",
    "estCefr": "B2",
-   "engineVersion": 2,
+   "engineVersion": 3,
    "interval": 0,
    "due": 0,
    "ipaUK": "",
