@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:14:20.365Z",
+ "exportedAt": "2026-08-02T21:14:27.125Z",
  "words": [
   {
    "id": 1785705257083,
@@ -2863,19 +2863,14 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "To detect the scent of; to discern by the sense of smell.",
-     "ar": "للكشف عن رائحة ؛ لتمييز حاسة الشم."
-    },
-    {
-     "pos": "verb",
-     "en": "To have a suspicion of.",
-     "ar": "للاشتباه به."
-    },
-    {
      "pos": "adjective",
      "en": "Having a pleasant aroma.",
      "ar": "الحصول على رائحة لطيفة."
+    },
+    {
+     "pos": "adjective",
+     "en": "Having perfume added.",
+     "ar": "بعد إضافة العطر."
     },
     {
      "pos": "adjective",
@@ -2883,14 +2878,14 @@
      "ar": "(بشكل رئيسي في تركيبة) وجود رائحة من أي نوع."
     },
     {
-     "pos": "adjective",
-     "en": "Having a smell of any kind.",
-     "ar": "وجود رائحة من أي نوع."
+     "pos": "verb",
+     "en": "simple past and past participle of scent",
+     "ar": "تأثير الماضي والماضي البسيط للرائحة"
     },
     {
      "pos": "adjective",
-     "en": "Having perfume added.",
-     "ar": ""
+     "en": "Having a smell of any kind.",
+     "ar": "وجود رائحة من أي نوع."
     }
    ],
    "inflections": [
@@ -2946,16 +2941,16 @@
    ],
    "examples": [
     {
-     "en": "The hounds scented the fox in the woods.",
-     "ar": ""
-    },
-    {
-     "en": "I scented trouble when I saw them running down the hill towards me.",
-     "ar": ""
-    },
-    {
      "en": "a plant with skunk-scented leaves",
-     "ar": ""
+     "ar": "نبات ذو أوراق معطرة بالظربان"
+    },
+    {
+     "en": "a scented soap",
+     "ar": "صابون معطر"
+    },
+    {
+     "en": "I use pine-scented air fresheners in my cars.",
+     "ar": "أستخدم معطرات الجو برائحة الصنوبر في سياراتي."
     }
    ],
    "differences": [],
@@ -2963,7 +2958,7 @@
    "due": 0,
    "freqLabel": "Top 8,000 words",
    "estCefr": "B2",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "right": 0,
