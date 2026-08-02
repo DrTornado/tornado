@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:12:40.071Z",
+ "exportedAt": "2026-08-02T21:12:48.256Z",
  "words": [
   {
    "id": 1785000460857,
@@ -376,24 +376,20 @@
   },
   {
    "id": 1784991631873,
-   "word": "burrs",
-   "ipa": "",
-   "arabicPron": "",
+   "word": "burr",
+   "ipa": "/bʌr/",
+   "arabicPron": "بير",
    "oxford": "",
    "cefr": "",
    "pos": [
-    "noun"
+    "noun",
+    "verb"
    ],
    "meanings": [
     {
      "pos": "noun",
-     "en": "A tree growth in which the grain has grown in a deformed manner.",
-     "ar": "نمو شجرة نمت فيها الحبوب بطريقة مشوهة."
-    },
-    {
-     "pos": "noun",
-     "en": "Wood of a mottled veneer, usually cut from such a growth.",
-     "ar": "خشب من قشرة مرقطة، عادة ما يكون مقطوعًا من مثل هذا النمو."
+     "en": "A small piece of material left on an edge after a cutting operation.",
+     "ar": "قطعة صغيرة من المواد متروكة على الحافة بعد عملية القطع."
     },
     {
      "pos": "noun",
@@ -402,8 +398,13 @@
     },
     {
      "pos": "noun",
-     "en": "A bur; a seed pod with sharp features that stick in fur or clothing.",
-     "ar": "مثقب ؛ كبسولة بذور ذات ملامح حادة تلتصق بالفراء أو الملابس."
+     "en": "(engineering) A revolving disk or cone with abrasive surfaces used to grind hard products in a grinder or mill.",
+     "ar": "(هندسة) قرص دوار أو مخروط ذو أسطح كاشطة يستخدم لطحن المنتجات الصلبة في مطحنة أو مطحنة."
+    },
+    {
+     "pos": "verb",
+     "en": "(transitive, engineering) To grind using a burr (revolving disk or cone with abrasive surfaces).",
+     "ar": "(متعدية، هندسية) للطحن باستخدام نتوء (قرص دوار أو مخروط بأسطح كاشطة)."
     },
     {
      "pos": "noun",
@@ -412,36 +413,65 @@
     },
     {
      "pos": "noun",
-     "en": "A uvular \"r\".",
+     "en": "A uvular \"r\" sound, or (by extension) an accent characterized by this sound.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "(transitive) To pronounce with a uvular \"r\".",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "(intransitive) To make a rough humming sound.",
      "ar": ""
     }
    ],
    "inflections": [
+    "burr",
     "burrs",
-    "burrses"
+    "burred",
+    "burring"
    ],
    "derivatives": [],
    "synonyms": [
     {
-     "en": "bur",
-     "ar": "حافة خشنة"
-    },
-    {
      "en": "sticker",
      "ar": "ملصق"
+    },
+    {
+     "en": "brough",
+     "ar": "بروف!"
+    },
+    {
+     "en": "bur",
+     "ar": "حافة خشنة"
     }
    ],
    "collocations": [
     {
-     "en": "like burrs",
-     "ar": "مثل النتوءات"
+     "en": "burr ridge",
+     "ar": "حافة الأزيز"
     },
     {
-     "en": "remove burrs",
-     "ar": "إزالة الحواف الخشنة"
+     "en": "aaron burr",
+     "ar": "آرون بور"
+    },
+    {
+     "en": "colonel burr",
+     "ar": "عقيد لدغ"
     }
    ],
-   "examples": [],
+   "examples": [
+    {
+     "en": "You left a bunch of burrs on those parts yesterday. You've already been told not to miss the deburring operation.",
+     "ar": "لقد تركت حفنة من النتوءات على تلك الأجزاء أمس. لقد تم إخبارك بالفعل بعدم تفويت عملية إزالة الأزيز."
+    },
+    {
+     "en": "burr grinder",
+     "ar": "مطحنة نتوءات"
+    }
+   ],
    "differences": [],
    "right": 0,
    "wrong": 0,
@@ -450,12 +480,14 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUS": "/bɝ/",
+   "audioUS": "-us"
   },
   {
    "id": 1784899215964,
    "word": "influential",
-   "ipa": "/ɪnfluˈɛnʃəl/",
+   "ipa": "/ˌənflʉˈenʃəl/",
    "arabicPron": "ينفلوينشل",
    "oxford": "5000",
    "cefr": "C1",
@@ -465,14 +497,14 @@
    ],
    "meanings": [
     {
-     "pos": "noun",
-     "en": "A person who has influence",
-     "ar": "الشخص الذي له تأثير"
-    },
-    {
      "pos": "adjective",
      "en": "Having or exerting influence.",
      "ar": "وجود أو ممارسة النفوذ."
+    },
+    {
+     "pos": "noun",
+     "en": "A person who has influence",
+     "ar": "الشخص الذي له تأثير"
     }
    ],
    "inflections": [
@@ -522,12 +554,12 @@
    ],
    "examples": [
     {
-     "en": "Jane was very influential in getting the motion passed.",
-     "ar": "كان لجين تأثير كبير في تمرير الاقتراح."
-    },
-    {
      "en": "John Lennon was a very influential person in music, as well as in politics, fashion and general culture.",
      "ar": "كان جون لينون شخصًا مؤثرًا جدًا في الموسيقى، وكذلك في السياسة والأزياء والثقافة العامة."
+    },
+    {
+     "en": "Jane was very influential in getting the motion passed.",
+     "ar": "كان لجين تأثير كبير في تمرير الاقتراح."
     }
    ],
    "differences": [],
@@ -536,9 +568,11 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/i/inf/influ/influential__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/i/inf/influ/influential__gb_1.mp3",
-   "engineVersion": 2
+   "audioUS": "-us",
+   "audioUK": "-uk",
+   "engineVersion": 3,
+   "ipaUS": "/ˌɪnfluˈɛnʃəl/",
+   "ipaUK": "/ɪnflʊˈɛnʃəl/"
   },
   {
    "id": 1784899135706,
