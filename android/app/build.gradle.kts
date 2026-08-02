@@ -1,6 +1,15 @@
 import java.util.Properties
 
 /*
+ * كل ما يخصّ النشر في مجلد واحد: Desktop/TORNADO-PLAY
+ *
+ * الحزمة والأيقونة واللقطات ونصوص المتجر والمفتاح — كلها هناك، وأي ملف جديد
+ * يُستبدل في مكانه داخله ولا يُنشأ مجلد ثانٍ.
+ *
+ * تفرّقُها سابقاً على ثلاثة مجلدات أنتج مفتاحين مختلفين وحزمتين، وكادت تُرفع
+ * حزمةٌ موقّعة بمفتاح لا يملكه صاحبها — وذاك خطأ لا رجعة فيه، لأن المتجر
+ * يربط التطبيق بمفتاح أول إصدار إلى الأبد.
+ *
  * بيانات التوقيع تُقرأ من ملف خارج المستودع.
  *
  * مفتاح النشر وكلمة مروره هما هوية التطبيق عند جوجل: من يملكهما يستطيع أن
@@ -11,7 +20,7 @@ import java.util.Properties
  * التطوير تعمل عنده، ولا يُوقف عمله بخطأ عن ملف لا يملكه.
  */
 val keystoreProps = Properties().apply {
-    val f = File(System.getProperty("user.home"), "OneDrive/Desktop/tornado-keys/keystore.properties")
+    val f = File(System.getProperty("user.home"), "OneDrive/Desktop/TORNADO-PLAY/SIGNING-KEY/keystore.properties")
     if (f.exists()) f.inputStream().use { load(it) }
 }
 
