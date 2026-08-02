@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:16:36.871Z",
+ "exportedAt": "2026-08-02T21:16:48.033Z",
  "words": [
   {
    "id": 1785705257083,
@@ -380,24 +380,19 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "To hold very tightly, as to not fall off",
-     "ar": "التمسك بإحكام شديد، حتى لا تسقط"
-    },
-    {
-     "pos": "verb",
-     "en": "To adhere to an object, without being affixed, in such a way as to follow its contours. Used especially of fabrics and films",
-     "ar": "التمسك بشيء ما، دون أن يتم لصقه، بطريقة تتبع ملامحه. تستخدم بشكل خاص من الأقمشة والأفلام"
-    },
-    {
-     "pos": "verb",
-     "en": "To produce a high-pitched ringing sound, like a small bell",
-     "ar": "لإنتاج صوت رنين عالي النبرة، مثل جرس صغير"
+     "pos": "adjective",
+     "en": "Clingy.",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "The act of one who clings",
-     "ar": "فعل من يتشبث"
+     "en": "The act of one who clings.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "present participle and gerund of cling",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -453,7 +448,7 @@
    "due": 0,
    "audioUS": "",
    "audioUK": "",
-   "engineVersion": 6,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
