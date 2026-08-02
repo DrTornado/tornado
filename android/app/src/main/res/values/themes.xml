@@ -1,3 +1,12 @@
 <resources>
-    <style name="Theme.Tornado" parent="android:Theme.Material.Light.NoActionBar" />
+    <!--
+      السمة قبل إقلاع Compose. اللون هنا يطابق خلفية التطبيق تماماً حتى لا يومض
+      المستخدم بشاشة بيضاء بين فتح الأيقونة وأول إطار مرسوم.
+    -->
+    <style name="Theme.Tornado" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/deep</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
 </resources>

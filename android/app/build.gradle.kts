@@ -14,13 +14,41 @@ android {
         applicationId = "com.tornado.vocab"
         minSdk = 26
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 3
+        versionName = "2.1"
+    }
+
+    /*
+     * ملف لكل معمارية بدل ملف واحد يحمل الثلاث.
+     *
+     * مكتبات محرك الصوت العصبي وحدها ٨٥ ميغابايت موزّعة على ثلاث معماريات،
+     * والجهاز لا يشغّل إلا واحدة منها. الملف الموحّد كان يجعل نقل التطبيق
+     * إلى الجوال عبئاً حقيقياً — وهذا سبب كافٍ لتقسيمه.
+     *
+     * القائمة هنا تحلّ محلّ ndk.abiFilters ولا تجتمع معها: x86_64 تبقى مشمولة
+     * لأن المحاكي يحتاجها، وإسقاطها يجعل محرك الصوت يفشل بصمت أثناء الاختبار.
+     */
+    splits {
+        abi {
+            isEnable = true
+            reset()
+            include("arm64-v8a", "armeabi-v7a", "x86_64")
+            isUniversalApk = false
+        }
     }
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            /*
+             * توقيع نسخة الإصدار بمفتاح التطوير.
+             *
+             * التطبيق شخصي يُثبَّت يدوياً ولا يمرّ بمتجر، والنسخة غير الموقّعة
+             * لا تُثبَّت أصلاً — فتبقى الفروق الحقيقية بين التطوير والإصدار
+             * (زمن الإقلاع خاصةً) غير قابلة للقياس. وهذا يجعل أي حكم على
+             * الأداء مبنياً على البناء الخطأ.
+             */
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
@@ -29,19 +57,39 @@ android {
     }
     kotlinOptions { jvmTarget = "17" }
     buildFeatures { compose = true }
-    packaging { resources.excludes += "/META-INF/{AL2.0,LGPL2.1}" }
+    packaging {
+        resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        /*
+         * نستبعد واجهتَي C وC++ من sherpa — أربعة ميغابايت ونصف لا نستدعيها.
+         *
+         * كوتلن يحمّل `sherpa-onnx-jni` وحدها، وهي مبنيّة مكتفية بذاتها.
+         * الواجهتان الأخريان للمشاريع التي تربط بلغة C أو C++ مباشرة، ووجودهما
+         * في الحزمة ثمنٌ يدفعه كل مستخدم مقابل شيفرة لا تعمل عنده أبداً.
+         */
+        jniLibs.excludes += setOf(
+            "**/libsherpa-onnx-c-api.so",
+            "**/libsherpa-onnx-cxx-api.so"
+        )
+    }
+    // بيانات المرجع (أكسفورد/التردد) والكلمات تُقرأ مباشرة من الأصول — منع الضغط يجعل القراءة أسرع
+    androidResources { noCompress += listOf("json", "txt") }
 }
 
 dependencies {
     val composeBom = platform("androidx.compose:compose-bom:2024.10.01")
     implementation(composeBom)
     implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.compose.foundation:foundation")
+    implementation("androidx.compose.animation:animation")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.activity:activity-compose:1.9.3")
+    implementation("androidx.core:core-ktx:1.15.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.7")
     implementation("androidx.navigation:navigation-compose:2.8.4")
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
 
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
@@ -49,8 +97,35 @@ dependencies {
 
     implementation("androidx.media3:media3-exoplayer:1.5.0")
     implementation("androidx.media3:media3-session:1.5.0")
-    implementation("androidx.media3:media3-ui:1.5.0")
 
+    /*
+     * محرك كوكورو الصوتي — عبر sherpa-onnx.
+     *
+     * سبق أن حُذفت هذه المكتبات مع Piper لأنه كان أضعف من محرك الجهاز نفسه —
+     * حملاً بلا مقابل. وعادت لسبب معاكس تماماً: كوكورو أفضل صوت مفتوح للإنجليزية
+     * اليوم، والمستخدم سمعه بأذنه وطلبه.
+     *
+     * المكتبات هنا (~٣٠ ميغابايت) لأن تحميل مكتبات أصلية ديناميكياً هشّ وممنوع
+     * متجرياً، والنموذج (~١٤٠ ميغابايت) تنزيل اختياري من الإعدادات — فمن يكفيه
+     * محرك جهازه لا ينزّل شيئاً.
+     */
+    implementation(files("libs/sherpa-onnx-1.13.4.aar"))
+    // فكّ ضغط حزمة النموذج (tar.bz2) — لا دعم bzip2 في مكتبة جافا القياسية
+    implementation("org.apache.commons:commons-compress:1.27.1")
+
+    // تخزين مفتاح الخدمة مشفّراً بمفتاح عتادي — لا يُحفظ نصاً صريحاً أبداً
+    implementation("androidx.security:security-crypto:1.1.0-alpha06")
+
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
+
+    // اختبارات تعمل على الحاسوب بلا جهاز — تغطّي منطق الصوت والبيانات
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
+    testImplementation("org.robolectric:robolectric:4.13")
+    testImplementation("androidx.test:core:1.6.1")
 }
+
+// Robolectric يحتاج موارد أندرويد الحقيقية لتشغيل الاختبارات على JVM
+android.testOptions.unitTests.isIncludeAndroidResources = true
