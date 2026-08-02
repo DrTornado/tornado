@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    أيقونة تكيّفية سليمة الطبقات.
+
+    الخلفية لون صلب، والأمامية علامة **شفافة** فوقها. الملف السابق كان يضع
+    صورة معتمة في الطبقة الأمامية، فتحجب الخلفية بالكامل ثم يقصّها المشغّل
+    دائرياً — فتظهر بحافّة صلبة لا تشبه أيقونات النظام.
+
+    ولا إدخال هنا: العلامة مرسومة أصلاً داخل المنطقة الآمنة، وإضافة إدخال
+    فوق ذلك تصغّرها بلا داعٍ.
+-->
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
     <background android:drawable="@color/deep" />
-    <foreground android:drawable="@color/gold" />
+    <foreground android:drawable="@drawable/ic_launcher_mark" />
+    <monochrome android:drawable="@drawable/ic_launcher_mark" />
 </adaptive-icon>
