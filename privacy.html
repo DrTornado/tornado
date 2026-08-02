@@ -43,6 +43,17 @@
 and generated audio — is stored only in the app's private storage on your device.
 None of it is sent anywhere unless you explicitly turn on sync.</p>
 
+<h2>Backup to your own Google account</h2>
+<p>Tornado uses Android's standard automatic backup so your words, notes and progress
+can be restored when you install the app on a new phone. That backup goes to
+<strong>your own Google account</strong>, under Google's terms — we have no access to it
+and receive no copy. You can turn it off at any time in Android Settings → Google →
+Backup.</p>
+<p>Two things are deliberately kept out of that backup: the downloaded voice and the
+generated audio, because both are large and rebuild themselves automatically; and your
+sync token, because it is tied to this device's hardware key and would be useless — and
+an unnecessary risk — anywhere else.</p>
+
 <h2>Optional sync with your own GitHub repository</h2>
 <p>If you choose to enter a GitHub access token in Settings, Tornado will read and
 write your word list and notes to a repository <em>that you own and control</em>.
@@ -78,6 +89,14 @@ or files.</p>
 <h2>Children</h2>
 <p>Tornado is a vocabulary learning tool suitable for all ages. Because it collects
 no personal information from anyone, it collects none from children.</p>
+
+<h2>Deleting your data</h2>
+<p>Uninstalling Tornado deletes everything it stored on your device — words, notes,
+progress, the downloaded voice and all generated audio. Nothing is left behind, and
+there is nothing for you to request from us, because we hold nothing.</p>
+<p>To clear the Google backup as well, use Android Settings → Google → Backup → App
+data. If you enabled the optional repository sync, that copy sits in your own GitHub
+account and only you can delete it.</p>
 
 <h2>Changes</h2>
 <p>If this policy changes, the updated version will be published at this address with
