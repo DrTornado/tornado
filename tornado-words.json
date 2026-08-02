@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:14:34.498Z",
+ "exportedAt": "2026-08-02T21:14:39.790Z",
  "words": [
   {
    "id": 1785705257083,
@@ -3101,19 +3101,35 @@
    "wrong": 0,
    "last": null,
    "id": 1784485677654,
-   "word": "crustaceans",
-   "ipa": "",
-   "arabicPron": "",
+   "word": "crustacean",
+   "ipa": "/kɹʌsˈteɪʃən/",
+   "arabicPron": "كراستيشن",
    "oxford": "",
    "cefr": "",
    "pos": [
-    "noun"
+    "noun",
+    "adjective"
    ],
    "meanings": [
     {
      "pos": "noun",
      "en": "Any arthropod of the subphylum Crustacea, including lobsters, crabs, shrimp, barnacles and woodlice.",
-     "ar": "أي مفصليات من القشريات الفرعية، بما في ذلك الكركند وسرطان البحر والروبيان والأرنب وقمل الخشب"
+     "ar": "أي مفصليات من القشريات الفرعية، بما في ذلك الكركند وسرطان البحر والروبيان والأرنب وقمل الخشب."
+    },
+    {
+     "pos": "noun",
+     "en": "(cladistically) Any arthropod of the clade Pancrustacea, which includes hexapods in addition to traditional crustaceans.",
+     "ar": ""
+    },
+    {
+     "pos": "adjective",
+     "en": "Of, relating to, or characteristic of the subphylum Crustacea.",
+     "ar": "من القشريات الفرعية أو المتعلقة بها أو المميزة لها."
+    },
+    {
+     "pos": "noun",
+     "en": "Any arthropod of the clade Pancrustacea, which includes hexapods in addition to traditional crustaceans.",
+     "ar": "أي مفصليات من فصيلة البانكروستاسيا، والتي تشمل سداسيات الأرجل بالإضافة إلى القشريات التقليدية."
     }
    ],
    "inflections": [
@@ -3121,8 +3137,34 @@
     "crustaceanses"
    ],
    "derivatives": [],
-   "synonyms": [],
-   "collocations": [],
+   "synonyms": [
+    {
+     "en": "crustaceal",
+     "ar": ""
+    }
+   ],
+   "collocations": [
+    {
+     "en": "crustacean muscle",
+     "ar": "عضلة القشريات"
+    },
+    {
+     "en": "crustacean zooplankton",
+     "ar": "العوالق الحيوانية القشرية"
+    },
+    {
+     "en": "crustacean species",
+     "ar": ""
+    },
+    {
+     "en": "small crustacean",
+     "ar": "قشريات صغيرة"
+    },
+    {
+     "en": "decapod crustacean",
+     "ar": ""
+    }
+   ],
    "examples": [
     {
      "en": "Crabs are crustaceans.",
@@ -3140,7 +3182,7 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -3157,7 +3199,7 @@
    "id": 1784485562378,
    "word": "mollusc",
    "ipa": "/ˈmɒləsk/",
-   "arabicPron": "مولسك",
+   "arabicPron": "مالسك",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -3167,12 +3209,17 @@
     {
      "pos": "noun",
      "en": "A soft-bodied invertebrate of the phylum Mollusca, typically with a hard shell of one or more pieces.",
-     "ar": "اللافقاريات رخوة الجسم من شعبة الرخويات، وعادة مع قشرة صلبة من قطعة واحدة أو أكثر."
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "(figuratively) A weak-willed person.",
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "A weak-willed person.",
-     "ar": "شخص ضعيف الإرادة."
+     "ar": ""
     }
    ],
    "inflections": [
@@ -3233,7 +3280,11 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUS": "/ˈmɑləsk/",
+   "ipaUK": "/ˈmɒləsk/",
+   "audioUS": "-us",
+   "audioUK": "-uk"
   },
   {
    "right": 0,
@@ -3241,8 +3292,8 @@
    "last": null,
    "id": 1784636175360,
    "word": "pairs",
-   "ipa": "/pɛəz/",
-   "arabicPron": "بيز",
+   "ipa": "/peəz/",
+   "arabicPron": "بيرز",
    "oxford": "3000",
    "cefr": "A1",
    "pos": [
@@ -3252,32 +3303,7 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "Two similar or identical things taken together; often followed by of.",
-     "ar": "شيئان متشابهان أو متطابقان معًا ؛ غالبًا ما يتبعهما."
-    },
-    {
-     "pos": "noun",
-     "en": "Two people in a relationship, partnership or friendship.",
-     "ar": "شخصان في علاقة أو شراكة أو صداقة."
-    },
-    {
-     "pos": "verb",
-     "en": "To group into one or more sets of two.",
-     "ar": "للتجميع في مجموعة واحدة أو أكثر من مجموعتين."
-    },
-    {
-     "pos": "verb",
-     "en": "To bring two (animals, notably dogs) together for mating.",
-     "ar": "لجلب اثنين (الحيوانات، ولا سيما الكلاب) معا للتزاوج."
-    },
-    {
-     "pos": "verb",
-     "en": "To impair, to make worse.",
-     "ar": "يضعف، ويزيد الأمر سوءًا."
-    },
-    {
-     "pos": "verb",
-     "en": "To become worse, to deteriorate.",
+     "en": "Synonym of pelmanism (“memory card game”).",
      "ar": ""
     }
    ],
@@ -3287,15 +3313,32 @@
     "pairsed",
     "pairsing"
    ],
-   "derivatives": [],
+   "derivatives": [
+    {
+     "en": "repair (verb)",
+     "ar": ""
+    }
+   ],
    "synonyms": [
     {
-     "en": "pair of spectacles",
-     "ar": "زوج من النظارات"
+     "en": "pelmanism",
+     "ar": ""
     },
     {
-     "en": "spectacles",
-     "ar": "نظارات"
+     "en": "span",
+     "ar": ""
+    },
+    {
+     "en": "yoke",
+     "ar": ""
+    },
+    {
+     "en": "mate",
+     "ar": ""
+    },
+    {
+     "en": "brace",
+     "ar": ""
     }
    ],
    "collocations": [
@@ -3327,11 +3370,13 @@
     }
    ],
    "differences": [],
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pai/pair_/pair__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/p/pai/pair_/pair__gb_1.mp3",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUS": "/pɛɹz/",
+   "ipaUK": "/pɛəz/"
   },
   {
    "right": 0,
