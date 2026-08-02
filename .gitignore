@@ -1,0 +1,5 @@
+
+# مفاتيح النشر — لا تدخل المستودع أبداً
+*.jks
+*.keystore
+keystore.properties
