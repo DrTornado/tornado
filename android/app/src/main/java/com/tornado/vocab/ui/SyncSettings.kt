@@ -92,6 +92,38 @@ fun GitHubSyncSection(
             else Text(if (hasToken) "Sync now" else "Pull from computer")
         }
 
+        /*
+         * نطمئن المستخدم قبل أن نطلب منه شيئاً.
+         *
+         * أغلب من يتعلّم الإنجليزية لا يعرف GitHub ولا يريد أن يعرفه، ورؤية
+         * حقل «مستودع» ورمز وصول تُقرأ تهديداً: «إن لم أفعل هذا ضاعت كلماتي».
+         * وهي ليست كذلك — أندرويد يحفظ البيانات في حساب جوجل الذي يملكه
+         * أصلاً. فنقول ذلك أولاً، ثم نعرض المزامنة لمن يريد الأكثر.
+         */
+        if (!repo.contains('/')) {
+            VSpace(10)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    Icons.Filled.CheckCircle, null,
+                    Modifier.size(18.dp), tint = StatusColors.Known
+                )
+                HSpace(8)
+                Text(
+                    "Your words are already backed up",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+            VSpace(4)
+            Text(
+                "Android saves them to your Google account automatically and restores " +
+                    "them when you install Tornado on a new phone — nothing to set up.\n\n" +
+                    "The repository above is optional, and only for keeping a computer " +
+                    "and a phone on one library at the same time.",
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+
         status?.let {
             VSpace(6)
             Text(

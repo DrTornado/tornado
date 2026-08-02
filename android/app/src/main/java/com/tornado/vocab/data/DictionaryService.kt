@@ -69,6 +69,9 @@ class DictionaryService(private val context: Context) {
         const val MAX_MEANINGS = 8   // إجمالي المعاني (كان ٦)
         const val MAX_EXAMPLES = 6   // الأمثلة (كان ٤)
         const val MAX_SYNONYMS = 10  // المرادفات (كان ٨)
+
+        /** بريد يرفع حصة الترجمة من ٥٬٠٠٠ إلى ٥٠٬٠٠٠ حرف يومياً */
+        const val CONTACT_EMAIL = "a.muglad@yahoo.com"
     }
 
     private val client = OkHttpClient.Builder()
@@ -116,6 +119,9 @@ class DictionaryService(private val context: Context) {
 
         fun normDef(s: String) = s.lowercase().replace(Regex("[.!?;:]+$"), "").replace(Regex("\\s+"), " ").trim()
 
+        // ترتيب التواتر يُجلب مرة واحدة للكلمة كلها — لا لكل قسم كلام
+        val freqOrder: List<String> = if (entry != null) senseOrder(corrected) else emptyList()
+
         entry?.let { e ->
             /*
              * قراءة بنية freedictionaryapi.com.
@@ -159,15 +165,22 @@ class DictionaryService(private val context: Context) {
                  * القراءة عند حدّ المعاني كان يرمي المثال معه، فتُحسب الكلمة
                  * «بلا مثال» ومثالها في الاستجابة نفسها.
                  */
-                var taken = 0
+                /*
+                 * نجمع كل المعاني ثم نرتّبها، لا نأخذ أوّلها.
+                 *
+                 * الأخذ بالترتيب الوارد كان يعني الاستسلام لترتيب ويكاموس
+                 * التاريخي: «articulation» يبدأ بالمفصل التشريحي وينتهي بوضوح
+                 * النطق، فيقرأ المتعلّم «مفصل» ويظنّ التطبيق جاهلاً — وهو
+                 * محقّ في ظنّه.
+                 */
+                val posSenses = mutableListOf<Meaning>()
                 (eo["senses"] as? JsonArray)?.forEach { s ->
                     val so = s as? JsonObject ?: return@forEach
                     val def = so.str("definition")
-                    if (def.isNotBlank() && taken < PER_POS && meanings.size < MAX_MEANINGS &&
-                        meanings.none { normDef(it.en) == normDef(def) }
+                    if (def.isNotBlank() && meanings.none { normDef(it.en) == normDef(def) } &&
+                        posSenses.none { normDef(it.en) == normDef(def) }
                     ) {
-                        meanings += Meaning(pos.ifBlank { null }, def, "")
-                        taken++
+                        posSenses += Meaning(pos.ifBlank { null }, def, "")
                     }
                     (so["examples"] as? JsonArray)?.forEach { x ->
                         val ex = (x as? JsonPrimitive)?.contentOrNull.orEmpty().trim()
@@ -180,6 +193,11 @@ class DictionaryService(private val context: Context) {
                             if (synSet.size < MAX_SYNONYMS && it.isNotBlank()) synSet += it
                         }
                     }
+                }
+
+                // العام قبل المتخصّص، ثم نأخذ نصيب هذا القسم من الكلام
+                MeaningQuality.rankByFrequency(posSenses, freqOrder).take(PER_POS).forEach { m ->
+                    if (meanings.size < MAX_MEANINGS) meanings += m
                 }
             }
         }
@@ -373,14 +391,46 @@ class DictionaryService(private val context: Context) {
         return arr.mapNotNull { (it as? JsonObject)?.str("word")?.takeIf { w -> w.isNotBlank() }?.let(::DmWord) }
     }
 
+    /**
+     * ترتيب المعاني بحسب شيوع الاستعمال.
+     *
+     * Datamuse يعيد تعريفات نفس المصدر مرتّبةً تواتُرياً لا تاريخياً، وهذا هو
+     * الفرق كلّه: «articulation» تبدأ عنده بوضوح النطق لا بالمفصل، و«bank»
+     * بالمصرف لا بضفة النهر، و«charge» بالرسوم لا بالهجوم. حكمٌ مبنيّ على
+     * استعمال الناس الفعلي لا على شكل النصّ.
+     *
+     * والفشل هنا لا يكسر شيئاً: تُرجَع قائمة فارغة فيسقط الترتيب إلى قاعدة
+     * «العام قبل المتخصّص»، وهي أضعف لكنها تعمل بلا شبكة.
+     */
+    private suspend fun senseOrder(word: String): List<String> {
+        val body = get("https://api.datamuse.com/words?sp=${enc(word)}&md=d&max=1") ?: return emptyList()
+        val arr = runCatching { json.parseToJsonElement(body).jsonArray }.getOrNull() ?: return emptyList()
+        val defs = (arr.firstOrNull() as? JsonObject)?.get("defs") as? JsonArray ?: return emptyList()
+        return defs.mapNotNull { d ->
+            // الصيغة: "n\t(uncountable) The quality…" — نُسقط بادئة قسم الكلام
+            (d as? JsonPrimitive)?.contentOrNull?.substringAfter('\t')?.trim()?.takeIf { it.isNotBlank() }
+        }
+    }
+
     /** ترجمة أفضل جهد — الفشل يرجع نصاً فارغاً بلا كسر البطاقة */
     private suspend fun translateToArabic(text: String): String {
         if (text.isBlank()) return ""
+        /*
+         * بريد التعريف يرفع الحصة عشرة أضعاف.
+         *
+         * وثيقة الخدمة صريحة: خمسة آلاف حرف يومياً بلا تعريف، وخمسون ألفاً
+         * مع بريد صالح في المُعامل `de`. وقياسٌ اليوم أظهر أن الحصة نفدت
+         * فعلاً وعادت الخدمة تحذيراً بدل ترجمة — فبقيت كلمات بلا معنى عربي
+         * لا لعطل في الشيفرة بل لسقف لم نطلب رفعه.
+         */
         val body = get(
-            "https://api.mymemory.translated.net/get?q=${enc(text)}&langpair=en|ar"
+            "https://api.mymemory.translated.net/get" +
+                "?q=${enc(text)}&langpair=en|ar&de=${enc(CONTACT_EMAIL)}"
         ) ?: return ""
         val root = runCatching { json.parseToJsonElement(body).jsonObject }.getOrNull() ?: return ""
         val raw = (root["responseData"] as? JsonObject)?.str("translatedText").orEmpty()
+        // الخدمة تردّ بتحذير نصّي عند نفاد الحصة — نصٌّ لا ترجمة، فلا يُحفظ
+        if (raw.contains("MYMEMORY WARNING", true) || raw.contains("QUERY LENGTH LIMIT", true)) return ""
         val clean = raw
             .replace(Regex("</?[a-zA-Z][^>]*>"), "")
             .replace(Regex("\\[[A-Z_ ]+]:?\\s*"), "")

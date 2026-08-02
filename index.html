@@ -24185,6 +24185,26 @@ async function datamuse(params) {
   } catch(e) { return []; }
 }
 
+/*
+ * ترتيب المعاني بحسب شيوع الاستعمال.
+ *
+ * Datamuse يعيد تعريفات نفس المصدر مرتّبةً تواتُرياً لا تاريخياً، وهذا هو
+ * الفرق كلّه: «articulation» تبدأ عنده بوضوح النطق لا بالمفصل. حكمٌ مبنيّ
+ * على استعمال الناس الفعلي لا على شكل النصّ.
+ *
+ * والفشل لا يكسر شيئاً: قائمة فارغة تُسقط الترتيب إلى القاعدة الشكلية.
+ */
+async function senseOrder(word) {
+  try {
+    const r = await subFetch('https://api.datamuse.com/words?sp=' + encodeURIComponent(word) + '&md=d&max=1', 7000);
+    if (!r.ok) return [];
+    const a = await r.json();
+    const defs = (a && a[0] && a[0].defs) || [];
+    // الصيغة: "n\t(uncountable) The quality…" — نُسقط بادئة قسم الكلام
+    return defs.map(d => String(d).split('\t').pop().trim()).filter(Boolean);
+  } catch(e) { return []; }
+}
+
 // جدول الأفعال الشاذة الشائعة: base:past:pastParticiple
 const IRREG = ('be:was:been,have:had:had,do:did:done,say:said:said,go:went:gone,get:got:gotten,make:made:made,know:knew:known,think:thought:thought,take:took:taken,see:saw:seen,come:came:come,find:found:found,give:gave:given,tell:told:told,become:became:become,show:showed:shown,leave:left:left,feel:felt:felt,put:put:put,bring:brought:brought,begin:began:begun,keep:kept:kept,hold:held:held,write:wrote:written,stand:stood:stood,hear:heard:heard,let:let:let,mean:meant:meant,set:set:set,meet:met:met,run:ran:run,pay:paid:paid,sit:sat:sat,speak:spoke:spoken,lie:lay:lain,lead:led:led,read:read:read,grow:grew:grown,lose:lost:lost,fall:fell:fallen,send:sent:sent,build:built:built,understand:understood:understood,draw:drew:drawn,break:broke:broken,spend:spent:spent,cut:cut:cut,rise:rose:risen,drive:drove:driven,buy:bought:bought,wear:wore:worn,choose:chose:chosen,seek:sought:sought,throw:threw:thrown,catch:caught:caught,deal:dealt:dealt,win:won:won,forget:forgot:forgotten,lay:laid:laid,sell:sold:sold,fight:fought:fought,teach:taught:taught,eat:ate:eaten,sing:sang:sung,drink:drank:drunk,sleep:slept:slept,fly:flew:flown,rid:rid:rid,swim:swam:swum,ride:rode:ridden,feed:fed:fed,shake:shook:shaken,hang:hung:hung,hide:hid:hidden,shoot:shot:shot,strike:struck:struck,bend:bent:bent,bite:bit:bitten,blow:blew:blown,burst:burst:burst,cost:cost:cost,dig:dug:dug,freeze:froze:frozen,hit:hit:hit,hurt:hurt:hurt,lend:lent:lent,light:lit:lit,quit:quit:quit,ring:rang:rung,shine:shone:shone,shut:shut:shut,steal:stole:stolen,stick:stuck:stuck,swear:swore:sworn,sweep:swept:swept,tear:tore:torn,wake:woke:woken,beat:beat:beaten,bear:bore:borne,spread:spread:spread,split:split:split,slide:slid:slid,spin:spun:spun,forgive:forgave:forgiven')
   .split(',').reduce((o, s) => { const p = s.split(':'); o[p[0]] = [p[1], p[2]]; return o; }, {});
@@ -24258,8 +24278,8 @@ function sanitizeCard(c) {
 }
 
 // ===== قاموس أكسفورد المدمج: مستوى CEFR وقائمة 3000/5000 ونطق أكسفورد الرسمي (يعمل بلا إنترنت للمستويات) =====
-const OX_US = 'https://www.oxfordlearnersdictionaries.com/media/english/us_pron/';
-const OX_UK = 'https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/';
+// حُذف مصدرا النطق المملوكان — يبقى المستوى وحده من القائمة المدمجة
+
 let OXMAP = null;
 function oxParse() {
   if (OXMAP) return OXMAP;
@@ -24479,16 +24499,47 @@ document.getElementById('batch-start').onclick = async () => {
   flash(`📚 Batch finished: ${ok} words added`);
 };
 
+/*
+ * المصدر الأساسي — ويكاموس عبر واجهة معلَنة الرخصة.
+ *
+ * سبقه `api.dictionaryapi.dev`، ولا يذكر مستودعه رخصةً لبياناته إطلاقاً.
+ * وهذا يعلنها صراحةً (CC BY-SA 4.0) وبنيته أغنى، فنحوّلها إلى الشكل الذي
+ * تعرفه بقية الشيفرة بدل إعادة كتابتها كلها.
+ */
 async function fetchDict(w) {
-  const r = await subFetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + encodeURIComponent(w), 9000);
+  const r = await subFetch('https://freedictionaryapi.com/api/v1/entries/en/' + encodeURIComponent(w), 9000);
   if (r.status === 404) return null; // كلمة غير معروفة
   if (!r.ok) throw new Error('dict HTTP ' + r.status);
   const data = await r.json();
-  return Array.isArray(data) ? data[0] : null;
+  if (!data || !Array.isArray(data.entries) || !data.entries.length) return null;
+
+  const meanings = [], phonetics = [];
+  data.entries.forEach(e => {
+    if (e.language && e.language.code && e.language.code !== 'en') return;
+    (e.pronunciations || []).forEach(p => {
+      if ((p.type || '').toLowerCase() !== 'ipa' || !p.text) return;
+      // اللهجة موسومة صراحةً — نصنّفها بدل تخمينها من اسم ملف صوت
+      const tags = (p.tags || []).join(' ').toLowerCase();
+      const suffix = (tags.includes('us') || tags.includes('general american')) ? '-us'
+        : (tags.includes('received') || tags.includes('uk') || tags.includes('british')) ? '-uk' : '';
+      phonetics.push({ text: p.text, audio: suffix });
+    });
+    meanings.push({
+      partOfSpeech: e.partOfSpeech || '',
+      definitions: (e.senses || []).map(s => ({
+        definition: s.definition || '',
+        example: (s.examples || [])[0] || '',
+        synonyms: s.synonyms || [],
+        antonyms: s.antonyms || []
+      })).filter(d => d.definition),
+      synonyms: [], antonyms: []
+    });
+  });
+  return meanings.length ? { word: data.word, phonetic: '', phonetics, meanings } : null;
 }
 
 // رقم إصدار المحرك: يُرفَع يدوياً عند أي تحسين حقيقي في منطق الجلب — يُستخدم لتخطي الكلمات المحدَّثة أصلاً بدل إعادة جلبها كل مرة
-const ENGINE_VERSION = 2; // رُفع بعد إصلاح تنظيف وسوم الترجمة — يضمن إعادة فحص كل الكلمات القديمة مرة واحدة لتصحيح أي ترجمة مكسورة محفوظة سابقاً
+const ENGINE_VERSION = 3; // رُفع بعد تبديل المصدر وترتيب المعاني — يعيد بناء المكتبة كلها بالمعنى الصحيح
 async function fetchEntryOnce(w, timeoutMs, _depth) {
   _depth = _depth || 0;
   let entry = await fetchDict(w);
@@ -24508,6 +24559,61 @@ async function fetchEntryOnce(w, timeoutMs, _depth) {
   const posSet = [], examples = [], synSet = [], antSet = [];
   let meanings = [];
   const normDef = s => String(s || '').toLowerCase().replace(/[.!?;:]+$/, '').replace(/\s+/g, ' ').trim();
+
+  // ترتيب التواتر يُجلب مرة واحدة للكلمة كلها — لا لكل قسم كلام
+  const freqOrder = entry ? await senseOrder(corrected) : [];
+
+  /*
+   * مجالات متخصّصة تُؤخِّر المعنى ولا تحذفه.
+   *
+   * المعنى التشريحي لـ«articulation» صحيح ويفيد من يقرؤه، لكنه ليس ما يبدأ
+   * به متعلّم. والوسم يُقرأ من القوس في أوّل التعريف — وهو الموضع الوحيد
+   * الذي يذكره فيه المصدر.
+   */
+  const NARROW_DOMAINS = new Set([
+    'anatomy','zoology','botany','biology','medicine','pathology',
+    'chemistry','physics','astronomy','geology','mathematics',
+    'phonetics','phonology','linguistics','grammar',
+    'music','heraldry','nautical','military','law','legal','accounting',
+    'computing','programming','engineering','architecture',
+    'archaic','obsolete','dated','historical','rare',
+    'dialectal','regional','slang','poetic','literary'
+  ]);
+
+  function isNarrowSense(def) {
+    const head = /^\s*\(([^()]{1,60})\)/.exec(String(def || ''));
+    if (!head) return false;
+    return head[1].split(/[,;|]|\bor\b/)
+      .some(part => NARROW_DOMAINS.has(part.trim().toLowerCase()));
+  }
+
+  /** العام قبل المتخصّص، وترتيب مستقرّ داخل كل فئة */
+  function rankMeanings(defs) {
+    return defs
+      .map((d, i) => [d, i])
+      .sort((a, b) => (isNarrowSense(a[0].definition) - isNarrowSense(b[0].definition)) || (a[1] - b[1]))
+      .map(v => v[0]);
+  }
+
+  /** مفتاح مطابقة متسامح — الترقيم والمسافات لا تكسر المطابقة */
+  const senseKey = s => String(s || '').toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 60);
+
+  /*
+   * الترتيب بحسب شيوع الاستعمال — أقوى إشارة متاحة.
+   *
+   * ترتيب ويكاموس تاريخي: «articulation» تبدأ بالمفصل، و«bank» بضفة النهر،
+   * و«charge» بالهجوم. والناس تقصد الفصاحة والمصرف والرسوم. والقاعدة الشكلية
+   * وحدها لا تكفي لأن المعنى المتصدّر غالباً بلا وسم مجال أصلاً.
+   *
+   * وما لا يُعرف ترتيبه يُلحَق بالآخر على ترتيبه الأصلي، فلا يضيع معنى
+   * لمجرّد غيابه عن قائمة المرجع.
+   */
+  function rankByFrequency(defs, order) {
+    if (!order || !order.length) return rankMeanings(defs);
+    const rank = new Map(order.map((d, i) => [senseKey(d), i]));
+    const at = d => rank.has(senseKey(d.definition)) ? rank.get(senseKey(d.definition)) : Number.MAX_SAFE_INTEGER;
+    return defs.map((d, i) => [d, i]).sort((a, b) => (at(a[0]) - at(b[0])) || (a[1] - b[1])).map(v => v[0]);
+  }
   if (entry) {
     (entry.phonetics || []).forEach(p => {
       const a = (p.audio || '').toLowerCase();
@@ -24519,12 +24625,23 @@ async function fetchEntryOnce(w, timeoutMs, _depth) {
     (entry.meanings || []).forEach(m => {
       const pos = m.partOfSpeech || '';
       if (pos && !posSet.includes(pos)) posSet.push(pos);
-      (m.definitions || []).slice(0, 2).forEach(d => {
+      /*
+       * نجمع كل المعاني ثم نرتّبها، لا نأخذ أوّلها.
+       *
+       * ويكاموس يرتّب المعاني تاريخياً لا حسب الشيوع: «articulation» يبدأ
+       * بالمفصل التشريحي وينتهي بوضوح النطق. فكان أخذ أوّل معنيين يعطي
+       * «مفصل» لكلمة يقصد بها الناس «الفصاحة» — وبطاقة كهذه تُفقد التطبيق
+       * مصداقيته كله.
+       */
+      const ranked = rankByFrequency(m.definitions || [], freqOrder);
+      ranked.slice(0, 3).forEach(d => {
         const dKey = normDef(d.definition);
-        if (d.definition && dKey && meanings.length < 6 && !meanings.some(x => normDef(x.en) === dKey)) meanings.push({ pos: pos, en: d.definition, ar: '' });
+        if (d.definition && dKey && meanings.length < 8 && !meanings.some(x => normDef(x.en) === dKey)) meanings.push({ pos: pos, en: d.definition, ar: '' });
+      });
+      (m.definitions || []).forEach(d => {
         const eKey = normDef(d.example);
-        if (d.example && eKey && examples.length < 4 && !examples.some(x => normDef(x.en) === eKey)) examples.push({ en: d.example, ar: '' });
-        (d.synonyms || []).forEach(s => { if (synSet.length < 8 && !synSet.includes(s)) synSet.push(s); });
+        if (d.example && eKey && examples.length < 6 && !examples.some(x => normDef(x.en) === eKey)) examples.push({ en: d.example, ar: '' });
+        (d.synonyms || []).forEach(s => { if (synSet.length < 10 && !synSet.includes(s)) synSet.push(s); });
         (d.antonyms || []).forEach(a => { if (antSet.length < 5 && !antSet.includes(a)) antSet.push(a); });
       });
       (m.synonyms || []).forEach(s => { if (synSet.length < 8 && !synSet.includes(s)) synSet.push(s); });
@@ -24604,8 +24721,13 @@ async function fetchEntryOnce(w, timeoutMs, _depth) {
   if (ox) {
     cefr = ox.lvl;
     oxford = ox.lvl === 'C1' ? '5000' : '3000';
-    if (ox.us) audioUS = OX_US + ox.us;
-    if (ox.uk) audioUK = OX_UK + ox.uk;
+    /*
+     * المستوى وحده — لا صوت من خوادم أكسفورد.
+     *
+     * كانت تُبنى هنا روابط لتسجيلات نطق مملوكة لا رخصة لنا فيها، وهي أوضح
+     * مخاطرة قانونية كانت في المشروع. أن كلمةً من مستوى B2 واقعةٌ لغوية
+     * منشورة لا تُملَك؛ أما التسجيل فعملٌ مملوك.
+     */
   }
   // شارة "Common word" الموسّعة (١٨,٠٠٠ كلمة) — تُعرض فقط عند غياب Oxford لتفادي ازدواج الشارات، وتحمل مستوى تقديرياً معها
   const freq = !oxford ? freqLookup(lemma || finalWord) : null;

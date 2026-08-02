@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  نفس القواعد لأندرويد ١٢ فما فوق، بمسارين منفصلين:
+
+   cloud-backup    : النسخة في حساب جوجل — تُستعمل عند تنصيب التطبيق على
+                     جهاز جديد أو بعد إعادة ضبط المصنع.
+   device-transfer : النقل المباشر من جهاز قديم إلى جديد.
+
+  قائمة سماح لا منع: الكلمات والملاحظات والتقدّم تُنقل، والصوت لا. النموذج
+  يُنزَّل من مصدره والبطاقات تُبنى من الكلمات — نقلهما إنفاقٌ لسعة المستخدم
+  فيما يُستعاد مجاناً.
+
+  والمفتاح المشفَّر مستثنى من المسارين: سرٌّ مربوط بعتاد جهازه لا ينفع في
+  غيره، ونقله مخاطرة بلا مقابل.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <include domain="database" path="." />
+        <include domain="sharedpref" path="." />
+        <include domain="file" path="datastore" />
+
+        <exclude domain="sharedpref" path="tornado_secure_keys.xml" />
+    </cloud-backup>
+
+    <device-transfer>
+        <include domain="database" path="." />
+        <include domain="sharedpref" path="." />
+        <include domain="file" path="datastore" />
+
+        <exclude domain="sharedpref" path="tornado_secure_keys.xml" />
+    </device-transfer>
+</data-extraction-rules>

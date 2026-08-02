@@ -165,3 +165,104 @@ class MeaningQualityTest {
         assertEquals(1, MeaningQuality.refine(input).size)
     }
 }
+
+/**
+ * ترتيب المعاني: العام قبل المتخصّص.
+ *
+ * الحالة مأخوذة حرفياً من «articulation» كما يعطيها المصدر — وهي الكلمة
+ * التي رآها المستخدم فوجد «مفصل» مكان «وضوح النطق»، وقال إن البطاقة تفقد
+ * مصداقيتها كلها بمعنىً واحد كهذا. وكان محقاً.
+ */
+class MeaningRankingTest {
+
+    private fun m(text: String) = Meaning("noun", text, "")
+
+    @Test
+    fun `general sense outranks specialised ones`() {
+        val source = listOf(
+            m("(anatomy) Such a joint in an animalian body, as between bones."),
+            m("(phonetics) The mechanism by which a sound is formed in the vocal tract."),
+            m("(music, uncountable) The manner in which a note is attacked."),
+            m("The quality, clarity, or sharpness of speech.")
+        )
+        val ranked = MeaningQuality.rankBySpread(source)
+        assertTrue(
+            "المعنى العام يجب أن يتصدّر، لا التشريحي",
+            ranked.first().en.startsWith("The quality")
+        )
+    }
+
+    @Test
+    fun `order is stable inside each tier`() {
+        val source = listOf(m("First general."), m("Second general."), m("(law) Narrow one."))
+        val ranked = MeaningQuality.rankBySpread(source)
+        assertEquals("First general.", ranked[0].en)
+        assertEquals("Second general.", ranked[1].en)
+        assertEquals("(law) Narrow one.", ranked[2].en)
+    }
+
+    @Test
+    fun `grammatical labels are not treated as narrow domains`() {
+        // «countable» و«uncountable» وسمان نحويان لا مجالان متخصّصان
+        val source = listOf(
+            m("(countable or uncountable) A joint at which something bends."),
+            m("A plain sense with no label.")
+        )
+        val ranked = MeaningQuality.rankBySpread(source)
+        assertEquals("الترتيب يبقى كما ورد", "(countable or uncountable) A joint at which something bends.", ranked[0].en)
+    }
+}
+
+/**
+ * الترتيب بحسب شيوع الاستعمال — أقوى إشارة متاحة.
+ *
+ * الحالات الثلاث مقيسة فعلاً من Datamuse: هذا ما تعيده لهذه الكلمات
+ * بالترتيب نفسه. والقاعدة الشكلية وحدها كانت تُبقي «المفصل» متصدّراً
+ * لأنه بلا وسم مجال — والتواتر وحده يعرف أن الناس تقصد «الفصاحة».
+ */
+class FrequencyRankingTest {
+
+    private fun m(text: String) = Meaning("noun", text, "")
+
+    @Test
+    fun `frequency order wins over the source order`() {
+        val asSourceGaveThem = listOf(
+            m("(countable or uncountable) A joint or the collection of joints at which something is articulated."),
+            m("(anatomy) Such a joint in an animalian body."),
+            m("(uncountable) The quality, clarity, or sharpness of speech.")
+        )
+        val byUsage = listOf(
+            "(uncountable) The quality, clarity, or sharpness of speech.",
+            "(anatomy) Such a joint in an animalian body.",
+            "(countable or uncountable) A joint or the collection of joints at which something is articulated."
+        )
+        val ranked = MeaningQuality.rankByFrequency(asSourceGaveThem, byUsage)
+        assertTrue(
+            "أشيع المعاني يجب أن يتصدّر",
+            ranked.first().en.contains("quality, clarity")
+        )
+    }
+
+    @Test
+    fun `senses missing from the reference keep their place at the end`() {
+        val items = listOf(m("Known one."), m("Unlisted one."), m("Another known."))
+        val ranked = MeaningQuality.rankByFrequency(items, listOf("Another known.", "Known one."))
+        assertEquals("Another known.", ranked[0].en)
+        assertEquals("Known one.", ranked[1].en)
+        assertEquals("المجهول يُلحَق بالآخر لا يُحذف", "Unlisted one.", ranked[2].en)
+    }
+
+    @Test
+    fun `an empty reference falls back to general-before-narrow`() {
+        val items = listOf(m("(law) Narrow sense."), m("A general sense."))
+        val ranked = MeaningQuality.rankByFrequency(items, emptyList())
+        assertEquals("بلا شبكة يبقى ترتيبٌ معقول", "A general sense.", ranked[0].en)
+    }
+
+    @Test
+    fun `punctuation differences do not break matching`() {
+        val items = listOf(m("Second one"), m("The first one."))
+        val ranked = MeaningQuality.rankByFrequency(items, listOf("the first one", "second one"))
+        assertEquals("The first one.", ranked[0].en)
+    }
+}
