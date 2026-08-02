@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:13:01.697Z",
+ "exportedAt": "2026-08-02T21:13:07.320Z",
  "words": [
   {
    "id": 1785000460857,
@@ -929,7 +929,7 @@
    "id": 1784663410864,
    "word": "blogging",
    "ipa": "",
-   "arabicPron": "",
+   "arabicPron": "بلاقينق",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -938,29 +938,19 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "To contribute to a blog.",
-     "ar": "للمساهمة في مدونة."
-    },
-    {
-     "pos": "verb",
-     "en": "To blag, to steal something; to acquire something illegally.",
-     "ar": "التباهي، وسرقة شيء ما ؛ للحصول على شيء ما بشكل غير قانوني."
-    },
-    {
-     "pos": "verb",
-     "en": "To look sullen or sulky",
-     "ar": "أن تبدو متجهمًا أو عابسًا"
-    },
-    {
      "pos": "noun",
-     "en": "The design and editing of a blog; weblogging.",
-     "ar": "تصميم وتحرير مدونة ؛ التدوين على شبكة الإنترنت."
+     "en": "(computing) The design and editing of a blog; weblogging.",
+     "ar": "(الحوسبة) تصميم وتحرير مدونة ؛ التدوين على شبكة الإنترنت."
     },
     {
      "pos": "verb",
      "en": "present participle and gerund of blog",
      "ar": "تقديم الفاعلية وجيروند من بلوق"
+    },
+    {
+     "pos": "noun",
+     "en": "The design and editing of a blog; weblogging.",
+     "ar": "تصميم وتحرير مدونة ؛ التدوين على شبكة الإنترنت."
     }
    ],
    "inflections": [
@@ -988,13 +978,15 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUS": "/ˈblɑ.ɡiŋ/",
+   "audioUS": "-us"
   },
   {
    "id": 1784662312122,
    "word": "deliberate",
-   "ipa": "",
-   "arabicPron": "",
+   "ipa": "/dəˈlɪb.ɚ.ət/",
+   "arabicPron": "ديليبرت",
    "oxford": "3000",
    "cefr": "B2",
    "pos": [
@@ -1003,19 +995,14 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "To consider carefully; to weigh well in the mind.",
-     "ar": "للتفكير بعناية ؛ لوزن جيد في العقل."
-    },
-    {
-     "pos": "verb",
-     "en": "To consider the reasons for and against anything; to reflect.",
-     "ar": "النظر في الأسباب المؤيدة والمعارضة لأي شيء ؛ والتفكير."
-    },
-    {
      "pos": "adjective",
      "en": "Done on purpose; intentional.",
      "ar": "تم عن قصد ؛ متعمد."
+    },
+    {
+     "pos": "adjective",
+     "en": "Formed with deliberation; carefully considered; not sudden or rash.",
+     "ar": "تم تشكيلها بمداولات ؛ مدروسة بعناية ؛ ليست مفاجئة أو متسرعة."
     },
     {
      "pos": "adjective",
@@ -1023,9 +1010,19 @@
      "ar": "من شخص، يزن الحقائق والحجج بهدف الاختيار أو القرار ؛ النظر بعناية في العواقب المحتملة لخطوة ؛ بطيئة في التحديد."
     },
     {
-     "pos": "adjective",
-     "en": "Formed with deliberation; carefully considered; not sudden or rash.",
-     "ar": "تم تشكيلها بمداولات ؛ مدروسة بعناية ؛ ليست مفاجئة أو متسرعة."
+     "pos": "verb",
+     "en": "(transitive) To consider carefully; to weigh well in the mind.",
+     "ar": "(متعدية) للنظر بعناية ؛ لوزن جيد في العقل."
+    },
+    {
+     "pos": "verb",
+     "en": "(intransitive) To consider the reasons for and against anything; to reflect.",
+     "ar": "(متعنت) النظر في الأسباب المؤيدة والمعارضة لأي شيء ؛ للتفكير."
+    },
+    {
+     "pos": "verb",
+     "en": "To consider carefully; to weigh well in the mind.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -1078,12 +1075,12 @@
    ],
    "examples": [
     {
-     "en": "It is now time for the jury to deliberate the guilt of the defendant.",
-     "ar": "لقد حان الوقت الآن لكي تتداول هيئة المحلفين ذنب المدعى عليه."
+     "en": "a deliberate attempt to cover up his crime",
+     "ar": "محاولة متعمدة للتغطية على جريمته"
     },
     {
-     "en": "Tripping me was deliberate action.",
-     "ar": "تعريتي كان عملاً متعمداً."
+     "en": "a deliberate opinion; a deliberate measure or result",
+     "ar": "رأي متعمد ؛ تدبير أو نتيجة متعمدة"
     },
     {
      "en": "The jury took eight hours to come to its deliberate verdict.",
@@ -1096,9 +1093,11 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/d/del/delib/deliberate__us_2_rr.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/d/del/delib/deliberate__gb_4.mp3",
-   "engineVersion": 2
+   "audioUS": "-us",
+   "audioUK": "-uk",
+   "engineVersion": 3,
+   "ipaUS": "/dɪˈlɪb.ɚ.ət/",
+   "ipaUK": "/dɪˈlɪb.(ə.)ɹət/"
   },
   {
    "id": 1784662047598,
