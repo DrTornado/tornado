@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:13:25.256Z",
+ "exportedAt": "2026-08-02T21:13:30.718Z",
  "words": [
   {
    "id": 1785000460857,
@@ -1560,11 +1560,6 @@
     },
     {
      "pos": "noun",
-     "en": "Any deficiency of elements or resources that are needed or desired, or that constitute richness",
-     "ar": "أي نقص في العناصر أو الموارد اللازمة أو المرغوبة، أو التي تشكل ثراء"
-    },
-    {
-     "pos": "noun",
      "en": "A deficiency of something needed or desired",
      "ar": "نقص في شيء مطلوب أو مرغوب فيه"
     }
@@ -1596,12 +1591,12 @@
    ],
    "examples": [
     {
-     "en": "poverty of soil",
-     "ar": "فقر التربة"
-    },
-    {
      "en": "get into poverty",
      "ar": "الوقوع في براثن الفقر"
+    },
+    {
+     "en": "poverty of soil",
+     "ar": "فقر التربة"
     },
     {
      "en": "get out of poverty",
@@ -1610,11 +1605,12 @@
    ],
    "differences": [],
    "ipaUS": "/ˈpɑːvɚti/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pov/pover/poverty__us_3.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/p/pov/pover/poverty__gb_2.mp3",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUK": "/ˈpɒvəti/"
   },
   {
    "right": 0,
