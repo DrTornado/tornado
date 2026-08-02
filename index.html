@@ -23419,22 +23419,58 @@ function renderNotes() {
   ta.oninput = updateStats;
   updateStats();
 
-  document.getElementById('note-save').onclick = async () => {
+  /*
+   * الزر يُقفل لحظة الضغط.
+   *
+   * الرفع إلى المستودع يستغرق ثوانيَ لا يرى المستخدم فيها شيئاً: النص باقٍ
+   * في مكانه والزر يقبل الضغط. فيضغط ثانيةً وثالثة ورابعة ظاناً أن الأولى
+   * لم تصل — وتُحفظ الملاحظة أربع مرات. حدث هذا فعلاً.
+   *
+   * القفل الفوري يقول «وصلت» قبل أن تنتهي الشبكة، وهو ما ينتظره المستخدم.
+   */
+  const saveBtn = document.getElementById('note-save');
+  saveBtn.onclick = async () => {
+    if (saveBtn.disabled) return;
     const text = ta.value.trim();
     if (text.length < 20) { flash('Paste a longer text first'); return; }
+
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving…';
+    saveBtn.style.opacity = '0.6';
+
     const now = Date.now();
     notes.push({
       id: now,
       title: (document.getElementById('note-title').value || '').trim() || noteTitleFrom(text),
       text, createdAt: now, updatedAt: now, lastChunk: 0, favorite: false
     });
-    try { await notesPush(); flash('Note saved — it will reach your phone'); }
-    catch (e) { flash('Saved locally — sync failed'); }
+    // الحقول تُفرَّغ فوراً: نصٌّ باقٍ في الصندوق يبدو غير محفوظ
+    ta.value = '';
+    document.getElementById('note-title').value = '';
+
+    try { await notesPush(); flash('✅ Saved — it will reach your phone'); }
+    catch (e) { flash('✅ Saved on this computer — sync will retry'); }
     renderNotes();
   };
 
+  // الحذف بتأكيد: ضغطة واحدة لا تمحو نصاً كتبه المستخدم أو لصقه بجهد
   pane.querySelectorAll('[data-del]').forEach(b => {
     b.onclick = async () => {
+      if (b.dataset.confirm !== '1') {
+        b.dataset.confirm = '1';
+        b.textContent = 'Sure?';
+        b.style.background = '#D96A5B';
+        b.style.color = '#fff';
+        setTimeout(() => {
+          if (b.dataset.confirm === '1') {
+            b.dataset.confirm = '';
+            b.textContent = 'Delete';
+            b.style.background = 'none';
+            b.style.color = '#D96A5B';
+          }
+        }, 4000);
+        return;
+      }
       notes = notes.filter(n => String(n.id) !== b.dataset.del);
       try { await notesPush(); } catch (e) { /* الحذف محلي على كل حال */ }
       renderNotes();
