@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T17:10:46.522Z",
+ "exportedAt": "2026-08-02T17:10:50.397Z",
  "words": [
   {
    "id": 1785185030316,
@@ -8540,13 +8540,13 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "Someone or something that exterminates",
-     "ar": "شخص أو شيء يبيد"
+     "en": "Someone or something that exterminates.",
+     "ar": "شخص أو شيء يبيد."
     },
     {
      "pos": "noun",
-     "en": "Specifically, a person whose job it is to kill insects and other pests in a building",
-     "ar": "على وجه التحديد، الشخص الذي تتمثل مهمته في قتل الحشرات والآفات الأخرى في المبنى"
+     "en": "Specifically, a person whose job it is to kill insects and other pests in a building.",
+     "ar": "على وجه التحديد، الشخص الذي تتمثل مهمته في قتل الحشرات والآفات الأخرى في المبنى."
     }
    ],
    "inflections": [
@@ -8603,7 +8603,7 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 5,
+   "engineVersion": 2,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
