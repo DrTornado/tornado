@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:13:30.718Z",
+ "exportedAt": "2026-08-02T21:13:35.011Z",
  "words": [
   {
    "id": 1785000460857,
@@ -1617,9 +1617,9 @@
    "wrong": 0,
    "last": null,
    "id": 1784531567933,
-   "word": "mutations",
-   "ipa": "",
-   "arabicPron": "",
+   "word": "mutation",
+   "ipa": "/mjuˈteɪʃən/",
+   "arabicPron": "ميوتيشن",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -1629,12 +1629,22 @@
     {
      "pos": "noun",
      "en": "Any alteration or change.",
-     "ar": "أي تغيير أو تغيير"
+     "ar": "أي تغيير أو تغيير."
+    },
+    {
+     "pos": "noun",
+     "en": "(genetics) Any heritable change of the base-pair sequence of genetic material.",
+     "ar": "(علم الوراثة) أي تغيير وراثي في تسلسل زوج القاعدة للمادة الوراثية."
+    },
+    {
+     "pos": "noun",
+     "en": "A mutant.",
+     "ar": "متحول"
     },
     {
      "pos": "noun",
      "en": "Any heritable change of the base-pair sequence of genetic material.",
-     "ar": "أي تغيير وراثي في تسلسل زوج القاعدة للمادة الوراثية"
+     "ar": "أي تغيير وراثي في تسلسل زوج القاعدة للمادة الوراثية."
     }
    ],
    "inflections": [
@@ -1652,7 +1662,24 @@
      "ar": "طافِرَة"
     }
    ],
-   "collocations": [],
+   "collocations": [
+    {
+     "en": "mutation rate",
+     "ar": "مُعَدَّلُ الطَّفْرَة"
+    },
+    {
+     "en": "mutation rates",
+     "ar": "معدلات الطفرات"
+    },
+    {
+     "en": "point mutation",
+     "ar": "طَفْرَةٌ نُقْطِيَّة"
+    },
+    {
+     "en": "gene mutation",
+     "ar": "طفرة جينية...................................................................................................................."
+    }
+   ],
    "examples": [
     {
      "en": "Tom has a rare gene mutation.",
@@ -1668,7 +1695,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "audioUS": "",
