@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:13:18.868Z",
+ "exportedAt": "2026-08-02T21:13:21.355Z",
  "words": [
   {
    "id": 1785000460857,
@@ -1409,14 +1409,19 @@
    "last": null,
    "id": 1784574885662,
    "word": "calorimeter",
-   "ipa": "",
-   "arabicPron": "",
+   "ipa": "/kaləri.miʈə(r)/",
+   "arabicPron": "كالريميتر",
    "oxford": "",
    "cefr": "",
    "pos": [
     "noun"
    ],
    "meanings": [
+    {
+     "pos": "noun",
+     "en": "(physics) An apparatus for measuring the heat generated or absorbed by either a chemical reaction, change of phase or some other physical change.",
+     "ar": "(فيزياء) جهاز لقياس الحرارة المتولدة أو الممتصة إما عن طريق تفاعل كيميائي أو تغيير في الطور أو بعض التغييرات الفيزيائية الأخرى."
+    },
     {
      "pos": "noun",
      "en": "An apparatus for measuring the heat generated or absorbed by either a chemical reaction, change of phase or some other physical change.",
@@ -1455,7 +1460,9 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUS": "/ˌkæləˈɹɪmɪtɚ/",
+   "audioUS": "-us"
   },
   {
    "right": 0,
