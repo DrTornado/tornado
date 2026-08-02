@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:13:42.827Z",
+ "exportedAt": "2026-08-02T21:13:49.371Z",
  "words": [
   {
    "id": 1785000460857,
@@ -1886,9 +1886,9 @@
    "wrong": 0,
    "last": null,
    "id": 1784531064403,
-   "word": "snails",
-   "ipa": "",
-   "arabicPron": "",
+   "word": "snail",
+   "ipa": "/sneɪl/",
+   "arabicPron": "سنيل",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -1903,13 +1903,23 @@
     },
     {
      "pos": "noun",
-     "en": "(by extension) A slow person; a sluggard.",
-     "ar": "(بالتبعية) شخص بطيء ؛ كسلان."
+     "en": "(informal, by extension) A slow person; a sluggard.",
+     "ar": "(غير رسمي، بالتبعية) شخص بطيء ؛ كسلان."
+    },
+    {
+     "pos": "noun",
+     "en": "(engineering) A spiral cam, or a flat piece of metal of spirally curved outline, used for giving motion to, or changing the position of, another part, as the hammer tail of a striking clock.",
+     "ar": "(هندسة) كاميرا حلزونية، أو قطعة معدنية مسطحة ذات مخطط منحني حلزونيًا، تستخدم لإعطاء الحركة أو تغيير موضع جزء آخر، كذيل مطرقة لساعة مدهشة."
     },
     {
      "pos": "verb",
      "en": "To move or travel very slowly.",
      "ar": "التحرك أو السفر ببطء شديد."
+    },
+    {
+     "pos": "noun",
+     "en": "A slow person; a sluggard.",
+     "ar": "شخص بطيء ؛ كسلان."
     }
    ],
    "inflections": [
@@ -1933,7 +1943,24 @@
      "ar": "حلزون, (الفرنسية) حلزون للأكل يقدم عادة مع قوقعته مع صلصة الثوم والزبدة"
     }
    ],
-   "collocations": [],
+   "collocations": [
+    {
+     "en": "snail shells",
+     "ar": "أصداف الحلزون"
+    },
+    {
+     "en": "snail mail",
+     "ar": "البريد البطي ء"
+    },
+    {
+     "en": "snail shell",
+     "ar": "صدفة الحلزون"
+    },
+    {
+     "en": "land snail",
+     "ar": "الحلزون البري"
+    }
+   ],
    "examples": [
     {
      "en": "The cars were snailing along the motorway during the rush hour.",
@@ -1945,7 +1972,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "right": 0,
@@ -1953,8 +1980,8 @@
    "last": null,
    "id": 1784495900971,
    "word": "surfer",
-   "ipa": "",
-   "arabicPron": "",
+   "ipa": "/ˈsɜː(ɹ)fə(ɹ)/",
+   "arabicPron": "سرفر",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -1970,6 +1997,11 @@
      "pos": "noun",
      "en": "A person who surfs the Internet.",
      "ar": "شخص يتصفح الإنترنت."
+    },
+    {
+     "pos": "noun",
+     "en": "(obsolete) A duck, the surf scoter (Melanitta perspicillata).",
+     "ar": "(عفا عليها الزمن) بطة، سكوتر ركوب الأمواج (Melanitta perspicillata)."
     },
     {
      "pos": "noun",
@@ -2029,7 +2061,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "audioUS": "",
