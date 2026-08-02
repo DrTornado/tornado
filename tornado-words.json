@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:16:15.824Z",
+ "exportedAt": "2026-08-02T21:16:19.863Z",
  "words": [
   {
    "id": 1785705257083,
@@ -75,7 +75,9 @@
    "differences": [],
    "right": 0,
    "wrong": 0,
-   "last": null
+   "last": null,
+   "interval": 0,
+   "due": 0
   },
   {
    "id": 1785000460857,
@@ -378,19 +380,24 @@
    ],
    "meanings": [
     {
-     "pos": "adjective",
-     "en": "Clingy.",
-     "ar": "لزج, دبق"
-    },
-    {
-     "pos": "noun",
-     "en": "The act of one who clings.",
-     "ar": "فعل من يتشبث."
+     "pos": "verb",
+     "en": "To hold very tightly, as to not fall off",
+     "ar": "التمسك بإحكام شديد، حتى لا تسقط"
     },
     {
      "pos": "verb",
-     "en": "present participle and gerund of cling",
-     "ar": "تقديم الفاعلية والتشبث"
+     "en": "To adhere to an object, without being affixed, in such a way as to follow its contours. Used especially of fabrics and films",
+     "ar": "التمسك بشيء ما، دون أن يتم لصقه، بطريقة تتبع ملامحه. تستخدم بشكل خاص من الأقمشة والأفلام"
+    },
+    {
+     "pos": "verb",
+     "en": "To produce a high-pitched ringing sound, like a small bell",
+     "ar": "لإنتاج صوت رنين عالي النبرة، مثل جرس صغير"
+    },
+    {
+     "pos": "noun",
+     "en": "The act of one who clings",
+     "ar": "فعل من يتشبث"
     }
    ],
    "inflections": [
@@ -435,7 +442,7 @@
    "examples": [
     {
      "en": "Seaweed clung to the anchor.",
-     "ar": "تشبثت الأعشاب البحرية بالمرساة."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -444,9 +451,15 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cli/cling/cling__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/cli/cling/cling__gb_1.mp3",
-   "engineVersion": 3
+   "audioUS": "",
+   "audioUK": "",
+   "engineVersion": 6,
+   "ipaUS": "",
+   "ipaUK": "",
+   "estCefr": "",
+   "freqLabel": "",
+   "audioGen": "",
+   "favorite": "false"
   },
   {
    "id": 1784991631873,
@@ -1012,19 +1025,24 @@
    ],
    "meanings": [
     {
-     "pos": "noun",
-     "en": "(computing) The design and editing of a blog; weblogging.",
-     "ar": "(الحوسبة) تصميم وتحرير مدونة ؛ التدوين على شبكة الإنترنت."
+     "pos": "verb",
+     "en": "To contribute to a blog",
+     "ar": "للمساهمة في مدونة"
     },
     {
      "pos": "verb",
-     "en": "present participle and gerund of blog",
-     "ar": "تقديم الفاعلية وجيروند من بلوق"
+     "en": "To blag, to steal something",
+     "ar": "التباهي، وسرقة شيء ما"
+    },
+    {
+     "pos": "verb",
+     "en": "To look sullen or sulky",
+     "ar": "أن تبدو متجهمًا أو عابسًا"
     },
     {
      "pos": "noun",
-     "en": "The design and editing of a blog; weblogging.",
-     "ar": "تصميم وتحرير مدونة ؛ التدوين على شبكة الإنترنت."
+     "en": "The design and editing of a blog",
+     "ar": "تصميم وتحرير مدونة"
     }
    ],
    "inflections": [
@@ -1045,16 +1063,31 @@
     }
    ],
    "collocations": [],
-   "examples": [],
+   "examples": [
+    {
+     "en": "I love blogging.",
+     "ar": ""
+    },
+    {
+     "en": "Sami was blogging.",
+     "ar": ""
+    }
+   ],
    "differences": [],
    "right": 0,
    "wrong": 0,
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 3,
+   "engineVersion": 6,
    "ipaUS": "/ˈblɑ.ɡiŋ/",
-   "audioUS": "-us"
+   "audioUS": "",
+   "ipaUK": "",
+   "estCefr": "",
+   "freqLabel": "",
+   "audioUK": "",
+   "audioGen": "",
+   "favorite": "false"
   },
   {
    "id": 1784662312122,
@@ -1555,13 +1588,28 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "(nautical, slang) The sailmaker on board ship.",
-     "ar": "صانع الشراع على متن السفينة."
+     "en": "A piece of fabric attached to a boat and arranged such that it causes the wind to drive the boat along. The sail may be attached to the boat via a combination of mast…",
+     "ar": "قطعة من القماش متصلة بقارب ومرتبة بحيث تتسبب في دفع الرياح للقارب. يمكن ربط الشراع بالقارب عبر مزيج من الصاري والصاري والحبال"
     },
     {
      "pos": "noun",
-     "en": "The sailmaker on board ship.",
-     "ar": "صانع الشراع على متن السفينة."
+     "en": "The concept of a sail or sails, as if a substance",
+     "ar": "(بحري،لا يحصى) مفهوم الشراع أو الأشرعة، كما لو كانت مادة"
+    },
+    {
+     "pos": "verb",
+     "en": "To be impelled or driven forward by the action of wind upon sails, as a ship on water",
+     "ar": "أن يتم دفعه أو دفعه إلى الأمام بفعل الرياح على الأشرعة، كسفينة على الماء"
+    },
+    {
+     "pos": "verb",
+     "en": "To move through or on the water",
+     "ar": "التحرك عبر الماء أو فوقه"
+    },
+    {
+     "pos": "noun",
+     "en": "The sailmaker on board ship",
+     "ar": "صانع الشراع على متن السفينة"
     }
    ],
    "inflections": [
@@ -1602,16 +1650,21 @@
    "examples": [
     {
      "en": "Take in sail: a storm is coming.",
-     "ar": "خذ شراعًا: عاصفة قادمة."
+     "ar": ""
     }
    ],
    "differences": [],
    "ipaUS": "/seɪlz/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/sai/sail_/sail__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/s/sai/sail_/sail__gb_2.mp3",
+   "audioUS": "",
+   "audioUK": "",
    "interval": 0,
    "due": 0,
-   "engineVersion": 3
+   "engineVersion": 2,
+   "ipaUK": "",
+   "estCefr": "",
+   "freqLabel": "",
+   "audioGen": "",
+   "favorite": "false"
   },
   {
    "right": 0,
@@ -2517,13 +2570,18 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "present participle and gerund of dwarf",
-     "ar": "الحاضر الفاعل و gerund من قزم"
+     "en": "To render (much) smaller, turn into a dwarf (version",
+     "ar": "لجعلها أصغر (بكثير)، تتحول إلى قزم (نسخة)"
+    },
+    {
+     "pos": "verb",
+     "en": "To make appear (much) smaller, puny, tiny",
+     "ar": "لجعلها تبدو أصغر (بكثير)، ضئيلة، صغيرة"
     },
     {
      "pos": "noun",
-     "en": "The situation where something is made to seem (relatively) small or unimportant.",
-     "ar": "الحالة التي يبدو فيها شيء ما صغيرًا (نسبيًا) أو غير مهم."
+     "en": "The situation where something is made to seem (relatively) small or unimportant",
+     "ar": "الحالة التي يبدو فيها شيء ما صغيرًا (نسبيًا) أو غير مهم"
     }
    ],
    "inflections": [
@@ -2572,7 +2630,7 @@
    "examples": [
     {
      "en": "The newly-built skyscraper dwarfs all older buildings in the downtown skyline.",
-     "ar": "ناطحة السحاب المبنية حديثًا تقزم جميع المباني القديمة في أفق وسط المدينة."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -2580,7 +2638,13 @@
    "due": 0,
    "freqLabel": "Top 8,000 words",
    "estCefr": "B2",
-   "engineVersion": 3
+   "engineVersion": 6,
+   "ipaUS": "",
+   "ipaUK": "",
+   "audioUS": "",
+   "audioUK": "",
+   "audioGen": "",
+   "favorite": "false"
   },
   {
    "right": 0,
@@ -2976,8 +3040,13 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "The opposite ends of a range or scale.",
-     "ar": "الأطراف المعاكسة للنطاق أو المقياس."
+     "en": "The greatest or utmost point, degree or condition",
+     "ar": "النقطة أو الدرجة أو الشرط الأكبر أو الأقصى"
+    },
+    {
+     "pos": "noun",
+     "en": "Each of the things at opposite ends of a range or scale",
+     "ar": "كل من الأشياء على طرفي نقيض من نطاق أو مقياس"
     }
    ],
    "inflections": [
@@ -3020,13 +3089,17 @@
     }
    ],
    "differences": [],
-   "audioUS": "-us",
-   "audioUK": "-uk",
+   "audioUS": "",
+   "audioUK": "",
    "interval": 0,
    "due": 0,
-   "engineVersion": 3,
+   "engineVersion": 6,
    "ipaUS": "/ɪkˈstɹimz/",
-   "ipaUK": "/ɪkˈstɹiːmz/"
+   "ipaUK": "/ɪkˈstɹiːmz/",
+   "estCefr": "",
+   "freqLabel": "",
+   "audioGen": "",
+   "favorite": "false"
   },
   {
    "right": 0,
@@ -3292,8 +3365,8 @@
    "last": null,
    "id": 1784636175360,
    "word": "pairs",
-   "ipa": "/peəz/",
-   "arabicPron": "بيرز",
+   "ipa": "/pɛəz/",
+   "arabicPron": "بيز",
    "oxford": "3000",
    "cefr": "A1",
    "pos": [
@@ -3303,7 +3376,32 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "Synonym of pelmanism (“memory card game”).",
+     "en": "Two similar or identical things taken together",
+     "ar": "شيئان متشابهان أو متطابقان معًا"
+    },
+    {
+     "pos": "noun",
+     "en": "Two people in a relationship, partnership or friendship",
+     "ar": "شخصان في علاقة أو شراكة أو صداقة"
+    },
+    {
+     "pos": "verb",
+     "en": "To group into one or more sets of two",
+     "ar": "للتجميع في مجموعة واحدة أو أكثر من مجموعتين"
+    },
+    {
+     "pos": "verb",
+     "en": "To bring two (animals, notably dogs) together for mating",
+     "ar": "لجلب اثنين (الحيوانات، ولا سيما الكلاب) معا للتزاوج"
+    },
+    {
+     "pos": "verb",
+     "en": "To impair, to make worse",
+     "ar": "يضعف، ويزيد الأمر سوءًا"
+    },
+    {
+     "pos": "verb",
+     "en": "To become worse, to deteriorate",
      "ar": ""
     }
    ],
@@ -3313,32 +3411,15 @@
     "pairsed",
     "pairsing"
    ],
-   "derivatives": [
-    {
-     "en": "repair (verb)",
-     "ar": ""
-    }
-   ],
+   "derivatives": [],
    "synonyms": [
     {
-     "en": "pelmanism",
-     "ar": ""
+     "en": "pair of spectacles",
+     "ar": "زوج من النظارات"
     },
     {
-     "en": "span",
-     "ar": ""
-    },
-    {
-     "en": "yoke",
-     "ar": ""
-    },
-    {
-     "en": "mate",
-     "ar": ""
-    },
-    {
-     "en": "brace",
-     "ar": ""
+     "en": "spectacles",
+     "ar": "نظارات"
     }
    ],
    "collocations": [
@@ -3370,13 +3451,17 @@
     }
    ],
    "differences": [],
-   "audioUS": "-us",
-   "audioUK": "-uk",
+   "audioUS": "",
+   "audioUK": "",
    "interval": 0,
    "due": 0,
-   "engineVersion": 3,
-   "ipaUS": "/pɛɹz/",
-   "ipaUK": "/pɛəz/"
+   "engineVersion": 2,
+   "ipaUS": "",
+   "ipaUK": "",
+   "estCefr": "",
+   "freqLabel": "",
+   "audioGen": "",
+   "favorite": "false"
   },
   {
    "right": 0,
@@ -3621,8 +3706,8 @@
    "last": null,
    "id": 1784652215752,
    "word": "glimpses",
-   "ipa": "",
-   "arabicPron": "",
+   "ipa": "/ˈɡlɪm(p)s/",
+   "arabicPron": "قليمبس",
    "oxford": "5000",
    "cefr": "C1",
    "pos": [
@@ -3632,23 +3717,23 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A brief look, glance, or peek.",
-     "ar": "نظرة موجزة أو نظرة خاطفة أو نظرة خاطفة."
+     "en": "A brief look, glance, or peek",
+     "ar": "نظرة موجزة أو نظرة خاطفة أو نظرة خاطفة"
     },
     {
      "pos": "noun",
-     "en": "A sudden flash.",
-     "ar": "ومضة مفاجئة."
+     "en": "A sudden flash",
+     "ar": "ومضة مفاجئة"
     },
     {
      "pos": "verb",
-     "en": "To see or view briefly or incompletely.",
-     "ar": "الرؤية أو المشاهدة باختصار أو بشكل غير كامل."
+     "en": "To see or view briefly or incompletely",
+     "ar": "الرؤية أو المشاهدة باختصار أو بشكل غير كامل"
     },
     {
      "pos": "verb",
-     "en": "To appear by glimpses.",
-     "ar": "لتظهر من خلال لمحات."
+     "en": "To appear by glimpses",
+     "ar": "لتظهر من خلال لمحات"
     }
    ],
    "inflections": [
@@ -3694,9 +3779,15 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/g/gli/glimp/glimpse__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/g/gli/glimp/glimpse__gb_1.mp3",
-   "engineVersion": 2
+   "audioUS": "",
+   "audioUK": "",
+   "engineVersion": 6,
+   "ipaUS": "",
+   "ipaUK": "",
+   "estCefr": "",
+   "freqLabel": "",
+   "audioGen": "",
+   "favorite": "false"
   },
   {
    "right": 0,
@@ -5112,8 +5203,8 @@
    "last": null,
    "id": 1784735563891,
    "word": "convalescent",
-   "ipa": "",
-   "arabicPron": "",
+   "ipa": "/ˌkɒnvəˈlɛsənt/",
+   "arabicPron": "كونڤليسنت",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -5123,8 +5214,8 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A person recovering from illness.",
-     "ar": "شخص يتعافى من المرض."
+     "en": "A person recovering from illness",
+     "ar": "شخص يتعافى من المرض"
     },
     {
      "pos": "adjective",
@@ -5135,11 +5226,6 @@
      "pos": "adjective",
      "en": "Of convalescence or convalescents",
      "ar": "النقاهة أو النقاهة"
-    },
-    {
-     "pos": "adjective",
-     "en": "recovering one's health and strength after a period of illness; on the mend.",
-     "ar": "استعادة صحة الفرد وقوته بعد فترة من المرض ؛ في تحسن."
     }
    ],
    "inflections": [
@@ -5186,9 +5272,17 @@
     }
    ],
    "differences": [],
-   "engineVersion": 2,
+   "engineVersion": 6,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "",
+   "ipaUK": "",
+   "estCefr": "",
+   "freqLabel": "",
+   "audioUS": "",
+   "audioUK": "",
+   "audioGen": "",
+   "favorite": "false"
   },
   {
    "right": 0,
@@ -5258,8 +5352,8 @@
    "last": null,
    "id": 1784757229581,
    "word": "counterfactuals",
-   "ipa": "",
-   "arabicPron": "",
+   "ipa": "/ˌkaʊntɚˈfæktʃuəl/",
+   "arabicPron": "كاونترفاكتشول",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -5268,13 +5362,13 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A claim, hypothesis, or other belief that is contrary to the facts.",
-     "ar": "ادعاء أو فرضية أو اعتقاد آخر يتعارض مع الحقائق."
+     "en": "A claim, hypothesis, or other belief that is contrary to the facts",
+     "ar": "ادعاء أو فرضية أو اعتقاد آخر يتعارض مع الحقائق"
     },
     {
      "pos": "noun",
-     "en": "A hypothetical state of the world, used to assess the impact of an action.",
-     "ar": "حالة افتراضية للعالم، تُستخدم لتقييم تأثير الإجراء."
+     "en": "A hypothetical state of the world, used to assess the impact of an action",
+     "ar": "حالة افتراضية للعالم، تُستخدم لتقييم تأثير الإجراء"
     }
    ],
    "inflections": [
@@ -5295,9 +5389,17 @@
    "collocations": [],
    "examples": [],
    "differences": [],
-   "engineVersion": 2,
+   "engineVersion": 6,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "",
+   "ipaUK": "/ˌkaʊn.tə(ɹ)ˈfæk.tʃu.əl/",
+   "estCefr": "",
+   "freqLabel": "",
+   "audioUS": "",
+   "audioUK": "",
+   "audioGen": "",
+   "favorite": "false"
   },
   {
    "right": 0,
@@ -5306,7 +5408,7 @@
    "id": 1784757139188,
    "word": "contenders",
    "ipa": "",
-   "arabicPron": "",
+   "arabicPron": "كنتيندر",
    "oxford": "5000",
    "cefr": "C1",
    "pos": [
@@ -5315,13 +5417,13 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "Someone who competes with one or more other people.",
-     "ar": "شخص يتنافس مع شخص آخر أو أكثر."
+     "en": "Someone who competes with one or more other people",
+     "ar": "شخص يتنافس مع شخص آخر أو أكثر"
     },
     {
      "pos": "noun",
-     "en": "Someone who has a viable chance of winning a competition.",
-     "ar": "شخص لديه فرصة قابلة للتطبيق للفوز في مسابقة."
+     "en": "Someone who has a viable chance of winning a competition",
+     "ar": "شخص لديه فرصة قابلة للتطبيق للفوز في مسابقة"
     }
    ],
    "inflections": [
@@ -5363,12 +5465,12 @@
     }
    ],
    "differences": [],
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/x/xco/xcont/xcontender__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/x/xco/xcont/xcontender__gb_1.mp3",
-   "engineVersion": 2,
+   "audioUS": "",
+   "audioUK": "",
+   "engineVersion": 6,
    "interval": 0,
    "due": 0,
-   "ipaUS": "",
+   "ipaUS": "/kənˈtɛn.dɚ/",
    "ipaUK": "",
    "estCefr": "",
    "freqLabel": "",
@@ -5626,18 +5728,18 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A disadvantageous aspect of something that is normally advantageous.",
-     "ar": "جانب سلبي لشيء مفيد عادة."
+     "en": "A disadvantageous aspect of something that is normally advantageous",
+     "ar": "جانب سلبي لشيء مفيد عادة"
     },
     {
      "pos": "noun",
-     "en": "A downward tendency, especially in the price of shares etc.",
-     "ar": "اتجاه هبوطي، خاصة في سعر الأسهم وما إلى ذلك."
+     "en": "A downward tendency, especially in the price of shares etc",
+     "ar": "اتجاه هبوطي، خاصة في سعر الأسهم وما إلى ذلك"
     },
     {
      "pos": "noun",
-     "en": "The side of something that is at the bottom, or that is intended to face downward.",
-     "ar": "جانب شيء موجود في القاع، أو يهدف إلى مواجهته لأسفل."
+     "en": "The side of something that is at the bottom, or that is intended to face downward",
+     "ar": "جانب شيء موجود في القاع، أو يهدف إلى مواجهته لأسفل"
     }
    ],
    "inflections": [
@@ -5645,7 +5747,12 @@
     "downsides"
    ],
    "derivatives": [],
-   "synonyms": [],
+   "synonyms": [
+    {
+     "en": "flipside",
+     "ar": "الوجه الآخر"
+    }
+   ],
    "collocations": [
     {
      "en": "downside risk",
@@ -5677,7 +5784,11 @@
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/downside-us.mp3",
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2
+   "engineVersion": 4,
+   "ipaUK": "",
+   "audioUK": "",
+   "audioGen": "",
+   "favorite": "false"
   },
   {
    "right": 0,
@@ -5946,7 +6057,7 @@
    "id": 1784751768137,
    "word": "contributory",
    "ipa": "",
-   "arabicPron": "",
+   "arabicPron": "كانتريبيتوري",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -5966,13 +6077,13 @@
     },
     {
      "pos": "adjective",
-     "en": "Paying tribute, tributary.",
-     "ar": "دفع الجزية، الروافد."
+     "en": "Paying tribute, tributary",
+     "ar": "دفع الجزية، الروافد"
     },
     {
      "pos": "noun",
-     "en": "A person or thing that contributes.",
-     "ar": "شخص أو شيء يساهم."
+     "en": "A person or thing that contributes",
+     "ar": "شخص أو شيء يساهم"
     }
    ],
    "inflections": [
@@ -6029,9 +6140,9 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2,
-   "ipaUS": "",
-   "ipaUK": "",
+   "engineVersion": 6,
+   "ipaUS": "/ˈkɑntɹɪbjəˌtɔɹi/",
+   "ipaUK": "/ˈkɒntɹɪˌbjuːt(ə)ɹi/",
    "estCefr": "",
    "freqLabel": "",
    "audioUS": "",
@@ -7080,7 +7191,7 @@
    "id": 1784746900843,
    "word": "junctures",
    "ipa": "",
-   "arabicPron": "",
+   "arabicPron": "دجانكتشر",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -7089,13 +7200,13 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A place where things join, a junction.",
-     "ar": "مكان تتلاقى فيه الأشياء، تقاطع طرق."
+     "en": "A place where things join, a junction",
+     "ar": "مكان تتلاقى فيه الأشياء، تقاطع طرق"
     },
     {
      "pos": "noun",
-     "en": "A critical moment in time.",
-     "ar": "لحظة حرجة في الوقت المناسب."
+     "en": "A critical moment in time",
+     "ar": "لحظة حرجة في الوقت المناسب"
     }
    ],
    "inflections": [
@@ -7135,7 +7246,15 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 4,
+   "ipaUS": "/ˈd͡ʒʌŋk.t͡ʃɚ/",
+   "ipaUK": "/ˈd͡ʒʌŋk.tʃə(ɹ)/",
+   "estCefr": "",
+   "freqLabel": "",
+   "audioUS": "",
+   "audioUK": "",
+   "audioGen": "",
+   "favorite": "false"
   },
   {
    "right": 0,
@@ -7144,7 +7263,7 @@
    "id": 1784745682080,
    "word": "disproportionately",
    "ipa": "",
-   "arabicPron": "",
+   "arabicPron": "ديسبربورشنتلي",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -7193,8 +7312,8 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2,
-   "ipaUS": "",
+   "engineVersion": 6,
+   "ipaUS": "/ˈdɪs.pɹəˌpɔɹ.ʃən.ət.li/",
    "ipaUK": "",
    "estCefr": "",
    "freqLabel": "",
@@ -8989,8 +9108,8 @@
    "last": null,
    "id": 1784974543897,
    "word": "glaciers",
-   "ipa": "",
-   "arabicPron": "",
+   "ipa": "/ˈɡleɪ.ʃɚ/",
+   "arabicPron": "قليشر",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -8999,8 +9118,8 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A large body of ice which flows under its own mass, usually downhill.",
-     "ar": "جسم كبير من الجليد يتدفق تحت كتلته الخاصة، وعادة ما يكون منحدرًا."
+     "en": "A large body of ice which flows under its own mass, usually downhill",
+     "ar": "جسم كبير من الجليد يتدفق تحت كتلته الخاصة، وعادة ما يكون منحدرًا"
     }
    ],
    "inflections": [
@@ -9013,7 +9132,7 @@
    "examples": [
     {
      "en": "They warned that the effects of glacier melting on water resources are becoming “increasingly serious” for China.",
-     "ar": ""
+     "ar": "وحذروا من أن آثار ذوبان الأنهار الجليدية على الموارد المائية أصبحت \"خطيرة بشكل متزايد\" بالنسبة للصين."
     }
    ],
    "differences": [],
@@ -9021,7 +9140,13 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2
+   "engineVersion": 6,
+   "ipaUS": "/ˈɡleɪ.ʃɚ/",
+   "ipaUK": "/ˈɡlæs.jə/",
+   "audioUS": "",
+   "audioUK": "",
+   "audioGen": "",
+   "favorite": "false"
   },
   {
    "right": 0,
@@ -9178,6 +9303,299 @@
    "engineVersion": 2,
    "interval": 0,
    "due": 0
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784487461009,
+   "word": "confederacy",
+   "ipa": "/kənˈfɛdəɹəsi/",
+   "ipaUS": "",
+   "ipaUK": "",
+   "arabicPron": "كنفيدرسي",
+   "oxford": "",
+   "cefr": "",
+   "estCefr": "",
+   "freqLabel": "",
+   "audioUS": "",
+   "audioUK": "",
+   "audioGen": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "An alliance",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "A state where the sovereign constituent units delegate their authority to the centre. As opposed to a federation, where the central and regional governments are each…",
+     "ar": "دولة تفوض فيها الوحدات السيادية سلطتها إلى المركز. على عكس الاتحاد، حيث تكون كل من الحكومات المركزية والإقليمية متساوية وذات سيادة في مجالها الخاص"
+    },
+    {
+     "pos": "noun",
+     "en": "Specifically, an instance of a decentralized governing structure among the indigenous peoples of North America",
+     "ar": "على وجه التحديد، مثال لهيكل حكم لامركزي بين الشعوب الأصلية في أمريكا الشمالية"
+    }
+   ],
+   "inflections": [
+    "confederacy",
+    "confederacies"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "federation",
+     "ar": "اتحاد"
+    },
+    {
+     "en": "conspiracy",
+     "ar": "تآمر, مؤامرة"
+    },
+    {
+     "en": "south",
+     "ar": "جَنُوب ; جَنُوبِيّ"
+    },
+    {
+     "en": "confederate states of america",
+     "ar": "ولايات التحالف ا?مريكية, تحالف ل-11 ولاية جنوبية حاولت ا?نفصال عن الولايات المتحدة في 1860-1861 بوحده ذاتية"
+    },
+    {
+     "en": "confederation",
+     "ar": "اتحاد, إتحاد كونفدرالي"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "southern confederacy",
+     "ar": "الكونفدرالية الجنوبية"
+    },
+    {
+     "en": "iroquois confederacy",
+     "ar": "اتحاد الأوريكيون"
+    }
+   ],
+   "examples": [
+    {
+     "en": "Maratha polity consisted of a decentralised confederacy of various states.",
+     "ar": ""
+    },
+    {
+     "en": "The Maratha Empire could just as easily be called the Maratha Confederacy.",
+     "ar": ""
+    },
+    {
+     "en": "The founding fathers of the confederacy were staunchly opposed to giving more powers to the federal government.",
+     "ar": ""
+    }
+   ],
+   "differences": [],
+   "interval": 0,
+   "due": 0,
+   "favorite": "false",
+   "engineVersion": 6
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1785705363036,
+   "word": "fucking",
+   "ipa": "/ˈfʌkɪŋ/",
+   "ipaUS": "",
+   "ipaUK": "",
+   "arabicPron": "فاكينق",
+   "oxford": "",
+   "cefr": "",
+   "estCefr": "A1",
+   "freqLabel": "Top 1,000 words",
+   "audioUS": "",
+   "audioUK": "",
+   "audioGen": "",
+   "pos": [
+    "noun",
+    "adjective",
+    "verb",
+    "adverb",
+    "infix"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "An act of sexual intercourse, especially one lacking passion or a feeling of sincere love",
+     "ar": "فعل الاتصال الجنسي، لا سيما الذي يفتقر إلى العاطفة أو الشعور بالحب الصادق"
+    },
+    {
+     "pos": "noun",
+     "en": "An act of mistreatment",
+     "ar": "فعل من أفعال سوء المعاملة"
+    },
+    {
+     "pos": "adjective",
+     "en": "An intensifier, often applying more to the whole utterance than to the specific word it grammatically modifies",
+     "ar": "مكثف، غالبًا ما يطبق على الكلام بأكمله أكثر من الكلمة المحددة التي يعدلها نحويًا"
+    },
+    {
+     "pos": "adjective",
+     "en": "Offensive, annoying or worthless",
+     "ar": "مسيء أو مزعج أو لا قيمة له"
+    },
+    {
+     "pos": "adverb",
+     "en": "Really, very",
+     "ar": "حقاً، جداً"
+    },
+    {
+     "pos": "infix",
+     "en": "Alternative form of -fucking-, used when the infix is put between two words",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "fucking",
+    "fuckings",
+    "fuckinged",
+    "fuckinging"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "coitus",
+     "ar": "مضاجعة, جماع"
+    },
+    {
+     "en": "frig",
+     "ar": "مُبَرِدْ, (غير رسمية) وحدة تبريد"
+    },
+    {
+     "en": "screw",
+     "ar": "مسمار التثبيت"
+    },
+    {
+     "en": "aphrodisia",
+     "ar": "بَاهٌ"
+    },
+    {
+     "en": "carnal knowledge",
+     "ar": "جِنْس ; مُمَارَسَةُ الجِنْس ; إتّصالٌ جِنْسِيّ ; جِمَاع ; مُبَاضَعَة ; مُجَامَعَة ; مُضَاجَعَة ; وَطْء ; وِقَاع"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "fucking thing",
+     "ar": "ايها الشئ اللعين"
+    },
+    {
+     "en": "fucking around",
+     "ar": ". أتسكع"
+    },
+    {
+     "en": "fucking bitch",
+     "ar": "أيتها السافلة اللعينة!"
+    }
+   ],
+   "examples": [
+    {
+     "en": "I got a good fucking out of her, but I doubt we'll have another date.",
+     "ar": "لقد حصلت على شيء جيد منها، لكنني أشك في أننا سنحظى بموعد آخر."
+    },
+    {
+     "en": "I took a real fucking on the interest rate for that loan.",
+     "ar": "أخذت سخيف حقيقي على سعر الفائدة لهذا القرض."
+    },
+    {
+     "en": "No fucking way.",
+     "ar": "هذا لا يمكن."
+    }
+   ],
+   "differences": [],
+   "interval": 0,
+   "due": 0,
+   "favorite": "false",
+   "engineVersion": 3
+  },
+  {
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "id": 1784531150409,
+   "word": "molluscs",
+   "ipa": "",
+   "ipaUS": "",
+   "ipaUK": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "estCefr": "",
+   "freqLabel": "",
+   "audioUS": "",
+   "audioUK": "",
+   "audioGen": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A soft-bodied invertebrate of the phylum Mollusca, typically with a hard shell of one or more pieces",
+     "ar": "اللافقاريات رخوة الجسم من شعبة الرخويات، وعادة مع قشرة صلبة من قطعة واحدة أو أكثر"
+    },
+    {
+     "pos": "noun",
+     "en": "A weak-willed person",
+     "ar": "شخص ضعيف الإرادة"
+    }
+   ],
+   "inflections": [
+    "molluscs",
+    "molluscses"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "little girl",
+     "ar": "أيتها الفتاة الصغيرة"
+    },
+    {
+     "en": "nose of wax",
+     "ar": "أنف الشمع"
+    },
+    {
+     "en": "pushover",
+     "ar": "مهمة سهلة, خصم ضعيف, شخص عاجز عن مقاومة الإغراء"
+    },
+    {
+     "en": "shellfish",
+     "ar": "محار, طعام البحر"
+    },
+    {
+     "en": "mollusk",
+     "ar": "رخوي حيوان من الرخو يات كالحلزون"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "Are mussels molluscs?",
+     "ar": ""
+    },
+    {
+     "en": "Snails are slow-moving molluscs.",
+     "ar": ""
+    },
+    {
+     "en": "Snails are molluscs which move slowly.",
+     "ar": ""
+    }
+   ],
+   "differences": [],
+   "interval": 0,
+   "due": 0,
+   "favorite": "false",
+   "engineVersion": 2
   }
  ],
  "tombstones": [
