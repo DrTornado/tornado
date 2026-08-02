@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:12:28.530Z",
+ "exportedAt": "2026-08-02T21:12:32.984Z",
  "words": [
   {
    "id": 1785000460857,
@@ -16,9 +16,19 @@
    ],
    "meanings": [
     {
+     "pos": "verb",
+     "en": "(transitive) To persuade somebody not to do (something).",
+     "ar": "(متعدية) لإقناع شخص ما بعدم القيام (بشيء)."
+    },
+    {
+     "pos": "verb",
+     "en": "(transitive) To extinguish the courage of; to dishearten; to depress the spirits of; to deprive of confidence; to deject.",
+     "ar": "(متعدية) لإخماد شجاعة ؛ تثبيط ؛ لإحباط أرواح ؛ للحرمان من الثقة ؛ للاكتئاب."
+    },
+    {
      "pos": "noun",
-     "en": "Lack of courage",
-     "ar": "عدم التحلي بالشجاعة."
+     "en": "(rare) Lack of courage",
+     "ar": "(نادر) قلة الشجاعة"
     },
     {
      "pos": "verb",
@@ -29,6 +39,11 @@
      "pos": "verb",
      "en": "To persuade somebody not to do (something).",
      "ar": "لإقناع شخص ما بعدم القيام (بشيء ما)."
+    },
+    {
+     "pos": "noun",
+     "en": "Lack of courage",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -74,9 +89,10 @@
    "interval": 0,
    "due": 0,
    "ipaUS": "/dɪsˈkɝɪd͡ʒ/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/d/dis/disco/discourage__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/d/dis/disco/discourage__gb_3.mp3",
-   "engineVersion": 2
+   "audioUS": "-us",
+   "audioUK": "-uk",
+   "engineVersion": 3,
+   "ipaUK": "/dɪsˈkʌɹɪd͡ʒ/"
   },
   {
    "id": 1784999975523,
@@ -157,7 +173,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 2,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
