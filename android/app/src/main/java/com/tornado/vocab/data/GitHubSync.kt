@@ -197,7 +197,17 @@ class GitHubSync(
 
     companion object {
         const val PROVIDER = "github"
-        const val DEFAULT_REPO = "DrTornado/tornado"
+        /*
+         * لا مستودع افتراضي.
+         *
+         * كان هنا مستودع المطوّر، والسحب لا يحتاج رمزاً — فكان كل من ينزّل
+         * التطبيق يجذب مكتبة المطوّر الشخصية وملاحظاته إلى جهازه في أول
+         * فتحة، ويجدها كأنها محتوى التطبيق. مكتبةٌ خاصة تتحوّل إلى محتوى
+         * عام لكل غريب، بلا أن يطلب أحدهما ذلك.
+         *
+         * المزامنة الآن اختيار صريح: من يريدها يكتب مستودعه هو.
+         */
+        const val DEFAULT_REPO = ""
         private const val PATH = "tornado-words.json"
     }
 }

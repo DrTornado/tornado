@@ -46,6 +46,80 @@ object MeaningQuality {
     // يطابق سقف DictionaryService — رقمان مختلفان يعنيان أن التنقية تقصّ ما جمعه الجلب
     private const val MAX_MEANINGS = 8
 
+    /**
+     * مجالات متخصّصة تُؤخِّر المعنى ولا تحذفه.
+     *
+     * ويكاموس يرتّب المعاني تاريخياً لا حسب الشيوع، فيأتي المعنى التشريحي
+     * أولاً والمعنى الشائع رابعاً. والمستخدم رأى «articulation» فقُدِّم له
+     * «مفصل» بينما ما يقصده الناس هو «وضوح النطق» — والبطاقة تفقد مصداقيتها
+     * كلها بمعنىً واحد كهذا.
+     *
+     * والتأخير لا الحذف: المعنى التشريحي صحيح ويفيد من يقرؤه، لكنه ليس ما
+     * يبدأ به متعلّم.
+     */
+    private val NARROW_DOMAINS = setOf(
+        "anatomy", "zoology", "botany", "biology", "medicine", "pathology",
+        "chemistry", "physics", "astronomy", "geology", "mathematics",
+        "phonetics", "phonology", "linguistics", "grammar",
+        "music", "heraldry", "nautical", "military", "law", "legal",
+        "computing", "programming", "engineering", "architecture",
+        "archaic", "obsolete", "dated", "historical", "rare",
+        "dialectal", "regional", "slang", "poetic", "literary"
+    )
+
+    /**
+     * يعيد ترتيب المعاني: العام قبل المتخصّص، مع حفظ الترتيب داخل كل فئة.
+     *
+     * المجال يُقرأ من القوس في أوّل التعريف لا من حقل الوسوم. وهذا ما أثبته
+     * الفحص: حقل `tags` يحمل وسوماً نحوية («countable») بينما المجال نفسه
+     * («anatomy»، «phonetics»، «music») مكتوبٌ داخل النصّ. ترتيبٌ مبنيّ على
+     * الحقل كان سيبدو صحيحاً في الشيفرة ولا يغيّر شيئاً في البطاقة.
+     *
+     * والترتيب مستقرّ عمداً: معنيان بنفس الدرجة يبقيان كما وردا من المصدر،
+     * فلا يتبدّل شكل البطاقة بين بناء وآخر بلا سبب.
+     */
+    fun rankBySpread(items: List<Meaning>): List<Meaning> =
+        items.withIndex()
+            .sortedWith(compareBy({ if (isNarrow(it.value.en)) 1 else 0 }, { it.index }))
+            .map { it.value }
+
+    /**
+     * يرتّب المعاني بحسب شيوع الاستعمال الحقيقي.
+     *
+     * [order] قائمة تعريفات مرتّبة تواتُرياً من مصدر خارجي. وهي أدقّ بكثير من
+     * أي حكم على شكل النصّ: ترتيب ويكاموس تاريخي، فيتصدّر «المفصل» كلمةَ
+     * articulation ويتصدّر «ضفة النهر» كلمةَ bank — بينما الناس تقصد
+     * «الفصاحة» و«المصرف». والتواتر يعرف ذلك، والقواعد لا تعرفه.
+     *
+     * وما لا يُعرف ترتيبه يُلحَق بالآخر على ترتيبه الأصلي، فلا يضيع معنى
+     * لمجرّد غيابه عن قائمة المرجع.
+     */
+    fun rankByFrequency(items: List<Meaning>, order: List<String>): List<Meaning> {
+        if (order.isEmpty()) return rankBySpread(items)
+        val rank = order.withIndex().associate { (i, d) -> key(d) to i }
+        return items.withIndex()
+            .sortedWith(
+                compareBy(
+                    { rank[key(it.value.en)] ?: Int.MAX_VALUE },
+                    { it.index }
+                )
+            )
+            .map { it.value }
+    }
+
+    /** مفتاح مطابقة متسامح — الفروق في الترقيم والمسافات لا تكسر المطابقة */
+    private fun key(s: String): String =
+        s.lowercase().replace(Regex("[^a-z0-9 ]"), " ").replace(Regex("\\s+"), " ").trim().take(60)
+
+    /** هل يبدأ التعريف بوسم مجال متخصّص؟ */
+    private fun isNarrow(definition: String): Boolean {
+        val head = Regex("""^\s*\(([^()]{1,60})\)""").find(definition)?.groupValues?.get(1)
+            ?: return false
+        return head.split(',', ';', '|')
+            .flatMap { it.split(" or ") }
+            .any { it.trim().lowercase() in NARROW_DOMAINS }
+    }
+
     /** هل هذا النص معنى حقيقياً أم إحالة صرفية؟ */
     fun isRealDefinition(text: String): Boolean {
         val t = text.trim()
