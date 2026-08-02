@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:13:57.647Z",
+ "exportedAt": "2026-08-02T21:14:01.503Z",
  "words": [
   {
    "id": 1785000460857,
@@ -2150,7 +2150,7 @@
    "last": null,
    "id": 1784495753959,
    "word": "steward",
-   "ipa": "/ˈstjuː.əd/",
+   "ipa": "/ˈstjuː.əːd/",
    "arabicPron": "ستورد",
    "oxford": "",
    "cefr": "",
@@ -2161,13 +2161,18 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A person who manages the property or affairs for another entity, particularly the chief administrator of a medieval manor.",
-     "ar": "الشخص الذي يدير الممتلكات أو الشؤون لكيان آخر، ولا سيما المدير الرئيسي لمزرعة من القرون الوسطى."
+     "en": "A person who manages the property or affairs for another entity.",
+     "ar": "الشخص الذي يدير الممتلكات أو الشؤون لجهة أخرى."
     },
     {
      "pos": "noun",
-     "en": "A ship's officer who is in charge of making dining arrangements and provisions.",
-     "ar": "ضابط السفينة المسؤول عن اتخاذ ترتيبات الطعام والمؤن."
+     "en": "(nautical) A ship's officer who is in charge of making dining arrangements and provisions.",
+     "ar": "(بحري) ضابط السفينة المسؤول عن اتخاذ ترتيبات وأحكام تناول الطعام."
+    },
+    {
+     "pos": "noun",
+     "en": "A union member who is selected as a representative for fellow workers in negotiating terms with management.",
+     "ar": "عضو نقابي يتم اختياره كممثل لزملائه العمال في التفاوض على الشروط مع الإدارة."
     },
     {
      "pos": "verb",
@@ -2182,7 +2187,7 @@
     {
      "pos": "noun",
      "en": "A chief administrator of a medieval manor.",
-     "ar": "مدير رئيسي لمزرعة من القرون الوسطى."
+     "ar": ""
     }
    ],
    "inflections": [
@@ -2232,15 +2237,20 @@
      "ar": "إذا حوكم أحد اللوردات أو رجال الدولة أمام مجلس اللوردات بتهمة الخيانة أو غيرها من الجنايات، عين أحد الأعضاء اللوردات lord high steward رئيساً لجلسة المحاكمة ورئيسا مؤقتاً speaker للمجلس."
     }
    ],
-   "examples": [],
+   "examples": [
+    {
+     "en": "a steward in a Methodist church",
+     "ar": "مضيف في كنيسة ميثودية"
+    }
+   ],
    "differences": [],
-   "ipaUS": "/ˈstuɚd/",
-   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/steward-us.mp3",
+   "ipaUS": "/ˈstu.ɚd/",
+   "audioUS": "-us",
    "interval": 0,
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "right": 0,
@@ -2248,8 +2258,8 @@
    "last": null,
    "id": 1784495669251,
    "word": "astronomy",
-   "ipa": "/æˈstɹɑnəˌmi/",
-   "arabicPron": "استرانمي",
+   "ipa": "/asʈro.nɔmi/",
+   "arabicPron": "سترانمي",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -2260,6 +2270,11 @@
      "pos": "noun",
      "en": "The study of the physical universe beyond the Earth's atmosphere, including the process of mapping locations and properties of the matter and radiation in the universe.",
      "ar": "دراسة الكون المادي خارج الغلاف الجوي للأرض، بما في ذلك عملية رسم خرائط مواقع وخصائص المادة والإشعاع في الكون."
+    },
+    {
+     "pos": "noun",
+     "en": "(obsolete) Astrology.",
+     "ar": "(عفا عليها الزمن) علم التنجيم."
     },
     {
      "pos": "noun",
@@ -2307,13 +2322,13 @@
     }
    ],
    "differences": [],
-   "ipaUS": "/æˈstɹɑnəˌmi/",
-   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/astronomy-us.mp3",
+   "ipaUS": "/əˈstɹɑn.ə.mi/",
+   "audioUS": "-us",
    "interval": 0,
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2,
+   "engineVersion": 3,
    "ipaUK": "",
    "audioUK": "",
    "audioGen": "",
