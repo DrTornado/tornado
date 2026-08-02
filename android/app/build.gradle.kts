@@ -1,3 +1,20 @@
+import java.util.Properties
+
+/*
+ * بيانات التوقيع تُقرأ من ملف خارج المستودع.
+ *
+ * مفتاح النشر وكلمة مروره هما هوية التطبيق عند جوجل: من يملكهما يستطيع أن
+ * يصدر تحديثاً باسمك، ومن يفقدهما لا يستطيع تحديث تطبيقه أبداً — لا استرجاع
+ * ولا استثناء. فلا يدخلان المستودع مهما كان خاصاً، ولا يُكتبان في ملف يُدفع.
+ *
+ * وغيابهما لا يكسر البناء: من ينسخ المشروع يحصل على نسخة موقّعة بمفتاح
+ * التطوير تعمل عنده، ولا يُوقف عمله بخطأ عن ملف لا يملكه.
+ */
+val keystoreProps = Properties().apply {
+    val f = File(System.getProperty("user.home"), "OneDrive/Desktop/tornado-keys/keystore.properties")
+    if (f.exists()) f.inputStream().use { load(it) }
+}
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -36,19 +53,32 @@ android {
             isUniversalApk = false
         }
     }
+    signingConfigs {
+        // يُنشأ فقط إن وُجد الملف — وإلا فلا إعداد ولا خطأ
+        if (keystoreProps.getProperty("storeFile") != null) {
+            create("tornado") {
+                storeFile = file(keystoreProps.getProperty("storeFile"))
+                storePassword = keystoreProps.getProperty("storePassword")
+                keyAlias = keystoreProps.getProperty("keyAlias")
+                keyPassword = keystoreProps.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             /*
-             * توقيع نسخة الإصدار بمفتاح التطوير.
+             * مفتاح النشر إن وُجد، ومفتاح التطوير إن لم يوجد.
              *
-             * التطبيق شخصي يُثبَّت يدوياً ولا يمرّ بمتجر، والنسخة غير الموقّعة
-             * لا تُثبَّت أصلاً — فتبقى الفروق الحقيقية بين التطوير والإصدار
-             * (زمن الإقلاع خاصةً) غير قابلة للقياس. وهذا يجعل أي حكم على
-             * الأداء مبنياً على البناء الخطأ.
+             * جوجل بلاي ترفض ما يُوقَّع بمفتاح التطوير — وهو ما كان عليه
+             * التطبيق. والسقوط إلى مفتاح التطوير عند غياب الملف مقصود: يبقى
+             * البناء ممكناً على أي جهاز، ويستحيل أن يُرفع بالخطأ ما ليس
+             * موقّعاً بالمفتاح الصحيح لأن المتجر يرفضه صراحةً.
              */
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.findByName("tornado")
+                ?: signingConfigs.getByName("debug")
         }
     }
     compileOptions {
