@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:14:27.125Z",
+ "exportedAt": "2026-08-02T21:14:31.070Z",
  "words": [
   {
    "id": 1785705257083,
@@ -2976,16 +2976,6 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "The greatest or utmost point, degree or condition.",
-     "ar": "النقطة أو الدرجة أو الشرط الأكبر أو الأقصى."
-    },
-    {
-     "pos": "noun",
-     "en": "Each of the things at opposite ends of a range or scale.",
-     "ar": "كل من الأشياء على طرفي نقيض من نطاق أو مقياس."
-    },
-    {
-     "pos": "noun",
      "en": "The opposite ends of a range or scale.",
      "ar": "الأطراف المعاكسة للنطاق أو المقياس."
     }
@@ -3030,11 +3020,13 @@
     }
    ],
    "differences": [],
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/e/ext/extre/extreme__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/e/ext/extre/extreme__gb_1.mp3",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUS": "/ɪkˈstɹimz/",
+   "ipaUK": "/ɪkˈstɹiːmz/"
   },
   {
    "right": 0,
@@ -3053,18 +3045,13 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To make a threat against someone; to use threats.",
-     "ar": "لتوجيه تهديد ضد شخص ما ؛ لاستخدام التهديدات."
-    },
-    {
-     "pos": "verb",
-     "en": "To menace, or be dangerous.",
-     "ar": "للتهديد، أو أن تكون خطيرًا."
+     "en": "simple past and past participle of threaten",
+     "ar": "الفاعلية البسيطة للتهديد في الماضي والماضي"
     },
     {
      "pos": "adjective",
-     "en": "(of a plant or animal) At risk of becoming endangered in the near future.",
-     "ar": "(لنبات أو حيوان) معرض لخطر الانقراض في المستقبل القريب."
+     "en": "(especially ecology, of an organism) At risk of becoming endangered in the near future.",
+     "ar": "(خاصة البيئة، للكائن الحي) في خطر التعرض للخطر في المستقبل القريب."
     },
     {
      "pos": "adjective",
@@ -3072,14 +3059,9 @@
      "ar": "الشعور بعدم الأمان أو الضعف."
     },
     {
-     "pos": "verb",
-     "en": "simple past and past participle of threaten",
-     "ar": "الفاعلية البسيطة للتهديد في الماضي والماضي"
-    },
-    {
      "pos": "adjective",
      "en": "At risk of becoming endangered in the near future.",
-     "ar": ""
+     "ar": "في خطر التعرض للخطر في المستقبل القريب."
     }
    ],
    "inflections": [
@@ -3112,7 +3094,7 @@
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/t/thr/threa/threaten__gb_1.mp3",
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "right": 0,
