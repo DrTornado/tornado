@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:14:08.915Z",
+ "exportedAt": "2026-08-02T21:14:15.263Z",
  "words": [
   {
    "id": 1785000460857,
@@ -2514,8 +2514,8 @@
    "last": null,
    "id": 1784487595225,
    "word": "staggering",
-   "ipa": "",
-   "arabicPron": "",
+   "ipa": "/ˈstæɡəɹɪŋ/",
+   "arabicPron": "ستاقرينق",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -2526,13 +2526,23 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "Sway unsteadily, reel, or totter.",
-     "ar": "يتمايل بشكل غير ثابت، أو يتدحرج، أو يترنح."
+     "en": "present participle and gerund of stagger",
+     "ar": "تقديم الفاعلية والارتفاع من الترنح"
     },
     {
-     "pos": "verb",
-     "en": "Doubt, waver, be shocked.",
-     "ar": "الشك، التردد، الصدمة."
+     "pos": "adjective",
+     "en": "Incredible, overwhelming, amazing.",
+     "ar": "لا يصدق، ساحقة، مذهلة."
+    },
+    {
+     "pos": "adjective",
+     "en": "Lurching, floundering.",
+     "ar": "مترنح، متخبط."
+    },
+    {
+     "pos": "noun",
+     "en": "The condition of being staggered or amazed.",
+     "ar": "حالة الترنح أو الدهشة."
     },
     {
      "pos": "noun",
@@ -2541,17 +2551,7 @@
     },
     {
      "pos": "noun",
-     "en": "That which staggers something or somebody.",
-     "ar": "ذلك الذي يترنح شيء أو شخص ما."
-    },
-    {
-     "pos": "adjective",
-     "en": "Incredible, overwhelming, amazing.",
-     "ar": "لا يصدق، ساحقة، مذهلة."
-    },
-    {
-     "pos": "verb",
-     "en": "present participle and gerund of stagger",
+     "en": "The spacing out of various actions over time.",
      "ar": ""
     }
    ],
@@ -2601,7 +2601,7 @@
    "examples": [
     {
      "en": "The army suffered a staggering defeat.",
-     "ar": ""
+     "ar": "عانى الجيش من هزيمة مذهلة."
     }
    ],
    "differences": [],
@@ -2609,7 +2609,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "right": 0,
@@ -2632,18 +2632,18 @@
     },
     {
      "pos": "noun",
-     "en": "A state where the sovereign constituent units delegate their authority to the centre. As opposed to a federation, where the central and regional governments are each equal and sovereign in their own sphere.",
-     "ar": "دولة تفوض فيها الوحدات السيادية سلطتها إلى المركز. على عكس الاتحاد، حيث تكون كل من الحكومات المركزية والإقليمية متساوية وذات سيادة في مجالها الخاص."
-    },
-    {
-     "pos": "noun",
-     "en": "A state where the sovereign constituent units delegate their authority to the centre.",
-     "ar": "دولة تفوض فيها الوحدات السيادية سلطتها إلى المركز."
+     "en": "(politics) A state where the sovereign constituent units delegate their authority to the centre. As opposed to a federation, where the central and regional governments are each equal and sovereign in their own sphere.",
+     "ar": "(السياسة) دولة تفوض فيها الوحدات التأسيسية السيادية سلطتها إلى المركز. على عكس الاتحاد، حيث تكون كل من الحكومات المركزية والإقليمية متساوية وذات سيادة في مجالها الخاص."
     },
     {
      "pos": "noun",
      "en": "Specifically, an instance of a decentralized governing structure among the indigenous peoples of North America.",
      "ar": "على وجه التحديد، مثال لهيكل حكم لامركزي بين الشعوب الأصلية في أمريكا الشمالية."
+    },
+    {
+     "pos": "noun",
+     "en": "A state where the sovereign constituent units delegate their authority to the centre.",
+     "ar": "دولة تفوض فيها الوحدات السيادية سلطتها إلى المركز."
     }
    ],
    "inflections": [
@@ -2683,11 +2683,16 @@
      "ar": "اتحاد الأوريكيون"
     }
    ],
-   "examples": [],
+   "examples": [
+    {
+     "en": "The Blackfoot, Iroquois, and Sioux peoples all were governed as confederacies. There were also multi-ethnic confederacies, such as the Iron Confederacy made up of the Plains Cree, Assiniboine, Stoney, and Saulteaux.",
+     "ar": "حُكمت شعوب بلاكفوت وإيروكوا وسيوكس جميعًا ككونفدراليات. كانت هناك أيضًا كونفدراليات متعددة الأعراق، مثل الكونفدرالية الحديدية المكونة من Plains Cree و Assiniboine و Stoney و Saulteaux."
+    }
+   ],
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "right": 0,
