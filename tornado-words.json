@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:13:10.647Z",
+ "exportedAt": "2026-08-02T21:13:15.922Z",
  "words": [
   {
    "id": 1785000460857,
@@ -1101,9 +1101,9 @@
   },
   {
    "id": 1784662047598,
-   "word": "creatures",
-   "ipa": "/ˈkɹiːt͡ʃəz/",
-   "arabicPron": "كريتشرز",
+   "word": "creature",
+   "ipa": "/kɹiːˈeɪ.tjʊə(ɹ)/",
+   "arabicPron": "كريتشر",
    "oxford": "3000",
    "cefr": "B2",
    "pos": [
@@ -1112,13 +1112,23 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A living being; an animal or (sometimes derogatory) a human.",
-     "ar": "كائن حي ؛ حيوان أو (في بعض الأحيان مهين) إنسان."
+     "en": "A living being, such as an animal, monster, or alien.",
+     "ar": "كائن حي، مثل حيوان أو وحش أو فضائي."
     },
     {
      "pos": "noun",
-     "en": "A created thing, whether animate or inanimate; a creation.",
-     "ar": "شيء مخلوق، سواء كان حيًّا أو غير حيّ ؛ خلق."
+     "en": "An unidentified, mysterious, and often monstrous animal or being.",
+     "ar": "حيوان أو كائن مجهول الهوية وغامض وغالبًا ما يكون وحشيًا."
+    },
+    {
+     "pos": "noun",
+     "en": "(sometimes derogatory) A human.",
+     "ar": "(مهين في بعض الأحيان) إنسان."
+    },
+    {
+     "pos": "noun",
+     "en": "A human.",
+     "ar": "- إنسان"
     }
    ],
    "inflections": [
@@ -1148,11 +1158,32 @@
      "ar": "دمية, لعبة الأطفال, دمية متحركة, شخص أشبه بالألعوبة"
     }
    ],
-   "collocations": [],
+   "collocations": [
+    {
+     "en": "living creature",
+     "ar": "كائن حي, مخلوق حي, إنسان"
+    },
+    {
+     "en": "little creature",
+     "ar": "مخلوق صغير"
+    },
+    {
+     "en": "poor creature",
+     "ar": "كائن ضعيف, شخص يستحق الشفقة, حيوان يستحق الشفقة"
+    },
+    {
+     "en": "human creature",
+     "ar": "مخلوق بشري"
+    }
+   ],
    "examples": [
     {
-     "en": "He's a creature of habit.   insects and other creatures",
-     "ar": "إنه مخلوق من العادة. الحشرات والمخلوقات الأخرى"
+     "en": "insects and other creatures",
+     "ar": "الحشرات والمخلوقات الأخرى"
+    },
+    {
+     "en": "He's a creature of habit.",
+     "ar": "إن (آندي) أسير لعاداته."
     }
    ],
    "differences": [],
@@ -1161,16 +1192,17 @@
    "last": "right",
    "interval": 1,
    "due": 1785198224349,
-   "ipaUS": "/ˈkɹit͡ʃɚz/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cre/creat/creature__us_2.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/cre/creat/creature__gb_1.mp3",
-   "engineVersion": 2
+   "ipaUS": "/ˈkɹi.tʃɚ/",
+   "audioUS": "-us",
+   "audioUK": "-uk",
+   "engineVersion": 3,
+   "ipaUK": "/ˈkɹiː.tʃə/"
   },
   {
    "id": 1784646739633,
    "word": "dispatch",
    "ipa": "/dəˈspætʃ/",
-   "arabicPron": "ديسباتش",
+   "arabicPron": "دسباتش",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -1179,33 +1211,33 @@
    ],
    "meanings": [
     {
-     "pos": "noun",
-     "en": "A message sent quickly, as a shipment, a prompt settlement of a business, or an important official message sent by a diplomat, or military officer.",
-     "ar": "رسالة يتم إرسالها بسرعة، كشحنة، أو تسوية فورية لنشاط تجاري، أو رسالة رسمية مهمة يرسلها دبلوماسي أو ضابط عسكري."
-    },
-    {
-     "pos": "noun",
-     "en": "The act of doing something quickly.",
-     "ar": "فعل شيء بسرعة."
+     "pos": "verb",
+     "en": "(transitive) To send (a shipment) with promptness.",
+     "ar": "(متعدية) لإرسال (شحنة) على وجه السرعة."
     },
     {
      "pos": "verb",
-     "en": "To send (a shipment) with promptness.",
-     "ar": "لإرسال (شحنة) على وجه السرعة."
+     "en": "(transitive) To send (a person) away hastily.",
+     "ar": "(عابر) لإبعاد (شخص) على عجل."
     },
     {
      "pos": "verb",
-     "en": "To send (a person) away hastily.",
-     "ar": "لإبعاد (شخص) على عجل."
-    },
-    {
-     "pos": "verb",
-     "en": "To send (an important official message) promptly, by means of a diplomat or military officer.",
-     "ar": "إرسال (رسالة رسمية مهمة) على وجه السرعة، عن طريق دبلوماسي أو ضابط عسكري."
+     "en": "(transitive) To send (an important official message) promptly, by means of a diplomat or military officer.",
+     "ar": "(متعدية) لإرسال (رسالة رسمية مهمة) على وجه السرعة، عن طريق دبلوماسي أو ضابط عسكري."
     },
     {
      "pos": "noun",
      "en": "A message sent quickly, as a shipment, a prompt settlement of a business, or an important official message sent by a diplomat, government official, military officer, etc.",
+     "ar": "رسالة يتم إرسالها بسرعة، كشحنة، أو تسوية فورية لنشاط تجاري، أو رسالة رسمية مهمة يرسلها دبلوماسي أو مسؤول حكومي أو ضابط عسكري، إلخ."
+    },
+    {
+     "pos": "noun",
+     "en": "A mission by an emergency response service, typically involving attending to an emergency in the field.",
+     "ar": "مهمة من قبل خدمة الاستجابة للطوارئ، وعادة ما تنطوي على رعاية حالات الطوارئ في الميدان."
+    },
+    {
+     "pos": "noun",
+     "en": "The act of doing something quickly.",
      "ar": ""
     }
    ],
@@ -1249,13 +1281,15 @@
    "right": 0,
    "wrong": 0,
    "last": null,
-   "ipaUS": "/dɪˈspætʃ/",
-   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/dispatch-us.mp3",
+   "ipaUS": "/dəˈspæt͡ʃ/",
+   "audioUS": "-us",
    "freqLabel": "Top 8,000 words",
    "interval": 0,
    "due": 0,
    "estCefr": "B2",
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUK": "/dɪˈspætʃ/",
+   "audioUK": "-uk"
   },
   {
    "right": 0,
