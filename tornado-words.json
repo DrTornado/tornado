@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T17:10:32.591Z",
+ "exportedAt": "2026-08-02T17:10:38.029Z",
  "words": [
   {
    "id": 1785185030316,
@@ -4686,8 +4686,8 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "Either of the two orifices located on the nose (or on the beak of a bird",
-     "ar": "أي من الفتحتين الموجودتين على الأنف (أو على منقار طائر )"
+     "en": "Either of the two orifices located on the nose (or on the beak of a bird); used as a passage for air and other gases to travel the nasal passages.",
+     "ar": "أي من الفتحتين الموجودتين على الأنف (أو على منقار طائر )؛ تستخدم كممر للهواء والغازات الأخرى للسفر في الممرات الأنفية."
     }
    ],
    "inflections": [
@@ -4727,7 +4727,7 @@
    "interval": 1,
    "due": 1785198221330,
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/nostrils-us.mp3",
-   "engineVersion": 5,
+   "engineVersion": 2,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
