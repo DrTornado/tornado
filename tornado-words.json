@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T21:16:48.033Z",
+ "exportedAt": "2026-08-02T21:16:56.736Z",
  "words": [
   {
    "id": 1785705257083,
@@ -1020,24 +1020,19 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "To contribute to a blog",
-     "ar": "للمساهمة في مدونة"
+     "pos": "noun",
+     "en": "(computing) The design and editing of a blog; weblogging.",
+     "ar": ""
     },
     {
      "pos": "verb",
-     "en": "To blag, to steal something",
-     "ar": "التباهي، وسرقة شيء ما"
-    },
-    {
-     "pos": "verb",
-     "en": "To look sullen or sulky",
-     "ar": "أن تبدو متجهمًا أو عابسًا"
+     "en": "present participle and gerund of blog",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "The design and editing of a blog",
-     "ar": "تصميم وتحرير مدونة"
+     "en": "The design and editing of a blog; weblogging.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -1074,9 +1069,9 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 6,
+   "engineVersion": 3,
    "ipaUS": "/ˈblɑ.ɡiŋ/",
-   "audioUS": "",
+   "audioUS": "-us",
    "ipaUK": "",
    "estCefr": "",
    "freqLabel": "",
