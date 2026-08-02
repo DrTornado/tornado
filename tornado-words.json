@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-02T17:10:38.029Z",
+ "exportedAt": "2026-08-02T17:10:42.467Z",
  "words": [
   {
    "id": 1785185030316,
@@ -6518,18 +6518,18 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A person who rides a surfboard",
-     "ar": "شخص يركب لوح تزلج"
+     "en": "A person who rides a surfboard.",
+     "ar": "شخص يركب لوح تزلج."
     },
     {
      "pos": "noun",
-     "en": "A person who surfs the Internet",
-     "ar": "شخص يتصفح الإنترنت"
+     "en": "A person who surfs the Internet.",
+     "ar": "شخص يتصفح الإنترنت."
     },
     {
      "pos": "noun",
-     "en": "A duck, the surf scoter (Melanitta perspicillata",
-     "ar": ""
+     "en": "A duck, the surf scoter (Melanitta perspicillata).",
+     "ar": "بطة، سكوتر ركوب الأمواج (Melanitta perspicillata)."
     }
    ],
    "inflections": [
@@ -6584,7 +6584,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 5,
+   "engineVersion": 2,
    "ipaUS": "",
    "ipaUK": "",
    "audioUS": "",
@@ -6779,12 +6779,12 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "The study of the physical universe beyond the Earth's atmosphere, including the process of mapping locations and properties of the matter and radiation in the universe",
-     "ar": "دراسة الكون المادي خارج الغلاف الجوي للأرض، بما في ذلك عملية رسم خرائط مواقع وخصائص المادة والإشعاع في الكون"
+     "en": "The study of the physical universe beyond the Earth's atmosphere, including the process of mapping locations and properties of the matter and radiation in the universe.",
+     "ar": "دراسة الكون المادي خارج الغلاف الجوي للأرض، بما في ذلك عملية رسم خرائط مواقع وخصائص المادة والإشعاع في الكون."
     },
     {
      "pos": "noun",
-     "en": "Astrology",
+     "en": "Astrology.",
      "ar": "التنجيم"
     }
    ],
@@ -6834,7 +6834,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 3,
+   "engineVersion": 2,
    "ipaUK": "",
    "audioUK": "",
    "audioGen": "",
