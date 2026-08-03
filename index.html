@@ -132,6 +132,19 @@
   <div id="bg-upgrade-status" style="font-size:11px;color:#5B9E6F;margin-top:4px;text-align:center;"></div>
   <div id="piper-status" style="font-size:11px;color:#E8B04B;margin-top:4px;text-align:center;"></div>
   <div id="audio-prep-status" style="font-size:11px;color:#5B8DD9;margin-top:2px;text-align:center;"></div>
+  <!--
+    اختيار الصوت ظاهر لا مدفون.
+    الصوت أوّل ما يلاحظه المستخدم وأوّل ما يشتكي منه، ودفن تبديله خلف قائمة
+    يعني أن يعيش بصوت لا يحبّه ظنّاً أنه الوحيد المتاح.
+  -->
+  <div id="voice-row" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px;flex-wrap:wrap;">
+    <span style="font-size:12px;color:#8A93A3;">🗣️ Voice</span>
+    <select id="kokoro-voice" class="inp" style="width:auto;font-size:12.5px;padding:5px 8px;"></select>
+    <label style="font-size:12px;color:#8A93A3;display:flex;align-items:center;gap:4px;cursor:pointer;">
+      <input type="checkbox" id="kokoro-on" style="accent-color:#E8B04B;"> Neural voice
+    </label>
+  </div>
+  <div id="kokoro-status" style="font-size:11px;color:#8A93A3;margin-top:3px;text-align:center;"></div>
   <div id="gh-box" class="hidden" style="background:#1B212B;border-radius:10px;padding:12px;margin-top:8px;">
     <p id="gh-intro" style="font-size:12.5px;color:#8A93A3;margin:0 0 8px;line-height:1.7;"></p>
     <input class="inp" id="gh-token" type="password" placeholder="Fine-grained token (repo: Contents R/W)" style="font-size:13px;margin-bottom:6px;">
@@ -24419,7 +24432,7 @@ function ttsSay(word, accent) {
     u.lang = lang; u.rate = 0.9;
     window.speechSynthesis.speak(u);
   };
-  if (piperEnabled) {
+  if (neuralReady()) {
     piperSpeak(word, lang, 'pron').then(ok => { if (!ok) fallback(); }).catch(fallback);
     return;
   }
@@ -25099,6 +25112,175 @@ function buildPlaylist() {
 // يعمل بالكامل داخل المتصفح، بلا خادم وبلا حساب — يُحمَّل مرة واحدة فقط عند أول استخدام فعلي، ثم يُخزَّن بالجهاز للأبد
 const PIPER_VOICES = { 'en-US': 'en_US-amy-medium', 'en-GB': 'en_GB-alan-medium', 'ar-SA': 'ar_JO-kareem-medium' };
 
+/* ===== Kokoro: نفس محرّك الجوال، داخل المتصفّح =====
+ *
+ * الجوال يستعمل Kokoro 82M عبر sherpa-onnx، والمتصفّح يستعمل النموذج نفسه عبر
+ * ONNX Runtime Web. فالصوت مطابق حرفياً لا مشابه: نفس الأوزان ونفس معرّف
+ * الصوت — من اعتاد Edward على جواله يسمعه هو نفسه على حاسوبه.
+ *
+ * والتوليد في عامل مستقلّ لا في الخيط الرئيسي. النموذج يشغّل المعالج ثوانيَ
+ * متّصلة، وتشغيله في الخيط الرئيسي يجمّد الصفحة كلها: لا تمرير، ولا ضغطة زر،
+ * ولا حتى مؤشّر انتظار يدور. والمستخدم يظنّ المتصفّح تعطّل.
+ *
+ * ولا خيوط متعدّدة هنا: GitHub Pages لا تضبط ترويسات العزل عبر المصادر
+ * (COOP/COEP)، فلا SharedArrayBuffer ولا WASM متعدّد الخيوط — قِسته:
+ * crossOriginIsolated = false. لذلك WebGPU أولاً وWASM شبكةَ أمان.
+ */
+const KOKORO_MODEL = 'onnx-community/Kokoro-82M-v1.0-ONNX';
+const KOKORO_CDNS = ['https://esm.sh/kokoro-js@1.2.1', 'https://cdn.jsdelivr.net/npm/kokoro-js@1.2.1/+esm'];
+
+/** أصوات معروضة بأسمائها الحقيقية — لا أسماء مخترعة فوق معرّفات أخرى */
+const KOKORO_VOICES = [
+  { id: 'bm_george',  label: 'Edward · British male' },
+  { id: 'bm_daniel',  label: 'Daniel · British male' },
+  { id: 'bm_lewis',   label: 'Lewis · British male' },
+  { id: 'bf_emma',    label: 'Emma · British female' },
+  { id: 'bf_isabella',label: 'Isabella · British female' },
+  { id: 'am_michael', label: 'Michael · American male' },
+  { id: 'am_adam',    label: 'Adam · American male' },
+  { id: 'af_bella',   label: 'Bella · American female' },
+  { id: 'af_heart',   label: 'Heart · American female' },
+  { id: 'af_nicole',  label: 'Nicole · American female' }
+];
+
+function kokoroPref() {
+  try { return JSON.parse(localStorage.getItem('kokoro') || 'null') || {}; } catch(e) { return {}; }
+}
+function kokoroSetPref(p) {
+  try { localStorage.setItem('kokoro', JSON.stringify({ ...kokoroPref(), ...p })); } catch(e) {}
+}
+function kokoroVoice() { return kokoroPref().voice || 'bm_george'; }
+function kokoroOn() { return kokoroPref().enabled !== false; }
+
+let kokoroWorker = null, kokoroReady = null, kokoroBroken = false, kokoroSeq = 0;
+const kokoroWaiting = new Map();
+
+function kokoroWorkerSource() {
+  /*
+   * fp32 مع WebGPU وq8 مع WASM.
+   *
+   * كرت الشاشة يبتلع الدقّة الكاملة بلا أثر محسوس في الزمن، أما المعالج فلا:
+   * قِست fp32 على WASM فتجاوز التوليد أربعين ثانية لجملة واحدة. والمضغوط q8
+   * اثنان وتسعون ميغابايت بدل ثلاثمئة وستّة وعشرين، وفرقه في الجودة لا يكاد
+   * يُسمع — والنموذج معروف بتحمّله للضغط.
+   */
+  return `
+    let tts = null, loading = null;
+    async function load(dtype, device, cdns) {
+      let mod = null, lastErr = null;
+      for (const url of cdns) {
+        try { mod = await import(url); break; } catch (e) { lastErr = e; }
+      }
+      if (!mod) throw lastErr || new Error('kokoro-js unreachable');
+      return mod.KokoroTTS.from_pretrained(${JSON.stringify(KOKORO_MODEL)}, { dtype, device });
+    }
+    self.onmessage = async (e) => {
+      const { id, cmd, text, voice, dtype, device, cdns } = e.data;
+      try {
+        if (!tts) { loading = loading || load(dtype, device, cdns); tts = await loading; }
+        if (cmd === 'load') { self.postMessage({ id, ok: true }); return; }
+        const a = await tts.generate(text, { voice });
+        self.postMessage({ id, ok: true, pcm: a.audio, rate: a.sampling_rate }, [a.audio.buffer]);
+      } catch (err) {
+        loading = null;
+        self.postMessage({ id, ok: false, err: String((err && err.message) || err) });
+      }
+    };
+  `;
+}
+
+async function kokoroBoot() {
+  if (kokoroBroken || !kokoroOn()) return null;
+  if (kokoroReady) return kokoroReady;
+  kokoroReady = (async () => {
+    const gpu = !!navigator.gpu;
+    const url = URL.createObjectURL(new Blob([kokoroWorkerSource()], { type: 'text/javascript' }));
+    const w = new Worker(url, { type: 'module' });
+    w.onmessage = ev => {
+      const { id, ok, err, pcm, rate } = ev.data || {};
+      const pend = kokoroWaiting.get(id);
+      if (!pend) return;
+      kokoroWaiting.delete(id);
+      ok ? pend.resolve({ pcm, rate }) : pend.reject(new Error(err || 'kokoro failed'));
+    };
+    w.onerror = () => { kokoroBroken = true; };
+    kokoroWorker = w;
+    await kokoroSend({ cmd: 'load', dtype: gpu ? 'fp32' : 'q8', device: gpu ? 'webgpu' : 'wasm' }, 900000);
+    return w;
+  })().catch(e => { kokoroBroken = true; kokoroReady = null; throw e; });
+  return kokoroReady;
+}
+
+function kokoroSend(msg, timeoutMs) {
+  const id = ++kokoroSeq;
+  return new Promise((resolve, reject) => {
+    kokoroWaiting.set(id, { resolve, reject });
+    const t = setTimeout(() => {
+      if (kokoroWaiting.delete(id)) reject(new Error('kokoro timeout'));
+    }, timeoutMs);
+    const wrap = { resolve: v => { clearTimeout(t); resolve(v); }, reject: e => { clearTimeout(t); reject(e); } };
+    kokoroWaiting.set(id, wrap);
+    kokoroWorker.postMessage({
+      id, cdns: KOKORO_CDNS,
+      dtype: navigator.gpu ? 'fp32' : 'q8',
+      device: navigator.gpu ? 'webgpu' : 'wasm',
+      ...msg
+    });
+  });
+}
+
+/** عيّنات عشرية ٢٤ك → WAV ستة عشر بت، بنفس البانّي المستعمل للتصدير */
+function kokoroWav(pcm, rate) {
+  const n = pcm.length;
+  const bytes = new Uint8Array(n * 2);
+  const view = new DataView(bytes.buffer);
+  for (let i = 0; i < n; i++) {
+    const s = Math.max(-1, Math.min(1, pcm[i]));
+    view.setInt16(i * 2, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+  }
+  return buildWav(
+    { audioFormat: 1, channels: 1, sampleRate: rate, byteRate: rate * 2, blockAlign: 2, bitsPerSample: 16 },
+    [bytes]
+  );
+}
+
+function kokoroStatus(msg) {
+  const el = document.getElementById('kokoro-status');
+  if (el) el.textContent = msg || '';
+}
+
+function kokoroRefreshUi() {
+  const sel = document.getElementById('kokoro-voice');
+  const chk = document.getElementById('kokoro-on');
+  if (!sel || !chk) return;
+  if (!sel.options.length) {
+    sel.innerHTML = KOKORO_VOICES.map(v => `<option value="${v.id}">${v.label}</option>`).join('');
+  }
+  sel.value = kokoroVoice();
+  chk.checked = kokoroOn();
+  sel.disabled = !kokoroOn();
+  kokoroStatus(kokoroOn()
+    ? (navigator.gpu ? 'Kokoro 82M · WebGPU · downloads once, then works offline'
+                     : 'Kokoro 82M · downloads once (92 MB), then works offline')
+    : 'Using your device voice');
+}
+
+/** يولّد إنجليزيةً بصوت Kokoro، أو null فيتولّى ما بعده */
+async function kokoroGenerate(text, lang) {
+  if (!kokoroOn() || kokoroBroken || !text) return null;
+  if (!String(lang || '').toLowerCase().startsWith('en')) return null; // العربية ليست من اختصاصه
+  try {
+    await kokoroBoot();
+    if (!kokoroWorker) return null;
+    const { pcm, rate } = await kokoroSend({ cmd: 'gen', text, voice: kokoroVoice() }, 180000);
+    if (!pcm || !pcm.length) return null;
+    return kokoroWav(pcm, rate);
+  } catch (e) {
+    console.log('[Kokoro] ' + (e && e.message));
+    return null; // السقوط إلى Piper ثم إلى صوت الجهاز — لا صمت أبداً
+  }
+}
+
 // ===== محوّل عربي مستقل: يحوّل النص العربي إلى رموز IPA مباشرة =====
 // محرك النطق مفتوح المصدر لا يملك قواعد عربية، لكن النموذج الصوتي نفسه يقبل رموز IPA قياسية.
 // فنتجاوز المحرك كلياً ونغذّي النموذج بالرموز المحسوبة هنا — صوت عربي حقيقي بنموذج عصبي حقيقي.
@@ -25162,7 +25344,14 @@ async function getArabicIdMap() {
     return AR_ID_MAP;
   } catch(e) { return null; }
 }
-let piperMod = null, piperLoadPromise = null, piperEnabled = true; // piperEnabled يُقفَل تلقائياً بلا رجعة لهذي الجلسة لو فشل التحميل مرة
+let piperMod = null, piperLoadPromise = null, piperEnabled = true;
+/**
+ * هل يوجد محرّك عصبي صالح أصلاً؟
+ *
+ * البوابات كانت تسأل عن Piper وحده، فلو سقط Piper سقط معه Kokoro وهو سليم —
+ * فيهبط الصوت إلى محرّك النظام بلا سبب. المحرّكان مستقلّان: يكفي أحدهما.
+ */
+function neuralReady() { return piperEnabled || (kokoroOn() && !kokoroBroken); } // piperEnabled يُقفَل تلقائياً بلا رجعة لهذي الجلسة لو فشل التحميل مرة
 let piperAudioEl = null, piperPronEl = null;
 let playlistMarks = []; // مواضع الكلمات بالثواني داخل الملف الموحّد — أساس التنقل الفوري
 // ===== شاشة المشغّل الكاملة: تفتح تلقائياً عند بدء التشغيل =====
@@ -25342,6 +25531,16 @@ function piperLock(fn) {
   return run;
 }
 async function piperGenerate(text, lang) {
+  /*
+   * Kokoro أولاً، وما بعده شبكة أمان لا بديل.
+   *
+   * هذا هو المَفصِل الوحيد الذي يمرّ منه كل صوت في التطبيق — البطاقات والنطق
+   * والملاحظات والتصدير. فوضع Kokoro هنا يجعله المحرّك الأساسي في كل موضع
+   * دفعةً واحدة، ويجعل سقوطه إلى Piper ثم إلى صوت الجهاز تلقائياً في كل موضع
+   * كذلك. ولا صمت في أي حال.
+   */
+  const k = await kokoroGenerate(text, lang);
+  if (k) return k;
   return piperLock(() => piperGenerateInner(text, lang));
 }
 async function piperGenerateInner(text, lang) {
@@ -25458,7 +25657,7 @@ async function speak(text, lang) {
     });
     return;
   }
-  if (piperEnabled && PIPER_VOICES[lang] && stopped !== true) {
+  if (neuralReady() && (PIPER_VOICES[lang] || String(lang||'').toLowerCase().startsWith('en')) && stopped !== true) {
     try { if (await piperSpeak(text, lang)) return; } catch(e) {}
   }
   if (!ttsReady) return;
@@ -25513,7 +25712,16 @@ const AUDIO_CACHE = new Map(); // ذاكرة سريعة داخل الجلسة
 // ⚠️ لا تُرفع هذه القيمة إلا لضرورة قصوى: رفعها يمسح كل الأصوات المولَّدة ويجبر
 // المستخدم على انتظار توليدها كاملة من جديد. مثبَّتة عمداً.
 const AUDIO_VERSION = 6;
-function cacheKey(card) { return card.id + '|' + (detailedAudio?'d':'s') + '|' + wordRepeat + '|' + ENGINE_VERSION + '|a' + AUDIO_VERSION; }
+/*
+ * هوية الصوت جزء من المفتاح.
+ *
+ * بدونها يبدّل المستخدم الصوت من الإعدادات فيجد التطبيق ملفاً بنفس الاسم
+ * فيعيده كما هو — يختار Emma ويسمع Edward إلى الأبد، ولا سبيل عنده لإجبار
+ * البناء. وهي بالضبط العلّة التي وقعت في نسخة الجوال حين تغيّر النموذج ولم
+ * يتغيّر المفتاح.
+ */
+function voiceKeyPart() { return kokoroOn() && !kokoroBroken ? 'k' + kokoroVoice() : 'p'; }
+function cacheKey(card) { return card.id + '|' + (detailedAudio?'d':'s') + '|' + wordRepeat + '|' + ENGINE_VERSION + '|a' + AUDIO_VERSION + '|' + voiceKeyPart(); }
 
 // ===== تخزين دائم للصوت المولَّد =====
 // جوهر الحل النهائي للتأخير: كل كلمة تُولَّد مرة واحدة فقط في عمر التطبيق، ثم تُحفظ في قاعدة
@@ -25601,7 +25809,7 @@ async function buildSegmentsAudio(segs, label) {
 }
 // يبني صوت بطاقة واحدة (مع تخزين مؤقت) — لا يشغّل شيئاً، فقط يعيد ملف WAV جاهزاً
 async function buildCardAudio(card) {
-  if (!piperEnabled) return null;
+  if (!neuralReady()) return null;
   const key = cacheKey(card);
   if (AUDIO_CACHE.has(key)) return AUDIO_CACHE.get(key); // موجود في ذاكرة الجلسة؟ فوري
   const stored = await ADB.get(key); // موجود في التخزين الدائم؟ فوري أيضاً بلا أي توليد
@@ -25967,7 +26175,7 @@ async function exportPlaylist() {
   const origText = btn ? btn.textContent : '';
 
   // المحاولة الأولى: صوت حقيقي حقيقي (WAV) — يعمل بالخلفية وبأي مشغل صوت عادي
-  if (piperEnabled) {
+  if (neuralReady()) {
     if (btn) { btn.disabled = true; btn.textContent = '⏳ Generating real audio…'; }
     try {
       const wav = await exportAudioForList(list, reps, (i, total) => { if (btn) btn.textContent = `⏳ Generating real audio… ${i}/${total}`; });
@@ -26202,12 +26410,12 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 // النتيجة: حين تضغط تشغيل، الصوت جاهز مسبقاً — بلا أي انتظار.
 let audioPrepActive = false, audioPrepAbort = false;
 async function prepareAudioInBackground() {
-  if (audioPrepActive || !piperEnabled || !words.length) return;
+  if (audioPrepActive || !neuralReady() || !words.length) return;
   audioPrepActive = true; audioPrepAbort = false;
   const statusEl = document.getElementById('audio-prep-status');
   let done = 0, made = 0;
   for (const w of words) {
-    if (audioPrepAbort || !piperEnabled) break;
+    if (audioPrepAbort || !neuralReady()) break;
     done++;
     const key = cacheKey(w);
     if (AUDIO_CACHE.has(key) || await ADB.get(key)) continue; // جاهز سلفاً
@@ -26294,6 +26502,19 @@ async function autoSyncOnStartup() {
 load().then(async () => {
   setSyncBadge();
   if (fsSupported) { await getLinkedHandle(); updateLinkStatus(); }
+  /*
+   * تبديل الصوت يمسح المبنيّ بالصوت القديم من ذاكرة الجلسة فقط.
+   *
+   * المخزَّن على القرص يبقى: مفتاحه يحمل هوية صوته، فمن عاد إلى Edward وجد
+   * بطاقاته جاهزة بلا إعادة بناء. ولو مسحناها لدفع ثمن تجربةِ صوتٍ مرّةً
+   * واحدة ببناء المكتبة كلها من جديد.
+   */
+  const vSel = document.getElementById('kokoro-voice');
+  const vChk = document.getElementById('kokoro-on');
+  if (vSel) vSel.onchange = () => { kokoroSetPref({ voice: vSel.value }); AUDIO_CACHE.clear(); kokoroRefreshUi(); };
+  if (vChk) vChk.onchange = () => { kokoroSetPref({ enabled: vChk.checked }); AUDIO_CACHE.clear(); kokoroRefreshUi(); };
+  kokoroRefreshUi();
+
   await autoSyncOnStartup(); // سحبٌ ورفعٌ معاً قبل أي إثراء — فلا نُثري نسخة قديمة
   backgroundUpgrade(); // إثراء المعاني يبدأ بصمت بلا أي ضغطة — لا await حتى لا تؤخر ظهور الصفحة
   setTimeout(() => prepareAudioInBackground(), 3000); // يبدأ مبكراً حتى ينتهي بأسرع ما يمكن

@@ -76,6 +76,24 @@ class ListenViewModel(app: Application) : AndroidViewModel(app) {
     private fun reload() = viewModelScope.launch {
         val s = _source.value
         _loadedPlaylist.value = repo.playlistRows(s.status, s.favOnly)
+        prebuildHead()
+    }
+
+    /**
+     * يبني أول بطاقتين قبل أن يضغط المستخدم تشغيلاً.
+     *
+     * البطاقة نحو ثلاثين مقطعاً صوتياً، فبناؤها لحظة الضغط يعني انتظاراً تجاوز
+     * الدقيقة على جهاز حقيقي — والمستخدم يرى «Building the first card» ويظنّ
+     * الزرّ معطّلاً، خاصةً أن مشغّل الملاحظات يفتح فوراً بجانبه.
+     *
+     * ولا نستبق إن كان هناك طابور يعمل: ما يُسمع الآن أولى بالمحرّك مما قد
+     * يُسمع لاحقاً.
+     */
+    private fun prebuildHead() {
+        if (playback.value.hasQueue) return
+        val head = _loadedPlaylist.value.take(2).map { it.toPlayItem() }
+        if (head.isEmpty()) return
+        PlaybackBus.submit(getApplication()) { it.prebuild(head) }
     }
 
     // ===== تشغيل أي قائمة =====
