@@ -25543,6 +25543,15 @@ function kokoroStatus(msg) {
   if (el) el.textContent = msg || '';
 }
 
+/*
+ * رقم النسخة ظاهر على الشاشة.
+ *
+ * نُشر إصلاح فبقي المستخدم على النسخة القديمة ولا شيء يدلّ على ذلك — يجرّب
+ * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
+ * ثانية: أعندك الجديدة أم لا؟
+ */
+const BUILD = 88;
+
 function kokoroRefreshUi() {
   const sel = document.getElementById('kokoro-voice');
   const chk = document.getElementById('kokoro-on');
@@ -25554,23 +25563,39 @@ function kokoroRefreshUi() {
   chk.checked = kokoroOn();
   sel.disabled = !kokoroOn();
   kokoroStatus(kokoroOn()
-    ? (navigator.gpu ? 'Kokoro 82M · WebGPU · downloads once, then works offline'
-                     : 'Kokoro 82M · downloads once (92 MB), then works offline')
-    : 'Using your device voice');
+    ? `v${BUILD} · Kokoro 82M · ${navigator.gpu ? 'WebGPU' : 'CPU'} · downloads once, then works offline`
+    : `v${BUILD} · Using your device voice`);
 }
+
+/*
+ * الفشل يُقال، لا يُبتلع.
+ *
+ * السقوط الصامت إلى محرّك آخر يعني أن المستخدم يسمع صوتاً آلياً ويرى اسم
+ * Edward في الإعدادات، ولا شيء يربط بين الأمرين. فيظنّ الميزة كذباً — وقد ظنّ.
+ * الآن سبب السقوط مكتوب على الشاشة في اللحظة التي يقع فيها.
+ */
+let kokoroLastEngine = '—';
 
 /** يولّد إنجليزيةً بصوت Kokoro، أو null فيتولّى ما بعده */
 async function kokoroGenerate(text, lang) {
-  if (!kokoroOn() || kokoroBroken || !text) return null;
+  if (!kokoroOn()) { kokoroLastEngine = 'off'; return null; }
+  if (kokoroBroken) { kokoroLastEngine = 'broken'; return null; }
+  if (!text) return null;
   if (!String(lang || '').toLowerCase().startsWith('en')) return null; // العربية ليست من اختصاصه
   try {
+    if (!kokoroWorker) kokoroStatus('⏳ Downloading the neural voice once — this can take a minute…');
     await kokoroBoot();
-    if (!kokoroWorker) return null;
+    if (!kokoroWorker) { kokoroLastEngine = 'no-worker'; return null; }
     const { pcm, rate } = await kokoroSend({ cmd: 'gen', text, voice: kokoroVoice() }, 180000);
-    if (!pcm || !pcm.length) return null;
+    if (!pcm || !pcm.length) { kokoroLastEngine = 'empty'; return null; }
+    kokoroLastEngine = 'kokoro:' + kokoroVoice();
+    kokoroStatus('🗣️ ' + kokoroVoice() + ' · neural voice');
     return kokoroWav(pcm, rate);
   } catch (e) {
-    console.log('[Kokoro] ' + (e && e.message));
+    const why = String((e && e.message) || e);
+    kokoroLastEngine = 'error: ' + why;
+    console.log('[Kokoro] ' + why);
+    kokoroStatus('⚠️ Neural voice failed (' + why.slice(0, 60) + ') — using fallback voice');
     return null; // السقوط إلى Piper ثم إلى صوت الجهاز — لا صمت أبداً
   }
 }
@@ -26715,17 +26740,30 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 // يولّد صوت كل كلمة بهدوء أثناء استخدامك العادي للتطبيق، ويخزّنه دائماً.
 // النتيجة: حين تضغط تشغيل، الصوت جاهز مسبقاً — بلا أي انتظار.
 let audioPrepActive = false, audioPrepAbort = false;
+/*
+ * التحضير المسبق للأوائل فقط، لا للمكتبة كلها.
+ *
+ * كان يبني الصوت لكل كلمة عند كل فتح، وهو محتمَل مع محرّك سريع. أما Kokoro
+ * فيولّد ثلاث عشرة ثانية لكل جملة — قِسته. ومئة واثنتا عشرة بطاقة بنحو خمس
+ * عشرة جملة لكلٍّ منها تعني ساعاتٍ من المعالج تدور بلا أن يطلبها أحد، وقد
+ * لا تُشغَّل أكثرها أصلاً.
+ *
+ * فنبني ما يُشغَّل أولاً، والباقي يُبنى حين يُطلب ويُخزَّن بعدها للأبد. وهو
+ * نفس ما استقرّ عليه الجوال: بطاقتان استباقاً لا مكتبة كاملة.
+ */
+const AUDIO_PREP_AHEAD = 6;
+
 async function prepareAudioInBackground() {
   if (audioPrepActive || !neuralReady() || !words.length) return;
   audioPrepActive = true; audioPrepAbort = false;
   const statusEl = document.getElementById('audio-prep-status');
   let done = 0, made = 0;
-  for (const w of words) {
+  for (const w of words.slice(0, AUDIO_PREP_AHEAD)) {
     if (audioPrepAbort || !neuralReady()) break;
     done++;
     const key = cacheKey(w);
     if (AUDIO_CACHE.has(key) || await ADB.get(key)) continue; // جاهز سلفاً
-    if (statusEl) statusEl.textContent = `🎧 Preparing audio in background… ${done}/${words.length}`;
+    if (statusEl) statusEl.textContent = `🎧 Preparing audio in background… ${done}/${Math.min(words.length, AUDIO_PREP_AHEAD)}`;
     silentBuild = true;
     try { if (await buildCardAudio(w)) made++; } catch(e) {}
     silentBuild = false;
