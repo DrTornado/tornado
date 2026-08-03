@@ -23908,9 +23908,20 @@ async function doSync() {
       try { await notesPull(); await notesPush(); if (tab === 'notes') renderNotes(); }
       catch(e) { /* لا ملف بعد أو انقطاع — الكلمات نجحت ولا داعي لإفزاع المستخدم */ }
     }
-    flash('✅ Synced');
+    flash(`✅ Synced — ${words.length} words`);
   } catch(e) {
-    flash('⚠️ Sync had an issue — check the messages above for details');
+    /*
+     * الرسالة تقول السبب، لا «راجع الرسائل أعلاه».
+     *
+     * حين توقّف الرفع فعلاً، رأى المستخدم رسالةً عامّة تحيله إلى رسائل لم تظهر،
+     * فظنّ المزامنة تمّت بينما لم يصل شيء إلى المستودع — والعددان يختلفان بلا
+     * تفسير. الرسالة التي تخفي السبب أسوأ من غيابها.
+     */
+    const why = e && e.kind === 'auth' ? 'GitHub token rejected — re-enter it in 🔗 Integration settings'
+      : e && e.kind === 'noconf' ? 'GitHub not connected — add your repo and token in 🔗 Integration settings'
+      : e && e.kind === 'empty' ? 'No backup on GitHub yet'
+      : (e && (e.raw || e.message)) || 'network problem';
+    flash('⚠️ Sync failed: ' + why);
   } finally {
     syncing = false; btn.disabled = false; btn.textContent = orig;
     backgroundUpgrade(); // نكمل مواكبة أي كلمات متبقية بالخلفية دون انتظار من المستخدم
@@ -26162,13 +26173,60 @@ async function prepareAudioInBackground() {
   if (statusEl && made) setTimeout(() => { if (statusEl) statusEl.textContent = ''; }, 6000);
 }
 
-async function autoPullOnStartup() {
-  // نتأكد من أحدث نسخة تلقائياً عند كل فتح للتطبيق — بلا أي ضغطة، وبلا أي نافذة تصفح تحتاج تفاعل المستخدم أصلاً
+/*
+ * بصمة محتوى — لنعرف هل نحن متأخّرون عن المستودع أم متقدّمون عليه.
+ *
+ * المقارنة بالنصّ الخام لا تصلح: `exportedAt` يتغيّر في كل توليد، فتبدو كل
+ * نسخة مختلفة عن كل نسخة، فنرفع في كل فتحة رفعةً بلا داعٍ.
+ *
+ * فنُرتّب حسب المعرّف ونتجاهل ختم الوقت، ونجزم: إن اختلفت البصمتان فعندنا ما
+ * يستحقّ الرفع — كلمةٌ جديدة، أو حذفٌ، أو معنى أثراه المحرّك.
+ */
+function syncFingerprint(wordsArr, tombsArr) {
+  const byId = (a, b) => (a && a.id || 0) - (b && b.id || 0);
+  const norm = JSON.stringify({
+    w: (wordsArr || []).slice().sort(byId),
+    t: (tombsArr || []).slice().sort(byId)
+  });
+  let h = 5381;
+  for (let i = 0; i < norm.length; i++) h = ((h * 33) ^ norm.charCodeAt(i)) >>> 0;
+  return h.toString(36) + '-' + norm.length;
+}
+
+async function autoSyncOnStartup() {
+  /*
+   * المزامنة عند الفتح تسير في الاتجاهين، لا في اتجاه واحد.
+   *
+   * كانت تسحب ولا ترفع. فمن أضاف كلمات على حاسوبه ثم فتح جواله وجد جواله
+   * ناقصاً، ولا سبب ظاهر: الرقمان مختلفان والزرّ يقول «تمّت المزامنة». والسبب
+   * أن ما أضافه لم يغادر المتصفّح قط.
+   *
+   * نسحب أولاً لنكون على أحدث نسخة، ثم نرفع إن كان عندنا ما ليس عندها.
+   */
   if (ghConf()) {
     // الملاحظات تُسحب مع الكلمات في نفس الفتحة — إعداد واحد لمحتويين
     try { await notesPull(); } catch(e) { /* لا ملف بعد أو انقطاع — صمت */ }
-    try { await applyRestoredData(await ghRestore(), true); return; }
-    catch(e) { /* أول مرة (لا ملف بعد) أو مشكلة اتصال — صمت تام، ما نزعج المستخدم بكل فتح */ }
+
+    let remote = null;
+    try {
+      const text = await ghRestore();
+      try { remote = JSON.parse(text); } catch(e) { remote = null; }
+      await applyRestoredData(text, true);
+    } catch(e) {
+      // أول مرة (لا ملف بعد) أو انقطاع — لا نزعج المستخدم بكل فتح
+      if (e.kind === 'auth') ghStatus('🔑 GitHub token rejected — re-enter it below');
+    }
+
+    // ثم نرفع إن كنّا متقدّمين — بلا ضغطة، وبلا رفعة فارغة إن كنّا متطابقين
+    try {
+      const mine = syncFingerprint(words, tombstones);
+      const theirs = remote ? syncFingerprint(remote.words, remote.tombstones) : null;
+      if (words.length && mine !== theirs) {
+        await ghBackup();
+        syncDirty = false; setSyncBadge();
+      }
+      await notesPush();
+    } catch(e) { /* الرفع التلقائي لا يقاطع الإقلاع؛ زرّ Sync يبلّغ بالتفصيل */ }
     return;
   }
   if (fsSupported) {
@@ -26187,8 +26245,8 @@ async function autoPullOnStartup() {
 load().then(async () => {
   setSyncBadge();
   if (fsSupported) { await getLinkedHandle(); updateLinkStatus(); }
-  await autoPullOnStartup(); // نتأكد أولاً أننا على أحدث نسخة قبل بدء أي مواكبة خلفية
-  backgroundUpgrade(); // تبدأ بصمت بلا أي ضغطة — لا await حتى لا تؤخر ظهور الصفحة
+  await autoSyncOnStartup(); // سحبٌ ورفعٌ معاً قبل أي إثراء — فلا نُثري نسخة قديمة
+  backgroundUpgrade(); // إثراء المعاني يبدأ بصمت بلا أي ضغطة — لا await حتى لا تؤخر ظهور الصفحة
   setTimeout(() => prepareAudioInBackground(), 3000); // يبدأ مبكراً حتى ينتهي بأسرع ما يمكن
 });
 </script>

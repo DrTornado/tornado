@@ -350,7 +350,11 @@ class PlaybackService : MediaSessionService() {
             pushState()
         }
 
-        override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) = pushState()
+        override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
+            // الانتقال التلقائي وحده يُنهي ملاحظة؛ القفز اليدوي اختيار المستخدم
+            if (reason == Player.MEDIA_ITEM_TRANSITION_REASON_AUTO) repeatNoteIfNeeded()
+            pushState()
+        }
 
         override fun onPlaybackStateChanged(state: Int) {
             if (state == Player.STATE_ENDED) onPlaylistEnded()
@@ -375,6 +379,19 @@ class PlaybackService : MediaSessionService() {
             showPrepNotification(planCursor, session.size, session.getOrNull(planCursor)?.title.orEmpty())
             return
         }
+        /*
+         * آخر فقرة في الطابور لا يلتقطها انتقالٌ بعدها.
+         *
+         * إعادة الملاحظة تُنفَّذ عند الانتقال إلى ما بعدها، ولا انتقال بعد
+         * آخرها — فتنتهي الجلسة بلا تكرار. فنعالج هذه الحالة هنا صراحةً.
+         */
+        if (ListRepeat.normalize(listRepeat) == ListRepeat.ONE) {
+            val last = rendered.lastOrNull()
+            if (last?.kind == RowKind.NOTE_CHUNK) {
+                val first = firstIndexOfNote(last.id)
+                if (first >= 0) { player.seekTo(first, 0); player.play(); return }
+            }
+        }
         if (scopeMode == PlayScope.SINGLE) { finishSession(); return }
         when (ListRepeat.normalize(listRepeat)) {
             ListRepeat.ALL -> restartFromStart()
@@ -390,10 +407,53 @@ class PlaybackService : MediaSessionService() {
      * التعارض معه — وهذا بالضبط ما جعل الزر القديم لا يفعل شيئاً.
      */
     private fun applyRepeatMode() {
-        player.repeatMode = when (ListRepeat.normalize(listRepeat)) {
-            ListRepeat.ONE -> Player.REPEAT_MODE_ONE
+        /*
+         * «تكرار واحد» يعني بطاقةً واحدة أو **ملاحظةً كاملة**.
+         *
+         * REPEAT_MODE_ONE في المشغّل يعيد العنصر الجاري، وهو صالح للكلمة لأنها
+         * عنصر واحد. أما الملاحظة فصارت عشرات العناصر — فقرةً فقرة — فيعيد
+         * الفقرة الجارية وحدها ويظنّ المستخدم الزرّ معطوباً أو مجنوناً.
+         *
+         * فنترك المشغّل بلا تكرار للملاحظات، ونعيد أول عنصر من الملاحظة يدوياً
+         * حين تنتهي آخر فقرة فيها.
+         */
+        val noteQueue = rendered.any { it.kind == RowKind.NOTE_CHUNK }
+        player.repeatMode = when {
+            ListRepeat.normalize(listRepeat) == ListRepeat.ONE && !noteQueue ->
+                Player.REPEAT_MODE_ONE
             else -> Player.REPEAT_MODE_OFF
         }
+    }
+
+    /**
+     * يعيد الملاحظة من أوّلها حين تنتهي آخر فقرة منها ووضع التكرار «واحد».
+     *
+     * يُستدعى عند كل انتقال بين عناصر المشغّل: إن كان العنصر التالي من ملاحظة
+     * أخرى، فالملاحظة الحالية قد انتهت — فنقفز إلى أوّل فقرة فيها.
+     */
+    /**
+     * أول فقرة في الملاحظة داخل قائمة المشغّل.
+     *
+     * البحث عن أول عنصر يحمل رقم الملاحظة لا يكفي: إعادة البناء تبدأ من موضع
+     * المستخدم لا من الصفر، فيصير أول المبنيّ هو الفقرة الثالثة — وتُعاد
+     * الملاحظة من وسطها. فنطلب الفقرة رقم صفر صراحةً، وإن لم تكن مبنيّة
+     * فأقدم ما بُني منها.
+     */
+    private fun firstIndexOfNote(id: Long): Int {
+        val exact = rendered.indexOfFirst { it.id == id && it.chunkIndex == 0 }
+        return if (exact >= 0) exact else rendered.indexOfFirst { it.id == id }
+    }
+
+    private fun repeatNoteIfNeeded() {
+        if (ListRepeat.normalize(listRepeat) != ListRepeat.ONE) return
+        val i = player.currentMediaItemIndex
+        val previous = rendered.getOrNull(i - 1) ?: return
+        if (previous.kind != RowKind.NOTE_CHUNK) return
+        val current = rendered.getOrNull(i)
+        // ما زلنا داخل نفس الملاحظة — لا شيء يُعاد بعد
+        if (current != null && current.id == previous.id) return
+        val first = firstIndexOfNote(previous.id)
+        if (first >= 0) player.seekTo(first, 0)
     }
 
     private fun restartFromStart() {
@@ -434,9 +494,47 @@ class PlaybackService : MediaSessionService() {
      */
     private fun rebuildFromCurrent() {
         if (session.isEmpty()) return
+        if (session.any { it.kind == RowKind.NOTE_CHUNK }) { rebuildNoteSession(); return }
         val at = renderedToSession.getOrNull(player.currentMediaItemIndex) ?: 0
         val wasPlaying = player.playWhenReady
         startSession(autoPlay = wasPlaying, from = at)
+    }
+
+    /**
+     * يعيد تقسيم طابور الملاحظات بالوضع والتكرار الحاليين.
+     *
+     * الكلمة عنصرٌ ثابت مهما تغيّرت الإعدادات، فيكفيها إعادة بناء الصوت. أما
+     * الملاحظة فتُقسَّم إلى فقرات أو جُمل حسب FULL/SHORT، وعدد عناصرها نفسه
+     * يتغيّر — فإعادة البناء وحدها تُبقي التقسيم القديم وتجعل الزرّ بلا أثر.
+     * وقد رأى المستخدم ذلك: يضغط SHORT فتظلّ الفقرة هي ما يتكرّر.
+     *
+     * والاستئناف من الملاحظة الجارية لا من أولها: من غيّر إعداده في منتصف
+     * نصّ يريد إكماله، لا العودة إلى بدايته.
+     */
+    private fun rebuildNoteSession() = scope.launch {
+        val currentNoteId = rendered.getOrNull(player.currentMediaItemIndex)?.id
+        val wasPlaying = player.playWhenReady
+        val ids = session.map { it.id }.distinct()
+        val rebuilt = withContext(Dispatchers.IO) {
+            ids.mapNotNull { id -> notes.byId(id) }.flatMap { note ->
+                NoteChunker.units(note.text, detailed).flatMapIndexed { i, text ->
+                    List(wordRepeat.coerceIn(1, 10)) {
+                        PlayItem(
+                            id = note.id,
+                            title = note.title,
+                            subtitle = text.take(70),
+                            kind = RowKind.NOTE_CHUNK,
+                            chunkIndex = i,
+                            favorite = note.favorite
+                        )
+                    }
+                }
+            }
+        }
+        if (rebuilt.isEmpty()) return@launch
+        session = rebuilt
+        val from = rebuilt.indexOfFirst { it.id == currentNoteId }.coerceAtLeast(0)
+        startSession(autoPlay = wasPlaying, from = from)
     }
 
     private fun startSession(autoPlay: Boolean, from: Int = 0) {
@@ -554,6 +652,8 @@ class PlaybackService : MediaSessionService() {
 
             if (!started && rendered.size >= minOf(HEAD_START, session.size)) {
                 started = true
+                // نوع المحتوى يُعرف بعد أول بناء، ووضع التكرار يعتمد عليه
+                applyRepeatMode()
                 beginPlayback(autoPlay)
             }
             if (waitingForRender && rendered.isNotEmpty()) {

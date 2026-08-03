@@ -106,28 +106,27 @@ object NoteChunker {
 
         if (byParagraph) return paragraphs
 
-        // جُملاً: نقسّم داخل كل فقرة ولا نخلط فقرتين في مقطع واحد
+        /*
+         * الجملة جملةٌ واحدة — لا كتلة من جمل.
+         *
+         * كنت أجمعها في كتل من مئة وثمانين حرفاً ليبدأ الصوت أسرع، فصارت
+         * «الجملة» بحجم الفقرة تقريباً: يضغط المستخدم SHORT فيسمع نفس ما يسمعه
+         * مع FULL، ويقول محقاً «لا يكرّر الجملة». والسرعة لا تُشترى بإفساد
+         * المعنى الذي طلبه صراحةً.
+         *
+         * والجملة القصيرة جداً وحدها تُضمّ لما بعدها — «نعم.» مقطعاً مستقلاً
+         * تقطيعٌ لا قراءة.
+         */
         val out = ArrayList<String>()
         paragraphs.forEach { p ->
-            // موضع بداية هذه الفقرة في الناتج — حدٌّ لا يتجاوزه الضمّ
             val paragraphStart = out.size
-            val buf = StringBuilder()
-            p.split(Regex("(?<=[.!?؟])\\s+")).filter { it.isNotBlank() }.forEach { s ->
-                if (buf.isNotEmpty()) buf.append(' ')
-                buf.append(s)
-                if (buf.length >= MIN_SPOKEN_CHARS) { out += buf.toString(); buf.clear() }
-            }
-            if (buf.isNotEmpty()) {
-                /*
-                 * البقيّة القصيرة تلتحق بسابقتها من **نفس الفقرة** وحدها.
-                 *
-                 * كان الضمّ ينظر إلى آخر مقطع في الناتج أياً كانت فقرته، فتلتصق
-                 * بداية الفقرة الثانية بنهاية الأولى — وهو ما أمسكه الاختبار
-                 * قبل أن يصل إلى الجهاز.
-                 */
-                val canMerge = out.size > paragraphStart &&
-                    out.last().length + buf.length <= MAX_CHARS
-                if (canMerge) out[out.lastIndex] = out.last() + " " + buf else out += buf.toString()
+            splitSentences(p).forEach { s ->
+                val tooShort = s.length < MIN_SENTENCE_CHARS
+                if (tooShort && out.size > paragraphStart) {
+                    out[out.lastIndex] = out.last() + " " + s
+                } else {
+                    out += s
+                }
             }
         }
         return out
@@ -136,15 +135,55 @@ object NoteChunker {
     /** يُبقى للتوافق — الجُمل هي الوضع الافتراضي */
     fun sentences(text: String): List<String> = units(text, byParagraph = false)
 
-    /** أقلّ طول لمقطع منطوق — دونه يصير التشغيل تقطيعاً لا قراءة */
-    private const val MIN_SPOKEN_CHARS = 180
+    /**
+     * ما دون هذا ليس جملة بل شذرة — «نعم.» أو «حسناً.».
+     *
+     * كان الحدّ خمسة وعشرين فابتلع جملاً حقيقية من ثلاثة وعشرين حرفاً، وهو ما
+     * أمسكه الاختبار: «And a third one closes.» جملة تامّة لا شذرة.
+     */
+    private const val MIN_SENTENCE_CHARS = 12
+
+    /*
+     * ليست كل نقطة نهايةَ جملة.
+     *
+     * القطع عند كل `.` يشطر «a groundbreaking U.S. study» نصفين، فيسمع
+     * المستخدم جملةً مبتورة عند «U.S.» ثم شذرةً تبدأ بـ«study» — وهذا ما ظهر
+     * على الجوال فعلاً عند أول قراءة حقيقية.
+     *
+     * فنُخفي نقاط الاختصارات خلف حرفٍ لا يَرِد في نصّ بشري، ثم نقطع، ثم نعيدها.
+     * والخطأ هنا مقصود في اتجاه واحد: أن نصل جملتين خيرٌ من أن نبتر واحدة.
+     */
+    private const val DOT = ''
+
+    /** ما يتكرّر فيه الحرف والنقطة: U.S. · e.g. · a.m. */
+    private val DOTTED = Regex("\\b(?:[A-Za-z]\\.){2,}")
+
+    /** ألقاب واختصارات شائعة تليها نقطة ولا تنتهي بها جملة */
+    private val ABBREV = Regex(
+        "\\b(?:Mr|Mrs|Ms|Dr|Prof|Rev|Hon|St|Jr|Sr|Inc|Ltd|Co|Corp|Univ|Dept|" +
+            "vs|etc|approx|est|No|Fig|Vol|Ch|Sec|Gen|Sen|Rep|Gov|Col|Capt|Lt|Sgt|" +
+            "Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sept|Sep|Oct|Nov|Dec)\\."
+    )
+
+    /** الحرف الأول من اسم — «John F. Kennedy» */
+    private val INITIAL = Regex("\\b[A-Z]\\.(?=\\s+[A-Z])")
+
+    fun splitSentences(paragraph: String): List<String> {
+        var masked = paragraph
+        listOf(DOTTED, ABBREV, INITIAL).forEach { r ->
+            masked = r.replace(masked) { it.value.replace('.', DOT) }
+        }
+        return masked.split(Regex("(?<=[.!?؟])\\s+"))
+            .map { it.replace(DOT, '.') }
+            .filter { it.isNotBlank() }
+    }
 
     fun split(text: String): List<String> {
         val clean = text.replace(Regex("\\s+"), " ").trim()
         if (clean.isBlank()) return emptyList()
         if (clean.length <= MAX_CHARS) return listOf(clean)
 
-        val sentences = clean.split(Regex("(?<=[.!?؟])\\s+")).filter { it.isNotBlank() }
+        val sentences = splitSentences(clean)
         val out = ArrayList<String>()
         val current = StringBuilder()
 
