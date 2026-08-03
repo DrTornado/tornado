@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:26:50.466Z",
+ "exportedAt": "2026-08-03T09:26:53.567Z",
  "words": [
   {
    "id": 1785185030316,
@@ -1668,7 +1668,7 @@
   },
   {
    "id": 1784803845911,
-   "word": "apothecaries",
+   "word": "apothecary",
    "ipa": "",
    "arabicPron": "باثكيري",
    "oxford": "",
@@ -1679,17 +1679,32 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "Synonym of pharmacist: a person who sells medicine, especially (historical) one who made and sold their own medicines in the medieval or early modern eras",
+     "en": "(archaic in US, dated in UK) Synonym of pharmacist: a person who sells medicine, especially (historical) one who made and sold their own medicines in the medieval or early modern eras.",
      "ar": ""
     },
     {
      "pos": "noun",
-     "en": "Synonym of pharmacy: an apothecary's shop, a drugstore",
+     "en": "(archaic or historical) Synonym of pharmacy: an apothecary's shop, a drugstore.",
      "ar": ""
     },
     {
      "pos": "noun",
-     "en": "A glass jar of the sort once used for storing medicine",
+     "en": "(uncommon) A glass jar of the sort once used for storing medicine.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "Synonym of pharmacist: a person who sells medicine, especially one who made and sold their own medicines in the medieval or early modern eras.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "Synonym of pharmacy: an apothecary's shop, a drugstore.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "A glass jar of the sort once used for storing medicine.",
      "ar": ""
     }
    ],
@@ -1720,14 +1735,23 @@
      "ar": "محل صيدلي"
     }
    ],
-   "collocations": [],
-   "examples": [
+   "collocations": [
     {
-     "en": "The Russian people as a whole almost revered the apothecary, and they entered it as they would enter a sanctum.",
+     "en": "apothecary shop",
      "ar": ""
     },
     {
-     "en": "Seeds found in a 1630s refuse-filled clay borrow pit, located near an apothecary, illustrate colonists intense interest in experimenting with the medicinal qualities of New World plants.",
+     "en": "old apothecary",
+     "ar": ""
+    },
+    {
+     "en": "local apothecary",
+     "ar": ""
+    }
+   ],
+   "examples": [
+    {
+     "en": "The Russian people as a whole almost revered the apothecary, and they entered it as they would enter a sanctum.",
      "ar": ""
     }
    ],
@@ -1737,13 +1761,13 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "/əˈpɑθəˌkɛəɹi/",
    "ipaUK": "/əˈpɒθəkəɹi/",
    "estCefr": "",
    "freqLabel": "",
-   "audioUS": "",
-   "audioUK": "",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "audioGen": "",
    "favorite": "false"
   },
