@@ -70,8 +70,20 @@ class DictionaryService(private val context: Context) {
         const val MAX_EXAMPLES = 6   // الأمثلة (كان ٤)
         const val MAX_SYNONYMS = 10  // المرادفات (كان ٨)
 
-        /** بريد يرفع حصة الترجمة من ٥٬٠٠٠ إلى ٥٠٬٠٠٠ حرف يومياً */
-        const val CONTACT_EMAIL = "a.muglad@yahoo.com"
+        /*
+         * كم يُترجَم من كل بطاقة.
+         *
+         * كان بريد المطوّر مكتوباً هنا ليرفع الحصة عشرة أضعاف، وكان خطأً
+         * فادحاً: الحصة تُحسب على البريد لا على الجهاز، فكل نسخة من التطبيق
+         * في العالم تشترك في حصة واحدة — تنفد في دقائق يوم يصير للتطبيق
+         * مستخدمون، وتتعطّل الترجمة عند الجميع دفعةً واحدة. عطلٌ لا يظهر في
+         * أي اختبار، ويظهر يوم النجاح وحده.
+         *
+         * فحُذف البريد — لكل جهاز حصته المستقلة — وقُلّص ما يُرسَل إلى ما
+         * يُقرأ فعلاً: من نحو ألف ومئتي حرف للبطاقة إلى نحو مئتين.
+         */
+        const val TRANSLATED_MEANINGS = 3
+        const val TRANSLATED_EXAMPLES = 2
     }
 
     private val client = OkHttpClient.Builder()
@@ -267,15 +279,27 @@ class DictionaryService(private val context: Context) {
         val collList = collPairs.toMutableList()
         val derivPairs = derivWords.map { LangPair(it, "") }.toMutableList()
 
+        /*
+         * نترجم ما يُقرأ، لا كل ما جُمع.
+         *
+         * كانت البطاقة تُرسل نحو ألف ومئتي حرف إلى خدمة الترجمة: خمسة تعريفات
+         * كاملة وثلاثة أمثلة وخمسة مرادفات ومتلازمات ومشتقات. والحصة المجانية
+         * خمسة آلاف حرف يومياً — أي أربع كلمات ثم يتوقف كل شيء. وقد توقّف
+         * فعلاً، فقرأ المستخدم كلمات بلا معنى عربي وظنّها عيباً في المحرّك.
+         *
+         * والمرادفات والمتلازمات كلماتٌ إنجليزية مفردة، وترجمتها الآلية تعطي
+         * مقابلاً واحداً مضلّلاً غالباً — تكلفة عالية وقيمة منخفضة. أما التعريف
+         * فيُقصَّر قبل الترجمة: الجملة الأولى تُترجَم أدقّ من فقرة كاملة، وهي
+         * التي يقرؤها المتعلّم أصلاً.
+         */
         val translated = coroutineScope {
             val wordAr = async { translateToArabic(finalWord) }
-            val meaningJobs = meanings.take(5).mapIndexed { i, m ->
-                async { i to (if (m.ar.isBlank()) translateToArabic(m.en) else m.ar) }
+            val meaningJobs = meanings.take(TRANSLATED_MEANINGS).mapIndexed { i, m ->
+                async { i to (if (m.ar.isBlank()) translateToArabic(gistOf(m.en)) else m.ar) }
             }
-            val synJobs = synPairs.mapIndexed { i, p -> async { i to translateToArabic(p.en) } }
-            val collJobs = collList.mapIndexed { i, p -> async { i to translateToArabic(p.en) } }
-            val exJobs = exList.mapIndexed { i, p -> async { i to translateToArabic(p.en) } }
-            val derJobs = derivPairs.mapIndexed { i, p -> async { i to translateToArabic(p.en) } }
+            val exJobs = exList.take(TRANSLATED_EXAMPLES).mapIndexed { i, p ->
+                async { i to translateToArabic(p.en) }
+            }
 
             val w = wordAr.await()
             // ترجمة فاشلة تُهمَل: خانة عربية فارغة أوضح من نصّ مشوّه يُقرأ كشرح
@@ -285,10 +309,7 @@ class DictionaryService(private val context: Context) {
                     meanings[i] = meanings[i].copy(ar = cleaned)
                 }
             }
-            synJobs.awaitAll().forEach { (i, ar) -> synPairs[i] = synPairs[i].copy(ar = ar) }
-            collJobs.awaitAll().forEach { (i, ar) -> collList[i] = collList[i].copy(ar = ar) }
             exJobs.awaitAll().forEach { (i, ar) -> exList[i] = exList[i].copy(ar = ar) }
-            derJobs.awaitAll().forEach { (i, ar) -> derivPairs[i] = derivPairs[i].copy(ar = ar) }
             w
         }
         if (meanings.isNotEmpty() && meanings[0].ar.isBlank() &&
@@ -412,20 +433,37 @@ class DictionaryService(private val context: Context) {
         }
     }
 
+    /**
+     * لبّ التعريف — أول جملة، بلا وسم المجال ولا الفروع.
+     *
+     * الترجمة الآلية تتدهور بطول النص: فقرة من ثلاثين كلمة تعود ركيكة، وجملة
+     * من عشر تعود مفهومة. والمتعلّم يقرأ أولها على كل حال.
+     *
+     * وهذا يخدم غرضين بضربة واحدة: عربية أدقّ، واستهلاك أقلّ من حصة يومية
+     * محدودة أصلاً.
+     */
+    private fun gistOf(definition: String): String {
+        var t = definition.trim()
+        t = t.replace(Regex("""^\s*\([^()]{1,60}\)\s*"""), "")   // وسم المجال
+        t = t.substringBefore(';').substringBefore(" — ").trim()
+        // جملة واحدة تكفي؛ وما زاد على مئة وستين حرفاً يُقصّ عند آخر فاصلة
+        if (t.length > 160) t = t.take(160).substringBeforeLast(',').trim()
+        return t.ifBlank { definition.take(160) }
+    }
+
     /** ترجمة أفضل جهد — الفشل يرجع نصاً فارغاً بلا كسر البطاقة */
     private suspend fun translateToArabic(text: String): String {
         if (text.isBlank()) return ""
         /*
-         * بريد التعريف يرفع الحصة عشرة أضعاف.
+         * بلا تعريف — الحصة لكل جهاز على حدة.
          *
-         * وثيقة الخدمة صريحة: خمسة آلاف حرف يومياً بلا تعريف، وخمسون ألفاً
-         * مع بريد صالح في المُعامل `de`. وقياسٌ اليوم أظهر أن الحصة نفدت
-         * فعلاً وعادت الخدمة تحذيراً بدل ترجمة — فبقيت كلمات بلا معنى عربي
-         * لا لعطل في الشيفرة بل لسقف لم نطلب رفعه.
+         * وثيقة الخدمة تعطي خمسين ألف حرف يومياً لمن يضع بريده، وخمسة آلاف
+         * لمن لا يضع. والإغراء أن نضع بريد المطوّر، لكن الحصة تُحسب على
+         * البريد: عشرة آلاف مستخدم يقتسمون حصةً واحدة، فتنفد لهم جميعاً.
+         * خمسة آلاف لكل جهاز أكثر بكثير من خمسين ألفاً مقسومة على الجميع.
          */
         val body = get(
-            "https://api.mymemory.translated.net/get" +
-                "?q=${enc(text)}&langpair=en|ar&de=${enc(CONTACT_EMAIL)}"
+            "https://api.mymemory.translated.net/get?q=${enc(text)}&langpair=en|ar"
         ) ?: return ""
         val root = runCatching { json.parseToJsonElement(body).jsonObject }.getOrNull() ?: return ""
         val raw = (root["responseData"] as? JsonObject)?.str("translatedText").orEmpty()

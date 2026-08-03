@@ -69,6 +69,7 @@ fun LibraryScreen(
     val rows by vm.rows.collectAsStateWithLifecycle()
     val filters by vm.filters.collectAsStateWithLifecycle()
     val stats by vm.stats.collectAsStateWithLifecycle()
+    val pendingGaps by vm.pendingGaps.collectAsStateWithLifecycle()
     val expanded by vm.expanded.collectAsStateWithLifecycle()
     val expandedWords by vm.expandedWords.collectAsStateWithLifecycle()
     var pendingDelete by remember { mutableStateOf<WordRow?>(null) }
@@ -127,8 +128,18 @@ fun LibraryScreen(
             Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 6.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            /*
+             * تقدّم الإثراء حيث ينظر المستخدم.
+             *
+             * العدد كان معروضاً في الإعدادات وحدها، ولا أحد يفتح الإعدادات
+             * ليطمئنّ. فمن يرى بطاقة بلا مثال يظنّها نقصاً دائماً، بينما هي
+             * في طابور يكتمل من نفسه — والفرق بين الاثنين سطرٌ واحد.
+             */
             Text(
-                "${rows.size} word${if (rows.size == 1) "" else "s"}",
+                buildString {
+                    append(rows.size).append(" word").append(if (rows.size == 1) "" else "s")
+                    if (pendingGaps > 0) append("  ·  $pendingGaps filling in")
+                },
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.weight(1f)
