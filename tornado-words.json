@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:29:17.249Z",
+ "exportedAt": "2026-08-03T09:29:43.590Z",
  "words": [
   {
    "id": 1785185030316,
@@ -6080,7 +6080,7 @@
   },
   {
    "id": 1784652215752,
-   "word": "glimpses",
+   "word": "glimpse",
    "ipa": "/ˈɡlɪm(p)s/",
    "arabicPron": "قليمبس",
    "oxford": "5000",
@@ -6091,24 +6091,34 @@
    ],
    "meanings": [
     {
-     "pos": "noun",
-     "en": "A brief look, glance, or peek",
-     "ar": "نظرة موجزة أو نظرة خاطفة أو نظرة خاطفة"
-    },
-    {
-     "pos": "noun",
-     "en": "A sudden flash",
-     "ar": "ومضة مفاجئة"
+     "pos": "verb",
+     "en": "To see or view (someone, or something tangible) briefly and incompletely.",
+     "ar": ""
     },
     {
      "pos": "verb",
-     "en": "To see or view briefly or incompletely",
-     "ar": "الرؤية أو المشاهدة باختصار أو بشكل غير كامل"
+     "en": "To perceive (something intangible) briefly and incompletely.",
+     "ar": ""
     },
     {
      "pos": "verb",
-     "en": "To appear by glimpses",
-     "ar": "لتظهر من خلال لمحات"
+     "en": "Chiefly followed by at or upon: to look at briefly and incompletely; to glance.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "Chiefly followed by of: a brief and incomplete look.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "(archaic) A brief, sudden flash of light; a glimmer.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "(obsolete) A faint (and often temporary) appearance; a tinge.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -6140,14 +6150,31 @@
      "ar": "فهم, لمس, أدرك, وعى, ميز, لاحظ"
     }
    ],
-   "collocations": [],
-   "examples": [
+   "collocations": [
     {
-     "en": "I only got a glimpse of the car, so I can tell you the colour but not the registration number.",
+     "en": "first glimpse",
      "ar": ""
     },
     {
+     "en": "last glimpse",
+     "ar": ""
+    },
+    {
+     "en": "brief glimpse",
+     "ar": ""
+    },
+    {
+     "en": "fleeting glimpse",
+     "ar": ""
+    }
+   ],
+   "examples": [
+    {
      "en": "I have only begun to glimpse the magnitude of the problem.",
+     "ar": ""
+    },
+    {
+     "en": "I only got a glimpse of the car, so I can tell you the colour but not the registration number.",
      "ar": ""
     }
    ],
@@ -6159,7 +6186,7 @@
    "due": 0,
    "audioUS": "",
    "audioUK": "",
-   "engineVersion": 13,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -6180,18 +6207,8 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To grow plants, notably crops",
-     "ar": "لزراعة النباتات، ولا سيما المحاصيل"
-    },
-    {
-     "pos": "verb",
-     "en": "To nurture; to foster; to tend.",
-     "ar": "لرعاية ؛ لرعاية ؛ لرعاية."
-    },
-    {
-     "pos": "verb",
      "en": "present participle and gerund of cultivate",
-     "ar": "تقديم الفاعلية وجيروند من زراعة"
+     "ar": ""
     }
    ],
    "inflections": [
@@ -6221,7 +6238,7 @@
    "due": 0,
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cul/culti/cultivate__us_1.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/cul/culti/cultivate__gb_1.mp3",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "id": 1784650954854,
@@ -6236,8 +6253,13 @@
    "meanings": [
     {
      "pos": "noun",
+     "en": "(zoology) Any of the dinosauromorphs of the family Lagerpetidae.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
      "en": "Any of the pterosauromorphs of the family Lagerpetidae.",
-     "ar": "أي من مجسمات التيروصور من عائلة Lagerpetidae."
+     "ar": ""
     }
    ],
    "inflections": [
@@ -6254,13 +6276,13 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "id": 1784636175360,
    "word": "pairs",
-   "ipa": "/pɛəz/",
-   "arabicPron": "بيز",
+   "ipa": "/peəz/",
+   "arabicPron": "بيرز",
    "oxford": "3000",
    "cefr": "A1",
    "pos": [
@@ -6270,32 +6292,7 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "Two similar or identical things taken together",
-     "ar": "شيئان متشابهان أو متطابقان معًا"
-    },
-    {
-     "pos": "noun",
-     "en": "Two people in a relationship, partnership or friendship",
-     "ar": "شخصان في علاقة أو شراكة أو صداقة"
-    },
-    {
-     "pos": "verb",
-     "en": "To group into one or more sets of two",
-     "ar": "للتجميع في مجموعة واحدة أو أكثر من مجموعتين"
-    },
-    {
-     "pos": "verb",
-     "en": "To bring two (animals, notably dogs) together for mating",
-     "ar": "لجلب اثنين (الحيوانات، ولا سيما الكلاب) معا للتزاوج"
-    },
-    {
-     "pos": "verb",
-     "en": "To impair, to make worse",
-     "ar": "يضعف، ويزيد الأمر سوءًا"
-    },
-    {
-     "pos": "verb",
-     "en": "To become worse, to deteriorate",
+     "en": "Synonym of pelmanism (“memory card game”).",
      "ar": ""
     }
    ],
@@ -6313,12 +6310,24 @@
    ],
    "synonyms": [
     {
-     "en": "pair of spectacles",
-     "ar": "زوج من النظارات"
+     "en": "pelmanism",
+     "ar": ""
     },
     {
-     "en": "spectacles",
-     "ar": "نظارات"
+     "en": "span",
+     "ar": ""
+    },
+    {
+     "en": "yoke",
+     "ar": ""
+    },
+    {
+     "en": "mate",
+     "ar": ""
+    },
+    {
+     "en": "brace",
+     "ar": ""
     }
    ],
    "collocations": [
@@ -6353,11 +6362,11 @@
    "right": 0,
    "wrong": 0,
    "last": null,
-   "audioUS": "",
-   "audioUK": "",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "interval": 0,
    "due": 0,
-   "engineVersion": 13,
+   "engineVersion": 3,
    "ipaUS": "/pɛɹz/",
    "ipaUK": "/pɛəz/",
    "estCefr": "",
@@ -6368,7 +6377,7 @@
   {
    "id": 1784636145662,
    "word": "overcome",
-   "ipa": "/ˌəʊvəˈkʌm/",
+   "ipa": "/ˌɐʉ.vɐˈkɐm/",
    "arabicPron": "وڤركام",
    "oxford": "3000",
    "cefr": "B2",
@@ -6379,33 +6388,33 @@
    ],
    "meanings": [
     {
-     "pos": "noun",
-     "en": "The burden or recurring theme in a song.",
+     "pos": "verb",
+     "en": "(transitive) To surmount (a physical or abstract obstacle); to prevail over, to get the better of.",
      "ar": "العبء أو السمة المتكررة في أغنية."
     },
     {
-     "pos": "noun",
-     "en": "A surplus.",
+     "pos": "verb",
+     "en": "(transitive) To recover from (a difficulty), to get over.",
      "ar": "فائض."
     },
     {
      "pos": "verb",
-     "en": "To surmount (a physical or abstract obstacle); to prevail over, to get the better of.",
+     "en": "(transitive) To win against or prevail over in some sort of battle, contest, etc.",
      "ar": "للتغلب على (عقبة مادية أو مجردة )؛ للتغلب على، للحصول على أفضل من."
     },
     {
-     "pos": "verb",
-     "en": "To win or prevail in some sort of battle, contest, etc.",
+     "pos": "noun",
+     "en": "(Scotland) The burden or recurring theme in a song.",
      "ar": "للفوز أو الفوز في نوع من المعارك أو المسابقات وما إلى ذلك."
     },
     {
-     "pos": "verb",
-     "en": "To prevail.",
+     "pos": "noun",
+     "en": "(Scotland) A surplus.",
      "ar": "أن تسود."
     },
     {
-     "pos": "verb",
-     "en": "To recover from (a difficulty), to get over.",
+     "pos": "adjective",
+     "en": "That has been overcome, prevailed over.",
      "ar": ""
     }
    ],
@@ -6445,7 +6454,7 @@
      "ar": ""
     },
     {
-     "en": "We shall overcome.",
+     "en": "I was overcome with anger.",
      "ar": ""
     }
    ],
@@ -6453,12 +6462,13 @@
    "right": 0,
    "wrong": 0,
    "last": null,
-   "ipaUS": "/ˌoʊvəɹˈkʌm/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/o/ove/overc/overcome__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/o/ove/overc/overcome__gb_1.mp3",
+   "ipaUS": "/ˌoʊ.vəɹˈkʌm/",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUK": "/ˌəʊ.vəˈkʌm/"
   },
   {
    "id": 1784636081936,
@@ -6474,13 +6484,18 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "Interaction",
-     "ar": "التفاعل"
+     "en": "Interaction; reciprocal relationship.",
+     "ar": ""
     },
     {
      "pos": "verb",
-     "en": "To interact",
-     "ar": "للتفاعل"
+     "en": "(intransitive) To interact.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "To interact.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -6521,7 +6536,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 13,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -6549,22 +6564,22 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To be on fire, especially producing bright flames.",
+     "en": "present participle and gerund of blaze",
      "ar": "أن تكون مشتعلًا، خاصةً إذا أنتجت لهبًا ساطعًا."
     },
     {
-     "pos": "verb",
-     "en": "To send forth or reflect a bright light; shine like a flame.",
+     "pos": "adjective",
+     "en": "Of tremendous intensity, heat (thermal energy) or fervor; white-hot.",
      "ar": "لإرسال أو عكس ضوء ساطع ؛ تألق مثل اللهب."
     },
     {
-     "pos": "verb",
-     "en": "To blow, as from a trumpet",
+     "pos": "adjective",
+     "en": "(informal) Very fast.",
      "ar": "ينفخ، كما من بوق"
     },
     {
-     "pos": "verb",
-     "en": "To publish; announce publicly",
+     "pos": "adjective",
+     "en": "(informal) Exceedingly angry.",
      "ar": "ينشر ؛ يعلن علنا"
     },
     {
@@ -6627,15 +6642,11 @@
    ],
    "examples": [
     {
-     "en": "The campfire blazed merrily.",
+     "en": "The divorced couple had a blazing row.",
      "ar": ""
     },
     {
      "en": "the blazings of many fires",
-     "ar": ""
-    },
-    {
-     "en": "The actress, with her perfectly-curved body, was simply blazing in her new movie!",
      "ar": ""
     }
    ],
@@ -6645,7 +6656,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "right": 0,
@@ -6663,7 +6674,12 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "An apparatus for measuring the heat generated or absorbed by either a chemical reaction, change of phase or some other physical change",
+     "en": "(physics) An apparatus for measuring the heat generated or absorbed by either a chemical reaction, change of phase or some other physical change.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "An apparatus for measuring the heat generated or absorbed by either a chemical reaction, change of phase or some other physical change.",
      "ar": ""
     }
    ],
@@ -6699,12 +6715,12 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 22,
+   "engineVersion": 3,
    "ipaUS": "/ˌkæləˈɹɪmɪtɚ/",
    "ipaUK": "",
    "estCefr": "",
    "freqLabel": "",
-   "audioUS": "",
+   "audioUS": "-us",
    "audioUK": "",
    "audioGen": "",
    "favorite": "false"
@@ -6726,28 +6742,13 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A piece of fabric attached to a boat and arranged such that it causes the wind to drive the boat along. The sail may be attached to the boat via a combination of mast, spars and ropes.",
-     "ar": "قطعة من القماش متصلة بقارب ومرتبة بحيث تتسبب في دفع الرياح للقارب. يمكن ربط الشراع بالقارب عبر مزيج من الصاري والصاري والحبال."
-    },
-    {
-     "pos": "noun",
-     "en": "(nautical,uncountable) The concept of a sail or sails, as if a substance.",
-     "ar": "(بحري،لا يحصى) مفهوم الشراع أو الأشرعة، كما لو كانت مادة."
-    },
-    {
-     "pos": "verb",
-     "en": "To be impelled or driven forward by the action of wind upon sails, as a ship on water; to be impelled on a body of water by steam or other power.",
-     "ar": "أن يتم دفعه أو دفعه إلى الأمام بفعل الرياح على الأشرعة، كسفينة على الماء ؛ أن يتم دفعه على جسم مائي بواسطة البخار أو أي قوة أخرى."
-    },
-    {
-     "pos": "verb",
-     "en": "To move through or on the water; to swim, as a fish or a waterfowl.",
-     "ar": "التحرك عبر الماء أو فوقه ؛ للسباحة، كسمكة أو كطيور مائية."
+     "en": "(nautical, slang) The sailmaker on board ship.",
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "The sailmaker on board ship.",
-     "ar": "صانع الشراع على متن السفينة."
+     "ar": ""
     }
    ],
    "inflections": [
@@ -6797,7 +6798,7 @@
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/s/sai/sail_/sail__gb_2.mp3",
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "right": 0,
@@ -6816,17 +6817,12 @@
     {
      "pos": "noun",
      "en": "The quality or state of being poor; lack of money",
-     "ar": "نوعية أو حالة الرداءة ؛ قلة المال"
-    },
-    {
-     "pos": "noun",
-     "en": "Any deficiency of elements or resources that are needed or desired, or that constitute richness",
-     "ar": "أي نقص في العناصر أو الموارد اللازمة أو المرغوبة، أو التي تشكل ثراء"
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "A deficiency of something needed or desired",
-     "ar": "نقص في شيء مطلوب أو مرغوب فيه"
+     "ar": ""
     }
    ],
    "inflections": [
@@ -6856,11 +6852,11 @@
    ],
    "examples": [
     {
-     "en": "poverty of soil",
+     "en": "get into poverty",
      "ar": ""
     },
     {
-     "en": "get into poverty",
+     "en": "poverty of soil",
      "ar": ""
     },
     {
@@ -6870,20 +6866,21 @@
    ],
    "differences": [],
    "ipaUS": "/ˈpɑːvɚti/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pov/pover/poverty__us_3.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/p/pov/pover/poverty__gb_2.mp3",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUK": "/ˈpɒvəti/"
   },
   {
    "right": 0,
    "wrong": 0,
    "last": null,
    "id": 1784531567933,
-   "word": "mutations",
-   "ipa": "",
-   "arabicPron": "",
+   "word": "mutation",
+   "ipa": "/mjuˈteɪʃən/",
+   "arabicPron": "ميوتيشن",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -6893,12 +6890,22 @@
     {
      "pos": "noun",
      "en": "Any alteration or change.",
-     "ar": "أي تغيير أو تغيير"
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "(genetics) Any heritable change of the base-pair sequence of genetic material.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "A mutant.",
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "Any heritable change of the base-pair sequence of genetic material.",
-     "ar": "أي تغيير وراثي في تسلسل زوج القاعدة للمادة الوراثية"
+     "ar": ""
     }
    ],
    "inflections": [
@@ -6916,7 +6923,24 @@
      "ar": "طافِرَة"
     }
    ],
-   "collocations": [],
+   "collocations": [
+    {
+     "en": "mutation rate",
+     "ar": ""
+    },
+    {
+     "en": "mutation rates",
+     "ar": ""
+    },
+    {
+     "en": "point mutation",
+     "ar": ""
+    },
+    {
+     "en": "gene mutation",
+     "ar": ""
+    }
+   ],
    "examples": [
     {
      "en": "Tom has a rare gene mutation.",
@@ -6932,7 +6956,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "audioUS": "",
@@ -6945,7 +6969,7 @@
    "wrong": 0,
    "last": null,
    "id": 1784531150409,
-   "word": "molluscs",
+   "word": "mollusc",
    "ipa": "",
    "arabicPron": "مالسك",
    "oxford": "",
@@ -6956,13 +6980,18 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A soft-bodied invertebrate of the phylum Mollusca, typically with a hard shell of one or more pieces",
-     "ar": "اللافقاريات رخوة الجسم من شعبة الرخويات، وعادة مع قشرة صلبة من قطعة واحدة أو أكثر"
+     "en": "A soft-bodied invertebrate of the phylum Mollusca, typically with a hard shell of one or more pieces.",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "A weak-willed person",
-     "ar": "شخص ضعيف الإرادة"
+     "en": "(figuratively) A weak-willed person.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "A weak-willed person.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -6992,31 +7021,44 @@
      "ar": "رخوي حيوان من الرخو يات كالحلزون"
     }
    ],
-   "collocations": [],
+   "collocations": [
+    {
+     "en": "mollusc shells",
+     "ar": ""
+    },
+    {
+     "en": "mollusc shell",
+     "ar": ""
+    },
+    {
+     "en": "mollusc species",
+     "ar": ""
+    },
+    {
+     "en": "bivalve mollusc",
+     "ar": ""
+    },
+    {
+     "en": "marine mollusc",
+     "ar": ""
+    }
+   ],
    "examples": [
     {
-     "en": "Are mussels molluscs?",
-     "ar": ""
-    },
-    {
-     "en": "Snails are slow-moving molluscs.",
-     "ar": ""
-    },
-    {
-     "en": "Snails are molluscs which move slowly.",
+     "en": "bivalve molluscs",
      "ar": ""
     }
    ],
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 13,
+   "engineVersion": 3,
    "ipaUS": "/ˈmɑləsk/",
    "ipaUK": "/ˈmɒləsk/",
    "estCefr": "",
    "freqLabel": "",
-   "audioUS": "",
-   "audioUK": "",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "audioGen": "",
    "favorite": "false"
   },
@@ -7025,9 +7067,9 @@
    "wrong": 0,
    "last": null,
    "id": 1784531083797,
-   "word": "electrodes",
+   "word": "electrode",
    "ipa": "",
-   "arabicPron": "",
+   "arabicPron": "ليكترود",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -7036,12 +7078,12 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "The terminal through which electric current passes between metallic and nonmetallic parts of an electric circuit",
+     "en": "The terminal through which electric current passes between metallic and nonmetallic parts of an electric circuit.",
      "ar": "الطرف الذي يمر من خلاله التيار الكهربائي بين الأجزاء المعدنية وغير المعدنية للدائرة الكهربائية"
     },
     {
      "pos": "noun",
-     "en": "A collector or emitter of electric charge in a semiconducting device",
+     "en": "A collector or emitter of electric charge in a semiconducting device.",
      "ar": "جامع أو باعث للشحنة الكهربائية في جهاز شبه موصل"
     }
    ],
@@ -7051,7 +7093,28 @@
    ],
    "derivatives": [],
    "synonyms": [],
-   "collocations": [],
+   "collocations": [
+    {
+     "en": "electrode potential",
+     "ar": ""
+    },
+    {
+     "en": "electrode surface",
+     "ar": ""
+    },
+    {
+     "en": "reference electrode",
+     "ar": ""
+    },
+    {
+     "en": "negative electrode",
+     "ar": ""
+    },
+    {
+     "en": "positive electrode",
+     "ar": ""
+    }
+   ],
    "examples": [
     {
      "en": "The positive electrode is called the cathode.",
@@ -7069,13 +7132,13 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2,
+   "engineVersion": 3,
    "ipaUS": "",
-   "ipaUK": "",
+   "ipaUK": "/əˈlɛk.tɹəʊd/",
    "estCefr": "",
    "freqLabel": "",
    "audioUS": "",
-   "audioUK": "",
+   "audioUK": "-uk",
    "audioGen": "",
    "favorite": "false"
   },
