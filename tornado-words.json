@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T15:46:08.577Z",
+ "exportedAt": "2026-08-03T15:46:22.391Z",
  "words": [
   {
    "id": 1785185030316,
@@ -6831,28 +6831,13 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A piece of fabric attached to a boat and arranged such that it causes the wind to drive the boat along. The sail may be attached to the boat via a combination of mast…",
-     "ar": "قطعة من القماش متصلة بقارب ومرتبة بحيث تتسبب في دفع الرياح للقارب. يمكن ربط الشراع بالقارب عبر مزيج من الصاري والصاري والحبال"
+     "en": "(nautical, slang) The sailmaker on board ship.",
+     "ar": "صانع الشراع على متن السفينة."
     },
     {
      "pos": "noun",
-     "en": "The concept of a sail or sails, as if a substance",
-     "ar": "(بحري،لا يحصى) مفهوم الشراع أو الأشرعة، كما لو كانت مادة"
-    },
-    {
-     "pos": "verb",
-     "en": "To be impelled or driven forward by the action of wind upon sails, as a ship on water",
-     "ar": "أن يتم دفعه أو دفعه إلى الأمام بفعل الرياح على الأشرعة، كسفينة على الماء"
-    },
-    {
-     "pos": "verb",
-     "en": "To move through or on the water",
-     "ar": "التحرك عبر الماء أو فوقه"
-    },
-    {
-     "pos": "noun",
-     "en": "The sailmaker on board ship",
-     "ar": "صانع الشراع على متن السفينة"
+     "en": "The sailmaker on board ship.",
+     "ar": "صانع الشراع على متن السفينة."
     }
    ],
    "inflections": [
@@ -6902,7 +6887,7 @@
    "audioUK": "",
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUK": "",
    "estCefr": "",
    "freqLabel": "",
