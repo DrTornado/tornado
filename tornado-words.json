@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:28:47.054Z",
+ "exportedAt": "2026-08-03T09:28:56.706Z",
  "words": [
   {
    "id": 1785185030316,
@@ -5200,7 +5200,7 @@
   },
   {
    "id": 1784659612001,
-   "word": "nostrils",
+   "word": "nostril",
    "ipa": "",
    "arabicPron": "ناسترل",
    "oxford": "",
@@ -5211,7 +5211,7 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "Either of the two orifices located on the nose (or on the beak of a bird",
+     "en": "Either of the two orifices located on the nose (or on the beak of a bird); used as a passage for air and other gases to travel the nasal passages.",
      "ar": "أي من الفتحتين الموجودتين على الأنف (أو على منقار طائر )"
     }
    ],
@@ -5222,15 +5222,36 @@
    "derivatives": [],
    "synonyms": [
     {
+     "en": "intake",
+     "ar": ""
+    },
+    {
+     "en": "nare",
+     "ar": ""
+    },
+    {
      "en": "naris",
-     "ar": "مَنْخَر"
+     "ar": ""
     },
     {
      "en": "nosehole",
-     "ar": "فتحة الأنف"
+     "ar": ""
     }
    ],
-   "collocations": [],
+   "collocations": [
+    {
+     "en": "nostril breathing",
+     "ar": ""
+    },
+    {
+     "en": "left nostril",
+     "ar": ""
+    },
+    {
+     "en": "right nostril",
+     "ar": ""
+    }
+   ],
    "examples": [
     {
      "en": "His nostrils flared.",
@@ -5251,20 +5272,20 @@
    "last": "right",
    "interval": 1,
    "due": 1785198221330,
-   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/nostrils-us.mp3",
-   "engineVersion": 13,
+   "audioUS": "-us",
+   "engineVersion": 3,
    "ipaUS": "/ˈnɑ.stɹəl/",
    "ipaUK": "/ˈnɒs.tɹɪl/",
    "estCefr": "",
    "freqLabel": "",
-   "audioUK": "",
+   "audioUK": "-uk",
    "audioGen": "",
    "favorite": "false"
   },
   {
    "id": 1784659584450,
    "word": "prologue",
-   "ipa": "/ˈpɹəʊlɒɡ/",
+   "ipa": "/ˈpɹoʊloʊɡ/",
    "arabicPron": "برولوق",
    "oxford": "",
    "cefr": "",
@@ -5275,32 +5296,32 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A speech or section used as an introduction, especially to a play or novel",
+     "en": "One who delivers a prologue.",
      "ar": "خطاب أو قسم يستخدم كمقدمة، خاصة لمسرحية أو رواية"
     },
     {
      "pos": "noun",
-     "en": "One who delivers a prologue",
+     "en": "(cycling) An individual time trial before a stage race, used to determine which rider wears the leader's jersey on the first stage.",
      "ar": "الشخص الذي يقدم مقدمة"
     },
     {
-     "pos": "verb",
-     "en": "To introduce with a formal preface, or prologue",
+     "pos": "noun",
+     "en": "(Eastern Orthodoxy) A liturgical book containing daily readings, including hagiography.",
      "ar": "للتقديم بمقدمة رسمية، أو مقدمة"
     },
     {
-     "pos": "noun",
-     "en": "A component of a computer program that prepares the computer to execute a routine",
+     "pos": "verb",
+     "en": "(literature, rhetoric) To introduce with a formal preface, or prologue.",
      "ar": "مكون من برنامج كمبيوتر يعد الكمبيوتر لتنفيذ روتين"
     },
     {
-     "pos": "verb",
-     "en": "↑ Douglas Harper (2001–2026), “prologue”, in Online Etymology Dictionary",
+     "pos": "noun",
+     "en": "A speech or section used as an introduction, especially to a play or novel.",
      "ar": "↑ دوغلاس هاربر (2001-2026)، \"مقدمة\"، في قاموس علم أصول اللغة عبر الإنترنت"
     },
     {
-     "pos": "verb",
-     "en": "↑ Michaelis, Hermann",
+     "pos": "noun",
+     "en": "A component of a computer program that prepares the computer to execute a routine.",
      "ar": ""
     }
    ],
@@ -5314,6 +5335,18 @@
    "synonyms": [
     {
      "en": "forespeech",
+     "ar": ""
+    },
+    {
+     "en": "foretale",
+     "ar": ""
+    },
+    {
+     "en": "foretalk",
+     "ar": ""
+    },
+    {
+     "en": "foreword",
      "ar": ""
     }
    ],
@@ -5347,20 +5380,20 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 13,
+   "engineVersion": 3,
    "ipaUS": "/ˈpɹoʊlɔɡ/",
    "ipaUK": "/ˈpɹəʊlɒɡ/",
    "estCefr": "",
    "freqLabel": "",
-   "audioUS": "",
-   "audioUK": "",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "audioGen": "",
    "favorite": "false"
   },
   {
    "id": 1784659545425,
    "word": "wick",
-   "ipa": "/wɪk/",
+   "ipa": "/ˈwɪk/",
    "arabicPron": "ويك",
    "oxford": "",
    "cefr": "",
@@ -5372,32 +5405,42 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A bundle, twist, braid, or woven strip of cord, fabric, fibre/fiber, or other porous material in a candle, oil lamp, kerosene heater, or the like, that draws up liquid fuel, such as melted tallow, wax, or the oil, delivering it to the base of the flame for conversion to gases and burning; any other length of material burned for illumination in small successive portions.",
-     "ar": "حزمة أو لف أو تجديل أو شريط منسوج من الحبل أو القماش أو الألياف/الألياف أو غيرها من المواد المسامية في شمعة أو مصباح زيت أو سخان كيروسين أو ما شابه ذلك، يسحب الوقود السائل، مثل الشحم المذاب أو الشمع أو الزيت، ويوصله إلى قاعدة اللهب لتحويله إلى غازات وحرقه ؛ أي طول آخر من المواد المحترقة للإضاءة في أجزاء صغيرة متتالية."
+     "en": "(countable) A braid or bundle of fibre or other porous material (now generally twisted or woven cotton) in a candle, kerosene heater, oil lamp, etc., that draws up a liquid fuel (such as melted tallow or wax, or oil) at one end, to be ignited at the other end to produce a flame.",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "Any piece of porous material that conveys liquid by capillary action, such as a strip of gauze placed in a wound to serve as a drain.",
-     "ar": "أي قطعة من مادة مسامية تنقل السائل عن طريق عمل الشعيرات الدموية، مثل شريط من الشاش يوضع في الجرح ليكون بمثابة تصريف."
+     "en": "(countable, euphemistic, slang) Often in dip one's wick: the penis.",
+     "ar": ""
     },
     {
      "pos": "verb",
-     "en": "To convey or draw off (liquid) by capillary action.",
-     "ar": "لنقل أو سحب (السائل) عن طريق عمل الشعيرات الدموية."
+     "en": "(transitive) Of a material (especially a textile): to convey or draw off (liquid) by capillary action.",
+     "ar": ""
     },
     {
      "pos": "verb",
-     "en": "(of a liquid) To traverse (i.e. be conveyed by capillary action) through a wick or other porous material, as water through a sponge. Usually followed by through.",
-     "ar": "(من سائل) لاجتياز (أي يتم نقلها عن طريق العمل الشعري) من خلال الفتيل أو غيرها من المواد المسامية، مثل الماء من خلال الإسفنج. عادة ما يتبعها من خلال."
+     "en": "Of a material: to convey or draw off liquid by capillary action.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "Chiefly followed by through or up: of a liquid: to move by capillary action through a porous material.",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "A braid or bundle of fibre or other porous material (now generally twisted or woven cotton) in a candle, kerosene heater, oil lamp, etc., that draws up a liquid fuel (such as melted tallow or wax, or oil) at one end, to be ignited at the other end to produce a flame.",
-     "ar": "جديلة أو حزمة من الألياف أو غيرها من المواد المسامية (التي أصبحت الآن قطنًا ملتويًا أو منسوجًا بشكل عام) في شمعة أو سخان كيروسين أو مصباح زيت، وما إلى ذلك، والتي تسحب وقودًا سائلًا (مثل الشحم المذاب أو الشمع أو الزيت) في أحد الطرفين، لإشعاله في الطرف الآخر لإنتاج لهب."
+     "en": "(obsolete except dialectal) A hamlet or village; also, a town.",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "Synonym of wicking (“the material of which wicks (etymology 1, noun sense&nbsp;1) are made”).",
+     "en": "(obsolete except dialectal, chiefly East Anglia and Essex) A farm; specifically, a dairy farm.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "(obsolete) An enclosed piece of land; a close.",
      "ar": ""
     }
    ],
@@ -5410,8 +5453,16 @@
    "derivatives": [],
    "synonyms": [
     {
+     "en": "quick",
+     "ar": ""
+    },
+    {
+     "en": "port",
+     "ar": ""
+    },
+    {
      "en": "taper",
-     "ar": "شمعة رفيعة"
+     "ar": ""
     }
    ],
    "collocations": [
@@ -5451,7 +5502,7 @@
    "audioGen": "https://api.dictionaryapi.dev/media/pronunciations/en/wick-au.mp3",
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "id": 1784659495782,
