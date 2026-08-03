@@ -25581,7 +25581,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 92;
+const BUILD = 93;
 
 function kokoroRefreshUi() {
   const sel = document.getElementById('kokoro-voice');
@@ -25903,7 +25903,8 @@ async function piperGenerateInner(text, lang) {
   piperStatus(`🎙️ Using voice: ${voiceId} (${lang})`);
   let lastErr = null;
   for (let attempt = 1; attempt <= maxAttempts; attempt++) { // إعادة محاولة حقيقية: الأعطال العابرة (شبكة/ذاكرة) تُعالَج بدل أن تُسقط الصوت كله
-    if (stopped) return null;
+    // نفس التمييز: التوقّف عن التشغيل لا يعني التوقّف عن التحضير المسبق
+    if (stopped && !silentBuild) return null;
     try {
       const mod = await loadPiper();
       // العربية: نحسب الرموز الصوتية بأنفسنا ونمررها للنموذج مباشرة، متجاوزين محرك النطق العاجز عن العربية
@@ -26149,8 +26150,20 @@ async function buildSegmentsAudio(segs, label) {
   let fmt = null, okCount = 0, skipped = 0;
   for (let i = 0; i < segs.length; i++) {
     const seg = segs[i];
-    if (stopped) return null;
+    /*
+     * `stopped` تعني «توقّف التشغيل»، لا «توقّف البناء».
+     *
+     * وهي صحيحة دائماً خارج التشغيل، فكان التحضير الخلفي ينسحب قبل أن يبني
+     * مقطعاً واحداً: يركض العدّاد إلى ١١٢/١١٢ في ثوانٍ ولا يُخزَّن شيء. ثم
+     * يضغط المستخدم تشغيلاً فلا يجد شيئاً جاهزاً، فيهبط الصوت إلى محرّك
+     * النظام — وهو بالضبط ما سمعه.
+     *
+     * والتحضير الخلفي يُوقفه `audioPrepAbort` وحده، وهو ما يُرفع فور أي ضغطة
+     * تشغيل. فلا تزاحم على المحرّك، ولا انسحابٌ بلا سبب.
+     */
+    if (stopped && !silentBuild) return null;
     if (!silentBuild) piperStatus(`🎧 Preparing ${label || 'audio'} — part ${i + 1} of ${segs.length}…`);
+    if (silentBuild && audioPrepAbort) return null;
     const wav = await getSegmentAudio(seg.text, seg.lang); // من المخزن إن وُجد، وإلا يُولَّد ويُخزَّن
     if (!wav) { skipped++; continue; } // مقطع تعذّر توليده؟ نتخطاه بصمت ونكمل — لا نلغي الصوت كله ولا نلجأ لنطق آلي مشوَّه
     const parsed = parseWav(await wav.arrayBuffer());
