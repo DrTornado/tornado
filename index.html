@@ -24723,11 +24723,28 @@ function freqLookup(word) {
 
 // ===== مشغل النطق: صوت أكسفورد/القاموس الحقيقي أولاً، والنطق الآلي باللكنة الصحيحة احتياطاً =====
 let pronAudio = null;
+/**
+ * هل يُسمح بصوت النظام أصلاً؟
+ *
+ * القاعدة كانت مكتوبة في موضع واحد من ثلاثة، فبقي منفذان مفتوحان: زرّ النطق
+ * ينطق بصوت النظام حين يتأخّر Kokoro، فيسمع المستخدم الكلمة الأولى آلية ثم
+ * صمتاً — وهو ما وصفه حرفياً. قاعدة تُطبَّق في موضع ولا تُطبَّق في آخر ليست
+ * قاعدة.
+ */
+function systemVoiceAllowed(lang) {
+  const en = String(lang || '').slice(0, 2).toLowerCase() === 'en';
+  return !(en && kokoroOn() && !kokoroBroken);
+}
+
 function ttsSay(word, accent) {
   if (!word) return;
   const lang = accent === 'uk' ? 'en-GB' : 'en-US';
   const fallback = () => {
     if (!ttsReady) return;
+    if (!systemVoiceAllowed(lang)) {
+      kokoroStatus('⏳ Building ' + kokoroVoice() + ' audio — the system voice is never used instead');
+      return;
+    }
     window.speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(word);
     u.lang = lang; u.rate = 0.9;
@@ -25581,7 +25598,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 95;
+const BUILD = 96;
 
 function kokoroRefreshUi() {
   const sel = document.getElementById('kokoro-voice');
@@ -26032,7 +26049,7 @@ async function speak(text, lang) {
    *
    * الصمت هنا أصدق: يعني «لم يجهز بعد»، لا «هذا هو صوتك».
    */
-  if (langPrefix === 'en' && kokoroOn() && !kokoroBroken) {
+  if (!systemVoiceAllowed(lang)) {
     console.log('[TTS] Neural voice not ready for this segment — skipping rather than using the system voice');
     kokoroStatus('⏳ Building ' + kokoroVoice() + ' audio — the system voice is never used instead');
     return;
