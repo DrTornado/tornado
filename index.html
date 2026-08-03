@@ -143,6 +143,13 @@
     <label style="font-size:12px;color:#8A93A3;display:flex;align-items:center;gap:4px;cursor:pointer;">
       <input type="checkbox" id="kokoro-on" style="accent-color:#E8B04B;"> Neural voice
     </label>
+    <!--
+      زرّ يقطع الشكّ.
+      كان الحكم على الصوت يمرّ عبر بناء بطاقة كاملة وتخزينٍ وتشغيل — فإن خرج
+      صوتٌ آليّ لم يُعرف أين انكسرت السلسلة. هذا الزرّ يولّد جملةً واحدة الآن،
+      يتجاوز كل مخزَّن، ويقول بأي محرّك خرجت.
+    -->
+    <button class="btn" id="kokoro-test" style="width:auto;padding:5px 12px;font-size:12px;background:#1B212B;border:1px solid #3A4453;color:#E8B04B;">🔊 Test voice</button>
   </div>
   <div id="kokoro-status" style="font-size:11px;color:#8A93A3;margin-top:3px;text-align:center;"></div>
   <div id="gh-box" class="hidden" style="background:#1B212B;border-radius:10px;padding:12px;margin-top:8px;">
@@ -25574,7 +25581,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 91;
+const BUILD = 92;
 
 function kokoroRefreshUi() {
   const sel = document.getElementById('kokoro-voice');
@@ -26881,6 +26888,32 @@ load().then(async () => {
   const vChk = document.getElementById('kokoro-on');
   if (vSel) vSel.onchange = () => { kokoroSetPref({ voice: vSel.value }); AUDIO_CACHE.clear(); kokoroRefreshUi(); };
   if (vChk) vChk.onchange = () => { kokoroSetPref({ enabled: vChk.checked }); AUDIO_CACHE.clear(); kokoroRefreshUi(); };
+
+  /*
+   * اختبارٌ يتجاوز كل مخزَّن.
+   *
+   * الحكم على الصوت كان يمرّ عبر بناء بطاقة وتخزين وتشغيل، فإن خرج صوتٌ آليّ
+   * لم يُعرف أين انكسرت السلسلة: أفي المحرّك، أم في مخزَّنٍ قديم، أم في مسارٍ
+   * لا يمرّ بالمحرّك أصلاً. هذا يولّد الآن ويشغّل الآن ويقول بأي محرّك خرج.
+   */
+  const vTest = document.getElementById('kokoro-test');
+  if (vTest) vTest.onclick = async () => {
+    vTest.disabled = true;
+    const orig = vTest.textContent;
+    vTest.textContent = '⏳ Generating…';
+    kokoroStatus('⏳ Generating a fresh sample — first run downloads the voice…');
+    try {
+      const wav = await kokoroGenerate('This is the neural voice you selected.', 'en-GB');
+      if (!wav) { kokoroStatus('❌ Neural voice did not produce audio — ' + kokoroLastEngine); return; }
+      const el = getPiperAudioEl('pron');
+      const url = URL.createObjectURL(wav);
+      el.src = url; el.playbackRate = 1;
+      el.onended = () => URL.revokeObjectURL(url);
+      await el.play().catch(() => {});
+      kokoroStatus('✅ ' + kokoroVoice() + ' · ' + (kokoroBackend || 'ready') + ' — this is what you just heard');
+    } finally { vTest.disabled = false; vTest.textContent = orig; }
+  };
+
   kokoroRefreshUi();
 
   await autoSyncOnStartup(); // سحبٌ ورفعٌ معاً قبل أي إثراء — فلا نُثري نسخة قديمة
