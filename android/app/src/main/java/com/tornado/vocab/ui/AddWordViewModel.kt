@@ -31,6 +31,15 @@ class AddWordViewModel(app: Application) : AndroidViewModel(app) {
 
     private val repo = app.tornado.repository
     private val dict = app.tornado.dictionary
+
+    /** هل للجهاز اتصال مُتحقَّق منه الآن؟ */
+    private fun isOnline(): Boolean = runCatching {
+        val cm = getApplication<Application>()
+            .getSystemService(android.net.ConnectivityManager::class.java)
+        val caps = cm.getNetworkCapabilities(cm.activeNetwork) ?: return false
+        caps.hasCapability(android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
+            caps.hasCapability(android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED)
+    }.getOrDefault(true)
     private val container = app.tornado
     private val settings = app.tornado.settings
 
@@ -86,10 +95,24 @@ class AddWordViewModel(app: Application) : AndroidViewModel(app) {
                         manualPrompt = result.query
                     )
                 }
+                /*
+                 * نفرّق بين «لا إنترنت» و«الخدمة تعطّلت».
+                 *
+                 * كانت الرسالة واحدة لكل فشل، فيقرأ من أطفأ بياناته «مشكلة
+                 * اتصال» ويظنّ التطبيق معطلاً — بينما السبب في يده ويُحلّ في
+                 * ثانية. والفرق بين خطأ يفهمه المستخدم وخطأ لا يفهمه هو الفرق
+                 * بين محاولة ثانية وحذف التطبيق.
+                 */
                 is LookupResult.Failed -> update {
                     it.copy(
                         busy = false, statusText = "",
-                        error = "Connection problem — retry, or type the meaning yourself",
+                        error = if (!isOnline()) {
+                            "No internet — adding a word needs a connection. " +
+                                "Reviewing and listening work offline."
+                        } else {
+                            "The dictionary did not answer — try again, " +
+                                "or type the meaning yourself"
+                        },
                         manualPrompt = result.query
                     )
                 }

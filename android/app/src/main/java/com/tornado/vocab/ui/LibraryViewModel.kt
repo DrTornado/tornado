@@ -12,7 +12,6 @@ import com.tornado.vocab.data.Word
 import com.tornado.vocab.data.WordRow
 import com.tornado.vocab.data.toPlayItem
 import com.tornado.vocab.data.WordStatus
-import com.tornado.vocab.tornado
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,6 +21,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -42,6 +42,20 @@ class LibraryViewModel(app: Application) : AndroidViewModel(app) {
 
     val stats: StateFlow<LibraryStats> = repo.stats()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), LibraryStats())
+
+    /**
+     * كم بطاقة ما زالت تُكمَّل بالخلفية.
+     *
+     * القياس كل نصف دقيقة لا لحظياً: العدد يتناقص على مدى أيام بمعدّل ثماني
+     * كلمات في كل فتحة، ومراقبته لحظياً استعلامٌ متكرر بلا ما يقابله على
+     * الشاشة.
+     */
+    val pendingGaps: StateFlow<Int> = flow {
+        while (true) {
+            emit(runCatching { app.tornado.enricher.pendingCount() }.getOrDefault(0))
+            kotlinx.coroutines.delay(30_000)
+        }
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), 0)
 
     /**
      * تهدئة ٢٠٠ ملي ثانية على نص البحث وحده.
