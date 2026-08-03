@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T15:43:13.278Z",
+ "exportedAt": "2026-08-03T15:43:29.448Z",
  "words": [
   {
    "id": 1785185030316,
@@ -7319,7 +7319,7 @@
    "examples": [
     {
      "en": "The cars were snailing along the motorway during the rush hour.",
-     "ar": "كانت السيارات تتسلل على طول الطريق السريع خلال ساعة الذروة."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -8850,11 +8850,11 @@
    "examples": [
     {
      "en": "insects and other creatures",
-     "ar": "الحشرات والمخلوقات الأخرى"
+     "ar": ""
     },
     {
      "en": "He's a creature of habit.",
-     "ar": "إن (آندي) أسير لعاداته."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -9686,15 +9686,15 @@
    "examples": [
     {
      "en": "I dropped a small stone into the pond and watched the ripples spread.",
-     "ar": "أسقطت حجرًا صغيرًا في البركة وشاهدت انتشار التموجات."
+     "ar": ""
     },
     {
      "en": "The ebbing tide had left ripples in the sand.",
-     "ar": "كان المد والجزر قد ترك تموجات في الرمال."
+     "ar": ""
     },
     {
      "en": "I enjoy fudge ripple ice cream, but I especially like to dig through the carton to get at the ripple part and eat only that.",
-     "ar": "أنا أستمتع بالآيس كريم المموج، لكنني أحب بشكل خاص الحفر في الكرتون للوصول إلى جزء المموج وتناول ذلك فقط."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -9888,11 +9888,11 @@
    "examples": [
     {
      "en": "You left a bunch of burrs on those parts yesterday. You've already been told not to miss the deburring operation.",
-     "ar": "لقد تركت حفنة من النتوءات على تلك الأجزاء أمس. لقد تم إخبارك بالفعل بعدم تفويت عملية إزالة الأزيز."
+     "ar": ""
     },
     {
      "en": "burr grinder",
-     "ar": "مطحنة نتوءات"
+     "ar": ""
     }
    ],
    "differences": [],
