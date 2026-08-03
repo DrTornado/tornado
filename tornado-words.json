@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:26:34.065Z",
+ "exportedAt": "2026-08-03T09:26:40.231Z",
  "words": [
   {
    "id": 1785185030316,
@@ -1212,17 +1212,22 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A round building, usually small, often with a dome",
+     "en": "(architecture) A round building, usually small, often with a dome.",
      "ar": ""
     },
     {
      "pos": "noun",
-     "en": "A Gothic typeface used in early printed books in Northern Italy, based on a rounded script developed in the 13th cent",
+     "en": "(typography, frequently capitalized) A Gothic typeface used in early printed books in Northern Italy, based on a rounded script developed in the 13th cent.; the manuscript hand on which this typeface was based.",
      "ar": ""
     },
     {
      "pos": "noun",
-     "en": "A form of cupola that has pentagons rather than squares or rectangles",
+     "en": "(geometry) A form of cupola that has pentagons rather than squares or rectangles.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "A round building, usually small, often with a dome.",
      "ar": ""
     }
    ],
@@ -1257,7 +1262,7 @@
    "examples": [
     {
      "en": "TPLEX Rotunda is a roundabout located in Rosario, La Union.",
-     "ar": "TPLEX Rotunda هو دوار يقع في روزاريو، لا يونيون."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -1266,13 +1271,13 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 13,
+   "engineVersion": 3,
    "ipaUS": "/ɹoʊˈtʌndə/",
    "ipaUK": "/ɹə(ʊ)ˈtʌndə/",
    "estCefr": "",
    "freqLabel": "",
-   "audioUS": "",
-   "audioUK": "",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "audioGen": "",
    "favorite": "false"
   },
@@ -1332,7 +1337,7 @@
    "examples": [
     {
      "en": "He easily shot the unsuspecting target.",
-     "ar": "أطلق النار بسهولة على الهدف المطمئن."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -1341,7 +1346,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "id": 1784804589585,
