@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T18:03:41.250Z",
+ "exportedAt": "2026-08-03T18:03:47.768Z",
  "words": [
   {
    "id": 1785185030316,
@@ -182,18 +182,13 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To search for and gather food for animals, particularly cattle and horses",
-     "ar": "للبحث عن الطعام للحيوانات وجمعه، وخاصة الماشية والخيول"
-    },
-    {
-     "pos": "verb",
-     "en": "To rampage through, gathering and destroying as one goes",
-     "ar": "الهيجان والجمع والتدمير كما يذهب المرء"
+     "en": "present participle and gerund of forage",
+     "ar": "مجرى العلف الحالي وجيروند العلف"
     },
     {
      "pos": "noun",
-     "en": "The act of searching for food",
-     "ar": "فعل البحث عن الطعام"
+     "en": "The act of searching for food or other items.",
+     "ar": "فعل البحث عن طعام أو مواد أخرى."
     }
    ],
    "inflections": [
@@ -239,7 +234,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
