@@ -1,5 +1,5 @@
 // Tornado service worker — enables real app install (not just a shortcut) and offline opening
-const CACHE = 'tornado-v99';
+const CACHE = 'tornado-v100';
 const PRECACHE = ['./', './manifest.json', './icon-192.png', './icon-512.png', './icon-180.png', './favicon-32.png'];
 
 self.addEventListener('install', e => {
@@ -36,6 +36,9 @@ self.addEventListener('fetch', e => {
   // اعتراضها كان يستنسخ كل استجابة في الذاكرة ويحاول تخزينها، فيتجاوز حصة التخزين على الجوال
   // ويُفشل جلب ملفات WASM بالكامل. المتصفح يخزّنها بنفسه بكفاءة أعلى بكثير.
   if (url.pathname.includes('/piper/') || url.pathname.includes('/voices/')) return;
+
+  // ملف الإصدار لا يُعترض ولا يُخزَّن أبداً — هو الحَكَم الذي يكشف أننا على نسخة قديمة
+  if (url.pathname.endsWith('version.json')) return;
 
   // كذلك نتجاهل أي طلب نطاقي (Range) — تخزين الاستجابات الجزئية (206) غير مسموح ويسبب أخطاء
   if (e.request.headers.has('range')) return;

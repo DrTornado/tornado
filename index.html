@@ -25632,7 +25632,41 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 99;
+const BUILD = 100;
+
+/*
+ * الصفحة تتحقّق من نفسها وتُجدّد نفسها.
+ *
+ * ثلاث مرّات نُشر إصلاح وبقي المستخدم على شيفرة قديمة: يضغط الزرّ فلا يعمل،
+ * فأفحص أنا الموقع الحيّ فأجده يعمل، فأتّهم شيفرتي أو أتّهم متصفّحه — وكلانا
+ * محقّ وكلانا يضيّع ساعة. السبب أن عامل الخدمة يمكن أن يخدم مستنداً مخزَّناً،
+ * وأن GitHub Pages تضع عمراً على الملفات، وأن التطبيق المثبَّت يبدأ من قوقعته.
+ *
+ * فنسأل ملفاً صغيراً لا يُخزَّن أبداً: ما آخر بناء؟ فإن خالف ما نشغّله، مسحنا
+ * كل قوقعة وسجّلنا عامل خدمة جديداً وأعدنا التحميل مرّة واحدة.
+ *
+ * والحارس في sessionStorage يمنع دورة إعادة تحميل لا تنتهي إن تعذّر التحديث
+ * لسبب آخر — إعادة تحميل أبدية أسوأ من نسخة قديمة.
+ */
+async function ensureLatestBuild() {
+  try {
+    const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' });
+    if (!r.ok) return;
+    const { build } = await r.json();
+    if (!build || build === BUILD) { sessionStorage.removeItem('reloadedFor'); return; }
+    if (sessionStorage.getItem('reloadedFor') === String(build)) return; // جرّبنا ولم ينفع — لا ندور
+    sessionStorage.setItem('reloadedFor', String(build));
+    try {
+      const regs = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(regs.map(x => x.unregister()));
+    } catch (e) {}
+    try {
+      const keys = await caches.keys();
+      await Promise.all(keys.map(k => caches.delete(k)));
+    } catch (e) {}
+    location.reload();
+  } catch (e) { /* بلا شبكة؟ نعمل بما لدينا */ }
+}
 
 function kokoroRefreshUi() {
   const sel = document.getElementById('kokoro-voice');
@@ -26973,6 +27007,7 @@ async function autoSyncOnStartup() {
   }
 }
 load().then(async () => {
+  ensureLatestBuild(); // قبل كل شيء: نتأكّد أننا نشغّل أحدث شيفرة لا نسخة مخزَّنة
   setSyncBadge();
   if (fsSupported) { await getLinkedHandle(); updateLinkStatus(); }
   /*
