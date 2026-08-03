@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:26:20.545Z",
+ "exportedAt": "2026-08-03T09:26:24.322Z",
  "words": [
   {
    "id": 1785185030316,
@@ -748,7 +748,7 @@
   {
    "id": 1784811704077,
    "word": "articulation",
-   "ipa": "/ɑːˌtɪk.jəˈleɪ.ʃən/",
+   "ipa": "/ˌa(r).ʈɪ.k(j)ʊˌle.ʃən/",
    "arabicPron": "ارتيكيليشن",
    "oxford": "",
    "cefr": "",
@@ -758,18 +758,28 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A joint or the collection of joints at which something is articulated, or hinged, for bending.",
-     "ar": "مفصل أو مجموعة من المفاصل التي يتم فيها توضيح شيء ما، أو تعليقه، للانحناء."
+     "en": "(uncountable) The quality, clarity, or sharpness of speech; the movement within the mouth that allows for those things.",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "A manner or method by which elements of a system are connected.",
-     "ar": "طريقة أو طريقة يتم من خلالها توصيل عناصر النظام."
+     "en": "(phonetics) The mechanism by which a sound is formed in the vocal tract.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "(countable) A manner or method by which elements of a system are connected.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "A joint or the collection of joints at which something is articulated, or hinged, for bending.",
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "Such a joint in an animalian body, as for example between bones or between exoskeleton segments.",
-     "ar": "مثل هذا المفصل في جسم حيواني، على سبيل المثال بين العظام أو بين أجزاء الهيكل الخارجي."
+     "ar": ""
     }
    ],
    "inflections": [
@@ -803,7 +813,15 @@
    "examples": [
     {
      "en": "The articulation allowed the robot to move around corners.",
-     "ar": "سمح النطق للروبوت بالتحرك حول الزوايا."
+     "ar": ""
+    },
+    {
+     "en": "His volume is reasonable, but his articulation could use work.",
+     "ar": ""
+    },
+    {
+     "en": "manner of articulation",
+     "ar": ""
     }
    ],
    "differences": [],
@@ -813,9 +831,11 @@
    "interval": 0,
    "due": 0,
    "ipaUS": "/ɑɹˌtɪk.jəˈleɪ.ʃən/",
-   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/articulation-us.mp3",
+   "audioUS": "-us",
    "audioGen": "https://api.dictionaryapi.dev/media/pronunciations/en/articulation-au.mp3",
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUK": "/ɑːˌtɪk.jʊˈleɪ.ʃən/",
+   "audioUK": "-uk"
   },
   {
    "id": 1784807944973,
