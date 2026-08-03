@@ -2,7 +2,7 @@
  "app": "tornado",
  "kind": "notes",
  "version": 1,
- "exportedAt": "2026-08-03T19:59:15.362Z",
+ "exportedAt": "2026-08-03T20:00:41.330Z",
  "notes": [
   {
    "id": 1785772686709,
@@ -28,6 +28,15 @@
    "text": "Topic X has emerged as a crucial societal concern. A debate persists among experts and researchers over two key dimensions of this issue: its widespread nature and the solutions proposed to address it. This essay will explore both aspects of this matter, as elaborated below.\n\nTo begin with, the first dimension provides a range of substantial supporting points. This is primarily because of [reasons]. In particular, a groundbreaking U.S. government publication stated that 78% of society is directly affected by this issue in their daily lives. As a result, this aspect demonstrates a stronger alignment with the community and is therefore supported.\n\nFurthermore, the solutions involve a range of practical proposals to address this issue. These include [solutions]. According to a recent paper published by the Arab Research Centre (ARC), 65% of relevant cases showed measurable improvement after adopting these measures. These findings reinforce the practicality of these measures in resolving the issue.\n\nIn conclusion, regarding [Topic], [both dimensions] of this issue warrant serious consideration, as each plays a significant role in shaping the outcomes for the community. The overall evidence clearly supports the importance of addressing this matter, given its wider scope and broader relevance.",
    "createdAt": 1785686937786,
    "updatedAt": 1785705780495,
+   "lastChunk": 0,
+   "favorite": false
+  },
+  {
+   "id": 1785787240470,
+   "title": "Essay 01",
+   "text": "Topic X has emerged as a crucial societal concern. A debate persists between proponents and opponents over whether the first opinion of [first opinion] or the second opinion of [second opinion] is more advantageous for society. This essay will argue that the first opinion is the more effective approach, for the reasons outlined below.\n\nTo begin with, the first opinion provides a range of substantial supporting points. This is primarily because of the [reason]. In particular, a ground-breaking U.S. government publication concluded that 78% of society tends to favour this approach over the alternative. As a result, this opinion demonstrates a stronger alignment with the community and is therefore supported.\n\nOn the other hand, the second opinion may appear valid under certain circumstances. This is mainly due to the [reason]. According to a recent paper published by the Arab Research Centre (ARC), 45% of people are inclined to align with this viewpoint. However, this perspective remains limited and does not outweigh the merits of the first opinion.\n\nIn conclusion, regarding [Topic], while [second opinion] warrants consideration in specific contexts, I firmly contend that [first opinion] is superior, given its wider scope and broader relevance. The overall evidence clearly supports this stance.",
+   "createdAt": 1785787240470,
+   "updatedAt": 1785787240470,
    "lastChunk": 0,
    "favorite": false
   }
