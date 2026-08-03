@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:26:53.567Z",
+ "exportedAt": "2026-08-03T09:26:56.098Z",
  "words": [
   {
    "id": 1785185030316,
@@ -1785,18 +1785,18 @@
    ],
    "meanings": [
     {
-     "pos": "noun",
-     "en": "(biblical criticism) A conflate text, one which conflates multiple version of a text together.",
+     "pos": "verb",
+     "en": "To combine or mix together.",
      "ar": "خلط, مركب, مخلوط (أثنان مخلوطان في واحد)"
     },
     {
      "pos": "verb",
-     "en": "To bring (things) together and fuse (them) into a single entity.",
+     "en": "(by extension) To fail to properly distinguish or keep separate (things); to mistakenly treat (them) as equivalent.",
      "ar": "لجمع (الأشياء) معًا ودمجها في كيان واحد."
     },
     {
      "pos": "verb",
-     "en": "To mix together different elements.",
+     "en": "(by extension) To deliberately draw a false equivalence or association, typically in a tacit or implicit manner as propaganda and/or an intentional distortion or misrepresentation of the subject matter.",
      "ar": "لخلط العناصر المختلفة معًا."
     },
     {
@@ -1805,8 +1805,8 @@
      "ar": "(نقد كتابي) الجمع بين عناصر من نسخ متعددة من نفس النص."
     },
     {
-     "pos": "verb",
-     "en": "To combine or mix together.",
+     "pos": "noun",
+     "en": "(biblical criticism) A conflate text, one which conflates multiple version of a text together.",
      "ar": "للجمع أو المزج معًا."
     },
     {
@@ -1858,8 +1858,10 @@
    "interval": 0,
    "due": 0,
    "ipaUS": "/kənˈfleɪt/",
-   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/conflate-us.mp3",
-   "engineVersion": 2
+   "audioUS": "-us",
+   "engineVersion": 3,
+   "ipaUK": "/kənˈfleɪt/",
+   "audioUK": "-uk"
   },
   {
    "id": 1784758615136,
