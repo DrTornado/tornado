@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:28:41.729Z",
+ "exportedAt": "2026-08-03T09:28:47.054Z",
  "words": [
   {
    "id": 1785185030316,
@@ -5037,29 +5037,19 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "Of two or more entities, to approach each other; to get closer and closer.",
-     "ar": "من بين كيانين أو أكثر، الاقتراب من بعضهما البعض ؛ الاقتراب أكثر فأكثر."
-    },
-    {
-     "pos": "verb",
-     "en": "Of a sequence, to have a limit.",
-     "ar": "من تسلسل، أن يكون لها حد."
-    },
-    {
-     "pos": "noun",
-     "en": "Convergence",
-     "ar": "التطابق"
-    },
-    {
      "pos": "adjective",
-     "en": "Approaching each other at a point; convergent.",
-     "ar": "الاقتراب من بعضهما البعض عند نقطة ؛ متقاربة."
+     "en": "approaching each other at a point; convergent.",
+     "ar": ""
     },
     {
      "pos": "verb",
      "en": "present participle and gerund of converge",
-     "ar": "الحاضر الفاعل و gerund من التقارب"
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "convergence",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -5100,7 +5090,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "id": 1784706745622,
@@ -5121,27 +5111,27 @@
     },
     {
      "pos": "noun",
+     "en": "(music) A music synchronization license, allowing the music to be synchronized with visual media such as films.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "Clipping of synchronization or synchrony.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "(informal) To synchronize, especially in the senses of data synchronization, time synchronization, or synchronizing music with video.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "(informal, computing) To flush all pending I/O operations to disk.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
      "en": "A music synchronization license, allowing the music to be synchronized with visual media such as films.",
-     "ar": ""
-    },
-    {
-     "pos": "verb",
-     "en": "To synchronize, especially in the senses of data synchronization, time synchronization, or synchronizing music with video.",
-     "ar": ""
-    },
-    {
-     "pos": "verb",
-     "en": "To flush all pending I/O operations to disk.",
-     "ar": ""
-    },
-    {
-     "pos": "noun",
-     "en": "The state or property of being synchronized.",
-     "ar": ""
-    },
-    {
-     "pos": "noun",
-     "en": "The arrangement of military actions in time, space, and purpose to produce maximum relative combat power at a decisive place and time.",
      "ar": ""
     }
    ],
@@ -5194,10 +5184,6 @@
      "ar": ""
     },
     {
-     "en": "The generator went off line when it lost synchronization with the power line.",
-     "ar": ""
-    },
-    {
      "en": "He synced his phone to the laptop to transfer data about the field trip.",
      "ar": ""
     }
@@ -5208,7 +5194,7 @@
    "last": null,
    "freqLabel": "Top 8,000 words",
    "estCefr": "B1",
-   "engineVersion": 2,
+   "engineVersion": 3,
    "interval": 0,
    "due": 0
   },
