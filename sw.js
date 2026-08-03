@@ -1,5 +1,5 @@
 // Tornado service worker — enables real app install (not just a shortcut) and offline opening
-const CACHE = 'tornado-v87';
+const CACHE = 'tornado-v88';
 const PRECACHE = ['./', './manifest.json', './icon-192.png', './icon-512.png', './icon-180.png', './favicon-32.png'];
 
 self.addEventListener('install', e => {
@@ -30,8 +30,22 @@ self.addEventListener('fetch', e => {
   // كذلك نتجاهل أي طلب نطاقي (Range) — تخزين الاستجابات الجزئية (206) غير مسموح ويسبب أخطاء
   if (e.request.headers.has('range')) return;
 
+  /*
+   * الصفحة نفسها تُجلب متجاوزةً ذاكرة المتصفّح، لا ذاكرتنا وحدها.
+   *
+   * هذا العامل يجلب من الشبكة أولاً، لكن `fetch` العادي يمرّ بذاكرة HTTP في
+   * المتصفّح — وGitHub Pages تضع عمراً بعشر دقائق. فيُنشر إصلاح ويبقى المستخدم
+   * على النسخة القديمة عشر دقائق بلا أن يعلم أحد لماذا لم يتغيّر شيء. حدث هذا
+   * فعلاً: نُشرت نسخة ولم تظهر دوالّها في الصفحة المحمّلة.
+   *
+   * والتجاوز للمستند وحده: الصور والأيقونات لا تستحق إبطال ذاكرتها.
+   */
+  const isDoc = e.request.mode === 'navigate'
+    || url.pathname.endsWith('/') || url.pathname.endsWith('.html');
+  const req = isDoc ? new Request(e.request, { cache: 'reload' }) : e.request;
+
   e.respondWith(
-    fetch(e.request).then(r => {
+    fetch(req).then(r => {
       // نخزّن فقط الاستجابات الكاملة الناجحة، وضمن حماية من أي خطأ تخزين (حصة ممتلئة مثلاً)
       if (r && r.ok && r.status === 200 && r.type === 'basic') {
         const copy = r.clone();
