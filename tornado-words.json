@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:27:24.641Z",
+ "exportedAt": "2026-08-03T09:27:34.944Z",
  "words": [
   {
    "id": 1785185030316,
@@ -2676,7 +2676,7 @@
   },
   {
    "id": 1784752004146,
-   "word": "refutes",
+   "word": "refute",
    "ipa": "/ɹəˈfjʉːt/",
    "arabicPron": "ريفيوت",
    "oxford": "",
@@ -2687,13 +2687,23 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To prove (something) to be false or incorrect",
-     "ar": "لإثبات (شيء) أنه خاطئ أو غير صحيح"
+     "en": "(transitive) To prove (something) to be false or incorrect.",
+     "ar": ""
     },
     {
      "pos": "verb",
-     "en": "To deny the truth or correctness of (something",
-     "ar": "إنكار حقيقة أو صحة (شيء ما"
+     "en": "(transitive, proscribed) To deny the truth or correctness of (something); to reject or disagree with an accusation.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "To prove (something) to be false or incorrect.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "To deny the truth or correctness of (something); to reject or disagree with an accusation.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -2746,13 +2756,13 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 13,
+   "engineVersion": 3,
    "ipaUS": "/ɹɪˈfjut/",
    "ipaUK": "/ɹɪˈfjuːt/",
    "estCefr": "",
    "freqLabel": "",
-   "audioUS": "",
-   "audioUK": "",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "audioGen": "",
    "favorite": "false"
   },
@@ -2770,23 +2780,28 @@
    "meanings": [
     {
      "pos": "adjective",
-     "en": "Of, pertaining to, or involving a contribution",
-     "ar": "من أو تتعلق أو تنطوي على مساهمة"
+     "en": "Tending to contribute to a result.",
+     "ar": ""
     },
     {
      "pos": "adjective",
-     "en": "Tending to contribute to a result",
-     "ar": "الميل إلى المساهمة في تحقيق نتيجة"
+     "en": "Of, pertaining to, or involving a contribution.",
+     "ar": ""
     },
     {
      "pos": "adjective",
-     "en": "Paying tribute, tributary",
-     "ar": "دفع الجزية، الروافد"
+     "en": "(obsolete) Paying tribute, tributary.",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "A person or thing that contributes",
-     "ar": "شخص أو شيء يساهم"
+     "en": "A person or thing that contributes.",
+     "ar": ""
+    },
+    {
+     "pos": "adjective",
+     "en": "Paying tribute, tributary.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -2846,13 +2861,13 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 13,
+   "engineVersion": 3,
    "ipaUS": "/ˈkɑntɹɪbjəˌtɔɹi/",
    "ipaUK": "/ˈkɒntɹɪˌbjuːt(ə)ɹi/",
    "estCefr": "",
    "freqLabel": "",
-   "audioUS": "",
-   "audioUK": "",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "audioGen": "",
    "favorite": "false"
   },
@@ -2870,23 +2885,33 @@
    "meanings": [
     {
      "pos": "verb",
+     "en": "(transitive) To concentrate toward the essence by making more close, compact, or dense, thereby decreasing size or volume.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "(transitive, chemistry) To transform from a gaseous state into a liquid state via condensation.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "(intransitive, chemistry) To be transformed from a gaseous state into a liquid state.",
+     "ar": ""
+    },
+    {
+     "pos": "adjective",
+     "en": "(archaic) Condensed; compact; dense.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
      "en": "To concentrate toward the essence by making more close, compact, or dense, thereby decreasing size or volume.",
-     "ar": "التركيز على الجوهر عن طريق جعله أكثر قربًا أو ضغطًا أو كثافة، وبالتالي تقليل الحجم أو الحجم."
+     "ar": ""
     },
     {
      "pos": "verb",
      "en": "To transform from a gaseous state into a liquid state via condensation.",
-     "ar": "للتحول من حالة غازية إلى حالة سائلة عن طريق التكثيف."
-    },
-    {
-     "pos": "adjective",
-     "en": "Condensed; compact; dense.",
-     "ar": "مكثف ؛ مضغوط ؛ كثيف."
-    },
-    {
-     "pos": "verb",
-     "en": "To be transformed from a gaseous state into a liquid state.",
-     "ar": "أن تتحول من حالة غازية إلى حالة سائلة."
+     "ar": ""
     }
    ],
    "inflections": [
@@ -2925,11 +2950,11 @@
      "ar": ""
     },
     {
-     "en": "Boiling off water condenses a thin sauce into a soupier mixture.",
+     "en": "Water condenses on the window on cold days because of the warm air inside.",
      "ar": ""
     },
     {
-     "en": "Water condenses on the window on cold days because of the warm air inside.",
+     "en": "Boiling off water condenses a thin sauce into a soupier mixture.",
      "ar": ""
     }
    ],
@@ -2941,7 +2966,7 @@
    "due": 0,
    "ipaUS": "/kənˈdɛns/",
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/condense-us.mp3",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "id": 1784751340235,
@@ -3010,7 +3035,7 @@
    "ipaUS": "/ʌnˈdaʊtɪdli/",
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/u/und/undou/undoubtedly__us_1.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/u/und/undou/undoubtedly__gb_3.mp3",
-   "engineVersion": 2,
+   "engineVersion": 3,
    "ipaUK": "",
    "estCefr": "",
    "freqLabel": "",
