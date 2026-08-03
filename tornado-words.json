@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T15:26:23.398Z",
+ "exportedAt": "2026-08-03T15:26:27.878Z",
  "words": [
   {
    "id": 1785185030316,
@@ -4929,13 +4929,8 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To show or illustrate by example",
-     "ar": "لإظهار أو توضيح بالقدوة"
-    },
-    {
-     "pos": "verb",
-     "en": "To be an instance of or serve as an example",
-     "ar": "أن تكون مثالاً أو مثالاً يحتذى به"
+     "en": "simple past and past participle of exemplify",
+     "ar": "المشاركة البسيطة في الماضي والماضي من سبيل المثال"
     }
    ],
    "inflections": [
@@ -4976,7 +4971,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
