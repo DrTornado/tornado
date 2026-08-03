@@ -54,6 +54,13 @@ class NarrationRepository(
     private val tmpDir = File(context.cacheDir, "narration-tmp")
     private val buildLock = Mutex()
 
+    /**
+     * بصمة الصوت أثناء بناء ملاحظة — تُتيح تخزين جملها منفردة.
+     * الملاحظات لا تحمل NarrationSpec لأنها ليست بطاقات، فتحتاج المسار نفسه
+     * إلى معرفة الصوت من مكان آخر ليصنع مفتاحاً صحيحاً.
+     */
+    @Volatile private var noteVoiceTag: String? = null
+
     @Volatile var maxCacheBytes: Long = 512L * 1024 * 1024
 
     init { cardDir.mkdirs(); segDir.mkdirs(); tmpDir.mkdirs() }
@@ -137,6 +144,7 @@ class NarrationRepository(
              * موضعه لا في نهاية النص: من يعيد جملة ليفهمها يريدها الآن، لا
              * بعد دقيقتين حين تكون قد فاتته.
              */
+            noteVoiceTag = voiceTag
             val units = splitUnits(text, byParagraph && n > 1)
             if (units.isEmpty()) return@withLock null
             val segments = units.flatMap { unit ->
@@ -326,15 +334,20 @@ class NarrationRepository(
         headword: String
     ): SegmentAudio? {
         /*
-         * التخزين المنفرد للعناوين المولّدة وحدها.
+         * التخزين المنفرد لكل مقطع مولَّد — للكلمات والملاحظات معاً.
          *
-         * جُمل الملاحظات مولّدة أيضاً لكنها فريدة لا تتكرّر، فتخزين كل جملة
-         * منها منفردة يملأ المجلّد بآلاف الملفات لا يُعاد استعمال أيّها.
-         * فنستثنيها: تُبنى داخل بطاقتها وتُخزَّن معها.
+         * كان مشروطاً بوجود `spec`، وهي فارغة للملاحظات، فكانت كل جملة تُولَّد
+         * من الصفر في كل مرة: تغيير Say من ×١ إلى ×٢ يعيد توليد النصّ كاملاً،
+         * والجملة الواحدة تُولَّد مرتين داخل البناء الواحد لأنها تتكرّر.
+         *
+         * والمستخدم لاحظ ذلك ووصفه بدقة: «ليش كل طريقة تشغيل تحميل جديد؟
+         * المفروض تنزل الجملة خلاص، ما يحتاج إعادة بناء». وكان محقاً — الجملة
+         * نفسها بنفس الصوت تعطي نفس الصوت مهما تغيّر ترتيبها أو تكرارها.
          */
-        if (seg.role == SegRole.GENERATED && spec != null) {
+        val cacheTag = spec?.voiceTag ?: noteVoiceTag
+        if (seg.role == SegRole.GENERATED && cacheTag != null) {
             // الإصدار يدخل مفتاح المقاطع أيضاً، وإلا بقيت العناوين القديمة مخشخشة
-            val key = hash("v$pipelineVersion|" + seg.text + "|" + seg.lang.name + "|" + spec.voiceTag)
+            val key = hash("v$pipelineVersion|" + seg.text + "|" + seg.lang.name + "|" + cacheTag)
             val cached = File(segDir, "$key.wav")
             val sourceTag = File(segDir, "$key.src")
             if (cached.exists() && cached.length() > 64) {

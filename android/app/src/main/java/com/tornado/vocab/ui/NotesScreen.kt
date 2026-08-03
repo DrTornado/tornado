@@ -56,7 +56,12 @@ import com.tornado.vocab.data.NoteRow
  * يتنقّل بين الكلمات ويستأنف من حيث وقف بدل العودة إلى أول نصّ من ساعة.
  */
 @Composable
-fun NotesScreen(vm: NotesViewModel, onOpenNote: (Long) -> Unit = {}) {
+fun NotesScreen(
+    vm: NotesViewModel,
+    onOpenNote: (Long) -> Unit = {},
+    /** الضغط على تشغيل يفتح المشغّل — الصوت بلا شاشته يبدو معطّلاً */
+    onOpenPlayer: () -> Unit = {}
+) {
     val rows by vm.rows.collectAsStateWithLifecycle()
     val ui by vm.ui.collectAsStateWithLifecycle()
     val playback by vm.playback.collectAsStateWithLifecycle()
@@ -133,7 +138,8 @@ fun NotesScreen(vm: NotesViewModel, onOpenNote: (Long) -> Unit = {}) {
                      * قائمة الكلمات تماماً: الصفّ للمحتوى، والأيقونة للصوت.
                      */
                     onOpen = { onOpenNote(row.id) },
-                    onPlay = { vm.play(row.id) },
+                    // يشغّل من هذه الملاحظة ثم يواصل لما بعدها، ويفتح المشغّل
+                    onPlay = { vm.playAll(row.id); onOpenPlayer() },
                     onDelete = { confirmDelete = row }
                 )
             }

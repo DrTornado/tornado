@@ -51,6 +51,13 @@ class NoteSync(
             val remote = fetch()
             var pulled = 0
 
+            // شواهد الطرف الآخر أولاً: ما حُذف هناك يُحذف هنا ولا يُسحب ثانيةً
+            remote?.deleted?.let { del ->
+                for (i in 0 until del.length()) {
+                    val id = del.optLong(i, 0L)
+                    if (id != 0L) repository.acceptRemoteDelete(id)
+                }
+            }
             remote?.notes?.let { arr ->
                 for (i in 0 until arr.length()) {
                     val o = arr.optJSONObject(i) ?: continue
@@ -71,6 +78,7 @@ class NoteSync(
                  * فالضخمة تُستثنى من الرفع وتبقى تعمل محلياً كاملة — تشغيلاً
                  * وتقسيماً واستئنافاً — بدل أن يُرفض حفظها أو تُعطّل غيرها.
                  */
+                tombstones = repository.tombstoneIds()
                 val local = repository.all().filter { it.text.length <= MAX_SYNC_CHARS }
                 val body = payload(local)
                 val put = JSONObject().apply {
@@ -90,7 +98,7 @@ class NoteSync(
         }.getOrElse { SyncResult.Failed(it.message?.take(80) ?: "No connection") }
     }
 
-    private class Remote(val notes: JSONArray?, val sha: String?)
+    private class Remote(val notes: JSONArray?, val sha: String?, val deleted: JSONArray? = null)
 
     private fun fetch(): Remote? {
         client.newCall(request(Request.Builder().url(url()).get())).execute().use { r ->
@@ -104,7 +112,8 @@ class NoteSync(
             val root = runCatching { JSONObject(decoded) }.getOrNull()
             return Remote(
                 root?.optJSONArray("notes"),
-                meta.optString("sha").takeIf { it.isNotBlank() }
+                meta.optString("sha").takeIf { it.isNotBlank() },
+                root?.optJSONArray("deleted")
             )
         }
     }
@@ -145,8 +154,18 @@ class NoteSync(
             put("version", 1)
             put("exportedAt", java.time.Instant.now().toString())
             put("notes", arr)
+            /*
+             * الشواهد تُرفع مع الملاحظات.
+             *
+             * الحذف الذي يبقى محلياً يعود في المزامنة التالية من الطرف الآخر
+             * الذي لا يعلم به. والشاهدة تخبره أنه حذف متعمَّد لا نقص بيانات.
+             */
+            put("deleted", JSONArray().also { d -> tombstones.forEach(d::put) })
         }.toString(1)
     }
+
+    /** ما حُذف محلياً — يُقرأ عند كل رفع */
+    private var tombstones: List<Long> = emptyList()
 
     private companion object {
         const val PATH = "tornado-notes.json"

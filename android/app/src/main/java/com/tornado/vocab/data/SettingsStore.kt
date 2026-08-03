@@ -70,7 +70,14 @@ data class AudioSettings(
      * يُجبَر على مئة وتسعين ميغابايت.
      */
     val useKokoro: Boolean = true,
-    val cacheLimitMb: Int = 512,
+    /**
+     * حدّ التخزين الصوتي.
+     *
+     * خُفض من ٥١٢ إلى ٢٥٦: النظام نبّه المستخدم إلى «مسح الكاش للتحسين» بعد
+     * استعمال بسيط، وتنبيهٌ كهذا يجعل التطبيق يبدو متطفّلاً على الجهاز. ومع
+     * تخزين الجُمل منفردة صار البناء أرخص، فالحدّ الأدنى يكفي.
+     */
+    val cacheLimitMb: Int = 256,
     /**
      * الوضع الافتراضي: لا يُنطق إلا ما سجّله إنسان حقيقي.
      * الكلمة بلا تسجيل تُتخطّى ولا تُولَّد — هذا جوهر المنتج لا خيار فيه.
@@ -176,7 +183,7 @@ class SettingsStore(private val context: Context) {
         ttsArabicEngine = this[K.ENGINE_AR] ?: "",
         kokoroSid = this[K.KOKORO_SID] ?: 26,
         useKokoro = this[K.USE_KOKORO] ?: true,
-        cacheLimitMb = this[K.CACHE_MB] ?: 512,
+        cacheLimitMb = this[K.CACHE_MB] ?: 256,
         humanOnly = this[K.HUMAN_ONLY] ?: true,
         allowSystemVoice = this[K.ALLOW_SYSTEM] ?: false,
         cloudEnabled = this[K.CLOUD_ENABLED] ?: true,

@@ -80,6 +80,39 @@ class NotesViewModel(app: Application) : AndroidViewModel(app) {
      * والتالي كما يتنقّل بين الكلمات — ويستأنف من حيث وقف بدل العودة إلى أول
      * نصّ من ساعة.
      */
+    /**
+     * يشغّل كل الملاحظات بالترتيب، بادئاً بواحدة معيّنة.
+     *
+     * كانت كل ملاحظة جزيرة: تنتهي فيقف المشغّل، وزرّ التالي لا يجد ما بعدها
+     * لأنها وحدها في الطابور. ومن يستمع وهو يمشي أو يقود لا يستطيع أن يلتقط
+     * جواله عند نهاية كل نصّ.
+     */
+    fun playAll(startId: Long? = null) = viewModelScope.launch {
+        val all = notes.all().sortedByDescending { it.updatedAt }
+        val items = all.flatMap { note ->
+            val chunks = NoteChunker.split(note.text)
+            chunks.mapIndexed { i, text ->
+                PlayItem(
+                    id = note.id,
+                    title = if (chunks.size == 1) note.title else "${note.title} · ${i + 1}",
+                    subtitle = text.take(70),
+                    kind = RowKind.NOTE_CHUNK,
+                    chunkIndex = i,
+                    favorite = note.favorite
+                )
+            }
+        }
+        if (items.isEmpty()) {
+            _ui.value = _ui.value.copy(message = "No notes to play yet")
+            return@launch
+        }
+        val start = startId?.let { id -> items.indexOfFirst { it.id == id } }
+            ?.takeIf { it >= 0 } ?: 0
+        PlaybackBus.submit(getApplication()) {
+            it.setQueue(items, start, PlayScope.LIST, autoPlay = true)
+        }
+    }
+
     fun play(id: Long, fromChunk: Int? = null) = viewModelScope.launch {
         val note = notes.byId(id) ?: return@launch
         val chunks = NoteChunker.split(note.text)
