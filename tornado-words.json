@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T15:27:22.921Z",
+ "exportedAt": "2026-08-03T15:27:29.568Z",
  "words": [
   {
    "id": 1785185030316,
@@ -7075,17 +7075,17 @@
     {
      "pos": "noun",
      "en": "A soft-bodied invertebrate of the phylum Mollusca, typically with a hard shell of one or more pieces.",
-     "ar": ""
+     "ar": "اللافقاريات رخوة الجسم من شعبة الرخويات، وعادة مع قشرة صلبة من قطعة واحدة أو أكثر."
     },
     {
      "pos": "noun",
      "en": "(figuratively) A weak-willed person.",
-     "ar": ""
+     "ar": "(مجازياً) شخص ضعيف الإرادة."
     },
     {
      "pos": "noun",
      "en": "A weak-willed person.",
-     "ar": ""
+     "ar": "شخص ضعيف الإرادة."
     }
    ],
    "inflections": [
@@ -7140,7 +7140,7 @@
    "examples": [
     {
      "en": "bivalve molluscs",
-     "ar": ""
+     "ar": "رخويات ثنائية الصدفة"
     }
    ],
    "differences": [],
