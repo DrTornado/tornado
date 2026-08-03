@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:28:27.201Z",
+ "exportedAt": "2026-08-03T09:28:30.465Z",
  "words": [
   {
    "id": 1785185030316,
@@ -4600,8 +4600,8 @@
   {
    "id": 1784733987627,
    "word": "turf",
-   "ipa": "/tɜːf/",
-   "arabicPron": "تف",
+   "ipa": "/tʌɾf/",
+   "arabicPron": "تيرف",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -4611,32 +4611,32 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A layer of earth covered with grass; sod.",
+     "en": "(uncountable) A layer of earth covered with grass; sod.",
      "ar": "طبقة من الأرض مغطاة بالعشب."
     },
     {
      "pos": "noun",
-     "en": "A piece of such a layer cut from the soil. May be used as sod to make a lawn, dried for peat, stacked to form earthen structures, etc.",
+     "en": "(countable) A piece of such a layer cut from the soil. May be used as sod to make a lawn, dried for peat, stacked to form earthen structures, etc.",
      "ar": "قطعة من هذه الطبقة مقطوعة من التربة. يمكن استخدامها كترسبات لصنع العشب، وتجفيفها للخث، وتكديسها لتشكيل هياكل ترابية، وما إلى ذلك."
     },
     {
-     "pos": "verb",
-     "en": "To cover with turf; to create a lawn by laying turfs.",
+     "pos": "noun",
+     "en": "(uncountable, specifically) A surface of synthetic fibers made to look like grass; artificial turf.",
      "ar": "للتغطية بالعشب ؛ لإنشاء حديقة عن طريق وضع العشب."
     },
     {
      "pos": "verb",
-     "en": "(Ultimate Frisbee) To throw a frisbee well short of its intended target, usually causing it to hit the ground within 10 yards of its release.",
+     "en": "To cover with turf; to create a lawn by laying turfs.",
      "ar": "(الطبق الطائر النهائي) لرمي الطبق الطائر أقل بكثير من الهدف المقصود، وعادة ما يتسبب في اصطدامه بالأرض في غضون 10 ياردات من إطلاقه."
     },
     {
-     "pos": "noun",
-     "en": "A block of peat used as fuel.",
+     "pos": "verb",
+     "en": "(Ultimate Frisbee) To throw a frisbee well short of its intended target, usually causing it to hit the ground within 10 yards of its release.",
      "ar": "كتلة من الخث تستخدم كوقود."
     },
     {
      "pos": "verb",
-     "en": "To throw a frisbee well short of its intended target, usually causing it to hit the ground within 10 yards of its release.",
+     "en": "(business) To fire from a job or dismiss from a task.",
      "ar": ""
     }
    ],
@@ -4677,7 +4677,15 @@
    ],
    "examples": [
     {
+     "en": "In climates where grass struggles to grow, turf is usually used instead on sports fields.",
+     "ar": ""
+    },
+    {
      "en": "Eight managers were turfed after the merger of the two companies.",
+     "ar": ""
+    },
+    {
+     "en": "The company turfed the concept car because the prototype performed poorly.",
      "ar": ""
     }
    ],
@@ -4690,7 +4698,9 @@
    "audioGen": "https://api.dictionaryapi.dev/media/pronunciations/en/turf-au.mp3",
    "freqLabel": "Top 18,000 words",
    "estCefr": "B2",
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUS": "/tɝf/",
+   "audioUS": "-us"
   },
   {
    "id": 1784733972020,
