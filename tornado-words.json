@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:27:11.098Z",
+ "exportedAt": "2026-08-03T09:27:24.641Z",
  "words": [
   {
    "id": 1785185030316,
@@ -2177,7 +2177,7 @@
    "meanings": [
     {
      "pos": "adverb",
-     "en": "(temporal location) At a later or succeeding time.",
+     "en": "(temporal location) At a later or succeeding time; after that;",
      "ar": "(الموقع الزمني) في وقت لاحق أو لاحق."
     },
     {
@@ -2238,9 +2238,10 @@
    "interval": 0,
    "due": 0,
    "ipaUS": "/ˈæf.tɚ.wɚdz/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/a/aft/after/afterwards__us_2.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/a/aft/after/afterwards__gb_3.mp3",
-   "engineVersion": 2
+   "audioUS": "-us",
+   "audioUK": "-uk",
+   "engineVersion": 3,
+   "ipaUK": "/ˈɑːftə.wədz/"
   },
   {
    "id": 1784754761850,
@@ -2256,23 +2257,13 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To repair, as anything that is torn, broken, defaced, decayed, or the like; to restore from partial decay, injury, or defacement.",
-     "ar": "لإصلاح، مثل أي شيء ممزق أو مكسور أو مشوه أو متحلل أو ما شابه ذلك ؛ لاستعادة من الاضمحلال الجزئي أو الإصابة أو التشوه."
-    },
-    {
-     "pos": "verb",
-     "en": "To alter for the better; to set right; to reform; hence, to quicken; as, to mend one's manners or pace.",
-     "ar": "أن يغير للأفضل ؛ أن يصحح ؛ أن يصلح ؛ وبالتالي، أن يسرع ؛ كما، أن يصلح أخلاقه أو وتيرته."
+     "en": "present participle and gerund of mend",
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "The act by which something is mended or repaired.",
-     "ar": "الفعل الذي يتم من خلاله إصلاح شيء ما أو إصلاحه."
-    },
-    {
-     "pos": "verb",
-     "en": "present participle and gerund of mend",
-     "ar": "الحاضر الفاعل و gerund من إصلاح"
+     "ar": ""
     }
    ],
    "inflections": [
@@ -2319,7 +2310,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "B2",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "id": 1784753652740,
@@ -2334,18 +2325,33 @@
    "meanings": [
     {
      "pos": "verb",
+     "en": "(transitive) To cause, bring about, lead to.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "(transitive) To lead by persuasion or influence; incite or prevail upon.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "(transitive) To induce the labour of (a pregnant woman).",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
      "en": "To lead by persuasion or influence; incite or prevail upon.",
-     "ar": "القيادة عن طريق الإقناع أو التأثير ؛ التحريض أو التغلب عليها."
+     "ar": ""
     },
     {
      "pos": "verb",
      "en": "To cause, bring about, lead to.",
-     "ar": "للتسبب، وإحداث، وتؤدي إلى."
+     "ar": ""
     },
     {
      "pos": "verb",
      "en": "To induce the labour of (a pregnant woman).",
-     "ar": "للحث على عمل (المرأة الحامل)."
+     "ar": ""
     }
    ],
    "inflections": [
@@ -2380,7 +2386,7 @@
    "collocations": [],
    "examples": [
     {
-     "en": "His meditation induced a compromise.   Opium induces sleep.",
+     "en": "His meditation induced a compromise. Opium induces sleep.",
      "ar": ""
     },
     {
@@ -2395,9 +2401,10 @@
    "interval": 0,
    "due": 0,
    "ipaUS": "/ɪnˈduːs/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/i/ind/induc/induce__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/i/ind/induc/induce__gb_1.mp3",
-   "engineVersion": 2
+   "audioUS": "-us",
+   "audioUK": "-uk",
+   "engineVersion": 3,
+   "ipaUK": "/ɪnˈdjuːs/"
   },
   {
    "id": 1784753085143,
@@ -2412,17 +2419,17 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A disadvantageous aspect of something that is normally advantageous",
+     "en": "A disadvantageous aspect of something that is normally advantageous.",
      "ar": "جانب سلبي لشيء مفيد عادة"
     },
     {
      "pos": "noun",
-     "en": "A downward tendency, especially in the price of shares etc",
+     "en": "A downward tendency, especially in the price of shares etc.",
      "ar": "اتجاه هبوطي، خاصة في سعر الأسهم وما إلى ذلك"
     },
     {
      "pos": "noun",
-     "en": "The side of something that is at the bottom, or that is intended to face downward",
+     "en": "The side of something that is at the bottom, or that is intended to face downward.",
      "ar": "جانب شيء موجود في القاع، أو يهدف إلى مواجهته لأسفل"
     }
    ],
@@ -2471,7 +2478,7 @@
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/downside-us.mp3",
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 11,
+   "engineVersion": 3,
    "ipaUK": "",
    "audioUK": "",
    "audioGen": "",
@@ -2490,23 +2497,18 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "The act of gratifying, or pleasing, either the mind, the taste, or the appetite.",
-     "ar": "فعل إرضاء، أو إرضاء، إما العقل أو الذوق أو الشهية."
-    },
-    {
-     "pos": "noun",
-     "en": "A feeling of pleasure; satisfaction",
-     "ar": "الشعور بالسعادة والرضا"
+     "en": "(uncountable) A feeling of pleasure; satisfaction.",
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "The act of gratifying or pleasing, either the mind, or the appetite or taste.",
-     "ar": "فعل إرضاء أو إرضاء، إما العقل، أو الشهية أو الذوق."
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "A gratuity; a reward.",
-     "ar": "مكافأة."
+     "ar": ""
     }
    ],
    "inflections": [
@@ -2556,11 +2558,7 @@
    ],
    "examples": [
     {
-     "en": "the gratification of the heart",
-     "ar": ""
-    },
-    {
-     "en": "gratification of the heart gratification of the palate",
+     "en": "gratification of the heart    gratification of the palate",
      "ar": ""
     }
    ],
@@ -2570,7 +2568,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "id": 1784752076144,
@@ -2585,28 +2583,28 @@
    ],
    "meanings": [
     {
-     "pos": "noun",
-     "en": "(chiefly in the plural) An incompatible substance; one of a group of things that cannot be placed or used together because of a change of chemical composition or opposing medicinal qualities.",
+     "pos": "adjective",
+     "en": "(chemistry) Incapable of being together without mutual reaction or decomposition, as certain medicines.",
      "ar": "(بشكل رئيسي في صيغة الجمع) مادة غير متوافقة ؛ واحدة من مجموعة من الأشياء التي لا يمكن وضعها أو استخدامها معًا بسبب تغيير التركيب الكيميائي أو معارضة الصفات الطبية."
-    },
-    {
-     "pos": "noun",
-     "en": "A consequent of a contrary.",
-     "ar": "نتيجة لعكس ذلك."
-    },
-    {
-     "pos": "adjective",
-     "en": "Of two things: that cannot coexist; not congruous because of differences",
-     "ar": "من أمرين: لا يمكن أن يتعايش ؛ غير متطابق بسبب الاختلافات"
-    },
-    {
-     "pos": "adjective",
-     "en": "Incapable of being together without mutual reaction or decomposition, as certain medicines.",
-     "ar": "عدم القدرة على البقاء معًا دون رد فعل متبادل أو تحلل، كأدوية معينة."
     },
     {
      "pos": "adjective",
      "en": "Of two or more things: that cannot coexist; not congruous because of differences; unable to function together due to dissimilarities.",
+     "ar": "نتيجة لعكس ذلك."
+    },
+    {
+     "pos": "noun",
+     "en": "(medicine, chemistry, chiefly in the plural) An incompatible substance; one of a group of things that cannot be placed or used together because of a change of chemical composition or opposing medicinal qualities.",
+     "ar": "من أمرين: لا يمكن أن يتعايش ؛ غير متطابق بسبب الاختلافات"
+    },
+    {
+     "pos": "noun",
+     "en": "(philosophy) A consequent of a contrary.",
+     "ar": "عدم القدرة على البقاء معًا دون رد فعل متبادل أو تحلل، كأدوية معينة."
+    },
+    {
+     "pos": "adjective",
+     "en": "Incapable of being together without mutual reaction or decomposition, as certain medicines.",
      "ar": "من شيئين أو أكثر: لا يمكن أن يتعايش ؛ غير متطابق بسبب الاختلافات ؛ غير قادر على العمل معًا بسبب الاختلافات."
     },
     {
@@ -2658,11 +2656,11 @@
    ],
    "examples": [
     {
-     "en": "the incompatibles of iron",
+     "en": "My phone is incompatible with the latest version of this app.",
      "ar": ""
     },
     {
-     "en": "My phone is incompatible with the latest version of this app.",
+     "en": "the incompatibles of iron",
      "ar": ""
     }
    ],
@@ -2674,7 +2672,7 @@
    "due": 0,
    "ipaUS": "/ˌɪŋkəmˈpætɪbəl/",
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/incompatible-us.mp3",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "id": 1784752004146,
