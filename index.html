@@ -25447,6 +25447,7 @@ function kokoroVoice() { return kokoroPref().voice || 'bm_george'; }
 function kokoroOn() { return kokoroPref().enabled !== false; }
 
 let kokoroWorker = null, kokoroReady = null, kokoroBroken = false, kokoroSeq = 0;
+let kokoroBackend = '';   // ما استقرّ عليه العامل فعلاً: webgpu/fp32 أو wasm/q8
 const kokoroWaiting = new Map();
 
 function kokoroWorkerSource() {
@@ -25460,13 +25461,34 @@ function kokoroWorkerSource() {
    */
   return `
     let tts = null, loading = null;
+    /*
+     * المحرّك يُختار داخل العامل بالتجربة، لا من الخيط الرئيسي بالافتراض.
+     *
+     * كنت أفحص navigator.gpu في الصفحة ثم أفرض webgpu على العامل. ووجود
+     * WebGPU في الصفحة لا يعني توفّره في العامل: قد يكون محجوباً هناك، أو
+     * يفشل طلب المهايئ. فيسقط التحميل كلّه برسالة
+     * «no available backend found» ويعود المستخدم لصوت النظام — وهو ما وقع.
+     *
+     * فنجرّب الأسرع، فإن سقط جرّبنا الأضمن. والقرار عند من يملك الحقيقة.
+     */
     async function load(dtype, device, cdns) {
       let mod = null, lastErr = null;
       for (const url of cdns) {
         try { mod = await import(url); break; } catch (e) { lastErr = e; }
       }
       if (!mod) throw lastErr || new Error('kokoro-js unreachable');
-      return mod.KokoroTTS.from_pretrained(${JSON.stringify(KOKORO_MODEL)}, { dtype, device });
+      const plans = device === 'webgpu'
+        ? [{ dtype: 'fp32', device: 'webgpu' }, { dtype: 'q8', device: 'wasm' }]
+        : [{ dtype: 'q8', device: 'wasm' }];
+      let err = null;
+      for (const p of plans) {
+        try {
+          const t = await mod.KokoroTTS.from_pretrained(${JSON.stringify(KOKORO_MODEL)}, p);
+          self.postMessage({ id: 0, note: 'engine', engine: p.device + '/' + p.dtype });
+          return t;
+        } catch (e) { err = e; }
+      }
+      throw err || new Error('no backend');
     }
     self.onmessage = async (e) => {
       const { id, cmd, text, voice, dtype, device, cdns } = e.data;
@@ -25491,7 +25513,9 @@ async function kokoroBoot() {
     const url = URL.createObjectURL(new Blob([kokoroWorkerSource()], { type: 'text/javascript' }));
     const w = new Worker(url, { type: 'module' });
     w.onmessage = ev => {
-      const { id, ok, err, pcm, rate } = ev.data || {};
+      const { id, ok, err, pcm, rate, note, engine } = ev.data || {};
+      // العامل يخبرنا بأي محرّك استقرّ — نعرضه فلا يبقى الاختيار مخفياً
+      if (note === 'engine') { kokoroBackend = engine; kokoroRefreshUi(); return; }
       const pend = kokoroWaiting.get(id);
       if (!pend) return;
       kokoroWaiting.delete(id);
@@ -25550,7 +25574,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 90;
+const BUILD = 91;
 
 function kokoroRefreshUi() {
   const sel = document.getElementById('kokoro-voice');
@@ -25563,7 +25587,7 @@ function kokoroRefreshUi() {
   chk.checked = kokoroOn();
   sel.disabled = !kokoroOn();
   kokoroStatus(kokoroOn()
-    ? `v${BUILD} · Kokoro 82M · ${navigator.gpu ? 'WebGPU' : 'CPU'} · downloads once, then works offline`
+    ? `v${BUILD} · Kokoro 82M${kokoroBackend ? ' · ' + kokoroBackend : ''} · downloads once, then works offline`
     : `v${BUILD} · Using your device voice`);
 }
 
