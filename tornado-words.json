@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T20:25:14.364Z",
+ "exportedAt": "2026-08-03T20:25:18.578Z",
  "words": [
   {
    "id": 1784978307444,
@@ -7633,18 +7633,13 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To render (much) smaller, turn into a dwarf (version",
-     "ar": "لجعلها أصغر (بكثير)، تتحول إلى قزم (نسخة)"
-    },
-    {
-     "pos": "verb",
-     "en": "To make appear (much) smaller, puny, tiny",
-     "ar": "لجعلها تبدو أصغر (بكثير)، ضئيلة، صغيرة"
+     "en": "present participle and gerund of dwarf",
+     "ar": "الحاضر الفاعل و gerund من قزم"
     },
     {
      "pos": "noun",
-     "en": "The situation where something is made to seem (relatively) small or unimportant",
-     "ar": "الحالة التي يبدو فيها شيء ما صغيرًا (نسبيًا) أو غير مهم"
+     "en": "The situation where something is made to seem (relatively) small or unimportant.",
+     "ar": "الحالة التي يبدو فيها شيء ما صغيرًا (نسبيًا) أو غير مهم."
     }
    ],
    "inflections": [
@@ -7701,7 +7696,7 @@
    "due": 0,
    "freqLabel": "Top 8,000 words",
    "estCefr": "B2",
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "audioUS": "",
@@ -8100,13 +8095,8 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "The greatest or utmost point, degree or condition",
-     "ar": "النقطة أو الدرجة أو الشرط الأكبر أو الأقصى"
-    },
-    {
-     "pos": "noun",
-     "en": "Each of the things at opposite ends of a range or scale",
-     "ar": "كل من الأشياء على طرفي نقيض من نطاق أو مقياس"
+     "en": "The opposite ends of a range or scale.",
+     "ar": "الأطراف المعاكسة للنطاق أو المقياس."
     }
    ],
    "inflections": [
@@ -8149,11 +8139,11 @@
     }
    ],
    "differences": [],
-   "audioUS": "",
-   "audioUK": "",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "/ɪkˈstɹimz/",
    "ipaUK": "/ɪkˈstɹiːmz/",
    "estCefr": "",
