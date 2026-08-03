@@ -1,93 +1,8 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T19:46:34.000Z",
+ "exportedAt": "2026-08-03T19:47:43.650Z",
  "words": [
-  {
-   "id": 1785185030316,
-   "word": "compulsory",
-   "ipa": "/kəmˈpʌlsəɹi/",
-   "arabicPron": "كمبالسري",
-   "oxford": "3000",
-   "cefr": "B2",
-   "pos": [
-    "noun",
-    "adjective"
-   ],
-   "meanings": [
-    {
-     "pos": "adjective",
-     "en": "Required; obligatory; mandatory.",
-     "ar": "شيء إلزامي أو إلزامي."
-    },
-    {
-     "pos": "adjective",
-     "en": "Having the power of compulsion; constraining.",
-     "ar": "مطلوب ؛ إلزامي ؛ إلزامي."
-    },
-    {
-     "pos": "noun",
-     "en": "Something that is compulsory or required.",
-     "ar": "امتلاك قوة الإكراه ؛ التقييد."
-    }
-   ],
-   "inflections": [
-    "compulsory",
-    "compulsories"
-   ],
-   "derivatives": [],
-   "synonyms": [
-    {
-     "en": "mandatory",
-     "ar": "المطبقة"
-    },
-    {
-     "en": "obligatory",
-     "ar": "إلزامية"
-    },
-    {
-     "en": "required",
-     "ar": "مطلوب"
-    }
-   ],
-   "collocations": [
-    {
-     "en": "compulsory education",
-     "ar": "تعليم الزامي"
-    },
-    {
-     "en": "compulsory arbitration",
-     "ar": "تحكيم إجباري"
-    },
-    {
-     "en": "compulsory military",
-     "ar": "الجيش الإجباري"
-    },
-    {
-     "en": "made compulsory",
-     "ar": "إلزامية التنمية المهنية المستمرة"
-    }
-   ],
-   "examples": [
-    {
-     "en": "The ten-dollar fee was compulsory.",
-     "ar": ""
-    },
-    {
-     "en": "Such compulsory measures are limited.",
-     "ar": ""
-    }
-   ],
-   "differences": [],
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "interval": 0,
-   "due": 0,
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/com/compu/compulsory__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/com/compu/compulsory__gb_1.mp3",
-   "engineVersion": 3
-  },
   {
    "id": 1785084977101,
    "word": "skiing",
@@ -9901,6 +9816,11 @@
    "id": 1785705363036,
    "word": "fucking",
    "deletedAt": 1785705886800
+  },
+  {
+   "id": 1785185030316,
+   "word": "compulsory",
+   "deletedAt": 1785786459494
   }
  ]
 }
