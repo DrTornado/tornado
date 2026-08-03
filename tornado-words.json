@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:26:59.558Z",
+ "exportedAt": "2026-08-03T09:27:04.395Z",
  "words": [
   {
    "id": 1785185030316,
@@ -1865,7 +1865,7 @@
   },
   {
    "id": 1784758615136,
-   "word": "pathologies",
+   "word": "pathology",
    "ipa": "/pəˈθɒləd͡ʒi/",
    "arabicPron": "بثولدجي",
    "oxford": "",
@@ -1876,13 +1876,23 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "The study of the nature of disease and its causes, processes, development, and consequences",
-     "ar": "دراسة طبيعة المرض وأسبابه وعملياته وتطوره وعواقبه"
+     "en": "The study of the nature of disease and its causes, processes, development, and consequences; now usually and especially in the clinical and academic medicine subsenses defined below.",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "Pathosis: any deviation from a healthy or normal structure or function",
-     "ar": "المرض: أي انحراف عن بنية أو وظيفة صحية أو طبيعية"
+     "en": "Pathosis: any deviation from a healthy or normal structure or function; abnormality; illness or malformation.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "The study of the nature of disease and its causes, processes, development, and consequences; now usually and especially in the clinical and academic medicine subsenses defined below. The clinical biomedical specialty that provides microscopy and other laboratory services to clinicians (e.g., cytology, histology, cytopathology, histopathology, cytometry).",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "The clinical biomedical specialty that provides microscopy and other laboratory services to clinicians (e.g., cytology, histology, cytopathology, histopathology, cytometry).",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -1908,10 +1918,35 @@
      "ar": "حالَةٌ مَرَضِيَّة"
     }
    ],
-   "collocations": [],
+   "collocations": [
+    {
+     "en": "plant pathology",
+     "ar": ""
+    },
+    {
+     "en": "social pathology",
+     "ar": ""
+    },
+    {
+     "en": "clinical pathology",
+     "ar": ""
+    },
+    {
+     "en": "speech pathology",
+     "ar": ""
+    }
+   ],
    "examples": [
     {
-     "en": "The surgeon sent a specimen of the cyst to the pathology department for staining and analysis to determine its histologic subtype.",
+     "en": "Some sort of renal pathology was suspected, but imaging and even biopsy found no discernible pathology, glomerular or otherwise.",
+     "ar": ""
+    },
+    {
+     "en": "The surgeon sent a specimen of the cyst to the hospital's pathology department for staining and analysis to determine its histologic subtype.",
+     "ar": ""
+    },
+    {
+     "en": "Those three pioneering pathologists went on to become leaders in building the pathology departments at several universities.",
      "ar": ""
     }
    ],
@@ -1923,7 +1958,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 13,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "audioUS": "",
@@ -1933,33 +1968,44 @@
   },
   {
    "id": 1784757229581,
-   "word": "counterfactuals",
+   "word": "counterfactual",
    "ipa": "/ˌkaʊntɚˈfæktʃuəl/",
    "arabicPron": "كاونترفاكتشول",
    "oxford": "",
    "cefr": "",
    "pos": [
+    "adjective",
     "noun"
    ],
    "meanings": [
     {
      "pos": "adjective",
-     "en": "Contrary to known or agreed facts",
+     "en": "Contrary to known or agreed facts; untrue.",
      "ar": ""
     },
     {
      "pos": "adjective",
-     "en": "Of or in comparison to a hypothetical state of the world",
+     "en": "Of or in comparison to a hypothetical state of the world.",
      "ar": ""
     },
     {
      "pos": "noun",
-     "en": "A claim, hypothesis, or other belief that is contrary to the facts",
+     "en": "A claim, hypothesis, or other belief that is contrary to the facts.",
      "ar": ""
     },
     {
      "pos": "noun",
-     "en": "A conditional statement in which the conditional clause is false",
+     "en": "A hypothetical state of the world, used to assess the impact of an action.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "(linguistics, philosophy) A conditional statement in which the conditional clause is false.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "A conditional statement in which the conditional clause is false.",
      "ar": ""
     }
    ],
@@ -1970,15 +2016,40 @@
    "derivatives": [],
    "synonyms": [
     {
-     "en": "conditional",
-     "ar": "شرطي"
+     "en": "contrafactual",
+     "ar": ""
     },
     {
-     "en": "contrary to fact",
-     "ar": "مخالف"
+     "en": "counterfact",
+     "ar": ""
+    },
+    {
+     "en": "misapprehension",
+     "ar": ""
+    },
+    {
+     "en": "misconception",
+     "ar": ""
+    },
+    {
+     "en": "misunderstanding",
+     "ar": ""
     }
    ],
-   "collocations": [],
+   "collocations": [
+    {
+     "en": "counterfactual conditionals",
+     "ar": ""
+    },
+    {
+     "en": "counterfactual thinking",
+     "ar": ""
+    },
+    {
+     "en": "counterfactual conditional",
+     "ar": ""
+    }
+   ],
    "examples": [],
    "differences": [],
    "right": 0,
@@ -1986,13 +2057,13 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "/ˌkaʊn.tə(ɹ)ˈfæk.tʃu.əl/",
    "estCefr": "",
    "freqLabel": "",
    "audioUS": "",
-   "audioUK": "",
+   "audioUK": "-uk",
    "audioGen": "",
    "favorite": "false"
   },
