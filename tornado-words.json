@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T15:26:49.924Z",
+ "exportedAt": "2026-08-03T15:27:01.576Z",
  "words": [
   {
    "id": 1785185030316,
@@ -8260,13 +8260,8 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "The greatest or utmost point, degree or condition",
-     "ar": "النقطة أو الدرجة أو الشرط الأكبر أو الأقصى"
-    },
-    {
-     "pos": "noun",
-     "en": "Each of the things at opposite ends of a range or scale",
-     "ar": "كل من الأشياء على طرفي نقيض من نطاق أو مقياس"
+     "en": "The opposite ends of a range or scale.",
+     "ar": "الأطراف المعاكسة للنطاق أو المقياس."
     }
    ],
    "inflections": [
@@ -8309,11 +8304,11 @@
     }
    ],
    "differences": [],
-   "audioUS": "",
-   "audioUK": "",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "/ɪkˈstɹimz/",
    "ipaUK": "/ɪkˈstɹiːmz/",
    "estCefr": "",
@@ -8595,24 +8590,19 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "To contribute to a blog",
-     "ar": "للمساهمة في مدونة"
+     "pos": "noun",
+     "en": "(computing) The design and editing of a blog; weblogging.",
+     "ar": "(الحوسبة) تصميم وتحرير مدونة ؛ التدوين على شبكة الإنترنت."
     },
     {
      "pos": "verb",
-     "en": "To blag, to steal something",
-     "ar": "التباهي، وسرقة شيء ما"
-    },
-    {
-     "pos": "verb",
-     "en": "To look sullen or sulky",
-     "ar": "أن تبدو متجهمًا أو عابسًا"
+     "en": "present participle and gerund of blog",
+     "ar": "تقديم الفاعلية وجيروند من بلوق"
     },
     {
      "pos": "noun",
-     "en": "The design and editing of a blog",
-     "ar": "تصميم وتحرير مدونة"
+     "en": "The design and editing of a blog; weblogging.",
+     "ar": "تصميم وتحرير مدونة ؛ التدوين على شبكة الإنترنت."
     }
    ],
    "inflections": [
@@ -8646,12 +8636,12 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "/ˈblɑ.ɡiŋ/",
    "ipaUK": "",
    "estCefr": "",
    "freqLabel": "",
-   "audioUS": "",
+   "audioUS": "-us",
    "audioUK": "",
    "audioGen": "",
    "favorite": "false"
@@ -9731,24 +9721,19 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "To hold very tightly, as to not fall off",
-     "ar": "التمسك بإحكام شديد، حتى لا تسقط"
-    },
-    {
-     "pos": "verb",
-     "en": "To adhere to an object, without being affixed, in such a way as to follow its contours. Used especially of fabrics and films",
-     "ar": "التمسك بشيء ما، دون أن يتم لصقه، بطريقة تتبع ملامحه. تستخدم بشكل خاص من الأقمشة والأفلام"
-    },
-    {
-     "pos": "verb",
-     "en": "To produce a high-pitched ringing sound, like a small bell",
-     "ar": "لإنتاج صوت رنين عالي النبرة، مثل جرس صغير"
+     "pos": "adjective",
+     "en": "Clingy.",
+     "ar": "لزج, دبق"
     },
     {
      "pos": "noun",
-     "en": "The act of one who clings",
-     "ar": "فعل من يتشبث"
+     "en": "The act of one who clings.",
+     "ar": "فعل من يتشبث."
+    },
+    {
+     "pos": "verb",
+     "en": "present participle and gerund of cling",
+     "ar": "تقديم الفاعلية والتشبث"
     }
    ],
    "inflections": [
@@ -9801,7 +9786,7 @@
    "due": 0,
    "audioUS": "",
    "audioUK": "",
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -9827,27 +9812,27 @@
     {
      "pos": "noun",
      "en": "A small piece of material left on an edge after a cutting operation.",
-     "ar": ""
+     "ar": "قطعة صغيرة من المواد متروكة على الحافة بعد عملية القطع."
     },
     {
      "pos": "noun",
      "en": "A sharp, pointy object, such as a sliver or splinter.",
-     "ar": ""
+     "ar": "جسم حاد ومدبب، مثل الشظية أو الشظية."
     },
     {
      "pos": "noun",
      "en": "(engineering) A revolving disk or cone with abrasive surfaces used to grind hard products in a grinder or mill.",
-     "ar": ""
+     "ar": "(هندسة) قرص دوار أو مخروط ذو أسطح كاشطة يستخدم لطحن المنتجات الصلبة في مطحنة أو مطحنة."
     },
     {
      "pos": "verb",
      "en": "(transitive, engineering) To grind using a burr (revolving disk or cone with abrasive surfaces).",
-     "ar": ""
+     "ar": "(متعدية، هندسية) للطحن باستخدام نتوء (قرص دوار أو مخروط بأسطح كاشطة)."
     },
     {
      "pos": "noun",
      "en": "A rough humming sound.",
-     "ar": ""
+     "ar": "صوت طنين خشن."
     },
     {
      "pos": "noun",
@@ -9903,11 +9888,11 @@
    "examples": [
     {
      "en": "You left a bunch of burrs on those parts yesterday. You've already been told not to miss the deburring operation.",
-     "ar": ""
+     "ar": "لقد تركت حفنة من النتوءات على تلك الأجزاء أمس. لقد تم إخبارك بالفعل بعدم تفويت عملية إزالة الأزيز."
     },
     {
      "en": "burr grinder",
-     "ar": ""
+     "ar": "مطحنة نتوءات"
     }
    ],
    "differences": [],
