@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:26:11.987Z",
+ "exportedAt": "2026-08-03T09:26:17.928Z",
  "words": [
   {
    "id": 1785185030316,
@@ -614,12 +614,12 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "The quality of being respectable",
+     "en": "The quality of being respectable.",
      "ar": "جودة أن تكون محترمًا"
     },
     {
      "pos": "noun",
-     "en": "The class of respectable people",
+     "en": "The class of respectable people.",
      "ar": "فئة المحترمين"
     }
    ],
@@ -651,7 +651,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 13,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -675,22 +675,32 @@
     {
      "pos": "adverb",
      "en": "In a manner which makes the fact or conclusion evident; obviously; as may be clearly inferred.",
-     "ar": "بطريقة تجعل الحقيقة أو الاستنتاج واضحين ؛ من الواضح ؛ كما يمكن الاستدلال عليه بوضوح."
+     "ar": ""
     },
     {
      "pos": "adverb",
-     "en": "In such a way as to be clearly visible or manifest; distinctly, clearly.",
-     "ar": "بطريقة تكون مرئية أو واضحة بشكل واضح ؛ بوضوح، بوضوح."
+     "en": "(proscribed) Apparently.",
+     "ar": ""
+    },
+    {
+     "pos": "adverb",
+     "en": "(obsolete) In such a way as to be clearly visible or manifest; distinctly, clearly.",
+     "ar": ""
     },
     {
      "pos": "adverb",
      "en": "In a manner which makes the fact or conclusion evident; obviously; as may be clearly inferred. .mw-parser-output .defdate{font-size:smaller}",
-     "ar": "بطريقة تجعل الحقيقة أو الاستنتاج واضحًا ؛ من الواضح ؛ كما يمكن الاستدلال عليه بوضوح. .mw - parser - output .defdate {font - size:smaller}"
+     "ar": ""
+    },
+    {
+     "pos": "adverb",
+     "en": "In such a way as to be clearly visible or manifest; distinctly, clearly.",
+     "ar": ""
     },
     {
      "pos": "adverb",
      "en": "Apparently.",
-     "ar": "على ما يبدو."
+     "ar": ""
     }
    ],
    "inflections": [
@@ -727,10 +737,13 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/evidently-us.mp3",
+   "audioUS": "-us",
    "freqLabel": "Top 18,000 words",
    "estCefr": "B2",
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUS": "/ˈɛvɪdəntli/",
+   "ipaUK": "/ˈɛvɪdəntli/",
+   "audioUK": "-uk"
   },
   {
    "id": 1784811704077,
