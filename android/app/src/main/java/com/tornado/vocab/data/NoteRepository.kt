@@ -59,7 +59,7 @@ class NoteRepository(context: Context) {
         dao.update(note.copy(updatedAt = System.currentTimeMillis()))
     }
 
-    suspend fun delete(id: Long) = withContext(Dispatchers.IO) { dao.deleteById(id) }
+    suspend fun delete(id: Long) = withContext(Dispatchers.IO) { dao.deleteWithTombstone(id) }
     suspend fun setLastChunk(id: Long, chunk: Int) =
         withContext(Dispatchers.IO) { dao.setLastChunk(id, chunk) }
     suspend fun setFavorite(id: Long, fav: Boolean) =
@@ -67,9 +67,29 @@ class NoteRepository(context: Context) {
 
     /** يستورد ملاحظة قادمة من المزامنة بلا أن يدوس على أحدث منها محلياً */
     suspend fun mergeRemote(note: Note): Boolean = withContext(Dispatchers.IO) {
+        /*
+         * الشاهدة تسبق كل شيء.
+         *
+         * الملاحظة المحذوفة هنا تبقى في المستودع حتى ترفعها المزامنة التالية،
+         * وأي سحب بينهما كان يعيدها — فيرى المستخدم نوتةً تُمسح وترجع في
+         * اللحظة نفسها ولا يفهم لماذا. وقد رآها فعلاً.
+         *
+         * والاستثناء مقصود: نسخة بعيدة أحدث من الحذف تعني تعديلاً على جهاز
+         * آخر بعده، فإحياؤها هو الصواب لا الخطأ.
+         */
+        val killedAt = dao.deletedAt(note.id)
+        if (killedAt != null && note.updatedAt <= killedAt) return@withContext false
         val local = dao.byId(note.id)
         if (local != null && local.updatedAt >= note.updatedAt) return@withContext false
         dao.insert(note)
         true
     }
+
+    /** يقبل حذفاً جاء من الطرف الآخر — ويسجّل شاهدة لئلا يعود من هنا */
+    suspend fun acceptRemoteDelete(id: Long) = withContext(Dispatchers.IO) {
+        if (dao.deletedAt(id) == null) dao.deleteWithTombstone(id)
+    }
+
+    /** معرّفات ما حُذف — تُرفع مع الملاحظات ليعرف الطرف الآخر أنه حذف متعمَّد */
+    suspend fun tombstoneIds(): List<Long> = withContext(Dispatchers.IO) { dao.tombstoneIds() }
 }

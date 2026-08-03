@@ -226,7 +226,11 @@ private fun TornadoRoot() {
                     }
 
                     composable("notes") {
-                        NotesScreen(vm = viewModel(), onOpenNote = { nav.navigate("note/$it") })
+                        NotesScreen(
+                            vm = viewModel(),
+                            onOpenNote = { nav.navigate("note/$it") },
+                            onOpenPlayer = { nav.navigate("player") }
+                        )
                     }
 
                     composable("listen") {

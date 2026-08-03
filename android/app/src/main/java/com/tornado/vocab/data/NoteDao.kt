@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
@@ -41,6 +42,27 @@ interface NoteDao {
 
     @Query("DELETE FROM notes WHERE id = :id")
     suspend fun deleteById(id: Long)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addTombstone(t: NoteTombstone)
+
+    @Query("SELECT id FROM note_tombstones")
+    suspend fun tombstoneIds(): List<Long>
+
+    @Query("SELECT deletedAt FROM note_tombstones WHERE id = :id")
+    suspend fun deletedAt(id: Long): Long?
+
+    /**
+     * الحذف والشاهدة في معاملة واحدة.
+     *
+     * فصلهما يترك نافذةً بينهما: يُحذف الصفّ ثم تنقطع الكهرباء قبل الشاهدة،
+     * فتعيد المزامنة التالية ما حذفه المستخدم عمداً.
+     */
+    @Transaction
+    suspend fun deleteWithTombstone(id: Long) {
+        deleteById(id)
+        addTombstone(NoteTombstone(id, System.currentTimeMillis()))
+    }
 
     /** يحفظ موضع الاستماع — نصّ طويل يُستأنف لا يُعاد من أوّله */
     @Query("UPDATE notes SET lastChunk = :chunk WHERE id = :id")

@@ -507,8 +507,16 @@ class PlaybackService : MediaSessionService() {
                          * مع FULL والجملة مع SHORT. زرّان موجودان يكتسبان
                          * معنى في سياقهما بدل زرّين جديدين يزدحم بهما المشغّل.
                          */
+                        /*
+                         * بصمة النص جزء من المفتاح.
+                         *
+                         * كان المفتاح رقم الملاحظة ورقم المقطع فقط، فتُعدَّل
+                         * الملاحظة ويجد التطبيق ملفاً بنفس الاسم فيعيده كما
+                         * هو — نصٌّ جديد بصوت قديم إلى الأبد. والمستخدم عدّل
+                         * نوتة فسمع القديمة، ولا سبيل عنده لإجبار البناء.
+                         */
                         narration.getOrBuildText(
-                            key = "note-${note.id}-${row.chunkIndex}",
+                            key = "note-${note.id}-${row.chunkIndex}-${chunk.hashCode()}",
                             text = chunk,
                             voiceTag = voiceTag,
                             repeat = wordRepeat,

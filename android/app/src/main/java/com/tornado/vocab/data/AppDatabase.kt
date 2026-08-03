@@ -44,8 +44,8 @@ class Converters {
 }
 
 @Database(
-    entities = [Word::class, WordFts::class, Tombstone::class, Note::class],
-    version = 2,
+    entities = [Word::class, WordFts::class, Tombstone::class, Note::class, NoteTombstone::class],
+    version = 3,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -64,6 +64,27 @@ abstract class AppDatabase : RoomDatabase() {
          * يمسح مكتبة المستخدم كاملة — تقدّمه في المراجعة ومفضّلاته وتواريخه.
          * وهو إعداد يمرّ بلا أن يُلاحَظ حتى يقع.
          */
+        /**
+         * جدول شواهد حذف الملاحظات.
+         *
+         * ترحيل لا حذف: مكتبة المستخدم وملاحظاته تبقى كما هي. وقد كانت
+         * قاعدة البيانات على `fallbackToDestructiveMigration` يوماً، فكان أي
+         * تغيير في المخطط يمسح كل شيء بلا إنذار.
+         */
+        private val MIGRATION_2_3 = object : Migration(2, 3) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    """
+                    CREATE TABLE IF NOT EXISTS `note_tombstones` (
+                        `id` INTEGER NOT NULL,
+                        `deletedAt` INTEGER NOT NULL,
+                        PRIMARY KEY(`id`)
+                    )
+                    """.trimIndent()
+                )
+            }
+        }
+
         private val MIGRATION_1_2 = object : Migration(1, 2) {
             override fun migrate(db: SupportSQLiteDatabase) {
                 db.execSQL(
@@ -87,7 +108,7 @@ abstract class AppDatabase : RoomDatabase() {
             INSTANCE ?: Room.databaseBuilder(
                 context.applicationContext, AppDatabase::class.java, "tornado.db"
             )
-                .addMigrations(MIGRATION_1_2)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                 .build()
                 .also { INSTANCE = it }
         }
