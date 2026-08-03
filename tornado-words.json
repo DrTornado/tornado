@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:29:43.590Z",
+ "exportedAt": "2026-08-03T09:31:03.942Z",
  "words": [
   {
    "id": 1785185030316,
@@ -7147,9 +7147,9 @@
    "wrong": 0,
    "last": null,
    "id": 1784531064403,
-   "word": "snails",
-   "ipa": "",
-   "arabicPron": "",
+   "word": "snail",
+   "ipa": "/sneɪl/",
+   "arabicPron": "سنيل",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -7160,17 +7160,27 @@
     {
      "pos": "noun",
      "en": "Any of very many animals (either hermaphroditic or nonhermaphroditic), of the class Gastropoda, having a coiled shell.",
-     "ar": "أي من العديد من الحيوانات (إما خنثى أو غير خنثى)، من فئة Gastropoda، لها قشرة ملفوفة."
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "(by extension) A slow person; a sluggard.",
-     "ar": "(بالتبعية) شخص بطيء ؛ كسلان."
+     "en": "(informal, by extension) A slow person; a sluggard.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "(engineering) A spiral cam, or a flat piece of metal of spirally curved outline, used for giving motion to, or changing the position of, another part, as the hammer tail of a striking clock.",
+     "ar": ""
     },
     {
      "pos": "verb",
      "en": "To move or travel very slowly.",
-     "ar": "التحرك أو السفر ببطء شديد."
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "A slow person; a sluggard.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -7194,7 +7204,24 @@
      "ar": "حلزون, (الفرنسية) حلزون للأكل يقدم عادة مع قوقعته مع صلصة الثوم والزبدة"
     }
    ],
-   "collocations": [],
+   "collocations": [
+    {
+     "en": "snail shells",
+     "ar": ""
+    },
+    {
+     "en": "snail mail",
+     "ar": ""
+    },
+    {
+     "en": "snail shell",
+     "ar": ""
+    },
+    {
+     "en": "land snail",
+     "ar": ""
+    }
+   ],
    "examples": [
     {
      "en": "The cars were snailing along the motorway during the rush hour.",
@@ -7206,7 +7233,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "right": 0,
@@ -7224,17 +7251,22 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A person who rides a surfboard",
+     "en": "A person who rides a surfboard.",
      "ar": ""
     },
     {
      "pos": "noun",
-     "en": "A person who surfs the Internet",
+     "en": "A person who surfs the Internet.",
      "ar": ""
     },
     {
      "pos": "noun",
-     "en": "A duck, the surf scoter (Melanitta perspicillata",
+     "en": "(obsolete) A duck, the surf scoter (Melanitta perspicillata).",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "A duck, the surf scoter (Melanitta perspicillata).",
      "ar": ""
     }
    ],
@@ -7290,7 +7322,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 13,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "audioUS": "",
@@ -7305,7 +7337,7 @@
    "id": 1784495777063,
    "word": "hostess",
    "ipa": "/ˈhəʊstəs/",
-   "arabicPron": "هوستس",
+   "arabicPron": "هوستيس",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -7324,13 +7356,13 @@
      "ar": "ضابطة نزل."
     },
     {
-     "pos": "verb",
-     "en": "To host, as a woman.",
+     "pos": "noun",
+     "en": "Stewardess: a woman steward on an airplane.",
      "ar": "للاستضافة، كامرأة."
     },
     {
-     "pos": "noun",
-     "en": "Stewardess: a woman steward on an airplane.",
+     "pos": "verb",
+     "en": "To host, as a woman.",
      "ar": "مضيفة: امرأة مضيفة على متن طائرة."
     }
    ],
@@ -7363,13 +7395,15 @@
     }
    ],
    "differences": [],
-   "ipaUS": "/ˈhoʊstəs/",
-   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/hostess-us.mp3",
+   "ipaUS": "/ˈhoʊstɪs/",
+   "audioUS": "-us",
    "interval": 0,
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "B2",
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUK": "/ˈhəʊstəs/",
+   "audioUK": "-uk"
   },
   {
    "right": 0,
@@ -7377,7 +7411,7 @@
    "last": null,
    "id": 1784495753959,
    "word": "steward",
-   "ipa": "/ˈstjuː.əd/",
+   "ipa": "/ˈstjuː.əːd/",
    "arabicPron": "ستورد",
    "oxford": "",
    "cefr": "",
@@ -7388,28 +7422,33 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A person who manages the property or affairs for another entity, particularly the chief administrator of a medieval manor.",
-     "ar": "الشخص الذي يدير الممتلكات أو الشؤون لكيان آخر، ولا سيما المدير الرئيسي لمزرعة من القرون الوسطى."
+     "en": "A person who manages the property or affairs for another entity.",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "A ship's officer who is in charge of making dining arrangements and provisions.",
-     "ar": "ضابط السفينة المسؤول عن اتخاذ ترتيبات الطعام والمؤن."
+     "en": "(nautical) A ship's officer who is in charge of making dining arrangements and provisions.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "A union member who is selected as a representative for fellow workers in negotiating terms with management.",
+     "ar": ""
     },
     {
      "pos": "verb",
      "en": "To act as the steward or caretaker of (something)",
-     "ar": "العمل كمشرف أو راعٍ (لشيء ما)"
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "A person who manages the property or affairs for another entity. A chief administrator of a medieval manor.",
-     "ar": "الشخص الذي يدير الممتلكات أو الشؤون لجهة أخرى. مدير رئيسي لمزرعة من القرون الوسطى."
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "A chief administrator of a medieval manor.",
-     "ar": "مدير رئيسي لمزرعة من القرون الوسطى."
+     "ar": ""
     }
    ],
    "inflections": [
@@ -7459,15 +7498,20 @@
      "ar": "إذا حوكم أحد اللوردات أو رجال الدولة أمام مجلس اللوردات بتهمة الخيانة أو غيرها من الجنايات، عين أحد الأعضاء اللوردات lord high steward رئيساً لجلسة المحاكمة ورئيسا مؤقتاً speaker للمجلس."
     }
    ],
-   "examples": [],
+   "examples": [
+    {
+     "en": "a steward in a Methodist church",
+     "ar": ""
+    }
+   ],
    "differences": [],
-   "ipaUS": "/ˈstuɚd/",
-   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/steward-us.mp3",
+   "ipaUS": "/ˈstu.ɚd/",
+   "audioUS": "-us",
    "interval": 0,
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "right": 0,
@@ -7475,8 +7519,8 @@
    "last": null,
    "id": 1784495669251,
    "word": "astronomy",
-   "ipa": "/æˈstɹɑnəˌmi/",
-   "arabicPron": "استرانمي",
+   "ipa": "/asʈro.nɔmi/",
+   "arabicPron": "سترانمي",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -7486,12 +7530,17 @@
     {
      "pos": "noun",
      "en": "The study of the physical universe beyond the Earth's atmosphere, including the process of mapping locations and properties of the matter and radiation in the universe.",
-     "ar": "دراسة الكون المادي خارج الغلاف الجوي للأرض، بما في ذلك عملية رسم خرائط مواقع وخصائص المادة والإشعاع في الكون."
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "(obsolete) Astrology.",
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "Astrology.",
-     "ar": "التنجيم"
+     "ar": ""
     }
    ],
    "inflections": [
@@ -7534,13 +7583,13 @@
     }
    ],
    "differences": [],
-   "ipaUS": "/æˈstɹɑnəˌmi/",
-   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/astronomy-us.mp3",
+   "ipaUS": "/əˈstɹɑn.ə.mi/",
+   "audioUS": "-us",
    "interval": 0,
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2,
+   "engineVersion": 3,
    "ipaUK": "",
    "audioUK": "",
    "audioGen": "",
@@ -7553,7 +7602,7 @@
    "id": 1784488534430,
    "word": "preliminary",
    "ipa": "/pɹɪˈlɪmɪnəɹi/",
-   "arabicPron": "بريليمينري",
+   "arabicPron": "بريليمينيري",
    "oxford": "5000",
    "cefr": "C1",
    "pos": [
@@ -7562,23 +7611,23 @@
    ],
    "meanings": [
     {
-     "pos": "noun",
-     "en": "A preparation for a main matter; an introduction.",
+     "pos": "adjective",
+     "en": "In preparation for the main matter; initial, introductory, preparatory.",
      "ar": "تحضير لمسألة رئيسية ؛ مقدمة."
     },
     {
      "pos": "noun",
-     "en": "Any of a series of sports events that determine the finalists",
+     "en": "A preparation for a main matter; an introduction.",
      "ar": "أي من سلسلة الأحداث الرياضية التي تحدد المتأهلين للتصفيات النهائية"
     },
     {
-     "pos": "adjective",
-     "en": "In preparation for the main matter; initial, introductory, preparatory.",
+     "pos": "noun",
+     "en": "Any of a series of sports events that determine the finalists",
      "ar": "استعدادا للمسألة الرئيسية ؛ الأولية، التمهيدية، التحضيرية."
     },
     {
      "pos": "noun",
-     "en": "A relatively minor contest that precedes a major one, especially in boxing.",
+     "en": "A relatively minor contest that precedes a major one, especially in boxing",
      "ar": "مسابقة صغيرة نسبيًا تسبق مسابقة رئيسية، خاصة في الملاكمة."
     }
    ],
@@ -7630,11 +7679,13 @@
     }
    ],
    "differences": [],
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pre/preli/preliminary__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/p/pre/preli/preliminary__gb_2.mp3",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUS": "/pɹɪˈlɪmɪnɛɹi/",
+   "ipaUK": "/pɹɪˈlɪmɪn(ə)ɹi/"
   },
   {
    "right": 0,
@@ -7653,23 +7704,13 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To render (much) smaller, turn into a dwarf (version).",
-     "ar": "لجعلها أصغر (بكثير)، تتحول إلى قزم (نسخة)."
-    },
-    {
-     "pos": "verb",
-     "en": "To make appear (much) smaller, puny, tiny.",
-     "ar": "لجعلها تبدو أصغر (بكثير)، ضئيلة، صغيرة."
-    },
-    {
-     "pos": "verb",
      "en": "present participle and gerund of dwarf",
-     "ar": "الحاضر الفاعل و gerund من قزم"
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "The situation where something is made to seem (relatively) small or unimportant.",
-     "ar": "الحالة التي يبدو فيها شيء ما صغيرًا (نسبيًا) أو غير مهم."
+     "ar": ""
     }
    ],
    "inflections": [
@@ -7726,7 +7767,7 @@
    "due": 0,
    "freqLabel": "Top 8,000 words",
    "estCefr": "B2",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "right": 0,
@@ -7746,28 +7787,33 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "Sway unsteadily, reel, or totter",
-     "ar": "يتمايل بشكل غير ثابت، أو يتدحرج، أو يترنح"
-    },
-    {
-     "pos": "verb",
-     "en": "Doubt, waver, be shocked",
-     "ar": "الشك، التردد، الصدمة"
-    },
-    {
-     "pos": "noun",
-     "en": "The motion of one who staggers",
-     "ar": "حركة الشخص الذي يترنح"
-    },
-    {
-     "pos": "noun",
-     "en": "That which staggers something or somebody",
-     "ar": "ذلك الذي يترنح شيء أو شخص ما"
+     "en": "present participle and gerund of stagger",
+     "ar": ""
     },
     {
      "pos": "adjective",
-     "en": "Incredible, overwhelming, amazing",
-     "ar": "لا يصدق، ساحقة، مذهلة"
+     "en": "Incredible, overwhelming, amazing.",
+     "ar": ""
+    },
+    {
+     "pos": "adjective",
+     "en": "Lurching, floundering.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "The condition of being staggered or amazed.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "The motion of one who staggers.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "The spacing out of various actions over time.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -7824,7 +7870,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 13,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "audioUS": "",
@@ -7853,17 +7899,17 @@
     },
     {
      "pos": "noun",
-     "en": "A state where the sovereign constituent units delegate their authority to the centre. As opposed to a federation, where the central and regional governments are each equal and sovereign in their own sphere.",
+     "en": "(politics) A state where the sovereign constituent units delegate their authority to the centre. As opposed to a federation, where the central and regional governments are each equal and sovereign in their own sphere.",
      "ar": "دولة تفوض فيها الوحدات السيادية سلطتها إلى المركز. على عكس الاتحاد، حيث تكون كل من الحكومات المركزية والإقليمية متساوية وذات سيادة في مجالها الخاص."
     },
     {
      "pos": "noun",
-     "en": "A state where the sovereign constituent units delegate their authority to the centre.",
+     "en": "Specifically, an instance of a decentralized governing structure among the indigenous peoples of North America.",
      "ar": "دولة تفوض فيها الوحدات السيادية سلطتها إلى المركز."
     },
     {
      "pos": "noun",
-     "en": "Specifically, an instance of a decentralized governing structure among the indigenous peoples of North America.",
+     "en": "A state where the sovereign constituent units delegate their authority to the centre.",
      "ar": "على وجه التحديد، مثال لهيكل حكم لامركزي بين الشعوب الأصلية في أمريكا الشمالية."
     }
    ],
@@ -7904,11 +7950,16 @@
      "ar": "اتحاد الأوريكيون"
     }
    ],
-   "examples": [],
+   "examples": [
+    {
+     "en": "The Blackfoot, Iroquois, and Sioux peoples all were governed as confederacies. There were also multi-ethnic confederacies, such as the Iron Confederacy made up of the Plains Cree, Assiniboine, Stoney, and Saulteaux.",
+     "ar": ""
+    }
+   ],
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "right": 0,
@@ -7916,7 +7967,7 @@
    "last": null,
    "id": 1784487423998,
    "word": "statistically",
-   "ipa": "/stəˈtɪstɪkl̩i/",
+   "ipa": "/stəˈtɪs.tɪ.kə.li/",
    "arabicPron": "ستتيستيكلي",
    "oxford": "",
    "cefr": "",
@@ -7926,17 +7977,17 @@
    "meanings": [
     {
      "pos": "adverb",
-     "en": "In a statistical way.",
+     "en": "From a statistical point of view.",
      "ar": "بطريقة إحصائية."
     },
     {
      "pos": "adverb",
-     "en": "From a statistical point of view.",
+     "en": "From statistical evidence.",
      "ar": "من وجهة نظر إحصائية."
     },
     {
      "pos": "adverb",
-     "en": "From statistical evidence.",
+     "en": "In a statistical way.",
      "ar": "الدلًلة الإحصائية"
     }
    ],
@@ -7978,7 +8029,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "right": 0,
@@ -7996,33 +8047,28 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "To detect the scent of; to discern by the sense of smell.",
-     "ar": "للكشف عن رائحة ؛ لتمييز حاسة الشم."
-    },
-    {
-     "pos": "verb",
-     "en": "To have a suspicion of.",
-     "ar": "للاشتباه به."
-    },
-    {
      "pos": "adjective",
      "en": "Having a pleasant aroma.",
-     "ar": "الحصول على رائحة لطيفة."
-    },
-    {
-     "pos": "adjective",
-     "en": "(chiefly in combination) Having a smell of any kind.",
-     "ar": "(بشكل رئيسي في تركيبة) وجود رائحة من أي نوع."
-    },
-    {
-     "pos": "adjective",
-     "en": "Having a smell of any kind.",
-     "ar": "وجود رائحة من أي نوع."
+     "ar": ""
     },
     {
      "pos": "adjective",
      "en": "Having perfume added.",
+     "ar": ""
+    },
+    {
+     "pos": "adjective",
+     "en": "(chiefly in combination) Having a smell of any kind.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "simple past and past participle of scent",
+     "ar": ""
+    },
+    {
+     "pos": "adjective",
+     "en": "Having a smell of any kind.",
      "ar": ""
     }
    ],
@@ -8079,15 +8125,15 @@
    ],
    "examples": [
     {
-     "en": "The hounds scented the fox in the woods.",
-     "ar": ""
-    },
-    {
-     "en": "I scented trouble when I saw them running down the hill towards me.",
-     "ar": ""
-    },
-    {
      "en": "a plant with skunk-scented leaves",
+     "ar": ""
+    },
+    {
+     "en": "a scented soap",
+     "ar": ""
+    },
+    {
+     "en": "I use pine-scented air fresheners in my cars.",
      "ar": ""
     }
    ],
@@ -8096,7 +8142,7 @@
    "due": 0,
    "freqLabel": "Top 8,000 words",
    "estCefr": "B2",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "right": 0,
@@ -8114,18 +8160,8 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "The greatest or utmost point, degree or condition.",
-     "ar": "النقطة أو الدرجة أو الشرط الأكبر أو الأقصى."
-    },
-    {
-     "pos": "noun",
-     "en": "Each of the things at opposite ends of a range or scale.",
-     "ar": "كل من الأشياء على طرفي نقيض من نطاق أو مقياس."
-    },
-    {
-     "pos": "noun",
      "en": "The opposite ends of a range or scale.",
-     "ar": "الأطراف المعاكسة للنطاق أو المقياس."
+     "ar": ""
     }
    ],
    "inflections": [
@@ -8168,11 +8204,13 @@
     }
    ],
    "differences": [],
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/e/ext/extre/extreme__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/e/ext/extre/extreme__gb_1.mp3",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUS": "/ɪkˈstɹimz/",
+   "ipaUK": "/ɪkˈstɹiːmz/"
   },
   {
    "right": 0,
@@ -8191,28 +8229,18 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To make a threat against someone; to use threats.",
-     "ar": "لتوجيه تهديد ضد شخص ما ؛ لاستخدام التهديدات."
-    },
-    {
-     "pos": "verb",
-     "en": "To menace, or be dangerous.",
-     "ar": "للتهديد، أو أن تكون خطيرًا."
+     "en": "simple past and past participle of threaten",
+     "ar": ""
     },
     {
      "pos": "adjective",
-     "en": "(of a plant or animal) At risk of becoming endangered in the near future.",
-     "ar": "(لنبات أو حيوان) معرض لخطر الانقراض في المستقبل القريب."
+     "en": "(especially ecology, of an organism) At risk of becoming endangered in the near future.",
+     "ar": ""
     },
     {
      "pos": "adjective",
      "en": "Feeling insecure or vulnerable.",
-     "ar": "الشعور بعدم الأمان أو الضعف."
-    },
-    {
-     "pos": "verb",
-     "en": "simple past and past participle of threaten",
-     "ar": "الفاعلية البسيطة للتهديد في الماضي والماضي"
+     "ar": ""
     },
     {
      "pos": "adjective",
@@ -8250,26 +8278,42 @@
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/t/thr/threa/threaten__gb_1.mp3",
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "right": 0,
    "wrong": 0,
    "last": null,
    "id": 1784485677654,
-   "word": "crustaceans",
-   "ipa": "",
-   "arabicPron": "",
+   "word": "crustacean",
+   "ipa": "/kɹʌsˈteɪʃən/",
+   "arabicPron": "كراستيشن",
    "oxford": "",
    "cefr": "",
    "pos": [
-    "noun"
+    "noun",
+    "adjective"
    ],
    "meanings": [
     {
      "pos": "noun",
      "en": "Any arthropod of the subphylum Crustacea, including lobsters, crabs, shrimp, barnacles and woodlice.",
-     "ar": "أي مفصليات من القشريات الفرعية، بما في ذلك الكركند وسرطان البحر والروبيان والأرنب وقمل الخشب"
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "(cladistically) Any arthropod of the clade Pancrustacea, which includes hexapods in addition to traditional crustaceans.",
+     "ar": ""
+    },
+    {
+     "pos": "adjective",
+     "en": "Of, relating to, or characteristic of the subphylum Crustacea.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "Any arthropod of the clade Pancrustacea, which includes hexapods in addition to traditional crustaceans.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -8277,8 +8321,34 @@
     "crustaceanses"
    ],
    "derivatives": [],
-   "synonyms": [],
-   "collocations": [],
+   "synonyms": [
+    {
+     "en": "crustaceal",
+     "ar": ""
+    }
+   ],
+   "collocations": [
+    {
+     "en": "crustacean muscle",
+     "ar": ""
+    },
+    {
+     "en": "crustacean zooplankton",
+     "ar": ""
+    },
+    {
+     "en": "crustacean species",
+     "ar": ""
+    },
+    {
+     "en": "small crustacean",
+     "ar": ""
+    },
+    {
+     "en": "decapod crustacean",
+     "ar": ""
+    }
+   ],
    "examples": [
     {
      "en": "Crabs are crustaceans.",
@@ -8296,7 +8366,7 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -8313,7 +8383,7 @@
    "id": 1784485562378,
    "word": "mollusc",
    "ipa": "/ˈmɒləsk/",
-   "arabicPron": "مولسك",
+   "arabicPron": "مالسك",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -8323,12 +8393,17 @@
     {
      "pos": "noun",
      "en": "A soft-bodied invertebrate of the phylum Mollusca, typically with a hard shell of one or more pieces.",
-     "ar": "اللافقاريات رخوة الجسم من شعبة الرخويات، وعادة مع قشرة صلبة من قطعة واحدة أو أكثر."
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "(figuratively) A weak-willed person.",
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "A weak-willed person.",
-     "ar": "شخص ضعيف الإرادة."
+     "ar": ""
     }
    ],
    "inflections": [
@@ -8389,7 +8464,11 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUS": "/ˈmɑləsk/",
+   "ipaUK": "/ˈmɒləsk/",
+   "audioUS": "-us",
+   "audioUK": "-uk"
   },
   {
    "right": 0,
@@ -8407,24 +8486,19 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "To contribute to a blog",
-     "ar": "للمساهمة في مدونة"
+     "pos": "noun",
+     "en": "(computing) The design and editing of a blog; weblogging.",
+     "ar": ""
     },
     {
      "pos": "verb",
-     "en": "To blag, to steal something",
-     "ar": "التباهي، وسرقة شيء ما"
-    },
-    {
-     "pos": "verb",
-     "en": "To look sullen or sulky",
-     "ar": "أن تبدو متجهمًا أو عابسًا"
+     "en": "present participle and gerund of blog",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "The design and editing of a blog",
-     "ar": "تصميم وتحرير مدونة"
+     "en": "The design and editing of a blog; weblogging.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -8458,12 +8532,12 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "/ˈblɑ.ɡiŋ/",
    "ipaUK": "",
    "estCefr": "",
    "freqLabel": "",
-   "audioUS": "",
+   "audioUS": "-us",
    "audioUK": "",
    "audioGen": "",
    "favorite": "false"
@@ -8484,29 +8558,34 @@
    ],
    "meanings": [
     {
+     "pos": "adjective",
+     "en": "Done on purpose; intentional.",
+     "ar": ""
+    },
+    {
+     "pos": "adjective",
+     "en": "Formed with deliberation; carefully considered; not sudden or rash.",
+     "ar": ""
+    },
+    {
+     "pos": "adjective",
+     "en": "Of a person, weighing facts and arguments with a view to a choice or decision; carefully considering the probable consequences of a step; slow in determining.",
+     "ar": ""
+    },
+    {
      "pos": "verb",
-     "en": "To consider carefully",
-     "ar": "للتفكير بعناية"
+     "en": "(transitive) To consider carefully; to weigh well in the mind.",
+     "ar": ""
     },
     {
      "pos": "verb",
-     "en": "To consider the reasons for and against anything",
-     "ar": "النظر في الأسباب المؤيدة والمعارضة لأي شيء"
+     "en": "(intransitive) To consider the reasons for and against anything; to reflect.",
+     "ar": ""
     },
     {
-     "pos": "adjective",
-     "en": "Done on purpose",
-     "ar": "تم عن قصد"
-    },
-    {
-     "pos": "adjective",
-     "en": "Of a person, weighing facts and arguments with a view to a choice or decision",
-     "ar": "من شخص، يزن الحقائق والحجج بهدف الاختيار أو القرار"
-    },
-    {
-     "pos": "adjective",
-     "en": "Formed with deliberation",
-     "ar": "تم تشكيلها بمداولات"
+     "pos": "verb",
+     "en": "To consider carefully; to weigh well in the mind.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -8559,11 +8638,11 @@
    ],
    "examples": [
     {
-     "en": "It is now time for the jury to deliberate the guilt of the defendant.",
+     "en": "a deliberate attempt to cover up his crime",
      "ar": ""
     },
     {
-     "en": "Tripping me was deliberate action.",
+     "en": "a deliberate opinion; a deliberate measure or result",
      "ar": ""
     },
     {
@@ -8574,9 +8653,9 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "audioUS": "",
-   "audioUK": "",
-   "engineVersion": 13,
+   "audioUS": "-us",
+   "audioUK": "-uk",
+   "engineVersion": 3,
    "ipaUS": "/dɪˈlɪb.ɚ.ət/",
    "ipaUK": "/dɪˈlɪb.(ə.)ɹət/",
    "estCefr": "",
@@ -8589,9 +8668,9 @@
    "wrong": 0,
    "last": "right",
    "id": 1784662047598,
-   "word": "creatures",
-   "ipa": "/ˈkɹiːt͡ʃəz/",
-   "arabicPron": "كريتشرز",
+   "word": "creature",
+   "ipa": "/kɹiːˈeɪ.tjʊə(ɹ)/",
+   "arabicPron": "كريتشر",
    "oxford": "3000",
    "cefr": "B2",
    "pos": [
@@ -8600,13 +8679,23 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A living being; an animal or (sometimes derogatory) a human.",
-     "ar": "كائن حي ؛ حيوان أو (في بعض الأحيان مهين) إنسان."
+     "en": "A living being, such as an animal, monster, or alien.",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "A created thing, whether animate or inanimate; a creation.",
-     "ar": "شيء مخلوق، سواء كان حيًّا أو غير حيّ ؛ خلق."
+     "en": "An unidentified, mysterious, and often monstrous animal or being.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "(sometimes derogatory) A human.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "A human.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -8636,20 +8725,42 @@
      "ar": "دمية, لعبة الأطفال, دمية متحركة, شخص أشبه بالألعوبة"
     }
    ],
-   "collocations": [],
+   "collocations": [
+    {
+     "en": "living creature",
+     "ar": ""
+    },
+    {
+     "en": "little creature",
+     "ar": ""
+    },
+    {
+     "en": "poor creature",
+     "ar": ""
+    },
+    {
+     "en": "human creature",
+     "ar": ""
+    }
+   ],
    "examples": [
     {
-     "en": "He's a creature of habit.   insects and other creatures",
+     "en": "insects and other creatures",
+     "ar": ""
+    },
+    {
+     "en": "He's a creature of habit.",
      "ar": ""
     }
    ],
    "differences": [],
    "interval": 1,
    "due": 1785198224349,
-   "ipaUS": "/ˈkɹit͡ʃɚz/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cre/creat/creature__us_2.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/cre/creat/creature__gb_1.mp3",
-   "engineVersion": 2
+   "ipaUS": "/ˈkɹi.tʃɚ/",
+   "audioUS": "-us",
+   "audioUK": "-uk",
+   "engineVersion": 3,
+   "ipaUK": "/ˈkɹiː.tʃə/"
   },
   {
    "right": 0,
@@ -8658,7 +8769,7 @@
    "id": 1784646739633,
    "word": "dispatch",
    "ipa": "/dəˈspætʃ/",
-   "arabicPron": "ديسباتش",
+   "arabicPron": "دسباتش",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -8667,33 +8778,33 @@
    ],
    "meanings": [
     {
-     "pos": "noun",
-     "en": "A message sent quickly, as a shipment, a prompt settlement of a business, or an important official message sent by a diplomat, or military officer.",
+     "pos": "verb",
+     "en": "(transitive) To send (a shipment) with promptness.",
      "ar": "رسالة يتم إرسالها بسرعة، كشحنة، أو تسوية فورية لنشاط تجاري، أو رسالة رسمية مهمة يرسلها دبلوماسي أو ضابط عسكري."
     },
     {
-     "pos": "noun",
-     "en": "The act of doing something quickly.",
+     "pos": "verb",
+     "en": "(transitive) To send (a person) away hastily.",
      "ar": "فعل شيء بسرعة."
     },
     {
      "pos": "verb",
-     "en": "To send (a shipment) with promptness.",
+     "en": "(transitive) To send (an important official message) promptly, by means of a diplomat or military officer.",
      "ar": "لإرسال (شحنة) على وجه السرعة."
-    },
-    {
-     "pos": "verb",
-     "en": "To send (a person) away hastily.",
-     "ar": "لإبعاد (شخص) على عجل."
-    },
-    {
-     "pos": "verb",
-     "en": "To send (an important official message) promptly, by means of a diplomat or military officer.",
-     "ar": "إرسال (رسالة رسمية مهمة) على وجه السرعة، عن طريق دبلوماسي أو ضابط عسكري."
     },
     {
      "pos": "noun",
      "en": "A message sent quickly, as a shipment, a prompt settlement of a business, or an important official message sent by a diplomat, government official, military officer, etc.",
+     "ar": "لإبعاد (شخص) على عجل."
+    },
+    {
+     "pos": "noun",
+     "en": "A mission by an emergency response service, typically involving attending to an emergency in the field.",
+     "ar": "إرسال (رسالة رسمية مهمة) على وجه السرعة، عن طريق دبلوماسي أو ضابط عسكري."
+    },
+    {
+     "pos": "noun",
+     "en": "The act of doing something quickly.",
      "ar": ""
     }
    ],
@@ -8734,13 +8845,15 @@
     }
    ],
    "differences": [],
-   "ipaUS": "/dɪˈspætʃ/",
-   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/dispatch-us.mp3",
+   "ipaUS": "/dəˈspæt͡ʃ/",
+   "audioUS": "-us",
    "freqLabel": "Top 8,000 words",
    "interval": 0,
    "due": 0,
    "estCefr": "B2",
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUK": "/dɪˈspætʃ/",
+   "audioUK": "-uk"
   },
   {
    "right": 0,
@@ -8759,18 +8872,23 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A violent windstorm characterized by a mobile, twisting, funnel-shaped cloud.",
-     "ar": "عاصفة رياح عنيفة تتميز بسحابة متحركة ملتوية على شكل قمع."
+     "en": "(meteorology) A violent wind in the form of a mobile, rapidly rotating, funnel cloud that has contacted the ground.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "(ambitransitive, figuratively) To sweep through something violently.",
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "A violent wind in the form of a mobile, rapidly rotating, funnel cloud that has contacted the ground.",
-     "ar": "رياح عنيفة على شكل سحابة قمعية متحركة سريعة الدوران تلامس الأرض."
+     "ar": ""
     },
     {
      "pos": "verb",
      "en": "To sweep through something violently.",
-     "ar": "لاكتساح شيء ما بعنف."
+     "ar": ""
     }
    ],
    "inflections": [
@@ -8798,13 +8916,15 @@
     }
    ],
    "differences": [],
-   "ipaUS": "/tɔː(ɹ)ˈneɪ.dəʊ/",
-   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/tornado-us.mp3",
+   "ipaUS": "/tɔɹˈneɪ.doʊ/",
+   "audioUS": "-us",
    "freqLabel": "Top 18,000 words",
    "estCefr": "B2",
-   "engineVersion": 2,
+   "engineVersion": 3,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUK": "/tɔː(ɹ)ˈneɪ.dəʊ/",
+   "audioUK": "-uk"
   },
   {
    "right": 0,
@@ -8879,7 +8999,7 @@
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/scenery-us.mp3",
    "freqLabel": "Top 18,000 words",
    "estCefr": "B2",
-   "engineVersion": 2,
+   "engineVersion": 3,
    "interval": 0,
    "due": 0,
    "ipaUK": "",
@@ -8893,7 +9013,7 @@
    "last": null,
    "id": 1784899215964,
    "word": "influential",
-   "ipa": "/ɪnfluˈɛnʃəl/",
+   "ipa": "/ˌənflʉˈenʃəl/",
    "arabicPron": "ينفلوينشل",
    "oxford": "5000",
    "cefr": "C1",
@@ -8903,13 +9023,13 @@
    ],
    "meanings": [
     {
-     "pos": "noun",
-     "en": "A person who has influence",
+     "pos": "adjective",
+     "en": "Having or exerting influence.",
      "ar": "الشخص الذي له تأثير"
     },
     {
-     "pos": "adjective",
-     "en": "Having or exerting influence.",
+     "pos": "noun",
+     "en": "A person who has influence",
      "ar": "وجود أو ممارسة النفوذ."
     }
    ],
@@ -8960,20 +9080,22 @@
    ],
    "examples": [
     {
-     "en": "Jane was very influential in getting the motion passed.",
+     "en": "John Lennon was a very influential person in music, as well as in politics, fashion and general culture.",
      "ar": ""
     },
     {
-     "en": "John Lennon was a very influential person in music, as well as in politics, fashion and general culture.",
+     "en": "Jane was very influential in getting the motion passed.",
      "ar": ""
     }
    ],
    "differences": [],
    "interval": 0,
    "due": 0,
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/i/inf/influ/influential__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/i/inf/influ/influential__gb_1.mp3",
-   "engineVersion": 2
+   "audioUS": "-us",
+   "audioUK": "-uk",
+   "engineVersion": 3,
+   "ipaUS": "/ˌɪnfluˈɛnʃəl/",
+   "ipaUK": "/ɪnflʊˈɛnʃəl/"
   },
   {
    "right": 0,
@@ -9053,7 +9175,7 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "right": 0,
@@ -9072,33 +9194,33 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "To lie in a position directly beneath.",
+     "pos": "adjective",
+     "en": "basic or fundamental",
      "ar": "الاستلقاء في وضع تحته مباشرة."
     },
     {
-     "pos": "verb",
-     "en": "To lie under or beneath.",
+     "pos": "adjective",
+     "en": "(literal) lying underneath",
      "ar": "الاستلقاء تحتها أو تحتها."
     },
     {
-     "pos": "noun",
-     "en": "The entity from whose performance a derivative derives its value.",
+     "pos": "adjective",
+     "en": "implicit",
      "ar": "الجهة التي يستمد من أدائها المشتق قيمته."
     },
     {
-     "pos": "adjective",
-     "en": "Lying underneath",
+     "pos": "noun",
+     "en": "(finance) The entity from whose performance a derivative derives its value.",
      "ar": "الاستلقاء تحت"
     },
     {
-     "pos": "adjective",
-     "en": "Basic or fundamental",
+     "pos": "verb",
+     "en": "present participle and gerund of underlie",
      "ar": "أساسي أو أساسي"
     },
     {
      "pos": "adjective",
-     "en": "Implicit.",
+     "en": "Lying underneath.",
      "ar": ""
     }
    ],
@@ -9155,15 +9277,15 @@
    ],
    "examples": [
     {
-     "en": "A stratum of clay underlies the surface gravel.",
-     "ar": ""
-    },
-    {
      "en": "We dug down to the underlying rock.",
      "ar": ""
     },
     {
      "en": "Points and straight lines are underlying elements of geometry.",
+     "ar": ""
+    },
+    {
+     "en": "Many nursery rhymes have an underlying meaning.",
      "ar": ""
     }
    ],
@@ -9172,7 +9294,7 @@
    "due": 0,
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/u/und/under/underlying__us_1.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/u/und/under/underlying__gb_3.mp3",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "right": 0,
@@ -9190,19 +9312,34 @@
    ],
    "meanings": [
     {
+     "pos": "verb",
+     "en": "(transitive) To persuade somebody not to do (something).",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "(transitive) To extinguish the courage of; to dishearten; to depress the spirits of; to deprive of confidence; to deject.",
+     "ar": ""
+    },
+    {
      "pos": "noun",
-     "en": "Lack of courage",
-     "ar": "<g id=\"1\">عدم التحلي بالشجاعة.</g>"
+     "en": "(rare) Lack of courage",
+     "ar": ""
     },
     {
      "pos": "verb",
      "en": "To extinguish the courage of; to dishearten; to depress the spirits of; to deprive of confidence; to deject.",
-     "ar": "لإخماد شجاعة ؛ تثبيط ؛ لإحباط أرواح ؛ للحرمان من الثقة ؛ للاكتئاب."
+     "ar": ""
     },
     {
      "pos": "verb",
      "en": "To persuade somebody not to do (something).",
-     "ar": "لإقناع شخص ما بعدم القيام (بشيء ما)."
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "Lack of courage",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -9245,9 +9382,10 @@
    "interval": 0,
    "due": 0,
    "ipaUS": "/dɪsˈkɝɪd͡ʒ/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/d/dis/disco/discourage__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/d/dis/disco/discourage__gb_3.mp3",
-   "engineVersion": 2
+   "audioUS": "-us",
+   "audioUK": "-uk",
+   "engineVersion": 3,
+   "ipaUK": "/dɪsˈkʌɹɪd͡ʒ/"
   },
   {
    "right": 0,
@@ -9328,7 +9466,7 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -9343,9 +9481,9 @@
    "wrong": 0,
    "last": null,
    "id": 1784991936913,
-   "word": "ripples",
+   "word": "ripple",
    "ipa": "",
-   "arabicPron": "",
+   "arabicPron": "ريبل",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -9356,31 +9494,41 @@
     {
      "pos": "noun",
      "en": "A moving disturbance, or undulation, in the surface of a fluid.",
-     "ar": "اضطراب متحرك، أو تموج، في سطح السائل."
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "A sound similar to that of undulating water.",
-     "ar": "صوت مشابه لصوت الماء المتموج."
-    },
-    {
-     "pos": "verb",
-     "en": "To move like the undulating surface of a body of water; to undulate.",
-     "ar": "للتحرك مثل السطح المتموج لجسم مائي ؛ للتموج."
-    },
-    {
-     "pos": "verb",
-     "en": "To propagate like a moving wave.",
-     "ar": "للانتشار مثل موجة متحركة."
-    },
-    {
-     "pos": "verb",
-     "en": "To scratch, tear, or break slightly; graze",
-     "ar": "يخدش أو يمزق أو ينكسر قليلاً ؛ يخدش"
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "An implement, with teeth like those of a comb, for removing the seeds and seed vessels from flax, broom corn, etc.",
+     "en": "A style of ice cream in which flavors have been coarsely blended together.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "(intransitive) To propagate like a moving wave.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "(intransitive) To make a sound as of water running gently over a rough bottom, or the breaking of ripples on the shore.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "(transitive) To shape into a series of ripples.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "(transitive) To scratch, tear, or break slightly; graze",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "(textiles) An implement, with teeth like those of a comb, for removing the seeds and seed vessels from flax, broom corn, etc.",
      "ar": ""
     }
    ],
@@ -9391,35 +9539,66 @@
     "ripplesing"
    ],
    "derivatives": [],
-   "synonyms": [],
+   "synonyms": [
+    {
+     "en": "ruffle",
+     "ar": ""
+    },
+    {
+     "en": "undulate",
+     "ar": ""
+    },
+    {
+     "en": "burble",
+     "ar": ""
+    },
+    {
+     "en": "riffle",
+     "ar": ""
+    },
+    {
+     "en": "babble",
+     "ar": ""
+    }
+   ],
    "collocations": [
     {
-     "en": "like ripples",
-     "ar": "مثل التموجات"
+     "en": "ripple effect",
+     "ar": ""
     },
     {
-     "en": "current ripples",
-     "ar": "التموجات الحالية"
+     "en": "ripple marks",
+     "ar": ""
     },
     {
-     "en": "little ripples",
-     "ar": "تموجات صغيرة"
+     "en": "ripple effects",
+     "ar": ""
     },
     {
-     "en": "small ripples",
-     "ar": "تموجات صغيرة"
+     "en": "little ripple",
+     "ar": ""
     }
    ],
    "examples": [
     {
      "en": "I dropped a small stone into the pond and watched the ripples spread.",
      "ar": ""
+    },
+    {
+     "en": "The ebbing tide had left ripples in the sand.",
+     "ar": ""
+    },
+    {
+     "en": "I enjoy fudge ripple ice cream, but I especially like to dig through the carton to get at the ripple part and eat only that.",
+     "ar": ""
     }
    ],
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUS": "/ˈɹɪp(ə)l/",
+   "audioUS": "-us"
   },
   {
    "right": 0,
@@ -9438,29 +9617,14 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "To hold very tightly, as to not fall off.",
-     "ar": "التمسك بإحكام شديد، حتى لا تسقط."
-    },
-    {
-     "pos": "verb",
-     "en": "To adhere to an object, without being affixed, in such a way as to follow its contours. Used especially of fabrics and films.",
-     "ar": "التمسك بشيء ما، دون أن يتم لصقه، بطريقة تتبع ملامحه. تستخدم بشكل خاص من الأقمشة والأفلام."
-    },
-    {
-     "pos": "verb",
-     "en": "To produce a high-pitched ringing sound, like a small bell.",
-     "ar": "لإنتاج صوت رنين عالي النبرة، مثل جرس صغير."
+     "pos": "adjective",
+     "en": "Clingy.",
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "The act of one who clings.",
-     "ar": "فعل من يتشبث."
-    },
-    {
-     "pos": "adjective",
-     "en": "Clingy.",
-     "ar": "لزج, دبق"
+     "ar": ""
     },
     {
      "pos": "verb",
@@ -9518,85 +9682,117 @@
    "due": 0,
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cli/cling/cling__us_1.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/cli/cling/cling__gb_1.mp3",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "right": 0,
    "wrong": 0,
    "last": null,
    "id": 1784991631873,
-   "word": "burrs",
-   "ipa": "",
-   "arabicPron": "",
+   "word": "burr",
+   "ipa": "/bʌr/",
+   "arabicPron": "بير",
    "oxford": "",
    "cefr": "",
    "pos": [
-    "noun"
+    "noun",
+    "verb"
    ],
    "meanings": [
     {
      "pos": "noun",
-     "en": "A tree growth in which the grain has grown in a deformed manner.",
-     "ar": "نمو شجرة نمت فيها الحبوب بطريقة مشوهة."
-    },
-    {
-     "pos": "noun",
-     "en": "Wood of a mottled veneer, usually cut from such a growth.",
-     "ar": "خشب من قشرة مرقطة، عادة ما يكون مقطوعًا من مثل هذا النمو."
+     "en": "A small piece of material left on an edge after a cutting operation.",
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "A sharp, pointy object, such as a sliver or splinter.",
-     "ar": "جسم حاد ومدبب، مثل الشظية أو الشظية."
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "A bur; a seed pod with sharp features that stick in fur or clothing.",
-     "ar": "مثقب ؛ كبسولة بذور ذات ملامح حادة تلتصق بالفراء أو الملابس."
+     "en": "(engineering) A revolving disk or cone with abrasive surfaces used to grind hard products in a grinder or mill.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "(transitive, engineering) To grind using a burr (revolving disk or cone with abrasive surfaces).",
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "A rough humming sound.",
-     "ar": "صوت طنين خشن."
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "A uvular \"r\".",
+     "en": "A uvular \"r\" sound, or (by extension) an accent characterized by this sound.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "(transitive) To pronounce with a uvular \"r\".",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "(intransitive) To make a rough humming sound.",
      "ar": ""
     }
    ],
    "inflections": [
+    "burr",
     "burrs",
-    "burrses"
+    "burred",
+    "burring"
    ],
    "derivatives": [],
    "synonyms": [
     {
-     "en": "bur",
-     "ar": "حافة خشنة"
+     "en": "sticker",
+     "ar": ""
     },
     {
-     "en": "sticker",
-     "ar": "ملصق"
+     "en": "brough",
+     "ar": ""
+    },
+    {
+     "en": "bur",
+     "ar": ""
     }
    ],
    "collocations": [
     {
-     "en": "like burrs",
-     "ar": "مثل النتوءات"
+     "en": "burr ridge",
+     "ar": ""
     },
     {
-     "en": "remove burrs",
-     "ar": "إزالة الحواف الخشنة"
+     "en": "aaron burr",
+     "ar": ""
+    },
+    {
+     "en": "colonel burr",
+     "ar": ""
     }
    ],
-   "examples": [],
+   "examples": [
+    {
+     "en": "You left a bunch of burrs on those parts yesterday. You've already been told not to miss the deburring operation.",
+     "ar": ""
+    },
+    {
+     "en": "burr grinder",
+     "ar": ""
+    }
+   ],
    "differences": [],
    "interval": 0,
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUS": "/bɝ/",
+   "audioUS": "-us"
   },
   {
    "right": 0,
