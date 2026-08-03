@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T15:45:43.162Z",
+ "exportedAt": "2026-08-03T15:46:03.929Z",
  "words": [
   {
    "id": 1785185030316,
@@ -1523,18 +1523,8 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "The state of being tranquil",
-     "ar": "حالة الهدوء"
-    },
-    {
-     "pos": "noun",
-     "en": "The absence of disturbance",
-     "ar": "غياب الاضطراب"
-    },
-    {
-     "pos": "noun",
-     "en": "American standard spelling of tranquillity",
-     "ar": "التهجئة القياسية الأمريكية للهدوء"
+     "en": "American standard spelling of tranquillity.",
+     "ar": "التهجئة القياسية الأمريكية للهدوء."
     }
    ],
    "inflections": [
@@ -1598,7 +1588,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -2280,18 +2270,13 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To repair, as anything that is torn, broken, defaced, decayed, or the like",
-     "ar": "لإصلاح، مثل أي شيء ممزق أو مكسور أو مشوه أو متحلل أو ما شابه ذلك"
-    },
-    {
-     "pos": "verb",
-     "en": "To alter for the better",
-     "ar": "أن يغير للأفضل"
+     "en": "present participle and gerund of mend",
+     "ar": "الحاضر الفاعل و gerund من إصلاح"
     },
     {
      "pos": "noun",
-     "en": "The act by which something is mended or repaired",
-     "ar": "الفعل الذي يتم من خلاله إصلاح شيء ما أو إصلاحه"
+     "en": "The act by which something is mended or repaired.",
+     "ar": "الفعل الذي يتم من خلاله إصلاح شيء ما أو إصلاحه."
     }
    ],
    "inflections": [
@@ -2338,7 +2323,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "B2",
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "audioUS": "",
@@ -3251,13 +3236,8 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To come from a source",
-     "ar": "أن يأتي من مصدر"
-    },
-    {
-     "pos": "verb",
-     "en": "To send or give out",
-     "ar": "لإرسال أو إعطاء"
+     "en": "present participle and gerund of emanate",
+     "ar": "يقدم الفاعل والمرشد من المنبثق"
     }
    ],
    "inflections": [
@@ -3302,7 +3282,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -3513,13 +3493,8 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To proclaim or announce an event",
-     "ar": "لإعلان أو الإعلان عن حدث"
-    },
-    {
-     "pos": "verb",
-     "en": "To greet something with excitement",
-     "ar": "(عادة ما يكون سلبيًا) لتحية شيء ما بإثارة"
+     "en": "simple past and past participle of herald",
+     "ar": "بسيطة الماضي والماضي الفاعل من هيرالد"
     }
    ],
    "inflections": [
@@ -3562,7 +3537,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "audioUS": "",
@@ -4359,7 +4334,7 @@
   {
    "id": 1784741976331,
    "word": "strung",
-   "ipa": "/ˈstɹʌŋ/",
+   "ipa": "/stɹʌŋ/",
    "arabicPron": "سترانق",
    "oxford": "",
    "cefr": "",
@@ -4369,13 +4344,8 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To put (items) on a string",
-     "ar": "لوضع (عناصر) على سلسلة"
-    },
-    {
-     "pos": "verb",
-     "en": "To put strings on (something",
-     "ar": "لوضع الخيوط على (شيء ما)"
+     "en": "simple past and past participle of string",
+     "ar": "مشاركة بسيطة في الماضي والماضي من السلسلة"
     }
    ],
    "inflections": [
@@ -4433,7 +4403,7 @@
    "audioUK": "https://api.dictionaryapi.dev/media/pronunciations/en/strung-uk.mp3",
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 21,
+   "engineVersion": 3,
    "ipaUS": "",
    "audioUS": "",
    "audioGen": "",
@@ -4453,18 +4423,13 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To remove tangles or knots from",
-     "ar": "لإزالة التشابكات أو العقد"
-    },
-    {
-     "pos": "verb",
-     "en": "To remove confusion or mystery from",
-     "ar": "(بالتبعية) لإزالة الارتباك أو الغموض من"
+     "en": "present participle and gerund of untangle",
+     "ar": "الحاضر الفاعل والمرتفع من فك التشابك"
     },
     {
      "pos": "noun",
-     "en": "The process by which something is untangled",
-     "ar": "العملية التي يتم من خلالها فك تشابك شيء ما"
+     "en": "The process by which something is untangled.",
+     "ar": "العملية التي يتم من خلالها فك تشابك شيء ما."
     }
    ],
    "inflections": [
@@ -4509,7 +4474,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -4964,13 +4929,8 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To show or illustrate by example",
-     "ar": "لإظهار أو توضيح بالقدوة"
-    },
-    {
-     "pos": "verb",
-     "en": "To be an instance of or serve as an example",
-     "ar": "أن تكون مثالاً أو مثالاً يحتذى به"
+     "en": "simple past and past participle of exemplify",
+     "ar": "المشاركة البسيطة في الماضي والماضي من سبيل المثال"
     }
    ],
    "inflections": [
@@ -5011,7 +4971,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -5143,24 +5103,19 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "Of two or more entities, to approach each other",
-     "ar": "من بين كيانين أو أكثر، الاقتراب من بعضهما البعض"
+     "pos": "adjective",
+     "en": "approaching each other at a point; convergent.",
+     "ar": "تقترب من بعضها البعض عند نقطة ؛ متقاربة."
     },
     {
      "pos": "verb",
-     "en": "Of a sequence, to have a limit",
-     "ar": "من تسلسل، أن يكون لها حد"
+     "en": "present participle and gerund of converge",
+     "ar": "الحاضر الفاعل و gerund من التقارب"
     },
     {
      "pos": "noun",
-     "en": "Convergence",
-     "ar": "التطابق"
-    },
-    {
-     "pos": "adjective",
-     "en": "Approaching each other at a point",
-     "ar": "الاقتراب من بعضهما البعض عند نقطة"
+     "en": "convergence",
+     "ar": "تجمع, التقاء, نقطة إلتقاء"
     }
    ],
    "inflections": [
@@ -5210,7 +5165,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -6335,13 +6290,8 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To grow plants, notably crops",
-     "ar": "لزراعة النباتات، ولا سيما المحاصيل"
-    },
-    {
-     "pos": "verb",
-     "en": "To nurture",
-     "ar": "لرعاية"
+     "en": "present participle and gerund of cultivate",
+     "ar": "تقديم الفاعلية وجيروند من زراعة"
     }
    ],
    "inflections": [
@@ -6371,7 +6321,7 @@
    "due": 0,
    "audioUS": "",
    "audioUK": "",
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
