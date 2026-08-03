@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T18:11:34.601Z",
+ "exportedAt": "2026-08-03T18:11:42.703Z",
  "words": [
   {
    "id": 1785185030316,
@@ -1523,18 +1523,8 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "The state of being tranquil",
-     "ar": "حالة الهدوء"
-    },
-    {
-     "pos": "noun",
-     "en": "The absence of disturbance",
-     "ar": "غياب الاضطراب"
-    },
-    {
-     "pos": "noun",
-     "en": "American standard spelling of tranquillity",
-     "ar": "التهجئة القياسية الأمريكية للهدوء"
+     "en": "American standard spelling of tranquillity.",
+     "ar": "التهجئة القياسية الأمريكية للهدوء."
     }
    ],
    "inflections": [
@@ -1598,7 +1588,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -2280,18 +2270,13 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To repair, as anything that is torn, broken, defaced, decayed, or the like",
-     "ar": "لإصلاح، مثل أي شيء ممزق أو مكسور أو مشوه أو متحلل أو ما شابه ذلك"
-    },
-    {
-     "pos": "verb",
-     "en": "To alter for the better",
-     "ar": "أن يغير للأفضل"
+     "en": "present participle and gerund of mend",
+     "ar": "الحاضر الفاعل و gerund من إصلاح"
     },
     {
      "pos": "noun",
-     "en": "The act by which something is mended or repaired",
-     "ar": "الفعل الذي يتم من خلاله إصلاح شيء ما أو إصلاحه"
+     "en": "The act by which something is mended or repaired.",
+     "ar": "الفعل الذي يتم من خلاله إصلاح شيء ما أو إصلاحه."
     }
    ],
    "inflections": [
@@ -2338,7 +2323,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "B2",
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "audioUS": "",
@@ -3251,13 +3236,8 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To come from a source",
-     "ar": "أن يأتي من مصدر"
-    },
-    {
-     "pos": "verb",
-     "en": "To send or give out",
-     "ar": "لإرسال أو إعطاء"
+     "en": "present participle and gerund of emanate",
+     "ar": "يقدم الفاعل والمرشد من المنبثق"
     }
    ],
    "inflections": [
@@ -3302,7 +3282,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
