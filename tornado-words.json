@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:26:24.322Z",
+ "exportedAt": "2026-08-03T09:26:31.048Z",
  "words": [
   {
    "id": 1785185030316,
@@ -908,21 +908,21 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "ipaUK": "/ˈljuːbɹɪkənt/",
-   "audioUK": "https://api.dictionaryapi.dev/media/pronunciations/en/lubricant-uk.mp3",
-   "engineVersion": 2,
-   "ipaUS": "",
+   "ipaUK": "/ˈluːbɹɪkənt/",
+   "audioUK": "-uk",
+   "engineVersion": 3,
+   "ipaUS": "/ˈlubɹəkənt/",
    "estCefr": "",
    "freqLabel": "",
-   "audioUS": "",
+   "audioUS": "-us",
    "audioGen": "",
    "favorite": "false"
   },
   {
    "id": 1784806902887,
    "word": "lettuce",
-   "ipa": "/ˈlɛtəs/",
-   "arabicPron": "ليتس",
+   "ipa": "/ˈlɛt.ɪs/",
+   "arabicPron": "ليتيس",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -931,17 +931,17 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "An edible plant, Lactuca sativa and its close relatives, having a head of green and/or purple leaves.",
+     "en": "An edible plant, Lactuca sativa and its close relatives, having a head of green or purple leaves.",
      "ar": "نبات صالح للأكل، لاكتوكا ساتيفا وأقاربه المقربون، له رأس من الأوراق الخضراء و/أو الأرجوانية."
     },
     {
      "pos": "noun",
-     "en": "The leaves of the lettuce plant, eaten as a vegetable; as a dish often mixed with other ingredients, dressing etc.",
+     "en": "(uncountable, vegetable) The leaves of the lettuce plant, eaten as a vegetable; as a dish often mixed with other ingredients, dressing etc.",
      "ar": "أوراق نبات الخس، تؤكل كخضروات ؛ كطبق غالبًا ما يخلط مع مكونات أخرى، صلصة وما إلى ذلك."
     },
     {
      "pos": "noun",
-     "en": "An edible plant, Lactuca sativa and its close relatives, having a head of green or purple leaves.",
+     "en": "(uncountable, US, slang) United States paper currency; dollars.",
      "ar": "نبات صالح للأكل، لاكتوكا ساتيفا وأقاربه المقربون، له رأس من الأوراق الخضراء أو الأرجوانية."
     }
    ],
@@ -985,7 +985,11 @@
    "examples": [
     {
      "en": "I’ll have a ham sandwich with lettuce and tomato.",
-     "ar": "سآخذ شطيرة لحم خنزير مع الخس والطماطم."
+     "ar": ""
+    },
+    {
+     "en": "Twenty dollars an hour? That's a lot of lettuce!",
+     "ar": ""
     }
    ],
    "differences": [],
@@ -998,7 +1002,7 @@
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/lettuce-us.mp3",
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "id": 1784805733158,
@@ -1013,28 +1017,33 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To endure without yielding; to withstand; await defiantly; to encounter; to persevere.",
-     "ar": "التحمل دون الخضوع ؛ الصمود ؛ الانتظار بتحد ؛ المواجهة ؛ المثابرة."
+     "en": "Used in a phrasal verb: abide by (“to accept and act in accordance with”).",
+     "ar": ""
     },
     {
      "pos": "verb",
-     "en": "To bear patiently; to tolerate; to put up with; stand.",
-     "ar": "يتحمل بصبر ؛ يتحمل ؛ يتحمل ؛ يقف."
+     "en": "(transitive) To endure without yielding; to withstand.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "(transitive) To bear patiently.",
+     "ar": ""
     },
     {
      "pos": "verb",
      "en": "To endure without yielding; to withstand. .mw-parser-output .defdate{font-size:smaller}",
-     "ar": "لتحمل دون الخضوع ؛ لتحمل. .mw - parser - output .defdate {font - size:smaller}"
+     "ar": ""
     },
     {
      "pos": "verb",
      "en": "To bear patiently.",
-     "ar": "التحمل بصبر."
+     "ar": ""
     },
     {
      "pos": "verb",
      "en": "To pay for; to stand the consequences of.",
-     "ar": "لدفع ثمن ؛ لتحمل عواقب."
+     "ar": ""
     }
    ],
    "inflections": [
@@ -1070,11 +1079,15 @@
    "examples": [
     {
      "en": "The old oak tree abides the wind endlessly.",
-     "ar": "شجرة البلوط القديمة تحافظ على الريح إلى ما لا نهاية."
+     "ar": ""
     },
     {
      "en": "\"I never could abide shoemakers,\" said an old servant,—and it ended in her marrying one.",
-     "ar": "قالت خادمة عجوز: \"لم أستطع أبدًا الالتزام بصانعي الأحذية\"، وانتهى الأمر بزواجها من أحدهم."
+     "ar": ""
+    },
+    {
+     "en": "The new teacher was strict and the students did not want to abide by his rules.",
+     "ar": ""
     }
    ],
    "differences": [],
@@ -1084,10 +1097,12 @@
    "interval": 0,
    "due": 0,
    "ipaUS": "/əˈbaɪd/",
-   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/abide-us.mp3",
+   "audioUS": "-us",
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUK": "/əˈbaɪd/",
+   "audioUK": "-uk"
   },
   {
    "id": 1784805509427,
