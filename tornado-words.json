@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:27:52.319Z",
+ "exportedAt": "2026-08-03T09:27:57.891Z",
  "words": [
   {
    "id": 1785185030316,
@@ -3681,13 +3681,13 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "id": 1784747147345,
-   "word": "reams",
-   "ipa": "/ɹiːmz/",
-   "arabicPron": "ريمز",
+   "word": "ream",
+   "ipa": "/ɹiːm/",
+   "arabicPron": "ريم",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -3696,29 +3696,34 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "To cream; mantle; foam; froth.",
-     "ar": "إلى كريم ؛ عباءة ؛ رغوة ؛ رغوة."
+     "pos": "noun",
+     "en": "(UK dialectal, Northern England, Scotland) Cream; also, the creamlike froth on ale or other liquor; froth or foam in general.",
+     "ar": ""
     },
     {
      "pos": "verb",
-     "en": "To enlarge a hole, especially using a reamer; to bore a hole wider.",
-     "ar": "لتكبير الحفرة، خاصة باستخدام موسع الثقوب ؛ لحفر حفرة أوسع."
+     "en": "(UK dialectal, Northern England, Scotland) To cream; mantle; foam; froth.",
+     "ar": ""
     },
     {
      "pos": "verb",
-     "en": "To shape or form, especially using a reamer.",
-     "ar": "للتشكيل أو التشكيل، خاصة باستخدام موسع الثقوب."
+     "en": "(transitive) To enlarge (a hole), especially using a reamer; to bore (a hole) wider.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "(transitive) To remove (material) by reaming.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "(transitive) To remove burrs and debris from inside (something, such as a freshly bored hole) using a tool.",
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "A bundle, package, or quantity of paper, nowadays usually containing 500 sheets.",
-     "ar": "حزمة أو عبوة أو كمية من الورق، في الوقت الحاضر تحتوي عادة على 500 ورقة."
-    },
-    {
-     "pos": "noun",
-     "en": "(chiefly in the plural) An abstract large amount of something.",
-     "ar": "(بشكل رئيسي في صيغة الجمع) كمية كبيرة مجردة من شيء ما."
+     "ar": ""
     }
    ],
    "inflections": [
@@ -3750,8 +3755,21 @@
      "ar": "عنقود, حزمة, باقة, ربطة حزمية, حدبة, سنام, نتوء"
     }
    ],
-   "collocations": [],
+   "collocations": [
+    {
+     "en": "ream out",
+     "ar": ""
+    },
+    {
+     "en": "vinnie ream",
+     "ar": ""
+    }
+   ],
    "examples": [
+    {
+     "en": "The accountants requested reams of financial records.",
+     "ar": ""
+    },
     {
      "en": "I can't go – I still have reams of work left.",
      "ar": ""
@@ -3765,7 +3783,7 @@
    "due": 0,
    "ipaUK": "/ɹiːmz/",
    "audioUK": "https://api.dictionaryapi.dev/media/pronunciations/en/reams-uk.mp3",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "id": 1784747132715,
