@@ -111,6 +111,13 @@ data class AppSettings(
     val quizLimit: Int = 40,
     val showArabicFirst: Boolean = false,
     val seeded: Boolean = false,
+    /**
+     * هل رأى المستخدم شاشة الترحيب؟
+     *
+     * تُعرض مرة واحدة في عمر التثبيت. وتخزينها في الإعدادات لا في الذاكرة
+     * يعني أنها لا تعود مع كل دوران للشاشة ولا مع كل إعادة تشغيل.
+     */
+    val welcomed: Boolean = false,
     val streakDays: Int = 0,
     val lastStudyDay: Long = 0,
     val reviewedToday: Int = 0
@@ -158,6 +165,7 @@ class SettingsStore(private val context: Context) {
         val QUIZ_LIMIT = intPreferencesKey("quiz_limit")
         val AR_FIRST = booleanPreferencesKey("quiz_arabic_first")
         val SEEDED = booleanPreferencesKey("seeded")
+        val WELCOMED = booleanPreferencesKey("welcomed")
         val STREAK = intPreferencesKey("streak_days")
         val LAST_DAY = longPreferencesKey("last_study_day")
         val TODAY_COUNT = intPreferencesKey("reviewed_today")
@@ -224,6 +232,7 @@ class SettingsStore(private val context: Context) {
         quizLimit = this[K.QUIZ_LIMIT] ?: 40,
         showArabicFirst = this[K.AR_FIRST] ?: false,
         seeded = this[K.SEEDED] ?: false,
+        welcomed = this[K.WELCOMED] ?: false,
         streakDays = this[K.STREAK] ?: 0,
         lastStudyDay = this[K.LAST_DAY] ?: 0L,
         reviewedToday = this[K.TODAY_COUNT] ?: 0
@@ -273,6 +282,7 @@ class SettingsStore(private val context: Context) {
     suspend fun setQuizLimit(v: Int) = edit { it[K.QUIZ_LIMIT] = v }
     suspend fun setArabicFirst(v: Boolean) = edit { it[K.AR_FIRST] = v }
     suspend fun setSeeded(v: Boolean) = edit { it[K.SEEDED] = v }
+    suspend fun setWelcomed() = edit { it[K.WELCOMED] = true }
 
     /**
      * يسجّل مراجعة اليوم ويحدّث سلسلة الأيام المتتالية.

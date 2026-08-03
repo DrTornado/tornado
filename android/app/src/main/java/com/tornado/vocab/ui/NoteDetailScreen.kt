@@ -63,7 +63,7 @@ class NoteDetailViewModel(app: Application) : AndroidViewModel(app) {
      */
     fun save(title: String, text: String) = viewModelScope.launch {
         val current = _note.value ?: return@launch
-        val chunks = NoteChunker.split(text)
+        val chunks = NoteChunker.sentences(text)
         val updated = current.copy(
             title = title.trim().ifBlank { NoteChunker.titleFrom(text) },
             text = text.trim(),
@@ -171,31 +171,19 @@ fun NoteDetailScreen(
                 )
             } else {
                 /*
-                 * العرض بمقاطع لا كتلة واحدة.
+                 * النصّ كما كتبه صاحبه — بلا تقطيع ولا ترقيم.
                  *
-                 * المقطع هو وحدة الاستماع، فعرضه وحدةً للقراءة يجعل المستخدم
-                 * يعرف أين هو من النص حين يسمع «الجزء ٣» — الشاشة والأذن
-                 * تتكلمان نفس اللغة.
+                 * كان يُعرض مقسَّماً إلى مقاطع مرقّمة لتوافق وحدات الاستماع،
+                 * والنية أن يعرف القارئ أين هو من الصوت. لكن النصّ ملكُ صاحبه
+                 * يعود إليه ليقرأه ويحرّره، وتقطيعه يشوّه فقراته ويجعل مراجعته
+                 * أصعب. ووحدات الصوت شأن داخلي لا يجب أن يتسرّب إلى الورقة.
                  */
-                NoteChunker.split(n.text).forEachIndexed { i, chunk ->
-                    Row(verticalAlignment = androidx.compose.ui.Alignment.Top) {
-                        Text(
-                            "${i + 1}",
-                            style = MaterialTheme.typography.labelMedium,
-                            color = if (i == n.lastChunk) MaterialTheme.colorScheme.primary
-                            else MaterialTheme.colorScheme.onSurfaceVariant,
-                            fontWeight = if (i == n.lastChunk) FontWeight.Bold else FontWeight.Normal,
-                            modifier = Modifier.padding(end = 12.dp, top = 3.dp)
-                        )
-                        Text(
-                            chunk,
-                            fontSize = 17.sp,
-                            lineHeight = 28.sp,
-                            color = MaterialTheme.colorScheme.onBackground
-                        )
-                    }
-                    VSpace(16)
-                }
+                Text(
+                    n.text,
+                    fontSize = 17.sp,
+                    lineHeight = 28.sp,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
             }
             VSpace(32)
         }

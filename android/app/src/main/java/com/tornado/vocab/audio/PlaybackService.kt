@@ -497,7 +497,8 @@ class PlaybackService : MediaSessionService() {
                     }
                     RowKind.NOTE_CHUNK -> {
                         val note = notes.byId(row.id) ?: return@withContext null
-                        val chunk = NoteChunker.split(note.text).getOrNull(row.chunkIndex)
+                        // نفس الوحدة التي بنى بها الطابور — وإلا نُطق نصٌّ غير المعروض
+                        val chunk = NoteChunker.units(note.text, detailed).getOrNull(row.chunkIndex)
                             ?: return@withContext null
                         /*
                          * Say يحدّد العدد وSHORT/FULL تحدّد الوحدة.
@@ -515,12 +516,22 @@ class PlaybackService : MediaSessionService() {
                          * هو — نصٌّ جديد بصوت قديم إلى الأبد. والمستخدم عدّل
                          * نوتة فسمع القديمة، ولا سبيل عنده لإجبار البناء.
                          */
+                        /*
+                         * الجملة تُبنى مرة واحدة، بلا تكرار ولا وضع.
+                         *
+                         * كان التكرار والوضع يدخلان الملف نفسه، فكل تبديل
+                         * لـSay أو FULL يبني صوتاً جديداً — وهو ما شكا منه
+                         * المستخدم مراراً: «المفروض تنزل الجملة خلاص، ما
+                         * يحتاج إعادة بناء، فقط استدعاء حسب التكرار».
+                         *
+                         * والتكرار صار طابوراً: نفس الجملة تُضاف مرتين أو
+                         * ثلاثاً، وتُقرأ من نفس الملف المخزَّن. فتبديل Say
+                         * لا يولّد شيئاً — يعيد ترتيب الطابور فحسب.
+                         */
                         narration.getOrBuildText(
                             key = "note-${note.id}-${row.chunkIndex}-${chunk.hashCode()}",
                             text = chunk,
-                            voiceTag = voiceTag,
-                            repeat = wordRepeat,
-                            byParagraph = detailed
+                            voiceTag = voiceTag
                         ) { done, total ->
                             PlaybackBus.update { it.copy(prepareDone = done, prepareTotal = total) }
                         }
@@ -592,10 +603,21 @@ class PlaybackService : MediaSessionService() {
             .setIsBrowsable(false).setIsPlayable(true)
             .build()
 
+        /*
+         * لكل عنصر معرّف فريد — ولو كان صوته نفس الملف.
+         *
+         * كان المعرّف رقم الكلمة أو الملاحظة، وهو صالح حين تكون كل كلمة عنصراً
+         * واحداً. أما الملاحظة فتدخل الطابور بعشر جمل تحمل رقمها نفسه، ومع
+         * Say ×٢ تتكرّر كل جملة — فتصير في الطابور عناصر لا يميّز بينها شيء.
+         *
+         * وجلسة الوسائط تبني طابورها على هذه المعرّفات، فتراها عنصراً واحداً:
+         * يُشغَّل الأول ولا ينتقل إلى ما بعده. والمستخدم يسمع ثلاث عشرة ثانية
+         * ثم صمتاً، ويظنّ النصّ كلّه هذا.
+         */
         player.addMediaItem(
             MediaItem.Builder()
                 .setUri(android.net.Uri.fromFile(result.file))
-                .setMediaId(word.id.toString())
+                .setMediaId("${word.id}-${word.chunkIndex}-$position")
                 .setMediaMetadata(metadata)
                 .build()
         )

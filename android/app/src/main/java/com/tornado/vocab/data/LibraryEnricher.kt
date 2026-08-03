@@ -102,8 +102,22 @@ class LibraryEnricher(
      * والحدّ على المحاولات ضروري: كلمة نادرة لا مثال لها في أي مصدر ستبقى
      * ناقصة مهما سألنا، وسؤالها في كل فتحة يستهلك حصة مصدر مجاني بلا فائدة.
      */
+    /**
+     * البطاقة مؤهّلة إن كان فيها فراغ — أو إن بُنيت بمحرّك أقدم.
+     *
+     * الشرط كان الفراغ وحده، وهو يكفي لبطاقة ناقصة ولا يكفي لبطاقة **خاطئة**:
+     * «articulation» عندها معنىً وأمثلة ونطق ومستوى، ففجواتها صفر، فلا تُعاد
+     * أبداً مهما تحسّن المحرّك. وقد تحسّن فعلاً — صار يقدّم المعنى الشائع على
+     * المتخصّص — ولم يصل التحسين إلى كلمة واحدة من مكتبة المستخدم.
+     *
+     * ورقم المحرّك يفصل الحالتين: ما بُني قبل الإصدار الحالي يُعاد مرة واحدة،
+     * ثم يستقرّ. فالتحسين يسري بأثر رجعي بلا أن يدور الإثراء بلا نهاية.
+     */
     private fun Word.isEligible(): Boolean =
-        gapCount() > 0 && attemptsSoFar() < MAX_ATTEMPTS
+        (gapCount() > 0 || isStale()) && attemptsSoFar() < MAX_ATTEMPTS
+
+    /** بُنيت بمحرّك أقدم من الحالي — تستحق إعادة بناء واحدة */
+    private fun Word.isStale(): Boolean = engineVersion < ENGINE_VERSION
 
     private fun Word.gapCount(): Int {
         var gaps = 0
@@ -112,6 +126,17 @@ class LibraryEnricher(
         if (cefr.isBlank() && estCefr.isBlank()) gaps++
         if (synonyms.isEmpty()) gaps++
         if (meanings.isEmpty()) gaps++
+        /*
+         * المعنى بلا عربية نقصٌ يُعاد إليه.
+         *
+         * لم يكن معدوداً، فبطاقةٌ صُحّح معناها الإنجليزي وتعذّرت ترجمته —
+         * لنفاد الحصة اليومية مثلاً — تُحسب مكتملة ولا يُعاد إليها أبداً.
+         * والمستخدم يرى الشرح الإنجليزي صحيحاً والعربي قديماً أو غائباً، ولا
+         * سبيل عنده لإجبار المحاولة. وقد رآه.
+         *
+         * وعدّه نقصاً يجعل الجولة التالية تكمله من نفسها حين تتجدّد الحصة.
+         */
+        if (meanings.isNotEmpty() && meanings.none { it.ar.isNotBlank() }) gaps++
         return gaps
     }
 
@@ -155,12 +180,55 @@ class LibraryEnricher(
             oxford = pick(oxford, fresh.oxford) { it.isBlank() },
             freqLabel = pick(freqLabel, fresh.freqLabel) { it.isBlank() },
             pos = pick(pos, fresh.pos) { it.isEmpty() },
-            // المعاني تُملأ فقط إن كانت فارغة تماماً — لا تُوسَّع ولا تُبدَّل
-            meanings = pick(meanings, fresh.meanings) { it.isEmpty() },
-            // المحاولة تُسجَّل دائماً، نجحت أو لم تنجح — وإلا دارت الجولة بلا نهاية
-            engineVersion = maxOf(engineVersion, ENGINE_VERSION) + 1
+            /*
+             * المعاني تُستبدَل حين تأتي من محرّك أحدث.
+             *
+             * كانت تُملأ إن كانت فارغة وحدها، حفاظاً على ما حرّره المستخدم
+             * بيده. والنية سليمة والنتيجة أن كل بطاقة قديمة تحتفظ بترتيبها
+             * الخاطئ إلى الأبد: يُقدَّم «مفصل» على «وضوح النطق» ولا سبيل
+             * لتصحيحه إلا حذف الكلمة وإعادة إضافتها.
+             *
+             * فالاستبدال مشروط بأمرين: أن يكون المحرّك أحدث فعلاً، وأن يأتي
+             * بمعانٍ أكثر أو مساوية — لئلا يستبدل شرحاً وافياً بأقلّ منه.
+             */
+            meanings = when {
+                meanings.isEmpty() -> pick(meanings, fresh.meanings) { it.isEmpty() }
+                isStale() && fresh.meanings.size >= meanings.size -> {
+                    changed = true; fresh.meanings
+                }
+                /*
+                 * العربية تُملأ في مكانها دون المساس بالإنجليزية.
+                 *
+                 * الاستبدال الكامل مشروط بقِدَم المحرّك، وبطاقةٌ حديثة ينقصها
+                 * العربي وحده كانت تخرج بلا تغيير. فتُملأ الترجمة وحدها: كل
+                 * معنىً يأخذ عربيّته من مقابله إن وُجد، وما بقي فارغاً يبقى.
+                 */
+                meanings.none { it.ar.isNotBlank() } && fresh.meanings.any { it.ar.isNotBlank() } -> {
+                    changed = true
+                    meanings.mapIndexed { i, m ->
+                        val ar = fresh.meanings.getOrNull(i)?.ar.orEmpty()
+                        if (m.ar.isBlank() && ar.isNotBlank()) m.copy(ar = ar) else m
+                    }
+                }
+                else -> meanings
+            }
         )
-        return if (changed) merged.derive() else merged
+        /*
+         * النجاح يثبّت الرقم، والفشل وحده يزيده.
+         *
+         * كان الرقم يزيد في الحالتين، فيحمل معنيين متعارضين: «أي محرّك بنى
+         * هذه البطاقة» و«كم مرة حاولنا إكمالها». وبعد جولات إثراء تضخّم فوق
+         * رقم المحرّك نفسه — مئة كلمة عند ٦ ومحرّكها ٣ — فصار كل تحسين لاحق
+         * يبدو أقدم من البطاقات التي يريد إصلاحها، ولا يصل إلى واحدة منها.
+         *
+         * الفصل يعيد للرقم معناه: مساوٍ للمحرّك يعني محدَّثاً، وأقلّ يعني
+         * قديماً يستحق الإعادة، وأكثر يعني محاولاتٍ فشلت بعددها.
+         */
+        val settled = merged.copy(
+            engineVersion = if (changed) ENGINE_VERSION
+            else maxOf(engineVersion, ENGINE_VERSION) + 1
+        )
+        return if (changed) settled.derive() else settled
     }
 
     private companion object {

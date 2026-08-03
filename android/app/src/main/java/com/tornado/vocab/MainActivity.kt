@@ -33,6 +33,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
@@ -66,6 +68,7 @@ import com.tornado.vocab.ui.SettingsScreen
 import com.tornado.vocab.ui.SettingsViewModel
 import com.tornado.vocab.ui.TornadoTheme
 import com.tornado.vocab.ui.WordDetailScreen
+import com.tornado.vocab.ui.WelcomeScreen
 import com.tornado.vocab.ui.WordDetailViewModel
 
 private data class Destination(val route: String, val label: String, val icon: ImageVector)
@@ -125,6 +128,20 @@ private fun TornadoRoot() {
     val settings by app.settings.app.collectAsStateWithLifecycle(initialValue = AppSettings())
 
     TornadoTheme(mode = settings.theme, dynamicColor = settings.dynamicColor) {
+
+        /*
+         * الترحيب قبل كل شيء عند أول تشغيل.
+         *
+         * يسبق شريط التنقّل والمشغّل المصغّر عمداً: من لم يعرف بعدُ أن هذا
+         * مشغّل صوت لا ينفعه أن يرى خمسة تبويبات لا يميّز بينها، ولا تنزيلاً
+         * بمئات الميغابايتات يجري بلا تفسير.
+         */
+        val scope = rememberCoroutineScope()
+        if (!settings.welcomed) {
+            WelcomeScreen(onDone = { scope.launch { app.settings.setWelcomed() } })
+            return@TornadoTheme
+        }
+
         val nav = rememberNavController()
         val backStack by nav.currentBackStackEntryAsState()
         val route = backStack?.destination?.route
@@ -281,7 +298,15 @@ private fun TornadoRoot() {
                         NoteDetailScreen(
                             noteId = id,
                             onBack = { nav.popBackStack() },
-                            onPlay = { notesVm.play(it) }
+                            /*
+                             * التشغيل من داخل النص يفتح المشغّل أيضاً.
+                             *
+                             * كان يبدأ الصوت ويترك المستخدم في صفحة النص، وبناء
+                             * البطاقة يستغرق ثوانيَ قبل أن يُسمع شيء — فيبدو أن
+                             * الزرّ لم يفعل شيئاً. وقد أصلحنا هذا في زرّ القائمة
+                             * ونسيناه هنا، فبقي نصف الطريق مضاءً ونصفه مظلماً.
+                             */
+                            onPlay = { notesVm.playAll(it); nav.navigate("player") }
                         )
                     }
 

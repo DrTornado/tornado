@@ -26,10 +26,31 @@ import java.util.concurrent.TimeUnit
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
-/** رقم إصدار المحرّك — يُرفع عند أي تحسين حقيقي في منطق الجلب */
-// رُفع إلى ٣ بعد تبديل المصدر: الرقم يجعل الإثراء يعيد المرور على المكتبة
-// كلها فتُبنى بطاقاتها من المصدر المرخَّص بدل بقائها على القديم
-const val ENGINE_VERSION = 3
+/**
+ * رقم إصدار المحرّك — يُرفع عند كل تحسين يجب أن يسري على ما بُني سابقاً.
+ *
+ * رُفع إلى ١٠ بعد ترتيب المعاني (العام قبل المتخصّص). والقفزة كبيرة عمداً:
+ * الحقل كان يُزاد مع كل محاولة إثراء لا مع كل تحسين، فتضخّم على جهاز المستخدم
+ * إلى ٦ و٧ بينما المحرّك عند ٣ — فأي رقم أدنى كان سيبدو أقدم من البطاقات التي
+ * يريد إصلاحها، ولا يصل إلى واحدة منها.
+ *
+ * والمحاسبة صُحّحت في LibraryEnricher: النجاح يثبّت الرقم والفشل وحده يزيده،
+ * فلن يتكرّر الانحراف.
+ */
+const val ENGINE_VERSION = 20
+
+/**
+ * أقلّ قفزة مسموحة عند رفع رقم المحرّك.
+ *
+ * عدّاد المحاولات مخبّأ في الفرق بين رقم البطاقة ورقم المحرّك، فبطاقة فشلت
+ * ثلاث مرات تحمل رقماً أعلى من المحرّك بثلاثة. ورفعٌ بأقلّ من ذلك يترك تلك
+ * البطاقات فوق السقف — فتبقى مقصاة رغم أن سبب فشلها قد أُصلح.
+ *
+ * وقد وقع هذا فعلاً: عطلٌ في المحرّك أفشل كل جلب، فتسلّقت البطاقات إلى حدّ
+ * المحاولات، ثم أُصلح العطل ولم تعد أيٌّ منها مؤهّلة. فالقفزة تتجاوز السقف
+ * دائماً، ليبدأ الجميع من صفر مع كل تحسين.
+ */
+const val MIN_VERSION_STEP = 5
 
 sealed interface LookupResult {
     data class Success(val word: Word) : LookupResult
@@ -131,8 +152,16 @@ class DictionaryService(private val context: Context) {
 
         fun normDef(s: String) = s.lowercase().replace(Regex("[.!?;:]+$"), "").replace(Regex("\\s+"), " ").trim()
 
-        // ترتيب التواتر يُجلب مرة واحدة للكلمة كلها — لا لكل قسم كلام
-        val freqOrder: List<String> = if (entry != null) senseOrder(corrected) else emptyList()
+        /*
+         * ترتيب التواتر تحسينٌ لا شرط.
+         *
+         * يُجلب مرة واحدة للكلمة كلها لا لكل قسم كلام، وفشلُه يعيد قائمة
+         * فارغة فيُرتَّب بالمجالات بدلاً منه. وقد كان استثناؤه يصعد فيُسقط
+         * البطاقة كلها ويعود «القاموس لم يجب» — فامتنعت إضافة أي كلمة.
+         */
+        val freqOrder: List<String> =
+            if (entry != null) runCatching { senseOrder(corrected) }.getOrDefault(emptyList())
+            else emptyList()
 
         entry?.let { e ->
             /*
@@ -293,7 +322,10 @@ class DictionaryService(private val context: Context) {
          * التي يقرؤها المتعلّم أصلاً.
          */
         val translated = coroutineScope {
-            val wordAr = async { translateToArabic(finalWord) }
+            // البشري أولاً بلا حدّ، والآلي يكمل ما عجز عنه
+            val wordAr = async {
+                arabicFromWiktionary(finalWord).ifBlank { translateToArabic(finalWord) }
+            }
             val meaningJobs = meanings.take(TRANSLATED_MEANINGS).mapIndexed { i, m ->
                 async { i to (if (m.ar.isBlank()) translateToArabic(gistOf(m.en)) else m.ar) }
             }
@@ -407,7 +439,7 @@ class DictionaryService(private val context: Context) {
     private data class DmWord(val word: String)
 
     private suspend fun datamuse(params: String): List<DmWord> {
-        val body = get("https://api.datamuse.com/words?$params&max=8") ?: return emptyList()
+        val body = getOptional("https://api.datamuse.com/words?$params&max=8") ?: return emptyList()
         val arr = runCatching { json.parseToJsonElement(body).jsonArray }.getOrNull() ?: return emptyList()
         return arr.mapNotNull { (it as? JsonObject)?.str("word")?.takeIf { w -> w.isNotBlank() }?.let(::DmWord) }
     }
@@ -424,7 +456,7 @@ class DictionaryService(private val context: Context) {
      * «العام قبل المتخصّص»، وهي أضعف لكنها تعمل بلا شبكة.
      */
     private suspend fun senseOrder(word: String): List<String> {
-        val body = get("https://api.datamuse.com/words?sp=${enc(word)}&md=d&max=1") ?: return emptyList()
+        val body = getOptional("https://api.datamuse.com/words?sp=${enc(word)}&md=d&max=1") ?: return emptyList()
         val arr = runCatching { json.parseToJsonElement(body).jsonArray }.getOrNull() ?: return emptyList()
         val defs = (arr.firstOrNull() as? JsonObject)?.get("defs") as? JsonArray ?: return emptyList()
         return defs.mapNotNull { d ->
@@ -451,6 +483,28 @@ class DictionaryService(private val context: Context) {
         return t.ifBlank { definition.take(160) }
     }
 
+    /**
+     * ترجمة عربية كتبها بشر — من قسم الترجمات في ويكاموس.
+     *
+     * تُسأل قبل الترجمة الآلية لسببين: جودتها أعلى لأن إنساناً اختارها، وهي
+     * بلا حدّ يومي فلا تستهلك حصةً محدودة أصلاً. وقياسٌ على ستّ كلمات أعطى
+     * تغطية اثنتين — فهي مصدر أول لا وحيد، والآلية تكمل ما تعجز عنه.
+     *
+     * والقالب في ويكاموس على صورة `{{t+|ar|كلمة}}` أو `{{t|ar|كلمة}}`.
+     */
+    private suspend fun arabicFromWiktionary(word: String): String {
+        val body = getOptional(
+            "https://en.wiktionary.org/w/api.php?action=query&titles=${enc(word)}" +
+                "&prop=revisions&rvprop=content&rvslots=main&format=json&formatversion=2"
+        ) ?: return ""
+        val hit = Regex("""\{\{t\+?\|ar\|([^}|]+)""").find(body)?.groupValues?.get(1).orEmpty()
+        // النصّ يعود مُهرَّباً بصيغة \uXXXX داخل JSON — نفكّه قبل استعماله
+        val decoded = Regex("""\\u([0-9a-fA-F]{4})""").replace(hit) {
+            it.groupValues[1].toInt(16).toChar().toString()
+        }
+        return decoded.trim().takeIf { it.isNotBlank() && Linguistics.isArabic(it) }.orEmpty()
+    }
+
     /** ترجمة أفضل جهد — الفشل يرجع نصاً فارغاً بلا كسر البطاقة */
     private suspend fun translateToArabic(text: String): String {
         if (text.isBlank()) return ""
@@ -462,7 +516,7 @@ class DictionaryService(private val context: Context) {
          * البريد: عشرة آلاف مستخدم يقتسمون حصةً واحدة، فتنفد لهم جميعاً.
          * خمسة آلاف لكل جهاز أكثر بكثير من خمسين ألفاً مقسومة على الجميع.
          */
-        val body = get(
+        val body = getOptional(
             "https://api.mymemory.translated.net/get?q=${enc(text)}&langpair=en|ar"
         ) ?: return ""
         val root = runCatching { json.parseToJsonElement(body).jsonObject }.getOrNull() ?: return ""
@@ -479,6 +533,19 @@ class DictionaryService(private val context: Context) {
     }
 
     // ===== أدوات =====
+
+    /**
+     * استدعاء لمصدر مساعد — فشله لا يُسقط البطاقة أبداً.
+     *
+     * المصادر المساعدة (المرادفات، ترتيب المعاني، الترجمة) تُحسّن البطاقة ولا
+     * تصنعها. وكانت تستدعي `get` مباشرة، وهو يرمي استثناءً عند أي استجابة غير
+     * ناجحة — فيصعد الاستثناء إلى `lookup` ويعود «القاموس لم يجب».
+     *
+     * والنتيجة أن تعثّراً عابراً في مصدر ثانوي كان يمنع إضافة أي كلمة وإصلاح
+     * أي بطاقة قديمة. عطلٌ تامّ سببه تحسينٌ اختياري — وقد وقع فعلاً.
+     */
+    private suspend fun getOptional(url: String): String? =
+        runCatching { get(url, allow404 = true) }.getOrNull()
 
     private suspend fun get(url: String, allow404: Boolean = false): String? =
         suspendCancellableCoroutine { cont ->

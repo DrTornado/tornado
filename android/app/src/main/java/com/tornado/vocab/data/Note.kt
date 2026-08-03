@@ -73,6 +73,72 @@ object NoteChunker {
     private const val TARGET_CHARS = 1_200
     private const val MAX_CHARS = 1_800
 
+    /**
+     * يقسّم النصّ إلى جُمل — وحدة التشغيل الحقيقية.
+     *
+     * المقطع الكبير (١٢٠٠ حرف) كان وحدة الطابور، فيُبنى كاملاً قبل أن يُسمع
+     * حرفٌ واحد: عشرون ثانية صمتٍ بعد ضغطة التشغيل، ويظنّ المستخدم الزرّ
+     * معطّلاً. والجملة تُبنى في ثانية أو اثنتين، فيبدأ الصوت بعد جملتين
+     * ويستمرّ البناء خلفه — وهو ما يفعله المشغّل مع الكلمات أصلاً.
+     *
+     * والجمل القصيرة جداً تُضمّ لما بعدها: «نعم.» وحدها تقطّع السماع بلا داعٍ.
+     */
+    /**
+     * وحدات التشغيل — فقرات أو جُملاً، كما يختار المستخدم بزرّ FULL/SHORT.
+     *
+     * وأول ما يجب حفظه هو الأسطر الجديدة. كان التقسيم يبدأ بـ`\s+ → " "` فيمحو
+     * كل فاصل بين الفقرات قبل أن يراه أحد — ثم يُسأل «كرّر الفقرة» ولا فقرات
+     * في النص أصلاً. فبقي FULL بلا أثر، وسأل المستخدم محقاً: «هل تعرف حدود
+     * الفقرة أصلاً؟» والجواب كان: لا، لأنني أتلفها في السطر الأول.
+     *
+     * والفقرة تُعرَّف بسطر فارغ، فإن لم يوجد فبسطر واحد — فمن يلصق نصاً من
+     * صفحة ويب تصله فقراته بسطر مفرد لا بسطرين.
+     */
+    fun units(text: String, byParagraph: Boolean): List<String> {
+        val src = text.trim()
+        if (src.isBlank()) return emptyList()
+
+        val paragraphs = when {
+            src.contains(Regex("\\n\\s*\\n")) -> src.split(Regex("\\n\\s*\\n+"))
+            src.contains('\n') -> src.split('\n')
+            else -> listOf(src)
+        }.map { it.replace(Regex("[ \\t]+"), " ").trim() }.filter { it.isNotBlank() }
+
+        if (byParagraph) return paragraphs
+
+        // جُملاً: نقسّم داخل كل فقرة ولا نخلط فقرتين في مقطع واحد
+        val out = ArrayList<String>()
+        paragraphs.forEach { p ->
+            // موضع بداية هذه الفقرة في الناتج — حدٌّ لا يتجاوزه الضمّ
+            val paragraphStart = out.size
+            val buf = StringBuilder()
+            p.split(Regex("(?<=[.!?؟])\\s+")).filter { it.isNotBlank() }.forEach { s ->
+                if (buf.isNotEmpty()) buf.append(' ')
+                buf.append(s)
+                if (buf.length >= MIN_SPOKEN_CHARS) { out += buf.toString(); buf.clear() }
+            }
+            if (buf.isNotEmpty()) {
+                /*
+                 * البقيّة القصيرة تلتحق بسابقتها من **نفس الفقرة** وحدها.
+                 *
+                 * كان الضمّ ينظر إلى آخر مقطع في الناتج أياً كانت فقرته، فتلتصق
+                 * بداية الفقرة الثانية بنهاية الأولى — وهو ما أمسكه الاختبار
+                 * قبل أن يصل إلى الجهاز.
+                 */
+                val canMerge = out.size > paragraphStart &&
+                    out.last().length + buf.length <= MAX_CHARS
+                if (canMerge) out[out.lastIndex] = out.last() + " " + buf else out += buf.toString()
+            }
+        }
+        return out
+    }
+
+    /** يُبقى للتوافق — الجُمل هي الوضع الافتراضي */
+    fun sentences(text: String): List<String> = units(text, byParagraph = false)
+
+    /** أقلّ طول لمقطع منطوق — دونه يصير التشغيل تقطيعاً لا قراءة */
+    private const val MIN_SPOKEN_CHARS = 180
+
     fun split(text: String): List<String> {
         val clean = text.replace(Regex("\\s+"), " ").trim()
         if (clean.isBlank()) return emptyList()
