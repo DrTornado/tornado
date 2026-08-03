@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T15:27:05.442Z",
+ "exportedAt": "2026-08-03T15:27:22.921Z",
  "words": [
   {
    "id": 1785185030316,
@@ -6984,22 +6984,22 @@
     {
      "pos": "noun",
      "en": "Any alteration or change.",
-     "ar": ""
+     "ar": "أي تغيير أو تغيير."
     },
     {
      "pos": "noun",
      "en": "(genetics) Any heritable change of the base-pair sequence of genetic material.",
-     "ar": ""
+     "ar": "(علم الوراثة) أي تغيير وراثي في تسلسل زوج القاعدة للمادة الوراثية."
     },
     {
      "pos": "noun",
      "en": "A mutant.",
-     "ar": ""
+     "ar": "متحول"
     },
     {
      "pos": "noun",
      "en": "Any heritable change of the base-pair sequence of genetic material.",
-     "ar": ""
+     "ar": "أي تغيير وراثي في تسلسل زوج القاعدة للمادة الوراثية."
     }
    ],
    "inflections": [
@@ -7173,12 +7173,12 @@
     {
      "pos": "noun",
      "en": "The terminal through which electric current passes between metallic and nonmetallic parts of an electric circuit.",
-     "ar": "الطرف الذي يمر من خلاله التيار الكهربائي بين الأجزاء المعدنية وغير المعدنية للدائرة الكهربائية"
+     "ar": "الطرف الذي يمر من خلاله التيار الكهربائي بين الأجزاء المعدنية وغير المعدنية للدائرة الكهربائية."
     },
     {
      "pos": "noun",
      "en": "A collector or emitter of electric charge in a semiconducting device.",
-     "ar": "جامع أو باعث للشحنة الكهربائية في جهاز شبه موصل"
+     "ar": "مجمع أو باعث للشحنة الكهربائية في جهاز شبه موصل."
     }
    ],
    "inflections": [
@@ -7254,27 +7254,27 @@
     {
      "pos": "noun",
      "en": "Any of very many animals (either hermaphroditic or nonhermaphroditic), of the class Gastropoda, having a coiled shell.",
-     "ar": ""
+     "ar": "أي من العديد من الحيوانات (إما خنثى أو غير خنثى)، من فئة Gastropoda، لها قشرة ملفوفة."
     },
     {
      "pos": "noun",
      "en": "(informal, by extension) A slow person; a sluggard.",
-     "ar": ""
+     "ar": "(غير رسمي، بالتبعية) شخص بطيء ؛ كسلان."
     },
     {
      "pos": "noun",
      "en": "(engineering) A spiral cam, or a flat piece of metal of spirally curved outline, used for giving motion to, or changing the position of, another part, as the hammer tail of a striking clock.",
-     "ar": ""
+     "ar": "(هندسة) كاميرا حلزونية، أو قطعة معدنية مسطحة ذات مخطط منحني حلزونيًا، تستخدم لإعطاء الحركة أو تغيير موضع جزء آخر، كذيل مطرقة لساعة مدهشة."
     },
     {
      "pos": "verb",
      "en": "To move or travel very slowly.",
-     "ar": ""
+     "ar": "التحرك أو السفر ببطء شديد."
     },
     {
      "pos": "noun",
      "en": "A slow person; a sluggard.",
-     "ar": ""
+     "ar": "شخص بطيء ؛ كسلان."
     }
    ],
    "inflections": [
@@ -7319,7 +7319,7 @@
    "examples": [
     {
      "en": "The cars were snailing along the motorway during the rush hour.",
-     "ar": ""
+     "ar": "كانت السيارات تتسلل على طول الطريق السريع خلال ساعة الذروة."
     }
    ],
    "differences": [],
@@ -8402,22 +8402,22 @@
     {
      "pos": "noun",
      "en": "Any arthropod of the subphylum Crustacea, including lobsters, crabs, shrimp, barnacles and woodlice.",
-     "ar": ""
+     "ar": "أي مفصليات من القشريات الفرعية، بما في ذلك الكركند وسرطان البحر والروبيان والأرنب وقمل الخشب."
     },
     {
      "pos": "noun",
      "en": "(cladistically) Any arthropod of the clade Pancrustacea, which includes hexapods in addition to traditional crustaceans.",
-     "ar": ""
+     "ar": "(cladistically) أي مفصليات الأرجل من فصيلة Pancrustacea، والتي تشمل سداسيات الأرجل بالإضافة إلى القشريات التقليدية."
     },
     {
      "pos": "adjective",
      "en": "Of, relating to, or characteristic of the subphylum Crustacea.",
-     "ar": ""
+     "ar": "من القشريات الفرعية أو المتعلقة بها أو المميزة لها."
     },
     {
      "pos": "noun",
      "en": "Any arthropod of the clade Pancrustacea, which includes hexapods in addition to traditional crustaceans.",
-     "ar": ""
+     "ar": "أي مفصليات من فصيلة البانكروستاسيا، والتي تشمل سداسيات الأرجل بالإضافة إلى القشريات التقليدية."
     }
    ],
    "inflections": [
@@ -8784,22 +8784,22 @@
     {
      "pos": "noun",
      "en": "A living being, such as an animal, monster, or alien.",
-     "ar": ""
+     "ar": "كائن حي، مثل حيوان أو وحش أو فضائي."
     },
     {
      "pos": "noun",
      "en": "An unidentified, mysterious, and often monstrous animal or being.",
-     "ar": ""
+     "ar": "حيوان أو كائن مجهول الهوية وغامض وغالبًا ما يكون وحشيًا."
     },
     {
      "pos": "noun",
      "en": "(sometimes derogatory) A human.",
-     "ar": ""
+     "ar": "(مهين في بعض الأحيان) إنسان."
     },
     {
      "pos": "noun",
      "en": "A human.",
-     "ar": ""
+     "ar": "- إنسان"
     }
    ],
    "inflections": [
@@ -8850,11 +8850,11 @@
    "examples": [
     {
      "en": "insects and other creatures",
-     "ar": ""
+     "ar": "الحشرات والمخلوقات الأخرى"
     },
     {
      "en": "He's a creature of habit.",
-     "ar": ""
+     "ar": "إن (آندي) أسير لعاداته."
     }
    ],
    "differences": [],
@@ -9598,27 +9598,27 @@
     {
      "pos": "noun",
      "en": "A moving disturbance, or undulation, in the surface of a fluid.",
-     "ar": ""
+     "ar": "اضطراب متحرك، أو تموج، في سطح السائل."
     },
     {
      "pos": "noun",
      "en": "A sound similar to that of undulating water.",
-     "ar": ""
+     "ar": "صوت مشابه لصوت الماء المتموج."
     },
     {
      "pos": "noun",
      "en": "A style of ice cream in which flavors have been coarsely blended together.",
-     "ar": ""
+     "ar": "نمط من الآيس كريم تمتزج فيه النكهات بشكل خشن معًا."
     },
     {
      "pos": "verb",
      "en": "(intransitive) To propagate like a moving wave.",
-     "ar": ""
+     "ar": "(غير متعدية) للانتشار مثل موجة متحركة."
     },
     {
      "pos": "verb",
      "en": "(intransitive) To make a sound as of water running gently over a rough bottom, or the breaking of ripples on the shore.",
-     "ar": ""
+     "ar": "(غير متعدية) لإصدار صوت مثل الماء الجاري برفق فوق قاع خشن، أو كسر التموجات على الشاطئ."
     },
     {
      "pos": "verb",
@@ -9686,15 +9686,15 @@
    "examples": [
     {
      "en": "I dropped a small stone into the pond and watched the ripples spread.",
-     "ar": ""
+     "ar": "أسقطت حجرًا صغيرًا في البركة وشاهدت انتشار التموجات."
     },
     {
      "en": "The ebbing tide had left ripples in the sand.",
-     "ar": ""
+     "ar": "كان المد والجزر قد ترك تموجات في الرمال."
     },
     {
      "en": "I enjoy fudge ripple ice cream, but I especially like to dig through the carton to get at the ripple part and eat only that.",
-     "ar": ""
+     "ar": "أنا أستمتع بالآيس كريم المموج، لكنني أحب بشكل خاص الحفر في الكرتون للوصول إلى جزء المموج وتناول ذلك فقط."
     }
    ],
    "differences": [],
