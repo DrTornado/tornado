@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:28:07.039Z",
+ "exportedAt": "2026-08-03T09:28:27.201Z",
  "words": [
   {
    "id": 1785185030316,
@@ -4082,7 +4082,7 @@
    "meanings": [
     {
      "pos": "adverb",
-     "en": "In a disproportionate manner",
+     "en": "in a disproportionate manner",
      "ar": "بطريقة غير متناسبة"
     }
    ],
@@ -4125,12 +4125,12 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 13,
+   "engineVersion": 3,
    "ipaUS": "/ˈdɪs.pɹəˌpɔɹ.ʃən.ət.li/",
    "ipaUK": "",
    "estCefr": "",
    "freqLabel": "",
-   "audioUS": "",
+   "audioUS": "-us",
    "audioUK": "",
    "audioGen": "",
    "favorite": "false"
@@ -4149,28 +4149,23 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To bring into musical accord.",
-     "ar": "لتحقيق التوافق الموسيقي."
-    },
-    {
-     "pos": "verb",
-     "en": "To tune (an instrument).",
-     "ar": "لضبط (أداة)."
-    },
-    {
-     "pos": "adjective",
-     "en": "(of a musical instrument) Tuned to the correct pitch.",
-     "ar": "(لآلة موسيقية) مضبوطة على النغمة الصحيحة."
+     "en": "simple past and past participle of attune",
+     "ar": ""
     },
     {
      "pos": "adjective",
      "en": "Brought into harmony; harmonized.",
-     "ar": "جلبت في وئام ؛ منسقة."
+     "ar": ""
     },
     {
-     "pos": "verb",
-     "en": "simple past and past participle of attune",
-     "ar": "مشاركة بسيطة للماضي والماضي في التناغم"
+     "pos": "adjective",
+     "en": "Having been changed to fit in with a particular context or to be in sync with a phenomenon.",
+     "ar": ""
+    },
+    {
+     "pos": "adjective",
+     "en": "(of a musical instrument) Tuned to the correct pitch.",
+     "ar": ""
     },
     {
      "pos": "adjective",
@@ -4207,23 +4202,29 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "id": 1784742185522,
-   "word": "nutrients",
+   "word": "nutrient",
    "ipa": "",
    "arabicPron": "نوترينت",
    "oxford": "",
    "cefr": "",
    "pos": [
-    "noun"
+    "noun",
+    "adjective"
    ],
    "meanings": [
     {
      "pos": "noun",
-     "en": "A source of nourishment, such as food, that can be metabolized by an organism to give energy and build tissue",
-     "ar": "مصدر للتغذية، مثل الطعام، يمكن استقلابه بواسطة كائن حي لإعطاء الطاقة وبناء الأنسجة"
+     "en": "A source of nourishment, such as food, that can be metabolized by an organism to give energy and build tissue.",
+     "ar": ""
+    },
+    {
+     "pos": "adjective",
+     "en": "Providing nourishment.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -4253,7 +4254,20 @@
      "ar": "غذائي, مغذ, متعلق بالغذاء"
     }
    ],
-   "collocations": [],
+   "collocations": [
+    {
+     "en": "nutrient solution",
+     "ar": ""
+    },
+    {
+     "en": "nutrient content",
+     "ar": ""
+    },
+    {
+     "en": "nutrient requirements",
+     "ar": ""
+    }
+   ],
    "examples": [
     {
      "en": "What is nutrient absorption?",
@@ -4274,20 +4288,20 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 13,
+   "engineVersion": 3,
    "ipaUS": "/ˈnuː.tɹi.ənt/",
    "ipaUK": "/ˈnjuː.tɹi.ənt/",
    "estCefr": "",
    "freqLabel": "",
-   "audioUS": "",
-   "audioUK": "",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "audioGen": "",
    "favorite": "false"
   },
   {
    "id": 1784741976331,
    "word": "strung",
-   "ipa": "/ˈstɹʌŋ/",
+   "ipa": "/stɹʌŋ/",
    "arabicPron": "سترانق",
    "oxford": "",
    "cefr": "",
@@ -4297,18 +4311,8 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To put (items) on a string.",
-     "ar": "لوضع (عناصر) على سلسلة."
-    },
-    {
-     "pos": "verb",
-     "en": "To put strings on (something).",
-     "ar": "لوضع الخيوط على (شيء ما)."
-    },
-    {
-     "pos": "verb",
      "en": "simple past and past participle of string",
-     "ar": "مشاركة بسيطة في الماضي والماضي من السلسلة"
+     "ar": ""
     }
    ],
    "inflections": [
@@ -4366,7 +4370,7 @@
    "audioUK": "https://api.dictionaryapi.dev/media/pronunciations/en/strung-uk.mp3",
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "id": 1784741118527,
@@ -4382,23 +4386,13 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To remove tangles or knots from.",
-     "ar": "لإزالة التشابكات أو العقد."
-    },
-    {
-     "pos": "verb",
-     "en": "(by extension) To remove confusion or mystery from.",
-     "ar": "(بالتبعية) لإزالة الارتباك أو الغموض من."
-    },
-    {
-     "pos": "verb",
      "en": "present participle and gerund of untangle",
-     "ar": "الحاضر الفاعل والمرتفع من فك التشابك"
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "The process by which something is untangled.",
-     "ar": "العملية التي يتم من خلالها فك تشابك شيء ما."
+     "ar": ""
     }
    ],
    "inflections": [
@@ -4443,13 +4437,13 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "id": 1784740869341,
    "word": "furious",
    "ipa": "/ˈfjʊə.ɹɪəs/",
-   "arabicPron": "فييريس",
+   "arabicPron": "فيوريس",
    "oxford": "3000",
    "cefr": "B2",
    "pos": [
@@ -4510,10 +4504,11 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "ipaUS": "/ˈfjɝ.i.əs/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/f/fur/furio/furious__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/f/fur/furio/furious__gb_1.mp3",
-   "engineVersion": 2
+   "ipaUS": "/ˈfjʊɹ.i.əs/",
+   "audioUS": "-us",
+   "audioUK": "-uk",
+   "engineVersion": 3,
+   "ipaUK": "/ˈfjʊə.ɹɪəs/"
   },
   {
    "id": 1784735563891,
@@ -4528,18 +4523,18 @@
    ],
    "meanings": [
     {
-     "pos": "noun",
-     "en": "A person recovering from illness",
+     "pos": "adjective",
+     "en": "recovering one's health and strength after a period of illness; on the mend.",
      "ar": "شخص يتعافى من المرض"
     },
     {
      "pos": "adjective",
-     "en": "Recovering one's health and strength after a period of illness",
+     "en": "of convalescence or convalescents",
      "ar": "استعادة الصحة والقوة بعد فترة من المرض"
     },
     {
-     "pos": "adjective",
-     "en": "Of convalescence or convalescents",
+     "pos": "noun",
+     "en": "A person recovering from illness.",
      "ar": "النقاهة أو النقاهة"
     }
    ],
@@ -4578,11 +4573,11 @@
    ],
    "examples": [
     {
-     "en": "I had been ill in health, but am now a convalescent.",
+     "en": "She stayed in a convalescent hospital for two weeks before returning home.",
      "ar": ""
     },
     {
-     "en": "She stayed in a convalescent hospital for two weeks before returning home.",
+     "en": "I had been ill in health, but am now a convalescent.",
      "ar": ""
     }
    ],
@@ -4592,7 +4587,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 13,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
