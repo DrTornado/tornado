@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:26:02.473Z",
+ "exportedAt": "2026-08-03T09:26:07.199Z",
  "words": [
   {
    "id": 1785185030316,
@@ -244,7 +244,7 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A human being (Homo sapiens",
+     "en": "A human being (Homo sapiens).",
      "ar": ""
     }
    ],
@@ -257,15 +257,15 @@
    "collocations": [
     {
      "en": "homo sapiens",
-     "ar": "الإِنْسانُ العاقِل"
+     "ar": ""
     },
     {
      "en": "archaic sapiens",
-     "ar": "حكميون عتيقون"
+     "ar": ""
     },
     {
      "en": "species sapiens",
-     "ar": "الأنواع العاقله"
+     "ar": ""
     }
    ],
    "examples": [
@@ -288,7 +288,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 13,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -300,7 +300,7 @@
   },
   {
    "id": 1784974543897,
-   "word": "glaciers",
+   "word": "glacier",
    "ipa": "/ˈɡleɪ.ʃɚ/",
    "arabicPron": "قليشر",
    "oxford": "",
@@ -311,8 +311,33 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A large body of ice which flows under its own mass, usually downhill",
-     "ar": "جسم كبير من الجليد يتدفق تحت كتلته الخاصة، وعادة ما يكون منحدرًا"
+     "en": "(geology) A large body of ice which flows under its own mass, usually downhill.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "(mountaineering) An area of a mountain where snow is present year-round.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "(figurative) Something that moves very slowly",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "A large body of ice which flows under its own mass, usually downhill.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "An area of a mountain where snow is present year-round.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "Something that moves very slowly",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -321,11 +346,36 @@
    ],
    "derivatives": [],
    "synonyms": [],
-   "collocations": [],
+   "collocations": [
+    {
+     "en": "glacier national",
+     "ar": ""
+    },
+    {
+     "en": "glacier bay",
+     "ar": ""
+    },
+    {
+     "en": "glacier ice",
+     "ar": ""
+    },
+    {
+     "en": "great glacier",
+     "ar": ""
+    }
+   ],
    "examples": [
     {
      "en": "They warned that the effects of glacier melting on water resources are becoming “increasingly serious” for China.",
-     "ar": "وحذروا من أن آثار ذوبان الأنهار الجليدية على الموارد المائية أصبحت \"خطيرة بشكل متزايد\" بالنسبة للصين."
+     "ar": ""
+    },
+    {
+     "en": "You can ski down the glacier in both the winter and the summer.",
+     "ar": ""
+    },
+    {
+     "en": "The queue in the pharmacy was a glacier.",
+     "ar": ""
     }
    ],
    "differences": [],
@@ -336,11 +386,11 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 13,
+   "engineVersion": 3,
    "ipaUS": "/ˈɡleɪ.ʃɚ/",
    "ipaUK": "/ˈɡlæs.jə/",
-   "audioUS": "",
-   "audioUK": "",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "audioGen": "",
    "favorite": "false"
   },
