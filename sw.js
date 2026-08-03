@@ -1,5 +1,5 @@
 // Tornado service worker — enables real app install (not just a shortcut) and offline opening
-const CACHE = 'tornado-v88';
+const CACHE = 'tornado-v89';
 const PRECACHE = ['./', './manifest.json', './icon-192.png', './icon-512.png', './icon-180.png', './favicon-32.png'];
 
 self.addEventListener('install', e => {
@@ -10,12 +10,31 @@ self.addEventListener('install', e => {
     ).then(() => self.skipWaiting())
   );
 });
+/*
+ * النسخة الجديدة تُحمّل نفسها على الصفحات المفتوحة.
+ *
+ * المصيدة التي وقعنا فيها: الإصلاح الذي يمنع بقاء المستخدم على نسخة قديمة
+ * يعيش داخل النسخة الجديدة — ونسخته القديمة هي التي تمنعه من الوصول إليه.
+ * فيُنشر إصلاح تلو إصلاح ولا يصله شيء، ويجرّب فيجد العطل نفسه، ويظنّ أن لا
+ * أحد أصلح شيئاً. وقد ظنّ.
+ *
+ * والعامل يملك ما لا تملكه الصفحة: أن يعيد تحميلها من الخارج. فينكسر الطوق
+ * من هنا مرّةً واحدة — المتصفّح يفحص هذا الملف عند كل انتقال متجاوزاً كل
+ * ذاكرة، فما إن تُنشر نسخة حتى تُفعّل وتُحدّث كل صفحة مفتوحة بنفسها.
+ *
+ * والتفعيل يقع مرّة واحدة لكل نسخة، فلا حلقة إعادة تحميل لا تنتهي.
+ */
 self.addEventListener('activate', e => {
-  e.waitUntil(
-    caches.keys()
-      .then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
-      .then(() => self.clients.claim())
-  );
+  e.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)));
+    // هل كنّا نستبدل نسخةً سابقة، أم هذا أول تثبيت؟ الأول وحده يستحق إعادة تحميل
+    const had = keys.some(k => k !== CACHE && k.startsWith('tornado-'));
+    await self.clients.claim();
+    if (!had) return;
+    const clients = await self.clients.matchAll({ type: 'window' });
+    await Promise.all(clients.map(c => c.navigate(c.url).catch(() => {})));
+  })());
 });
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
