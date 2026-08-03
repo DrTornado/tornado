@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T15:33:56.015Z",
+ "exportedAt": "2026-08-03T15:34:04.076Z",
  "words": [
   {
    "id": 1785185030316,
@@ -3236,13 +3236,8 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To come from a source",
-     "ar": "أن يأتي من مصدر"
-    },
-    {
-     "pos": "verb",
-     "en": "To send or give out",
-     "ar": "لإرسال أو إعطاء"
+     "en": "present participle and gerund of emanate",
+     "ar": "يقدم الفاعل والمرشد من المنبثق"
     }
    ],
    "inflections": [
@@ -3287,7 +3282,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -3498,13 +3493,8 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To proclaim or announce an event",
-     "ar": "لإعلان أو الإعلان عن حدث"
-    },
-    {
-     "pos": "verb",
-     "en": "To greet something with excitement",
-     "ar": "(عادة ما يكون سلبيًا) لتحية شيء ما بإثارة"
+     "en": "simple past and past participle of herald",
+     "ar": "بسيطة الماضي والماضي الفاعل من هيرالد"
     }
    ],
    "inflections": [
@@ -3547,7 +3537,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "audioUS": "",
