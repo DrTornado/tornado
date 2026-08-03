@@ -2,7 +2,7 @@
  "app": "tornado",
  "kind": "notes",
  "version": 1,
- "exportedAt": "2026-08-03T15:55:01.178Z",
+ "exportedAt": "2026-08-03T15:58:07.933Z",
  "notes": [
   {
    "id": 1785686647994,
@@ -19,6 +19,15 @@
    "text": "Topic X has emerged as a crucial societal concern. A debate persists among experts and researchers over two key dimensions of this issue: its widespread nature and the solutions proposed to address it. This essay will explore both aspects of this matter, as elaborated below.\n\nTo begin with, the first dimension provides a range of substantial supporting points. This is primarily because of [reasons]. In particular, a groundbreaking U.S. government publication stated that 78% of society is directly affected by this issue in their daily lives. As a result, this aspect demonstrates a stronger alignment with the community and is therefore supported.\n\nFurthermore, the solutions involve a range of practical proposals to address this issue. These include [solutions]. According to a recent paper published by the Arab Research Centre (ARC), 65% of relevant cases showed measurable improvement after adopting these measures. These findings reinforce the practicality of these measures in resolving the issue.\n\nIn conclusion, regarding [Topic], [both dimensions] of this issue warrant serious consideration, as each plays a significant role in shaping the outcomes for the community. The overall evidence clearly supports the importance of addressing this matter, given its wider scope and broader relevance.",
    "createdAt": 1785686937786,
    "updatedAt": 1785705780495,
+   "lastChunk": 0,
+   "favorite": false
+  },
+  {
+   "id": 1785772686709,
+   "title": "Essay 04",
+   "text": "[Topic] has emerged as a crucial societal concern. In my opinion, [the problem] represents one of the most pressing challenges facing individuals and communities today. However, viable solutions can be implemented to address this issue effectively.\n\nFirstly, the origin of this issue is primarily the absence of unified policies to address it. Subsequently, the relevant authorities should establish clear legislation and regulatory frameworks to tackle this issue. In particular, a ground-breaking U.S. government publication concluded that 78% of people follow enacted legislation and tend to comply with the rules imposed. As a result, this solution demonstrates a stronger alignment with the community and is therefore well supported. \n\nSecondly, relevant organisations can implement effective management practices to ensure consistent outcomes across all levels. This is mainly due to the need to coordinate efforts to address this issue comprehensively. According to a recent paper published by the Arab Research Centre (ARC), 65% of people are inclined to support effective management as an essential solution. These findings remain significant and reinforce the need to address this matter effectively.\n\nIn conclusion, addressing [the problem] requires a concerted effort from all relevant stakeholders. The overall evidence clearly supports the importance of implementing these solutions holistically, given their wider scope and broader relevance.",
+   "createdAt": 1785772686709,
+   "updatedAt": 1785772686709,
    "lastChunk": 0,
    "favorite": false
   }
