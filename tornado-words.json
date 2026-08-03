@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T20:25:18.578Z",
+ "exportedAt": "2026-08-03T20:25:25.380Z",
  "words": [
   {
    "id": 1784978307444,
@@ -8331,24 +8331,19 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "To contribute to a blog",
-     "ar": "للمساهمة في مدونة"
+     "pos": "noun",
+     "en": "(computing) The design and editing of a blog; weblogging.",
+     "ar": "(الحوسبة) تصميم وتحرير مدونة ؛ التدوين على شبكة الإنترنت."
     },
     {
      "pos": "verb",
-     "en": "To blag, to steal something",
-     "ar": "التباهي، وسرقة شيء ما"
-    },
-    {
-     "pos": "verb",
-     "en": "To look sullen or sulky",
-     "ar": "أن تبدو متجهمًا أو عابسًا"
+     "en": "present participle and gerund of blog",
+     "ar": "تقديم الفاعلية وجيروند من بلوق"
     },
     {
      "pos": "noun",
-     "en": "The design and editing of a blog",
-     "ar": "تصميم وتحرير مدونة"
+     "en": "The design and editing of a blog; weblogging.",
+     "ar": "تصميم وتحرير مدونة ؛ التدوين على شبكة الإنترنت."
     }
    ],
    "inflections": [
@@ -8382,12 +8377,12 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "/ˈblɑ.ɡiŋ/",
    "ipaUK": "",
    "estCefr": "",
    "freqLabel": "",
-   "audioUS": "",
+   "audioUS": "-us",
    "audioUK": "",
    "audioGen": "",
    "favorite": "false"
@@ -9467,24 +9462,19 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "To hold very tightly, as to not fall off",
-     "ar": "التمسك بإحكام شديد، حتى لا تسقط"
-    },
-    {
-     "pos": "verb",
-     "en": "To adhere to an object, without being affixed, in such a way as to follow its contours. Used especially of fabrics and films",
-     "ar": "التمسك بشيء ما، دون أن يتم لصقه، بطريقة تتبع ملامحه. تستخدم بشكل خاص من الأقمشة والأفلام"
-    },
-    {
-     "pos": "verb",
-     "en": "To produce a high-pitched ringing sound, like a small bell",
-     "ar": "لإنتاج صوت رنين عالي النبرة، مثل جرس صغير"
+     "pos": "adjective",
+     "en": "Clingy.",
+     "ar": "لزج, دبق"
     },
     {
      "pos": "noun",
-     "en": "The act of one who clings",
-     "ar": "فعل من يتشبث"
+     "en": "The act of one who clings.",
+     "ar": "فعل من يتشبث."
+    },
+    {
+     "pos": "verb",
+     "en": "present participle and gerund of cling",
+     "ar": "تقديم الفاعلية والتشبث"
     }
    ],
    "inflections": [
@@ -9537,7 +9527,7 @@
    "due": 0,
    "audioUS": "",
    "audioUK": "",
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
