@@ -52,16 +52,25 @@ class SyncButtonViewModel(app: Application) : AndroidViewModel(app) {
             container.audioSync.sync()
         }.getOrNull()
 
-        /*
-         * الكلمات القادمة من الكمبيوتر تخضع لنفس فحص النواقص.
-         *
-         * نسخة الويب تبني بطاقاتها بمصادرها ومنطقها، وكثير منها يصل بلا مثال
-         * ولا نطق. وإثراء يجري عند الإقلاع وحده يكون قد انتهى قبل وصولها، فتبقى
-         * ناقصة إلى الفتحة التالية — أي أن باب النقص يبقى مفتوحاً من جهة المزامنة.
-         */
-        if (r is SyncResult.Success && r.pulled > 0) {
-            container.appScope.launch { runCatching { container.enricher.runUntilComplete() } }
+        // الملاحظات مع الكلمات في الضغطة نفسها — زرّ يحمل نصف المحتوى يمنح ثقة كاذبة
+        runCatching {
+            container.noteSync.repo = repo
+            if (container.noteSync.canPull) {
+                container.noteSync.sync(push = container.noteSync.canPush)
+            }
         }
+
+        /*
+         * الزرّ يجلب المعاني المحدَّثة أيضاً، لا الكلمات الجديدة وحدها.
+         *
+         * كان الإثراء يجري إن وصلت كلمات من الكمبيوتر فقط. فمن حسّنّا محرّكه
+         * ولم تصله كلمة جديدة يبقى على بطاقاته القديمة بلا سبيل لتحديثها —
+         * يضغط «مزامنة» فلا يتغيّر شيء، ويظنّ التحسين لم يصل. وقد ظنّه.
+         *
+         * الآن كل ضغطة تمرّ على المكتبة: ما بُني بمحرّك أقدم يُعاد بناؤه،
+         * وما هو محدَّث لا يُمسّ. والعمل بالخلفية فلا ينتظره أحد.
+         */
+        container.appScope.launch { runCatching { container.enricher.runUntilComplete() } }
 
         _busy.value = false
         _toast.value = when (r) {

@@ -126,7 +126,20 @@ fun PlayerScreen(
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back", Modifier.size(26.dp))
             }
             Text(
-                if (state.hasQueue) "${state.index + 1}/${state.queue.size}" else "0/0",
+                /*
+                 * العدّاد يعدّ ما يراه المستخدم لا ما يبنيه المشغّل.
+                 *
+                 * الملاحظة تُقسَّم داخلياً إلى جمل ليبدأ الصوت بسرعة، وذلك شأن
+                 * المحرّك. لكن العدّاد كان يعرض تلك الجمل: «١ من ١٠» لمن عنده
+                 * ملاحظتان — رقمٌ لا يقابل شيئاً على شاشته.
+                 */
+                if (!state.hasQueue) "0/0"
+                else if (state.current?.isNote == true) {
+                    val ids = state.queue.map { it.id }
+                    val total = ids.distinct().size
+                    val here = ids.take(state.index + 1).distinct().size
+                    "$here/$total"
+                } else "${state.index + 1}/${state.queue.size}",
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onBackground
             )

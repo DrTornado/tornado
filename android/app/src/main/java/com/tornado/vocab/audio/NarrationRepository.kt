@@ -118,8 +118,18 @@ class NarrationRepository(
         onProgress: ((done: Int, total: Int) -> Unit)? = null
     ): NarrationResult? = withContext(Dispatchers.IO) {
         val n = repeat.coerceAtLeast(1)
-        // نمط التكرار يدخل المفتاح: خلافه يعني تشغيل ملفٍّ بُني لإعداد آخر
-        val tag = "v$pipelineVersion|$voiceTag|x$n${if (n > 1 && byParagraph) "P" else ""}"
+        /*
+         * وحدة التشغيل صارت جملة، فوحدة التكرار لم يعد لها أثر.
+         *
+         * كان المفتاح يحمل «فقرة أم جملة»، وذلك صحيح حين كان العنصر مقطعاً من
+         * ألف ومئتي حرف. أما الآن فالعنصر جملة واحدة، وتقسيمها بالفقرات أو
+         * بالجمل يعطي الجملة نفسها — فيُبنى ملفٌّ مطابق باسمٍ آخر، ويرى
+         * المستخدم «يحمّل» بعد ضغطة FULL بلا أن يتغيّر شيء في سمعه.
+         *
+         * والعدد يبقى في المفتاح لأنه يغيّر الناتج فعلاً، لكن تكلفته صارت
+         * دمجاً لمقاطع مخزَّنة لا توليداً من جديد.
+         */
+        val tag = "v$pipelineVersion|$voiceTag|x$n"
         val target = File(cardDir, "$key-${hash(tag)}.${AudioEncoder.EXTENSION}")
         if (target.exists() && target.length() > 128) {
             target.setLastModified(System.currentTimeMillis())
@@ -150,8 +160,18 @@ class NarrationRepository(
             val segments = units.flatMap { unit ->
                 List(n) { Segment(unit, SegLang.EN, pauseMs = 350, role = SegRole.GENERATED) }
             }
+            /*
+             * ما يُعرض جملة دائماً، وإن كان ما يُكرَّر فقرة.
+             *
+             * كانت حدود العرض تُشتقّ من وحدات التكرار نفسها، فمع FULL تصير
+             * الفقرة كلها سطراً واحداً — عشرات الأسطر تُلقى على الشاشة دفعة
+             * واحدة، ولا يعرف المستمع أين هو منها.
+             *
+             * والعرض والتكرار غرضان مختلفان: التكرار يخدم الحفظ، والعرض يخدم
+             * المتابعة بالعين. فالثاني جملةً جملةً مهما كان الأول.
+             */
             buildSegments(segments, target, "note", onProgress)
-                ?.also { writeLines(target, segments.map { s -> s.text }, it.durationMs) }
+                ?.also { writeLines(target, splitUnits(text, byParagraph = false), it.durationMs) }
                 ?.copy(lines = readLines(target))
         }
     }

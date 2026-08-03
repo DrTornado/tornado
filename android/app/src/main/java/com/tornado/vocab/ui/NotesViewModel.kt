@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -89,17 +90,32 @@ class NotesViewModel(app: Application) : AndroidViewModel(app) {
      */
     fun playAll(startId: Long? = null) = viewModelScope.launch {
         val all = notes.all().sortedByDescending { it.updatedAt }
+        /*
+         * التكرار يُبنى في الطابور لا في الملف.
+         *
+         * Say ×٢ تعني أن الجملة تدخل الطابور مرتين وتُقرأ من نفس الملف
+         * المخزَّن — لا توليد ثانياً ولا انتظار. وهذا ما طلبه المستخدم
+         * حرفياً بعد أن رأى كل تبديل يعيد البناء من الصفر.
+         */
+        val audio = runCatching { getApplication<Application>().tornado.settings.audio.first() }.getOrNull()
+        val times = (audio?.wordRepeat ?: 1).coerceIn(1, 10)
+        // FULL يعني الفقرة وحدةً للتكرار، وSHORT يعني الجملة — كما طلب المستخدم
+        val byParagraph = audio?.detailed ?: false
+
         val items = all.flatMap { note ->
-            val chunks = NoteChunker.split(note.text)
-            chunks.mapIndexed { i, text ->
-                PlayItem(
-                    id = note.id,
-                    title = if (chunks.size == 1) note.title else "${note.title} · ${i + 1}",
-                    subtitle = text.take(70),
-                    kind = RowKind.NOTE_CHUNK,
-                    chunkIndex = i,
-                    favorite = note.favorite
-                )
+            val chunks = NoteChunker.units(note.text, byParagraph)
+            chunks.flatMapIndexed { i: Int, text: String ->
+                List(times) {
+                    PlayItem(
+                        id = note.id,
+                        // الاسم كما سمّاه صاحبه: رقم الجملة تفصيل داخلي لا عنوان
+                        title = note.title,
+                        subtitle = text.take(70),
+                        kind = RowKind.NOTE_CHUNK,
+                        chunkIndex = i,
+                        favorite = note.favorite
+                    )
+                }
             }
         }
         if (items.isEmpty()) {
@@ -115,7 +131,7 @@ class NotesViewModel(app: Application) : AndroidViewModel(app) {
 
     fun play(id: Long, fromChunk: Int? = null) = viewModelScope.launch {
         val note = notes.byId(id) ?: return@launch
-        val chunks = NoteChunker.split(note.text)
+        val chunks = NoteChunker.sentences(note.text)
         if (chunks.isEmpty()) {
             _ui.value = _ui.value.copy(message = "This note has no readable text")
             return@launch
@@ -123,7 +139,7 @@ class NotesViewModel(app: Application) : AndroidViewModel(app) {
         val items = chunks.mapIndexed { i, text ->
             PlayItem(
                 id = note.id,
-                title = if (chunks.size == 1) note.title else "${note.title} · ${i + 1}",
+                title = note.title,
                 subtitle = text.take(70),
                 kind = RowKind.NOTE_CHUNK,
                 chunkIndex = i,

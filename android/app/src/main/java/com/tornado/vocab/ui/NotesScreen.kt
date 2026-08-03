@@ -95,6 +95,27 @@ fun NotesScreen(
             Button(onClick = { pasting = true }) { Text("Paste text") }
         }
 
+        /*
+         * زرّ تشغيل لا يُخطأ.
+         *
+         * كان التشغيل أيقونةً بأربعين نقطة على يسار الصفّ، ومن أخطأها بقليل
+         * ضغط الصفّ ففُتح النص بدل المشغّل — فيبدو أن التشغيل لا يعمل وهو
+         * يعمل. والهدف الصغير في قائمة تُستعمل باليد أثناء المشي عيبٌ في
+         * التصميم لا في يد المستخدم.
+         */
+        if (rows.isNotEmpty()) {
+            Row(
+                Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp),
+                horizontalArrangement = Arrangement.End
+            ) {
+                TextButton(onClick = { vm.playAll(); onOpenPlayer() }) {
+                    Icon(Icons.Filled.PlayArrow, null, Modifier.size(20.dp))
+                    HSpace(6)
+                    Text("PLAY ALL", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                }
+            }
+        }
+
         if (rows.isEmpty()) {
             Column(
                 Modifier.fillMaxSize().padding(32.dp),
@@ -186,7 +207,8 @@ private fun NoteRowItem(
         verticalAlignment = Alignment.CenterVertically
     ) {
         // زرّ التشغيل مستقل عن الصفّ — الصفّ يفتح النص والزرّ يشغّل الصوت
-        IconButton(onClick = onPlay, modifier = Modifier.size(40.dp)) {
+        // ستّ وخمسون نقطة: أدنى هدف لمس مريح، والأربعون كانت تُخطأ
+        IconButton(onClick = onPlay, modifier = Modifier.size(56.dp)) {
             Icon(
                 Icons.Filled.PlayArrow, "Play",
                 Modifier.size(26.dp),
