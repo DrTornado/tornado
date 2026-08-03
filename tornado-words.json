@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T15:46:03.929Z",
+ "exportedAt": "2026-08-03T15:46:08.577Z",
  "words": [
   {
    "id": 1785185030316,
@@ -6370,8 +6370,8 @@
   {
    "id": 1784636175360,
    "word": "pairs",
-   "ipa": "/pɛəz/",
-   "arabicPron": "بيز",
+   "ipa": "/peəz/",
+   "arabicPron": "بيرز",
    "oxford": "3000",
    "cefr": "A1",
    "pos": [
@@ -6381,33 +6381,8 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "Two similar or identical things taken together",
-     "ar": "شيئان متشابهان أو متطابقان معًا"
-    },
-    {
-     "pos": "noun",
-     "en": "Two people in a relationship, partnership or friendship",
-     "ar": "شخصان في علاقة أو شراكة أو صداقة"
-    },
-    {
-     "pos": "verb",
-     "en": "To group into one or more sets of two",
-     "ar": "للتجميع في مجموعة واحدة أو أكثر من مجموعتين"
-    },
-    {
-     "pos": "verb",
-     "en": "To bring two (animals, notably dogs) together for mating",
-     "ar": "لجلب اثنين (الحيوانات، ولا سيما الكلاب) معا للتزاوج"
-    },
-    {
-     "pos": "verb",
-     "en": "To impair, to make worse",
-     "ar": "يضعف، ويزيد الأمر سوءًا"
-    },
-    {
-     "pos": "verb",
-     "en": "To become worse, to deteriorate",
-     "ar": ""
+     "en": "Synonym of pelmanism (“memory card game”).",
+     "ar": "مرادف ل pelmanism (\" لعبة بطاقة الذاكرة \")."
     }
    ],
    "inflections": [
@@ -6424,12 +6399,24 @@
    ],
    "synonyms": [
     {
-     "en": "pair of spectacles",
-     "ar": "زوج من النظارات"
+     "en": "pelmanism",
+     "ar": "البلمانية"
     },
     {
-     "en": "spectacles",
-     "ar": "نظارات"
+     "en": "span",
+     "ar": "شبر, مدي, امتداد, اتساع, زوج من الحصين"
+    },
+    {
+     "en": "yoke",
+     "ar": "فدان, نير, مقرن, عبودية, النير جزء من ثوب يطوق العنق"
+    },
+    {
+     "en": "mate",
+     "ar": "وكيل الربان"
+    },
+    {
+     "en": "brace",
+     "ar": "ثبت, زوج أثنان, ملفاف, مشبك, دعامة, الة طبية, حمالة, حاصرة, شجاعة, شىء مثير للنشاط"
     }
    ],
    "collocations": [
@@ -6464,11 +6451,11 @@
    "right": 0,
    "wrong": 0,
    "last": null,
-   "audioUS": "",
-   "audioUK": "",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "/pɛɹz/",
    "ipaUK": "/pɛəz/",
    "estCefr": "",
