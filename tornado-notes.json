@@ -2,7 +2,7 @@
  "app": "tornado",
  "kind": "notes",
  "version": 1,
- "exportedAt": "2026-08-03T15:24:50.232759Z",
+ "exportedAt": "2026-08-03T15:27:36.326Z",
  "notes": [
   {
    "id": 1785686647994,
@@ -22,9 +22,5 @@
    "lastChunk": 0,
    "favorite": false
   }
- ],
- "deleted": [
-  1785326546969,
-  1785686644934
  ]
 }
