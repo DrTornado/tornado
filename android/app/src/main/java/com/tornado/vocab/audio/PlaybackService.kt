@@ -57,6 +57,15 @@ class PlaybackService : MediaSessionService() {
     private companion object {
         const val HEAD_START = 2
         const val WINDOW_AHEAD = 5
+
+        /**
+         * كم بطاقة تُبنى قبل أن يطلبها أحد.
+         *
+         * واحدة تكفي لتختفي فترة الانتظار عند الضغط، والثانية تغطّي من يضغط
+         * «التالية» فوراً. وما بعدهما بناءٌ لقائمة قد لا تُشغَّل أصلاً — كلفةٌ
+         * في البطارية والتخزين بلا مقابل يشعر به المستخدم.
+         */
+        const val PREBUILD_COUNT = 2
         const val SEEK_STEP_MS = 10_000L
     }
 
@@ -537,7 +546,49 @@ class PlaybackService : MediaSessionService() {
         startSession(autoPlay = wasPlaying, from = from)
     }
 
+    /**
+     * بناء استباقي صامت لأول بطاقة.
+     *
+     * البطاقة الواحدة نحو ثلاثين مقطعاً، فبناؤها لحظة الضغط يترك المستخدم أمام
+     * «Building the first card · 13 of 31» أكثر من دقيقة — قِسته على جهاز حقيقي.
+     * ومشغّل الملاحظات يفتح فوراً لأن وحدته جملة واحدة، فيبدو مشغّل الكلمات
+     * وحده معطّلاً وهو ليس كذلك.
+     *
+     * وهذا البناء لا يُشعر بنفسه: لا إشعار، ولا شريط تقدّم، ولا `preparing`.
+     * الحالة المعروضة ملك الجلسة الحقيقية وحدها، وإظهار تقدّم لعمل لم يطلبه أحد
+     * يُقلق بلا سبب.
+     */
+    private var prebuildJob: Job? = null
+
+    private fun prebuildAhead(rows: List<PlayItem>) {
+        // جلسة جارية؟ حلقة التوليد أولى بالمحرّك، ولا معنى لبناء ما سيُبنى بعد قليل
+        if (session.isNotEmpty() || rows.isEmpty()) return
+        if (prebuildJob?.isActive == true) return
+        prebuildJob = scope.launch {
+            settingsReady.await()
+            val spec = currentSpec()
+            rows.take(PREBUILD_COUNT).forEach { row ->
+                coroutineContext.ensureActive()
+                if (session.isNotEmpty()) return@launch   // بدأ التشغيل فعلاً — ننسحب
+                if (row.kind != RowKind.WORD) return@forEach
+                val word = withContext(Dispatchers.IO) { repository.word(row.id) } ?: return@forEach
+                if (narration.isCached(word, spec)) return@forEach
+                runCatching {
+                    withContext(Dispatchers.IO) { narration.getOrBuild(word, spec) }
+                }
+            }
+        }
+    }
+
     private fun startSession(autoPlay: Boolean, from: Int = 0) {
+        /*
+         * الاستباق ينسحب فوراً أمام الجلسة الحقيقية.
+         *
+         * البنّاء يحمل قفلاً واحداً (`buildLock`)، فبناءٌ استباقي جارٍ يؤخّر أول
+         * بطاقة يطلبها المستخدم بمقدار بطاقة كاملة — أي يصنع بالضبط التأخير
+         * الذي وُجد ليمنعه.
+         */
+        prebuildJob?.cancel()
         renderJob?.cancel()
         waitingForRender = false
         rendered.clear(); renderedSources.clear(); renderedToSession.clear(); renderedLines.clear()
@@ -907,6 +958,8 @@ class PlaybackService : MediaSessionService() {
             // loopsLeft لم يعد مستعملاً بعد الانتقال لأوضاع التكرار الثلاثة
             startSession(autoPlay)
         }
+
+        override fun prebuild(rows: List<PlayItem>) = prebuildAhead(rows)
 
         override fun playPause() {
             if (session.isEmpty()) return
