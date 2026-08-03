@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:27:04.395Z",
+ "exportedAt": "2026-08-03T09:27:11.098Z",
  "words": [
   {
    "id": 1785185030316,
@@ -2069,7 +2069,7 @@
   },
   {
    "id": 1784757139188,
-   "word": "contenders",
+   "word": "contender",
    "ipa": "",
    "arabicPron": "كنتيندر",
    "oxford": "5000",
@@ -2080,12 +2080,12 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "Someone who competes with one or more other people",
+     "en": "Someone who competes with one or more other people.",
      "ar": ""
     },
     {
      "pos": "noun",
-     "en": "Someone who has a viable chance of winning a competition",
+     "en": "Someone who has a viable chance of winning a competition.",
      "ar": ""
     }
    ],
@@ -2112,7 +2112,28 @@
      "ar": "متحد مستفز"
     }
    ],
-   "collocations": [],
+   "collocations": [
+    {
+     "en": "serious contender",
+     "ar": ""
+    },
+    {
+     "en": "leading contender",
+     "ar": ""
+    },
+    {
+     "en": "strong contender",
+     "ar": ""
+    },
+    {
+     "en": "presidential contender",
+     "ar": ""
+    },
+    {
+     "en": "major contender",
+     "ar": ""
+    }
+   ],
    "examples": [
     {
      "en": "I want to be a contender.",
@@ -2133,9 +2154,9 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "audioUS": "",
+   "audioUS": "-us",
    "audioUK": "",
-   "engineVersion": 20,
+   "engineVersion": 3,
    "ipaUS": "/kənˈtɛn.dɚ/",
    "ipaUK": "",
    "estCefr": "",
