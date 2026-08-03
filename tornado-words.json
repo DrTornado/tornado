@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T15:53:47.150Z",
+ "exportedAt": "2026-08-03T15:54:01.179Z",
  "words": [
   {
    "id": 1785185030316,
@@ -7798,18 +7798,13 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To render (much) smaller, turn into a dwarf (version",
-     "ar": "لجعلها أصغر (بكثير)، تتحول إلى قزم (نسخة)"
-    },
-    {
-     "pos": "verb",
-     "en": "To make appear (much) smaller, puny, tiny",
-     "ar": "لجعلها تبدو أصغر (بكثير)، ضئيلة، صغيرة"
+     "en": "present participle and gerund of dwarf",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "The situation where something is made to seem (relatively) small or unimportant",
-     "ar": "الحالة التي يبدو فيها شيء ما صغيرًا (نسبيًا) أو غير مهم"
+     "en": "The situation where something is made to seem (relatively) small or unimportant.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -7866,7 +7861,7 @@
    "due": 0,
    "freqLabel": "Top 8,000 words",
    "estCefr": "B2",
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "audioUS": "",
@@ -8265,13 +8260,8 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "The greatest or utmost point, degree or condition",
-     "ar": "النقطة أو الدرجة أو الشرط الأكبر أو الأقصى"
-    },
-    {
-     "pos": "noun",
-     "en": "Each of the things at opposite ends of a range or scale",
-     "ar": "كل من الأشياء على طرفي نقيض من نطاق أو مقياس"
+     "en": "The opposite ends of a range or scale.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -8314,11 +8304,11 @@
     }
    ],
    "differences": [],
-   "audioUS": "",
-   "audioUK": "",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "/ɪkˈstɹimz/",
    "ipaUK": "/ɪkˈstɹiːmz/",
    "estCefr": "",
@@ -8506,24 +8496,19 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "To contribute to a blog",
-     "ar": "للمساهمة في مدونة"
+     "pos": "noun",
+     "en": "(computing) The design and editing of a blog; weblogging.",
+     "ar": ""
     },
     {
      "pos": "verb",
-     "en": "To blag, to steal something",
-     "ar": "التباهي، وسرقة شيء ما"
-    },
-    {
-     "pos": "verb",
-     "en": "To look sullen or sulky",
-     "ar": "أن تبدو متجهمًا أو عابسًا"
+     "en": "present participle and gerund of blog",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "The design and editing of a blog",
-     "ar": "تصميم وتحرير مدونة"
+     "en": "The design and editing of a blog; weblogging.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -8557,12 +8542,12 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "/ˈblɑ.ɡiŋ/",
    "ipaUK": "",
    "estCefr": "",
    "freqLabel": "",
-   "audioUS": "",
+   "audioUS": "-us",
    "audioUK": "",
    "audioGen": "",
    "favorite": "false"
@@ -9642,24 +9627,19 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "To hold very tightly, as to not fall off",
-     "ar": "التمسك بإحكام شديد، حتى لا تسقط"
-    },
-    {
-     "pos": "verb",
-     "en": "To adhere to an object, without being affixed, in such a way as to follow its contours. Used especially of fabrics and films",
-     "ar": "التمسك بشيء ما، دون أن يتم لصقه، بطريقة تتبع ملامحه. تستخدم بشكل خاص من الأقمشة والأفلام"
-    },
-    {
-     "pos": "verb",
-     "en": "To produce a high-pitched ringing sound, like a small bell",
-     "ar": "لإنتاج صوت رنين عالي النبرة، مثل جرس صغير"
+     "pos": "adjective",
+     "en": "Clingy.",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "The act of one who clings",
-     "ar": "فعل من يتشبث"
+     "en": "The act of one who clings.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "present participle and gerund of cling",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -9712,7 +9692,7 @@
    "due": 0,
    "audioUS": "",
    "audioUK": "",
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
