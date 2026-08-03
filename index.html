@@ -25581,7 +25581,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 94;
+const BUILD = 95;
 
 function kokoroRefreshUi() {
   const sel = document.getElementById('kokoro-voice');
@@ -26021,6 +26021,21 @@ async function speak(text, lang) {
   if (!sysVoice && langPrefix !== 'en') {
     console.log(`[TTS] No system voice for "${lang}" — skipping segment instead of mispronouncing it`);
     return; // لا صوت نظام مطابق لهذه اللغة؟ نتخطى بصمت — أفضل بكثير من نطق مشوَّه بصوت لغة أخرى
+  }
+  /*
+   * قاعدة قاطعة للإنجليزية أيضاً: لا صوت نظام ما دام الصوت العصبي مفعّلاً.
+   *
+   * كانت العربية وحدها محميّة بهذه القاعدة، والإنجليزية تسقط إلى محرّك النظام
+   * كلما تأخّر Kokoro — وبناء بطاقة كاملة يستغرق دقائق، فالسقوط هو القاعدة لا
+   * الاستثناء. فيسمع المستخدم صوتاً آلياً بينما زرّ الاختبار يعطيه Edward في
+   * الدقيقة نفسها، ويقرأ ذلك كذباً في الواجهة — وقد قرأه.
+   *
+   * الصمت هنا أصدق: يعني «لم يجهز بعد»، لا «هذا هو صوتك».
+   */
+  if (langPrefix === 'en' && kokoroOn() && !kokoroBroken) {
+    console.log('[TTS] Neural voice not ready for this segment — skipping rather than using the system voice');
+    kokoroStatus('⏳ Building ' + kokoroVoice() + ' audio — the system voice is never used instead');
+    return;
   }
   await new Promise(res => {
     let finished = false;
