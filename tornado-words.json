@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:25:52.360Z",
+ "exportedAt": "2026-08-03T09:26:02.473Z",
  "words": [
   {
    "id": 1785185030316,
@@ -91,7 +91,7 @@
   {
    "id": 1785084977101,
    "word": "skiing",
-   "ipa": "/ˈskiɪŋ/",
+   "ipa": "/ˈski.ɪŋ/",
    "arabicPron": "سكيينق",
    "oxford": "3000",
    "cefr": "A2",
@@ -102,17 +102,17 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To move on skis",
+     "en": "present participle and gerund of ski",
      "ar": "للتحرك على الزلاجات"
     },
     {
-     "pos": "verb",
-     "en": "To travel over (a slope etc.) on skis",
+     "pos": "noun",
+     "en": "(sports) A group of sports using skis as primary equipment.",
      "ar": "السفر فوق (منحدر وما إلى ذلك) على الزلاجات"
     },
     {
      "pos": "noun",
-     "en": "A group of sports utilizing skis as primary equipment",
+     "en": "A group of sports using skis as primary equipment.",
      "ar": "مجموعة من الألعاب الرياضية التي تستخدم الزلاجات كمعدات أساسية"
     }
    ],
@@ -160,7 +160,7 @@
    "due": 0,
    "audioUS": "",
    "audioUK": "",
-   "engineVersion": 13,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -182,28 +182,13 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To search for and gather food for animals, particularly cattle and horses.",
-     "ar": "للبحث عن الطعام للحيوانات وجمعه، وخاصة الماشية والخيول."
-    },
-    {
-     "pos": "verb",
-     "en": "To rampage through, gathering and destroying as one goes.",
-     "ar": "الهيجان والجمع والتدمير كما يذهب المرء."
-    },
-    {
-     "pos": "noun",
-     "en": "The act of searching for food.",
-     "ar": "فعل البحث عن الطعام."
-    },
-    {
-     "pos": "verb",
      "en": "present participle and gerund of forage",
-     "ar": "مجرى العلف الحالي وجيروند العلف"
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "The act of searching for food or other items.",
-     "ar": "فعل البحث عن طعام أو مواد أخرى."
+     "ar": ""
     }
    ],
    "inflections": [
@@ -244,7 +229,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "id": 1784974772189,
