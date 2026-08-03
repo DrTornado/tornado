@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:27:57.891Z",
+ "exportedAt": "2026-08-03T09:28:07.039Z",
  "words": [
   {
    "id": 1785185030316,
@@ -3847,7 +3847,15 @@
    ],
    "examples": [
     {
-     "en": "Diligence trumps talent.",
+     "en": "1863 Joseph Story: Commentaries on the Law of Bailments\nBefore entering, however, upon a particular consideration of the distinctions of the common law, with, a view of ascertaining the precise nature and extent of the obligations of the bailee in the various sorts of bailment, it may be of use to say a few words on the subject of the various degrees of care or diligence, which are recognized in that law. It has been justly said, that there are infinite shades of care or diligence, from the slightest momentary thought to the most vigilant anxiety; but extremes in this case, as in most others, are inapplicable to practice. There may be a high degree of diligence, a common degree of diligence, and a slight degree of diligence ; and these, with a view to the business of life, seem all that are necessary to be brought under review. Common or ordinary diligence is that degree of diligence which men in general exert in respect to their own concerns. It may be said to be the common prudence, which men of business and heads of families usually exhibit, in affairs which are interesting to them. Or, as Sir William Jones has expressed it, it is the care, which every person, of common prudence, and capable of governing a family, takes of his own concerns. It is obvious, that this is adopting a very variable standard ; for it still leaves much ground for doubt, as to what is common prudence, and who is capable of governing a family. . . and low, or slight diligence is that, which persons of less than common prudence, or indeed of any prudence at all, take of their own concerns.",
+     "ar": ""
+    },
+    {
+     "en": "1822 M.Reichard, An Itinerary Of France And Belgium\nThe French diligence is a most curious and unique machine : it is a strange compound of the English stage waggon and coach; and it similarly possesses all the conveniences of each without their defects. It contains six, eight, or ten passengers inside, according to its size; and in front is what is called the cabriolet of the diligence for outside passengers, with leather covers, like the body of our one-horse chaises, to defend both the head and legs from the weather.\nThe (Dutch) Diligence, or Post-Waggon.\nA Diligence, or, as it is usually called, a post-waggon, is established between the principal towns of Holland. The post-waggon is constructed so as to contain six or eight travellers. Each place has its number, and the name of each passenger is registered. When he pays his fare, he obtains a ticket, with a number which indicates where he is to sit. Here, too, except he be very careful, his trunks will be fastened in such an awkward and negligent manner, that they will be frequently cut to pieces by the shaking, or dropped, or stolen on the road. These waggons are covered with waxed cloth, but are not suspended on springs. They are low and narrow : the seat is not remarkably comfortable; and the passenger is in danger of being suffocated by the smoke of his companions, who, if they are Dutch, light their pipes the instant they enter the waggon.",
+     "ar": ""
+    },
+    {
+     "en": "The precepts against parties, to whose oath of verity any point is referred, do only command them to compear at the term, with certification, that if they compear not, they shall be holden as confessing the point referred to their oath; but precepts against witnesses cannot have that certification, but all that can be done against them, or against the havers of writs, is to compel them to appear, and depone; and therefore these precepts are called executorials, because they are for putting the acts to effect by execution: they are also called compulsitors for the same reason. And they are called diligences, because they excuse the users thereof from negligence, whereby posterior diligences being exacty followed, are preferable to prior diligences being neglected, vigilantibus non dormientibus jura subveniunt, which is founded upon that great interest to hasten pleas to an end. They are also called diligences, because though the effect do not follow, yet the user thereof hath endeavoured what he could, and so is held as in the same case as if he had obtained the command of the precept. These precepts are called executorials before executions be thereupon; but they are only called diligences when they are executed in due time.\n... Diligences are of three sorts, being either upon precepts before decreets, upon acts, or upon decreets.\nThe last sort of diligences and executorials, viz. those after decreets, which serve for putting of decreets to execution, and making them effectual, are ordinarily horning, caption, poinding, charges to remove, and thereupon letters of possession, (which are granted on all decreets in petitory and possessory actions, but declaratory actions need none,) together with the executory actions upon arrestments, and of adjudications of lands and annualrents..",
      "ar": ""
     }
    ],
@@ -3857,21 +3865,21 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 2,
+   "engineVersion": 3,
    "ipaUS": "",
-   "ipaUK": "",
+   "ipaUK": "/ˈdɪlɪdʒəns/",
    "estCefr": "",
    "freqLabel": "",
    "audioUS": "",
-   "audioUK": "",
+   "audioUK": "-uk",
    "audioGen": "",
    "favorite": "false"
   },
   {
    "id": 1784747055982,
    "word": "infallible",
-   "ipa": "/ɪnˈfa.lɪ.b(ə)l/",
-   "arabicPron": "ينفالبل",
+   "ipa": "/ɪnˈfælɪbəl/",
+   "arabicPron": "ينفاليبل",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -3880,29 +3888,24 @@
    ],
    "meanings": [
     {
-     "pos": "adjective",
-     "en": "Without fault or weakness; incapable of error or fallacy.",
-     "ar": "دون خطأ أو ضعف ؛ غير قادر على الخطأ أو المغالطة."
-    },
-    {
-     "pos": "adjective",
-     "en": "Certain to produce the intended effect, sure.",
-     "ar": "من المؤكد أن تنتج التأثير المقصود، بالتأكيد."
-    },
-    {
      "pos": "noun",
      "en": "A person who, or an object or process that, is taken as being infallible.",
-     "ar": "الشخص الذي، أو كائن أو عملية، يؤخذ على أنه معصوم."
+     "ar": ""
+    },
+    {
+     "pos": "adjective",
+     "en": "Without fault or weakness; incapable of error or fallacy.",
+     "ar": ""
     },
     {
      "pos": "adjective",
      "en": "Certain to produce the intended effect; sure.",
-     "ar": "من المؤكد أن تنتج التأثير المقصود ؛ بالتأكيد."
+     "ar": ""
     },
     {
      "pos": "adjective",
      "en": "Certain to result from a specific cause; inevitable.",
-     "ar": "من المؤكد أنه ناتج عن سبب محدد ؛ لا مفر منه."
+     "ar": ""
     }
    ],
    "inflections": [
@@ -3965,11 +3968,11 @@
    "ipaUS": "/ɪnˈfæ.lə.bəl/",
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/infallible-us.mp3",
    "audioGen": "https://api.dictionaryapi.dev/media/pronunciations/en/infallible-au.mp3",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "id": 1784746900843,
-   "word": "junctures",
+   "word": "juncture",
    "ipa": "",
    "arabicPron": "دجانكتشر",
    "oxford": "",
@@ -3980,13 +3983,23 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A place where things join, a junction",
-     "ar": "مكان تتلاقى فيه الأشياء، تقاطع طرق"
+     "en": "A place where things join, a junction.",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "A critical moment in time",
-     "ar": "لحظة حرجة في الوقت المناسب"
+     "en": "A critical moment in time.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "(linguistics) The manner of moving (transition) or mode of relationship between two consecutive sounds; a suprasegmental phonemic cue, by which a listener can distinguish between two otherwise identical sequences of sounds that have different meanings.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "The manner of moving (transition) or mode of relationship between two consecutive sounds; a suprasegmental phonemic cue, by which a listener can distinguish between two otherwise identical sequences of sounds that have different meanings.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -4016,7 +4029,24 @@
      "ar": "ينضم"
     }
    ],
-   "collocations": [],
+   "collocations": [
+    {
+     "en": "critical juncture",
+     "ar": ""
+    },
+    {
+     "en": "present juncture",
+     "ar": ""
+    },
+    {
+     "en": "particular juncture",
+     "ar": ""
+    },
+    {
+     "en": "crucial juncture",
+     "ar": ""
+    }
+   ],
    "examples": [
     {
      "en": "We're at a crucial juncture in our relationship.",
@@ -4029,13 +4059,13 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 13,
+   "engineVersion": 3,
    "ipaUS": "/ˈd͡ʒʌŋk.t͡ʃɚ/",
    "ipaUK": "/ˈd͡ʒʌŋk.tʃə(ɹ)/",
    "estCefr": "",
    "freqLabel": "",
-   "audioUS": "",
-   "audioUK": "",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "audioGen": "",
    "favorite": "false"
   },
