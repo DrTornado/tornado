@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:28:56.706Z",
+ "exportedAt": "2026-08-03T09:29:02.091Z",
  "words": [
   {
    "id": 1785185030316,
@@ -5507,7 +5507,7 @@
   {
    "id": 1784659495782,
    "word": "opaque",
-   "ipa": "/əʊˈpeɪk/",
+   "ipa": "/ɐʉˈpæɪk/",
    "arabicPron": "وبيك",
    "oxford": "",
    "cefr": "",
@@ -5518,33 +5518,33 @@
    ],
    "meanings": [
     {
-     "pos": "noun",
-     "en": "An area of darkness",
+     "pos": "adjective",
+     "en": "Allowing little light to pass through, not translucent or transparent.",
      "ar": "منطقة مظلمة"
     },
     {
-     "pos": "noun",
-     "en": "Something which is opaque rather than translucent",
+     "pos": "adjective",
+     "en": "Neither reflecting nor emitting light.",
      "ar": "شيء غير شفاف بدلاً من شفاف"
     },
     {
-     "pos": "verb",
-     "en": "To make, render (more) opaque",
+     "pos": "adjective",
+     "en": "(figuratively) Unclear, unintelligible, hard to get or explain the meaning of.",
      "ar": "لجعلها مبهمة (أكثر)"
     },
     {
-     "pos": "adjective",
-     "en": "Neither reflecting nor emitting light",
+     "pos": "noun",
+     "en": "Something which is opaque rather than translucent.",
      "ar": "لا ينعكس ولا ينبعث منه ضوء"
     },
     {
-     "pos": "adjective",
-     "en": "Allowing little light to pass through, not translucent or transparent",
+     "pos": "noun",
+     "en": "(obsolete, poetic) An area of darkness; a place or region with no light.",
      "ar": "السماح بمرور القليل من الضوء، وليس شفافًا أو شفافًا"
     },
     {
-     "pos": "adjective",
-     "en": "Unclear, unintelligible, hard to get or explain the meaning of",
+     "pos": "verb",
+     "en": "(transitive) To make, render (more) opaque.",
      "ar": ""
     }
    ],
@@ -5611,13 +5611,13 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 13,
+   "engineVersion": 3,
    "ipaUS": "/oʊˈpeɪk/",
    "ipaUK": "/əʊˈpeɪk/",
    "estCefr": "",
    "freqLabel": "",
-   "audioUS": "",
-   "audioUK": "",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "audioGen": "",
    "favorite": "false"
   },
