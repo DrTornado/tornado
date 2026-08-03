@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:27:34.944Z",
+ "exportedAt": "2026-08-03T09:27:39.357Z",
  "words": [
   {
    "id": 1785185030316,
@@ -3055,13 +3055,8 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "The condition of being prosperous, of having good fortune",
-     "ar": "شرط أن تكون مزدهرًا، وأن يكون لديك ثروة جيدة"
-    },
-    {
-     "pos": "noun",
      "en": "The condition of being prosperous: having good fortune and a fortune.",
-     "ar": "شرط أن تكون مزدهرًا: امتلاك ثروة جيدة وثروة."
+     "ar": ""
     }
    ],
    "inflections": [
@@ -3101,7 +3096,12 @@
      "ar": "الرخاء المادي"
     }
    ],
-   "examples": [],
+   "examples": [
+    {
+     "en": "Near-synonym: thriving",
+     "ar": ""
+    }
+   ],
    "differences": [],
    "right": 0,
    "wrong": 0,
@@ -3109,14 +3109,15 @@
    "interval": 0,
    "due": 0,
    "ipaUS": "/pɹɑˈspɛɹ.ɪ.ti/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pro/prosp/prosperity__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/p/pro/prosp/prosperity__gb_1.mp3",
-   "engineVersion": 2
+   "audioUS": "-us",
+   "audioUK": "-uk",
+   "engineVersion": 3,
+   "ipaUK": "/pɹɒˈspɛɹ.ɪ.ti/"
   },
   {
    "id": 1784751098241,
    "word": "dietary",
-   "ipa": "/ˈdaɪətɹi/",
+   "ipa": "/ˈdaɪət(ə)ɹi/",
    "arabicPron": "دايتري",
    "oxford": "",
    "cefr": "",
@@ -3127,12 +3128,12 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A regulated diet.",
+     "en": "A regulated diet that excludes or constrains certain types of food, especially for health reasons; also, a book or similar setting out such regulations.",
      "ar": "نظام غذائي منظم."
     },
     {
-     "pos": "adjective",
-     "en": "Of, or relating to diet.",
+     "pos": "noun",
+     "en": "A prescribed meal plan setting out how the inhabitants of an institution (such as a prison, hospital etc.) should be fed, and on what foods.",
      "ar": "من، أو فيما يتعلق بالنظام الغذائي."
     },
     {
@@ -3141,13 +3142,13 @@
      "ar": "يتكون من مصدر غذائي."
     },
     {
-     "pos": "noun",
-     "en": "A regulated diet that excludes or constrains certain types of food, especially for health reasons; also, a book or similar setting out such regulations. .mw-parser-output .defdate{font-size:smaller}",
+     "pos": "adjective",
+     "en": "Pertaining to a prescribed diet; (generally), relating to what a person or animal eats.",
      "ar": "نظام غذائي منظم يستبعد أو يقيد أنواعًا معينة من الطعام، خاصة لأسباب صحية ؛ أيضًا، كتاب أو ما شابه يحدد مثل هذه اللوائح. .mw - parser - output .defdate {font - size:smaller}"
     },
     {
      "pos": "noun",
-     "en": "A prescribed meal plan setting out how the inhabitants of an institution (such as a prison, hospital etc.) should be fed, and on what foods.",
+     "en": "A regulated diet that excludes or constrains certain types of food, especially for health reasons; also, a book or similar setting out such regulations. .mw-parser-output .defdate{font-size:smaller}",
      "ar": "خطة وجبات محددة تحدد كيفية إطعام سكان المؤسسة (مثل السجن والمستشفى وما إلى ذلك)، وما هي الأطعمة."
     },
     {
@@ -3201,7 +3202,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "id": 1784750865167,
