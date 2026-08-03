@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:26:31.048Z",
+ "exportedAt": "2026-08-03T09:26:34.065Z",
  "words": [
   {
    "id": 1785185030316,
@@ -1106,7 +1106,7 @@
   },
   {
    "id": 1784805509427,
-   "word": "sculptures",
+   "word": "sculpture",
    "ipa": "",
    "arabicPron": "سكالبتشر",
    "oxford": "3000",
@@ -1118,32 +1118,32 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A three-dimensional work of art created by shaping malleable objects and letting them harden or by chipping away pieces from a rock (sculpting",
+     "en": "(countable) A three-dimensional work of art created by shaping malleable objects and letting them harden or by chipping away pieces from a rock (sculpting).",
      "ar": ""
     },
     {
      "pos": "noun",
-     "en": "More generally (since modernism), a three-dimensional work of art of any material or of mixed materials, whether sculpted, assembled, found, constructed or created using…",
+     "en": "(countable) More generally (since modernism), a three-dimensional work of art of any material or of mixed materials, whether sculpted, assembled, found, constructed or created using multiple techniques.",
      "ar": ""
     },
     {
      "pos": "noun",
-     "en": "Works of art created by sculpting, as a group",
+     "en": "Works of art created by sculpting, as a group.",
      "ar": ""
     },
     {
      "pos": "verb",
-     "en": "To fashion something into a three-dimensional figure",
+     "en": "To fashion something into a three-dimensional figure.",
      "ar": ""
     },
     {
      "pos": "verb",
-     "en": "To represent something in sculpture",
+     "en": "To represent something in sculpture.",
      "ar": ""
     },
     {
      "pos": "verb",
-     "en": "To change the shape of a land feature by erosion etc",
+     "en": "To change the shape of a land feature by erosion etc.",
      "ar": ""
     }
    ],
@@ -1189,9 +1189,9 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "audioUS": "",
-   "audioUK": "",
-   "engineVersion": 13,
+   "audioUS": "-us",
+   "audioUK": "-uk",
+   "engineVersion": 3,
    "ipaUS": "/ˈskʌlpt͡ʃɚ/",
    "ipaUK": "/ˈskʌlptj(ʊ)ə/",
    "estCefr": "",
