@@ -23462,7 +23462,9 @@ let notePlayer = {
   detailed: false,       // false = SHORT (جملة) · true = FULL (فقرة)
   say: 1,                // كم مرّة تُعاد الوحدة
   repeat: 0,             // 0 = بلا تكرار · 1 = يعيد هذه الملاحظة · 2 = يعيد كل الملاحظات
-  order: []              // ترتيب الملاحظات حين نشغّل الكل
+  order: [],             // ترتيب الملاحظات حين نشغّل الكل
+  /** سرعة قراءة النصّ — طبيعية افتراضاً، مستقلّة عن بطء تلقين الكلمات */
+  speed: 1.0
 };
 
 function noteEl() { return document.getElementById('note-player'); }
@@ -23505,6 +23507,7 @@ function renderNotePlayer() {
         style="width:auto;padding:4px 12px;font-size:12px;${say1 ? 'opacity:.4;' : ''}">${notePlayer.detailed ? 'FULL ¶' : 'SHORT ·'}</button>
       <button class="btn np-chip" id="np-say" style="width:auto;padding:4px 12px;font-size:12px;">Say ×${notePlayer.say}</button>
       <button class="btn np-chip" id="np-repeat" style="width:auto;padding:4px 12px;font-size:12px;">${['No repeat','Repeat note','Repeat all'][notePlayer.repeat]}</button>
+      <button class="btn np-chip" id="np-speed" style="width:auto;padding:4px 12px;font-size:12px;">${notePlayer.speed.toFixed(1)}X</button>
     </div>
     <div style="display:flex;gap:10px;justify-content:center;align-items:center;margin-top:8px;">
       <button class="btn" id="np-prev" style="width:auto;padding:5px 14px;">⏮</button>
@@ -23526,6 +23529,18 @@ function renderNotePlayer() {
   on('np-say', () => { notePlayer.say = notePlayer.say >= 3 ? 1 : notePlayer.say + 1; noteResplit(); });
   on('np-detail', () => { if (notePlayer.say > 1) { notePlayer.detailed = !notePlayer.detailed; noteResplit(); } });
   on('np-repeat', () => { notePlayer.repeat = (notePlayer.repeat + 1) % 3; renderNotePlayer(); });
+  /*
+   * السرعة تسري على المقطع الجاري فوراً، لا من المقطع التالي.
+   *
+   * من يضغط «أسرع» يريد ما يسمعه الآن أسرع؛ وانتظارُ نهاية الجملة يجعل الزرّ
+   * يبدو معطّلاً فيُضغط مرّتين ويقفز إلى سرعة لم يردها.
+   */
+  on('np-speed', () => {
+    const steps = [0.8, 0.9, 1.0, 1.1, 1.25, 1.5];
+    notePlayer.speed = steps[(steps.indexOf(notePlayer.speed) + 1) % steps.length];
+    try { getPiperAudioEl().playbackRate = notePlayer.speed; } catch(e) {}
+    renderNotePlayer();
+  });
 }
 
 /*
@@ -23624,12 +23639,22 @@ async function noteStep() {
   }
 }
 
+/*
+ * النوتس لها سرعتها، لا سرعة تلقين الكلمات.
+ *
+ * مشغّل الكلمات يعمل بأربعة أخماس السرعة عمداً: الكلمة المفردة تُلقَّن أوضح
+ * حين تُبطَّأ. أما النصّ المتّصل فيصير بهذه السرعة كلاماً متثاقلاً ممطوطاً —
+ * قِست الفقرة: تسع عشرة ثانية تصير أربعاً وعشرين. وقد وصفه المستخدم بالفساد
+ * وكان محقاً: البيانات سليمة والتشغيل هو الخطأ.
+ *
+ * أعدت استعمال عنصر الصوت بإعداداته بدل أن أفصل ما يخصّ كلّ مشغّل.
+ */
 function notePlayWav(wav) {
   return new Promise(res => {
     const el = getPiperAudioEl();
     const url = URL.createObjectURL(wav);
     el.src = url;
-    el.playbackRate = speed;
+    el.playbackRate = notePlayer.speed;
     let done = false;
     const finish = () => { if (done) return; done = true; clearInterval(tick); URL.revokeObjectURL(url); res(); };
     // النص يلاحق الصوت داخل الفقرة — بلا ذلك يقرأ المستخدم شيئاً ويسمع آخر
@@ -25598,7 +25623,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 97;
+const BUILD = 98;
 
 function kokoroRefreshUi() {
   const sel = document.getElementById('kokoro-voice');
