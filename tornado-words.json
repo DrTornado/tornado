@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:26:07.199Z",
+ "exportedAt": "2026-08-03T09:26:11.987Z",
  "words": [
   {
    "id": 1785185030316,
@@ -408,32 +408,37 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A prayer; petition.",
-     "ar": "صلاة ؛ عريضة."
+     "en": "A good thing; a thing to be thankful for or to appreciate duly.",
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "That which is asked or granted as a benefit or favor; a gift or benefaction.",
-     "ar": "ما يتم طلبه أو منحه كمنفعة أو خدمة ؛ هدية أو إحسان."
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "A good thing; a thing to be thankful for or to appreciate duly.",
-     "ar": "شيء جيد ؛ شيء يجب أن تكون ممتنًا له أو أن تقدره على النحو الواجب."
+     "en": "(Hinduism) A blessing, typically a supernatural power, granted to an ascetic by a god or goddess.",
+     "ar": ""
     },
     {
      "pos": "adjective",
-     "en": "Gay; merry; jovial; convivial.",
-     "ar": "مثلي الجنس ؛ مرح ؛ مرح ؛ مرح."
+     "en": "(now only in boon companion) Gay; merry; jovial; convivial.",
+     "ar": ""
     },
     {
      "pos": "adjective",
-     "en": "Kind; bountiful; benign.",
-     "ar": "لطيف ؛ وفير ؛ حميد."
+     "en": "(archaic) Kind; bountiful; benign.",
+     "ar": ""
     },
     {
      "pos": "adjective",
-     "en": "Good; prosperous.",
+     "en": "(obsolete) Good; prosperous.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "The woody portion of flax, separated from the fiber as refuse matter by retting, braking, and scutching.",
      "ar": ""
     }
    ],
@@ -480,16 +485,16 @@
    ],
    "examples": [
     {
-     "en": "Finding the dry cave was a boon to the weary travellers.",
-     "ar": "كان العثور على الكهف الجاف نعمة للمسافرين المرهقين."
+     "en": "Near-synonyms: gift; blessing, benefit; see also Thesaurus:gift",
+     "ar": ""
     },
     {
-     "en": "Anaesthetics are a great boon to modern surgery.",
-     "ar": "التخدير هو نعمة كبيرة للجراحة الحديثة."
+     "en": "(2) \"Everybody's boon companion, / Everybody's chaperon\"; (3) \"Everybody's boon companion: / Give[s] 'em everything he's got\"",
+     "ar": ""
     },
     {
      "en": "boon voyage",
-     "ar": "بون فويدج"
+     "ar": ""
     }
    ],
    "differences": [],
@@ -500,13 +505,13 @@
    "due": 1785198249705,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "id": 1784814256605,
    "word": "provocative",
    "ipa": "/pɹəˈvɒk.ə.tɪv/",
-   "arabicPron": "برڤوكتيڤ",
+   "arabicPron": "برڤاكتيڤ",
    "oxford": "",
    "cefr": "",
    "pos": [
@@ -515,23 +520,23 @@
    ],
    "meanings": [
     {
-     "pos": "noun",
-     "en": "(obsolescent) Something that provokes an appetite, especially a sexual appetite; an aphrodisiac.",
+     "pos": "adjective",
+     "en": "Serving or tending to elicit a strong, often negative sentiment in another person; exasperating.",
      "ar": "(زائل) شيء يثير الشهية، وخاصة الشهية الجنسية ؛ مثير للشهوة الجنسية."
     },
     {
      "pos": "adjective",
-     "en": "Serving or tending to elicit a strong, often negative sentiment in another person; exasperating.",
+     "en": "Serving or tending to excite, stimulate or arouse sexual interest; sexy.",
      "ar": "خدمة أو الميل إلى إثارة مشاعر قوية وسلبية في كثير من الأحيان في شخص آخر ؛ مزعجة."
     },
     {
      "pos": "adjective",
-     "en": "Serving or tending to excite, stimulate or arouse sexual interest; sexy.",
+     "en": "Provoking or triggering any response.",
      "ar": "تقديم أو الميل إلى إثارة أو تحفيز أو إثارة الاهتمام الجنسي ؛ مثير."
     },
     {
-     "pos": "adjective",
-     "en": "Provoking or triggering any response.",
+     "pos": "noun",
+     "en": "Something that provokes an appetite, especially a sexual appetite; an aphrodisiac.",
      "ar": "استفزاز أو إثارة أي استجابة."
     },
     {
@@ -590,7 +595,11 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUS": "/pɹəˈvɑ.kə.tɪv/",
+   "ipaUK": "/pɹəˈvɒk.ə.tɪv/",
+   "audioUS": "-us",
+   "audioUK": "-uk"
   },
   {
    "id": 1784813527523,
