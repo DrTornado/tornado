@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T15:26:05.047Z",
+ "exportedAt": "2026-08-03T15:26:16.546Z",
  "words": [
   {
    "id": 1785185030316,
@@ -182,18 +182,13 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To search for and gather food for animals, particularly cattle and horses",
-     "ar": "للبحث عن الطعام للحيوانات وجمعه، وخاصة الماشية والخيول"
-    },
-    {
-     "pos": "verb",
-     "en": "To rampage through, gathering and destroying as one goes",
-     "ar": "الهيجان والجمع والتدمير كما يذهب المرء"
+     "en": "present participle and gerund of forage",
+     "ar": "مجرى العلف الحالي وجيروند العلف"
     },
     {
      "pos": "noun",
-     "en": "The act of searching for food",
-     "ar": "فعل البحث عن الطعام"
+     "en": "The act of searching for food or other items.",
+     "ar": "فعل البحث عن طعام أو مواد أخرى."
     }
    ],
    "inflections": [
@@ -239,7 +234,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -1528,18 +1523,8 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "The state of being tranquil",
-     "ar": "حالة الهدوء"
-    },
-    {
-     "pos": "noun",
-     "en": "The absence of disturbance",
-     "ar": "غياب الاضطراب"
-    },
-    {
-     "pos": "noun",
-     "en": "American standard spelling of tranquillity",
-     "ar": "التهجئة القياسية الأمريكية للهدوء"
+     "en": "American standard spelling of tranquillity.",
+     "ar": "التهجئة القياسية الأمريكية للهدوء."
     }
    ],
    "inflections": [
@@ -1603,7 +1588,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -2285,18 +2270,13 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To repair, as anything that is torn, broken, defaced, decayed, or the like",
-     "ar": "لإصلاح، مثل أي شيء ممزق أو مكسور أو مشوه أو متحلل أو ما شابه ذلك"
-    },
-    {
-     "pos": "verb",
-     "en": "To alter for the better",
-     "ar": "أن يغير للأفضل"
+     "en": "present participle and gerund of mend",
+     "ar": "الحاضر الفاعل و gerund من إصلاح"
     },
     {
      "pos": "noun",
-     "en": "The act by which something is mended or repaired",
-     "ar": "الفعل الذي يتم من خلاله إصلاح شيء ما أو إصلاحه"
+     "en": "The act by which something is mended or repaired.",
+     "ar": "الفعل الذي يتم من خلاله إصلاح شيء ما أو إصلاحه."
     }
    ],
    "inflections": [
@@ -2343,7 +2323,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "B2",
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "audioUS": "",
@@ -3256,13 +3236,8 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To come from a source",
-     "ar": "أن يأتي من مصدر"
-    },
-    {
-     "pos": "verb",
-     "en": "To send or give out",
-     "ar": "لإرسال أو إعطاء"
+     "en": "present participle and gerund of emanate",
+     "ar": "يقدم الفاعل والمرشد من المنبثق"
     }
    ],
    "inflections": [
@@ -3307,7 +3282,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -3518,13 +3493,8 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To proclaim or announce an event",
-     "ar": "لإعلان أو الإعلان عن حدث"
-    },
-    {
-     "pos": "verb",
-     "en": "To greet something with excitement",
-     "ar": "(عادة ما يكون سلبيًا) لتحية شيء ما بإثارة"
+     "en": "simple past and past participle of herald",
+     "ar": "بسيطة الماضي والماضي الفاعل من هيرالد"
     }
    ],
    "inflections": [
@@ -3567,7 +3537,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "audioUS": "",
