@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:28:30.465Z",
+ "exportedAt": "2026-08-03T09:28:41.729Z",
  "words": [
   {
    "id": 1785185030316,
@@ -4705,7 +4705,7 @@
   {
    "id": 1784733972020,
    "word": "thatch",
-   "ipa": "/θætʃ/",
+   "ipa": "/θæt͡ʃ/",
    "arabicPron": "ثاتش",
    "oxford": "",
    "cefr": "",
@@ -4717,22 +4717,27 @@
     {
      "pos": "noun",
      "en": "Straw, rushes, or similar, used for making or covering the roofs of buildings, or of stacks of hay or grain.",
-     "ar": "القش أو الاندفاع أو ما شابه ذلك، يستخدم لصنع أو تغطية أسطح المباني أو أكوام القش أو الحبوب"
-    },
-    {
-     "pos": "noun",
-     "en": "Any of several kinds of palm, the leaves of which are used for thatching.",
-     "ar": "أي من عدة أنواع من النخيل، وتستخدم أوراقها للقش"
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "A buildup of cut grass, stolons or other material on the soil in a lawn.",
-     "ar": "تراكم العشب المقطوع أو الأحواض أو غيرها من المواد على التربة في العشب"
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "(Caribbean) Any of several kinds of palm, the leaves of which are used for thatching.",
+     "ar": ""
     },
     {
      "pos": "verb",
      "en": "To cover the roof with straw, reed, leaves, etc.",
-     "ar": "لتغطية السقف بالقش والقصب والأوراق وما إلى ذلك"
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "Any of several kinds of palm, the leaves of which are used for thatching.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -4796,7 +4801,7 @@
    "due": 0,
    "ipaUS": "/θætʃ/",
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/thatch-us.mp3",
-   "engineVersion": 2,
+   "engineVersion": 3,
    "ipaUK": "",
    "estCefr": "",
    "freqLabel": "",
@@ -4818,17 +4823,22 @@
     {
      "pos": "noun",
      "en": "The sound of laughing, produced by air so expelled; any similar sound.",
-     "ar": "صوت الضحك، الذي ينتجه الهواء حتى يطرد ؛ أي صوت مماثل."
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "A movement (usually involuntary) of the muscles of the laughing face, particularly of the lips, and of the whole body, with a peculiar expression of the eyes, indicating merriment, satisfaction or derision, and usually attended by a sonorous and interrupted expulsion of air from the lungs.",
-     "ar": "حركة (عادة لا إرادية) لعضلات الوجه الضاحك، وخاصة الشفاه، والجسم كله، مع تعبير غريب عن العينين، مما يشير إلى الفرح أو الرضا أو السخرية، وعادة ما يحضره طرد رنان ومتقطع للهواء من الرئتين."
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "(archaic) A reason for merriment.",
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "A reason for merriment.",
-     "ar": "سبب للفرح."
+     "ar": ""
     }
    ],
    "inflections": [
@@ -4856,9 +4866,10 @@
    "interval": 0,
    "due": 0,
    "ipaUS": "/ˈlæftɚ/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/l/lau/laugh/laughter__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/l/lau/laugh/laughter__gb_1.mp3",
-   "engineVersion": 2
+   "audioUS": "-us",
+   "audioUK": "-uk",
+   "engineVersion": 3,
+   "ipaUK": "/ˈlɑːftə/"
   },
   {
    "id": 1784712683838,
@@ -4873,18 +4884,8 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To show or illustrate by example.",
-     "ar": "لإظهار أو توضيح بالقدوة."
-    },
-    {
-     "pos": "verb",
-     "en": "To be an instance of or serve as an example.",
-     "ar": "أن تكون مثالاً أو مثالاً يحتذى به."
-    },
-    {
-     "pos": "verb",
      "en": "simple past and past participle of exemplify",
-     "ar": "المشاركة البسيطة في الماضي والماضي من سبيل المثال"
+     "ar": ""
     }
    ],
    "inflections": [
@@ -4912,7 +4913,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "id": 1784712173434,
@@ -4927,23 +4928,28 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "The dominion of an Elector in the Holy Roman Empire.",
-     "ar": "سيادة ناخب في الإمبراطورية الرومانية المقدسة."
+     "en": "The collective people of a country, state, or electoral district who are entitled to vote.",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "The collective people of a country, state, or electoral district who are entitled to vote.",
-     "ar": "الشعب الجماعي لبلد أو ولاية أو دائرة انتخابية الذي يحق له التصويت."
+     "en": "(chiefly Australia, New Zealand) A geographical area represented by one or more elected officials; a constituency, an electoral district.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "(historical) The office, or area of dominion, of an Elector (“a German prince entitled to elect the emperor of the Holy Roman Empire”); an electorship.",
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "The office, or area of dominion, of an Elector (“a German prince entitled to elect the emperor of the Holy Roman Empire”); an electorship.",
-     "ar": "منصب أو منطقة سيطرة الناخب (\" أمير ألماني يحق له انتخاب إمبراطور الإمبراطورية الرومانية المقدسة \")؛ هيئة انتخابية."
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "A geographical area represented by one or more elected officials; a constituency, an electoral district.",
-     "ar": "منطقة جغرافية يمثلها واحد أو أكثر من المسؤولين المنتخبين ؛ دائرة انتخابية، دائرة انتخابية."
+     "ar": ""
     }
    ],
    "inflections": [
@@ -5013,7 +5019,9 @@
    "due": 0,
    "ipaUK": "/ɪˈlɛktəɹət/",
    "audioUK": "https://api.dictionaryapi.dev/media/pronunciations/en/electorate-uk.mp3",
-   "engineVersion": 2
+   "engineVersion": 3,
+   "ipaUS": "/ɪˈlɛktəɹət/",
+   "audioUS": "-us"
   },
   {
    "id": 1784711749205,
