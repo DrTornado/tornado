@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T16:22:16.996Z",
+ "exportedAt": "2026-08-03T16:22:42.233Z",
  "words": [
   {
    "id": 1785185030316,
@@ -182,18 +182,13 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To search for and gather food for animals, particularly cattle and horses",
-     "ar": "للبحث عن الطعام للحيوانات وجمعه، وخاصة الماشية والخيول"
-    },
-    {
-     "pos": "verb",
-     "en": "To rampage through, gathering and destroying as one goes",
-     "ar": "الهيجان والجمع والتدمير كما يذهب المرء"
+     "en": "present participle and gerund of forage",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "The act of searching for food",
-     "ar": "فعل البحث عن الطعام"
+     "en": "The act of searching for food or other items.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -239,7 +234,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -1528,18 +1523,8 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "The state of being tranquil",
-     "ar": "حالة الهدوء"
-    },
-    {
-     "pos": "noun",
-     "en": "The absence of disturbance",
-     "ar": "غياب الاضطراب"
-    },
-    {
-     "pos": "noun",
-     "en": "American standard spelling of tranquillity",
-     "ar": "التهجئة القياسية الأمريكية للهدوء"
+     "en": "American standard spelling of tranquillity.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -1603,7 +1588,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -2285,18 +2270,13 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To repair, as anything that is torn, broken, defaced, decayed, or the like",
-     "ar": "لإصلاح، مثل أي شيء ممزق أو مكسور أو مشوه أو متحلل أو ما شابه ذلك"
-    },
-    {
-     "pos": "verb",
-     "en": "To alter for the better",
-     "ar": "أن يغير للأفضل"
+     "en": "present participle and gerund of mend",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "The act by which something is mended or repaired",
-     "ar": "الفعل الذي يتم من خلاله إصلاح شيء ما أو إصلاحه"
+     "en": "The act by which something is mended or repaired.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -2343,7 +2323,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "B2",
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "audioUS": "",
@@ -3256,13 +3236,8 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To come from a source",
-     "ar": "أن يأتي من مصدر"
-    },
-    {
-     "pos": "verb",
-     "en": "To send or give out",
-     "ar": "لإرسال أو إعطاء"
+     "en": "present participle and gerund of emanate",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -3307,7 +3282,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -3518,13 +3493,8 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To proclaim or announce an event",
-     "ar": "لإعلان أو الإعلان عن حدث"
-    },
-    {
-     "pos": "verb",
-     "en": "To greet something with excitement",
-     "ar": "(عادة ما يكون سلبيًا) لتحية شيء ما بإثارة"
+     "en": "simple past and past participle of herald",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -3567,7 +3537,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "audioUS": "",
@@ -4364,7 +4334,7 @@
   {
    "id": 1784741976331,
    "word": "strung",
-   "ipa": "/ˈstɹʌŋ/",
+   "ipa": "/stɹʌŋ/",
    "arabicPron": "سترانق",
    "oxford": "",
    "cefr": "",
@@ -4374,13 +4344,8 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To put (items) on a string",
-     "ar": "لوضع (عناصر) على سلسلة"
-    },
-    {
-     "pos": "verb",
-     "en": "To put strings on (something",
-     "ar": "لوضع الخيوط على (شيء ما)"
+     "en": "simple past and past participle of string",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -4438,7 +4403,7 @@
    "audioUK": "https://api.dictionaryapi.dev/media/pronunciations/en/strung-uk.mp3",
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 21,
+   "engineVersion": 3,
    "ipaUS": "",
    "audioUS": "",
    "audioGen": "",
@@ -4458,18 +4423,13 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To remove tangles or knots from",
-     "ar": "لإزالة التشابكات أو العقد"
-    },
-    {
-     "pos": "verb",
-     "en": "To remove confusion or mystery from",
-     "ar": "(بالتبعية) لإزالة الارتباك أو الغموض من"
+     "en": "present participle and gerund of untangle",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "The process by which something is untangled",
-     "ar": "العملية التي يتم من خلالها فك تشابك شيء ما"
+     "en": "The process by which something is untangled.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -4514,7 +4474,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -4969,13 +4929,8 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To show or illustrate by example",
-     "ar": "لإظهار أو توضيح بالقدوة"
-    },
-    {
-     "pos": "verb",
-     "en": "To be an instance of or serve as an example",
-     "ar": "أن تكون مثالاً أو مثالاً يحتذى به"
+     "en": "simple past and past participle of exemplify",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -5016,7 +4971,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -5148,24 +5103,19 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "Of two or more entities, to approach each other",
-     "ar": "من بين كيانين أو أكثر، الاقتراب من بعضهما البعض"
+     "pos": "adjective",
+     "en": "approaching each other at a point; convergent.",
+     "ar": ""
     },
     {
      "pos": "verb",
-     "en": "Of a sequence, to have a limit",
-     "ar": "من تسلسل، أن يكون لها حد"
+     "en": "present participle and gerund of converge",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "Convergence",
-     "ar": "التطابق"
-    },
-    {
-     "pos": "adjective",
-     "en": "Approaching each other at a point",
-     "ar": "الاقتراب من بعضهما البعض عند نقطة"
+     "en": "convergence",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -5215,7 +5165,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -6340,13 +6290,8 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To grow plants, notably crops",
-     "ar": "لزراعة النباتات، ولا سيما المحاصيل"
-    },
-    {
-     "pos": "verb",
-     "en": "To nurture",
-     "ar": "لرعاية"
+     "en": "present participle and gerund of cultivate",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -6376,7 +6321,7 @@
    "due": 0,
    "audioUS": "",
    "audioUK": "",
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -6425,8 +6370,8 @@
   {
    "id": 1784636175360,
    "word": "pairs",
-   "ipa": "/pɛəz/",
-   "arabicPron": "بيز",
+   "ipa": "/peəz/",
+   "arabicPron": "بيرز",
    "oxford": "3000",
    "cefr": "A1",
    "pos": [
@@ -6436,32 +6381,7 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "Two similar or identical things taken together",
-     "ar": "شيئان متشابهان أو متطابقان معًا"
-    },
-    {
-     "pos": "noun",
-     "en": "Two people in a relationship, partnership or friendship",
-     "ar": "شخصان في علاقة أو شراكة أو صداقة"
-    },
-    {
-     "pos": "verb",
-     "en": "To group into one or more sets of two",
-     "ar": "للتجميع في مجموعة واحدة أو أكثر من مجموعتين"
-    },
-    {
-     "pos": "verb",
-     "en": "To bring two (animals, notably dogs) together for mating",
-     "ar": "لجلب اثنين (الحيوانات، ولا سيما الكلاب) معا للتزاوج"
-    },
-    {
-     "pos": "verb",
-     "en": "To impair, to make worse",
-     "ar": "يضعف، ويزيد الأمر سوءًا"
-    },
-    {
-     "pos": "verb",
-     "en": "To become worse, to deteriorate",
+     "en": "Synonym of pelmanism (“memory card game”).",
      "ar": ""
     }
    ],
@@ -6479,12 +6399,24 @@
    ],
    "synonyms": [
     {
-     "en": "pair of spectacles",
-     "ar": "زوج من النظارات"
+     "en": "pelmanism",
+     "ar": ""
     },
     {
-     "en": "spectacles",
-     "ar": "نظارات"
+     "en": "span",
+     "ar": ""
+    },
+    {
+     "en": "yoke",
+     "ar": ""
+    },
+    {
+     "en": "mate",
+     "ar": ""
+    },
+    {
+     "en": "brace",
+     "ar": ""
     }
    ],
    "collocations": [
@@ -6519,11 +6451,11 @@
    "right": 0,
    "wrong": 0,
    "last": null,
-   "audioUS": "",
-   "audioUK": "",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "/pɛɹz/",
    "ipaUK": "/pɛəz/",
    "estCefr": "",
@@ -6899,28 +6831,13 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A piece of fabric attached to a boat and arranged such that it causes the wind to drive the boat along. The sail may be attached to the boat via a combination of mast…",
-     "ar": "قطعة من القماش متصلة بقارب ومرتبة بحيث تتسبب في دفع الرياح للقارب. يمكن ربط الشراع بالقارب عبر مزيج من الصاري والصاري والحبال"
+     "en": "(nautical, slang) The sailmaker on board ship.",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "The concept of a sail or sails, as if a substance",
-     "ar": "(بحري،لا يحصى) مفهوم الشراع أو الأشرعة، كما لو كانت مادة"
-    },
-    {
-     "pos": "verb",
-     "en": "To be impelled or driven forward by the action of wind upon sails, as a ship on water",
-     "ar": "أن يتم دفعه أو دفعه إلى الأمام بفعل الرياح على الأشرعة، كسفينة على الماء"
-    },
-    {
-     "pos": "verb",
-     "en": "To move through or on the water",
-     "ar": "التحرك عبر الماء أو فوقه"
-    },
-    {
-     "pos": "noun",
-     "en": "The sailmaker on board ship",
-     "ar": "صانع الشراع على متن السفينة"
+     "en": "The sailmaker on board ship.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -6970,7 +6887,7 @@
    "audioUK": "",
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUK": "",
    "estCefr": "",
    "freqLabel": "",
@@ -7881,18 +7798,13 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To render (much) smaller, turn into a dwarf (version",
-     "ar": "لجعلها أصغر (بكثير)، تتحول إلى قزم (نسخة)"
-    },
-    {
-     "pos": "verb",
-     "en": "To make appear (much) smaller, puny, tiny",
-     "ar": "لجعلها تبدو أصغر (بكثير)، ضئيلة، صغيرة"
+     "en": "present participle and gerund of dwarf",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "The situation where something is made to seem (relatively) small or unimportant",
-     "ar": "الحالة التي يبدو فيها شيء ما صغيرًا (نسبيًا) أو غير مهم"
+     "en": "The situation where something is made to seem (relatively) small or unimportant.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -7949,7 +7861,7 @@
    "due": 0,
    "freqLabel": "Top 8,000 words",
    "estCefr": "B2",
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "audioUS": "",
@@ -8348,13 +8260,8 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "The greatest or utmost point, degree or condition",
-     "ar": "النقطة أو الدرجة أو الشرط الأكبر أو الأقصى"
-    },
-    {
-     "pos": "noun",
-     "en": "Each of the things at opposite ends of a range or scale",
-     "ar": "كل من الأشياء على طرفي نقيض من نطاق أو مقياس"
+     "en": "The opposite ends of a range or scale.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -8397,11 +8304,11 @@
     }
    ],
    "differences": [],
-   "audioUS": "",
-   "audioUK": "",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "/ɪkˈstɹimz/",
    "ipaUK": "/ɪkˈstɹiːmz/",
    "estCefr": "",
@@ -8589,24 +8496,19 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "To contribute to a blog",
-     "ar": "للمساهمة في مدونة"
+     "pos": "noun",
+     "en": "(computing) The design and editing of a blog; weblogging.",
+     "ar": ""
     },
     {
      "pos": "verb",
-     "en": "To blag, to steal something",
-     "ar": "التباهي، وسرقة شيء ما"
-    },
-    {
-     "pos": "verb",
-     "en": "To look sullen or sulky",
-     "ar": "أن تبدو متجهمًا أو عابسًا"
+     "en": "present participle and gerund of blog",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "The design and editing of a blog",
-     "ar": "تصميم وتحرير مدونة"
+     "en": "The design and editing of a blog; weblogging.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -8640,12 +8542,12 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "/ˈblɑ.ɡiŋ/",
    "ipaUK": "",
    "estCefr": "",
    "freqLabel": "",
-   "audioUS": "",
+   "audioUS": "-us",
    "audioUK": "",
    "audioGen": "",
    "favorite": "false"
@@ -9725,24 +9627,19 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "To hold very tightly, as to not fall off",
-     "ar": "التمسك بإحكام شديد، حتى لا تسقط"
-    },
-    {
-     "pos": "verb",
-     "en": "To adhere to an object, without being affixed, in such a way as to follow its contours. Used especially of fabrics and films",
-     "ar": "التمسك بشيء ما، دون أن يتم لصقه، بطريقة تتبع ملامحه. تستخدم بشكل خاص من الأقمشة والأفلام"
-    },
-    {
-     "pos": "verb",
-     "en": "To produce a high-pitched ringing sound, like a small bell",
-     "ar": "لإنتاج صوت رنين عالي النبرة، مثل جرس صغير"
+     "pos": "adjective",
+     "en": "Clingy.",
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "The act of one who clings",
-     "ar": "فعل من يتشبث"
+     "en": "The act of one who clings.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "present participle and gerund of cling",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -9795,7 +9692,7 @@
    "due": 0,
    "audioUS": "",
    "audioUK": "",
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
