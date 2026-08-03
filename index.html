@@ -23383,10 +23383,256 @@ function noteParts(text) {
   return Math.max(1, Math.ceil((text || '').replace(/\s+/g, ' ').trim().length / 1200));
 }
 
+/* ===== تقسيم الملاحظات — منقول حرفياً عن نسخة الجوال =====
+ *
+ * القاعدتان اللتان استقرّتا بعد طول تصحيح هناك تُطبَّقان هنا بحرفهما، لأن
+ * الاختلاف بين الجهازين في معنى «جملة» أو «فقرة» يعني أن نفس الزرّ يفعل شيئين
+ * مختلفين — وهو أسوأ من غياب الزرّ.
+ *
+ *   SHORT = الوحدة جملة، فيكرّر Say كل جملة.
+ *   FULL  = الوحدة فقرة، فيكرّر Say كل فقرة.
+ *
+ * وأوّل ما يجب حفظه الأسطر الجديدة: محو `\s+` قبل التقسيم يمحو كل فاصل بين
+ * الفقرات، فلا تبقى فقرة يكرّرها FULL. والفقرة تُعرَّف بسطر فارغ، فإن لم يوجد
+ * فبسطر واحد — فمن يلصق نصاً من صفحة ويب تصله فقراته بسطر مفرد.
+ */
+const NOTE_MIN_SENTENCE = 12;
+const NOTE_DOT = '';
+const NOTE_DOTTED = /\b(?:[A-Za-z]\.){2,}/g;
+const NOTE_ABBREV = /\b(?:Mr|Mrs|Ms|Dr|Prof|Rev|Hon|St|Jr|Sr|Inc|Ltd|Co|Corp|Univ|Dept|vs|etc|approx|est|No|Fig|Vol|Ch|Sec|Gen|Sen|Rep|Gov|Col|Capt|Lt|Sgt|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sept|Sep|Oct|Nov|Dec)\./g;
+const NOTE_INITIAL = /\b[A-Z]\.(?=\s+[A-Z])/g;
+
+/** ليست كل نقطة نهايةَ جملة — «a groundbreaking U.S. study» جملة واحدة */
+function noteSplitSentences(paragraph) {
+  let masked = paragraph;
+  [NOTE_DOTTED, NOTE_ABBREV, NOTE_INITIAL].forEach(re => {
+    masked = masked.replace(re, m => m.split('.').join(NOTE_DOT));
+  });
+  return masked.split(/(?<=[.!?؟])\s+/)
+    .map(s => s.split(NOTE_DOT).join('.'))
+    .filter(s => s.trim());
+}
+
+function noteUnits(text, byParagraph) {
+  const src = (text || '').trim();
+  if (!src) return [];
+  const paragraphs = (/\n\s*\n/.test(src) ? src.split(/\n\s*\n+/)
+                     : src.includes('\n') ? src.split('\n')
+                     : [src])
+    .map(p => p.replace(/[ \t]+/g, ' ').trim())
+    .filter(Boolean);
+  if (byParagraph) return paragraphs;
+
+  const out = [];
+  paragraphs.forEach(p => {
+    const start = out.length;
+    noteSplitSentences(p).forEach(s => {
+      const t = s.trim();
+      if (t.length < NOTE_MIN_SENTENCE && out.length > start) out[out.length - 1] += ' ' + t;
+      else out.push(t);
+    });
+  });
+  return out;
+}
+
 function noteTitleFrom(text) {
   const first = (text || '').split('\n').map(s => s.trim()).find(s => s) || '';
   if (first && first.length <= 60) return first;
   return first.slice(0, 57).replace(/\s+\S*$/, '') + '…';
+}
+
+/* ===== مشغّل الملاحظات — بنفس قواعد الجوال =====
+ *
+ * الوحدة تحدّدها SHORT/FULL، وعددها يحدّده Say، والتكرار متتابع في موضعه لا في
+ * نهاية النص: من يعيد جملة ليفهمها يريدها الآن لا بعد دقيقتين حين تكون قد فاتته.
+ *
+ * والمعروض على الشاشة الجملة الجارية دائماً — حتى في FULL. عرض الفقرة كاملة
+ * يجعل القارئ يبحث عن موضع الصوت فيها بدل أن يتابعه.
+ */
+let notePlayer = {
+  id: null, units: [], idx: 0, rep: 0,
+  playing: false, stopped: true,
+  detailed: false,       // false = SHORT (جملة) · true = FULL (فقرة)
+  say: 1,                // كم مرّة تُعاد الوحدة
+  repeat: 0,             // 0 = بلا تكرار · 1 = يعيد هذه الملاحظة · 2 = يعيد كل الملاحظات
+  order: []              // ترتيب الملاحظات حين نشغّل الكل
+};
+
+function noteEl() { return document.getElementById('note-player'); }
+
+function noteCurrentSentence() {
+  const u = notePlayer.units[notePlayer.idx] || '';
+  if (!notePlayer.detailed) return u;
+  // في FULL الوحدة فقرة، والمعروض جملتها الجارية — نقدّرها بمرور الزمن على الصوت
+  const sents = noteSplitSentences(u);
+  if (sents.length <= 1) return u;
+  const el = getPiperAudioEl();
+  const frac = el && el.duration ? Math.min(0.999, (el.currentTime || 0) / el.duration) : 0;
+  const chars = u.length * frac;
+  let acc = 0;
+  for (const s of sents) { acc += s.length + 1; if (acc >= chars) return s.trim(); }
+  return sents[sents.length - 1].trim();
+}
+
+function renderNotePlayer() {
+  const box = noteEl();
+  if (!box) return;
+  if (!notePlayer.id) { box.classList.add('hidden'); return; }
+  box.classList.remove('hidden');
+  const n = notes.find(x => x.id === notePlayer.id);
+  const total = notePlayer.units.length || 1;
+  const say1 = notePlayer.say === 1;
+  box.innerHTML = `
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+      <div style="flex:1;min-width:0;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+        ${esc(n ? (n.title || 'Note') : 'Note')}
+      </div>
+      <div style="font-size:12px;color:#8A93A3;">${notePlayer.idx + 1} / ${total}</div>
+      <button class="btn" id="np-close" style="width:auto;background:none;border:1px solid #3A4453;color:#8A93A3;padding:3px 9px;font-size:12px;">✕</button>
+    </div>
+    <div id="np-line" style="font-size:15px;line-height:1.9;color:#E8B04B;min-height:58px;text-align:center;padding:6px 2px;">
+      ${esc(noteCurrentSentence())}
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:6px;">
+      <button class="btn np-chip" id="np-detail" ${say1 ? 'disabled' : ''}
+        style="width:auto;padding:4px 12px;font-size:12px;${say1 ? 'opacity:.4;' : ''}">${notePlayer.detailed ? 'FULL ¶' : 'SHORT ·'}</button>
+      <button class="btn np-chip" id="np-say" style="width:auto;padding:4px 12px;font-size:12px;">Say ×${notePlayer.say}</button>
+      <button class="btn np-chip" id="np-repeat" style="width:auto;padding:4px 12px;font-size:12px;">${['No repeat','Repeat note','Repeat all'][notePlayer.repeat]}</button>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center;align-items:center;margin-top:8px;">
+      <button class="btn" id="np-prev" style="width:auto;padding:5px 14px;">⏮</button>
+      <button class="btn" id="np-play" style="width:auto;padding:5px 20px;font-size:15px;">${notePlayer.playing ? '⏸' : '▶'}</button>
+      <button class="btn" id="np-next" style="width:auto;padding:5px 14px;">⏭</button>
+    </div>`;
+
+  const on = (id, fn) => { const e = document.getElementById(id); if (e) e.onclick = fn; };
+  on('np-close', noteStop);
+  on('np-play', () => notePlayer.playing ? notePause() : noteResume());
+  on('np-prev', () => noteJump(-1));
+  on('np-next', () => noteJump(1));
+  /*
+   * Say ×1 يعطّل SHORT/FULL ويطفئه.
+   *
+   * الزرّان يحدّدان وحدة التكرار، وبلا تكرار لا وحدة لها معنى — فزرٌّ مضيء
+   * لا أثر له يُعلّم المستخدم ألّا يثق بالأزرار.
+   */
+  on('np-say', () => { notePlayer.say = notePlayer.say >= 3 ? 1 : notePlayer.say + 1; noteResplit(); });
+  on('np-detail', () => { if (notePlayer.say > 1) { notePlayer.detailed = !notePlayer.detailed; noteResplit(); } });
+  on('np-repeat', () => { notePlayer.repeat = (notePlayer.repeat + 1) % 3; renderNotePlayer(); });
+}
+
+/*
+ * تبديل SHORT/FULL أو Say يعيد التقسيم لا البناء.
+ *
+ * الجملة تُبنى مرّة وتُخزَّن، والتكرار طابورٌ يعيد استعمال المخزَّن — فتبديل
+ * الأزرار لا يولّد صوتاً جديداً ولا يُظهر «يحمّل» من جديد.
+ */
+function noteResplit() {
+  const n = notes.find(x => x.id === notePlayer.id);
+  if (!n) return;
+  const spoken = notePlayer.units[notePlayer.idx] || '';
+  notePlayer.units = noteUnits(n.text, notePlayer.detailed && notePlayer.say > 1);
+  const at = notePlayer.units.findIndex(u => u.includes(spoken.slice(0, 40)) || spoken.includes(u.slice(0, 40)));
+  notePlayer.idx = at >= 0 ? at : 0;
+  notePlayer.rep = 0;
+  renderNotePlayer();
+}
+
+function noteStop() {
+  notePlayer.stopped = true; notePlayer.playing = false; notePlayer.id = null;
+  const el = getPiperAudioEl();
+  try { el.pause(); } catch(e) {}
+  renderNotePlayer();
+}
+function notePause() {
+  notePlayer.playing = false;
+  try { getPiperAudioEl().pause(); } catch(e) {}
+  renderNotePlayer();
+}
+function noteResume() {
+  if (!notePlayer.id) return;
+  notePlayer.playing = true; notePlayer.stopped = false;
+  renderNotePlayer();
+  noteStep();
+}
+function noteJump(d) {
+  notePlayer.rep = 0;
+  notePlayer.idx = Math.max(0, Math.min(notePlayer.units.length - 1, notePlayer.idx + d));
+  try { getPiperAudioEl().pause(); } catch(e) {}
+  renderNotePlayer();
+  if (notePlayer.playing) noteStep();
+}
+
+function playNote(id, fromIdx) {
+  const n = notes.find(x => x.id === id);
+  if (!n) return;
+  notePlayer.id = id;
+  notePlayer.units = noteUnits(n.text, notePlayer.detailed && notePlayer.say > 1);
+  notePlayer.idx = Math.max(0, Math.min(notePlayer.units.length - 1, fromIdx || 0));
+  notePlayer.rep = 0;
+  notePlayer.order = notes.slice().sort((a,b) => (b.updatedAt||0) - (a.updatedAt||0)).map(x => x.id);
+  noteResume();
+}
+
+let noteStepping = false;
+async function noteStep() {
+  if (noteStepping) return;
+  noteStepping = true;
+  try {
+    while (notePlayer.playing && !notePlayer.stopped) {
+      const unit = notePlayer.units[notePlayer.idx];
+      if (!unit) break;
+      renderNotePlayer();
+      const wav = await getSegmentAudio(unit, 'en-GB');
+      if (!notePlayer.playing || notePlayer.stopped) break;
+      if (wav) await notePlayWav(wav);
+      if (!notePlayer.playing || notePlayer.stopped) break;
+
+      // التكرار في موضعه: نفس الوحدة Say مرّة قبل الانتقال
+      notePlayer.rep++;
+      if (notePlayer.rep < notePlayer.say) continue;
+      notePlayer.rep = 0;
+
+      if (notePlayer.idx + 1 < notePlayer.units.length) { notePlayer.idx++; continue; }
+
+      // انتهت الملاحظة
+      if (notePlayer.repeat === 1) { notePlayer.idx = 0; continue; }
+      if (notePlayer.repeat === 2) {
+        const at = notePlayer.order.indexOf(notePlayer.id);
+        const nextId = notePlayer.order[(at + 1) % notePlayer.order.length];
+        const nx = notes.find(x => x.id === nextId);
+        if (nx) {
+          notePlayer.id = nextId;
+          notePlayer.units = noteUnits(nx.text, notePlayer.detailed && notePlayer.say > 1);
+          notePlayer.idx = 0;
+          continue;
+        }
+      }
+      notePlayer.playing = false;
+      break;
+    }
+  } finally {
+    noteStepping = false;
+    renderNotePlayer();
+  }
+}
+
+function notePlayWav(wav) {
+  return new Promise(res => {
+    const el = getPiperAudioEl();
+    const url = URL.createObjectURL(wav);
+    el.src = url;
+    el.playbackRate = speed;
+    let done = false;
+    const finish = () => { if (done) return; done = true; clearInterval(tick); URL.revokeObjectURL(url); res(); };
+    // النص يلاحق الصوت داخل الفقرة — بلا ذلك يقرأ المستخدم شيئاً ويسمع آخر
+    const tick = setInterval(() => {
+      const line = document.getElementById('np-line');
+      if (line) line.textContent = noteCurrentSentence();
+    }, 400);
+    el.onended = finish; el.onerror = finish;
+    el.play().catch(finish);
+  });
 }
 
 function renderNotes() {
@@ -23402,23 +23648,34 @@ function renderNotes() {
       <div id="note-stats" style="font-size:12px;color:#8A93A3;margin:6px 0;"></div>
       <button class="btn" id="note-save">Save note</button>
     </div>
-    <div style="font-size:13px;color:#8A93A3;margin:10px 0 6px;">
-      ${list.length ? list.length + ' note' + (list.length > 1 ? 's' : '') : 'No notes yet'}
+    <div id="note-player" class="card hidden" style="margin-bottom:10px;position:sticky;top:6px;z-index:5;"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin:10px 0 6px;">
+      <span style="font-size:13px;color:#8A93A3;">
+        ${list.length ? list.length + ' note' + (list.length > 1 ? 's' : '') : 'No notes yet'}
+      </span>
+      ${list.length ? `<a href="#" id="note-play-all" style="color:#E8B04B;font-size:13px;font-weight:700;text-decoration:none;">▶ PLAY ALL</a>` : ''}
     </div>
     ${list.map(n => `
       <div class="card" style="margin-bottom:8px;">
         <div style="display:flex;align-items:flex-start;gap:8px;">
-          <div style="flex:1;min-width:0;">
+          <button class="btn" data-play="${n.id}" title="Play"
+            style="width:auto;background:none;border:none;color:#E8B04B;font-size:18px;padding:2px 6px;">▶</button>
+          <!-- الضغط على الملاحظة يفتح نصّها للقراءة والتعديل، والتشغيل زرّ مستقلّ بجانبه -->
+          <div style="flex:1;min-width:0;cursor:pointer;" data-open="${n.id}">
             <div style="font-weight:700;">${esc(n.title || 'Note')}</div>
             <div style="font-size:12px;color:#8A93A3;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
               ${esc((n.text || '').slice(0, 120))}
             </div>
             <div style="font-size:12px;color:#E8B04B;margin-top:4px;">
-              ${(n.text || '').split(/\s+/).filter(Boolean).length} words · ${noteParts(n.text)} parts
+              ${(n.text || '').split(/\s+/).filter(Boolean).length} words · ${noteUnits(n.text, false).length} sentences
             </div>
           </div>
           <button class="btn" data-del="${n.id}"
             style="width:auto;background:none;border:1px solid #D96A5B;color:#D96A5B;padding:4px 10px;font-size:12px;">Delete</button>
+        </div>
+        <div class="hidden" data-editor="${n.id}" style="margin-top:8px;">
+          <textarea class="inp" data-edit="${n.id}" rows="10" style="resize:vertical;font-family:inherit;font-size:14px;line-height:1.8;">${esc(n.text || '')}</textarea>
+          <button class="btn" data-save="${n.id}" style="margin-top:6px;">Save changes</button>
         </div>
       </div>`).join('')}
   `;
@@ -23485,11 +23742,48 @@ function renderNotes() {
         }, 4000);
         return;
       }
+      // الملاحظة المحذوفة تغادر المشغّل فوراً — بقاؤها تُسمع بعد حذفها خلل بحق
+      if (notePlayer.id != null && String(notePlayer.id) === b.dataset.del) noteStop();
       notes = notes.filter(n => String(n.id) !== b.dataset.del);
       try { await notesPush(); } catch (e) { /* الحذف محلي على كل حال */ }
       renderNotes();
     };
   });
+
+  pane.querySelectorAll('[data-play]').forEach(b => {
+    b.onclick = e => { e.stopPropagation(); playNote(Number(b.dataset.play), 0); };
+  });
+
+  const all = document.getElementById('note-play-all');
+  if (all) all.onclick = e => {
+    e.preventDefault();
+    notePlayer.repeat = 2; // «شغّل الكل» يعني الانتقال للتالية بعد كل ملاحظة
+    playNote(list[0].id, 0);
+  };
+
+  // فتح النص للقراءة والتعديل — والتعديل ينعكس على الصوت لأن مفتاح المقطع نصّه
+  pane.querySelectorAll('[data-open]').forEach(d => {
+    d.onclick = () => {
+      const box = pane.querySelector(`[data-editor="${d.dataset.open}"]`);
+      if (box) box.classList.toggle('hidden');
+    };
+  });
+  pane.querySelectorAll('[data-save]').forEach(b => {
+    b.onclick = async () => {
+      const id = Number(b.dataset.save);
+      const ta = pane.querySelector(`[data-edit="${b.dataset.save}"]`);
+      const n = notes.find(x => x.id === id);
+      if (!n || !ta) return;
+      n.text = ta.value;
+      n.updatedAt = Date.now();
+      b.disabled = true; b.textContent = 'Saving…';
+      try { await notesPush(); } catch (e) {}
+      if (notePlayer.id === id) noteResplit();
+      renderNotes();
+    };
+  });
+
+  renderNotePlayer();
 }
 
 // ===== Card entry rendering (shared by Add preview & My Words) =====
