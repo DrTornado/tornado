@@ -23467,6 +23467,15 @@ let notePlayer = {
   speed: 1.0
 };
 
+/**
+ * البحث بالمعرّف نصّاً لا رقماً.
+ *
+ * المعرّف يُنشأ رقماً، ثم يسافر إلى المستودع ويعود عبر JSON، وقد يعود نصّاً.
+ * فالمقارنة الصارمة تفشل بصمت: يُضغط زرّ التشغيل فلا يُفتح المشغّل ولا تظهر
+ * رسالة — وهو ما وقع. وكود الحذف كان يقارن نصّاً أصلاً، فنجا وحده.
+ */
+function noteById(id) { return notes.find(x => String(x.id) === String(id)); }
+
 function noteEl() { return document.getElementById('note-player'); }
 
 function noteCurrentSentence() {
@@ -23488,7 +23497,7 @@ function renderNotePlayer() {
   if (!box) return;
   if (!notePlayer.id) { box.classList.add('hidden'); return; }
   box.classList.remove('hidden');
-  const n = notes.find(x => x.id === notePlayer.id);
+  const n = noteById(notePlayer.id);
   const total = notePlayer.units.length || 1;
   const say1 = notePlayer.say === 1;
   box.innerHTML = `
@@ -23550,7 +23559,7 @@ function renderNotePlayer() {
  * الأزرار لا يولّد صوتاً جديداً ولا يُظهر «يحمّل» من جديد.
  */
 function noteResplit() {
-  const n = notes.find(x => x.id === notePlayer.id);
+  const n = noteById(notePlayer.id);
   if (!n) return;
   const spoken = notePlayer.units[notePlayer.idx] || '';
   notePlayer.units = noteUnits(n.text, notePlayer.detailed && notePlayer.say > 1);
@@ -23586,7 +23595,7 @@ function noteJump(d) {
 }
 
 function playNote(id, fromIdx) {
-  const n = notes.find(x => x.id === id);
+  const n = noteById(id);
   if (!n) return;
   notePlayer.id = id;
   notePlayer.units = noteUnits(n.text, notePlayer.detailed && notePlayer.say > 1);
@@ -23620,9 +23629,9 @@ async function noteStep() {
       // انتهت الملاحظة
       if (notePlayer.repeat === 1) { notePlayer.idx = 0; continue; }
       if (notePlayer.repeat === 2) {
-        const at = notePlayer.order.indexOf(notePlayer.id);
+        const at = notePlayer.order.findIndex(x => String(x) === String(notePlayer.id));
         const nextId = notePlayer.order[(at + 1) % notePlayer.order.length];
-        const nx = notes.find(x => x.id === nextId);
+        const nx = noteById(nextId);
         if (nx) {
           notePlayer.id = nextId;
           notePlayer.units = noteUnits(nx.text, notePlayer.detailed && notePlayer.say > 1);
@@ -23783,7 +23792,7 @@ function renderNotes() {
   });
 
   pane.querySelectorAll('[data-play]').forEach(b => {
-    b.onclick = e => { e.stopPropagation(); playNote(Number(b.dataset.play), 0); };
+    b.onclick = e => { e.stopPropagation(); playNote(b.dataset.play, 0); };
   });
 
   const all = document.getElementById('note-play-all');
@@ -23802,15 +23811,15 @@ function renderNotes() {
   });
   pane.querySelectorAll('[data-save]').forEach(b => {
     b.onclick = async () => {
-      const id = Number(b.dataset.save);
+      const id = b.dataset.save;
       const ta = pane.querySelector(`[data-edit="${b.dataset.save}"]`);
-      const n = notes.find(x => x.id === id);
+      const n = noteById(id);
       if (!n || !ta) return;
       n.text = ta.value;
       n.updatedAt = Date.now();
       b.disabled = true; b.textContent = 'Saving…';
       try { await notesPush(); } catch (e) {}
-      if (notePlayer.id === id) noteResplit();
+      if (String(notePlayer.id) === String(id)) noteResplit();
       renderNotes();
     };
   });
@@ -25623,7 +25632,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 98;
+const BUILD = 99;
 
 function kokoroRefreshUi() {
   const sel = document.getElementById('kokoro-voice');
