@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T15:26:27.878Z",
+ "exportedAt": "2026-08-03T15:26:41.034Z",
  "words": [
   {
    "id": 1785185030316,
@@ -5103,24 +5103,19 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "Of two or more entities, to approach each other",
-     "ar": "من بين كيانين أو أكثر، الاقتراب من بعضهما البعض"
+     "pos": "adjective",
+     "en": "approaching each other at a point; convergent.",
+     "ar": "تقترب من بعضها البعض عند نقطة ؛ متقاربة."
     },
     {
      "pos": "verb",
-     "en": "Of a sequence, to have a limit",
-     "ar": "من تسلسل، أن يكون لها حد"
+     "en": "present participle and gerund of converge",
+     "ar": "الحاضر الفاعل و gerund من التقارب"
     },
     {
      "pos": "noun",
-     "en": "Convergence",
-     "ar": "التطابق"
-    },
-    {
-     "pos": "adjective",
-     "en": "Approaching each other at a point",
-     "ar": "الاقتراب من بعضهما البعض عند نقطة"
+     "en": "convergence",
+     "ar": "تجمع, التقاء, نقطة إلتقاء"
     }
    ],
    "inflections": [
@@ -5170,7 +5165,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -6295,13 +6290,8 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To grow plants, notably crops",
-     "ar": "لزراعة النباتات، ولا سيما المحاصيل"
-    },
-    {
-     "pos": "verb",
-     "en": "To nurture",
-     "ar": "لرعاية"
+     "en": "present participle and gerund of cultivate",
+     "ar": "تقديم الفاعلية وجيروند من زراعة"
     }
    ],
    "inflections": [
@@ -6331,7 +6321,7 @@
    "due": 0,
    "audioUS": "",
    "audioUK": "",
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -6380,8 +6370,8 @@
   {
    "id": 1784636175360,
    "word": "pairs",
-   "ipa": "/pɛəz/",
-   "arabicPron": "بيز",
+   "ipa": "/peəz/",
+   "arabicPron": "بيرز",
    "oxford": "3000",
    "cefr": "A1",
    "pos": [
@@ -6391,33 +6381,8 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "Two similar or identical things taken together",
-     "ar": "شيئان متشابهان أو متطابقان معًا"
-    },
-    {
-     "pos": "noun",
-     "en": "Two people in a relationship, partnership or friendship",
-     "ar": "شخصان في علاقة أو شراكة أو صداقة"
-    },
-    {
-     "pos": "verb",
-     "en": "To group into one or more sets of two",
-     "ar": "للتجميع في مجموعة واحدة أو أكثر من مجموعتين"
-    },
-    {
-     "pos": "verb",
-     "en": "To bring two (animals, notably dogs) together for mating",
-     "ar": "لجلب اثنين (الحيوانات، ولا سيما الكلاب) معا للتزاوج"
-    },
-    {
-     "pos": "verb",
-     "en": "To impair, to make worse",
-     "ar": "يضعف، ويزيد الأمر سوءًا"
-    },
-    {
-     "pos": "verb",
-     "en": "To become worse, to deteriorate",
-     "ar": ""
+     "en": "Synonym of pelmanism (“memory card game”).",
+     "ar": "مرادف ل pelmanism (\" لعبة بطاقة الذاكرة \")."
     }
    ],
    "inflections": [
@@ -6434,12 +6399,24 @@
    ],
    "synonyms": [
     {
-     "en": "pair of spectacles",
-     "ar": "زوج من النظارات"
+     "en": "pelmanism",
+     "ar": "البلمانية"
     },
     {
-     "en": "spectacles",
-     "ar": "نظارات"
+     "en": "span",
+     "ar": "شبر, مدي, امتداد, اتساع, زوج من الحصين"
+    },
+    {
+     "en": "yoke",
+     "ar": "فدان, نير, مقرن, عبودية, النير جزء من ثوب يطوق العنق"
+    },
+    {
+     "en": "mate",
+     "ar": "وكيل الربان"
+    },
+    {
+     "en": "brace",
+     "ar": "ثبت, زوج أثنان, ملفاف, مشبك, دعامة, الة طبية, حمالة, حاصرة, شجاعة, شىء مثير للنشاط"
     }
    ],
    "collocations": [
@@ -6474,11 +6451,11 @@
    "right": 0,
    "wrong": 0,
    "last": null,
-   "audioUS": "",
-   "audioUK": "",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "/pɛɹz/",
    "ipaUK": "/pɛəz/",
    "estCefr": "",
@@ -6854,28 +6831,13 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A piece of fabric attached to a boat and arranged such that it causes the wind to drive the boat along. The sail may be attached to the boat via a combination of mast…",
-     "ar": "قطعة من القماش متصلة بقارب ومرتبة بحيث تتسبب في دفع الرياح للقارب. يمكن ربط الشراع بالقارب عبر مزيج من الصاري والصاري والحبال"
+     "en": "(nautical, slang) The sailmaker on board ship.",
+     "ar": "صانع الشراع على متن السفينة."
     },
     {
      "pos": "noun",
-     "en": "The concept of a sail or sails, as if a substance",
-     "ar": "(بحري،لا يحصى) مفهوم الشراع أو الأشرعة، كما لو كانت مادة"
-    },
-    {
-     "pos": "verb",
-     "en": "To be impelled or driven forward by the action of wind upon sails, as a ship on water",
-     "ar": "أن يتم دفعه أو دفعه إلى الأمام بفعل الرياح على الأشرعة، كسفينة على الماء"
-    },
-    {
-     "pos": "verb",
-     "en": "To move through or on the water",
-     "ar": "التحرك عبر الماء أو فوقه"
-    },
-    {
-     "pos": "noun",
-     "en": "The sailmaker on board ship",
-     "ar": "صانع الشراع على متن السفينة"
+     "en": "The sailmaker on board ship.",
+     "ar": "صانع الشراع على متن السفينة."
     }
    ],
    "inflections": [
@@ -6925,7 +6887,7 @@
    "audioUK": "",
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUK": "",
    "estCefr": "",
    "freqLabel": "",
