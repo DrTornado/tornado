@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:29:02.091Z",
+ "exportedAt": "2026-08-03T09:29:17.249Z",
  "words": [
   {
    "id": 1785185030316,
@@ -5635,22 +5635,22 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A ravine or gorge, usually one with water running through.",
+     "en": "An open channel or trough used to direct or divert liquids, especially to carry materials (logs, mined material, etc) or people (as a water slide), especially (but not always) one where the walls are raised above the surrounding terrain rather than recessed like a ditch.",
      "ar": "وادٍ أو ممر ضيق، عادةً ما يمر عبره الماء."
     },
     {
      "pos": "noun",
-     "en": "An open channel or trough used to direct or divert liquids.",
+     "en": "A ravine or gorge, usually one with water running through.",
      "ar": "قناة مفتوحة أو حوض يستخدم لتوجيه أو تحويل السوائل."
     },
     {
      "pos": "verb",
-     "en": "To transport (logs of wood) by floating them along a water-filled channel or trough.",
+     "en": "(transitive) To transport (logs of wood) by floating them along a water-filled channel or trough.",
      "ar": "لنقل (جذوع الخشب) عن طريق تعويمها على طول قناة مملوءة بالماء أو حوض."
     },
     {
-     "pos": "noun",
-     "en": "An open channel or trough used to direct or divert liquids, especially to carry materials (logs, mined material, etc) or people (as a water slide), especially (but not always) one where the walls are raised above the surrounding terrain rather than recessed like a ditch.",
+     "pos": "verb",
+     "en": "To transport (logs of wood) by floating them along a water-filled channel or trough.",
      "ar": "قناة مفتوحة أو حوض يستخدم لتوجيه أو تحويل السوائل، خاصة لحمل المواد (جذوع الأشجار، المواد الملغومة، إلخ) أو الأشخاص (كشريحة مائية)، خاصة (ولكن ليس دائمًا) حيث يتم رفع الجدران فوق التضاريس المحيطة بدلاً من التجويف مثل الخندق."
     }
    ],
@@ -5692,8 +5692,9 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/flume-us.mp3",
-   "engineVersion": 2
+   "audioUS": "-us",
+   "engineVersion": 3,
+   "ipaUS": "/fluːm/"
   },
   {
    "id": 1784655998671,
@@ -5708,29 +5709,19 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "To operate a ranch; engage in ranching.",
-     "ar": "لتشغيل مزرعة ؛ الانخراط في تربية المواشي."
-    },
-    {
-     "pos": "verb",
-     "en": "To work on a ranch",
-     "ar": "للعمل في مزرعة"
-    },
-    {
      "pos": "noun",
      "en": "The business or activity of operating a ranch, of farming or raising livestock.",
-     "ar": "أعمال أو نشاط تشغيل مزرعة أو تربية الماشية."
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "A ranch.",
-     "ar": "أي مزرعة ؟"
+     "ar": ""
     },
     {
      "pos": "verb",
      "en": "present participle and gerund of ranch",
-     "ar": "تقديم نشاط وجيروند من مزرعة"
+     "ar": ""
     }
    ],
    "inflections": [
@@ -5757,11 +5748,11 @@
    ],
    "examples": [
     {
-     "en": "Formally the widow still ranches, but in fact she leaves all ranching to the foreman.",
+     "en": "Ranching is his way of life.",
      "ar": ""
     },
     {
-     "en": "Ranching is his way of life.",
+     "en": "At a later stage we may presume that other plants were found useful, such as the artificial fodder plants which began to be cultivated for cattle when the purely pastoral system of husbandry by nomad tribes came to an end, just as cattle ranchings will do in America at no distant date, it is said.",
      "ar": ""
     }
    ],
@@ -5773,7 +5764,7 @@
    "due": 0,
    "freqLabel": "Top 8,000 words",
    "estCefr": "B1",
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "id": 1784655199109,
@@ -5788,12 +5779,12 @@
    "meanings": [
     {
      "pos": "adjective",
-     "en": "Of or pertaining to a vocation.",
+     "en": "(of education) That provides a special skill rather than academic knowledge.",
      "ar": "أو تتعلق بمهنة."
     },
     {
      "pos": "adjective",
-     "en": "(of education) That provides a special skill rather than academic knowledge.",
+     "en": "Of or pertaining to a vocation.",
      "ar": "(التعليم) الذي يوفر مهارة خاصة بدلاً من المعرفة الأكاديمية."
     },
     {
@@ -5841,12 +5832,12 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 3
   },
   {
    "id": 1784654476272,
    "word": "laboratory",
-   "ipa": "/ləˈbɔɹətɹi/",
+   "ipa": "/ləˈbɔɹətɹe/",
    "arabicPron": "لابرتوري",
    "oxford": "3000",
    "cefr": "B1",
@@ -5923,10 +5914,10 @@
    "interval": 0,
    "due": 0,
    "ipaUS": "/ˈlæb(ə)ɹəˌtɔɹi/",
-   "ipaUK": "/ləˈbɒɹət(ə)ɹiː/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/l/lab/labor/laboratory__us_2.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/l/lab/labor/laboratory__gb_2.mp3",
-   "engineVersion": 2,
+   "ipaUK": "/ləˈbɒɹət(ə)ɹi/",
+   "audioUS": "-us",
+   "audioUK": "-uk",
+   "engineVersion": 3,
    "estCefr": "",
    "freqLabel": "",
    "audioGen": "",
@@ -5935,7 +5926,7 @@
   {
    "id": 1784653655818,
    "word": "bibliography",
-   "ipa": "/bɪbliɒɡɹəfi/",
+   "ipa": "/bɪbliˈɒɡɹəfi/",
    "arabicPron": "بيبليوقرفي",
    "oxford": "",
    "cefr": "",
@@ -6003,7 +5994,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 2,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -6028,12 +6019,17 @@
     {
      "pos": "noun",
      "en": "Protective eyewear set in a flexible frame to fit snugly against the face.",
-     "ar": "مجموعة نظارات واقية بإطار مرن لتناسب الوجه بشكل مريح."
+     "ar": ""
     },
     {
      "pos": "noun",
-     "en": "Blinds for shying horses.",
-     "ar": "ستائر للخيول الخجولة."
+     "en": "(loosely) Any safety glasses.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "(slang, loosely) Any glasses (spectacles).",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -6045,16 +6041,20 @@
    "derivatives": [],
    "synonyms": [
     {
+     "en": "blinders",
+     "ar": ""
+    },
+    {
      "en": "gawk",
-     "ar": "البله, الأخرق"
+     "ar": ""
     },
     {
      "en": "gape",
-     "ar": "تثاءب, فغر فاه, فتح فامه"
+     "ar": ""
     },
     {
      "en": "gawp",
-     "ar": "(الانجليزية البريطانية) فغر فاه"
+     "ar": ""
     }
    ],
    "collocations": [],
@@ -6075,8 +6075,8 @@
    "interval": 0,
    "due": 0,
    "ipaUS": "/ˈɡɑ.ɡəlz/",
-   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/goggles-us.mp3",
-   "engineVersion": 2
+   "audioUS": "-us",
+   "engineVersion": 3
   },
   {
    "id": 1784652215752,
