@@ -23260,6 +23260,7 @@ async function load() {
     try { const s = localStorage.getItem('auto-words'); if (s) words = JSON.parse(s); } catch(e2) {}
   }
   words = words.map(sanitizeCard); // تطهير أي بطاقات قديمة محفوظة قبل المنظف
+  dedupeWords(); // بطاقة مكرّرة تُدمج عند كل فتح، فلا تحتاج إصلاحاً يدوياً أبداً
   try {
     let t = null;
     if (window.storage) { const r2 = await window.storage.get('auto-tombstones'); if (r2 && r2.value) t = r2.value; }
@@ -24009,6 +24010,51 @@ async function upgradeAllWords(onProgress) {
 }
 
 // دمج قائمة بطاقات واردة (من ملف أو مزامنة) — مشترك بين الاستعادة اليدوية والتلقائية
+/*
+ * بطاقتان لكلمة واحدة — العطل الذي أراه المستخدم رقمين مختلفين.
+ *
+ * كان الكمبيوتر يعرض ١٢١ والجوال ١١٣، فبدت المزامنة معطّلة وثماني كلمات ضائعة.
+ * ولم تضع كلمة واحدة: الملف يحمل ١٢١ مدخلاً بـ١١٣ معرّفاً فريداً — ثمانٍ منها
+ * مكرّرة بنفس المعرّف ونفس الكلمة. الجوال يخزّنها في قاعدة بيانات مفتاحها
+ * المعرّف فتنطوي المكرّرة تلقائياً، والمتصفّح يعدّ طول مصفوفة فيعدّها مرتين.
+ *
+ * فالجوال كان مصيباً، والمتصفّح يعرض نفس الكلمة مرّتين.
+ *
+ * والدمج هنا لا يحذف: تفوز البطاقة الأغنى تفاصيل، ويُؤخذ أعلى تقدّم من
+ * الاثنتين — فمن راجع كلمة على جهاز لا يخسر مراجعته لأن نسخةً أخرى كانت أفقر.
+ */
+function mergeTwo(a, b) {
+  const winner = richness(b) > richness(a) ? { ...a, ...b, id: a.id } : { ...a };
+  winner.right = Math.max(a.right || 0, b.right || 0);
+  winner.wrong = Math.max(a.wrong || 0, b.wrong || 0);
+  winner.interval = Math.max(a.interval || 0, b.interval || 0);
+  winner.due = Math.max(a.due || 0, b.due || 0);
+  winner.last = a.last ?? b.last;
+  return winner;
+}
+
+/** يطوي المكرّرات بالمعرّف ثم بالكلمة، ويعيد كم طوى */
+function dedupeWords() {
+  const fold = keyOf => {
+    const seen = new Map();
+    const out = [];
+    words.forEach(w => {
+      if (!w) return;
+      const k = keyOf(w);
+      if (k == null || k === '') { out.push(w); return; }
+      const at = seen.get(k);
+      if (at === undefined) { seen.set(k, out.length); out.push(w); }
+      else out[at] = mergeTwo(out[at], w);
+    });
+    const folded = words.length - out.length;
+    words = out;
+    return folded;
+  };
+  const byId = fold(w => (w.id != null ? 'i' + w.id : null));
+  const byWord = fold(w => (w.word ? 'w' + String(w.word).toLowerCase() : null));
+  return byId + byWord;
+}
+
 function mergeIncoming(incoming) {
   let added = 0, updated = 0;
   incoming.forEach(incRaw => {
@@ -24058,6 +24104,8 @@ async function applyRestoredData(text, silent) {
 
   // ثم ندمج الكلمات الواردة، متجاهلين أي كلمة تطابق شاهد حذف (لا نعيد كلمة محذوفة عمداً)
   const r = mergeIncoming(incomingWords.filter(w => !tombIds.has(w && w.id)));
+  // ما وصل مكرّراً من جهاز آخر يُطوى هنا، فلا يُخزَّن التكرار ولا يُرفع
+  const folded = dedupeWords();
 
   await persist(); updateCount();
   syncDirty = false; setSyncBadge(); // استعدنا لتونا — لا داعي لتذكير النسخ الاحتياطي فوراً
@@ -24066,6 +24114,7 @@ async function applyRestoredData(text, silent) {
   if (r.added) parts.push(r.added + ' new');
   if (r.updated) parts.push(r.updated + ' updated');
   if (removedLocally) parts.push(removedLocally + ' removed (deleted elsewhere)');
+  if (folded) parts.push(folded + ' duplicate' + (folded > 1 ? 's' : '') + ' merged');
   if (!silent || parts.length) flash(`✅ ${silent ? 'Up to date' : 'Restore done'}${parts.length ? ': ' + parts.join(', ') : ''} — total ${words.length} words`);
 }
 async function doManualRestore() {
