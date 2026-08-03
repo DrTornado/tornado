@@ -25581,7 +25581,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 93;
+const BUILD = 94;
 
 function kokoroRefreshUi() {
   const sel = document.getElementById('kokoro-voice');
@@ -26178,13 +26178,24 @@ async function buildSegmentsAudio(segs, label) {
     pcmChunks.push(silenceBytes(fmt, seg.pause != null ? seg.pause : 450)); // الوقفة المحددة لدور هذا المقطع
     okCount++;
   }
-  if (!fmt || !okCount) return null; // لم ينجح ولا مقطع واحد — عندها فقط نعتبرها فشلاً كاملاً
+  if (!fmt || !okCount) { lastBuildReason = 'no segment built (' + segs.length + ' tried, ' + skipped + ' skipped)'; return null; }
+  if (skipped) lastBuildReason = skipped + ' of ' + segs.length + ' segments skipped';
   if (!silentBuild) piperStatus('');
   return buildWav(fmt, pcmChunks);
 }
 // يبني صوت بطاقة واحدة (مع تخزين مؤقت) — لا يشغّل شيئاً، فقط يعيد ملف WAV جاهزاً
+/**
+ * آخر سبب تعذّر فيه بناء صوت بطاقة.
+ *
+ * السقوط كان صامتاً في ثلاث طبقات متتالية: البطاقة المتواصلة تسقط إلى النطق
+ * جملةً بجملة، وذاك يسقط إلى محرّك النظام. فيسمع المستخدم صوتاً آلياً بينما
+ * زرّ الاختبار يعطيه صوتاً بشرياً في الدقيقة نفسها، ولا شيء يفسّر التناقض.
+ */
+let lastBuildReason = '';
+
 async function buildCardAudio(card) {
-  if (!neuralReady()) return null;
+  lastBuildReason = '';
+  if (!neuralReady()) { lastBuildReason = 'no neural engine'; return null; }
   const key = cacheKey(card);
   if (AUDIO_CACHE.has(key)) return AUDIO_CACHE.get(key); // موجود في ذاكرة الجلسة؟ فوري
   const stored = await ADB.get(key); // موجود في التخزين الدائم؟ فوري أيضاً بلا أي توليد
@@ -26193,7 +26204,7 @@ async function buildCardAudio(card) {
   // العربية مستبعدة من الصوت بناءً على طلبك: النطق الناتج غير مقبول، والترجمة تبقى كاملة على الشاشة وفي التصدير النصي
   // العربية لا تُدمج في الملف المتواصل (صوت النظام لا يُنتج ملفاً)، لكنها تُنطق في وضع الكلمة المفردة
   const segs = mergeSegments(all.filter(s => String(s.lang || '').slice(0,2).toLowerCase() !== 'ar'));
-  if (!segs.length) return null;
+  if (!segs.length) { lastBuildReason = 'card has no speakable segments'; return null; }
   const wav = await buildSegmentsAudio(segs, `"${card.word}"`);
   if (wav) {
     AUDIO_CACHE.set(key, wav);
@@ -26233,6 +26244,14 @@ async function playCardGapless(card) {
 }
 async function playTrack(card) {
   if (await playCardGapless(card)) return; // نجح البناء المتواصل — انتهينا، وهذا المسار يعمل مع إطفاء الشاشة
+  /*
+   * السقوط يُعلن سببه.
+   *
+   * كان هذا السطر يسقط بصمت إلى النطق جملةً بجملة، وذاك يسقط بدوره إلى محرّك
+   * النظام. فيسمع المستخدم صوتاً آلياً بينما زرّ الاختبار يعطيه صوتاً بشرياً
+   * في الدقيقة نفسها — ولا شيء يفسّر التناقض. وقد وقع هذا حرفياً.
+   */
+  kokoroStatus('⚠️ Card audio unavailable (' + (lastBuildReason || 'unknown') + ') — falling back');
   await playTrackSegmented(card); // تعذّر (مثلاً صوت غير متاح بعد) — نسقط للطريقة القديمة جملة بجملة كما كانت تماماً
 }
 async function playTrackSegmented(card) {
