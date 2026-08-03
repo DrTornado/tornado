@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T09:26:40.231Z",
+ "exportedAt": "2026-08-03T09:26:50.466Z",
  "words": [
   {
    "id": 1785185030316,
@@ -1362,12 +1362,17 @@
     {
      "pos": "noun",
      "en": "A person whose occupation specializes in the science of physics, especially at a professional level.",
-     "ar": "الشخص الذي تتخصص مهنته في علم الفيزياء، خاصة على المستوى المهني."
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "(archaic) A believer in the theory that the fundamental phenomena of life are to be explained upon purely chemical and physical principles (opposed to vitalist).",
+     "ar": ""
     },
     {
      "pos": "noun",
      "en": "A believer in the theory that the fundamental phenomena of life are to be explained upon purely chemical and physical principles (opposed to vitalist).",
-     "ar": "مؤمن بالنظرية القائلة بأن الظواهر الأساسية للحياة يجب أن تفسر على مبادئ كيميائية وفيزيائية بحتة (معارضة للحيوية)."
+     "ar": ""
     }
    ],
    "inflections": [
@@ -1418,11 +1423,11 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "ipaUS": "/ˈfɪz.ɪ.sɪst/",
-   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/physicist-us.mp3",
+   "ipaUS": "/ˈfɪzɪsɪst/",
+   "audioUS": "-us",
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 2,
+   "engineVersion": 3,
    "ipaUK": "",
    "audioUK": "",
    "audioGen": "",
@@ -1441,7 +1446,7 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "The quality or skill of giving an engaging or compelling performance",
+     "en": "The quality or skill of giving an engaging or compelling performance; a stage presence.",
      "ar": ""
     }
    ],
@@ -1473,7 +1478,7 @@
    "examples": [
     {
      "en": "The act was clean and well-rehearsed, but the performers lacked the showmanship that would have made it great.",
-     "ar": "كان العرض نظيفًا ومدروسًا جيدًا، لكن فناني الأداء افتقروا إلى البراعة التي كانت ستجعله رائعًا."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -1483,7 +1488,7 @@
    "interval": 0,
    "due": 0,
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/showmanship-us.mp3",
-   "engineVersion": 13,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -1505,18 +1510,8 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "The state of being tranquil",
-     "ar": "حالة الهدوء"
-    },
-    {
-     "pos": "noun",
-     "en": "The absence of disturbance",
-     "ar": "غياب الاضطراب"
-    },
-    {
-     "pos": "noun",
-     "en": "American standard spelling of tranquillity",
-     "ar": "التهجئة القياسية الأمريكية للهدوء"
+     "en": "American standard spelling of tranquillity.",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -1580,7 +1575,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 13,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -1592,29 +1587,37 @@
   },
   {
    "id": 1784803884474,
-   "word": "potions",
+   "word": "potion",
    "ipa": "/poːʃən/",
    "arabicPron": "بوشن",
    "oxford": "",
    "cefr": "",
    "pos": [
-    "noun"
+    "noun",
+    "verb"
    ],
    "meanings": [
     {
      "pos": "noun",
-     "en": "A small portion or dose of a liquid which is medicinal, poisonous, or magical",
-     "ar": "جزء صغير أو جرعة صغيرة من سائل طبي أو سام أو سحري"
+     "en": "A small portion or dose of a liquid which is medicinal, poisonous, or magical.",
+     "ar": ""
     },
     {
      "pos": "verb",
-     "en": "To drug (someone",
-     "ar": "لتخدير (شخص ما)"
+     "en": "(transitive, obsolete) To drug (someone).",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "To drug (someone).",
+     "ar": ""
     }
    ],
    "inflections": [
     "potion",
-    "potions"
+    "potions",
+    "potioned",
+    "potioning"
    ],
    "derivatives": [],
    "synonyms": [
@@ -1623,11 +1626,28 @@
      "ar": ""
     }
    ],
-   "collocations": [],
+   "collocations": [
+    {
+     "en": "love potion",
+     "ar": ""
+    },
+    {
+     "en": "magic potion",
+     "ar": ""
+    },
+    {
+     "en": "sleeping potion",
+     "ar": ""
+    },
+    {
+     "en": "bitter potion",
+     "ar": ""
+    }
+   ],
    "examples": [
     {
      "en": "He hoped to win the princess's heart by mixing the love potion the witch gave him into her drink.",
-     "ar": "كان يأمل في الفوز بقلب الأميرة عن طريق خلط جرعة الحب التي قدمتها له الساحرة في شرابها."
+     "ar": ""
     }
    ],
    "differences": [],
@@ -1638,11 +1658,11 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "B2",
-   "engineVersion": 13,
+   "engineVersion": 3,
    "ipaUS": "/ˈpoʊ.ʃən/",
    "ipaUK": "/ˈpəʊ.ʃən/",
-   "audioUS": "",
-   "audioUK": "",
+   "audioUS": "-us",
+   "audioUK": "-uk",
    "audioGen": "",
    "favorite": "false"
   },
