@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-03T15:34:51.253Z",
+ "exportedAt": "2026-08-03T15:35:00.390Z",
  "words": [
   {
    "id": 1785185030316,
@@ -7075,7 +7075,7 @@
     {
      "pos": "noun",
      "en": "A soft-bodied invertebrate of the phylum Mollusca, typically with a hard shell of one or more pieces.",
-     "ar": "اللافقاريات رخوة الجسم من شعبة الرخويات، وعادة مع قشرة صلبة من قطعة واحدة أو أكثر."
+     "ar": "الرخوي حيوان متعلق بالرخويات, الرخويات كالمحار"
     },
     {
      "pos": "noun",
@@ -7140,7 +7140,7 @@
    "examples": [
     {
      "en": "bivalve molluscs",
-     "ar": "رخويات ثنائية الصدفة"
+     "ar": ""
     }
    ],
    "differences": [],
