@@ -1,8 +1,91 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-04T10:40:39.973Z",
+ "exportedAt": "2026-08-04T10:41:15.658Z",
  "words": [
+  {
+   "id": 1785840072035,
+   "word": "nauseate",
+   "ipa": "",
+   "arabicPron": "نوزييت",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "verb"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "(transitive) To cause nausea in.",
+     "ar": "(متعدية) للتسبب في الغثيان."
+    },
+    {
+     "pos": "verb",
+     "en": "(transitive) To disgust.",
+     "ar": "(متعدية) للاشمئزاز."
+    },
+    {
+     "pos": "verb",
+     "en": "(intransitive) To become squeamish; to feel nausea; to turn away with disgust.",
+     "ar": "(متعنت) أن يصبح شديد الحساسية ؛ أن يشعر بالغثيان ؛ أن يبتعد بالاشمئزاز."
+    },
+    {
+     "pos": "verb",
+     "en": "To cause nausea in.",
+     "ar": "للتسبب في الغثيان."
+    },
+    {
+     "pos": "verb",
+     "en": "To disgust.",
+     "ar": "للاشمئزاز."
+    },
+    {
+     "pos": "verb",
+     "en": "To become squeamish; to feel nausea; to turn away with disgust.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "nauseate",
+    "nauseates",
+    "nauseated",
+    "nauseating"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "revolt",
+     "ar": "ثورة, عصيان, تمرد"
+    },
+    {
+     "en": "disgust",
+     "ar": "اشمئزاز"
+    },
+    {
+     "en": "churn up",
+     "ar": "تحرّك بقوة، حرّك بشدة، أثار بشدة ؛ دمّر الطّبقة السّطحيّة، أفسَدَ أو أتلف سطحَ الشيء"
+    },
+    {
+     "en": "sicken",
+     "ar": "مرض, غثى عليه, سئم, اشمأز, سقم"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "1753, J. Wall, A letter from J. Wall M.D. to Edward Wilmot M.D.F.R.S. and Physician to His Majesty, concerning the Use of the Peruvian Bark in the Small Pox, Proceedings of the Royal Society of London, 1753, p. 594,\nIn Children and delicate Persons, who are apt to nauseate this Remedy, I have with Success given it mix’d up with thin Chocolate; which, if sufficiently sweetened, disguises it better than any thing I know of.",
+     "ar": "1753، J. Wall، رسالة من J. Wall M.D. إلى Edward Wilmot M.D.F.R.S. والطبيب إلى جلالته، فيما يتعلق باستخدام لحاء بيرو في الجدري الصغير، وقائع الجمعية الملكية في لندن، 1753، ص. 594، في الأطفال والأشخاص الحساسين، الذين يميلون إلى غثيان هذا العلاج، قمت بخلطه بنجاح مع الشوكولاتة الرقيقة ؛ والتي، إذا كانت محلاة بما فيه الكفاية، تخفيها بشكل أفضل من أي شيء أعرفه."
+    },
+    {
+     "en": "1796, Frances Burney, Camilla, London: T. Payne, T. Cadell & W. Davies, Volume 2, Book 3, Chapter 7, p. 151,\nWhat a prospect for her, then, with our present race of young men! their frivolous fickleness nauseates whatever they can reach; they have a weak shame of asserting, or even listening to what is right, and a shallow pride in professing and performing what is wrong.",
+     "ar": "1796, Frances Burney, Camilla, London: T. Payne, T. Cadell & W. Davies, Volume 2, Book 3, Chapter 7, p. 151, يا له من احتمال لها، إذن، مع جنسنا الحالي من الشباب! تقلبهم التافه يغثيان كل ما يمكنهم الوصول إليه ؛ لديهم عار ضعيف من التأكيد، أو حتى الاستماع إلى ما هو صحيح، وفخر ضحل في المجاهرة وأداء ما هو خطأ."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1785840034981,
    "word": "cemetery",
