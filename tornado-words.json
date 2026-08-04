@@ -1,8 +1,43 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-04T08:20:30.071Z",
+ "exportedAt": "2026-08-04T08:24:28.747Z",
  "words": [
+  {
+   "id": 1785831865023,
+   "word": "coursework",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "(education) An assignment, project or task that a student is required to complete as part of a particular course, which is then assessed and counts towards the grade given.",
+     "ar": "(التعليم) مهمة أو مشروع أو مهمة يُطلب من الطالب إكمالها كجزء من دورة معينة، والتي يتم تقييمها بعد ذلك وتحسب ضمن الدرجة المعطاة."
+    },
+    {
+     "pos": "noun",
+     "en": "An assignment, project or task that a student is required to complete as part of a particular course, which is then assessed and counts towards the grade given.",
+     "ar": "واجب أو مشروع أو مهمة يُطلب من الطالب إكمالها كجزء من دورة معينة، والتي يتم تقييمها بعد ذلك ويتم احتسابها ضمن الدرجة المعطاة."
+    }
+   ],
+   "inflections": [
+    "coursework",
+    "courseworks"
+   ],
+   "derivatives": [],
+   "synonyms": [],
+   "collocations": [],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1785831623011,
    "word": "articulation",
