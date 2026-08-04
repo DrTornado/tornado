@@ -25676,7 +25676,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 109;
+const BUILD = 110;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.
@@ -26975,13 +26975,31 @@ async function prepareAudioInBackground() {
   if (audioPrepActive || !neuralReady() || !words.length) return;
   audioPrepActive = true; audioPrepAbort = false;
   const statusEl = document.getElementById('audio-prep-status');
+  /*
+   * يتقدّم في المكتبة، لا يدور على أوّل بطاقتين.
+   *
+   * كان يأخذ `words.slice(0, 2)` دائماً، فلا يتجاوزهما مهما فتح المستخدم
+   * التطبيق — والمكتبة لا تمتلئ أبداً. وأسوأ: بناء البطاقة يستغرق دقائق،
+   * فتُغلق الصفحة قبل أن يكتمل فيبدأ من جديد في الفتحة التالية، ويبقى
+   * العدّاد عالقاً على «١ من ٢» إلى الأبد.
+   *
+   * الآن يتخطّى الجاهز ويبني بطاقتين **غير جاهزتين** في كل فتحة — فتكتمل
+   * المكتبة على مدى الأيام، وكل فتحة تضيف شيئاً حقيقياً.
+   */
   let done = 0, made = 0;
-  for (const w of words.slice(0, AUDIO_PREP_AHEAD)) {
+  const pending = [];
+  for (const w of words) {
+    const k = cacheKey(w);
+    if (AUDIO_CACHE.has(k) || await ADB.get(k)) continue;
+    pending.push(w);
+    if (pending.length >= AUDIO_PREP_AHEAD) break;
+  }
+  const target = pending.length;
+  if (statusEl && !target) statusEl.textContent = '';
+  for (const w of pending) {
     if (audioPrepAbort || !neuralReady()) break;
     done++;
-    const key = cacheKey(w);
-    if (AUDIO_CACHE.has(key) || await ADB.get(key)) continue; // جاهز سلفاً
-    if (statusEl) statusEl.textContent = `🎧 Preparing audio in background… ${done}/${Math.min(words.length, AUDIO_PREP_AHEAD)}`;
+    if (statusEl) statusEl.textContent = `🎧 Preparing audio in background… ${done}/${target}`;
     silentBuild = true;
     try { if (await buildCardAudio(w)) made++; } catch(e) {}
     silentBuild = false;
