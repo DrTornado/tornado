@@ -1,8 +1,117 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-04T10:37:27.891Z",
+ "exportedAt": "2026-08-04T10:40:03.281Z",
  "words": [
+  {
+   "id": 1785839999337,
+   "word": "sleek",
+   "ipa": "/sliːk/",
+   "arabicPron": "سليك",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "adjective",
+    "adverb",
+    "verb",
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "adjective",
+     "en": "Having an even, smooth surface; smooth",
+     "ar": "وجود سطح مستوٍ وسلس ؛ أملس"
+    },
+    {
+     "pos": "adjective",
+     "en": "Glossy.",
+     "ar": "لامعه"
+    },
+    {
+     "pos": "adjective",
+     "en": "Slim and streamlined; not plump, thick, or stocky.",
+     "ar": "نحيف وانسيابي ؛ غير ممتلئ الجسم أو سميك أو ممتلئ الجسم."
+    },
+    {
+     "pos": "adverb",
+     "en": "(dated, colloquial) With ease and dexterity.",
+     "ar": "(مؤرخة، عامية) بكل سهولة وبراعة."
+    },
+    {
+     "pos": "verb",
+     "en": "(transitive) To make smooth or glossy; to polish.",
+     "ar": "(متعدية) لجعلها ناعمة أو لامعة ؛ لتلميع."
+    },
+    {
+     "pos": "verb",
+     "en": "(intransitive, dated) To glide.",
+     "ar": ""
+    },
+    {
+     "pos": "verb",
+     "en": "(transitive, dated) To calm or soothe.",
+     "ar": ""
+    },
+    {
+     "pos": "noun",
+     "en": "That which makes smooth; varnish.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "sleek",
+    "sleeks",
+    "sleeked",
+    "sleeking"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "frictionless",
+     "ar": "بدون احتكاك, بلا احتكاك"
+    },
+    {
+     "en": "silky",
+     "ar": "حريري, ناعم, عذب, حلو"
+    },
+    {
+     "en": "downy",
+     "ar": "زغبي, أملس, ناعم"
+    },
+    {
+     "en": "even",
+     "ar": "حتى ألاكثر, متساو, على مستوى كذا, عادل"
+    },
+    {
+     "en": "flat",
+     "ar": "منبسط"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "sleek black",
+     "ar": "أسود أنيق"
+    },
+    {
+     "en": "sleek head",
+     "ar": "رأس أنيق"
+    },
+    {
+     "en": "sleek hair",
+     "ar": "شعر أنيق"
+    }
+   ],
+   "examples": [
+    {
+     "en": "sleek hair",
+     "ar": "شعر أنيق"
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1785839843999,
    "word": "unstoppable",
