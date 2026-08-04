@@ -24545,7 +24545,13 @@ function scheduleBackup() {
   clearTimeout(autoPushTimer);
   autoPushTimer = setTimeout(async () => {
     if (syncing) return; // لا نتعارض مع مزامنة يدوية جارية — ستُحفظ التغييرات معها على أي حال
-    try { await doManualBackup(true); } catch(e) {} // دفع صامت: بلا أي رسالة ما لم يفشل بصمت أيضاً
+    /*
+     * التعديل يزامن في الاتجاهين لا يرفع فقط.
+     *
+     * الرفع وحده يوصل تعديلي إلى المستودع ولا يجلب ما فعله الجهاز الآخر في
+     * نفس الدقيقة — فأبقى أنا محدَّثاً عنده وهو قديم عندي.
+     */
+    try { await autoSyncOnStartup(); } catch(e) {}
   }, 2500); // ننتظر توقف التعديلات المتتالية قليلاً لتجميعها بدفعة واحدة بدل حفظ متكرر لكل حرف
 }
 
@@ -25644,7 +25650,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 103;
+const BUILD = 104;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.
@@ -26742,7 +26748,26 @@ function releaseWakeLock() {
 document.addEventListener('visibilitychange', () => {
   // عند الرجوع للصفحة أثناء التشغيل نعيد طلب القفل لأنه يتحرر تلقائياً عند مغادرتها
   if (document.visibilityState === 'visible' && playing) acquireWakeLock();
+  /*
+   * الرجوع إلى التبويب يعني «أرِني الجديد».
+   *
+   * المزامنة عند الفتح وحدها لا تكفي لمن يبقي كروم والجوال مفتوحين معاً: يضيف
+   * كلمة على جواله، يعود إلى التبويب، فلا يجدها — والتبويب لم «يُفتح» فلم
+   * يزامن. فيظنّ المزامنة معطّلة وهي لم تُستدعَ أصلاً.
+   */
+  if (document.visibilityState === 'visible') autoSyncOnStartup();
 });
+
+/*
+ * مزامنة دورية ما دام التبويب ظاهراً.
+ *
+ * لمن يترك الجهازين مفتوحين جنباً إلى جنب: التعديل على أحدهما يظهر على الآخر
+ * خلال دقيقة بلا لمس شيء. ولا تعمل والتبويب مخفيّ — لا معنى لاستهلاك شبكة
+ * وبطارية لصفحة لا يراها أحد.
+ */
+setInterval(() => {
+  if (document.visibilityState === 'visible' && !syncing) autoSyncOnStartup();
+}, 60000);
 
 function renderAudio() {
   const pane = document.getElementById('pane-audio');
@@ -26969,6 +26994,7 @@ function syncFingerprint(wordsArr, tombsArr) {
   return h.toString(36) + '-' + norm.length;
 }
 
+let autoSyncBusy = false;
 async function autoSyncOnStartup() {
   /*
    * المزامنة عند الفتح تسير في الاتجاهين، لا في اتجاه واحد.
@@ -26979,7 +27005,20 @@ async function autoSyncOnStartup() {
    *
    * نسحب أولاً لنكون على أحدث نسخة، ثم نرفع إن كان عندنا ما ليس عندها.
    */
+  if (autoSyncBusy || syncing) return;   // لا نتراكب مع مزامنة جارية
   if (ghConf()) {
+    /*
+     * الزرّ يدور أثناء المزامنة التلقائية أيضاً.
+     *
+     * كانت تجري بصمت تامّ، فلا يعرف المستخدم أحدثت أم لا — ويسأل «هل زامن؟»
+     * ولا شيء على الشاشة يجيبه. ودورانُ الزرّ جوابٌ بلا كلمات: يدور فيعلم أنها
+     * تعمل الآن، ويسكن فيعلم أنها انتهت.
+     */
+    autoSyncBusy = true;
+    const btn = document.getElementById('top-sync-btn');
+    const orig = btn ? btn.textContent : '';
+    if (btn) btn.textContent = '🔄 Syncing…';
+    try {
     // الملاحظات تُسحب مع الكلمات في نفس الفتحة — إعداد واحد لمحتويين
     try { await notesPull(); } catch(e) { /* لا ملف بعد أو انقطاع — صمت */ }
 
@@ -27003,6 +27042,13 @@ async function autoSyncOnStartup() {
       }
       await notesPush();
     } catch(e) { /* الرفع التلقائي لا يقاطع الإقلاع؛ زرّ Sync يبلّغ بالتفصيل */ }
+
+    // الإثراء يتبع كل مزامنة — المعاني الناقصة تُملأ بلا ضغطة
+    backgroundUpgrade();
+    } finally {
+      autoSyncBusy = false;
+      if (btn) btn.textContent = orig || '🔄 Sync';
+    }
     return;
   }
   if (fsSupported) {
