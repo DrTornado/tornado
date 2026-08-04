@@ -24594,7 +24594,19 @@ function subFetch(url, ms) {
 async function trAR(text) {
   // ترجمة مجانية للعربية — أفضل جهد: الفشل يرجع نصاً فارغاً بلا كسر
   try {
+    /*
+     * الحصّة تُحترم: ٤٢٩ يعني «كفى اليوم».
+     *
+     * الخدمة مجانية بحصّة يومية، وحين تنفد تردّ ٤٢٩ لكل طلب. وكان الإثراء
+     * يواصل الطلب لكل كلمة فتمتلئ الشاشة بمئات أسطر الفشل الحمراء بلا فائدة
+     * واحدة — رآها المستخدم وظنّ التطبيق معطوباً، وهو محقّ في أن يظنّ.
+     *
+     * فنرفع علماً يوقف بقيّة الجولة، ويُرفع عند إعادة تحميل الصفحة — أي غداً
+     * حين تتجدّد الحصّة، أو حين يفتحها بعد ساعات.
+     */
+    if (translateQuotaHit) return '';
     const r = await subFetch('https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=en|ar', 8000);
+    if (r.status === 429) { translateQuotaHit = true; bgUpgradeAbort = true; return ''; }
     if (!r.ok) return '';
     const d = await r.json();
     const t = (d && d.responseData && d.responseData.translatedText) || '';
@@ -25650,7 +25662,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 106;
+const BUILD = 107;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.
@@ -26985,6 +26997,8 @@ function syncFingerprint(wordsArr, tombsArr) {
 }
 
 let autoSyncBusy = false;
+/** نفدت حصّة المترجم اليوم — يُرفع بإعادة تحميل الصفحة */
+let translateQuotaHit = false;
 async function autoSyncOnStartup() {
   /*
    * المزامنة عند الفتح تسير في الاتجاهين، لا في اتجاه واحد.

@@ -61,9 +61,19 @@ object SyncCoordinator {
                     c.noteSync.repo = repo
                     if (c.noteSync.canPull) c.noteSync.sync(push = c.noteSync.canPush)
                 }
-                runCatching {
-                    c.audioSync.repo = repo
-                    c.audioSync.sync()
+                /*
+                 * الصوت خارج القفل — لا ينتظره الزرّ.
+                 *
+                 * مزامنة الصوت تنزّل ملفات بالميغابايتات فتستغرق دقائق، ووضعُها
+                 * داخل القفل جعل الزرّ يدور ثلاث دقائق بعد فتحة واحدة. والمستخدم
+                 * ينتظر كلماته لا أصواته: الكلمات تصل في ثوانٍ، والصوت يكمل
+                 * بصمت بعدها.
+                 */
+                c.appScope.launch {
+                    runCatching {
+                        c.audioSync.repo = repo
+                        c.audioSync.sync()
+                    }
                 }
 
                 // الإثراء يتبع كل مزامنة — المعاني الناقصة تُملأ بلا ضغطة
