@@ -24315,6 +24315,8 @@ async function backgroundUpgrade() {
   bgUpgradeActive = false;
   if (statusEl) statusEl.textContent = '';
   if (tab === 'list') renderList();
+  // ما جمعته الجولة يُرفع الآن دفعةً واحدة، لا كلمةً كلمة
+  if (syncDirty) scheduleBackup();
 }
 document.getElementById('top-sync-btn').onclick = doSync;
 document.getElementById('expand-all-btn').onclick = () => {
@@ -24541,6 +24543,18 @@ function hasAutoSaveTarget() {
 let autoPushTimer = null;
 function scheduleBackup() {
   syncDirty = true; setSyncBadge();
+  /*
+   * الإثراء لا يزامن كلمةً كلمة.
+   *
+   * كل بطاقة يحسّنها الإثراء تُحفَظ، والحفظ يجدول مزامنة، والمزامنة تطلق
+   * الإثراء — حلقة تدور على نفسها، ومعها رفعة كاملة إلى GitHub لكل كلمة.
+   * فيبقى السطران الأخضر والأزرق يعملان بلا توقّف، وتُرهق الشبكة بعشرات
+   * الرفعات لعملٍ واحد.
+   *
+   * فنؤجّل: الشارة تحمر لتقول «هناك ما يُرفع»، والمزامنة تجري مرّة واحدة
+   * حين تنتهي الجولة كلها.
+   */
+  if (bgUpgradeActive) return;
   if (!hasAutoSaveTarget()) return; // لا وجهة حفظ صامتة متاحة (مثلاً جوال بلا Integration) — الشارة الحمراء تبقى التذكير الوحيد الممكن
   clearTimeout(autoPushTimer);
   autoPushTimer = setTimeout(async () => {
@@ -25662,7 +25676,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 108;
+const BUILD = 109;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.

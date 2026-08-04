@@ -57,9 +57,21 @@ object SyncCoordinator {
                     if (c.sync.canPull) c.sync.sync(push = c.sync.canPush) else null
                 }.getOrNull()
 
-                runCatching {
-                    c.noteSync.repo = repo
-                    if (c.noteSync.canPull) c.noteSync.sync(push = c.noteSync.canPush)
+                /*
+                 * الملاحظات خارج القفل أيضاً.
+                 *
+                 * نصوصها كبيرة وتنزل كاملةً في كل جولة، فأضافت ثوانيَ إلى زمن
+                 * الزرّ — قاسه المستخدم اثنتين وعشرين ثانية. وهي لا تتغيّر كل
+                 * دقيقة، فلا معنى لأن ينتظرها من يريد كلماته.
+                 *
+                 * ولا يبقى داخل القفل إلا مزامنة الكلمات: هي وحدها ما ينتظره
+                 * المستخدم، وهي ثوانٍ معدودة.
+                 */
+                c.appScope.launch {
+                    runCatching {
+                        c.noteSync.repo = repo
+                        if (c.noteSync.canPull) c.noteSync.sync(push = c.noteSync.canPush)
+                    }
                 }
                 /*
                  * الصوت خارج القفل — لا ينتظره الزرّ.
