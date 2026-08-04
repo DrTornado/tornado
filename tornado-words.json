@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-04T13:46:31.933Z",
+ "exportedAt": "2026-08-04T13:46:43.732Z",
  "words": [
   {
    "id": 1785840072035,
@@ -4039,13 +4039,8 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To proclaim or announce an event",
-     "ar": "لإعلان أو الإعلان عن حدث"
-    },
-    {
-     "pos": "verb",
-     "en": "To greet something with excitement",
-     "ar": "(عادة ما يكون سلبيًا) لتحية شيء ما بإثارة"
+     "en": "simple past and past participle of herald",
+     "ar": "بسيطة الماضي والماضي الفاعل من هيرالد"
     }
    ],
    "inflections": [
@@ -4088,7 +4083,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "audioUS": "",
@@ -4885,7 +4880,7 @@
   {
    "id": 1784741976331,
    "word": "strung",
-   "ipa": "/ˈstɹʌŋ/",
+   "ipa": "/stɹʌŋ/",
    "arabicPron": "سترانق",
    "oxford": "",
    "cefr": "",
@@ -4895,13 +4890,8 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To put (items) on a string",
-     "ar": "لوضع (عناصر) على سلسلة"
-    },
-    {
-     "pos": "verb",
-     "en": "To put strings on (something",
-     "ar": "لوضع الخيوط على (شيء ما)"
+     "en": "simple past and past participle of string",
+     "ar": "مشاركة بسيطة في الماضي والماضي من السلسلة"
     }
    ],
    "inflections": [
@@ -4959,7 +4949,7 @@
    "audioUK": "https://api.dictionaryapi.dev/media/pronunciations/en/strung-uk.mp3",
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 21,
+   "engineVersion": 3,
    "ipaUS": "",
    "audioUS": "",
    "audioGen": "",
@@ -4979,18 +4969,13 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To remove tangles or knots from",
-     "ar": "لإزالة التشابكات أو العقد"
-    },
-    {
-     "pos": "verb",
-     "en": "To remove confusion or mystery from",
-     "ar": "(بالتبعية) لإزالة الارتباك أو الغموض من"
+     "en": "present participle and gerund of untangle",
+     "ar": "الحاضر الفاعل والمرتفع من فك التشابك"
     },
     {
      "pos": "noun",
-     "en": "The process by which something is untangled",
-     "ar": "العملية التي يتم من خلالها فك تشابك شيء ما"
+     "en": "The process by which something is untangled.",
+     "ar": "العملية التي يتم من خلالها فك تشابك شيء ما."
     }
    ],
    "inflections": [
@@ -5035,7 +5020,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
