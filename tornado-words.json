@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-04T13:13:08.743Z",
+ "exportedAt": "2026-08-04T13:13:12.625Z",
  "words": [
   {
    "id": 1785840072035,
@@ -3782,13 +3782,8 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To come from a source",
-     "ar": "أن يأتي من مصدر"
-    },
-    {
-     "pos": "verb",
-     "en": "To send or give out",
-     "ar": "لإرسال أو إعطاء"
+     "en": "present participle and gerund of emanate",
+     "ar": "يقدم الفاعل والمرشد من المنبثق"
     }
    ],
    "inflections": [
@@ -3833,7 +3828,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
