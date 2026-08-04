@@ -1,8 +1,47 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-04T08:58:47.628Z",
+ "exportedAt": "2026-08-04T10:36:18.679Z",
  "words": [
+  {
+   "id": 1785839774675,
+   "word": "deviousness",
+   "ipa": "",
+   "arabicPron": "",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "The characteristic of being devious; sneakiness; underhandedness.",
+     "ar": "سمة من سمات المراوغة ؛ التسلل ؛ الخداع."
+    }
+   ],
+   "inflections": [
+    "deviousness",
+    "deviousnesses"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "obliqueness",
+     "ar": "انحراف, التواء, ميل"
+    },
+    {
+     "en": "crookedness",
+     "ar": "إعْوِجاج ; إلْتِوَاء ; اِنْحِنَاء ; أوَد ; زَوَر ; مَيْل"
+    }
+   ],
+   "collocations": [],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1785833923266,
    "word": "psychology",
