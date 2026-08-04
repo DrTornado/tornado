@@ -24127,14 +24127,30 @@ function base64ToUtf8(b64) {
 function ghConf() { try { return JSON.parse(localStorage.getItem('gh-sync') || 'null'); } catch(e) { return null; } }
 function ghSetConf(v) { try { v ? localStorage.setItem('gh-sync', JSON.stringify(v)) : localStorage.removeItem('gh-sync'); } catch(e) {} }
 const GH_PATH = 'tornado-words.json';
-async function ghRequest(opts) {
+/*
+ * الشبكة تتعثّر، فنعيد المحاولة بدل أن نسقط.
+ *
+ * قِست على جهاز المستخدم: `ERR_CONNECTION_RESET` أثناء جلب ملف المكتبة —
+ * ثلاثمئة كيلوبايت تُقطع في منتصفها بينما عشرات طلبات الترجمة تزاحمها. فيسقط
+ * السحب صامتاً، ولا تصل الكلمات، ويبقى العددان مختلفين بلا تفسير: أربع كلمات
+ * ناقصة وثلاث ساعات في تعقّبها.
+ *
+ * وثلاث محاولات بتباعد متزايد تكفي: التعثّر عابر، والفشل بعدها حقيقي ويُقال.
+ */
+async function ghRequest(opts, attempt = 0) {
   const conf = ghConf();
   if (!conf || !conf.token || !conf.repo) { const e = new Error('not configured'); e.kind = 'noconf'; throw e; }
-  return fetch(`https://api.github.com/repos/${conf.repo}/contents/${GH_PATH}`, {
-    cache: 'no-store', // نضمن جلب أحدث نسخة من GitHub دائماً — لا اعتماد إطلاقاً على أي نسخة مخزّنة بالمتصفح
-    ...opts,
-    headers: { 'Authorization': 'Bearer ' + conf.token, 'Accept': 'application/vnd.github+json', ...(opts && opts.headers) },
-  });
+  try {
+    return await fetch(`https://api.github.com/repos/${conf.repo}/contents/${GH_PATH}`, {
+      cache: 'no-store', // نضمن جلب أحدث نسخة من GitHub دائماً — لا اعتماد إطلاقاً على أي نسخة مخزّنة بالمتصفح
+      ...opts,
+      headers: { 'Authorization': 'Bearer ' + conf.token, 'Accept': 'application/vnd.github+json', ...(opts && opts.headers) },
+    });
+  } catch (e) {
+    if (attempt >= 2) { const err = new Error('network'); err.raw = 'connection lost'; throw err; }
+    await new Promise(r => setTimeout(r, 800 * (attempt + 1)));
+    return ghRequest(opts, attempt + 1);
+  }
 }
 async function ghBackup() {
   let sha = null;
@@ -25206,14 +25222,32 @@ async function fetchEntryOnce(w, timeoutMs, _depth) {
   // الترجمة العربية بالتوازي: الكلمة + المعاني + المرادفات + المتلازمات + الأمثلة + المشتقات
   const jobs = [];
   const wordArP = trAR(finalWord);
-  meanings.slice(0, 5).forEach(m => { if (!m.ar) jobs.push(trAR(m.en).then(t => { m.ar = t; })); });
+  meanings.slice(0, 5).forEach(m => { if (!m.ar) jobs.push(() => trAR(m.en).then(t => { m.ar = t; })); });
   const synPairs = synSet.slice(0, 5).map(s => ({ en: s, ar: '' }));
-  synPairs.forEach(p => jobs.push(trAR(p.en).then(t => { p.ar = t; })));
+  synPairs.forEach(p => jobs.push(() => trAR(p.en).then(t => { p.ar = t; })));
   const collPairs = colls.map(c => ({ en: c, ar: '' }));
-  collPairs.forEach(p => jobs.push(trAR(p.en).then(t => { p.ar = t; })));
-  examples.slice(0, 3).forEach(ex => jobs.push(trAR(ex.en).then(t => { ex.ar = t; })));
-  derivs.forEach(d => jobs.push(trAR(d.word).then(t => { d.ar = t; delete d.word; })));
-  const [wordAr] = await Promise.all([wordArP, ...jobs]);
+  collPairs.forEach(p => jobs.push(() => trAR(p.en).then(t => { p.ar = t; })));
+  examples.slice(0, 3).forEach(ex => jobs.push(() => trAR(ex.en).then(t => { ex.ar = t; })));
+  derivs.forEach(d => jobs.push(() => trAR(d.word).then(t => { d.ar = t; delete d.word; })));
+  /*
+   * الترجمات تسير في طابور لا دفعةً واحدة.
+   *
+   * كانت تنطلق كلها معاً — كلمة واحدة تُطلق نحو عشرين طلباً في اللحظة نفسها.
+   * فتنفد حصّة الخدمة المجانية فوراً وترجع 429 للجميع، والأسوأ أن الطوفان
+   * يزاحم جلب ملف المكتبة من GitHub فيُقطع اتصاله — قِسته على جهاز المستخدم:
+   * ERR_CONNECTION_RESET، وأربع كلمات لم تصل بسببه.
+   *
+   * وثلاثة معاً تكفي: أسرع من واحد، وأرفق بالخدمة، ولا تخنق شيئاً.
+   */
+  const runQueued = async (list, width = 3) => {
+    const q = list.slice();
+    const workers = Array.from({ length: Math.min(width, q.length) }, async () => {
+      while (q.length) { if (translateQuotaHit) return; await q.shift()(); }
+    });
+    await Promise.all(workers);
+  };
+  const wordAr = await wordArP;
+  await runQueued(jobs);
   if (meanings.length && !meanings[0].ar && wordAr) meanings[0].ar = wordAr;
 
   // أكسفورد: المستوى الرسمي + نطق أكسفورد الأصلي (له الأولوية على صوت القاموس الأول)
@@ -25719,7 +25753,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 114;
+const BUILD = 115;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.
@@ -27096,6 +27130,14 @@ async function autoSyncOnStartup() {
      * تعمل الآن، ويسكن فيعلم أنها انتهت.
      */
     autoSyncBusy = true;
+    /*
+     * الإثراء يتنحّى أثناء المزامنة.
+     *
+     * كان يواصل إطلاق عشرات طلبات الترجمة بينما يجلب السحب ملفاً بثلاثمئة
+     * كيلوبايت، فيُقطع الاتصال في منتصفه — قِسته على جهاز المستخدم:
+     * ERR_CONNECTION_RESET. والمكتبة أولى من ترجمة مرادف.
+     */
+    bgUpgradeAbort = true;
     const btn = document.getElementById('top-sync-btn');
     const orig = btn ? btn.textContent : '';
     if (btn) btn.textContent = '🔄 Syncing…';
@@ -27159,6 +27201,7 @@ async function autoSyncOnStartup() {
      * و`backgroundUpgrade` يحرس نفسه من التداخل، فالنداء أثناء جولة جارية
      * يُتجاهل ولا يعيد العدّاد إلى أوّله.
      */
+    bgUpgradeAbort = false;
     backgroundUpgrade();
     } finally {
       autoSyncBusy = false;
