@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.lifecycle.lifecycleScope
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
@@ -86,6 +87,22 @@ class MainActivity : ComponentActivity() {
 
     private val notificationPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
+
+    /**
+     * المزامنة عند كل عودة للتطبيق، لا عند أول تشغيل فقط.
+     *
+     * من يُبقي الجوال وكروم مفتوحين معاً — وهو استعماله الفعلي — يضيف كلمة على
+     * حاسوبه ثم يرجع إلى الجوال فلا يجدها: التطبيق لم «يُفتح» من جديد، بل عاد
+     * من الخلفية، فلم تُستدعَ المزامنة أصلاً. فيظنّها معطّلة وهي لم تُطلب.
+     *
+     * والمنسّق يمنع التراكب: عودةٌ أثناء مزامنة جارية لا تبدأ ثانية.
+     */
+    override fun onResume() {
+        super.onResume()
+        lifecycleScope.launch {
+            runCatching { com.tornado.vocab.data.SyncCoordinator.syncNow(this@MainActivity) }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

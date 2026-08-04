@@ -132,11 +132,8 @@ class LibraryViewModel(app: Application) : AndroidViewModel(app) {
         repo.delete(row)
         // المشغّل يعرف بالحذف فوراً — لا كلمة شبح في جلسة جارية
         PlaybackBus.submit(getApplication()) { it.removeFromSession(row.id) }
-        runCatching {
-            val app = getApplication<android.app.Application>().tornado
-            app.sync.repo = app.settings.syncRepo()
-            if (app.sync.canPush) app.sync.sync(push = true)
-        }
+        // الحذف يزامن في الاتجاهين: ترفع شاهدته وتُسحب تعديلات الجهاز الآخر
+        runCatching { com.tornado.vocab.data.SyncCoordinator.syncNow(getApplication()) }
     }
 
     /**
@@ -204,7 +201,7 @@ class LibraryViewModel(app: Application) : AndroidViewModel(app) {
         runCatching { repo.update(updated) }
         _notice.value = null
         PlaybackBus.submit(getApplication()) { it.speakText(ar, arabic = true) }
-        runCatching { if (container.sync.canPush) container.sync.sync(push = true) }
+        runCatching { com.tornado.vocab.data.SyncCoordinator.syncNow(getApplication()) }
     }
 
     /** رسالة قصيرة تُعرض للمستخدم — الصمت بلا سبب أسوأ من التأخير */

@@ -22,7 +22,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tornado.vocab.data.SyncResult
+import com.tornado.vocab.data.SyncCoordinator
 import com.tornado.vocab.tornado
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -31,64 +31,21 @@ import kotlinx.coroutines.launch
 
 class SyncButtonViewModel(app: Application) : AndroidViewModel(app) {
 
-    private val container = app.tornado
-    private val _busy = MutableStateFlow(false)
-    val busy: StateFlow<Boolean> = _busy.asStateFlow()
-    private val _toast = MutableStateFlow<String?>(null)
-    val toast: StateFlow<String?> = _toast.asStateFlow()
+    /*
+     * الحالة تأتي من المنسّق لا من هذا الزرّ.
+     *
+     * كانت محلّية هنا، فيدور الزرّ عند الضغط وحده وتجري المزامنة التلقائية
+     * بصمت تامّ. فيسأل المستخدم «هل زامن عند الفتح؟» ولا شيء على الشاشة
+     * يجيبه — وقد سأل. والآن يدور في كل مرّة، ضغطها أو جرت من نفسها.
+     */
+    val busy = SyncCoordinator.busy
+    val toast = SyncCoordinator.lastResult
 
     fun sync() = viewModelScope.launch {
-        if (_busy.value) return@launch
-        _busy.value = true
-        val repo = runCatching { container.settings.syncRepo() }.getOrDefault("")
-        val r = runCatching {
-            container.sync.repo = repo
-            container.sync.sync(push = container.sync.canPush)
-        }.getOrElse { SyncResult.Failed(it.message?.take(60) ?: "No connection") }
-
-        // الصوت يُزامَن مع الكلمات في نفس الضغطة — فصلهما يعني زرّين لعمل واحد
-        val audio = runCatching {
-            container.audioSync.repo = repo
-            container.audioSync.sync()
-        }.getOrNull()
-
-        // الملاحظات مع الكلمات في الضغطة نفسها — زرّ يحمل نصف المحتوى يمنح ثقة كاذبة
-        runCatching {
-            container.noteSync.repo = repo
-            if (container.noteSync.canPull) {
-                container.noteSync.sync(push = container.noteSync.canPush)
-            }
-        }
-
-        /*
-         * الزرّ يجلب المعاني المحدَّثة أيضاً، لا الكلمات الجديدة وحدها.
-         *
-         * كان الإثراء يجري إن وصلت كلمات من الكمبيوتر فقط. فمن حسّنّا محرّكه
-         * ولم تصله كلمة جديدة يبقى على بطاقاته القديمة بلا سبيل لتحديثها —
-         * يضغط «مزامنة» فلا يتغيّر شيء، ويظنّ التحسين لم يصل. وقد ظنّه.
-         *
-         * الآن كل ضغطة تمرّ على المكتبة: ما بُني بمحرّك أقدم يُعاد بناؤه،
-         * وما هو محدَّث لا يُمسّ. والعمل بالخلفية فلا ينتظره أحد.
-         */
-        container.appScope.launch { runCatching { container.enricher.runUntilComplete() } }
-
-        _busy.value = false
-        _toast.value = when (r) {
-            is SyncResult.Success -> {
-                val words = if (r.pulled == 0 && r.pushed == 0 && r.deleted == 0) "Up to date"
-                else "+${r.pulled} words"
-                val clips = audio?.let {
-                    if (it.downloaded > 0 || it.uploaded > 0)
-                        " · audio ↓${it.downloaded} ↑${it.uploaded}" else ""
-                }.orEmpty()
-                words + clips
-            }
-            SyncResult.NotConfigured -> "Add your repository in Settings"
-            is SyncResult.Failed -> r.message
-        }
+        SyncCoordinator.syncNow(getApplication(), announce = true)
     }
 
-    fun clearToast() { _toast.value = null }
+    fun clearToast() = SyncCoordinator.consumeResult()
 }
 
 /**

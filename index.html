@@ -25650,7 +25650,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 104;
+const BUILD = 105;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.
@@ -26758,16 +26758,6 @@ document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible') autoSyncOnStartup();
 });
 
-/*
- * مزامنة دورية ما دام التبويب ظاهراً.
- *
- * لمن يترك الجهازين مفتوحين جنباً إلى جنب: التعديل على أحدهما يظهر على الآخر
- * خلال دقيقة بلا لمس شيء. ولا تعمل والتبويب مخفيّ — لا معنى لاستهلاك شبكة
- * وبطارية لصفحة لا يراها أحد.
- */
-setInterval(() => {
-  if (document.visibilityState === 'visible' && !syncing) autoSyncOnStartup();
-}, 60000);
 
 function renderAudio() {
   const pane = document.getElementById('pane-audio');
@@ -26995,6 +26985,7 @@ function syncFingerprint(wordsArr, tombsArr) {
 }
 
 let autoSyncBusy = false;
+let lastUpgradeAt = 0;
 async function autoSyncOnStartup() {
   /*
    * المزامنة عند الفتح تسير في الاتجاهين، لا في اتجاه واحد.
@@ -27043,8 +27034,19 @@ async function autoSyncOnStartup() {
       await notesPush();
     } catch(e) { /* الرفع التلقائي لا يقاطع الإقلاع؛ زرّ Sync يبلّغ بالتفصيل */ }
 
-    // الإثراء يتبع كل مزامنة — المعاني الناقصة تُملأ بلا ضغطة
-    backgroundUpgrade();
+    /*
+     * الإثراء يتبع المزامنة، ولا يُعاد كل دقيقة.
+     *
+     * إطلاقه بعد كل مزامنة جعل عدّاده يبدأ من أوّله في كل دورة — سطرٌ أخضر
+     * يومض «٢ من ٩» ثم «١ من ٩» بلا توقّف، فيبدو التطبيق يعمل في حلقة مفرغة.
+     *
+     * فيبدأ حين يصل جديدٌ يستحقّ الإثراء، أو بعد خمس دقائق من آخر جولة —
+     * وذلك يكفي لمكتبة تكتمل على مدى أيام.
+     */
+    if (!bgUpgradeActive && Date.now() - lastUpgradeAt > 300000) {
+      lastUpgradeAt = Date.now();
+      backgroundUpgrade();
+    }
     } finally {
       autoSyncBusy = false;
       if (btn) btn.textContent = orig || '🔄 Sync';
