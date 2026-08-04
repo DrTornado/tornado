@@ -1,8 +1,76 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-04T10:40:03.281Z",
+ "exportedAt": "2026-08-04T10:40:39.973Z",
  "words": [
+  {
+   "id": 1785840034981,
+   "word": "cemetery",
+   "ipa": "/ˈsem.ɘˌtʃɹi/",
+   "arabicPron": "سيميتيري",
+   "oxford": "5000",
+   "cefr": "C1",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "A place where the dead are buried; a graveyard or memorial park.",
+     "ar": "مكان دفن الموتى ؛ مقبرة أو حديقة تذكارية."
+    }
+   ],
+   "inflections": [
+    "cemetery",
+    "cemeteries"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "necropolis",
+     "ar": "مقبرة كبيرة, مدينة الموتي"
+    },
+    {
+     "en": "graveyard",
+     "ar": "مقبرة, مدفن, جبانة, قرافة"
+    },
+    {
+     "en": "burying ground",
+     "ar": "مدفن"
+    },
+    {
+     "en": "burial site",
+     "ar": "موقع الدفن"
+    },
+    {
+     "en": "burial ground",
+     "ar": "مقبرة"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "national cemetery",
+     "ar": "المقبرة الوطنية"
+    },
+    {
+     "en": "jewish cemetery",
+     "ar": "المقبرة اليهودية‏, المقبرة التي يدفن فيها الناس على الطريقة اليهودية"
+    },
+    {
+     "en": "hill cemetery",
+     "ar": "مقبرة التل"
+    },
+    {
+     "en": "old cemetery",
+     "ar": "المقبرة القديمة"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1785839999337,
    "word": "sleek",
