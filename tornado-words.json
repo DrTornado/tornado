@@ -1,8 +1,110 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-04T08:11:49.119Z",
+ "exportedAt": "2026-08-04T08:19:47.638Z",
  "words": [
+  {
+   "id": 1785831583823,
+   "word": "ample",
+   "ipa": "",
+   "arabicPron": "امبل",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "determiner",
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "determiner",
+     "en": "A fully sufficient or abundant quantity of; enough or more than enough.",
+     "ar": "كمية كافية أو وفيرة بالكامل من ؛ كافية أو أكثر من كافية."
+    },
+    {
+     "pos": "determiner",
+     "en": "(as pronoun) A quantity (of something) that is fully sufficient; plenty.",
+     "ar": "(كضمير) كمية (من شيء) كافية تمامًا ؛ الكثير."
+    },
+    {
+     "pos": "adjective",
+     "en": "Large; great in size, extent, capacity, or bulk; for example spacious, roomy or widely extended.",
+     "ar": "كبير ؛ كبير في الحجم أو المدى أو السعة أو الحجم ؛ على سبيل المثال واسع أو فسيح أو ممتد على نطاق واسع."
+    },
+    {
+     "pos": "adjective",
+     "en": "Not contracted or brief; not concise; extended; diffusive",
+     "ar": "غير متقلصة أو موجزة ؛ غير موجزة ؛ ممتدة ؛ منتشرة"
+    },
+    {
+     "pos": "adjective",
+     "en": "Very adequate.",
+     "ar": "مناسب جدًا"
+    },
+    {
+     "pos": "determiner",
+     "en": "A quantity (of something) that is fully sufficient; plenty.",
+     "ar": ""
+    }
+   ],
+   "inflections": [
+    "ample"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "good",
+     "ar": "جيد"
+    },
+    {
+     "en": "copious",
+     "ar": "وافر, غزير, زاخر, غزير الإنتاج, كثير"
+    },
+    {
+     "en": "abundant",
+     "ar": "وافر, غزير, كثير"
+    },
+    {
+     "en": "rich",
+     "ar": "غني, ثري, موسر, أنيق, وافر, مترف, أرج, غني بالموارد الطبيعية, خصب, دسم, واسع, فخم, سخي, باهي"
+    },
+    {
+     "en": "full",
+     "ar": "كامل"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "ample evidence",
+     "ar": "أدلة وافرة"
+    },
+    {
+     "en": "ample time",
+     "ar": "فُسْحَة ; مُتّسَعٌ مِنَ الوَقْت"
+    },
+    {
+     "en": "ample opportunity",
+     "ar": "فرصة كافية"
+    }
+   ],
+   "examples": [
+    {
+     "en": "We have ample time to finish the task.",
+     "ar": "لدينا متسع من الوقت لإنهاء المهمة."
+    },
+    {
+     "en": "We don't need any more. We already have ample.",
+     "ar": "نحن لسنا بحاجة إلى أي أكثر من ذلك. لدينا بالفعل وفرة."
+    },
+    {
+     "en": "We have an ample supply of water",
+     "ar": "لدينا امدادات وافرة من المياه"
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1785831071530,
    "word": "foraging",
