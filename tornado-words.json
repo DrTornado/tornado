@@ -1,8 +1,68 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-04T10:36:18.679Z",
+ "exportedAt": "2026-08-04T10:37:27.891Z",
  "words": [
+  {
+   "id": 1785839843999,
+   "word": "unstoppable",
+   "ipa": "/ʌnˈstɔ.pə.bəl/",
+   "arabicPron": "انستوببل",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "adjective"
+   ],
+   "meanings": [
+    {
+     "pos": "adjective",
+     "en": "Unable to be stopped.",
+     "ar": "لا يمكن إيقافه."
+    }
+   ],
+   "inflections": [
+    "unstoppable"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "unbeatable",
+     "ar": "لا يُقهر, لا يمكن ان يتم قهره, لا يمكن أن يُهزم (علي سبيل المثال الرياضي)"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "unstoppable force",
+     "ar": "قوة لا يمكن إيقافها"
+    },
+    {
+     "en": "unstoppable momentum",
+     "ar": "زخات لاتردع"
+    },
+    {
+     "en": "unstoppable process",
+     "ar": "عملية لا يمكن إيقافها"
+    },
+    {
+     "en": "seemingly unstoppable",
+     "ar": "لا يمكن إيقافه على ما يبدو"
+    },
+    {
+     "en": "seemed unstoppable",
+     "ar": "بدا أنه لا يمكن إيقافه"
+    }
+   ],
+   "examples": [
+    {
+     "en": "Their \"greatly unstoppable fight\" against the cause was a joke.",
+     "ar": "كانت \"معركتهم التي لا يمكن إيقافها إلى حد كبير\" ضد القضية مزحة."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1785839774675,
    "word": "deviousness",
