@@ -113,11 +113,18 @@ class KokoroEngine(private val context: Context) {
      * كوكورو يُخرج ٢٤٠٠٠ هرتز ونظامنا على ٤٤١٠٠ — الرفع لا يضيف تشوّهاً
      * (بخلاف الخفض الذي سبّب الخشخشة التي شكا منها المستخدم سابقاً).
      */
-    suspend fun synthesize(text: String, target: File): Boolean = genLock.withLock {
+    /**
+     * @param voiceSid صوتٌ لهذا النداء وحده — لا يمسّ اختيار المستخدم.
+     *
+     * زرّا 🇺🇸 و🇬🇧 يحتاجان صوتين مختلفين في اللحظة نفسها، بينما بقية التطبيق
+     * ينطق بالصوت المختار. وتغيير الحقل المشترك لأجلهما كان سيسرّب الصوت إلى
+     * كل بطاقة تُبنى في تلك اللحظة — والبناء يجري بالخلفية دائماً.
+     */
+    suspend fun synthesize(text: String, target: File, voiceSid: Int? = null): Boolean = genLock.withLock {
         withContext(Dispatchers.Default) {
             val engine = ensureLoaded() ?: return@withContext false
             runCatching {
-                val audio = engine.generate(text = text, sid = sid, speed = 1.0f)
+                val audio = engine.generate(text = text, sid = voiceSid ?: sid, speed = 1.0f)
                 if (audio.samples.isEmpty()) return@runCatching false
                 val shorts = ShortArray(audio.samples.size) { i ->
                     (audio.samples[i] * 32000f).toInt().coerceIn(-32768, 32767).toShort()
@@ -333,6 +340,16 @@ class KokoroEngine(private val context: Context) {
 
         /** bm_george — بريطاني */
         const val DEFAULT_SID = 26
+
+        /**
+         * صوتا زرّي اللهجة — ثابتان لا يتبعان اختيار المستخدم.
+         *
+         * الزرّان وُجدا ليُسمَع الفرق بين اللهجتين. فلو تبعا الاختيار العام
+         * لصارا صوتاً واحداً كلما اختار المستخدم صوتاً أمريكياً أو بريطانياً
+         * لمكتبته — أي في كل الأحوال تقريباً.
+         */
+        const val SID_UK = 26   // George · bm_george
+        const val SID_US = 9    // Sarah · af_sarah
 
         /**
          * أصوات إنجليزية منتقاة، وأرقامها مأخوذة حرفياً من سكربت بناء

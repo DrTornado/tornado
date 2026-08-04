@@ -505,6 +505,15 @@ class DictionaryService(private val context: Context) {
         return decoded.trim().takeIf { it.isNotBlank() && Linguistics.isArabic(it) }.orEmpty()
     }
 
+    /**
+     * ترجمة معنى واحد عند الطلب — لزرّ «عربي» حين تكون البطاقة بلا عربية.
+     *
+     * الإثراء الدوري يملأ الفراغات على مدى أيام، لكن من يضغط الزرّ الآن يريد
+     * الآن. فنترجم في اللحظة ونحفظ، فتعمل الكلمة مرّةً بانتظار ثوانٍ وكل مرّة
+     * بعدها فوراً.
+     */
+    suspend fun arabicFor(text: String): String = translateToArabic(text)
+
     /** ترجمة أفضل جهد — الفشل يرجع نصاً فارغاً بلا كسر البطاقة */
     private suspend fun translateToArabic(text: String): String {
         if (text.isBlank()) return ""

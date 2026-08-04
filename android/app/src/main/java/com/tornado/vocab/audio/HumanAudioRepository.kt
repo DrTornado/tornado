@@ -128,18 +128,42 @@ class HumanAudioRepository(private val context: Context) {
      * يضع تسجيل الكلمة في [target] بالصيغة الموحّدة.
      * يعيد false بهدوء إن لم يوجد تسجيل.
      */
-    suspend fun fetchWord(word: String, target: File, british: Boolean = false): Boolean {
-        if (!enabled || word.isBlank()) return false
+    /**
+     * @param force يتجاوز إعداد «الصوت البشري أولاً».
+     *
+     * الإعداد يحكم سرد البطاقات، ولا معنى لأن يحكم زرّي 🇺🇸 و🇬🇧: من يضغطهما
+     * يطلب نطق كلمة مفردة، والتسجيل البشري هو أصدق ما يُعطى له. وربطهما به
+     * جعل الطبقة البشرية معطّلة تماماً لمن اختار كوكورو.
+     */
+    suspend fun fetchWord(
+        word: String,
+        target: File,
+        british: Boolean = false,
+        force: Boolean = false,
+        strictAccent: Boolean = false
+    ): Boolean {
+        if ((!enabled && !force) || word.isBlank()) return false
         if (word.trim().contains(Regex("\\s"))) return false // عبارات مركبة: لا تسجيلات مفردة لها
 
-        val variant = if (british) "uk:$word" else word
+        /*
+         * المتساهل والصارم لا يتشاركان مفتاحاً.
+         *
+         * وإلّا لاسترجع الطلبُ الصارم الملفَّ الذي جلبه المتساهل باللهجة الأخرى،
+         * فيعود الزرّان متطابقين بعد الإصلاح — والمخزَّن لا يعرف بأي شرط جُلب.
+         */
+        val variant = when {
+            strictAccent && british -> "ukstrict:$word"
+            strictAccent -> "usstrict:$word"
+            british -> "uk:$word"
+            else -> word
+        }
         val local = localFile(variant)
         if (local.length() > 512) return copyCanonical(local, target)
         if (!allowNetwork) return false
         if (missMarker(variant).exists()) return false
 
         return withContext(Dispatchers.IO) {
-            val url = runCatching { findRecordingUrl(word, british) }.getOrNull()
+            val url = runCatching { findRecordingUrl(word, british, strictAccent) }.getOrNull()
             if (url == null) {
                 runCatching { missMarker(variant).createNewFile() }
                 return@withContext false
@@ -179,17 +203,34 @@ class HumanAudioRepository(private val context: Context) {
      *      للغة الإنجليزية، وهو الفاصل الوحيد الموثوق بين تسجيل إنجليزي
      *      وتسجيل فرنسي يحمل الكلمة نفسها.
      */
-    private fun findRecordingUrl(word: String, preferBritish: Boolean): String? {
+    /**
+     * @param strictAccent يرفض تسجيل اللهجة الأخرى بدل قبوله بديلاً.
+     *
+     * زرّا 🇺🇸 و🇬🇧 وُجدا ليُسمَع الفرق. والمصدر يجرّب اللهجة المطلوبة ثم يقبل
+     * الأخرى حين لا يجدها — فالكلمة التي لها تسجيل واحد تُعطى للزرّين معاً،
+     * وتخرج بملفّين متطابقين بايتاً ببايت. قِسته على المحاكي فوجدت البصمة
+     * نفسها في الملفّين.
+     *
+     * فحين تُطلب المطابقة الصارمة يُرفض غير المطابق ويتولّى التوليد بصوت
+     * اللهجة — سارة أو جورج — فيُسمع الفرق في كل كلمة لا في القليل منها.
+     */
+    private fun findRecordingUrl(
+        word: String,
+        preferBritish: Boolean,
+        strictAccent: Boolean = false
+    ): String? {
         val w = key(word)
 
         // ١ — الأسماء القياسية: إصابة مباشرة بلا بحث
         val direct = buildList {
             if (preferBritish) {
-                add("En-uk-$w.ogg"); add("En-gb-$w.ogg"); add("En-us-$w.ogg")
+                add("En-uk-$w.ogg"); add("En-gb-$w.ogg")
+                if (!strictAccent) add("En-us-$w.ogg")
             } else {
-                add("En-us-$w.ogg"); add("En-uk-$w.ogg"); add("En-gb-$w.ogg")
+                add("En-us-$w.ogg"); add("En-us-$w.wav")
+                if (!strictAccent) { add("En-uk-$w.ogg"); add("En-gb-$w.ogg") }
             }
-            add("En-us-$w.wav"); add("En-$w.ogg")
+            if (!strictAccent) { add("En-us-$w.wav"); add("En-$w.ogg") }
         }
         directLookup(direct)?.let { return it }
 
@@ -228,13 +269,18 @@ class HumanAudioRepository(private val context: Context) {
                 name.startsWith("en-gb-") || name.startsWith("en-")
             if (!isEnglish) return@mapNotNull null
 
+            val british = name.startsWith("en-uk-") || name.startsWith("en-gb-")
+            val american = name.startsWith("en-us-")
+            // المطابقة الصارمة ترفض اللهجة الأخرى وترفض المحايد — الزرّ يعد بلهجة
+            if (strictAccent && (if (preferBritish) !british else !american)) return@mapNotNull null
+
             var score = 50
             if (preferBritish) {
-                if (name.startsWith("en-uk-") || name.startsWith("en-gb-")) score += 40
-                if (name.startsWith("en-us-")) score += 10
+                if (british) score += 40
+                if (american) score += 10
             } else {
-                if (name.startsWith("en-us-")) score += 40
-                if (name.startsWith("en-uk-") || name.startsWith("en-gb-")) score += 10
+                if (american) score += 40
+                if (british) score += 10
             }
             if (name.contains("ll-q1860 (eng)")) score += 20
             Candidate(url, score)

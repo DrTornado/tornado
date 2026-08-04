@@ -117,6 +117,18 @@ class PlaybackService : MediaSessionService() {
 
     private var speed = 1.0f
     private var detailed = true
+
+    /**
+     * تفصيلٌ يخصّ جلسةً واحدة — يعلو على الإعداد ولا يكتب فيه.
+     *
+     *  مشترك بين ثلاثة مشغّلات، فالكتابة فيه لأجل بطاقة واحدة
+     * تسرّب الأثر إلى الاثنين الآخرين. وهذا الحقل يُقرأ أوّلاً ويُمسح بانتهاء
+     * الجلسة، فيبقى الأثر داخل حدوده.
+     */
+    private var detailOverride: Boolean? = null
+
+    /** التفصيل الساري الآن: تجاوزُ الجلسة إن وُجد، وإلا الإعداد */
+    private val effectiveDetail: Boolean get() = detailOverride ?: detailed
     private var shuffle = false
     private var wordRepeat = 1
     private var listRepeat = 1
@@ -526,7 +538,7 @@ class PlaybackService : MediaSessionService() {
         val ids = session.map { it.id }.distinct()
         val rebuilt = withContext(Dispatchers.IO) {
             ids.mapNotNull { id -> notes.byId(id) }.flatMap { note ->
-                NoteChunker.units(note.text, detailed).flatMapIndexed { i, text ->
+                NoteChunker.units(note.text, effectiveDetail).flatMapIndexed { i, text ->
                     List(wordRepeat.coerceIn(1, 10)) {
                         PlayItem(
                             id = note.id,
@@ -647,7 +659,7 @@ class PlaybackService : MediaSessionService() {
                     RowKind.NOTE_CHUNK -> {
                         val note = notes.byId(row.id) ?: return@withContext null
                         // نفس الوحدة التي بنى بها الطابور — وإلا نُطق نصٌّ غير المعروض
-                        val chunk = NoteChunker.units(note.text, detailed).getOrNull(row.chunkIndex)
+                        val chunk = NoteChunker.units(note.text, effectiveDetail).getOrNull(row.chunkIndex)
                             ?: return@withContext null
                         /*
                          * Say يحدّد العدد وSHORT/FULL تحدّد الوحدة.
@@ -788,7 +800,7 @@ class PlaybackService : MediaSessionService() {
     private fun currentSpec() = NarrationSpec(
         repeat = wordRepeat,
         mode = NarrationMode.RICH,
-        detail = if (detailed) NarrationDetail.FULL else NarrationDetail.BRIEF,
+        detail = if (effectiveDetail) NarrationDetail.FULL else NarrationDetail.BRIEF,
         speakArabic = speakArabic,
         voiceTag = voiceTag
     )
@@ -945,6 +957,8 @@ class PlaybackService : MediaSessionService() {
     private val commands = object : PlaybackCommands {
 
         override fun setQueue(rows: List<PlayItem>, startIndex: Int, scope: PlayScope, autoPlay: Boolean) {
+            // جلسة جديدة من قائمة أو ملاحظة: تجاوزُ بطاقةٍ سابقة لا يتبعها
+            detailOverride = null
             scopeMode = scope
             // نجهّز الصوت العصبي بهدوء حتى لا تسقط أي كلمة إلى محرك النظام
             val ordered = when {
@@ -1035,6 +1049,8 @@ class PlaybackService : MediaSessionService() {
          * الإعدادات على المقطع التالي وتترك الجاري يكمل، وهذا ما نفعله الآن.
          */
         override fun setDetailed(v: Boolean) {
+            // اختيار صريح من المستخدم يلغي أي تجاوز مؤقّت
+            detailOverride = null
             if (detailed == v) return
             detailed = v
             scope.launch { settings.setDetailed(v) }
@@ -1080,9 +1096,18 @@ class PlaybackService : MediaSessionService() {
 
         override fun setSleepTimer(minutes: Int) = applySleepTimer(minutes)
 
+        /**
+         * SHORT و FULL في بطاقة الكلمة — لهذه الجلسة وحدها.
+         *
+         * كان الزرّ يكتب في `detailed` المشترك، وهو نفسه الذي يحكم مشغّل
+         * Listen ومشغّل الملاحظات. فضغطةٌ على FULL في بطاقة كلمة تقلب وضع
+         * المشغّلين الآخرين بلا أن يطلب المستخدم ذلك ولا أن يراه — يفتح
+         * ملاحظةً بعدها فيجدها تكرّر الفقرة بدل الجملة، ولا يفهم لماذا.
+         *
+         * والتجاوز يُمسح بانتهاء الجلسة، فلا يتعدّى أثر الزرّ شاشته.
+         */
         override fun speakCard(word: Word, full: Boolean) {
-            // الزرّ يفرض مستوى التفصيل الذي طلبه المستخدم لا الذي في الإعدادات
-            detailed = full
+            detailOverride = full
             scopeMode = PlayScope.SINGLE
             session = listOf(
                 PlayItem(
@@ -1097,22 +1122,49 @@ class PlaybackService : MediaSessionService() {
             startSession(true)
         }
 
+        /**
+         * زرّا اللهجة — أمريكية بصوت سارة وبريطانية بصوت جورج.
+         *
+         * كان الزرّان ينطقان بالصوت المختار نفسه حين لا يوجد تسجيل أو رابط
+         * محفوظ، فيسمع المستخدم الصوت ذاته مرّتين ويظنّ أحدهما معطّلاً — وهو
+         * واقعٌ في أربعين بالمئة من مكتبته على الأقل.
+         *
+         * والصوتان مثبَّتان لا يتبعان اختيار المستخدم: من يختار صوتاً أمريكياً
+         * لمكتبته يجب أن يبقى زرّ 🇬🇧 بريطانياً، وإلا عاد الزرّان واحداً.
+         *
+         * ورقم الصوت داخل اسم الملف المخزَّن: بدونه يُسترجع الصوت القديم بعد
+         * أي تبديل ولا سبيل لإجبار البناء — وهي العلّة نفسها التي كلّفت
+         * نسخة الويب يوماً كاملاً.
+         */
         override fun playPronunciation(url: String, fallbackWord: String, british: Boolean) {
-            // التسجيل البشري أولاً دائماً، حتى لزر النطق المفرد
             scope.launch(Dispatchers.IO) {
+                val sid = if (british) KokoroEngine.SID_UK else KokoroEngine.SID_US
                 val tag = if (british) "uk" else "us"
-                val f = java.io.File(cacheDir, "pron-$tag-${fallbackWord.lowercase().hashCode()}.wav")
-                val ok = f.length() > 512 || humanAudio.fetchWord(fallbackWord, f, british)
-                if (ok) {
+                val f = java.io.File(
+                    cacheDir,
+                    "pron-$tag-$sid-${kokoro.modelTag}-${fallbackWord.lowercase().hashCode()}.wav"
+                )
+                /*
+                 * صوتٌ واحد لكل زرّ في كل كلمة — سارة للأمريكي وجورج للبريطاني.
+                 *
+                 * كان الترتيب: تسجيل بشري ثم الرابط المحفوظ ثم التوليد. فسارة
+                 * لا تُسمع إلا في أقلّية الكلمات — سبعٌ وستون من مئة وتسع عشرة
+                 * لها رابط محفوظ يسبقها — ويختلف الصوت من كلمة لأخرى بلا أن
+                 * يفهم المستخدم لماذا. والزرّ الذي لا تعرف صوته سلفاً لا يصلح
+                 * لمقارنة لهجتين، وهي وظيفته الوحيدة.
+                 *
+                 * فالتسجيلات البشرية والروابط المحفوظة لم تُحذف — هي مصدر سرد
+                 * البطاقات كما كانت. أما هذان الزرّان فصوتاهما ثابتان.
+                 */
+                // المولَّد يُخزَّن باسم يحمل الصوت، فالضغطة الثانية فورية
+                if (f.length() > 512) {
                     withContext(Dispatchers.Main) { playPron(android.net.Uri.fromFile(f)) }
                     return@launch
                 }
-                if (url.isNotBlank()) {
-                    withContext(Dispatchers.Main) { playPron(android.net.Uri.parse(url)) }
-                    return@launch
-                }
                 val seg = Segment(fallbackWord, SegLang.EN, role = SegRole.HEADWORD)
-                val source = voices.synthesize(seg, f, headword = fallbackWord)
+                val source = voices.synthesize(
+                    seg, f, headword = fallbackWord, voiceSid = sid, humanAllowed = false
+                )
                 if (source != VoiceSource.NONE) {
                     withContext(Dispatchers.Main) { playPron(android.net.Uri.fromFile(f)) }
                 }

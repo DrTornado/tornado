@@ -36,6 +36,7 @@ data class LibraryFilters(
 class LibraryViewModel(app: Application) : AndroidViewModel(app) {
 
     private val repo = app.tornado.repository
+    private val container = app.tornado
 
     private val _filters = MutableStateFlow(LibraryFilters())
     val filters: StateFlow<LibraryFilters> = _filters.asStateFlow()
@@ -162,13 +163,54 @@ class LibraryViewModel(app: Application) : AndroidViewModel(app) {
         PlaybackBus.submit(getApplication()) { it.playPronunciation(url, w.word, british) }
     }
 
-    /** ينطق المعنى العربي — لا تسجيلات بشرية للعربية، فهذه ضغطة واعية تسمح بالتوليد */
-    fun speakArabic(w: Word) {
-        val text = w.meanings.firstOrNull()?.ar?.takeIf { it.isNotBlank() }
-            ?: w.arabicPron.takeIf { it.isNotBlank() }
-            ?: return
-        PlaybackBus.submit(getApplication()) { it.speakText(text, arabic = true) }
+    /**
+     * زرّ «عربي» — يعمل لكل كلمة، ولا يصمت بلا سبب مُعلَن.
+     *
+     * كان يقرأ `arabicPron` حين لا يجد معنى عربياً، وذاك نطقٌ لا معنى: تضغط
+     * «عربي» على `glacier` فتسمع «جليشير» بدل «نهر جليدي». الزرّ يبدو عاملاً
+     * وهو يكذب — وسبعُ كلمات في المكتبة كانت كذلك.
+     *
+     * وإن لم يوجد معنى عربي أصلاً كان يخرج صامتاً بلا رسالة، فلا يعرف
+     * المستخدم أعُطِل الزرّ أم عُطِل الصوت. الآن يُترجَم المعنى في اللحظة
+     * ويُحفَظ ويُرفع مع المزامنة، فتعمل الكلمة مرّةً بانتظار ثوانٍ وكل مرّة
+     * بعدها فوراً — ويسمعها كروم أيضاً.
+     */
+    fun speakArabic(w: Word) = viewModelScope.launch {
+        val ready = w.meanings.firstOrNull { it.ar.isNotBlank() }?.ar
+        if (ready != null) {
+            PlaybackBus.submit(getApplication()) { it.speakText(ready, arabic = true) }
+            return@launch
+        }
+
+        val source = w.meanings.firstOrNull { it.en.isNotBlank() }?.en
+        if (source.isNullOrBlank()) {
+            _notice.value = "لا يوجد معنى لهذه الكلمة بعد — اضغط Sync"
+            return@launch
+        }
+
+        _notice.value = "جارٍ جلب المعنى بالعربية…"
+        val ar = runCatching { container.dictionary.arabicFor(source) }.getOrDefault("")
+        if (ar.isBlank()) {
+            _notice.value = "تعذّرت الترجمة الآن — تحقّق من الاتصال وأعد المحاولة"
+            return@launch
+        }
+
+        // نحفظه في البطاقة فلا يُطلب مرّتين، ويسافر مع المزامنة إلى بقية الأجهزة
+        val updated = w.copy(
+            meanings = w.meanings.mapIndexed { i, m ->
+                if (i == w.meanings.indexOfFirst { it.en == source }) m.copy(ar = ar) else m
+            }
+        )
+        runCatching { repo.update(updated) }
+        _notice.value = null
+        PlaybackBus.submit(getApplication()) { it.speakText(ar, arabic = true) }
+        runCatching { if (container.sync.canPush) container.sync.sync(push = true) }
     }
+
+    /** رسالة قصيرة تُعرض للمستخدم — الصمت بلا سبب أسوأ من التأخير */
+    private val _notice = MutableStateFlow<String?>(null)
+    val notice: StateFlow<String?> = _notice
+    fun clearNotice() { _notice.value = null }
 
     private fun <T> MutableStateFlow<T>.update(block: (T) -> T) { value = block(value) }
 }

@@ -75,6 +75,22 @@ fun LibraryScreen(
     var pendingDelete by remember { mutableStateOf<WordRow?>(null) }
     var sortMenu by remember { mutableStateOf(false) }
 
+    /*
+     * رسالة زرّ «عربي» تُقال ولا تُبتلع.
+     *
+     * الزرّ كان يخرج صامتاً حين لا يجد معنى عربياً، فلا يعرف المستخدم أعُطِل
+     * الزرّ أم عُطِل الصوت. والرسالة العابرة تكفي: خبرٌ يُقال مرّة ثم يزول،
+     * لا نافذة تُغلق بضغطة.
+     */
+    val notice by vm.notice.collectAsStateWithLifecycle()
+    val ctx = androidx.compose.ui.platform.LocalContext.current
+    androidx.compose.runtime.LaunchedEffect(notice) {
+        notice?.let {
+            android.widget.Toast.makeText(ctx, it, android.widget.Toast.LENGTH_SHORT).show()
+            vm.clearNotice()
+        }
+    }
+
     Column(Modifier.fillMaxSize()) {
 
         // ===== البحث =====
