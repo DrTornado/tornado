@@ -24349,7 +24349,16 @@ document.getElementById('collapse-all-btn').onclick = () => { expandedIds.clear(
 function mergeCards(oldC, newC) {
   // دمج حقلاً بحقل: الجديد يضيف ولا يمسح — الغني القديم (Oxford/CEFR/الفروق) محفوظ، والتقدم لا يُمس
   const m = { ...oldC };
-  if (newC.word && newC.word.toLowerCase() !== oldC.word.toLowerCase()) m.word = newC.word; // إعادة توجيه لجذر الكلمة تُحدّث العنوان أيضاً
+  /*
+   * البطاقة لا يُعاد تسميتها أبداً.
+   *
+   * كان الإثراء يسأل القاموس عن `molluscs` فيردّ الأصل `mollusc`، فيُعيد
+   * تسمية البطاقة إلى الأصل — ثم يطويها طاوي المكرّرات مع `mollusc` الموجودة،
+   * فتختفي الصيغة التي أضافها المستخدم ويَنقص العدد بلا سبب ظاهر.
+   *
+   * والاسم هوية البطاقة: من أضاف `molluscs` يريد `molluscs`. والمعاني القادمة
+   * من الأصل تُضاف إليها كما هي، فلا يخسر شيئاً.
+   */
   ['ipa','ipaUS','ipaUK','audioUS','audioUK','audioGen','arabicPron','oxford','cefr','freqLabel','estCefr','engineVersion'].forEach(k => { if (newC[k]) m[k] = newC[k]; });
   ['pos','inflections','synonyms','collocations','derivatives','differences'].forEach(k => {
     if (arr(newC[k]).length > arr(oldC[k]).length) m[k] = newC[k];
@@ -25710,7 +25719,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 113;
+const BUILD = 114;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.

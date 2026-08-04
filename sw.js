@@ -1,5 +1,5 @@
 // Tornado service worker — enables real app install (not just a shortcut) and offline opening
-const CACHE = 'tornado-v113';
+const CACHE = 'tornado-v114';
 const PRECACHE = ['./', './manifest.json', './icon-192.png', './icon-512.png', './icon-180.png', './favicon-32.png'];
 
 self.addEventListener('install', e => {
