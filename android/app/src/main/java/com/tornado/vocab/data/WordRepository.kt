@@ -159,6 +159,19 @@ class WordRepository(private val context: Context) {
     /** شواهد الحذف — تمنع المزامنة من إحياء كلمة حذفها المستخدم عمداً */
     suspend fun tombstones(): List<Tombstone> = dao.tombstones()
 
+    /**
+     * يحفظ شاهدةً وصلت من جهاز آخر.
+     *
+     * كانت الشواهد البعيدة تُطبَّق ولا تُحفظ: يحذف الجوال الكلمة المطابقة ثم
+     * يرفع شواهده المحلّية وحدها. فالشاهدة التي لا تطابق كلمةً موجودة عنده
+     * تضيع من الملف — نزلت من إحدى وعشرين إلى خمس، وقِست ذلك.
+     *
+     * ونتيجته أن كلمةً حُذفت عمداً تعود: يفقد الجوال شاهدتها، فيراها الكمبيوتر
+     * ناقصةً لا محذوفة، فيرفعها من جديد.
+     */
+    suspend fun rememberDeletion(id: Long, word: String, deletedAt: Long) =
+        dao.addTombstone(Tombstone(id, word, deletedAt))
+
     /** يحدّث بطاقة كاملة — يخدم الإثراء الذي يملأ نواقص البطاقات القديمة */
     suspend fun update(word: Word) = dao.update(word.derive())
 

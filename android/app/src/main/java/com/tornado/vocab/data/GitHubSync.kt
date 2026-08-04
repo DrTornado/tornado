@@ -91,19 +91,47 @@ class GitHubSync(
             val remote = fetch() ?: return@runCatching SyncResult.Failed("Could not read $PATH")
             val merged = merge(remote.json, remote.text)
             if (push && merged.localChanged && canPush) {
-                val body = payload()
-                val put = JSONObject().apply {
-                    put("message", "Tornado sync from phone")
-                    put("content", Base64.encodeToString(body.toByteArray(), Base64.NO_WRAP))
-                    remote.sha?.let { put("sha", it) }
-                }.toString()
-                val ok = client.newCall(
-                    request(
-                        Request.Builder().url(contentsUrl())
-                            .put(put.toRequestBody("application/json".toMediaType()))
-                    )
-                ).execute().use { it.isSuccessful }
-                if (!ok) return@runCatching SyncResult.Failed("Upload rejected by GitHub")
+                /*
+                 * الرفع يُعيد المحاولة مرّة بعد تعارض، ويقول سببه إن فشل.
+                 *
+                 * GitHub يرفض الكتابة إن تغيّر الملف بين قراءتنا وكتابتنا —
+                 * وهذا يقع كلّما زامن الكمبيوتر والجوال في دقيقة واحدة، وهو
+                 * الاستعمال الطبيعي لا حالة نادرة. والرمز ٤٠٩ يعني «اقرأ
+                 * الجديد وأعد المحاولة»، لا «فشل».
+                 *
+                 * وكانت الرسالة «Upload rejected by GitHub» تبتلع الرمز، فلا
+                 * يفرّق المستخدم بين تعارضٍ يزول بإعادة المحاولة وتوكنٍ
+                 * مرفوض يحتاج تدخّله. الآن الرمز في الرسالة.
+                 */
+                var attempt = 0
+                var sha = remote.sha
+                var lastCode = 0
+                while (attempt < 2) {
+                    val put = JSONObject().apply {
+                        put("message", "Tornado sync from phone")
+                        put("content", Base64.encodeToString(payload().toByteArray(), Base64.NO_WRAP))
+                        sha?.let { put("sha", it) }
+                    }.toString()
+                    val code = client.newCall(
+                        request(
+                            Request.Builder().url(contentsUrl())
+                                .put(put.toRequestBody("application/json".toMediaType()))
+                        )
+                    ).execute().use { if (it.isSuccessful) 0 else it.code }
+                    if (code == 0) { lastCode = 0; break }
+                    lastCode = code
+                    if (code != 409) break          // ليس تعارضاً — لا فائدة من التكرار
+                    sha = fetch()?.sha ?: break     // اقرأ البصمة الجديدة وأعد
+                    attempt++
+                }
+                if (lastCode != 0) return@runCatching SyncResult.Failed(
+                    when (lastCode) {
+                        401, 403 -> "Token rejected — check its access to this repo"
+                        404 -> "Repository not found — check its name in Settings"
+                        409 -> "Busy — another device is syncing, try again"
+                        else -> "Upload failed (HTTP $lastCode)"
+                    }
+                )
             }
             SyncResult.Success(merged.added, merged.uploaded, merged.removed)
         }.getOrElse { SyncResult.Failed(it.message?.take(90) ?: "No connection") }
@@ -138,7 +166,18 @@ class GitHubSync(
         val localTombstones = repository.tombstones().associateBy { it.word.lowercase() }
 
         // شواهد الحذف البعيدة تُطبَّق أولاً: كلمة حذفها الكمبيوتر لا تُستورَد
+        /*
+         * الشاهدة البعيدة تُحفظ كما تُطبَّق.
+         *
+         * كانت تُطبَّق فقط: تُحذف الكلمة المطابقة محلياً، ثم يرفع الجوال شواهده
+         * المحلّية وحدها — فتضيع كل شاهدة لا تطابق كلمةً موجودة عنده. قِستها:
+         * إحدى وعشرون شاهدة في المستودع صارت خمساً بعد رفعة واحدة من الجوال.
+         *
+         * وأثرها أن الحذف يُنقض: يفقد الجوال الشاهدة، فيرى الكمبيوتر الكلمة
+         * ناقصةً لا محذوفة، فيرفعها من جديد — وتعود كلمة حذفها المستخدم عمداً.
+         */
         val remoteDeleted = HashSet<String>()
+        val localTombIds = repository.tombstones().map { it.id }.toHashSet()
         remote.optJSONArray("tombstones")?.let { arr ->
             for (i in 0 until arr.length()) {
                 val t = arr.optJSONObject(i) ?: continue
@@ -146,6 +185,15 @@ class GitHubSync(
                 if (name.isBlank()) continue
                 remoteDeleted += name
                 localByName[name]?.let { repository.deleteById(it.id, it.word) }
+                // ونحفظها حتى لو لم تطابق كلمةً عندنا — وإلا ضاعت عند أول رفع
+                val id = t.optLong("id", 0L)
+                if (id != 0L && id !in localTombIds) {
+                    repository.rememberDeletion(
+                        id, t.optString("word"),
+                        t.optLong("deletedAt", System.currentTimeMillis())
+                    )
+                    localTombIds += id
+                }
             }
         }
 

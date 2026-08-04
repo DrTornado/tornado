@@ -25644,7 +25644,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 102;
+const BUILD = 103;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.
@@ -26926,7 +26926,7 @@ let audioPrepActive = false, audioPrepAbort = false;
  * فنبني ما يُشغَّل أولاً، والباقي يُبنى حين يُطلب ويُخزَّن بعدها للأبد. وهو
  * نفس ما استقرّ عليه الجوال: بطاقتان استباقاً لا مكتبة كاملة.
  */
-const AUDIO_PREP_AHEAD = 6;
+const AUDIO_PREP_AHEAD = 2;
 
 async function prepareAudioInBackground() {
   if (audioPrepActive || !neuralReady() || !words.length) return;
