@@ -25268,7 +25268,17 @@ async function lookup() {
     if (arr(parsed.meanings).length) {
       await addCard({
         id:Date.now(),
-        word: parsed.word || w,
+        /*
+         * الكلمة كما كتبها المستخدم، لا كما ردّها القاموس.
+         *
+         * القاموس يردّ الأصل: تكتب `molluscs` فيردّ `mollusc`، فتُحفظ باسم
+         * الأصل. ومن كان عنده `mollusc` سلفاً لا تُضاف عنده كلمة، فيبقى العدد
+         * كما هو ولا يفهم لماذا. وأسوأ: تختفي الصيغة التي يدرسها فعلاً.
+         *
+         * والمشتقّ كلمة مستقلّة تُحفظ وتُراجَع وتُنطق بذاتها — والمعاني
+         * القادمة من الأصل تبقى معها، فلا تخسر شيئاً.
+         */
+        word: w,
         ipa: parsed.ipa || '', arabicPron: parsed.arabicPron || '',
         oxford: parsed.oxford || '', cefr: parsed.cefr || '',
         pos: arr(parsed.pos),
@@ -25700,7 +25710,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 112;
+const BUILD = 113;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.
@@ -27084,14 +27094,29 @@ async function autoSyncOnStartup() {
     // الملاحظات تُسحب مع الكلمات في نفس الفتحة — إعداد واحد لمحتويين
     try { await notesPull(); } catch(e) { /* لا ملف بعد أو انقطاع — صمت */ }
 
+    /*
+     * المزامنة التلقائية تقول ما فعلت.
+     *
+     * كانت صامتة تماماً إلا لخطأ التوكن. فحين تفشل — انقطاع، أو مستودع خطأ،
+     * أو ملف غير مقروء — لا يظهر شيء، ويبقى العدد مختلفاً بين الجهازين بلا
+     * تفسير. وقد وقع هذا حرفياً: كلمة واحدة تنقص، وثلاث ساعات في تخمين السبب.
+     *
+     * الآن تُعلن النتيجة حين تتغيّر المكتبة، وتُعلن السبب حين تفشل.
+     */
     let remote = null;
+    const beforeCount = words.length;
     try {
       const text = await ghRestore();
       try { remote = JSON.parse(text); } catch(e) { remote = null; }
       await applyRestoredData(text, true);
+      const delta = words.length - beforeCount;
+      if (delta) flash((delta > 0 ? '⬇️ +' : '⬆️ ') + Math.abs(delta) + ' words — total ' + words.length);
     } catch(e) {
-      // أول مرة (لا ملف بعد) أو انقطاع — لا نزعج المستخدم بكل فتح
-      if (e.kind === 'auth') ghStatus('🔑 GitHub token rejected — re-enter it below');
+      const why = e.kind === 'auth'  ? '🔑 GitHub token rejected — re-enter it in 🔗 Integration'
+                : e.kind === 'empty' ? ''   // مستودع جديد بلا ملف بعد — طبيعي في أول مرّة
+                : e.kind === 'noconf'? ''
+                : '⚠️ Sync could not read the repo (' + ((e.raw || e.message) || 'network') + ')';
+      if (why) flash(why);
     }
 
     // ثم نرفع إن كنّا متقدّمين — بلا ضغطة، وبلا رفعة فارغة إن كنّا متطابقين
