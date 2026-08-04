@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-04T08:19:47.638Z",
+ "exportedAt": "2026-08-04T08:20:19.559Z",
  "words": [
   {
    "id": 1785831583823,
@@ -103,7 +103,9 @@
    "differences": [],
    "right": 0,
    "wrong": 0,
-   "last": null
+   "last": null,
+   "interval": 0,
+   "due": 0
   },
   {
    "id": 1785831071530,
@@ -192,87 +194,6 @@
    "engineVersion": 3,
    "interval": 0,
    "due": 0
-  },
-  {
-   "id": 1784978307444,
-   "word": "foraging",
-   "ipa": "",
-   "arabicPron": "",
-   "oxford": "",
-   "cefr": "",
-   "pos": [
-    "verb",
-    "noun"
-   ],
-   "meanings": [
-    {
-     "pos": "verb",
-     "en": "To search for and gather food for animals, particularly cattle and horses",
-     "ar": "للبحث عن الطعام للحيوانات وجمعه، وخاصة الماشية والخيول"
-    },
-    {
-     "pos": "verb",
-     "en": "To rampage through, gathering and destroying as one goes",
-     "ar": "الهيجان والجمع والتدمير كما يذهب المرء"
-    },
-    {
-     "pos": "noun",
-     "en": "The act of searching for food",
-     "ar": "فعل البحث عن الطعام"
-    }
-   ],
-   "inflections": [
-    "foraging",
-    "foragings",
-    "foraginged",
-    "foraginging"
-   ],
-   "derivatives": [],
-   "synonyms": [
-    {
-     "en": "forage",
-     "ar": "علف الماشية, التماس للعلف"
-    }
-   ],
-   "collocations": [
-    {
-     "en": "foraging parties",
-     "ar": "حفلات البحث عن الطعام"
-    },
-    {
-     "en": "foraging behavior",
-     "ar": "سلوك البحث عن الطعام"
-    },
-    {
-     "en": "foraging behaviour",
-     "ar": "سلوك البحث عن الطعام"
-    },
-    {
-     "en": "optimal foraging",
-     "ar": "البحث الأمثل عن الطعام"
-    }
-   ],
-   "examples": [
-    {
-     "en": "Ziri went foraging.",
-     "ar": ""
-    }
-   ],
-   "differences": [],
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "interval": 0,
-   "due": 0,
-   "engineVersion": 23,
-   "ipaUS": "",
-   "ipaUK": "",
-   "estCefr": "",
-   "freqLabel": "",
-   "audioUS": "",
-   "audioUK": "",
-   "audioGen": "",
-   "favorite": "false"
   },
   {
    "id": 1784974772189,
@@ -786,98 +707,6 @@
    "engineVersion": 3,
    "ipaUS": "/ˈɛvɪdəntli/",
    "ipaUK": "/ˈɛvɪdəntli/",
-   "audioUK": "-uk"
-  },
-  {
-   "id": 1784811704077,
-   "word": "articulation",
-   "ipa": "/ˌa(r).ʈɪ.k(j)ʊˌle.ʃən/",
-   "arabicPron": "ارتيكيليشن",
-   "oxford": "",
-   "cefr": "",
-   "pos": [
-    "noun"
-   ],
-   "meanings": [
-    {
-     "pos": "noun",
-     "en": "(uncountable) The quality, clarity, or sharpness of speech; the movement within the mouth that allows for those things.",
-     "ar": ""
-    },
-    {
-     "pos": "noun",
-     "en": "(phonetics) The mechanism by which a sound is formed in the vocal tract.",
-     "ar": ""
-    },
-    {
-     "pos": "noun",
-     "en": "(countable) A manner or method by which elements of a system are connected.",
-     "ar": ""
-    },
-    {
-     "pos": "noun",
-     "en": "A joint or the collection of joints at which something is articulated, or hinged, for bending.",
-     "ar": ""
-    },
-    {
-     "pos": "noun",
-     "en": "Such a joint in an animalian body, as for example between bones or between exoskeleton segments.",
-     "ar": ""
-    }
-   ],
-   "inflections": [
-    "articulation",
-    "articulations"
-   ],
-   "derivatives": [],
-   "synonyms": [
-    {
-     "en": "joint",
-     "ar": "وَصْلَةٌ"
-    },
-    {
-     "en": "juncture",
-     "ar": "مرحلة, تحول, نقطة إتصال, ظرف حال, رباط"
-    },
-    {
-     "en": "join",
-     "ar": "ينضم"
-    },
-    {
-     "en": "articulatio",
-     "ar": "‎ مَفْصِل:مَوصِلٌ عَظْمِيّ‎"
-    },
-    {
-     "en": "junction",
-     "ar": "ملتقى طرق, وصلة, ملتقى الأنهار, تقاطع, نقطة إتصال"
-    }
-   ],
-   "collocations": [],
-   "examples": [
-    {
-     "en": "The articulation allowed the robot to move around corners.",
-     "ar": ""
-    },
-    {
-     "en": "His volume is reasonable, but his articulation could use work.",
-     "ar": ""
-    },
-    {
-     "en": "manner of articulation",
-     "ar": ""
-    }
-   ],
-   "differences": [],
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "interval": 0,
-   "due": 0,
-   "ipaUS": "/ɑɹˌtɪk.jəˈleɪ.ʃən/",
-   "audioUS": "-us",
-   "audioGen": "https://api.dictionaryapi.dev/media/pronunciations/en/articulation-au.mp3",
-   "engineVersion": 3,
-   "ipaUK": "/ɑːˌtɪk.jʊˈleɪ.ʃən/",
    "audioUK": "-uk"
   },
   {
@@ -9941,6 +9770,11 @@
    "id": 1785084977101,
    "word": "skiing",
    "deletedAt": 1785786464238
+  },
+  {
+   "id": 1784811704077,
+   "word": "articulation",
+   "deletedAt": 1785831613203
   }
  ]
 }
