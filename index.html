@@ -23760,6 +23760,7 @@ function renderNotes() {
     ta.value = '';
     document.getElementById('note-title').value = '';
 
+    scheduleBackup(true);   // إضافة نوتة — مزامنة وإثراء فوراً
     try { await notesPush(); flash('✅ Saved — it will reach your phone'); }
     catch (e) { flash('✅ Saved on this computer — sync will retry'); }
     renderNotes();
@@ -23787,6 +23788,7 @@ function renderNotes() {
       if (notePlayer.id != null && String(notePlayer.id) === b.dataset.del) noteStop();
       notes = notes.filter(n => String(n.id) !== b.dataset.del);
       try { await notesPush(); } catch (e) { /* الحذف محلي على كل حال */ }
+      scheduleBackup(true);   // حذف نوتة — مزامنة وإثراء فوراً
       renderNotes();
     };
   });
@@ -24555,6 +24557,8 @@ function scheduleBackup() {
    * حين تنتهي الجولة كلها.
    */
   if (bgUpgradeActive) return;
+  // الشارة تحمر لكل حفظ، والمزامنة تُطلب صراحةً عند الإضافة والحذف وحدها
+  if (!arguments[0]) return;
   if (!hasAutoSaveTarget()) return; // لا وجهة حفظ صامتة متاحة (مثلاً جوال بلا Integration) — الشارة الحمراء تبقى التذكير الوحيد الممكن
   clearTimeout(autoPushTimer);
   autoPushTimer = setTimeout(async () => {
@@ -24573,6 +24577,7 @@ document.getElementById('sync-badge').onclick = () => doManualBackup();
 
 async function addCard(card) {
   words.unshift(card); await persist();
+  scheduleBackup(true);   // إضافة كلمة — مزامنة وإثراء فوراً
   document.getElementById('add-hint').classList.add('hidden');
   document.getElementById('manual-box').classList.add('hidden');
   document.getElementById('last-card').innerHTML =
@@ -24954,7 +24959,7 @@ document.getElementById('batch-start').onclick = async () => {
       const card = await fetchEntryOnce(w, 25000);
       if (arr(card.meanings).length) {
         words.unshift({ ...card, id: Date.now() + Math.random(), right: 0, wrong: 0, last: null });
-        await persist(); updateCount();
+        await persist(); updateCount(); scheduleBackup(true);
         ok++;
       } else { fail++; failedWords.push(w); }
     } catch(e) { fail++; failedWords.push(w); }
@@ -25340,6 +25345,7 @@ function renderList() {
     const delWord = words.find(x => x.id === delId);
     words = words.filter(x => x.id !== delId);
     tombstones.push({ id: delId, word: delWord ? delWord.word : '', deletedAt: Date.now() });
+    scheduleBackup(true);   // حذف كلمة — مزامنة وإثراء فوراً
     if (tombstones.length > 2000) tombstones = tombstones.slice(-2000); // سقف معقول يمنع أي تراكم غير محدود
     await persistTombstones();
     expandedIds.delete(delId); confirmingId = null;
@@ -25676,7 +25682,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 110;
+const BUILD = 111;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.
