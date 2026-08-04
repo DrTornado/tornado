@@ -53,7 +53,7 @@ class AddWordViewModel(app: Application) : AndroidViewModel(app) {
     private fun pushToComputer() = viewModelScope.launch {
         runCatching {
             container.sync.repo = settings.syncRepo()
-            if (container.sync.canPush) container.sync.sync(push = true)
+            com.tornado.vocab.data.SyncCoordinator.syncNow(getApplication())
         }
         // الكلمة المضافة للتوّ قد تكون وصلت ناقصة — تدخل طابور الإثراء فوراً
         container.appScope.launch { runCatching { container.enricher.runUntilComplete() } }
