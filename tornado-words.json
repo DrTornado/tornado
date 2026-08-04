@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-04T13:12:57.346Z",
+ "exportedAt": "2026-08-04T13:13:08.743Z",
  "words": [
   {
    "id": 1785840072035,
@@ -104,8 +104,8 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A place where the dead are buried",
-     "ar": "مكان دفن الموتى"
+     "en": "A place where the dead are buried; a graveyard or memorial park.",
+     "ar": "مكان دفن الموتى ؛ مقبرة أو حديقة تذكارية."
     }
    ],
    "inflections": [
@@ -177,7 +177,7 @@
    "ipaUK": "/ˈsɛm.ɪˌtɹi/",
    "audioUS": "-us",
    "audioUK": "-uk",
-   "engineVersion": 21,
+   "engineVersion": 3,
    "estCefr": "",
    "freqLabel": "",
    "audioGen": "",
@@ -494,8 +494,8 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "One who studies astrophysics",
-     "ar": "الشخص الذي يدرس الفيزياء الفلكية"
+     "en": "One who studies astrophysics.",
+     "ar": "الشخص الذي يدرس الفيزياء الفلكية."
     }
    ],
    "inflections": [
@@ -546,7 +546,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -2069,18 +2069,8 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "The state of being tranquil",
-     "ar": "حالة الهدوء"
-    },
-    {
-     "pos": "noun",
-     "en": "The absence of disturbance",
-     "ar": "غياب الاضطراب"
-    },
-    {
-     "pos": "noun",
-     "en": "American standard spelling of tranquillity",
-     "ar": "التهجئة القياسية الأمريكية للهدوء"
+     "en": "American standard spelling of tranquillity.",
+     "ar": "التهجئة القياسية الأمريكية للهدوء."
     }
    ],
    "inflections": [
@@ -2144,7 +2134,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
@@ -2826,18 +2816,13 @@
    "meanings": [
     {
      "pos": "verb",
-     "en": "To repair, as anything that is torn, broken, defaced, decayed, or the like",
-     "ar": "لإصلاح، مثل أي شيء ممزق أو مكسور أو مشوه أو متحلل أو ما شابه ذلك"
-    },
-    {
-     "pos": "verb",
-     "en": "To alter for the better",
-     "ar": "أن يغير للأفضل"
+     "en": "present participle and gerund of mend",
+     "ar": "الحاضر الفاعل و gerund من إصلاح"
     },
     {
      "pos": "noun",
-     "en": "The act by which something is mended or repaired",
-     "ar": "الفعل الذي يتم من خلاله إصلاح شيء ما أو إصلاحه"
+     "en": "The act by which something is mended or repaired.",
+     "ar": "الفعل الذي يتم من خلاله إصلاح شيء ما أو إصلاحه."
     }
    ],
    "inflections": [
@@ -2884,7 +2869,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "B2",
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "audioUS": "",
