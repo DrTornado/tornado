@@ -52,23 +52,52 @@ class VoiceChain(
     @Volatile var lastSource: VoiceSource = VoiceSource.NONE
         private set
 
+    /**
+     * @param voiceSid صوت كوكورو لهذا النداء وحده — لزرّي اللهجة.
+     * @param forceHuman يطلب التسجيل البشري مهما كان وضع الصوت المختار.
+     *
+     * الثاني يخصّ زرّي 🇺🇸 و🇬🇧 وحدهما: تسجيلٌ بشريّ حقيقي لكلمة مفردة هو
+     * بالضبط ما يطلبه من يضغطهما، بينما سرد البطاقة يبقى على المحرّك المختار.
+     * وربطهما بوضع واحد جعل الطبقة البشرية تُعطَّل لمن اختار كوكورو — فيسمع
+     * الزرّان صوتاً مولَّداً واحداً ولا يفترقان.
+     */
+    /**
+     * @param humanAllowed هل يجوز استعمال تسجيل بشري في هذا النداء؟
+     *
+     * زرّا 🇺🇸 و🇬🇧 يمنعانه: وظيفتهما مقارنة لهجتين، فيلزمهما صوتان ثابتان
+     * يعرفهما المستخدم سلفاً — سارة وجورج. والتسجيل البشري يغيّر الصوت من
+     * كلمة لأخرى بلا أن يفهم أحد لماذا، فتضيع المقارنة وهي كل غرض الزرّين.
+     *
+     * والتسجيلات لم تُحذف: هي مصدر سرد البطاقات كما كانت لمن اختار
+     * «الصوت البشري أولاً».
+     */
     suspend fun synthesize(
         segment: Segment,
         target: File,
-        headword: String? = null
+        headword: String? = null,
+        voiceSid: Int? = null,
+        forceHuman: Boolean = false,
+        humanAllowed: Boolean = true
     ): VoiceSource {
-        val result = resolve(segment, target, headword)
+        val result = resolve(segment, target, headword, voiceSid, forceHuman, humanAllowed)
         lastSource = result
         return result
     }
 
-    private suspend fun resolve(segment: Segment, target: File, headword: String?): VoiceSource {
-        // ١ — تسجيل بشري: للكلمة وجملها فقط، وفي هذا الوضع وحده
-        if (strategy == VoiceStrategy.HUMAN_FIRST) {
+    private suspend fun resolve(
+        segment: Segment,
+        target: File,
+        headword: String?,
+        voiceSid: Int? = null,
+        forceHuman: Boolean = false,
+        humanAllowed: Boolean = true
+    ): VoiceSource {
+        // ١ — تسجيل بشري: للكلمة وجملها فقط، وفي هذا الوضع أو بطلب صريح
+        if (humanAllowed && (strategy == VoiceStrategy.HUMAN_FIRST || forceHuman)) {
             when (segment.role) {
                 SegRole.HEADWORD -> {
                     val word = headword ?: segment.text
-                    if (human.fetchWord(word, target)) return VoiceSource.HUMAN
+                    if (human.fetchWord(word, target, force = forceHuman, strictAccent = forceHuman)) return VoiceSource.HUMAN
                 }
                 SegRole.EXAMPLE -> {
                     if (human.fetchSentence(segment.text, target)) return VoiceSource.HUMAN
@@ -85,7 +114,7 @@ class VoiceChain(
          * الجهاز أصدق من نطق مكسور.
          */
         if (preferKokoro && segment.lang == SegLang.EN && kokoro?.isReady == true &&
-            kokoro.synthesize(segment.text, target)
+            kokoro.synthesize(segment.text, target, voiceSid)
         ) return VoiceSource.KOKORO
 
         /*
@@ -102,7 +131,7 @@ class VoiceChain(
         // ٤ — كوكورو كملاذ أخير حتى لو اختار المستخدم محرك الجهاز:
         // محرك جهاز معطوب لا يبرّر بطاقة صامتة والبديل حاضر
         if (!preferKokoro && segment.lang == SegLang.EN && kokoro?.isReady == true &&
-            kokoro.synthesize(segment.text, target)
+            kokoro.synthesize(segment.text, target, voiceSid)
         ) return VoiceSource.KOKORO
 
         return VoiceSource.NONE

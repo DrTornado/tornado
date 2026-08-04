@@ -24172,10 +24172,22 @@ function ghRefreshUi() {
   if (localRow) localRow.style.display = fsSupported ? 'block' : 'none';
 }
 document.getElementById('gh-toggle').onclick = e => { e.preventDefault(); document.getElementById('gh-box').classList.toggle('hidden'); ghRefreshUi(); updateLinkStatus(); };
+/*
+ * تغيير المستودع لا يشترط إعادة كتابة التوكن.
+ *
+ * كان الحفظ يرفض ما لم يُملأ الحقلان، والتوكن محفوظ داخل المتصفّح ولا يُعرض —
+ * وGitHub لا يُظهره مرّة ثانية بعد إنشائه. فمن أراد تبديل المستودع وحده وجد
+ * نفسه أمام خيارين: أن يجد نسخة من توكنه، أو أن يولّد توكناً جديداً ويعيد
+ * لصقه في كل جهاز. وكلاهما عقوبة على تغيير حرفٍ في اسم مستودع.
+ *
+ * الآن: حقل التوكن فارغ = أبقِ الحالي. والتوكن يُطلب فقط حين لا يوجد أصلاً.
+ */
 document.getElementById('gh-save').onclick = () => {
-  const token = document.getElementById('gh-token').value.trim();
+  const typed = document.getElementById('gh-token').value.trim();
   const repo = document.getElementById('gh-repo').value.trim();
-  if (!token || !repo || !repo.includes('/')) { ghStatus('⚠️ Enter both the token and repo as owner/repo'); return; }
+  const token = typed || (ghConf() || {}).token || '';
+  if (!repo || !repo.includes('/')) { ghStatus('⚠️ Enter the repo as owner/repo'); return; }
+  if (!token) { ghStatus('⚠️ Enter your token — none is saved yet'); return; }
   ghSetConf({ token, repo });
   document.getElementById('gh-token').value = '';
   ghRefreshUi(); updateLinkStatus();
@@ -25632,7 +25644,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 100;
+const BUILD = 101;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.
