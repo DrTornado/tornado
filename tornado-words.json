@@ -1,8 +1,80 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-04T08:35:02.576Z",
+ "exportedAt": "2026-08-04T08:58:47.628Z",
  "words": [
+  {
+   "id": 1785833923266,
+   "word": "psychology",
+   "ipa": "",
+   "arabicPron": "سايكالدجي",
+   "oxford": "3000",
+   "cefr": "B2",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "(uncountable) The study of the human mind.",
+     "ar": "(لا يحصى) دراسة العقل البشري."
+    },
+    {
+     "pos": "noun",
+     "en": "(uncountable) The study of human or animal behavior.",
+     "ar": "(لا تحصى) دراسة السلوك البشري أو الحيواني."
+    },
+    {
+     "pos": "noun",
+     "en": "(countable) The mental, emotional, and behavioral characteristics pertaining to a specified person, group, or activity.",
+     "ar": "(قابل للعد) الخصائص العقلية والعاطفية والسلوكية المتعلقة بشخص أو مجموعة أو نشاط محدد."
+    },
+    {
+     "pos": "noun",
+     "en": "The study of the human mind.",
+     "ar": "دراسة العقل البشري."
+    },
+    {
+     "pos": "noun",
+     "en": "The study of human or animal behavior.",
+     "ar": "دراسة السلوك البشري أو الحيواني."
+    }
+   ],
+   "inflections": [
+    "psychology",
+    "psychologies"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "psychological science",
+     "ar": "علم النفس"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "social psychology",
+     "ar": "عِلْمُ النَّفْسِ الاجْتِماعِيّ"
+    },
+    {
+     "en": "clinical psychology",
+     "ar": "علم النفس السريري"
+    },
+    {
+     "en": "experimental psychology",
+     "ar": "علم النفس التجريبي"
+    },
+    {
+     "en": "educational psychology",
+     "ar": "عِلْمُ النّفْسِ التّرْبَوِيّ"
+    }
+   ],
+   "examples": [],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null
+  },
   {
    "id": 1785832498322,
    "word": "astrophysicist",
