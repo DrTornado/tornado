@@ -1,8 +1,99 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-04T08:20:19.559Z",
+ "exportedAt": "2026-08-04T08:20:30.071Z",
  "words": [
+  {
+   "id": 1785831623011,
+   "word": "articulation",
+   "ipa": "/ˌa(r).ʈɪ.k(j)ʊˌle.ʃən/",
+   "arabicPron": "ارتيكيليشن",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "noun"
+   ],
+   "meanings": [
+    {
+     "pos": "noun",
+     "en": "(uncountable) The quality, clarity, or sharpness of speech; the movement within the mouth that allows for those things.",
+     "ar": "(لا حصر لها) جودة أو وضوح أو حدة الكلام ؛ الحركة داخل الفم التي تسمح بتلك الأشياء."
+    },
+    {
+     "pos": "noun",
+     "en": "(phonetics) The mechanism by which a sound is formed in the vocal tract.",
+     "ar": "(الصوتيات) الآلية التي يتشكل بها الصوت في المجرى الصوتي."
+    },
+    {
+     "pos": "noun",
+     "en": "(countable) A manner or method by which elements of a system are connected.",
+     "ar": "(قابل للعد) طريقة أو طريقة يتم من خلالها توصيل عناصر النظام."
+    },
+    {
+     "pos": "noun",
+     "en": "A joint or the collection of joints at which something is articulated, or hinged, for bending.",
+     "ar": "مفصل أو مجموعة من المفاصل التي يتم فيها توضيح شيء ما، أو تعليقه، للانحناء."
+    },
+    {
+     "pos": "noun",
+     "en": "Such a joint in an animalian body, as for example between bones or between exoskeleton segments.",
+     "ar": "مثل هذا المفصل في جسم حيواني، على سبيل المثال بين العظام أو بين أجزاء الهيكل الخارجي."
+    }
+   ],
+   "inflections": [
+    "articulation",
+    "articulations"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "joint",
+     "ar": "وَصْلَةٌ"
+    },
+    {
+     "en": "juncture",
+     "ar": "مرحلة, تحول, نقطة إتصال, ظرف حال, رباط"
+    },
+    {
+     "en": "join",
+     "ar": "ينضم"
+    },
+    {
+     "en": "articulatio",
+     "ar": "‎ مَفْصِل:مَوصِلٌ عَظْمِيّ‎"
+    },
+    {
+     "en": "junction",
+     "ar": "ملتقى طرق, وصلة, ملتقى الأنهار, تقاطع, نقطة إتصال"
+    }
+   ],
+   "collocations": [],
+   "examples": [
+    {
+     "en": "The articulation allowed the robot to move around corners.",
+     "ar": "سمح النطق للروبوت بالتحرك حول الزوايا."
+    },
+    {
+     "en": "His volume is reasonable, but his articulation could use work.",
+     "ar": "حجمه معقول، لكن تعبيره يمكن أن يستخدم العمل."
+    },
+    {
+     "en": "manner of articulation",
+     "ar": "طريقة التعبير"
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "ipaUS": "/ɑɹˌtɪk.jəˈleɪ.ʃən/",
+   "ipaUK": "/ɑːˌtɪk.jʊˈleɪ.ʃən/",
+   "audioUS": "-us",
+   "audioUK": "-uk",
+   "engineVersion": 3,
+   "interval": 0,
+   "due": 0
+  },
   {
    "id": 1785831583823,
    "word": "ample",
@@ -105,7 +196,12 @@
    "wrong": 0,
    "last": null,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "ipaUS": "/ˈæm.pəl/",
+   "audioUS": "-us",
+   "freqLabel": "Top 18,000 words",
+   "estCefr": "C1",
+   "engineVersion": 3
   },
   {
    "id": 1785831071530,
