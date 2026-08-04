@@ -154,7 +154,7 @@
   <div id="kokoro-status" style="font-size:11px;color:#8A93A3;margin-top:3px;text-align:center;"></div>
   <div id="gh-box" class="hidden" style="background:#1B212B;border-radius:10px;padding:12px;margin-top:8px;">
     <p id="gh-intro" style="font-size:12.5px;color:#8A93A3;margin:0 0 8px;line-height:1.7;"></p>
-    <input class="inp" id="gh-token" type="password" placeholder="Fine-grained token (repo: Contents R/W)" style="font-size:13px;margin-bottom:6px;">
+    <input class="inp" id="gh-token" type="password" placeholder="Token — leave empty to keep the saved one" style="font-size:13px;margin-bottom:6px;">
     <input class="inp" id="gh-repo" placeholder="owner/repo — e.g. DrTornado/tornado" style="font-size:13px;margin-bottom:8px;">
     <div style="display:flex;gap:8px;">
       <button class="btn" id="gh-save" style="flex:1;background:#E8B04B;color:#242B36;font-size:13px;">Save</button>
@@ -25644,7 +25644,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 101;
+const BUILD = 102;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.
