@@ -176,15 +176,25 @@ class GitHubSync(
          * وأثرها أن الحذف يُنقض: يفقد الجوال الشاهدة، فيرى الكمبيوتر الكلمة
          * ناقصةً لا محذوفة، فيرفعها من جديد — وتعود كلمة حذفها المستخدم عمداً.
          */
-        val remoteDeleted = HashSet<String>()
+        val remoteDeleted = HashSet<Long>()
         val localTombIds = repository.tombstones().map { it.id }.toHashSet()
+        val localById = localWords.associateBy { it.id }
         remote.optJSONArray("tombstones")?.let { arr ->
             for (i in 0 until arr.length()) {
                 val t = arr.optJSONObject(i) ?: continue
                 val name = t.optString("word").lowercase()
                 if (name.isBlank()) continue
-                remoteDeleted += name
-                localByName[name]?.let { repository.deleteById(it.id, it.word) }
+                /*
+                 * الشاهدة تخصّ بطاقةً بعينها لا اسماً.
+                 *
+                 * كان الحذف والحظر بالاسم، فمن حذف كلمة ثم أضافها من جديد وجد
+                 * النسخة الجديدة تُحذف أو تُرفض للأبد — والبطاقتان مختلفتان
+                 * تماماً، لا تشتركان إلا في حروف الاسم.
+                 */
+                t.optLong("id", 0L).takeIf { it != 0L }?.let { tid ->
+                    remoteDeleted += tid
+                    localById[tid]?.let { repository.deleteById(it.id, it.word) }
+                }
                 // ونحفظها حتى لو لم تطابق كلمةً عندنا — وإلا ضاعت عند أول رفع
                 val id = t.optLong("id", 0L)
                 if (id != 0L && id !in localTombIds) {
@@ -208,9 +218,21 @@ class GitHubSync(
             val name = w.word.trim().lowercase()
             if (name.isBlank()) return@forEach
             remoteNames += name
-            if (name in remoteDeleted) return@forEach
-            // حذفناها هنا عمداً — لا نعيدها لمجرّد أنها ما زالت في الملف البعيد
-            if (name in localTombstones) return@forEach
+            if (w.id in remoteDeleted) return@forEach
+            /*
+             * الشاهدة تمنع ما حُذف، لا ما أُضيف بعده.
+             *
+             * كان الحظر بالاسم: من حذف كلمة على جواله ثم أضافها على حاسوبه لم
+             * تعد إليه أبداً — يرفضها الجوال إلى الأبد، ويرفع نسخته الناقصة،
+             * فيعيد الحاسوب رفع الكاملة، وتدور الحلقة بلا نهاية. وقِستها:
+             * ثلاث كلمات تسقط في كل دورة، والعددان لا يتساويان أبداً.
+             *
+             * والويب يحظر بالمعرّف، والكلمة المُعادة تحمل معرّفاً جديداً فتمرّ
+             * عنده وتُرفض هنا — وهذا التفاوت وحده كان كل العطل.
+             *
+             * فصار الحظر بالمعرّف: الشاهدة تخصّ البطاقة التي حُذفت بعينها.
+             */
+            if (w.id in localTombIds) return@forEach
             if (localByName.containsKey(name)) return@forEach
             repository.addWord(w)
             added++
