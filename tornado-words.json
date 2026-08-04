@@ -1,8 +1,96 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-04T08:11:09.478Z",
+ "exportedAt": "2026-08-04T08:11:14.852Z",
  "words": [
+  {
+   "id": 1785831071530,
+   "word": "foraging",
+   "ipa": "/ɪˈɹæd.ɪ.keɪt/",
+   "arabicPron": "رادكيت",
+   "oxford": "",
+   "cefr": "",
+   "pos": [
+    "verb",
+    "participle"
+   ],
+   "meanings": [
+    {
+     "pos": "verb",
+     "en": "present participle and gerund of forage",
+     "ar": "مجرى العلف الحالي وجيروند العلف"
+    },
+    {
+     "pos": "noun",
+     "en": "The act of searching for food or other items.",
+     "ar": "فعل البحث عن طعام أو مواد أخرى."
+    }
+   ],
+   "inflections": [
+    "eradicate",
+    "eradicates",
+    "eradicated",
+    "eradicating"
+   ],
+   "derivatives": [],
+   "synonyms": [
+    {
+     "en": "root out",
+     "ar": "اِسْتَأصَلَ ; اِجْتَثّ ; اِجْتَثّ ; أجْحَف بِـ ; اِسْتَأصَل ; اِصْطَلَمَ ; إصْطَلَم ; اِقْتَلَعَ ; اِقْتَلَع ; أَهْلَك ; قَطَعَ دابِرَ كَذَا"
+    },
+    {
+     "en": "root up",
+     "ar": "اِسْتَأصَلَ ; اِجْتَثّ ; اِجْتَثّ ; أجْحَف بِـ ; اِسْتَأصَل ; اِصْطَلَمَ ; إصْطَلَم ; اِقْتَلَعَ ; اِقْتَلَع ; أَهْلَك ; قَطَعَ دابِرَ كَذَا"
+    },
+    {
+     "en": "uproot",
+     "ar": "اجتث, استأصل"
+    },
+    {
+     "en": "annihilate",
+     "ar": "محق, أباد, دمر, أبطل"
+    },
+    {
+     "en": "eliminate",
+     "ar": "أزال, قصى, تجاهل, استبعد, ألغى, طرد"
+    }
+   ],
+   "collocations": [
+    {
+     "en": "foraging parties",
+     "ar": "حفلات البحث عن الطعام"
+    },
+    {
+     "en": "foraging behavior",
+     "ar": "سلوك البحث عن الطعام"
+    },
+    {
+     "en": "foraging behaviour",
+     "ar": "سلوك البحث عن الطعام"
+    },
+    {
+     "en": "optimal foraging",
+     "ar": "البحث الأمثل عن الطعام"
+    }
+   ],
+   "examples": [
+    {
+     "en": "Near-synonyms: delete, erase",
+     "ar": "شبه المرادفات: حذف، محو"
+    },
+    {
+     "en": "Smallpox was globally eradicated in 1980.",
+     "ar": "تم القضاء على الجدري عالميًا في عام 1980."
+    }
+   ],
+   "differences": [],
+   "right": 0,
+   "wrong": 0,
+   "last": null,
+   "engineVersion": 3,
+   "interval": 0,
+   "due": 0
+  },
   {
    "id": 1784978307444,
    "word": "foraging",
@@ -1363,18 +1451,8 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "The state of being tranquil",
-     "ar": "حالة الهدوء"
-    },
-    {
-     "pos": "noun",
-     "en": "The absence of disturbance",
-     "ar": "غياب الاضطراب"
-    },
-    {
-     "pos": "noun",
-     "en": "American standard spelling of tranquillity",
-     "ar": "التهجئة القياسية الأمريكية للهدوء"
+     "en": "American standard spelling of tranquillity.",
+     "ar": "التهجئة القياسية الأمريكية للهدوء."
     }
    ],
    "inflections": [
@@ -1438,7 +1516,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 23,
+   "engineVersion": 3,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
