@@ -157,13 +157,17 @@ class NotesViewModel(app: Application) : AndroidViewModel(app) {
         notes.setLastChunk(id, chunk)
     }
 
+    /**
+     * إضافة نوتة أو حذفها تُطلق المزامنة الشاملة، لا رفع النوتات وحده.
+     *
+     * كانت ترفع الملاحظات فقط، فتصل النوتة إلى الكمبيوتر ولا يجري شيء آخر:
+     * لا تُسحب كلمةٌ أضيفت هناك، ولا يعمل الإثراء. والمستخدم يقرأ «مزامنة»
+     * كلمةً واحدة تعني كل شيء، لا نصفه.
+     */
     private fun pushToComputer() {
-        val container = getApplication<Application>().tornado
-        container.appScope.launch {
-            runCatching {
-                container.noteSync.repo = container.settings.syncRepo()
-                if (container.noteSync.canPush) container.noteSync.sync()
-            }
+        val app = getApplication<Application>()
+        app.tornado.appScope.launch {
+            runCatching { com.tornado.vocab.data.SyncCoordinator.syncNow(app) }
         }
     }
 }

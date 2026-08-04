@@ -24306,10 +24306,28 @@ async function backgroundUpgrade() {
     const idx = words.findIndex(x => x.id === w0.id);
     if (idx === -1) { done++; continue; } // الكلمة اتحذفت أثناء الانتظار
     if (statusEl) statusEl.textContent = `🔄 Improving saved words in the background… ${done + 1}/${total}`;
+    /*
+     * الفشل يُعدّ، ولا يُبتلع.
+     *
+     * كان `catch` فارغاً: تفشل الشبكة أو تنفد حصّة المترجم فلا تُعلَّم الكلمة،
+     * فتبقى «قديمة» إلى الأبد وتُعاد المحاولة عليها في كل فتحة. ورأى المستخدم
+     * الرقم نفسه — خمس عشرة — في كل مرّة وسأل محقّاً: «هل هذا الزرّ مزيّف؟».
+     * وكان محقّاً: العمل لا ينتهي لأن الفشل لا يُسجَّل.
+     *
+     * وثلاث محاولات تكفي: ما لم يُجب المصدر بعدها لن يجيب، وإصرارنا عليه يمنع
+     * بقيّة المكتبة من دورها.
+     */
     try {
       const fresh = await fetchEntryOnce(words[idx].word, 20000);
-      words[idx] = arr(fresh.meanings).length ? mergeCards(words[idx], fresh) : { ...words[idx], engineVersion: ENGINE_VERSION };
-    } catch(e) {}
+      words[idx] = arr(fresh.meanings).length
+        ? { ...mergeCards(words[idx], fresh), engineVersion: ENGINE_VERSION, upgradeTries: 0 }
+        : { ...words[idx], engineVersion: ENGINE_VERSION };
+    } catch(e) {
+      const tries = (words[idx].upgradeTries || 0) + 1;
+      words[idx] = tries >= 3
+        ? { ...words[idx], engineVersion: ENGINE_VERSION, upgradeTries: tries }
+        : { ...words[idx], upgradeTries: tries };
+    }
     await persist();
     done++;
     await new Promise(r => setTimeout(r, 600)); // نفس مبدأ الرفق بالخدمات المجانية، بس دون ما يعطّل المستخدم بشيء
@@ -25682,7 +25700,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 111;
+const BUILD = 112;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.
