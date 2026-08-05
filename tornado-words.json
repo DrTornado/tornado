@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-05T17:56:25.963Z",
+ "exportedAt": "2026-08-05T17:56:33.651Z",
  "words": [
   {
    "id": 1785705257083,
@@ -1216,7 +1216,7 @@
   {
    "id": 1784662047598,
    "word": "creature",
-   "ipa": "/kɹiːˈeɪ.tjʊə(ɹ)/",
+   "ipa": "/ˈkɹiːt͡ʃə/",
    "arabicPron": "كريتشر",
    "oxford": "3000",
    "cefr": "B2",
@@ -1226,6 +1226,16 @@
    "meanings": [
     {
      "pos": "noun",
+     "en": "A living being; an animal or (sometimes derogatory) a human.",
+     "ar": "كائن حي ؛ حيوان أو (في بعض الأحيان مهين) إنسان."
+    },
+    {
+     "pos": "noun",
+     "en": "A created thing, whether animate or inanimate; a creation.",
+     "ar": "شيء مخلوق، سواء كان حيًّا أو غير حيّ ؛ خلق."
+    },
+    {
+     "pos": "noun",
      "en": "A living being, such as an animal, monster, or alien.",
      "ar": "كائن حي، مثل حيوان أو وحش أو فضائي."
     },
@@ -1233,11 +1243,6 @@
      "pos": "noun",
      "en": "An unidentified, mysterious, and often monstrous animal or being.",
      "ar": "حيوان أو كائن مجهول الهوية وغامض وغالبًا ما يكون وحشيًا."
-    },
-    {
-     "pos": "noun",
-     "en": "(sometimes derogatory) A human.",
-     "ar": "(مهين في بعض الأحيان) إنسان."
     },
     {
      "pos": "noun",
@@ -1292,6 +1297,10 @@
    ],
    "examples": [
     {
+     "en": "He's a creature of habit.   insects and other creatures",
+     "ar": "إنه مخلوق من العادة. الحشرات والمخلوقات الأخرى"
+    },
+    {
      "en": "insects and other creatures",
      "ar": "الحشرات والمخلوقات الأخرى"
     },
@@ -1306,10 +1315,10 @@
    "last": "right",
    "interval": 1,
    "due": 1785198224349,
-   "ipaUS": "/ˈkɹi.tʃɚ/",
-   "audioUS": "-us",
-   "audioUK": "-uk",
-   "engineVersion": 3,
+   "ipaUS": "/ˈkɹiːt͡ʃəɹ/",
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cre/creat/creature__us_2.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/cre/creat/creature__gb_1.mp3",
+   "engineVersion": 2,
    "ipaUK": "/ˈkɹiː.tʃə/"
   },
   {
@@ -2837,76 +2846,6 @@
    "right": 0,
    "wrong": 0,
    "last": null,
-   "id": 1784487423998,
-   "word": "statistically",
-   "ipa": "/stəˈtɪstɪkl̩i/",
-   "arabicPron": "ستتيستيكلي",
-   "oxford": "",
-   "cefr": "",
-   "pos": [
-    "adverb"
-   ],
-   "meanings": [
-    {
-     "pos": "adverb",
-     "en": "In a statistical way.",
-     "ar": "بطريقة إحصائية."
-    },
-    {
-     "pos": "adverb",
-     "en": "From a statistical point of view.",
-     "ar": "من وجهة نظر إحصائية."
-    },
-    {
-     "pos": "adverb",
-     "en": "From statistical evidence.",
-     "ar": "الدلًلة الإحصائية"
-    }
-   ],
-   "inflections": [
-    "statistically"
-   ],
-   "derivatives": [],
-   "synonyms": [],
-   "collocations": [
-    {
-     "en": "statistically significant",
-     "ar": "دال احصائياً"
-    },
-    {
-     "en": "statistically independent",
-     "ar": "مستقل إحصائياً"
-    },
-    {
-     "en": "statistically insignificant",
-     "ar": "عديم الأهمية من الناحية الإحصائية"
-    }
-   ],
-   "examples": [
-    {
-     "en": "He made his point statistically.",
-     "ar": ""
-    },
-    {
-     "en": "Statistically, the study was almost worthless.",
-     "ar": ""
-    },
-    {
-     "en": "Statistically, what he said is true.",
-     "ar": ""
-    }
-   ],
-   "differences": [],
-   "interval": 0,
-   "due": 0,
-   "freqLabel": "Top 18,000 words",
-   "estCefr": "C1",
-   "engineVersion": 2
-  },
-  {
-   "right": 0,
-   "wrong": 0,
-   "last": null,
    "id": 1784487105882,
    "word": "scented",
    "ipa": "",
@@ -3256,100 +3195,6 @@
    "audioUK": "",
    "audioGen": "",
    "favorite": "false"
-  },
-  {
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "id": 1784485562378,
-   "word": "mollusc",
-   "ipa": "/ˈmɒləsk/",
-   "arabicPron": "مالسك",
-   "oxford": "",
-   "cefr": "",
-   "pos": [
-    "noun"
-   ],
-   "meanings": [
-    {
-     "pos": "noun",
-     "en": "A soft-bodied invertebrate of the phylum Mollusca, typically with a hard shell of one or more pieces.",
-     "ar": ""
-    },
-    {
-     "pos": "noun",
-     "en": "(figuratively) A weak-willed person.",
-     "ar": ""
-    },
-    {
-     "pos": "noun",
-     "en": "A weak-willed person.",
-     "ar": ""
-    }
-   ],
-   "inflections": [
-    "mollusc",
-    "molluscs"
-   ],
-   "derivatives": [],
-   "synonyms": [
-    {
-     "en": "little girl",
-     "ar": "أيتها الفتاة الصغيرة"
-    },
-    {
-     "en": "nose of wax",
-     "ar": "أنف الشمع"
-    },
-    {
-     "en": "pushover",
-     "ar": "مهمة سهلة, خصم ضعيف, شخص عاجز عن مقاومة الإغراء"
-    },
-    {
-     "en": "shellfish",
-     "ar": "محار, طعام البحر"
-    },
-    {
-     "en": "mollusk",
-     "ar": "رخوي حيوان من الرخو يات كالحلزون"
-    }
-   ],
-   "collocations": [
-    {
-     "en": "mollusc shells",
-     "ar": "أصداف الرخويات"
-    },
-    {
-     "en": "mollusc shell",
-     "ar": "قشرة الرخويات"
-    },
-    {
-     "en": "mollusc species",
-     "ar": "أنواع الرخويات"
-    },
-    {
-     "en": "bivalve mollusc",
-     "ar": "رخويات ثنائية الصمامات"
-    },
-    {
-     "en": "marine mollusc",
-     "ar": "الرخويات البحرية"
-    }
-   ],
-   "examples": [
-    {
-     "en": "bivalve molluscs",
-     "ar": ""
-    }
-   ],
-   "differences": [],
-   "interval": 0,
-   "due": 0,
-   "engineVersion": 3,
-   "ipaUS": "/ˈmɑləsk/",
-   "ipaUK": "/ˈmɒləsk/",
-   "audioUS": "-us",
-   "audioUK": "-uk"
   },
   {
    "right": 0,
@@ -9300,100 +9145,6 @@
    "right": 0,
    "wrong": 0,
    "last": null,
-   "id": 1784487461009,
-   "word": "confederacy",
-   "ipa": "/kənˈfɛdəɹəsi/",
-   "ipaUS": "",
-   "ipaUK": "",
-   "arabicPron": "كنفيدرسي",
-   "oxford": "",
-   "cefr": "",
-   "estCefr": "",
-   "freqLabel": "",
-   "audioUS": "",
-   "audioUK": "",
-   "audioGen": "",
-   "pos": [
-    "noun"
-   ],
-   "meanings": [
-    {
-     "pos": "noun",
-     "en": "An alliance",
-     "ar": ""
-    },
-    {
-     "pos": "noun",
-     "en": "A state where the sovereign constituent units delegate their authority to the centre. As opposed to a federation, where the central and regional governments are each…",
-     "ar": "دولة تفوض فيها الوحدات السيادية سلطتها إلى المركز. على عكس الاتحاد، حيث تكون كل من الحكومات المركزية والإقليمية متساوية وذات سيادة في مجالها الخاص"
-    },
-    {
-     "pos": "noun",
-     "en": "Specifically, an instance of a decentralized governing structure among the indigenous peoples of North America",
-     "ar": "على وجه التحديد، مثال لهيكل حكم لامركزي بين الشعوب الأصلية في أمريكا الشمالية"
-    }
-   ],
-   "inflections": [
-    "confederacy",
-    "confederacies"
-   ],
-   "derivatives": [],
-   "synonyms": [
-    {
-     "en": "federation",
-     "ar": "اتحاد"
-    },
-    {
-     "en": "conspiracy",
-     "ar": "تآمر, مؤامرة"
-    },
-    {
-     "en": "south",
-     "ar": "جَنُوب ; جَنُوبِيّ"
-    },
-    {
-     "en": "confederate states of america",
-     "ar": "ولايات التحالف ا?مريكية, تحالف ل-11 ولاية جنوبية حاولت ا?نفصال عن الولايات المتحدة في 1860-1861 بوحده ذاتية"
-    },
-    {
-     "en": "confederation",
-     "ar": "اتحاد, إتحاد كونفدرالي"
-    }
-   ],
-   "collocations": [
-    {
-     "en": "southern confederacy",
-     "ar": "الكونفدرالية الجنوبية"
-    },
-    {
-     "en": "iroquois confederacy",
-     "ar": "اتحاد الأوريكيون"
-    }
-   ],
-   "examples": [
-    {
-     "en": "Maratha polity consisted of a decentralised confederacy of various states.",
-     "ar": ""
-    },
-    {
-     "en": "The Maratha Empire could just as easily be called the Maratha Confederacy.",
-     "ar": ""
-    },
-    {
-     "en": "The founding fathers of the confederacy were staunchly opposed to giving more powers to the federal government.",
-     "ar": ""
-    }
-   ],
-   "differences": [],
-   "interval": 0,
-   "due": 0,
-   "favorite": "false",
-   "engineVersion": 6
-  },
-  {
-   "right": 0,
-   "wrong": 0,
-   "last": null,
    "id": 1785705363036,
    "word": "fucking",
    "ipa": "/ˈfʌkɪŋ/",
@@ -9508,86 +9259,6 @@
    "due": 0,
    "favorite": "false",
    "engineVersion": 3
-  },
-  {
-   "right": 0,
-   "wrong": 0,
-   "last": null,
-   "id": 1784531150409,
-   "word": "molluscs",
-   "ipa": "",
-   "ipaUS": "",
-   "ipaUK": "",
-   "arabicPron": "",
-   "oxford": "",
-   "cefr": "",
-   "estCefr": "",
-   "freqLabel": "",
-   "audioUS": "",
-   "audioUK": "",
-   "audioGen": "",
-   "pos": [
-    "noun"
-   ],
-   "meanings": [
-    {
-     "pos": "noun",
-     "en": "A soft-bodied invertebrate of the phylum Mollusca, typically with a hard shell of one or more pieces",
-     "ar": "اللافقاريات رخوة الجسم من شعبة الرخويات، وعادة مع قشرة صلبة من قطعة واحدة أو أكثر"
-    },
-    {
-     "pos": "noun",
-     "en": "A weak-willed person",
-     "ar": "شخص ضعيف الإرادة"
-    }
-   ],
-   "inflections": [
-    "molluscs",
-    "molluscses"
-   ],
-   "derivatives": [],
-   "synonyms": [
-    {
-     "en": "little girl",
-     "ar": "أيتها الفتاة الصغيرة"
-    },
-    {
-     "en": "nose of wax",
-     "ar": "أنف الشمع"
-    },
-    {
-     "en": "pushover",
-     "ar": "مهمة سهلة, خصم ضعيف, شخص عاجز عن مقاومة الإغراء"
-    },
-    {
-     "en": "shellfish",
-     "ar": "محار, طعام البحر"
-    },
-    {
-     "en": "mollusk",
-     "ar": "رخوي حيوان من الرخو يات كالحلزون"
-    }
-   ],
-   "collocations": [],
-   "examples": [
-    {
-     "en": "Are mussels molluscs?",
-     "ar": ""
-    },
-    {
-     "en": "Snails are slow-moving molluscs.",
-     "ar": ""
-    },
-    {
-     "en": "Snails are molluscs which move slowly.",
-     "ar": ""
-    }
-   ],
-   "differences": [],
-   "interval": 0,
-   "due": 0,
-   "favorite": "false",
-   "engineVersion": 2
   }
  ],
  "tombstones": [
