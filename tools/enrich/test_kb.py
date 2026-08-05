@@ -177,18 +177,13 @@ before_human = db.execute(
     "SELECT ar FROM senses WHERE gloss='a question'").fetchone()[0]
 
 
-class _FakePipe:
-    """يحاكي مخرج transformers بلا تنزيل نموذج."""
-    def __call__(self, texts, **kw):
-        return [{"translation_text": "[ترجمة] " + t[:20]} for t in texts]
+def fake_translate(texts):
+    """مترجمٌ محقون — الاختبار لا يُنزّل ٣٠٠ م.ب من الأوزان."""
+    return ["[ترجمة] " + t[:20] for t in texts]
 
 
-import types                                                    # noqa: E402
-fake = types.ModuleType("transformers")
-fake.pipeline = lambda *a, **k: _FakePipe()
-sys.modules["transformers"] = fake
 K.TRANSLATE_SCOPE = "all"
-K.stage_translate(db)
+K.stage_translate(db, translate=fake_translate)
 
 check("المعنى الناقص تُرجم",
       (db.execute("SELECT ar FROM senses WHERE gloss='a thing to translate'"
@@ -206,7 +201,6 @@ check("المثال الناقص تُرجم",
       (db.execute("SELECT ar FROM examples WHERE en='An untranslated line.'"
                   ).fetchone()[0] or "").startswith("[ترجمة]"), True)
 db.close()
-del sys.modules["transformers"]
 
 # ── ٧ ── repair عديم الأثر عند التكرار ────────────────────────────
 print("\n[7] repair مرّتين لا يغيّر شيئاً")

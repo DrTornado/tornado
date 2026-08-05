@@ -39,7 +39,7 @@ from collections import Counter, defaultdict
 
 # يُطبع عند التشغيل. الخلية تفضّل النسخة المحلية على المستودع، فبلا بصمةٍ
 # ظاهرة قد تُعاد تشغيل نسخةٍ قديمة ويُظنّ الإصلاح فاشلاً.
-VERSION = "14 — ترجمة آلية مفتوحة تملأ العربية الناقصة"
+VERSION = "15 — نداء النموذج مباشرةً بلا pipeline"
 
 WORK = os.environ.get("TORNADO_WORK", "/content/kb")
 OUT_DB = os.path.join(WORK, "tornado-kb.sqlite")
@@ -740,7 +740,42 @@ def _translate_targets(db) -> set:
     return out
 
 
-def stage_translate(db) -> None:
+def _load_translator():
+    """
+    يحمّل النموذج ويردّ دالةً: نصوص ← ترجماتها.
+
+    لا نستعمل `pipeline("translation")`: المهمّة أُزيلت من transformers
+    الحديث فينكسر الاستدعاء بخطأ KeyError غامض. والنداء المباشر على
+    النموذج مستقرٌّ عبر الإصدارات، وهو أقلّ طبقاتٍ بيننا وبين ما نريد.
+    """
+    try:
+        import torch
+        from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
+    except ImportError:
+        log("أثبّت transformers…")
+        os.system(f"{sys.executable} -m pip install -q transformers "
+                  "sentencepiece sacremoses")
+        import torch
+        from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
+
+    gpu = torch.cuda.is_available()
+    log(f"النموذج {TRANSLATE_MODEL} · {'كرت رسومي' if gpu else 'معالج'}")
+    tok = AutoTokenizer.from_pretrained(TRANSLATE_MODEL)
+    model = AutoModelForSeq2SeqLM.from_pretrained(TRANSLATE_MODEL)
+    model = model.to("cuda" if gpu else "cpu").eval()
+
+    def run(texts):
+        enc = tok(texts, return_tensors="pt", padding=True,
+                  truncation=True, max_length=256)
+        enc = {k: v.to(model.device) for k, v in enc.items()}
+        with torch.no_grad():
+            out = model.generate(**enc, max_new_tokens=256, num_beams=1)
+        return tok.batch_decode(out, skip_special_tokens=True)
+
+    return run
+
+
+def stage_translate(db, translate=None) -> None:
     """
     يملأ العربية الناقصة بنموذجٍ مفتوح — كلّه داخل Colab.
 
@@ -748,22 +783,6 @@ def stage_translate(db) -> None:
     أبداً. الآلة تملأ الفراغ وحده، وتُعلَّم مخرجاتها بـ ar_src='mt' كي
     تظلّ التفرقة قائمة في البطاقة — لا يُخلط المُحرَّر بالمولَّد.
     """
-    try:
-        from transformers import pipeline
-    except ImportError:
-        log("أثبّت transformers…")
-        os.system(f"{sys.executable} -m pip install -q transformers "
-                  "sentencepiece sacremoses")
-        from transformers import pipeline
-
-    try:
-        import torch
-        device = 0 if torch.cuda.is_available() else -1
-    except ImportError:
-        device = -1
-    log(f"النموذج {TRANSLATE_MODEL} · "
-        f"{'كرت رسومي' if device == 0 else 'معالج'}")
-
     words = _translate_targets(db)
     if not words:
         log("لا كلمات في النطاق")
@@ -788,7 +807,8 @@ def stage_translate(db) -> None:
     log(f"النطاق {TRANSLATE_SCOPE}: {len(words):,} كلمة · "
         f"{len(jobs):,} نصاً للترجمة")
 
-    tr = pipeline("translation", model=TRANSLATE_MODEL, device=device)
+    # التحميل بعد التأكّد من وجود عمل — لا نُنزّل ٣٠٠ م.ب لنكتشف أن لا شيء ينقص
+    translate = translate or _load_translator()
     t0 = time.time()
     deadline = t0 + TRANSLATE_MAX_MIN * 60
     done = 0
@@ -796,13 +816,12 @@ def stage_translate(db) -> None:
     for i in range(0, len(jobs), TRANSLATE_BATCH):
         chunk = jobs[i:i + TRANSLATE_BATCH]
         try:
-            outs = tr([t for _, _, t in chunk], max_length=256,
-                      batch_size=len(chunk))
+            outs = translate([t for _, _, t in chunk])
         except Exception as e:                                   # noqa: BLE001
             log(f"  تعذّرت دفعة ({e}) — أتخطّاها")
             continue
         for (tbl, rid, _), o in zip(chunk, outs):
-            ar = (o.get("translation_text") or "").strip()
+            ar = (o or "").strip()
             if ar:
                 db.execute(f"UPDATE {tbl} SET ar=?, ar_src='mt'"
                            f" WHERE rowid=?", (ar, rid))
