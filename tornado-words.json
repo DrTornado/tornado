@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-05T17:56:16.403Z",
+ "exportedAt": "2026-08-05T17:56:19.514Z",
  "words": [
   {
    "id": 1785705257083,
@@ -962,13 +962,8 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "(meteorology) A violent wind in the form of a mobile, rapidly rotating, funnel cloud that has contacted the ground.",
-     "ar": "(الأرصاد الجوية) رياح عنيفة في شكل سحابة قمعية متحركة سريعة الدوران تلامس الأرض."
-    },
-    {
-     "pos": "verb",
-     "en": "(ambitransitive, figuratively) To sweep through something violently.",
-     "ar": "(expransitive، مجازياً) لاكتساح شيء ما بعنف."
+     "en": "A violent windstorm characterized by a mobile, twisting, funnel-shaped cloud.",
+     "ar": "عاصفة رياح عنيفة تتميز بسحابة متحركة ملتوية على شكل قمع."
     },
     {
      "pos": "noun",
@@ -1011,11 +1006,11 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "ipaUS": "/tɔɹˈneɪ.doʊ/",
-   "audioUS": "-us",
+   "ipaUS": "/tɔː(ɹ)ˈneɪ.dəʊ/",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/tornado-us.mp3",
    "freqLabel": "Top 18,000 words",
    "estCefr": "B2",
-   "engineVersion": 3,
+   "engineVersion": 2,
    "ipaUK": "/tɔː(ɹ)ˈneɪ.dəʊ/",
    "audioUK": "-uk"
   },
