@@ -79,11 +79,11 @@ db.executescript(K.SCHEMA)
 
 # كل صفّ مُدرَج مرّتين — يحاكي جولةً جرت مرّتين
 for _ in range(2):
-    db.execute("INSERT INTO senses VALUES(?,?,?,?,?,?,?)",
+    db.execute("INSERT INTO senses(word,pos,idx,gloss,tags,source,ar) VALUES(?,?,?,?,?,?,?)",
                ("issue", "noun", 0, "a question", "", "wiktionary", "مَسْأَلَة"))
-    db.execute("INSERT INTO senses VALUES(?,?,?,?,?,?,?)",
+    db.execute("INSERT INTO senses(word,pos,idx,gloss,tags,source,ar) VALUES(?,?,?,?,?,?,?)",
                ("issue", "noun", 1, "an edition", "", "wordnet", None))
-    db.execute("INSERT INTO examples VALUES('issue','We faced the issue.','واجهنا المشكلة','tatoeba')")
+    db.execute("INSERT INTO examples(word,en,ar,source) VALUES('issue','We faced the issue.','واجهنا المشكلة','tatoeba')")
     db.execute("INSERT INTO idioms VALUES('issue','side issue','A minor topic.')")
     db.execute("INSERT INTO forms VALUES('assume','assumes','')")
     db.execute("INSERT INTO forms VALUES('assume','no-table-tags','')")
@@ -162,6 +162,51 @@ check("رمز غير أبجدي", K._is_lemma(real, "a1b2!"), False)
 check("حرف واحد", K._is_lemma(real, "x"), False)
 check("بشرطة", K._is_lemma(real, "well-known"), True)
 check("بلا معنى", K._is_lemma({"senses": []}, "zzz"), False)
+
+# ── ٦٫٨ ── الترجمة الآلية: تملأ الفراغ ولا تمسّ البشري ────────────
+print("\n[6.8] stage_translate")
+db = sqlite3.connect(db_path)
+db.execute("INSERT INTO senses(word,pos,idx,gloss,tags,source,ar,ar_src) VALUES(?,?,?,?,?,?,?,?)",
+           ("issue", "noun", 9, "a thing to translate", "", "wiktionary",
+            None, None))
+db.execute("INSERT INTO examples(word,en,ar,source,ar_src) VALUES(?,?,?,?,?)",
+           ("issue", "An untranslated line.", None, "wiktionary", None))
+db.commit()
+
+before_human = db.execute(
+    "SELECT ar FROM senses WHERE gloss='a question'").fetchone()[0]
+
+
+class _FakePipe:
+    """يحاكي مخرج transformers بلا تنزيل نموذج."""
+    def __call__(self, texts, **kw):
+        return [{"translation_text": "[ترجمة] " + t[:20]} for t in texts]
+
+
+import types                                                    # noqa: E402
+fake = types.ModuleType("transformers")
+fake.pipeline = lambda *a, **k: _FakePipe()
+sys.modules["transformers"] = fake
+K.TRANSLATE_SCOPE = "all"
+K.stage_translate(db)
+
+check("المعنى الناقص تُرجم",
+      (db.execute("SELECT ar FROM senses WHERE gloss='a thing to translate'"
+                  ).fetchone()[0] or "").startswith("[ترجمة]"), True)
+check("موسوم آلياً",
+      db.execute("SELECT ar_src FROM senses WHERE gloss='a thing to translate'"
+                 ).fetchone()[0], "mt")
+check("الترجمة البشرية لم تُمسّ",
+      db.execute("SELECT ar FROM senses WHERE gloss='a question'"
+                 ).fetchone()[0], before_human)
+check("مصدرها ليس mt",
+      db.execute("SELECT ar_src FROM senses WHERE gloss='a question'"
+                 ).fetchone()[0], None)
+check("المثال الناقص تُرجم",
+      (db.execute("SELECT ar FROM examples WHERE en='An untranslated line.'"
+                  ).fetchone()[0] or "").startswith("[ترجمة]"), True)
+db.close()
+del sys.modules["transformers"]
 
 # ── ٧ ── repair عديم الأثر عند التكرار ────────────────────────────
 print("\n[7] repair مرّتين لا يغيّر شيئاً")

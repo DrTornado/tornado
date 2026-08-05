@@ -39,7 +39,7 @@ from collections import Counter, defaultdict
 
 # يُطبع عند التشغيل. الخلية تفضّل النسخة المحلية على المستودع، فبلا بصمةٍ
 # ظاهرة قد تُعاد تشغيل نسخةٍ قديمة ويُظنّ الإصلاح فاشلاً.
-VERSION = "13 — مفردات واسعة: كل مدخل حقيقي في ويكاموس"
+VERSION = "14 — ترجمة آلية مفتوحة تملأ العربية الناقصة"
 
 WORK = os.environ.get("TORNADO_WORK", "/content/kb")
 OUT_DB = os.path.join(WORK, "tornado-kb.sqlite")
@@ -83,6 +83,19 @@ STAGES = os.environ.get("TORNADO_STAGES", "all")
 # هذا المستوى يجمع النادر عمداً، فبناءٌ على «الشائع» يخذله بالضبط حيث
 # يحتاج. القياس الفعلي: ٥٠ من ١١٢ كلمة خارج القاعدة.
 VOCAB_MODE = os.environ.get("TORNADO_VOCAB", "wide")
+
+# الترجمة الآلية — مفتوحة، محلية داخل Colab، بلا مفتاح ولا حساب.
+#   mine        : مكتبة المستخدم وحدها (الافتراضي — دقائق)
+#   oxford      : كل أوكسفورد ٥٠٠٠
+#   freq:20000  : أشيَع ٢٠ ألف
+#   all         : الكل — أيام، لا يُنصح به
+TRANSLATE_SCOPE = os.environ.get("TORNADO_TR_SCOPE", "mine")
+# opus-mt خفيف وسريع على المعالج ورخصته CC BY. وNLLB أجود عربيةً لكنه
+# أثقل ورخصته غير تجارية — يناسب مشروعاً شخصياً لا منشوراً.
+TRANSLATE_MODEL = os.environ.get("TORNADO_TR_MODEL",
+                                 "Helsinki-NLP/opus-mt-en-ar")
+TRANSLATE_BATCH = int(os.environ.get("TORNADO_TR_BATCH", "24"))
+TRANSLATE_MAX_MIN = float(os.environ.get("TORNADO_TR_MAX_MIN", "30"))
 
 
 def want(stage: str) -> bool:
@@ -149,13 +162,13 @@ CREATE TABLE IF NOT EXISTS ipa (
   word TEXT, accent TEXT, value TEXT, source TEXT);
 CREATE TABLE IF NOT EXISTS senses (
   word TEXT, pos TEXT, idx INTEGER, gloss TEXT, tags TEXT, source TEXT,
-  ar TEXT);
+  ar TEXT, ar_src TEXT);
 CREATE TABLE IF NOT EXISTS forms (
   word TEXT, form TEXT, tags TEXT);
 CREATE TABLE IF NOT EXISTS relations (
   word TEXT, rel TEXT, target TEXT, source TEXT);
 CREATE TABLE IF NOT EXISTS examples (
-  word TEXT, en TEXT, ar TEXT, source TEXT);
+  word TEXT, en TEXT, ar TEXT, source TEXT, ar_src TEXT);
 CREATE TABLE IF NOT EXISTS collocations (
   word TEXT, pattern TEXT, collocate TEXT, score REAL, freq INTEGER);
 CREATE TABLE IF NOT EXISTS phrasal_verbs (
@@ -188,10 +201,14 @@ def connect() -> sqlite3.Connection:
     db.execute("PRAGMA journal_mode=OFF")
     db.execute("PRAGMA synchronous=OFF")
     # ترقية قاعدةٍ بُنيت قبل عمود الترجمة — لا تُهدَم لأجل عمود
-    cols = {r[1] for r in db.execute("PRAGMA table_info(senses)")}
-    if "ar" not in cols:
-        db.execute("ALTER TABLE senses ADD COLUMN ar TEXT")
-        db.commit()
+    # ترقية قاعدةٍ بُنيت قبل أعمدة الترجمة. وعمود ar_src ليس زينةً:
+    # المستخدم من حقّه أن يعرف أيّ عربيةٍ كتبها إنسان وأيّها آلة.
+    for table, col in (("senses", "ar"), ("senses", "ar_src"),
+                       ("examples", "ar_src")):
+        cols = {r[1] for r in db.execute(f"PRAGMA table_info({table})")}
+        if col not in cols:
+            db.execute(f"ALTER TABLE {table} ADD COLUMN {col} TEXT")
+    db.commit()
     return db
 
 
@@ -366,7 +383,7 @@ def stage_wiktionary(db, vocab: set) -> None:
 
     def flush():
         db.executemany("INSERT INTO ipa VALUES(?,?,?,?)", ipa_rows)
-        db.executemany("INSERT INTO senses VALUES(?,?,?,?,?,?,?)", sense_rows)
+        db.executemany("INSERT INTO senses(word,pos,idx,gloss,tags,source,ar) VALUES(?,?,?,?,?,?,?)", sense_rows)
         db.executemany("INSERT INTO forms VALUES(?,?,?)", form_rows)
         db.executemany("INSERT INTO relations VALUES(?,?,?,?)", rel_rows)
         db.executemany("INSERT INTO usage_notes VALUES(?,?)", usage_rows)
@@ -473,7 +490,7 @@ def stage_wiktionary(db, vocab: set) -> None:
                                ",".join(tags), "wiktionary", ar or None))
             for txt in _strs(s.get("examples"), "text", "example", "english"):
                 if 3 <= len(txt.split()) <= 30:
-                    db.execute("INSERT INTO examples VALUES(?,?,?,?)",
+                    db.execute("INSERT INTO examples(word,en,ar,source) VALUES(?,?,?,?)",
                                (wl, txt, None, "wiktionary"))
 
         # التصريفات جاهزة وموسومة — لا حاجة لتوليدها بقواعد تُخطئ
@@ -582,13 +599,13 @@ def stage_wordnet(db, vocab: set) -> None:
                     if dn != word:
                         rels.append((word, "derived", dn, "wordnet"))
         if len(senses) > 20000:
-            db.executemany("INSERT INTO senses VALUES(?,?,?,?,?,?,?)", senses)
+            db.executemany("INSERT INTO senses(word,pos,idx,gloss,tags,source,ar) VALUES(?,?,?,?,?,?,?)", senses)
             db.executemany("INSERT INTO relations VALUES(?,?,?,?)", rels)
             db.commit()
             senses.clear()
             rels.clear()
 
-    db.executemany("INSERT INTO senses VALUES(?,?,?,?,?,?,?)", senses)
+    db.executemany("INSERT INTO senses(word,pos,idx,gloss,tags,source,ar) VALUES(?,?,?,?,?,?,?)", senses)
     db.executemany("INSERT INTO relations VALUES(?,?,?,?)", rels)
     db.commit()
     log(f"WordNet: {n:,} كلمة لها مدخل")
@@ -688,9 +705,121 @@ def stage_tatoeba(db, vocab: set) -> None:
     for w, lst in by_word.items():
         for en, ar in sorted(lst, key=lambda p: len(p[0]))[:3]:
             rows.append((w, en, ar, "tatoeba"))
-    db.executemany("INSERT INTO examples VALUES(?,?,?,?)", rows)
+    db.executemany("INSERT INTO examples(word,en,ar,source) VALUES(?,?,?,?)", rows)
     db.commit()
     log(f"Tatoeba: {len(by_word):,} كلمة لها مثال مترجم · {len(rows):,} مثالاً")
+
+
+# ───────────────────────── المرحلة ٦: الترجمة الآلية ─────────────────────────
+
+def _translate_targets(db) -> set:
+    """
+    أيّ الكلمات تُترجَم؟
+
+    القاعدة نصف مليون مدخل، وترجمتها كلها أيامٌ من الحوسبة لأجل ألفاظ
+    لا يملكها أحد. فالنطاق افتراضاً مكتبة المستخدم: بضع مئات من العناصر،
+    دقائق معدودة، وكل ما يراه فعلاً.
+    """
+    scope = TRANSLATE_SCOPE
+    if scope == "all":
+        return {r[0] for r in db.execute("SELECT word FROM vocab")}
+    if scope == "oxford":
+        return {r[0] for r in db.execute(
+            "SELECT word FROM vocab WHERE oxford IS NOT NULL")}
+    if scope.startswith("freq:"):
+        n = int(scope.split(":", 1)[1])
+        return {r[0] for r in db.execute(
+            "SELECT word FROM vocab WHERE freq_rank IS NOT NULL"
+            " AND freq_rank <= ?", (n,))}
+
+    out = set()
+    for w in user_words():
+        r = resolve_word(db, w)
+        if r:
+            out.add(r)
+    return out
+
+
+def stage_translate(db) -> None:
+    """
+    يملأ العربية الناقصة بنموذجٍ مفتوح — كلّه داخل Colab.
+
+    الترتيب مقصود: ما ترجمه إنسان (جداول ويكاموس، جمل Tatoeba) لا يُمسّ
+    أبداً. الآلة تملأ الفراغ وحده، وتُعلَّم مخرجاتها بـ ar_src='mt' كي
+    تظلّ التفرقة قائمة في البطاقة — لا يُخلط المُحرَّر بالمولَّد.
+    """
+    try:
+        from transformers import pipeline
+    except ImportError:
+        log("أثبّت transformers…")
+        os.system(f"{sys.executable} -m pip install -q transformers "
+                  "sentencepiece sacremoses")
+        from transformers import pipeline
+
+    try:
+        import torch
+        device = 0 if torch.cuda.is_available() else -1
+    except ImportError:
+        device = -1
+    log(f"النموذج {TRANSLATE_MODEL} · "
+        f"{'كرت رسومي' if device == 0 else 'معالج'}")
+
+    words = _translate_targets(db)
+    if not words:
+        log("لا كلمات في النطاق")
+        return
+    db.execute("DROP TABLE IF EXISTS temp.tgt")
+    db.execute("CREATE TEMP TABLE tgt(word TEXT PRIMARY KEY)")
+    db.executemany("INSERT OR IGNORE INTO tgt VALUES(?)",
+                   [(w,) for w in words])
+
+    jobs = []
+    for tbl, col in (("senses", "gloss"), ("examples", "en")):
+        rows = db.execute(
+            f"SELECT rowid, {col} FROM {tbl}"
+            f" WHERE (ar IS NULL OR ar='') AND {col} IS NOT NULL"
+            f" AND length({col}) BETWEEN 3 AND 400"
+            f" AND word IN (SELECT word FROM tgt)").fetchall()
+        jobs += [(tbl, rid, txt) for rid, txt in rows]
+
+    if not jobs:
+        log("لا شيء ينقصه ترجمة في هذا النطاق")
+        return
+    log(f"النطاق {TRANSLATE_SCOPE}: {len(words):,} كلمة · "
+        f"{len(jobs):,} نصاً للترجمة")
+
+    tr = pipeline("translation", model=TRANSLATE_MODEL, device=device)
+    t0 = time.time()
+    deadline = t0 + TRANSLATE_MAX_MIN * 60
+    done = 0
+
+    for i in range(0, len(jobs), TRANSLATE_BATCH):
+        chunk = jobs[i:i + TRANSLATE_BATCH]
+        try:
+            outs = tr([t for _, _, t in chunk], max_length=256,
+                      batch_size=len(chunk))
+        except Exception as e:                                   # noqa: BLE001
+            log(f"  تعذّرت دفعة ({e}) — أتخطّاها")
+            continue
+        for (tbl, rid, _), o in zip(chunk, outs):
+            ar = (o.get("translation_text") or "").strip()
+            if ar:
+                db.execute(f"UPDATE {tbl} SET ar=?, ar_src='mt'"
+                           f" WHERE rowid=?", (ar, rid))
+                done += 1
+        db.commit()
+
+        el = max(time.time() - t0, 0.1)
+        pct = 100 * (i + len(chunk)) / len(jobs)
+        eta = (len(jobs) - i - len(chunk)) / max((i + len(chunk)) / el, 0.1) / 60
+        log(f"  {i+len(chunk):,}/{len(jobs):,} ({pct:.0f}%) · "
+            f"مضى {el/60:.0f} د · بقي ~{eta:.0f} د")
+        if time.time() > deadline:
+            log(f"  ⏱ بلغتُ السقف ({TRANSLATE_MAX_MIN} د) — "
+                f"تُرجم {done:,}، والباقي في تشغيلةٍ لاحقة")
+            break
+
+    log(f"الترجمة: {done:,} نصاً في {(time.time()-t0)/60:.0f} د")
 
 
 # ───────────────────────────── المرحلة ٥: المتلازمات ─────────────────────────────
@@ -1447,7 +1576,7 @@ def build_card(db, word: str) -> dict:
     #   ٢ غير المهجور            — «archaic/obsolete» يُؤخَّر لا يُحذف
     #   ٣ WordNet قبل ويكاموس    — تعريفاته موجزة، وويكاموس يسهب في
     #     المعاني الحرفية النادرة («القسم الخشبي من الكتّان بعد التعطين»)
-    raw = q("""SELECT DISTINCT pos,gloss,tags,source,ar FROM senses
+    raw = q("""SELECT DISTINCT pos,gloss,tags,source,ar,ar_src FROM senses
                WHERE word=? AND pos <> 'name'
                ORDER BY (ar IS NULL OR ar=''),
                         (tags LIKE '%archaic%' OR tags LIKE '%obsolete%'
@@ -1455,7 +1584,7 @@ def build_card(db, word: str) -> dict:
                         source DESC, idx""")
     senses = _dedupe(raw, lambda r: re.sub(r"\W+", " ",
                                            (r[1] or "").lower()).strip())[:6]
-    tags = sorted({t for _, _, tg, _, _ in senses
+    tags = sorted({t for _, _, tg, _, _, _ in senses
                    for t in (tg or "").split(",") if t})
 
     def rel(kind, n=8):
@@ -1465,7 +1594,7 @@ def build_card(db, word: str) -> dict:
 
     # المترجَم أوّلاً ثم الأقصر — والاقتباس القديم يُستبعد ما دام يوجد بديل
     ex_all = [r for r in _dedupe(
-        q("SELECT DISTINCT en,ar,source FROM examples WHERE word=?"
+        q("SELECT DISTINCT en,ar,source,ar_src FROM examples WHERE word=?"
           " ORDER BY (ar IS NULL OR ar=''), length(en)"),
         lambda r: (r[0] or "").lower().strip())
         if not NOT_EXAMPLE.match(r[0] or "")]
@@ -1476,9 +1605,9 @@ def build_card(db, word: str) -> dict:
         "word": word,
         "freq_rank": freq, "oxford": oxford, "cefr": cefr,
         "ipa": ipa, "arabicPron": ar_pron(best),
-        "pos": sorted({p for p, _, _, _, _ in senses if p}),
-        "meanings": [{"pos": p, "en": g, "ar": a, "src": s}
-                     for p, g, _, s, a in senses],
+        "pos": sorted({p for p, _, _, _, _, _ in senses if p}),
+        "meanings": [{"pos": p, "en": g, "ar": a, "arSrc": asrc, "src": s}
+                     for p, g, _, s, a, asrc in senses],
         "inflections": [r[0] for r in _dedupe(
             [r for r in q("SELECT DISTINCT form FROM forms WHERE word=?")
              if r[0] and r[0].lower() not in FORM_JUNK
@@ -1487,7 +1616,7 @@ def build_card(db, word: str) -> dict:
         "derivatives": rel("derived"),
         "synonyms": rel("synonym"),
         "antonyms": rel("antonym"),
-        "examples": [{"en": e, "ar": a, "src": s} for e, a, s in ex],
+        "examples": [{"en": e, "ar": a, "src": s, "arSrc": asrc} for e, a, s, asrc in ex],
         "collocations": [{"pat": p, "col": c, "score": sc} for p, c, sc in q(
             "SELECT pattern,collocate,score FROM collocations WHERE word=?"
             " ORDER BY score DESC", 8)],
@@ -1654,10 +1783,17 @@ padding:2px 10px;margin:2px 3px 2px 0;font-size:13px}
             row(label, " ".join(f'<span class="pill">{esc(x)}</span>'
                                 for x in c[key][:10]), not c[key])
 
+        def _ar(o):
+            """الترجمة الآلية تُعلَّم — البشرية لا تُخلط بالمولَّدة."""
+            if not o.get("ar"):
+                return ''
+            mark = ' <small class="empty">آلية</small>' \
+                if o.get("arSrc") == "mt" else ''
+            return (f'<br><span class="ar"><b>{esc(o["ar"])}</b>'
+                    f'{mark}</span>')
+
         row("المعاني", "<br>".join(
-            f'<b>{esc(m["pos"])}</b> — {esc(m["en"])}'
-            + (f'<br><span class="ar"><b>{esc(m["ar"])}</b></span>'
-               if m.get("ar") else '')
+            f'<b>{esc(m["pos"])}</b> — {esc(m["en"])}' + _ar(m)
             + f' <span class="empty">[{esc(m["src"])}]</span>'
             for m in c["meanings"]), not c["meanings"])
         for k, lab in (("pos", "نوع الكلمة"), ("inflections", "التصريفات"),
@@ -1669,8 +1805,8 @@ padding:2px 10px;margin:2px 3px 2px 0;font-size:13px}
             f'<small>{x["score"]:.1f}</small></span>'
             for x in c["collocations"]), not c["collocations"])
         row("الأمثلة", "<br>".join(
-            f'{esc(e["en"])}<br><span class="ar">'
-            f'{esc(e["ar"]) if e["ar"] else "<i>بلا ترجمة عربية</i>"}</span>'
+            esc(e["en"]) + (_ar(e) or
+                            '<br><span class="empty"><i>بلا ترجمة</i></span>')
             for e in c["examples"]), not c["examples"])
         row("التعابير", "<br>".join(
             f'<b>{esc(x["phrase"])}</b> — {esc(x["gloss"])[:90]}'
@@ -1706,6 +1842,8 @@ def main() -> None:
         stage_tatoeba(db, vocab)
     if want("collocations"):
         stage_collocations(db, vocab)
+    if want("translate"):
+        stage_translate(db)
 
     # التنقية جزءٌ من البناء لا خطوة تُنسى. الجولة الواحدة تُنتج تكراراً
     # طبيعياً — الصيغة نفسها تُذكر تحت الاسم والفعل معاً — فبناءٌ بلا تنقية
