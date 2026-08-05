@@ -10,3 +10,5 @@ __pycache__/
 tools/enrich/enrich-test/
 tools/enrich/tornado-kb.sqlite
 tools/enrich/out/
+tools/enrich/pending.json
+tools/enrich/translated.json
