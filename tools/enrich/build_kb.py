@@ -39,7 +39,7 @@ from collections import Counter, defaultdict
 
 # يُطبع عند التشغيل. الخلية تفضّل النسخة المحلية على المستودع، فبلا بصمةٍ
 # ظاهرة قد تُعاد تشغيل نسخةٍ قديمة ويُظنّ الإصلاح فاشلاً.
-VERSION = "21 — الفراغ يظهر حتى يكتمل الملء"
+VERSION = "22 — قياس CEFR يشمل التقدير كما تعرضه البطاقة"
 
 WORK = os.environ.get("TORNADO_WORK", "/content/kb")
 OUT_DB = os.path.join(WORK, "tornado-kb.sqlite")
@@ -1454,7 +1454,10 @@ def my_coverage(words=None, path=None) -> dict:
         ("IPA",            f"SELECT COUNT(DISTINCT word) FROM ipa WHERE{inq}"),
         ("معانٍ",          f"SELECT COUNT(DISTINCT word) FROM senses WHERE{inq}"),
         ("معانٍ بعربية",   f"SELECT COUNT(DISTINCT word) FROM senses WHERE ar IS NOT NULL AND ar<>'' AND{inq}"),
-        ("CEFR",           f"SELECT COUNT(*) FROM vocab WHERE cefr IS NOT NULL AND{inq}"),
+        # الرسمي وحده كان يُعرض، فيبدو ١٧٪ بينما البطاقة تحمل مستوىً لكل
+        # كلمة. والقياس الذي لا يقيس ما يراه المستخدم قياسٌ مضلّل.
+        ("CEFR رسمي",      f"SELECT COUNT(*) FROM vocab WHERE cefr IS NOT NULL AND{inq}"),
+        ("CEFR (مع التقدير)", f"SELECT COUNT(*) FROM vocab WHERE{inq}"),
         ("تصريفات",        f"SELECT COUNT(DISTINCT word) FROM forms WHERE{inq}"),
         ("مرادفات",        f"SELECT COUNT(DISTINCT word) FROM relations WHERE rel='synonym' AND{inq}"),
         ("أضداد",          f"SELECT COUNT(DISTINCT word) FROM relations WHERE rel='antonym' AND{inq}"),
