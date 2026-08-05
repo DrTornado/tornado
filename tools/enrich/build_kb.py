@@ -39,7 +39,7 @@ from collections import Counter, defaultdict
 
 # يُطبع عند التشغيل. الخلية تفضّل النسخة المحلية على المستودع، فبلا بصمةٍ
 # ظاهرة قد تُعاد تشغيل نسخةٍ قديمة ويُظنّ الإصلاح فاشلاً.
-VERSION = "24 — تثبيت اللغة الهدف + حارس يرفض غير العربية"
+VERSION = "25 — الترجمة البشرية تتصدّر الآلية"
 
 WORK = os.environ.get("TORNADO_WORK", "/content/kb")
 OUT_DB = os.path.join(WORK, "tornado-kb.sqlite")
@@ -1686,6 +1686,7 @@ def build_card(db, word: str) -> dict:
     raw = q("""SELECT DISTINCT pos,gloss,tags,source,ar,ar_src FROM senses
                WHERE word=? AND pos <> 'name'
                ORDER BY (ar IS NULL OR ar=''),
+                        (ar_src = 'mt'),
                         (tags LIKE '%archaic%' OR tags LIKE '%obsolete%'
                          OR tags LIKE '%dated%'),
                         source DESC, idx""")
