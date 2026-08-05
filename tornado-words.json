@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-05T17:56:19.514Z",
+ "exportedAt": "2026-08-05T17:56:25.963Z",
  "words": [
   {
    "id": 1785705257083,
@@ -1027,19 +1027,29 @@
    ],
    "meanings": [
     {
-     "pos": "noun",
-     "en": "(computing) The design and editing of a blog; weblogging.",
-     "ar": ""
+     "pos": "verb",
+     "en": "To contribute to a blog.",
+     "ar": "للمساهمة في مدونة."
     },
     {
      "pos": "verb",
-     "en": "present participle and gerund of blog",
-     "ar": ""
+     "en": "To blag, to steal something; to acquire something illegally.",
+     "ar": "التباهي، وسرقة شيء ما ؛ للحصول على شيء ما بشكل غير قانوني."
+    },
+    {
+     "pos": "verb",
+     "en": "To look sullen or sulky",
+     "ar": "أن تبدو متجهمًا أو عابسًا"
     },
     {
      "pos": "noun",
      "en": "The design and editing of a blog; weblogging.",
-     "ar": ""
+     "ar": "تصميم وتحرير مدونة ؛ التدوين على شبكة الإنترنت."
+    },
+    {
+     "pos": "verb",
+     "en": "present participle and gerund of blog",
+     "ar": "تقديم الفاعلية وجيروند من بلوق"
     }
    ],
    "inflections": [
@@ -1076,7 +1086,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 3,
+   "engineVersion": 2,
    "ipaUS": "/ˈblɑ.ɡiŋ/",
    "audioUS": "-us",
    "ipaUK": "",
