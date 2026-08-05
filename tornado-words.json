@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-05T17:55:50.651Z",
+ "exportedAt": "2026-08-05T17:55:56.651Z",
  "words": [
   {
    "id": 1785705257083,
@@ -120,19 +120,9 @@
    ],
    "meanings": [
     {
-     "pos": "verb",
-     "en": "(transitive) To persuade somebody not to do (something).",
-     "ar": "(متعدية) لإقناع شخص ما بعدم القيام (بشيء)."
-    },
-    {
-     "pos": "verb",
-     "en": "(transitive) To extinguish the courage of; to dishearten; to depress the spirits of; to deprive of confidence; to deject.",
-     "ar": "(متعدية) لإخماد شجاعة ؛ تثبيط ؛ لإحباط أرواح ؛ للحرمان من الثقة ؛ للاكتئاب."
-    },
-    {
      "pos": "noun",
-     "en": "(rare) Lack of courage",
-     "ar": "(نادر) قلة الشجاعة"
+     "en": "Lack of courage",
+     "ar": "عدم التحلي بالشجاعة."
     },
     {
      "pos": "verb",
@@ -143,11 +133,6 @@
      "pos": "verb",
      "en": "To persuade somebody not to do (something).",
      "ar": "لإقناع شخص ما بعدم القيام (بشيء ما)."
-    },
-    {
-     "pos": "noun",
-     "en": "Lack of courage",
-     "ar": ""
     }
    ],
    "inflections": [
@@ -193,9 +178,9 @@
    "interval": 0,
    "due": 0,
    "ipaUS": "/dɪsˈkɝɪd͡ʒ/",
-   "audioUS": "-us",
-   "audioUK": "-uk",
-   "engineVersion": 3,
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/d/dis/disco/discourage__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/d/dis/disco/discourage__gb_3.mp3",
+   "engineVersion": 2,
    "ipaUK": "/dɪsˈkʌɹɪd͡ʒ/"
   },
   {
@@ -408,14 +393,29 @@
    ],
    "meanings": [
     {
-     "pos": "adjective",
-     "en": "Clingy.",
-     "ar": ""
+     "pos": "verb",
+     "en": "To hold very tightly, as to not fall off.",
+     "ar": "التمسك بإحكام شديد، حتى لا تسقط."
+    },
+    {
+     "pos": "verb",
+     "en": "To adhere to an object, without being affixed, in such a way as to follow its contours. Used especially of fabrics and films.",
+     "ar": "التمسك بشيء ما، دون أن يتم لصقه، بطريقة تتبع ملامحه. تستخدم بشكل خاص من الأقمشة والأفلام."
+    },
+    {
+     "pos": "verb",
+     "en": "To produce a high-pitched ringing sound, like a small bell.",
+     "ar": "لإنتاج صوت رنين عالي النبرة، مثل جرس صغير."
     },
     {
      "pos": "noun",
      "en": "The act of one who clings.",
-     "ar": ""
+     "ar": "فعل من يتشبث."
+    },
+    {
+     "pos": "adjective",
+     "en": "Clingy.",
+     "ar": "لزج, دبق"
     },
     {
      "pos": "verb",
@@ -465,7 +465,7 @@
    "examples": [
     {
      "en": "Seaweed clung to the anchor.",
-     "ar": ""
+     "ar": "تشبثت الأعشاب البحرية بالمرساة."
     }
    ],
    "differences": [],
@@ -474,9 +474,9 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "audioUS": "",
-   "audioUK": "",
-   "engineVersion": 3,
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cli/cling/cling__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/cli/cling/cling__gb_1.mp3",
+   "engineVersion": 2,
    "ipaUS": "",
    "ipaUK": "",
    "estCefr": "",
