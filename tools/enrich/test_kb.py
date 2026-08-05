@@ -135,6 +135,16 @@ check("معنى WordNet بلا عربية",
       next((m["ar"] for m in card["meanings"] if m["en"] == "an edition"), "X"),
       None)
 check("المعنى المترجَم يسبق", card["meanings"][0]["en"], "a question")
+
+# البشري يسبق الآلي — ولو كان الآلي من مصدرٍ أوثق
+db.execute("INSERT INTO senses(word,pos,idx,gloss,tags,source,ar,ar_src)"
+           " VALUES(?,?,?,?,?,?,?,?)",
+           ("issue", "noun", 5, "mt-translated sense", "", "wordnet",
+            "ترجمة آلية", "mt"))
+db.commit()
+ordered = K.build_card(db, "issue")["meanings"]
+check("الترجمة البشرية تسبق الآلية",
+      ordered[0]["arSrc"] in (None, ""), True)
 db.close()
 
 # ── ٦٫٥ ── ردّ الصيغة المصرَّفة إلى مدخلها ─────────────────────────
