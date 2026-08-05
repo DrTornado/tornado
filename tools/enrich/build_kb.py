@@ -39,7 +39,7 @@ from collections import Counter, defaultdict
 
 # يُطبع عند التشغيل. الخلية تفضّل النسخة المحلية على المستودع، فبلا بصمةٍ
 # ظاهرة قد تُعاد تشغيل نسخةٍ قديمة ويُظنّ الإصلاح فاشلاً.
-VERSION = "15 — نداء النموذج مباشرةً بلا pipeline"
+VERSION = "16 — ترشيح الاقتباسات المهجورة وتفضيل Tatoeba"
 
 WORK = os.environ.get("TORNADO_WORK", "/content/kb")
 OUT_DB = os.path.join(WORK, "tornado-kb.sqlite")
@@ -1512,8 +1512,30 @@ FORM_JUNK = {"no-table-tags", "glossary", "table-tags", "inflection-template",
 
 # اقتباسات ويكاموس أدبية وقديمة غالباً: «She used by way of Provocative, to
 # read the wanton Verses of her Paramour». صحيحةٌ لغوياً وعديمة النفع لمتعلّم.
-ARCHAIC = re.compile(r"\[…\]|\[\.\.\.\]|\bthou\b|\bthee\b|\bthy\b|"
-                     r"\bhath\b|\bdoth\b|\bunto\b|\bwhilst\b|\bshalt\b")
+"""
+اقتباسات ويكاموس اختِيرت لتوثيق الاستعمال تاريخياً لا لتعليم متعلّم.
+فيها إنجليزية القرن السابع عشر بحروفها القديمة: «VVe will be Kings and
+Lords within our ſelues». وترجمتها آلياً تنتج هُراءً مضاعفاً — نصٌّ لا
+يفهمه النموذج، ولا ينفع قارئه لو فهمه.
+
+فالمرشّح يرفض ثلاثة أصناف: الحروف المهجورة، والإملاء القديم، وعلامات
+التحرير النصّي.
+"""
+ARCHAIC = re.compile(
+    # (?-i:) حاسمة: تحت re.I تُطابق «ſ» حرف «s» العادي — يونيكود يعدّهما
+    # حرفاً واحداً عند تجاهل الحالة — فكانت ترفض كل جملة فيها سين.
+    r"(?-i:[ſﬀﬁﬂ])"                     # ﺱ الطويلة والحروف الملتحمة
+    r"|(?-i:\bVV[a-z])"                 # VVe بدل We
+    r"|\[[a-zA-Z]"                      # M[aster] — إقحام المحرّر
+    r"|\[…\]|\[\.\.\.\]|…"
+    r"|\b(?:thou|thee|thy|thine|ye|hath|doth|dost|didst|art|wilt|shalt"
+    r"|unto|whilst|hence|thence|whence|nay|yea|oft|ere|betwixt|amongst"
+    r"|saith|quoth|prithee|forsooth|verily)\b"
+    r"|\b\w+(?:eth|est)\b(?<!\bbest\b)(?<!\brest\b)(?<!\bwest\b)"
+    r"(?<!\btest\b)(?<!\bguest\b)(?<!\bteeth\b)"
+    r"|\b(?:neuer|euer|ouer|loue|haue|giue|liue|selues|shee|hee|bee"
+    r"|alwayes|sayes|onely|vpon|vs|vnto|doe|goe|olde|worlde)\b",
+    re.I)
 
 # أسطر الإحالة في ويكاموس ليست أمثلة: «Near-synonyms: gift; blessing…»
 # تتسرّب إلى حقل الأمثلة فتُعرض جملةً وهي فهرس.
@@ -1612,13 +1634,16 @@ def build_card(db, word: str) -> dict:
             " LIMIT ?", (word, kind, n))]
 
     # المترجَم أوّلاً ثم الأقصر — والاقتباس القديم يُستبعد ما دام يوجد بديل
+    # Tatoeba أوّلاً: جمل حديثة كتبها بشر وترجمها بشر. واقتباسات ويكاموس
+    # آخِراً وبعد تنقية — وإن لم يبقَ منها شيء فالفراغ أصدق من هُراء.
     ex_all = [r for r in _dedupe(
         q("SELECT DISTINCT en,ar,source,ar_src FROM examples WHERE word=?"
-          " ORDER BY (ar IS NULL OR ar=''), length(en)"),
+          " ORDER BY (source <> 'tatoeba'), (ar IS NULL OR ar=''),"
+          " length(en)"),
         lambda r: (r[0] or "").lower().strip())
-        if not NOT_EXAMPLE.match(r[0] or "")]
-    ex = [r for r in ex_all if not ARCHAIC.search(r[0] or "")][:3] \
-        or ex_all[:3]
+        if not NOT_EXAMPLE.match(r[0] or "")
+        and not ARCHAIC.search(r[0] or "")]
+    ex = ex_all[:3]
 
     return {
         "word": word,

@@ -202,6 +202,22 @@ check("المثال الناقص تُرجم",
                   ).fetchone()[0] or "").startswith("[ترجمة]"), True)
 db.close()
 
+# ── ٦٫٩ ── ترشيح الاقتباسات المهجورة ──────────────────────────────
+print("\n[6.9] ARCHAIC — الاقتباس القديم يُرفض والحديث يُقبل")
+for txt, want_reject in [
+    ("VVe will be Kings within our ſelues", True),
+    ("Neuer neuer: shee would alwayes say", True),
+    ("thou dost not know the faith", True),
+    ("said M[aster] Shallow", True),
+    # الحديثة تُقبل — و«ſ» تطابق «s» تحت re.I لولا (?-i:)
+    ("The old oak tree abides the wind.", False),
+    ("Sami should assume responsibility.", False),
+    ("Under the best test conditions.", False),
+    ("It suddenly became a national issue.", False),
+]:
+    check(f"{'رفض' if want_reject else 'قبول'}: {txt[:34]}",
+          bool(K.ARCHAIC.search(txt)), want_reject)
+
 # ── ٧ ── repair عديم الأثر عند التكرار ────────────────────────────
 print("\n[7] repair مرّتين لا يغيّر شيئاً")
 K.repair(apply=True)
