@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-05T17:56:07.419Z",
+ "exportedAt": "2026-08-05T17:56:12.239Z",
  "words": [
   {
    "id": 1785705257083,
@@ -275,7 +275,7 @@
   {
    "id": 1784991936913,
    "word": "ripple",
-   "ipa": "",
+   "ipa": "/ˈɹɪp(ə)l/",
    "arabicPron": "ريبل",
    "oxford": "",
    "cefr": "",
@@ -295,33 +295,23 @@
      "ar": "صوت مشابه لصوت الماء المتموج."
     },
     {
-     "pos": "noun",
-     "en": "A style of ice cream in which flavors have been coarsely blended together.",
-     "ar": "نمط من الآيس كريم تمتزج فيه النكهات بشكل خشن معًا."
+     "pos": "verb",
+     "en": "To move like the undulating surface of a body of water; to undulate.",
+     "ar": "للتحرك مثل السطح المتموج لجسم مائي ؛ للتموج."
     },
     {
      "pos": "verb",
-     "en": "(intransitive) To propagate like a moving wave.",
-     "ar": "(غير متعدية) للانتشار مثل موجة متحركة."
-    },
-    {
-     "pos": "verb",
-     "en": "(intransitive) To make a sound as of water running gently over a rough bottom, or the breaking of ripples on the shore.",
-     "ar": "(غير متعدية) لإصدار صوت مثل الماء الجاري برفق فوق قاع خشن، أو كسر التموجات على الشاطئ."
-    },
-    {
-     "pos": "verb",
-     "en": "(transitive) To shape into a series of ripples.",
-     "ar": ""
-    },
-    {
-     "pos": "verb",
-     "en": "(transitive) To scratch, tear, or break slightly; graze",
-     "ar": ""
+     "en": "To propagate like a moving wave.",
+     "ar": "للانتشار مثل موجة متحركة."
     },
     {
      "pos": "noun",
-     "en": "(textiles) An implement, with teeth like those of a comb, for removing the seeds and seed vessels from flax, broom corn, etc.",
+     "en": "One of a series of corrugations in flat surface.",
+     "ar": "واحدة من سلسلة من التموجات في سطح مستو."
+    },
+    {
+     "pos": "verb",
+     "en": "To make a sound as of water running gently over a rough bottom, or the breaking of ripples on the shore.",
      "ar": ""
     }
    ],
@@ -354,7 +344,24 @@
      "ar": ""
     }
    ],
-   "collocations": [],
+   "collocations": [
+    {
+     "en": "ripple effect",
+     "ar": "الأَثَرُ المُتَمَوِّج"
+    },
+    {
+     "en": "ripple marks",
+     "ar": "عَلامات تَتابُع موجيّ"
+    },
+    {
+     "en": "ripple effects",
+     "ar": "تأثيرات موجية"
+    },
+    {
+     "en": "little ripple",
+     "ar": "تموج صغير"
+    }
+   ],
    "examples": [
     {
      "en": "I dropped a small stone into the pond and watched the ripples spread.",
@@ -363,10 +370,6 @@
     {
      "en": "The ebbing tide had left ripples in the sand.",
      "ar": "كان المد والجزر قد ترك تموجات في الرمال."
-    },
-    {
-     "en": "I enjoy fudge ripple ice cream, but I especially like to dig through the carton to get at the ripple part and eat only that.",
-     "ar": "أنا أستمتع بالآيس كريم المموج، لكنني أحب بشكل خاص الحفر في الكرتون للوصول إلى جزء المموج وتناول ذلك فقط."
     }
    ],
    "differences": [],
@@ -375,9 +378,9 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 3,
+   "engineVersion": 2,
    "ipaUS": "/ˈɹɪp(ə)l/",
-   "audioUS": "-us"
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/ripple-us.mp3"
   },
   {
    "id": 1784991696190,
@@ -743,7 +746,7 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 3
+   "engineVersion": 2
   },
   {
    "id": 1784898512946,
