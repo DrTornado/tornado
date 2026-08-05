@@ -39,7 +39,7 @@ from collections import Counter, defaultdict
 
 # يُطبع عند التشغيل. الخلية تفضّل النسخة المحلية على المستودع، فبلا بصمةٍ
 # ظاهرة قد تُعاد تشغيل نسخةٍ قديمة ويُظنّ الإصلاح فاشلاً.
-VERSION = "7 — مُختبَرة محلياً · تفضيل النطق الأمريكي للتعريب"
+VERSION = "8 — ترجمة عربية بشرية للمعاني من جداول ويكاموس"
 
 WORK = os.environ.get("TORNADO_WORK", "/content/kb")
 OUT_DB = os.path.join(WORK, "tornado-kb.sqlite")
@@ -139,7 +139,8 @@ CREATE TABLE IF NOT EXISTS vocab (
 CREATE TABLE IF NOT EXISTS ipa (
   word TEXT, accent TEXT, value TEXT, source TEXT);
 CREATE TABLE IF NOT EXISTS senses (
-  word TEXT, pos TEXT, idx INTEGER, gloss TEXT, tags TEXT, source TEXT);
+  word TEXT, pos TEXT, idx INTEGER, gloss TEXT, tags TEXT, source TEXT,
+  ar TEXT);
 CREATE TABLE IF NOT EXISTS forms (
   word TEXT, form TEXT, tags TEXT);
 CREATE TABLE IF NOT EXISTS relations (
@@ -176,6 +177,11 @@ def connect() -> sqlite3.Connection:
     # الكتابة بالدفعات على قرص Colab بطيئة افتراضياً — هذه تُسرّعها كثيراً
     db.execute("PRAGMA journal_mode=OFF")
     db.execute("PRAGMA synchronous=OFF")
+    # ترقية قاعدةٍ بُنيت قبل عمود الترجمة — لا تُهدَم لأجل عمود
+    cols = {r[1] for r in db.execute("PRAGMA table_info(senses)")}
+    if "ar" not in cols:
+        db.execute("ALTER TABLE senses ADD COLUMN ar TEXT")
+        db.commit()
     return db
 
 
@@ -328,7 +334,7 @@ def stage_wiktionary(db, vocab: set) -> None:
 
     def flush():
         db.executemany("INSERT INTO ipa VALUES(?,?,?,?)", ipa_rows)
-        db.executemany("INSERT INTO senses VALUES(?,?,?,?,?,?)", sense_rows)
+        db.executemany("INSERT INTO senses VALUES(?,?,?,?,?,?,?)", sense_rows)
         db.executemany("INSERT INTO forms VALUES(?,?,?)", form_rows)
         db.executemany("INSERT INTO relations VALUES(?,?,?,?)", rel_rows)
         db.executemany("INSERT INTO usage_notes VALUES(?,?)", usage_rows)
@@ -412,8 +418,22 @@ def stage_wiktionary(db, vocab: set) -> None:
                 continue
             tags = [t for t in _strs(s.get("tags"), "name")
                     if t in REGISTER_TAGS]
+
+            # ترجمة عربية مربوطة بهذا المعنى تحديداً — مُحرَّرة بشرياً
+            # ومشكولة، لا آلية. «free» تعطي حُرّ لمعنىً وشَاغِر لآخر،
+            # وهو ما لا تبلغه ترجمةٌ آلية تجهل المعنى المقصود.
+            ar = ""
+            for t in (s.get("translations") or []):
+                if not isinstance(t, dict) or t.get("code") not in ("ar", "arb"):
+                    continue
+                cand = t.get("word")
+                if isinstance(cand, str) and cand and cand not in ar:
+                    ar = f"{ar} · {cand}" if ar else cand
+                    if ar.count("·") >= 1:
+                        break
+
             sense_rows.append((wl, pos, i, glosses[-1],
-                               ",".join(tags), "wiktionary"))
+                               ",".join(tags), "wiktionary", ar or None))
             for txt in _strs(s.get("examples"), "text", "example", "english"):
                 if 3 <= len(txt.split()) <= 30:
                     db.execute("INSERT INTO examples VALUES(?,?,?,?)",
@@ -503,8 +523,9 @@ def stage_wordnet(db, vocab: set) -> None:
             continue
         n += 1
         for i, syn in enumerate(syns[:6]):
+            # WordNet لا يحمل عربية — العمود يبقى فارغاً وويكاموس يملؤه
             senses.append((word, POS_MAP.get(syn.pos(), syn.pos()), i,
-                           syn.definition(), "", "wordnet"))
+                           syn.definition(), "", "wordnet", None))
             for lem in syn.lemmas():
                 name = lem.name().replace("_", " ").lower()
                 if name != word:
@@ -517,13 +538,13 @@ def stage_wordnet(db, vocab: set) -> None:
                     if dn != word:
                         rels.append((word, "derived", dn, "wordnet"))
         if len(senses) > 20000:
-            db.executemany("INSERT INTO senses VALUES(?,?,?,?,?,?)", senses)
+            db.executemany("INSERT INTO senses VALUES(?,?,?,?,?,?,?)", senses)
             db.executemany("INSERT INTO relations VALUES(?,?,?,?)", rels)
             db.commit()
             senses.clear()
             rels.clear()
 
-    db.executemany("INSERT INTO senses VALUES(?,?,?,?,?,?)", senses)
+    db.executemany("INSERT INTO senses VALUES(?,?,?,?,?,?,?)", senses)
     db.executemany("INSERT INTO relations VALUES(?,?,?,?)", rels)
     db.commit()
     log(f"WordNet: {n:,} كلمة لها مدخل")
@@ -1020,6 +1041,15 @@ def repair(apply: bool = False) -> None:
         plan.append((f"حذف {n:,} عبارة من phrasal_verbs (ليست أفعالاً مركّبة)",
                      pv_sql))
 
+    # «give up» فعلٌ مركّب واصطلاحيّ معاً، فيظهر في الحقلين. والقاعدة أن
+    # ما كان فعلاً مركّباً يُعرض فعلاً مركّباً وحده — الشرح واحد في الحالين.
+    n = db.execute("SELECT COUNT(*) FROM idioms WHERE phrase IN"
+                   " (SELECT phrase FROM phrasal_verbs)").fetchone()[0]
+    if n:
+        plan.append((f"حذف {n:,} تعبيراً هو أصلاً فعل مركّب",
+                     "DELETE FROM idioms WHERE phrase IN"
+                     " (SELECT phrase FROM phrasal_verbs)"))
+
     junk = ",".join(repr(j) for j in sorted(FORM_JUNK))
     n = db.execute(f"SELECT COUNT(*) FROM forms WHERE LOWER(form)"
                    f" IN ({junk})").fetchone()[0]
@@ -1144,6 +1174,7 @@ def full_report(db=None) -> dict:
         ("Usage Notes",      "SELECT COUNT(DISTINCT word) FROM usage_notes", True),
         ("Examples (بترجمة)", "SELECT COUNT(DISTINCT word) FROM examples WHERE ar IS NOT NULL AND ar<>''", False),
         ("Meanings",         "SELECT COUNT(DISTINCT word) FROM senses", False),
+        ("Meanings (بعربية)", "SELECT COUNT(DISTINCT word) FROM senses WHERE ar IS NOT NULL AND ar<>''", False),
         ("Inflections",      "SELECT COUNT(DISTINCT word) FROM forms", False),
         ("Synonyms",         "SELECT COUNT(DISTINCT word) FROM relations WHERE rel='synonym'", False),
         ("Antonyms",         "SELECT COUNT(DISTINCT word) FROM relations WHERE rel='antonym'", False),
@@ -1240,11 +1271,11 @@ def build_card(db, word: str) -> dict:
     best = ipa.get("us") or ipa.get("gen") or ipa.get("uk") or ""
 
     # ويكاموس أوّلاً: تعريفاته أوفى، وWordNet يكمل ما نقص بلا تكرار معناه
-    raw = q("SELECT DISTINCT pos,gloss,tags,source FROM senses WHERE word=?"
-            " ORDER BY source ASC, idx")
+    raw = q("SELECT DISTINCT pos,gloss,tags,source,ar FROM senses WHERE word=?"
+            " ORDER BY source ASC, (ar IS NULL), idx")
     senses = _dedupe(raw, lambda r: re.sub(r"\W+", " ",
                                            (r[1] or "").lower()).strip())[:6]
-    tags = sorted({t for _, _, tg, _ in senses
+    tags = sorted({t for _, _, tg, _, _ in senses
                    for t in (tg or "").split(",") if t})
 
     def rel(kind, n=8):
@@ -1264,8 +1295,9 @@ def build_card(db, word: str) -> dict:
         "word": word,
         "freq_rank": freq, "oxford": oxford, "cefr": cefr,
         "ipa": ipa, "arabicPron": ar_pron(best),
-        "pos": sorted({p for p, _, _, _ in senses if p}),
-        "meanings": [{"pos": p, "en": g, "src": s} for p, g, _, s in senses],
+        "pos": sorted({p for p, _, _, _, _ in senses if p}),
+        "meanings": [{"pos": p, "en": g, "ar": a, "src": s}
+                     for p, g, _, s, a in senses],
         "inflections": [r[0] for r in _dedupe(
             [r for r in q("SELECT DISTINCT form FROM forms WHERE word=?")
              if r[0] and r[0].lower() not in FORM_JUNK
@@ -1433,8 +1465,10 @@ padding:2px 10px;margin:2px 3px 2px 0;font-size:13px}
                                 for x in c[key][:10]), not c[key])
 
         row("المعاني", "<br>".join(
-            f'<b>{esc(m["pos"])}</b> — {esc(m["en"])} '
-            f'<span class="empty">[{esc(m["src"])}]</span>'
+            f'<b>{esc(m["pos"])}</b> — {esc(m["en"])}'
+            + (f'<br><span class="ar"><b>{esc(m["ar"])}</b></span>'
+               if m.get("ar") else '')
+            + f' <span class="empty">[{esc(m["src"])}]</span>'
             for m in c["meanings"]), not c["meanings"])
         for k, lab in (("pos", "نوع الكلمة"), ("inflections", "التصريفات"),
                        ("derivatives", "المشتقات"), ("synonyms", "المرادفات"),
