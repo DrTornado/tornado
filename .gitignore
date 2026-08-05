@@ -9,3 +9,4 @@ __pycache__/
 *.pyc
 tools/enrich/enrich-test/
 tools/enrich/tornado-kb.sqlite
+tools/enrich/out/

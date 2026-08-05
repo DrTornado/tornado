@@ -40,7 +40,7 @@ from collections import Counter, defaultdict
 
 # يُطبع عند التشغيل. الخلية تفضّل النسخة المحلية على المستودع، فبلا بصمةٍ
 # ظاهرة قد تُعاد تشغيل نسخةٍ قديمة ويُظنّ الإصلاح فاشلاً.
-VERSION = "26 — تصدير الشرائح المفهرسة"
+VERSION = "27 — كل فتح للقاعدة يمرّ بالترقية"
 
 WORK = os.environ.get("TORNADO_WORK", "/content/kb")
 OUT_DB = os.path.join(WORK, "tornado-kb.sqlite")
@@ -1178,7 +1178,7 @@ def audit(db=None) -> dict:
     إعادة بناء ولا ظنّاً.
     """
     close = db is None
-    db = db or sqlite3.connect(OUT_DB)
+    db = db or connect()
 
     print("\n" + "═" * 68)
     print("  تدقيق التكرار داخل القاعدة")
@@ -1239,7 +1239,7 @@ def repair(apply: bool = False) -> None:
 
     @param apply عرضٌ فقط ما لم تُطلب الكتابة صراحةً.
     """
-    db = sqlite3.connect(OUT_DB)
+    db = connect()
     db.isolation_level = None
     mode = "تنفيذ" if apply else "عرض فقط (apply=True للتنفيذ)"
     print(f"\n{'═'*68}\n  إصلاح — {mode}\n{'═'*68}")
@@ -1390,7 +1390,7 @@ def inspect_wiktextract(sample=("issue", "assume", "abide", "affect",
 def full_report(db=None) -> dict:
     """أرقام مقيسة من القاعدة — لا تقديرات."""
     close = db is None
-    db = db or sqlite3.connect(OUT_DB)
+    db = db or connect()
     total = db.execute("SELECT COUNT(*) FROM vocab").fetchone()[0]
 
     # الحقول السبعة المطلوبة صراحةً، ثم البقية
@@ -1453,7 +1453,7 @@ def my_coverage(words=None, path=None) -> dict:
     النسبة العامّة على ١٨ ألف كلمة تخدع: أكثرها نادرٌ لا يملكه أحد.
     والرقم الذي يهمّ صاحب المكتبة هو تغطية كلماته هو.
     """
-    db = sqlite3.connect(OUT_DB)
+    db = connect()
     if words is None:
         words = user_words(path)
 
@@ -1554,7 +1554,7 @@ def export_shards(out_dir: str = "/content/enrich", words=None,
     والفهرس يحمل بصمة كل شريحة، فيقارنها التطبيق بما عنده ولا ينزّل إلا
     ما تغيّر — وهذا ما يجعل «المزامنة عند كل تعديل» رخيصةً بحقّ.
     """
-    db = sqlite3.connect(OUT_DB)
+    db = connect()
     src = words if words is not None else user_words(path)
 
     resolved, missing = {}, []
@@ -1872,7 +1872,7 @@ def sample_cards(n: int = 10, words=None, path=None,
     التوزيع مقصود: بطاقة لكلمة شائعة وأخرى لنادرة تكشفان مدى التفاوت،
     وهو ما لا يظهر لو انتقينا الأسهل.
     """
-    db = sqlite3.connect(OUT_DB)
+    db = connect()
     if words is None:
         try:
             words = user_words(path)
