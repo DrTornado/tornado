@@ -1,4 +1,5 @@
 """اختبار منطق build_kb محلياً — بلا Colab وبلا تنزيل."""
+import json
 import os
 import sqlite3
 import sys
@@ -248,6 +249,34 @@ for rank, want in [(1, "A1"), (1000, "A1"), (1001, "A2"), (2500, "A2"),
                    (10000, "B2"), (10001, "C1"), (99999, "C1"),
                    (None, "C1"), (0, "C1")]:
     check(f"rank {rank}", K.est_cefr(rank), want)
+
+# ── ٦٫٩٩ ── تصدير الشرائح ─────────────────────────────────────────
+print("\n[6.99] export_shards")
+out = os.path.join(HERE, "enrich-test")
+meta = K.export_shards(out_dir=out, words=["issue", "glaciers", "zzzqqq"])
+
+check("الفهرس مكتوب", os.path.exists(os.path.join(out, "index.json")), True)
+check("الإصدار", meta["schema"], K.CARD_SCHEMA)
+check("كلمتان مغطّاتان", meta["words"], 2)
+
+idx = json.load(open(os.path.join(out, "index.json"), encoding="utf-8"))
+check("لكل شريحة بصمة",
+      all("hash" in s and len(s["hash"]) == 16
+          for s in idx["shards"].values()), True)
+
+shard = json.load(open(os.path.join(out, "is.json"), encoding="utf-8"))
+check("البطاقة في شريحتها", "issue" in shard, True)
+check("الحقول الفارغة محذوفة", "antonyms" not in shard["issue"], True)
+check("الغائب مذكور", "antonyms" in shard["issue"].get("absent", []), True)
+
+gl = json.load(open(os.path.join(out, "gl.json"), encoding="utf-8"))
+check("الصيغة محفوظة كما كتبها", "glaciers" in gl, True)
+check("ومردودة إلى مدخلها", gl["glaciers"]["word"], "glacier")
+
+# التصدير مرّتين يعطي نفس البصمة — وإلا نزّل التطبيق بلا تغيير
+again = K.export_shards(out_dir=out, words=["issue", "glaciers", "zzzqqq"])
+check("البصمة ثابتة",
+      again["shards"]["is"]["hash"], idx["shards"]["is"]["hash"])
 
 # ── ٧ ── repair عديم الأثر عند التكرار ────────────────────────────
 print("\n[7] repair مرّتين لا يغيّر شيئاً")
