@@ -39,7 +39,7 @@ from collections import Counter, defaultdict
 
 # يُطبع عند التشغيل. الخلية تفضّل النسخة المحلية على المستودع، فبلا بصمةٍ
 # ظاهرة قد تُعاد تشغيل نسخةٍ قديمة ويُظنّ الإصلاح فاشلاً.
-VERSION = "16 — ترشيح الاقتباسات المهجورة وتفضيل Tatoeba"
+VERSION = "17 — قراءة مكتبتك الحيّة من ملف مُصدَّر"
 
 WORK = os.environ.get("TORNADO_WORK", "/content/kb")
 OUT_DB = os.path.join(WORK, "tornado-kb.sqlite")
@@ -1408,7 +1408,7 @@ def full_report(db=None) -> dict:
     return out
 
 
-def my_coverage(words=None) -> dict:
+def my_coverage(words=None, path=None) -> dict:
     """
     التغطية على كلمات المستخدم وحدها.
 
@@ -1417,7 +1417,7 @@ def my_coverage(words=None) -> dict:
     """
     db = sqlite3.connect(OUT_DB)
     if words is None:
-        words = user_words()
+        words = user_words(path)
 
     resolved, missing = {}, []
     for w in words:
@@ -1478,7 +1478,7 @@ def my_coverage(words=None) -> dict:
 
 # ───────────────────────── بطاقات حقيقية ─────────────────────────
 
-def user_words() -> list:
+def user_words(path=None) -> list:
     """
     كلمات المستخدم الفعلية من مستودعه العام.
 
@@ -1489,8 +1489,17 @@ def user_words() -> list:
     والإصلاح في الذاكرة فقط. لا يُكتب شيء على القرص ولا على المستودع —
     البيانات بياناته، وإصلاحها قرارٌ منفصل يخصّه هو.
     """
-    url = f"{REPO_RAW}/android/app/src/main/assets/words.json"
-    raw = urllib.request.urlopen(url, timeout=60).read().decode("utf-8")
+    # الملف المرفق بالتطبيق تصديرٌ قديم — المكتبة الحيّة في المستودع الخاص
+    # ولا نملك إليه توكناً، ولا يصحّ أن نطلبه. فمن أراد قياس مكتبته
+    # الحالية يرفع تصديرها ويشير إليه هنا.
+    src = path or os.environ.get("TORNADO_WORDS")
+    if src and os.path.exists(src):
+        raw = open(src, encoding="utf-8").read()
+        log(f"كلمات المستخدم من {src}")
+    else:
+        url = f"{REPO_RAW}/android/app/src/main/assets/words.json"
+        raw = urllib.request.urlopen(url, timeout=60).read().decode("utf-8")
+        log("كلمات المستخدم من المستودع العام — قد يكون تصديراً قديماً")
 
     fixed, n = re.subn(r'"last"\s*:\s*[^,\n}\]]*', '"last": 0', raw)
     try:
@@ -1692,7 +1701,8 @@ def _pct_filled(c: dict) -> float:
     return 100 * sum(checks) / len(checks)
 
 
-def sample_cards(n: int = 10, words=None, html: str = "/content/cards.html"):
+def sample_cards(n: int = 10, words=None, path=None,
+                 html: str = "/content/cards.html"):
     """
     عشر بطاقات حقيقية من كلمات المستخدم، موزّعة على مدى الشيوع.
 
@@ -1702,7 +1712,7 @@ def sample_cards(n: int = 10, words=None, html: str = "/content/cards.html"):
     db = sqlite3.connect(OUT_DB)
     if words is None:
         try:
-            words = user_words()
+            words = user_words(path)
             src = "مكتبتك"
         except Exception as e:                                   # noqa: BLE001
             log(f"تعذّر جلب كلماتك ({e}) — أستعمل عيّنة مرجعية")
