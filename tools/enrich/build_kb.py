@@ -39,7 +39,7 @@ from collections import Counter, defaultdict
 
 # يُطبع عند التشغيل. الخلية تفضّل النسخة المحلية على المستودع، فبلا بصمةٍ
 # ظاهرة قد تُعاد تشغيل نسخةٍ قديمة ويُظنّ الإصلاح فاشلاً.
-VERSION = "20 — طيّ الحقول غير المنطبقة مع ذكرها مجموعةً"
+VERSION = "21 — الفراغ يظهر حتى يكتمل الملء"
 
 WORK = os.environ.get("TORNADO_WORK", "/content/kb")
 OUT_DB = os.path.join(WORK, "tornado-kb.sqlite")
@@ -83,6 +83,13 @@ STAGES = os.environ.get("TORNADO_STAGES", "all")
 # هذا المستوى يجمع النادر عمداً، فبناءٌ على «الشائع» يخذله بالضبط حيث
 # يحتاج. القياس الفعلي: ٥٠ من ١١٢ كلمة خارج القاعدة.
 VOCAB_MODE = os.environ.get("TORNADO_VOCAB", "wide")
+
+# طيّ الحقول الفارغة — مُطفأٌ حتى يكتمل الملء.
+#
+# الطيّ مشروعٌ بعد التحقّق أن المعلومة غير موجودة، لا قبله. و«emanate»
+# بلا مرادفات لأن WordNet لم يُشغَّل عليها بعدُ — فطيُّ السطر يُخفي
+# تقصيراً لا حقيقةً لغوية. والفراغ الظاهر هو أداة التشخيص الوحيدة.
+HIDE_EMPTY = os.environ.get("TORNADO_HIDE_EMPTY", "0") == "1"
 
 # الترجمة الآلية — مفتوحة، محلية داخل Colab، بلا مفتاح ولا حساب.
 #   mine        : مكتبة المستخدم وحدها (الافتراضي — دقائق)
@@ -1872,6 +1879,11 @@ border-radius:4px;padding:1px 6px;margin-inline-end:6px;vertical-align:2px}
         def row(label, html_val, empty=False):
             if empty:
                 absent.append(label)
+                if not HIDE_EMPTY:
+                    parts.append(
+                        f'<div class="row"><div class="k">{label}</div>'
+                        f'<div class="v"><span class="empty">— فارغ</span>'
+                        f'</div></div>')
                 return
             parts.append(f'<div class="row"><div class="k">{label}</div>'
                          f'<div class="v">{html_val}</div></div>')
