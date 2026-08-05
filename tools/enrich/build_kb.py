@@ -39,7 +39,7 @@ from collections import Counter, defaultdict
 
 # يُطبع عند التشغيل. الخلية تفضّل النسخة المحلية على المستودع، فبلا بصمةٍ
 # ظاهرة قد تُعاد تشغيل نسخةٍ قديمة ويُظنّ الإصلاح فاشلاً.
-VERSION = "17 — قراءة مكتبتك الحيّة من ملف مُصدَّر"
+VERSION = "18 — CEFR مقدَّر من الرتبة، مُعلَّماً"
 
 WORK = os.environ.get("TORNADO_WORK", "/content/kb")
 OUT_DB = os.path.join(WORK, "tornado-kb.sqlite")
@@ -1565,6 +1565,21 @@ def _dedupe(rows, key):
     return out
 
 
+def est_cefr(rank) -> str:
+    """
+    تقديرٌ للمستوى من رتبة التكرار — نفس قاعدة التطبيق حرفياً
+    (ReferenceData.kt:116). ولا يُخترع هنا سلّمٌ ثانٍ يخالف ما يراه
+    المستخدم في تطبيقه.
+
+    والتقدير يُعلَّم تقديراً: أوكسفورد وحده يعطي مستوىً رسمياً، والخلط
+    بينهما يجعل الظنّ يقيناً.
+    """
+    if not rank:
+        return ""
+    return ("A1" if rank <= 1000 else "A2" if rank <= 2500 else
+            "B1" if rank <= 5000 else "B2" if rank <= 10000 else "C1")
+
+
 def resolve_word(db, word: str):
     """
     يردّ الصيغة المصرَّفة إلى مدخلها.
@@ -1657,6 +1672,9 @@ def build_card(db, word: str) -> dict:
     return {
         "word": word,
         "freq_rank": freq, "oxford": oxford, "cefr": cefr,
+        # الرسمي من أوكسفورد أوّلاً؛ فإن غاب فتقديرٌ من الرتبة مُعلَّمٌ
+        # بأنه تقدير. حقلٌ فارغ لا ينفع المتعلّم، وتقديرٌ يُعرض يقيناً يغشّه.
+        "cefrEst": "" if cefr else est_cefr(freq),
         "ipa": ipa, "arabicPron": ar_pron(best),
         "pos": sorted({p for p, _, _, _, _, _ in senses if p}),
         "meanings": [{"pos": p, "en": g, "ar": a, "arSrc": asrc, "src": s}
@@ -1825,7 +1843,10 @@ padding:2px 10px;margin:2px 3px 2px 0;font-size:13px}
                      f'<h2>{esc(c["word"])}</h2>'
                      f'<div class="meta">{esc(c["ipa"])} · '
                      f'<b class="ar">{esc(c["arabicPron"]) or "—"}</b> · '
-                     f'{esc(c["oxford"] or "—")} · {esc(c["cefr"] or "—")} · '
+                     f'{esc(c["oxford"] or "—")} · '
+                     + (esc(c["cefr"]) if c["cefr"]
+                        else (f'{esc(c["cefrEst"])} <small>مُقدَّر</small>'
+                              if c.get("cefrEst") else "—")) + ' · '
                      f'rank {esc(c["freq_rank"] or "—")}</div>')
 
         def row(label, html_val, empty=False):
