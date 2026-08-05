@@ -23,6 +23,7 @@
 
 import bz2
 import csv
+import hashlib
 import io
 import json
 import math
@@ -39,7 +40,7 @@ from collections import Counter, defaultdict
 
 # يُطبع عند التشغيل. الخلية تفضّل النسخة المحلية على المستودع، فبلا بصمةٍ
 # ظاهرة قد تُعاد تشغيل نسخةٍ قديمة ويُظنّ الإصلاح فاشلاً.
-VERSION = "25 — الترجمة البشرية تتصدّر الآلية"
+VERSION = "26 — تصدير الشرائح المفهرسة"
 
 WORK = os.environ.get("TORNADO_WORK", "/content/kb")
 OUT_DB = os.path.join(WORK, "tornado-kb.sqlite")
@@ -1514,6 +1515,101 @@ def my_coverage(words=None, path=None) -> dict:
     print("═" * 60 + "\n")
     db.close()
     return out
+
+
+# ───────────────────────── تصدير الشرائح ─────────────────────────
+
+CARD_SCHEMA = 1
+
+# ما لا ينطبق يُحذف من الملف لا يُرسَل فارغاً: «boon» اسمٌ لا فعل مركّب له،
+# وإرسال حقلٍ فارغ يضخّم الشرائح ويُلزم التطبيقين بمنطق عرضٍ للفراغ.
+# ويبقى `absent` ليعرف التطبيق أنه فُحص فلم يوجد، لا أنه لم يُسأل.
+_OPTIONAL = ("derivatives", "synonyms", "antonyms", "examples",
+             "collocations", "phrasalVerbs", "idioms", "usageNotes",
+             "register", "inflections")
+
+
+def _compact(card: dict) -> dict:
+    out, absent = {}, []
+    for k, v in card.items():
+        if k in _OPTIONAL and not v:
+            absent.append(k)
+            continue
+        if v or v == 0:
+            out[k] = v
+    if absent:
+        out["absent"] = absent
+    return out
+
+
+def export_shards(out_dir: str = "/content/enrich", words=None,
+                  path=None) -> dict:
+    """
+    يكتب البطاقات شرائحَ مفهرسةً، جاهزةً للمزامنة.
+
+    الشرائح لا ملفٌّ واحد: ملفُ الكلمات اليوم ٣٣٠ كيلوبايت وقد أسقط
+    المزامنة مرّةً بانقطاع الاتصال. وإضافة كلمةٍ واحدة يجب أن تكلّف
+    تنزيل شريحةٍ واحدة، لا الملف كلّه.
+
+    والفهرس يحمل بصمة كل شريحة، فيقارنها التطبيق بما عنده ولا ينزّل إلا
+    ما تغيّر — وهذا ما يجعل «المزامنة عند كل تعديل» رخيصةً بحقّ.
+    """
+    db = sqlite3.connect(OUT_DB)
+    src = words if words is not None else user_words(path)
+
+    resolved, missing = {}, []
+    for w in src:
+        r = resolve_word(db, w)
+        (resolved.setdefault(r, w) if r else missing.append(w))
+
+    shards = defaultdict(dict)
+    for head, original in resolved.items():
+        card = _compact(build_card(db, head))
+        card["v"] = CARD_SCHEMA
+        if original != head:
+            card["resolvedFrom"] = original    # «glaciers» ← «glacier»
+        shards[(head[:2] or "_").ljust(2, "_")][original] = card
+    db.close()
+
+    os.makedirs(out_dir, exist_ok=True)
+    for stale in os.listdir(out_dir):
+        if stale.endswith(".json"):
+            os.remove(os.path.join(out_dir, stale))
+
+    index, total = {}, 0
+    for key, cards in sorted(shards.items()):
+        body = json.dumps(cards, ensure_ascii=False, sort_keys=True,
+                          separators=(",", ":"))
+        with open(os.path.join(out_dir, f"{key}.json"), "w",
+                  encoding="utf-8") as f:
+            f.write(body)
+        index[key] = {
+            "hash": hashlib.sha1(body.encode("utf-8")).hexdigest()[:16],
+            "words": len(cards),
+            "bytes": len(body.encode("utf-8")),
+        }
+        total += len(body.encode("utf-8"))
+
+    meta = {"schema": CARD_SCHEMA,
+            "built": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "words": len(resolved), "shards": index}
+    with open(os.path.join(out_dir, "index.json"), "w",
+              encoding="utf-8") as f:
+        json.dump(meta, f, ensure_ascii=False, indent=1, sort_keys=True)
+
+    print("\n" + "═" * 60)
+    print(f"  تُصدِّر {len(resolved)} بطاقة في {len(index)} شريحة")
+    print("═" * 60)
+    print(f"  المجموع : {total/1024:.0f} ك.ب "
+          f"(متوسط {total/max(len(resolved),1):.0f} بايت للبطاقة)")
+    print(f"  الفهرس  : {os.path.getsize(os.path.join(out_dir,'index.json'))} بايت")
+    biggest = sorted(index.items(), key=lambda kv: -kv[1]["bytes"])[:5]
+    print("  أكبر الشرائح: " +
+          " · ".join(f"{k} {v['bytes']//1024}ك" for k, v in biggest))
+    if missing:
+        print(f"  خارج القاعدة ({len(missing)}): {', '.join(missing[:8])}")
+    print("═" * 60 + "\n")
+    return meta
 
 
 # ───────────────────────── بطاقات حقيقية ─────────────────────────
