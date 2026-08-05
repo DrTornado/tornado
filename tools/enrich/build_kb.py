@@ -39,7 +39,7 @@ from collections import Counter, defaultdict
 
 # يُطبع عند التشغيل. الخلية تفضّل النسخة المحلية على المستودع، فبلا بصمةٍ
 # ظاهرة قد تُعاد تشغيل نسخةٍ قديمة ويُظنّ الإصلاح فاشلاً.
-VERSION = "10 — ترتيب المعاني للمتعلّم + تنقية الأمثلة"
+VERSION = "11 — قراءة words.json تصمد أمام الحقل الفاسد"
 
 WORK = os.environ.get("TORNADO_WORK", "/content/kb")
 OUT_DB = os.path.join(WORK, "tornado-kb.sqlite")
@@ -1222,12 +1222,25 @@ def user_words() -> list:
     """
     كلمات المستخدم الفعلية من مستودعه العام.
 
-    الملف يحوي «0null» في ١٠٩ مواضع وهو JSON غير صالح — يُصلَح في الذاكرة
-    فقط للقراءة. لا يُكتب شيء على القرص ولا على المستودع.
+    الملف JSON غير صالح: حقل «last» يُكتب بقيمة فاسدة في كل سجلّ —
+    رأيتُ «0null» و«0"right"»، وقد تظهر أشكال أخرى. فلا نطارد الأشكال
+    واحداً واحداً بل نُصفّر الحقل كله: قيمته طابعٌ زمني لا نستعمله.
+
+    والإصلاح في الذاكرة فقط. لا يُكتب شيء على القرص ولا على المستودع —
+    البيانات بياناته، وإصلاحها قرارٌ منفصل يخصّه هو.
     """
     url = f"{REPO_RAW}/android/app/src/main/assets/words.json"
     raw = urllib.request.urlopen(url, timeout=60).read().decode("utf-8")
-    data = json.loads(raw.replace("0null", "0"))
+
+    fixed, n = re.subn(r'"last"\s*:\s*[^,\n}\]]*', '"last": 0', raw)
+    try:
+        data = json.loads(fixed)
+    except json.JSONDecodeError as e:
+        raise SystemExit(
+            f"تعذّر تحليل words.json حتى بعد إصلاح {n} حقلاً: {e}\n"
+            f"السياق: ...{fixed[max(0, e.pos-90):e.pos+90]}...")
+    if n:
+        log(f"words.json: صُحّح {n} حقل «last» فاسد (في الذاكرة فقط)")
     return [w["word"].strip().lower()
             for w in data.get("words", [])
             if w.get("word") and not w.get("deletedAt")]
