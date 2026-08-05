@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-05T17:55:56.651Z",
+ "exportedAt": "2026-08-05T17:56:00.144Z",
  "words": [
   {
    "id": 1785705257083,
@@ -120,9 +120,19 @@
    ],
    "meanings": [
     {
+     "pos": "verb",
+     "en": "(transitive) To persuade somebody not to do (something).",
+     "ar": "(متعدية) لإقناع شخص ما بعدم القيام (بشيء)."
+    },
+    {
+     "pos": "verb",
+     "en": "(transitive) To extinguish the courage of; to dishearten; to depress the spirits of; to deprive of confidence; to deject.",
+     "ar": "(متعدية) لإخماد شجاعة ؛ تثبيط ؛ لإحباط أرواح ؛ للحرمان من الثقة ؛ للاكتئاب."
+    },
+    {
      "pos": "noun",
-     "en": "Lack of courage",
-     "ar": "عدم التحلي بالشجاعة."
+     "en": "(rare) Lack of courage",
+     "ar": "(نادر) قلة الشجاعة"
     },
     {
      "pos": "verb",
@@ -133,6 +143,11 @@
      "pos": "verb",
      "en": "To persuade somebody not to do (something).",
      "ar": "لإقناع شخص ما بعدم القيام (بشيء ما)."
+    },
+    {
+     "pos": "noun",
+     "en": "Lack of courage",
+     "ar": ""
     }
    ],
    "inflections": [
@@ -178,9 +193,9 @@
    "interval": 0,
    "due": 0,
    "ipaUS": "/dɪsˈkɝɪd͡ʒ/",
-   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/d/dis/disco/discourage__us_1.mp3",
-   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/d/dis/disco/discourage__gb_3.mp3",
-   "engineVersion": 2,
+   "audioUS": "-us",
+   "audioUK": "-uk",
+   "engineVersion": 3,
    "ipaUK": "/dɪsˈkʌɹɪd͡ʒ/"
   },
   {
@@ -487,7 +502,7 @@
   {
    "id": 1784991631873,
    "word": "burr",
-   "ipa": "/bʌr/",
+   "ipa": "/bɝ/",
    "arabicPron": "بير",
    "oxford": "",
    "cefr": "",
@@ -498,43 +513,28 @@
    "meanings": [
     {
      "pos": "noun",
-     "en": "A small piece of material left on an edge after a cutting operation.",
-     "ar": "قطعة صغيرة من المواد متروكة على الحافة بعد عملية القطع."
-    },
-    {
-     "pos": "noun",
      "en": "A sharp, pointy object, such as a sliver or splinter.",
      "ar": "جسم حاد ومدبب، مثل الشظية أو الشظية."
     },
     {
      "pos": "noun",
-     "en": "(engineering) A revolving disk or cone with abrasive surfaces used to grind hard products in a grinder or mill.",
-     "ar": "(هندسة) قرص دوار أو مخروط ذو أسطح كاشطة يستخدم لطحن المنتجات الصلبة في مطحنة أو مطحنة."
+     "en": "A bur; a seed pod with sharp features that stick in fur or clothing.",
+     "ar": "مثقب ؛ كبسولة بذور ذات ملامح حادة تلتصق بالفراء أو الملابس."
+    },
+    {
+     "pos": "noun",
+     "en": "A small piece of material left on an edge after a cutting operation.",
+     "ar": "قطعة صغيرة من المواد متروكة على الحافة بعد عملية القطع."
     },
     {
      "pos": "verb",
-     "en": "(transitive, engineering) To grind using a burr (revolving disk or cone with abrasive surfaces).",
-     "ar": "(متعدية، هندسية) للطحن باستخدام نتوء (قرص دوار أو مخروط بأسطح كاشطة)."
+     "en": "To grind using a burr (revolving disk or cone with abrasive surfaces).",
+     "ar": "للطحن باستخدام نتوء (قرص دوار أو مخروط بأسطح كاشطة)."
     },
     {
      "pos": "noun",
      "en": "A rough humming sound.",
      "ar": "صوت طنين خشن."
-    },
-    {
-     "pos": "noun",
-     "en": "A uvular \"r\" sound, or (by extension) an accent characterized by this sound.",
-     "ar": ""
-    },
-    {
-     "pos": "verb",
-     "en": "(transitive) To pronounce with a uvular \"r\".",
-     "ar": ""
-    },
-    {
-     "pos": "verb",
-     "en": "(intransitive) To make a rough humming sound.",
-     "ar": ""
     }
    ],
    "inflections": [
@@ -576,10 +576,6 @@
     {
      "en": "You left a bunch of burrs on those parts yesterday. You've already been told not to miss the deburring operation.",
      "ar": "لقد تركت حفنة من النتوءات على تلك الأجزاء أمس. لقد تم إخبارك بالفعل بعدم تفويت عملية إزالة الأزيز."
-    },
-    {
-     "en": "burr grinder",
-     "ar": "مطحنة نتوءات"
     }
    ],
    "differences": [],
@@ -590,7 +586,7 @@
    "due": 0,
    "freqLabel": "Top 18,000 words",
    "estCefr": "C1",
-   "engineVersion": 3,
+   "engineVersion": 2,
    "ipaUS": "/bɝ/",
    "audioUS": "-us"
   },
