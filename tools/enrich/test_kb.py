@@ -218,6 +218,14 @@ for txt, want_reject in [
     check(f"{'رفض' if want_reject else 'قبول'}: {txt[:34]}",
           bool(K.ARCHAIC.search(txt)), want_reject)
 
+# ── ٦٫٩٥ ── تقدير CEFR من الرتبة ──────────────────────────────────
+print("\n[6.95] est_cefr — نفس سلّم التطبيق")
+for rank, want in [(1, "A1"), (1000, "A1"), (1001, "A2"), (2500, "A2"),
+                   (2501, "B1"), (5000, "B1"), (5001, "B2"),
+                   (10000, "B2"), (10001, "C1"), (99999, "C1"),
+                   (None, ""), (0, "")]:
+    check(f"rank {rank}", K.est_cefr(rank), want)
+
 # ── ٧ ── repair عديم الأثر عند التكرار ────────────────────────────
 print("\n[7] repair مرّتين لا يغيّر شيئاً")
 K.repair(apply=True)
