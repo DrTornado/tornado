@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-05T17:56:33.651Z",
+ "exportedAt": "2026-08-05T17:56:51.613Z",
  "words": [
   {
    "id": 1785705257083,
@@ -105,7 +105,8 @@
    "ipaUS": "/fʌk/",
    "ipaUK": "/fʌk/",
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/fuck-us.mp3",
-   "audioUK": "https://api.dictionaryapi.dev/media/pronunciations/en/fuck-uk.mp3"
+   "audioUK": "https://api.dictionaryapi.dev/media/pronunciations/en/fuck-uk.mp3",
+   "upgradeTries": 1
   },
   {
    "id": 1785000460857,
