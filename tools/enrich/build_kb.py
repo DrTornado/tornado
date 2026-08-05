@@ -39,7 +39,7 @@ from collections import Counter, defaultdict
 
 # يُطبع عند التشغيل. الخلية تفضّل النسخة المحلية على المستودع، فبلا بصمةٍ
 # ظاهرة قد تُعاد تشغيل نسخةٍ قديمة ويُظنّ الإصلاح فاشلاً.
-VERSION = "8 — ترجمة عربية بشرية للمعاني من جداول ويكاموس"
+VERSION = "10 — ترتيب المعاني للمتعلّم + تنقية الأمثلة"
 
 WORK = os.environ.get("TORNADO_WORK", "/content/kb")
 OUT_DB = os.path.join(WORK, "tornado-kb.sqlite")
@@ -1242,6 +1242,13 @@ FORM_JUNK = {"no-table-tags", "glossary", "table-tags", "inflection-template",
 ARCHAIC = re.compile(r"\[…\]|\[\.\.\.\]|\bthou\b|\bthee\b|\bthy\b|"
                      r"\bhath\b|\bdoth\b|\bunto\b|\bwhilst\b|\bshalt\b")
 
+# أسطر الإحالة في ويكاموس ليست أمثلة: «Near-synonyms: gift; blessing…»
+# تتسرّب إلى حقل الأمثلة فتُعرض جملةً وهي فهرس.
+NOT_EXAMPLE = re.compile(
+    r"^\s*(near-?synonyms?|synonyms?|antonyms?|coordinate terms?|"
+    r"hypernyms?|hyponyms?|see also|compare|thesaurus|usage|meronyms?)\s*:",
+    re.I)
+
 
 def _dedupe(rows, key):
     """يحذف المكرّر مع حفظ الترتيب — أوّل ظهورٍ يفوز."""
@@ -1271,8 +1278,17 @@ def build_card(db, word: str) -> dict:
     best = ipa.get("us") or ipa.get("gen") or ipa.get("uk") or ""
 
     # ويكاموس أوّلاً: تعريفاته أوفى، وWordNet يكمل ما نقص بلا تكرار معناه
-    raw = q("SELECT DISTINCT pos,gloss,tags,source,ar FROM senses WHERE word=?"
-            " ORDER BY source ASC, (ar IS NULL), idx")
+    # ترتيب الأولوية للمتعلّم، لا للمعجمي:
+    #   ١ ما له ترجمة عربية      — أثمن ما في البطاقة
+    #   ٢ غير المهجور            — «archaic/obsolete» يُؤخَّر لا يُحذف
+    #   ٣ WordNet قبل ويكاموس    — تعريفاته موجزة، وويكاموس يسهب في
+    #     المعاني الحرفية النادرة («القسم الخشبي من الكتّان بعد التعطين»)
+    raw = q("""SELECT DISTINCT pos,gloss,tags,source,ar FROM senses
+               WHERE word=? AND pos <> 'name'
+               ORDER BY (ar IS NULL OR ar=''),
+                        (tags LIKE '%archaic%' OR tags LIKE '%obsolete%'
+                         OR tags LIKE '%dated%'),
+                        source DESC, idx""")
     senses = _dedupe(raw, lambda r: re.sub(r"\W+", " ",
                                            (r[1] or "").lower()).strip())[:6]
     tags = sorted({t for _, _, tg, _, _ in senses
@@ -1284,10 +1300,11 @@ def build_card(db, word: str) -> dict:
             " LIMIT ?", (word, kind, n))]
 
     # المترجَم أوّلاً ثم الأقصر — والاقتباس القديم يُستبعد ما دام يوجد بديل
-    ex_all = _dedupe(
+    ex_all = [r for r in _dedupe(
         q("SELECT DISTINCT en,ar,source FROM examples WHERE word=?"
           " ORDER BY (ar IS NULL OR ar=''), length(en)"),
         lambda r: (r[0] or "").lower().strip())
+        if not NOT_EXAMPLE.match(r[0] or "")]
     ex = [r for r in ex_all if not ARCHAIC.search(r[0] or "")][:3] \
         or ex_all[:3]
 
@@ -1516,6 +1533,14 @@ def main() -> None:
         stage_tatoeba(db, vocab)
     if want("collocations"):
         stage_collocations(db, vocab)
+
+    # التنقية جزءٌ من البناء لا خطوة تُنسى. الجولة الواحدة تُنتج تكراراً
+    # طبيعياً — الصيغة نفسها تُذكر تحت الاسم والفعل معاً — فبناءٌ بلا تنقية
+    # يترك عشرات الآلاف من الصفوف المكرّرة بلا أن يُنبّه أحد.
+    db.close()
+    repair(apply=True)
+    db = connect()
+
     stage_report(db)
     db.close()
     log(f"تمّ: {OUT_DB}")
