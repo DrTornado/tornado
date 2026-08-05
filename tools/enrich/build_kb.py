@@ -39,7 +39,7 @@ from collections import Counter, defaultdict
 
 # يُطبع عند التشغيل. الخلية تفضّل النسخة المحلية على المستودع، فبلا بصمةٍ
 # ظاهرة قد تُعاد تشغيل نسخةٍ قديمة ويُظنّ الإصلاح فاشلاً.
-VERSION = "12 — ردّ الصيغ المصرَّفة إلى مداخلها + قياس كلماتك"
+VERSION = "13 — مفردات واسعة: كل مدخل حقيقي في ويكاموس"
 
 WORK = os.environ.get("TORNADO_WORK", "/content/kb")
 OUT_DB = os.path.join(WORK, "tornado-kb.sqlite")
@@ -74,6 +74,15 @@ COLLOCATION_TOP_N = 12          # كم متلازمة نحفظ لكل كلمة �
 COLLOCATION_MIN_FREQ = 5        # أقلّ من ذلك ضوضاء إحصائية لا ظاهرة لغوية
 
 STAGES = os.environ.get("TORNADO_STAGES", "all")
+
+# "wide"  : كل مدخل إنجليزي حقيقي في ويكاموس — الافتراضي
+# "lists" : أوكسفورد + أشيَع ١٨ ألف فقط (أصغر وأسرع)
+#
+# القوائم وحدها لا تكفي: مكتبة المستخدم فيها articulation وrotunda
+# وapothecary — لا واحدة منها في أوكسفورد ولا في أشيَع ١٨ ألف. ومن بلغ
+# هذا المستوى يجمع النادر عمداً، فبناءٌ على «الشائع» يخذله بالضبط حيث
+# يحتاج. القياس الفعلي: ٥٠ من ١١٢ كلمة خارج القاعدة.
+VOCAB_MODE = os.environ.get("TORNADO_VOCAB", "wide")
 
 
 def want(stage: str) -> bool:
@@ -289,6 +298,27 @@ PARTICLES = {
 }
 
 
+_LEMMA_OK = re.compile(r"^[a-z][a-z'\-]{1,29}$")
+
+
+def _is_lemma(e, wl: str) -> bool:
+    """
+    أهذا مدخلٌ حقيقي يستحقّ بطاقة، أم صيغةٌ مصرَّفة أو رمز؟
+
+    ويكاموس يضع «walked» مدخلاً مستقلاً معناه «صيغة الماضي من walk».
+    تلك ليست كلمةً تُحفَظ بل إشارةٌ إلى غيرها، ووجودها في المفردات
+    يضخّم القاعدة بلا فائدة. فنشترط معنىً قائماً بذاته لا إحالة.
+    """
+    if not _LEMMA_OK.match(wl):
+        return False
+    for s in (e.get("senses") or []):
+        if not isinstance(s, dict) or s.get("form_of") or s.get("alt_of"):
+            continue
+        if _strs(s.get("glosses"), "text"):
+            return True
+    return False
+
+
 def _strs(seq, *keys) -> list:
     """
     يُطبّع قوائم ويكاموس إلى نصوص خالصة.
@@ -331,6 +361,7 @@ def stage_wiktionary(db, vocab: set) -> None:
 
     ipa_rows, sense_rows, form_rows, rel_rows = [], [], [], []
     usage_rows, pv_rows, idiom_rows = [], [], []
+    added = set()
     kept = seen_lines = skipped = 0
 
     def flush():
@@ -393,7 +424,12 @@ def stage_wiktionary(db, vocab: set) -> None:
             return
 
         if wl not in vocab:
-            return
+            # في النمط الواسع: المدخل الحقيقي يدخل المفردات ولو لم يكن
+            # في أي قائمة — بلا CEFR ولا رتبة، فتلك تُترك فارغةً بصدق
+            if VOCAB_MODE != "wide" or not _is_lemma(e, wl):
+                return
+            vocab.add(wl)
+            added.add(wl)
         kept += 1
 
         # النطق — ويكاموس يوسم اللهجة، فنحتفظ بالتمييز بدل طمسه
@@ -488,6 +524,13 @@ def stage_wiktionary(db, vocab: set) -> None:
                         f"{sys.exc_info()[1]}")
 
     flush()
+    if added:
+        db.executemany(
+            "INSERT OR IGNORE INTO vocab(word,freq_rank,oxford,cefr)"
+            " VALUES(?,NULL,NULL,NULL)", [(w,) for w in added])
+        db.commit()
+        log(f"المفردات اتّسعت: +{len(added):,} مدخلاً من ويكاموس "
+            f"(المجموع {len(vocab):,})")
     log(f"ويكاموس: {seen_lines:,} سطراً · {kept:,} سجلاً محفوظاً"
         + (f" · {skipped:,} سجلاً متخطّى" if skipped else ""))
     if skipped > seen_lines * 0.01:
