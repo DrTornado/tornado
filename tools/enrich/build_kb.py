@@ -1542,6 +1542,53 @@ def _compact(card: dict) -> dict:
     return out
 
 
+def _existing_arabic(out_dir: str) -> dict:
+    """
+    يلتقط الترجمات الموجودة قبل أن تُمحى الشرائح.
+
+    التصدير يمسح المجلد ثم يبني من القاعدة، والترجمة الآلية لا تعيش في
+    القاعدة بل في الشرائح وحدها. فكانت إضافةُ كلمةٍ واحدة تمحو ترجمة
+    مئةٍ وستّين بطاقة، وتُلزم نصف ساعةٍ من الترجمة لتعود إلى ما كانت عليه.
+
+    والمفتاح النصُّ الإنجليزي نفسه: الجملة الواحدة ترجمتُها واحدة أينما
+    وردت، فلا حاجة لربطها بكلمةٍ بعينها.
+    """
+    keep = {}
+    if not os.path.isdir(out_dir):
+        return keep
+    for name in os.listdir(out_dir):
+        if not name.endswith(".json") or name == "index.json":
+            continue
+        try:
+            with open(os.path.join(out_dir, name), encoding="utf-8") as f:
+                cards = json.load(f)
+        except Exception as e:                                   # noqa: BLE001
+            print(f"  تعذّرت قراءة {name} ({e}) — أتخطّاها", flush=True)
+            continue
+        for card in cards.values():
+            for kind in ("meanings", "examples"):
+                for item in card.get(kind) or []:
+                    en, ar = item.get("en"), item.get("ar")
+                    if en and ar:
+                        keep.setdefault((kind, en), (ar, item.get("arSrc")))
+    if keep:
+        print(f"  محفوظٌ من الترجمة السابقة: {len(keep):,} نصاً", flush=True)
+    return keep
+
+
+def _restore_arabic(card: dict, keep: dict) -> None:
+    """يعيد الترجمة المحفوظة إلى ما خرج من القاعدة بلا عربية."""
+    if not keep:
+        return
+    for kind in ("meanings", "examples"):
+        for item in card.get(kind) or []:
+            if item.get("ar") or not item.get("en"):
+                continue
+            hit = keep.get((kind, item["en"]))
+            if hit:
+                item["ar"], item["arSrc"] = hit
+
+
 def export_shards(out_dir: str = "/content/enrich", words=None,
                   path=None) -> dict:
     """
@@ -1562,12 +1609,15 @@ def export_shards(out_dir: str = "/content/enrich", words=None,
         r = resolve_word(db, w)
         (resolved.setdefault(r, w) if r else missing.append(w))
 
+    kept_ar = _existing_arabic(out_dir)
+
     shards = defaultdict(dict)
     for head, original in resolved.items():
         card = _compact(build_card(db, head))
         card["v"] = CARD_SCHEMA
         if original != head:
             card["resolvedFrom"] = original    # «glaciers» ← «glacier»
+        _restore_arabic(card, kept_ar)
         shards[(head[:2] or "_").ljust(2, "_")][original] = card
     db.close()
 
@@ -1757,6 +1807,63 @@ def resolve_word(db, word: str):
     return None
 
 
+# الألقاب وأسماء الأعلام لا تصلح متلازمات مهما علت درجتها.
+#
+# المتن ويكيبيديا، وشطرها سِيَر. فـ«cope» يجاورها «Edward» و«Sir» لأن
+# إدوارد كوب عالمُ أحافير — لا لأن أحداً يقول العبارة. واللوغ‑دايس لا
+# يكشف هذا: الاقتران حقيقيٌّ إحصائياً وباطلٌ لغوياً، فالإحصاء يقيس
+# التجاور لا الصحّة.
+#
+# قِسته على البطاقات المصدَّرة: «cope» أعطت drinker · edward · sir.
+COLLOC_TITLES = {
+    "sir", "mr", "mrs", "ms", "miss", "dr", "prof", "lord", "lady",
+    "st", "saint", "rev", "capt", "gen", "col", "sgt", "lt", "maj",
+    "jr", "sr", "van", "von", "de", "del", "la", "le", "el", "al",
+    "king", "queen", "prince", "duke", "earl", "baron", "pope",
+}
+def good_collocations(db, word: str, q) -> list:
+    """
+    يبقي المتلازمة إن كانت كلمةَ لغةٍ حقاً، لا اسمَ رجل.
+
+    الاختبار من القاعدة نفسها: ويكاموس يَسِم معاني الأعلام بـ«name»، فإن
+    كان أكثرُ معاني الكلمة أعلاماً فهي عَلَم. والنسبة لا وجودُ معنىً واحد:
+    لأن WordNet يُدرج «إدوارد ملك إنجلترا» تحت «noun»، ولأن «water» لها
+    معنىً كاسم مكان — فوجودُ معنىً عامّ لا ينفي العَلَمية، وغلبتُها تُثبتها.
+
+    قِسته: edward ٢/٣ فيسقط · london ١٩/١٩ فيسقط · john ٧/١٤ فيسقط ·
+    water ٤/٣٢ فيبقى · drinker ١/٦ فيبقى · stress ٠/١٦ فيبقى.
+
+    ثم حكمٌ على السياق كلّه: إن كان أكثرُ ما جاور الكلمةَ أعلاماً، فما نجا
+    جاء من ذلك السياق نفسه. «cope» جاورها drinker وedward وsir — وكلّها
+    اسمُ رجلٍ واحد: إدوارد درنكر كوب، عالم الأحافير. فسقوطُ اثنين يُسقِط
+    الثالث معهما، لا لأنه عَلَم بل لأن شاهده هو ذلك العَلَم.
+
+    ولا حدَّ أدنى للدرجة ولا اشتراطَ عددٍ: جرّبتهما فأسقطا «radio astronomy»
+    و«realistic depiction» و«mental patient» — متلازماتٌ صحيحة. وإسقاطُ
+    الصحيح لتنقية الخطأ خسارةٌ لا ربح، والمطلوب بطاقةٌ ثريّة لا نظيفةٌ خاوية.
+    """
+    out, names = [], 0
+    for pat, col, score in q("SELECT pattern,collocate,score FROM collocations"
+                             " WHERE word=? ORDER BY score DESC", 24):
+        c = (col or "").strip().lower()
+        if len(c) < 3 or c == word:
+            continue
+        if c in COLLOC_TITLES:
+            names += 1
+            continue
+        poss = [p for (p,) in db.execute(
+            "SELECT pos FROM senses WHERE word=? AND source='wiktionary'",
+            (c,))]
+        if not poss:                      # لا مدخل معجمي — رمزٌ لا كلمة
+            continue
+        if sum(1 for p in poss if p == "name") * 2 >= len(poss):
+            names += 1                    # غلبتِ العَلَمية
+            continue
+        if len(out) < 8:
+            out.append({"pat": pat, "col": col, "score": score})
+    return [] if names > len(out) else out
+
+
 def build_card(db, word: str) -> dict:
     """بطاقة واحدة من القاعدة — كل حقل بحالته الصريحة، ومنقّى من التكرار."""
     def q(sql, n=None):
@@ -1833,9 +1940,7 @@ def build_card(db, word: str) -> dict:
         "synonyms": rel("synonym"),
         "antonyms": rel("antonym"),
         "examples": [{"en": e, "ar": a, "src": s, "arSrc": asrc} for e, a, s, asrc in ex],
-        "collocations": [{"pat": p, "col": c, "score": sc} for p, c, sc in q(
-            "SELECT pattern,collocate,score FROM collocations WHERE word=?"
-            " ORDER BY score DESC", 8)],
+        "collocations": good_collocations(db, word, q),
         "phrasalVerbs": [{"phrase": p, "gloss": g} for p, g in _dedupe(
             db.execute("SELECT DISTINCT phrase,gloss FROM phrasal_verbs"
                        " WHERE base=?", (word,)).fetchall(),
