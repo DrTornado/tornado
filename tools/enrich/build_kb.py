@@ -39,7 +39,7 @@ from collections import Counter, defaultdict
 
 # يُطبع عند التشغيل. الخلية تفضّل النسخة المحلية على المستودع، فبلا بصمةٍ
 # ظاهرة قد تُعاد تشغيل نسخةٍ قديمة ويُظنّ الإصلاح فاشلاً.
-VERSION = "11 — قراءة words.json تصمد أمام الحقل الفاسد"
+VERSION = "12 — ردّ الصيغ المصرَّفة إلى مداخلها + قياس كلماتك"
 
 WORK = os.environ.get("TORNADO_WORK", "/content/kb")
 OUT_DB = os.path.join(WORK, "tornado-kb.sqlite")
@@ -162,6 +162,7 @@ INDEXES = """
 CREATE INDEX IF NOT EXISTS ix_ipa       ON ipa(word);
 CREATE INDEX IF NOT EXISTS ix_senses    ON senses(word);
 CREATE INDEX IF NOT EXISTS ix_forms     ON forms(word);
+CREATE INDEX IF NOT EXISTS ix_form_rev  ON forms(form);
 CREATE INDEX IF NOT EXISTS ix_rel       ON relations(word, rel);
 CREATE INDEX IF NOT EXISTS ix_ex        ON examples(word);
 CREATE INDEX IF NOT EXISTS ix_col       ON collocations(word);
@@ -1216,6 +1217,74 @@ def full_report(db=None) -> dict:
     return out
 
 
+def my_coverage(words=None) -> dict:
+    """
+    التغطية على كلمات المستخدم وحدها.
+
+    النسبة العامّة على ١٨ ألف كلمة تخدع: أكثرها نادرٌ لا يملكه أحد.
+    والرقم الذي يهمّ صاحب المكتبة هو تغطية كلماته هو.
+    """
+    db = sqlite3.connect(OUT_DB)
+    if words is None:
+        words = user_words()
+
+    resolved, missing = {}, []
+    for w in words:
+        r = resolve_word(db, w)
+        (resolved.setdefault(r, w) if r else missing.append(w))
+
+    n = len(resolved)
+    direct = sum(1 for r, w in resolved.items() if r == w)
+    print("\n" + "═" * 60)
+    print(f"  تغطية كلماتك — {len(words)} كلمة")
+    print("═" * 60)
+    print(f"  في القاعدة مباشرةً : {direct}")
+    print(f"  رُدّت إلى مدخلها   : {n - direct}")
+    print(f"  غير مغطّاة         : {len(missing)}")
+    print("─" * 60)
+    if not n:
+        db.close()
+        return {}
+
+    db.execute("DROP TABLE IF EXISTS temp.mine")
+    db.execute("CREATE TEMP TABLE mine(word TEXT PRIMARY KEY)")
+    db.executemany("INSERT OR IGNORE INTO mine VALUES(?)",
+                   [(w,) for w in resolved])
+
+    inq = " word IN (SELECT word FROM mine)"
+    checks = [
+        ("IPA",            f"SELECT COUNT(DISTINCT word) FROM ipa WHERE{inq}"),
+        ("معانٍ",          f"SELECT COUNT(DISTINCT word) FROM senses WHERE{inq}"),
+        ("معانٍ بعربية",   f"SELECT COUNT(DISTINCT word) FROM senses WHERE ar IS NOT NULL AND ar<>'' AND{inq}"),
+        ("CEFR",           f"SELECT COUNT(*) FROM vocab WHERE cefr IS NOT NULL AND{inq}"),
+        ("تصريفات",        f"SELECT COUNT(DISTINCT word) FROM forms WHERE{inq}"),
+        ("مرادفات",        f"SELECT COUNT(DISTINCT word) FROM relations WHERE rel='synonym' AND{inq}"),
+        ("أضداد",          f"SELECT COUNT(DISTINCT word) FROM relations WHERE rel='antonym' AND{inq}"),
+        ("مشتقات",         f"SELECT COUNT(DISTINCT word) FROM relations WHERE rel='derived' AND{inq}"),
+        ("أمثلة",          f"SELECT COUNT(DISTINCT word) FROM examples WHERE{inq}"),
+        ("أمثلة بعربية",   f"SELECT COUNT(DISTINCT word) FROM examples WHERE ar IS NOT NULL AND ar<>'' AND{inq}"),
+        ("متلازمات",       f"SELECT COUNT(DISTINCT word) FROM collocations WHERE{inq}"),
+        ("أفعال مركّبة",    f"SELECT COUNT(DISTINCT base) FROM phrasal_verbs WHERE base IN (SELECT word FROM mine)"),
+        ("تعابير",         f"SELECT COUNT(DISTINCT word) FROM idioms WHERE{inq}"),
+        ("سجل/سياق",       f"SELECT COUNT(DISTINCT word) FROM senses WHERE tags<>'' AND{inq}"),
+    ]
+    out = {}
+    for label, q in checks:
+        c = db.execute(q).fetchone()[0]
+        pct = 100 * c / n
+        bar = "█" * round(pct / 5) + "░" * (20 - round(pct / 5))
+        print(f"  {label:<14} {bar} {c:>3}/{n}  {pct:5.1f}%")
+        out[label] = round(pct, 1)
+
+    if missing:
+        print("─" * 60)
+        print(f"  غير مغطّاة ({len(missing)}): "
+              f"{', '.join(missing[:14])}{' …' if len(missing) > 14 else ''}")
+    print("═" * 60 + "\n")
+    db.close()
+    return out
+
+
 # ───────────────────────── بطاقات حقيقية ─────────────────────────
 
 def user_words() -> list:
@@ -1272,6 +1341,45 @@ def _dedupe(rows, key):
             seen.add(k)
             out.append(r)
     return out
+
+
+def resolve_word(db, word: str):
+    """
+    يردّ الصيغة المصرَّفة إلى مدخلها.
+
+    مكتبة المستخدم فيها ما يُقرأ لا ما يُفهرس: «glaciers» و«foraging»
+    و«pathologies». والقاعدة مفهرسة بالمداخل، فثلثا كلماته كانت تخرج
+    فارغةً وهي مغطّاة تماماً تحت «glacier» و«forage» و«pathology».
+
+    وجدول `forms` يحمل الربط أصلاً — ٥٩ ألف صيغة موسومة من ويكاموس،
+    فيها الشاذّ الذي لا تبلغه قاعدة اشتقاق. نقرؤه معكوساً، والقواعد
+    البسيطة احتياطٌ لما لا يغطّيه.
+
+    @return المدخل، أو None إن لم يوجد.
+    """
+    w = (word or "").strip().lower()
+    if not w:
+        return None
+    if db.execute("SELECT 1 FROM vocab WHERE word=?", (w,)).fetchone():
+        return w
+
+    # الأشيع يفوز عند تعدّد المداخل لصيغةٍ واحدة
+    row = db.execute(
+        "SELECT f.word FROM forms f JOIN vocab v ON v.word = f.word"
+        " WHERE f.form = ? ORDER BY COALESCE(v.freq_rank, 999999) LIMIT 1",
+        (w,)).fetchone()
+    if row:
+        return row[0]
+
+    for suf, rep in (("ies", "y"), ("ves", "f"), ("es", ""), ("s", ""),
+                     ("ing", ""), ("ing", "e"), ("ed", ""), ("ed", "e"),
+                     ("ly", ""), ("er", ""), ("est", "")):
+        if w.endswith(suf) and len(w) - len(suf) >= 3:
+            cand = w[: -len(suf)] + rep
+            if db.execute("SELECT 1 FROM vocab WHERE word=?",
+                          (cand,)).fetchone():
+                return cand
+    return None
 
 
 def build_card(db, word: str) -> dict:
@@ -1388,8 +1496,17 @@ def sample_cards(n: int = 10, words=None, html: str = "/content/cards.html"):
     else:
         src = "قائمتك"
 
-    known = {w for w in words if db.execute(
-        "SELECT 1 FROM vocab WHERE word=?", (w,)).fetchone()}
+    # الصيغة المصرَّفة تُردّ إلى مدخلها، فلا تسقط كلمةٌ مغطّاة لأن صاحبها
+    # كتبها كما قرأها لا كما تُفهرس
+    resolved, direct = {}, 0
+    for w in words:
+        r = resolve_word(db, w)
+        if r:
+            resolved.setdefault(r, w)
+            direct += (r == w)
+    known = set(resolved)
+    if len(known) > direct:
+        log(f"رُدّت {len(known) - direct} صيغة مصرَّفة إلى مدخلها")
     ranked = sorted(known, key=lambda w: db.execute(
         "SELECT COALESCE(freq_rank, 99999) FROM vocab WHERE word=?",
         (w,)).fetchone()[0])
