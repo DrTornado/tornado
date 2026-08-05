@@ -3,3 +3,7 @@
 *.jks
 *.keystore
 keystore.properties
+
+# مخرجات بايثون المؤقتة
+__pycache__/
+*.pyc
