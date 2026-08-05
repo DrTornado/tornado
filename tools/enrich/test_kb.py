@@ -137,6 +137,20 @@ check("معنى WordNet بلا عربية",
 check("المعنى المترجَم يسبق", card["meanings"][0]["en"], "a question")
 db.close()
 
+# ── ٦٫٥ ── ردّ الصيغة المصرَّفة إلى مدخلها ─────────────────────────
+print("\n[6.5] resolve_word")
+db = sqlite3.connect(db_path)
+db.execute("INSERT INTO vocab VALUES('glacier',7000,NULL,NULL,NULL,NULL)")
+db.execute("INSERT INTO vocab VALUES('forage',9000,NULL,NULL,NULL,NULL)")
+db.execute("INSERT INTO forms VALUES('glacier','glaciers','plural')")
+db.commit()
+check("مطابقة مباشرة", K.resolve_word(db, "issue"), "issue")
+check("من جدول الصيغ", K.resolve_word(db, "glaciers"), "glacier")
+check("قاعدة ing", K.resolve_word(db, "foraging"), "forage")
+check("غير موجودة", K.resolve_word(db, "zzzqqq"), None)
+check("فارغة", K.resolve_word(db, ""), None)
+db.close()
+
 # ── ٧ ── repair عديم الأثر عند التكرار ────────────────────────────
 print("\n[7] repair مرّتين لا يغيّر شيئاً")
 K.repair(apply=True)
