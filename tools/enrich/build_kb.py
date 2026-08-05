@@ -39,7 +39,7 @@ from collections import Counter, defaultdict
 
 # يُطبع عند التشغيل. الخلية تفضّل النسخة المحلية على المستودع، فبلا بصمةٍ
 # ظاهرة قد تُعاد تشغيل نسخةٍ قديمة ويُظنّ الإصلاح فاشلاً.
-VERSION = "23 — وسم الترجمة على سطر مستقل"
+VERSION = "24 — تثبيت اللغة الهدف + حارس يرفض غير العربية"
 
 WORK = os.environ.get("TORNADO_WORK", "/content/kb")
 OUT_DB = os.path.join(WORK, "tornado-kb.sqlite")
@@ -101,6 +101,8 @@ TRANSLATE_SCOPE = os.environ.get("TORNADO_TR_SCOPE", "mine")
 # أثقل ورخصته غير تجارية — يناسب مشروعاً شخصياً لا منشوراً.
 TRANSLATE_MODEL = os.environ.get("TORNADO_TR_MODEL",
                                  "Helsinki-NLP/opus-mt-en-ar")
+TRANSLATE_SRC = os.environ.get("TORNADO_TR_SRC", "eng_Latn")
+TRANSLATE_TGT = os.environ.get("TORNADO_TR_TGT", "arb_Arab")
 TRANSLATE_BATCH = int(os.environ.get("TORNADO_TR_BATCH", "24"))
 TRANSLATE_MAX_MIN = float(os.environ.get("TORNADO_TR_MAX_MIN", "30"))
 
@@ -320,6 +322,9 @@ PARTICLES = {
     "together", "under", "upon", "with", "without", "after", "against",
     "ahead", "behind", "beyond", "from", "of", "round",
 }
+
+
+ARABIC_TEXT = re.compile("[\u0600-\u06ff]")
 
 
 _LEMMA_OK = re.compile(r"^[a-z][a-z'\-]{1,29}$")
@@ -767,7 +772,24 @@ def _load_translator():
 
     gpu = torch.cuda.is_available()
     log(f"النموذج {TRANSLATE_MODEL} · {'كرت رسومي' if gpu else 'معالج'}")
-    tok = AutoTokenizer.from_pretrained(TRANSLATE_MODEL)
+
+    # النموذج المتعدّد اللغات (NLLB) يحتاج تحديد الهدف صراحةً، وإلّا اختار
+    # لغةً عشوائية — أنتج هندية ورومانية ويونانية حين نُودي بلا تحديد.
+    # والمخصَّص (opus-mt-en-ar) لا يعرف هذه الرموز، فتُترك له وشأنه.
+    try:
+        tok = AutoTokenizer.from_pretrained(TRANSLATE_MODEL,
+                                            src_lang=TRANSLATE_SRC)
+    except (TypeError, ValueError):
+        tok = AutoTokenizer.from_pretrained(TRANSLATE_MODEL)
+
+    gen = {}
+    tgt_id = tok.convert_tokens_to_ids(TRANSLATE_TGT)
+    if tgt_id is not None and tgt_id != tok.unk_token_id:
+        gen["forced_bos_token_id"] = tgt_id
+        log(f"  اللغة الهدف مثبَّتة: {TRANSLATE_TGT} ({tgt_id})")
+    else:
+        log("  نموذج مخصَّص — لا حاجة لتثبيت اللغة")
+
     model = AutoModelForSeq2SeqLM.from_pretrained(TRANSLATE_MODEL)
     model = model.to("cuda" if gpu else "cpu").eval()
 
@@ -776,7 +798,8 @@ def _load_translator():
                   truncation=True, max_length=256)
         enc = {k: v.to(model.device) for k, v in enc.items()}
         with torch.no_grad():
-            out = model.generate(**enc, max_new_tokens=256, num_beams=1)
+            out = model.generate(**enc, max_new_tokens=256, num_beams=1,
+                                 **gen)
         return tok.batch_decode(out, skip_special_tokens=True)
 
     return run
@@ -818,7 +841,7 @@ def stage_translate(db, translate=None) -> None:
     translate = translate or _load_translator()
     t0 = time.time()
     deadline = t0 + TRANSLATE_MAX_MIN * 60
-    done = 0
+    done = rejected = 0
 
     for i in range(0, len(jobs), TRANSLATE_BATCH):
         chunk = jobs[i:i + TRANSLATE_BATCH]
@@ -829,6 +852,12 @@ def stage_translate(db, translate=None) -> None:
             continue
         for (tbl, rid, _), o in zip(chunk, outs):
             ar = (o or "").strip()
+            # حارس: لولاه لدخلت ستّمئة ترجمة هندية ورومانية ويونانية
+            # إلى القاعدة بلا أن يعترض أحد. الأداة التي تكتب بلا فحصٍ
+            # للمخرَج تكتب الخطأ بنفس ثقة الصواب.
+            if ar and not ARABIC_TEXT.search(ar):
+                rejected += 1
+                continue
             if ar:
                 db.execute(f"UPDATE {tbl} SET ar=?, ar_src='mt'"
                            f" WHERE rowid=?", (ar, rid))
@@ -845,7 +874,8 @@ def stage_translate(db, translate=None) -> None:
                 f"تُرجم {done:,}، والباقي في تشغيلةٍ لاحقة")
             break
 
-    log(f"الترجمة: {done:,} نصاً في {(time.time()-t0)/60:.0f} د")
+    log(f"الترجمة: {done:,} نصاً في {(time.time()-t0)/60:.0f} د"
+        + (f" · رُفضت {rejected:,} ليست عربية" if rejected else ""))
 
 
 # ───────────────────────────── المرحلة ٥: المتلازمات ─────────────────────────────

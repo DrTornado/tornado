@@ -183,6 +183,19 @@ def fake_translate(texts):
 
 
 K.TRANSLATE_SCOPE = "all"
+
+
+def wrong_language(texts):
+    """يحاكي NLLB بلا تثبيت اللغة — أنتج هندية ورومانية فعلاً."""
+    return ["एक वांछनीय स्थिति" for _ in texts]
+
+
+# الحارس أوّلاً: ما ليس عربياً لا يدخل القاعدة
+K.stage_translate(db, translate=wrong_language)
+check("الترجمة غير العربية مرفوضة",
+      db.execute("SELECT ar FROM senses WHERE gloss='a thing to translate'"
+                 ).fetchone()[0], None)
+
 K.stage_translate(db, translate=fake_translate)
 
 check("المعنى الناقص تُرجم",
