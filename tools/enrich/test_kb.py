@@ -151,6 +151,18 @@ check("غير موجودة", K.resolve_word(db, "zzzqqq"), None)
 check("فارغة", K.resolve_word(db, ""), None)
 db.close()
 
+# ── ٦٫٧ ── تمييز المدخل الحقيقي من الصيغة ─────────────────────────
+print("\n[6.7] _is_lemma")
+real = {"senses": [{"glosses": ["A person who studies physics."]}]}
+form = {"senses": [{"glosses": ["plural of glacier"],
+                    "form_of": [{"word": "glacier"}]}]}
+check("مدخل حقيقي", K._is_lemma(real, "physicist"), True)
+check("صيغة مصرَّفة", K._is_lemma(form, "glaciers"), False)
+check("رمز غير أبجدي", K._is_lemma(real, "a1b2!"), False)
+check("حرف واحد", K._is_lemma(real, "x"), False)
+check("بشرطة", K._is_lemma(real, "well-known"), True)
+check("بلا معنى", K._is_lemma({"senses": []}, "zzz"), False)
+
 # ── ٧ ── repair عديم الأثر عند التكرار ────────────────────────────
 print("\n[7] repair مرّتين لا يغيّر شيئاً")
 K.repair(apply=True)
