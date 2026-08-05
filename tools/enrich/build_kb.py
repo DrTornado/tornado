@@ -39,7 +39,7 @@ from collections import Counter, defaultdict
 
 # يُطبع عند التشغيل. الخلية تفضّل النسخة المحلية على المستودع، فبلا بصمةٍ
 # ظاهرة قد تُعاد تشغيل نسخةٍ قديمة ويُظنّ الإصلاح فاشلاً.
-VERSION = "22 — قياس CEFR يشمل التقدير كما تعرضه البطاقة"
+VERSION = "23 — وسم الترجمة على سطر مستقل"
 
 WORK = os.environ.get("TORNADO_WORK", "/content/kb")
 OUT_DB = os.path.join(WORK, "tornado-kb.sqlite")
@@ -1852,8 +1852,8 @@ padding:2px 10px;margin:2px 3px 2px 0;font-size:13px}
 .pct{float:left;font-weight:600}
 .absent{margin-top:12px;padding-top:10px;border-top:1px solid #f0eee9;
 color:#b9b4ab;font-size:12px}
-.tag{display:inline-block;background:#e8e3d8;color:#6b6b6b;font-size:11px;
-border-radius:4px;padding:1px 6px;margin-inline-end:6px;vertical-align:2px}
+.tag{display:table;background:#e8e3d8;color:#6b6b6b;font-size:11px;
+border-radius:4px;padding:1px 6px;margin:4px 0 2px}
 @media(prefers-color-scheme:dark){body{background:#16150f;color:#eae7df}
 .card{background:#211f18;border-color:#37342a}.k,.meta{color:#a09a8c}
 .pill,.tag{background:#2e2b22}.row{border-color:#2b2820}}
@@ -1901,7 +1901,9 @@ border-radius:4px;padding:1px 6px;margin-inline-end:6px;vertical-align:2px}
                 return ''
             # الوسم شارةٌ منفصلة لا كلمةٌ في آخر الجملة — كان يُقرأ
             # جزءاً منها: «يتدفق من الأزهار آلية»
-            mark = ('<span class="tag">ترجمة آلية</span>'
+            # الوسم على سطرٍ مستقلّ: كان يلتصق بالعربية فيُقرأ منها —
+            # «ترجمة آليةأن ترسل أو تعطي»
+            mark = ('<div class="tag">ترجمة آلية</div>'
                     if o.get("arSrc") == "mt" else '')
             return (f'<br>{mark}<span class="ar"><b>{esc(o["ar"])}</b>'
                     f'</span>')
