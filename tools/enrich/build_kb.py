@@ -39,7 +39,7 @@ from collections import Counter, defaultdict
 
 # يُطبع عند التشغيل. الخلية تفضّل النسخة المحلية على المستودع، فبلا بصمةٍ
 # ظاهرة قد تُعاد تشغيل نسخةٍ قديمة ويُظنّ الإصلاح فاشلاً.
-VERSION = "18 — CEFR مقدَّر من الرتبة، مُعلَّماً"
+VERSION = "20 — طيّ الحقول غير المنطبقة مع ذكرها مجموعةً"
 
 WORK = os.environ.get("TORNADO_WORK", "/content/kb")
 OUT_DB = os.path.join(WORK, "tornado-kb.sqlite")
@@ -1574,8 +1574,10 @@ def est_cefr(rank) -> str:
     والتقدير يُعلَّم تقديراً: أوكسفورد وحده يعطي مستوىً رسمياً، والخلط
     بينهما يجعل الظنّ يقيناً.
     """
+    # بلا رتبة = أندر من الكلمة الثامنة عشرة ألفاً شيوعاً، فهي C1 فما فوق.
+    # وكان التقدير يغيب عن أحوج الكلمات إليه: النادرة التي لا رتبة لها.
     if not rank:
-        return ""
+        return "C1"
     return ("A1" if rank <= 1000 else "A2" if rank <= 2500 else
             "B1" if rank <= 5000 else "B2" if rank <= 10000 else "C1")
 
@@ -1667,7 +1669,13 @@ def build_card(db, word: str) -> dict:
         lambda r: (r[0] or "").lower().strip())
         if not NOT_EXAMPLE.match(r[0] or "")
         and not ARCHAIC.search(r[0] or "")]
-    ex = ex_all[:3]
+
+    # الجملة التامّة تبدأ بحرفٍ كبير وتنتهي بعلامة. وشطرُ الجملة —
+    # «that subsisting form of government from which all special laws
+    # emanate» — لا يعلّم شيئاً، وترجمته الآلية شطرٌ أعرج مثله.
+    whole = [r for r in ex_all
+             if (r[0] or "")[:1].isupper() and (r[0] or "")[-1:] in ".!?\"'"]
+    ex = (whole or ex_all)[:3]
 
     return {
         "word": word,
@@ -1832,9 +1840,13 @@ h2{margin:0 0 4px;font-size:24px}
 .pill{display:inline-block;background:#f0ede6;border-radius:20px;
 padding:2px 10px;margin:2px 3px 2px 0;font-size:13px}
 .pct{float:left;font-weight:600}
+.absent{margin-top:12px;padding-top:10px;border-top:1px solid #f0eee9;
+color:#b9b4ab;font-size:12px}
+.tag{display:inline-block;background:#e8e3d8;color:#6b6b6b;font-size:11px;
+border-radius:4px;padding:1px 6px;margin-inline-end:6px;vertical-align:2px}
 @media(prefers-color-scheme:dark){body{background:#16150f;color:#eae7df}
 .card{background:#211f18;border-color:#37342a}.k,.meta{color:#a09a8c}
-.pill{background:#2e2b22}.row{border-color:#2b2820}}
+.pill,.tag{background:#2e2b22}.row{border-color:#2b2820}}
 </style><h1>بطاقات حقيقية — مولَّدة من القاعدة</h1>"""]
 
     for c in cards:
@@ -1849,10 +1861,20 @@ padding:2px 10px;margin:2px 3px 2px 0;font-size:13px}
                               if c.get("cefrEst") else "—")) + ' · '
                      f'rank {esc(c["freq_rank"] or "—")}</div>')
 
+        # الحقل الفارغ يُطوى ولا يُعرض.
+        #
+        # «boon» اسمٌ لا فعل مركّب له، و«physicist» لا ضدّ لها — وعرضُ
+        # سطرٍ فارغ يصنع شعوراً بالنقص حيث لا نقص. لكن الطيّ الصامت غشّ:
+        # فالمطويّ يُذكر مجموعاً في آخر البطاقة، ليعرف القارئ أنه فُحص
+        # ولم يُنسَ.
+        absent = []
+
         def row(label, html_val, empty=False):
-            v = (f'<span class="empty">— فارغ</span>' if empty else html_val)
+            if empty:
+                absent.append(label)
+                return
             parts.append(f'<div class="row"><div class="k">{label}</div>'
-                         f'<div class="v">{v}</div></div>')
+                         f'<div class="v">{html_val}</div></div>')
 
         def pills(key, label):
             row(label, " ".join(f'<span class="pill">{esc(x)}</span>'
@@ -1862,10 +1884,12 @@ padding:2px 10px;margin:2px 3px 2px 0;font-size:13px}
             """الترجمة الآلية تُعلَّم — البشرية لا تُخلط بالمولَّدة."""
             if not o.get("ar"):
                 return ''
-            mark = ' <small class="empty">آلية</small>' \
-                if o.get("arSrc") == "mt" else ''
-            return (f'<br><span class="ar"><b>{esc(o["ar"])}</b>'
-                    f'{mark}</span>')
+            # الوسم شارةٌ منفصلة لا كلمةٌ في آخر الجملة — كان يُقرأ
+            # جزءاً منها: «يتدفق من الأزهار آلية»
+            mark = ('<span class="tag">ترجمة آلية</span>'
+                    if o.get("arSrc") == "mt" else '')
+            return (f'<br>{mark}<span class="ar"><b>{esc(o["ar"])}</b>'
+                    f'</span>')
 
         row("المعاني", "<br>".join(
             f'<b>{esc(m["pos"])}</b> — {esc(m["en"])}' + _ar(m)
@@ -1892,8 +1916,10 @@ padding:2px 10px;margin:2px 3px 2px 0;font-size:13px}
         row("ملاحظات استعمال", "<br>".join(esc(u)[:400]
                                            for u in c["usageNotes"]),
             not c["usageNotes"])
-        row("أخطاء المتعلّم",
-            '<span class="empty">— لا مصدر مجاني (المرحلة التالية)</span>')
+        absent.append("أخطاء المتعلّم")
+        if absent:
+            parts.append('<div class="absent">لا يوجد لهذه الكلمة: '
+                         + ' · '.join(esc(a) for a in absent) + '</div>')
         parts.append("</div>")
 
     with open(path, "w", encoding="utf-8") as f:
