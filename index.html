@@ -23840,7 +23840,91 @@ function firstMeaningLine(card) {
   if (!m) return '';
   return typeof m === 'string' ? m : (m.ar || m.en || '');
 }
-function entryHtml(card) {
+/*
+ * ═══ دمج الإثراء في البطاقة ═══
+ *
+ * لا يُكتب شيء في بطاقة المستخدم: تُنسخ نسخةً سطحية ويُدمج فيها للعرض
+ * وحده. لأن البطاقات تُرفع إلى المستودع، فالكتابة فيها تنقل خطأ العرض
+ * إلى بياناته — وما لا يُكتب لا يُفسد.
+ *
+ * والقاعدة: القائم أوّلاً، والإثراء يملأ الفراغ ويزيد. فما بناه التطبيق
+ * لنفسه لا يُزاح، وما لم يكن عنده يأتيه من نصف مليون مدخل.
+ */
+const _norm = s => String(s || '').toLowerCase().replace(/[^a-z؀-ۿ ]/g, '').trim();
+const _txt  = p => typeof p === 'string' ? p : (p && (p.en || p.ar)) || '';
+
+/** يضمّ قائمتين بلا تكرار — عناصرها نصوص أو كائنات {en,ar} */
+function _union(base, add) {
+  const out = arr(base).slice();
+  const seen = new Set(out.map(x => _norm(_txt(x))).filter(Boolean));
+  for (const x of arr(add)) {
+    const k = _norm(_txt(x));
+    if (!k || seen.has(k)) continue;
+    seen.add(k); out.push(x);
+  }
+  return out;
+}
+
+function enrichMerge(card) {
+  const e = enrichCache && card && card.word
+          ? enrichCache[String(card.word).trim().toLowerCase()] : null;
+  if (!e) return card;
+  const c = Object.assign({}, card);          // نسخة للعرض — الأصل لا يُمسّ
+  // النطق يأتي بثلاث صيغ: أمريكية وبريطانية و«عامّة» بلا لهجة محدّدة.
+  // والعامّة تُعرض وحدها إن لم تكن الاثنتان — لا تُنسب إلى لهجة لم تُذكر.
+  if (!c.ipaUS && e.ipa && e.ipa.us) c.ipaUS = e.ipa.us;
+  if (!c.ipaUK && e.ipa && e.ipa.uk) c.ipaUK = e.ipa.uk;
+  if (!c.ipaUS && !c.ipaUK && !c.ipa && e.ipa && e.ipa.gen) c.ipa = e.ipa.gen;
+  if (!c.arabicPron && e.arabicPron) c.arabicPron = e.arabicPron;
+  if (!c.oxford && e.oxford) c.oxford = e.oxford;
+  if (!c.cefr && e.cefr) c.cefr = e.cefr;
+  if (!c.cefr && !c.estCefr && e.cefrEst) c.estCefr = e.cefrEst;
+  c.pos          = _union(c.pos, e.pos);
+  c.meanings     = _union(c.meanings, e.meanings);
+  c.inflections  = _union(c.inflections, e.inflections);
+  c.derivatives  = _union(c.derivatives, e.derivatives);
+  c.synonyms     = _union(c.synonyms, e.synonyms);
+  c.examples     = _union(c.examples, e.examples);
+  c._e = e;                                   // للأقسام التي لا مكان لها أصلاً
+  return c;
+}
+
+const _ABSENT_AR = {
+  antonyms: 'الأضداد', idioms: 'التعابير', usageNotes: 'ملاحظات الاستعمال',
+  collocations: 'المتلازمات', phrasalVerbs: 'الأفعال المركّبة',
+  examples: 'الأمثلة', derivatives: 'المشتقّات', synonyms: 'المرادفات',
+  inflections: 'التصريفات', ipa: 'النطق الصوتي', cefr: 'المستوى',
+};
+
+/*
+ * الأقسام التي لم تكن في البطاقة أصلاً — ثم إعلانُ ما لا يوجد.
+ *
+ * الفراغ يُذكر ولا يُخفى: قسمٌ بلا معلومة موثوقة يُقال عنه ذلك صراحةً،
+ * فيعرف القارئ أن المصدر خالٍ لا أن التطبيق كسل — والاختلاق ليس بديلاً.
+ */
+function enrichExtraHtml(c) {
+  const e = c && c._e;
+  if (!e) return '';
+  const cols = arr(e.collocations).filter(x => x && x.col);
+  const absent = arr(e.absent).map(k => _ABSENT_AR[k] || k);
+  return `
+    ${arr(e.antonyms).length ? `<div class="sect"><b class="h">Antonyms</b>${e.antonyms.map(pairHtml).join('')}</div>` : ''}
+    ${cols.length && !arr(c.collocations).length ? `<div class="sect"><b class="h">Collocations</b>${cols.map(x =>
+      `<div class="pair">${esc(x.col)}<span style="color:#8A93A3;font-size:11px;"> · ${esc(x.pat || '')}</span></div>`).join('')}</div>` : ''}
+    ${arr(e.phrasalVerbs).length ? `<div class="sect"><b class="h">Phrasal verbs</b>${e.phrasalVerbs.map(p =>
+      `<div class="pair"><b>${esc(p.phrase || '')}</b>${p.gloss ? `<div style="color:#8A93A3;">${esc(p.gloss)}</div>` : ''}</div>`).join('')}</div>` : ''}
+    ${arr(e.idioms).length ? `<div class="sect"><b class="h">Idioms</b>${e.idioms.map(p =>
+      `<div class="pair"><b>${esc(p.phrase || '')}</b>${p.gloss ? `<div style="color:#8A93A3;">${esc(p.gloss)}</div>` : ''}</div>`).join('')}</div>` : ''}
+    ${arr(e.usageNotes).length ? `<div class="sect"><b class="h">Usage notes</b>${e.usageNotes.map(pairHtml).join('')}</div>` : ''}
+    ${arr(e.register).length ? `<div class="sect"><b class="h">Register</b><span class="badge">${esc(e.register.join(' · '))}</span></div>` : ''}
+    ${e.word && _norm(e.word) !== _norm(c.word)
+      ? `<div class="sect" style="color:#8A93A3;font-size:12px;">🔎 مبنيّة على أصل الكلمة: <b>${esc(e.word)}</b></div>` : ''}
+    ${absent.length ? `<div class="sect" style="color:#8A93A3;font-size:12px;border-top:1px solid #2A3140;padding-top:6px;">
+      لا توجد معلومة موثوقة في المصادر لـ: ${esc(absent.join(' · '))}</div>` : ''}`;
+}
+
+function entryHtml(rawCard) {
+  const card = enrichMerge(rawCard);
   const ms = arr(card.meanings);
   return `
     <div class="sect" style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;">${pronBtns(card, false)}${
@@ -23863,7 +23947,8 @@ function entryHtml(card) {
     ${arr(card.synonyms).length ? `<div class="sect"><b class="h">Synonyms</b>${card.synonyms.map(pairHtml).join('')}</div>` : ''}
     ${arr(card.collocations).length ? `<div class="sect"><b class="h">Collocations</b>${card.collocations.map(pairHtml).join('')}</div>` : ''}
     ${arr(card.examples).length ? `<div class="sect"><b class="h">Examples</b>${card.examples.map(pairHtml).join('')}</div>` : ''}
-    ${arr(card.differences).length ? `<div class="sect"><b class="h">Differences</b>${arr(card.differences).map(pairHtml).join('')}</div>` : ''}`;
+    ${arr(card.differences).length ? `<div class="sect"><b class="h">Differences</b>${arr(card.differences).map(pairHtml).join('')}</div>` : ''}
+    ${enrichExtraHtml(card)}`;
 }
 
 // ===== Add =====
@@ -24152,6 +24237,109 @@ async function ghRequest(opts, attempt = 0) {
     return ghRequest(opts, attempt + 1);
   }
 }
+/*
+ * ═══ بطاقات الإثراء ═══
+ *
+ * تُبنى على خوادم GitHub من قاعدة معرفة بنصف مليون مدخل، وتصل هنا شرائحَ
+ * مفهرسة. والتخزين IndexedDB لا localStorage: البطاقات مئات الكيلوبايتات،
+ * وحدّ localStorage خمسة ميغابايت تحمل مكتبتك أصلاً — فإقحامها هناك يكسر
+ * ما يعمل.
+ *
+ * والفهرس يحمل بصمة كل شريحة، فلا يُنزَّل إلا ما تغيّر: إضافة كلمة تكلّف
+ * شريحةً واحدة لا الملف كلّه.
+ */
+const ENRICH_DB = 'tornado-enrich';
+let enrichCache = null;          // ذاكرة الجلسة — قراءةٌ واحدة من القرص
+
+function enrichOpen() {
+  return new Promise((res, rej) => {
+    const r = indexedDB.open(ENRICH_DB, 1);
+    r.onupgradeneeded = () => {
+      const db = r.result;
+      if (!db.objectStoreNames.contains('cards')) db.createObjectStore('cards');
+      if (!db.objectStoreNames.contains('meta')) db.createObjectStore('meta');
+    };
+    r.onsuccess = () => res(r.result);
+    r.onerror = () => rej(r.error);
+  });
+}
+
+function enrichPut(store, key, val) {
+  return enrichOpen().then(db => new Promise((res, rej) => {
+    const t = db.transaction(store, 'readwrite');
+    t.objectStore(store).put(val, key);
+    t.oncomplete = () => { db.close(); res(); };
+    t.onerror = () => { db.close(); rej(t.error); };
+  }));
+}
+
+function enrichGet(store, key) {
+  return enrichOpen().then(db => new Promise((res, rej) => {
+    const t = db.transaction(store, 'readonly');
+    const q = t.objectStore(store).get(key);
+    q.onsuccess = () => { db.close(); res(q.result); };
+    q.onerror = () => { db.close(); rej(q.error); };
+  }));
+}
+
+/** يجلب أي ملف من مستودع البيانات — ghRequest مقيّد بملف الكلمات وحده */
+async function ghFetchPath(path, attempt = 0) {
+  const conf = ghConf();
+  if (!conf || !conf.token || !conf.repo) return null;
+  try {
+    const r = await fetch(
+      `https://api.github.com/repos/${conf.repo}/contents/${path}`,
+      { cache: 'no-store', headers: {
+          'Authorization': 'Bearer ' + conf.token,
+          'Accept': 'application/vnd.github.raw' } });
+    if (r.status === 404) return null;      // لم تُبنَ الشرائح بعد
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return await r.text();
+  } catch (e) {
+    if (attempt >= 2) throw e;
+    await new Promise(r => setTimeout(r, 700 * (attempt + 1)));
+    return ghFetchPath(path, attempt + 1);
+  }
+}
+
+/**
+ * يزامن الشرائح المتغيّرة وحدها.
+ *
+ * يُنادى ضمن المزامنة القائمة — عند الفتح وبعد كل تعديل — فلا مسار جديد
+ * ولا استطلاع دوري.
+ */
+async function enrichSync() {
+  let idxText;
+  try { idxText = await ghFetchPath('enrich/index.json'); }
+  catch (e) { return 0; }                    // انقطاع — نصمت ونعيد لاحقاً
+  if (!idxText) return 0;
+
+  let idx; try { idx = JSON.parse(idxText); } catch (e) { return 0; }
+  const have = (await enrichGet('meta', 'hashes').catch(() => null)) || {};
+  const want = idx.shards || {};
+  const stale = Object.keys(want).filter(k => have[k] !== want[k].hash);
+  if (!stale.length) return 0;
+
+  let cards = (await enrichGet('cards', 'all').catch(() => null)) || {};
+  let got = 0;
+  for (const key of stale) {
+    let body;
+    try { body = await ghFetchPath('enrich/' + key + '.json'); }
+    catch (e) { continue; }                  // شريحة تعثّرت — البقية تكمل
+    if (!body) continue;
+    try {
+      Object.assign(cards, JSON.parse(body));
+      have[key] = want[key].hash;
+      got++;
+    } catch (e) { /* شريحة معطوبة — تُترك لبصمتها القديمة فتُعاد لاحقاً */ }
+  }
+  // البصمات تُحفظ بعد البطاقات: لو انقطع بينهما أُعيد التنزيل لا فُقد
+  await enrichPut('cards', 'all', cards);
+  await enrichPut('meta', 'hashes', have);
+  enrichCache = cards;
+  return got;
+}
+
 async function ghBackup() {
   let sha = null;
   const r1 = await ghRequest({});
@@ -27182,6 +27370,18 @@ async function autoSyncOnStartup() {
     } catch(e) { /* الرفع التلقائي لا يقاطع الإقلاع؛ زرّ Sync يبلّغ بالتفصيل */ }
 
     /*
+     * ثم بطاقات الإثراء — بعد الرفع لا قبله.
+     *
+     * الكلمة الجديدة تُرفع أوّلاً، فيستيقظ مسار البناء على خوادم GitHub
+     * ويبني بطاقتها. فلو سألنا عن الشرائح قبل الرفع لسألنا عن بطاقةٍ لم
+     * يُطلب بناؤها بعد. وهي تصل في المزامنة التالية — دقائق، بلا ضغطة.
+     */
+    try {
+      const fresh = await enrichSync();
+      if (fresh) { renderList(); flash('📚 ' + fresh + ' enriched card' + (fresh > 1 ? 's' : '') + ' updated'); }
+    } catch(e) { /* الإثراء زيادةٌ لا شرط — البطاقة تظهر بدونه كما كانت */ }
+
+    /*
      * الإثراء يتبع المزامنة، ولا يُعاد كل دقيقة.
      *
      * إطلاقه بعد كل مزامنة جعل عدّاده يبدأ من أوّله في كل دورة — سطرٌ أخضر
@@ -27264,6 +27464,19 @@ load().then(async () => {
   };
 
   kokoroRefreshUi();
+
+  /*
+   * الإثراء المخزَّن يُقرأ قبل أول رسم.
+   *
+   * لأن `entryHtml` متزامنة — تُستدعى من ثلاثة مواضع وترجع نصاً فوراً —
+   * فلا تستطيع انتظار القرص. فتُقرأ البطاقات مرّةً هنا إلى الذاكرة، ثم
+   * تُقرأ منها بلا انتظار. وإن تأخّرت القراءة رُسمت البطاقات كما كانت
+   * قبل الإثراء، ثم أعيد رسمها — لا شاشة فارغة ولا انتظار.
+   */
+  try {
+    enrichCache = (await enrichGet('cards', 'all')) || {};
+    if (Object.keys(enrichCache).length) renderList();
+  } catch(e) { enrichCache = {}; }   // متصفّح بلا IndexedDB — التطبيق يعمل بدونه
 
   await autoSyncOnStartup(); // سحبٌ ورفعٌ معاً قبل أي إثراء — فلا نُثري نسخة قديمة
   backgroundUpgrade(); // إثراء المعاني يبدأ بصمت بلا أي ضغطة — لا await حتى لا تؤخر ظهور الصفحة

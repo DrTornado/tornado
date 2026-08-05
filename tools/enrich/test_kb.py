@@ -278,6 +278,82 @@ again = K.export_shards(out_dir=out, words=["issue", "glaciers", "zzzqqq"])
 check("البصمة ثابتة",
       again["shards"]["is"]["hash"], idx["shards"]["is"]["hash"])
 
+# ── ٦ب ── الترجمة تنجو من إعادة التصدير ───────────────────────────
+print("\n[6b] إعادة التصدير لا تمحو الترجمة الآلية")
+# نحاكي ما يفعله translate_shards.py: يكتب العربية في الشريحة لا القاعدة
+MT = "ترجمةٌ آليةٌ لا وجود لها في القاعدة"
+EN = "The committee met to review the plan."   # يُدرَج الآن بلا عربية
+sh_path = os.path.join(out, "is.json")
+
+_db6 = K.connect()
+_db6.execute("DELETE FROM examples WHERE en=?", (EN,))
+_db6.execute("INSERT INTO examples(word,en,ar,source,ar_src)"
+             " VALUES(?,?,?,?,?)", ("issue", EN, None, "tatoeba", None))
+_db6.commit()
+K.export_shards(out_dir=out, words=["issue", "glaciers", "zzzqqq"])
+
+
+def _find(where):
+    with open(sh_path, encoding="utf-8") as f:
+        return next((x for x in json.load(f)["issue"][where]
+                     if x.get("en") == EN), None)
+
+
+check("النصّ يخرج من القاعدة بلا عربية", (_find("examples") or {}).get("ar"),
+      None)
+
+with open(sh_path, encoding="utf-8") as f:
+    cards = json.load(f)
+for item in cards["issue"]["examples"]:
+    if item.get("en") == EN:
+        item["ar"], item["arSrc"] = MT, "mt"
+with open(sh_path, "w", encoding="utf-8") as f:
+    json.dump(cards, f, ensure_ascii=False, sort_keys=True,
+              separators=(",", ":"))
+
+K.export_shards(out_dir=out, words=["issue", "glaciers", "zzzqqq"])
+after = _find("examples") or {}
+check("العربية نجت من المحو", after.get("ar"), MT)
+check("ومصدرها محفوظ", after.get("arSrc"), "mt")
+
+# ── ٧ب ── المتلازمات: الأعلام تسقط والكلمات تبقى ──────────────────
+print("\n[7b] good_collocations — العَلَم يسقط والكلمة تبقى")
+cdb = K.connect()
+cdb.execute("DELETE FROM senses WHERE word IN"
+            " ('edward','sir','drinker','radio','realistic','soil')")
+cdb.execute("DELETE FROM collocations WHERE word IN ('zcope','zerosion')")
+for w, pos, n in [("edward", "name", 2), ("edward", "noun", 1),
+                  ("drinker", "noun", 5), ("drinker", "name", 1),
+                  ("radio", "noun", 4), ("realistic", "adj", 3),
+                  ("soil", "noun", 6), ("sir", "noun", 9)]:
+    for i in range(n):
+        cdb.execute("INSERT INTO senses VALUES(?,?,?,?,?,?,?,?)",
+                    (w, pos, i, f"g{i}", "", "wiktionary", None, None))
+# «cope» عند ويكيبيديا اسمُ عالِم أحافير: إدوارد درنكر كوب
+for col, sc in [("drinker", 12.0), ("edward", 7.9), ("sir", 6.9)]:
+    cdb.execute("INSERT INTO collocations VALUES(?,?,?,?,?)",
+                ("zcope", "compound", col, sc, 5))
+for col, sc in [("soil", 9.0), ("radio", 6.1)]:
+    cdb.execute("INSERT INTO collocations VALUES(?,?,?,?,?)",
+                ("zerosion", "compound", col, sc, 5))
+cdb.commit()
+
+
+def _q(w):
+    def q(sql, *a):
+        lim = a[0] if a else None
+        return cdb.execute(sql + (f" LIMIT {lim}" if lim else ""),
+                           (w,)).fetchall()
+    return q
+
+
+got = K.good_collocations(cdb, "zcope", _q("zcope"))
+check("سياقٌ غالبه أعلام يسقط كلّه", [x["col"] for x in got], [])
+got = K.good_collocations(cdb, "zerosion", _q("zerosion"))
+check("الكلمات الحقيقية تبقى", [x["col"] for x in got], ["soil", "radio"])
+check("لا حدَّ أدنى للدرجة يُسقط الصحيح",
+      any(x["col"] == "radio" for x in got), True)   # radio = ٦٫١ فقط
+
 # ── ٧ ── repair عديم الأثر عند التكرار ────────────────────────────
 print("\n[7] repair مرّتين لا يغيّر شيئاً")
 K.repair(apply=True)
