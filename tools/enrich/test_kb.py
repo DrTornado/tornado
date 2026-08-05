@@ -4,7 +4,7 @@ import sqlite3
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-os.environ["TORNADO_WORK"] = os.environ.get("TORNADO_WORK", HERE)
+os.environ["TORNADO_WORK"] = HERE
 sys.path.insert(0, r"C:\Users\amugl\OneDrive\Documents\GitHub\tornado\tools\enrich")
 
 import build_kb as K                                            # noqa: E402
@@ -79,8 +79,10 @@ db.executescript(K.SCHEMA)
 
 # كل صفّ مُدرَج مرّتين — يحاكي جولةً جرت مرّتين
 for _ in range(2):
-    db.execute("INSERT INTO senses VALUES('issue','noun',0,'a question','','wordnet')")
-    db.execute("INSERT INTO senses VALUES('issue','noun',1,'an edition','','wordnet')")
+    db.execute("INSERT INTO senses VALUES(?,?,?,?,?,?,?)",
+               ("issue", "noun", 0, "a question", "", "wiktionary", "مَسْأَلَة"))
+    db.execute("INSERT INTO senses VALUES(?,?,?,?,?,?,?)",
+               ("issue", "noun", 1, "an edition", "", "wordnet", None))
     db.execute("INSERT INTO examples VALUES('issue','We faced the issue.','واجهنا المشكلة','tatoeba')")
     db.execute("INSERT INTO idioms VALUES('issue','side issue','A minor topic.')")
     db.execute("INSERT INTO forms VALUES('assume','assumes','')")
@@ -126,6 +128,13 @@ check("لا معنى مكرّر",
       len({m["en"] for m in card["meanings"]}), len(card["meanings"]))
 check("cefr", card["cefr"], "B1")
 check("النطق العربي مشتقّ", bool(card["arabicPron"]) or card["ipa"] == {}, True)
+check("الترجمة العربية للمعنى وصلت",
+      next((m["ar"] for m in card["meanings"] if m["en"] == "a question"), None),
+      "مَسْأَلَة")
+check("معنى WordNet بلا عربية",
+      next((m["ar"] for m in card["meanings"] if m["en"] == "an edition"), "X"),
+      None)
+check("المعنى المترجَم يسبق", card["meanings"][0]["en"], "a question")
 db.close()
 
 # ── ٧ ── repair عديم الأثر عند التكرار ────────────────────────────
