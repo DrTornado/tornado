@@ -23989,8 +23989,7 @@ function entryHtml(rawCard) {
     ${arr(card.examples).length ? `<div class="sect"><b class="h">Examples</b>${card.examples.map(pairHtml).join('')}</div>` : ''}
     ${arr(card.differences).length ? `<div class="sect"><b class="h">Differences</b>${arr(card.differences).map(pairHtml).join('')}</div>` : ''}
     ${arr(card.grammarPatterns).length ? `<div class="sect"><b class="h">Grammar patterns</b>${arr(card.grammarPatterns).map(pairHtml).join('')}</div>` : ''}
-    ${arr(card._e && card._e.pronunciationNote).length ? `<div class="sect" style="border-left:2px solid #E8B04B;padding-left:10px;"><b class="h">Pronunciation note</b>${card._e.pronunciationNote.map(t =>
-      `<div class="pair" style="font-family:monospace;font-size:13px;">${esc(t)}</div>`).join('')}</div>` : ''}
+    ${arr(card._e && card._e.pronunciationNote).length ? `<div class="sect" style="border-left:2px solid #E8B04B;padding-left:10px;"><b class="h">Pronunciation note</b>${card._e.pronunciationNote.map(pairHtml).join('')}</div>` : ''}
     ${enrichExtraHtml(card)}`;
 }
 
@@ -26343,7 +26342,7 @@ async function piperGenerateInner(text, lang) {
   let lastErr = null;
   for (let attempt = 1; attempt <= maxAttempts; attempt++) { // إعادة محاولة حقيقية: الأعطال العابرة (شبكة/ذاكرة) تُعالَج بدل أن تُسقط الصوت كله
     // نفس التمييز: التوقّف عن التشغيل لا يعني التوقّف عن التحضير المسبق
-    if (stopped && !silentBuild) return null;
+    if (stopped && !silentBuild) { lastBuildReason = 'playback stopped mid-build'; return null; }
     try {
       const mod = await loadPiper();
       // العربية: نحسب الرموز الصوتية بأنفسنا ونمررها للنموذج مباشرة، متجاوزين محرك النطق العاجز عن العربية
@@ -26649,11 +26648,11 @@ async function buildSegmentsAudio(segs, label) {
      * والتحضير الخلفي يُوقفه `audioPrepAbort` وحده، وهو ما يُرفع فور أي ضغطة
      * تشغيل. فلا تزاحم على المحرّك، ولا انسحابٌ بلا سبب.
      */
-    if (stopped && !silentBuild) return null;
+    if (stopped && !silentBuild) { lastBuildReason = 'playback stopped mid-build'; return null; }
     if (!silentBuild) piperStatus(`🎧 Preparing ${label || 'audio'} — part ${i + 1} of ${segs.length}…`);
-    if (silentBuild && audioPrepAbort) return null;
+    if (silentBuild && audioPrepAbort) { lastBuildReason = 'background prep aborted'; return null; }
     const wav = await getSegmentAudio(seg.text, seg.lang); // من المخزن إن وُجد، وإلا يُولَّد ويُخزَّن
-    if (!wav) { skipped++; continue; } // مقطع تعذّر توليده؟ نتخطاه بصمت ونكمل — لا نلغي الصوت كله ولا نلجأ لنطق آلي مشوَّه
+    if (!wav) { skipped++; lastBuildReason = 'segment generation failed: ' + String(seg.text).slice(0,40); continue; } // مقطع تعذّر توليده؟ نتخطاه بصمت ونكمل — لا نلغي الصوت كله ولا نلجأ لنطق آلي مشوَّه
     const parsed = parseWav(await wav.arrayBuffer());
     if (!parsed) { skipped++; continue; }
     if (!fmt) fmt = parsed.fmt;
@@ -26694,6 +26693,14 @@ async function buildCardAudio(card) {
   const segs = mergeSegments(all.filter(s => String(s.lang || '').slice(0,2).toLowerCase() !== 'ar'));
   if (!segs.length) { lastBuildReason = 'card has no speakable segments'; return null; }
   const wav = await buildSegmentsAudio(segs, `"${card.word}"`);
+  /*
+   * الفشل يُسمّي نفسه.
+   *
+   * كانت ترجع `null` بلا سبب في أكثر من طريق، فيقول المستخدم «الصوت لا
+   * يعمل» ولا يوجد ما يُقرأ. والسبب المسجَّل يحوّل شكوى مبهمة إلى عطلٍ
+   * محدَّد يُصلَح.
+   */
+  if (!wav && !lastBuildReason) lastBuildReason = 'engine returned no audio (voice model not loaded?)';
   if (wav) {
     AUDIO_CACHE.set(key, wav);
     if (AUDIO_CACHE.size > 40) AUDIO_CACHE.delete(AUDIO_CACHE.keys().next().value); // سقف ذاكرة الجلسة

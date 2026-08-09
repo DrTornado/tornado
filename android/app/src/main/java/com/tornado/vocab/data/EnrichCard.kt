@@ -95,10 +95,10 @@ data class Enrichment(
      */
     val grammarPatterns: List<LangPair> = emptyList(),
     /** تنبيه نطقٍ يفرّق بين متشابهين: patient ≠ patience */
-    val pronunciationNote: List<String> = emptyList(),
+    val pronunciationNote: List<LangPair> = emptyList(),
     val phrasalVerbs: List<Phrase> = emptyList(),
     val idioms: List<Phrase> = emptyList(),
-    val usageNotes: List<String> = emptyList(),
+    val usageNotes: List<LangPair> = emptyList(),
     val register: List<String> = emptyList(),
     val absent: List<String> = emptyList(),
     /** مكتوبةٌ بيدٍ ومكتملة — لا تُضمّ إليها بطاقة التطبيق القديمة */
@@ -169,14 +169,14 @@ data class Enrichment(
                 collocations = pairs(o, "collocations"),
                 differences = pairs(o, "differences"),
                 grammarPatterns = pairs(o, "grammarPatterns"),
-                pronunciationNote = strings(o, "pronunciationNote"),
+                pronunciationNote = pairs(o, "pronunciationNote"),
                 phrasalVerbs = objects(o, "phrasalVerbs").map {
                     Phrase(it.optString("phrase"), it.optString("gloss"))
                 },
                 idioms = objects(o, "idioms").map {
                     Phrase(it.optString("phrase"), it.optString("gloss"))
                 },
-                usageNotes = strings(o, "usageNotes"),
+                usageNotes = pairs(o, "usageNotes"),
                 register = strings(o, "register"),
                 absent = strings(o, "absent"),
                 curated = o.optBoolean("curated", false)

@@ -38,11 +38,12 @@ LATIN = re.compile(r"[A-Za-z]{2,}")
 MINIMUM = {
     "meanings": 2, "inflections": 2, "derivatives": 3, "synonyms": 4,
     "antonyms": 3, "examples": 4, "collocations": 5, "differences": 3,
-    "usageNotes": 2,
+    "usageNotes": 2, "pronunciationNote": 1,
 }
 SCALAR = ("ipa", "arabicPron", "pos")
 PAIRED = ("derivatives", "synonyms", "antonyms", "examples",
-          "collocations", "differences", "grammarPatterns")
+          "collocations", "differences", "grammarPatterns",
+          "usageNotes", "pronunciationNote")
 
 
 def faults(word: str, c: dict) -> list:
@@ -68,7 +69,7 @@ def faults(word: str, c: dict) -> list:
             if not isinstance(x, dict):
                 out.append(f"{k}[{i}] ليس زوجاً")
                 continue
-            if not x.get("en"):
+            if not x.get("en") and k not in ("usageNotes", "pronunciationNote"):
                 out.append(f"{k}[{i}] بلا إنجليزي")
             if not x.get("ar"):
                 out.append(f"{k}[{i}] بلا عربي: {x.get('en')}")
@@ -89,10 +90,6 @@ def faults(word: str, c: dict) -> list:
             out.append(f"meanings[{i}] بلا عربي صحيح")
         if not m.get("pos"):
             out.append(f"meanings[{i}] بلا قسم كلام")
-
-    for i, n in enumerate(c.get("usageNotes") or []):
-        if not ARABIC.search(str(n)):
-            out.append(f"usageNotes[{i}] ليست بالعربية")
 
     # الكلمة ذات المعنيين فأكثر: مرادفها وضدّها يجب أن يُنسبا إلى معناهما،
     # وإلا قرأ المتعلّم «abide → violate» فظنّهما مترادفين. النسبة تُكتب في

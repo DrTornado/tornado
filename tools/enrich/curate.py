@@ -31,10 +31,13 @@ CARD_SCHEMA = 1
 # الحقول التي تنتقل من البطاقة المنقّحة إلى الشريحة، وأشكالها.
 # نصوصٌ مفردة، أو قوائم نصوص، أو قوائم أزواج {en, ar}.
 TEXT = ("word", "arabicPron", "oxford", "cefr", "cefrEst")
-LISTS = ("pos", "inflections", "usageNotes", "register",
-         "pronunciationNote")
+LISTS = ("pos", "inflections", "register")
+# ملاحظاتُ الاستعمال والنطق أزواجٌ أيضاً: كانتا نصّاً مفرداً يجمع
+# اللغتين في سطرٍ واحد — «الصفة تأخذ with مع الشخص وabout مع الموقف»
+# — فيقفز البصر بين اتّجاهين مرّتين في السطر الواحد.
 PAIRS = ("derivatives", "synonyms", "antonyms", "examples",
-         "collocations", "differences", "grammarPatterns")
+         "collocations", "differences", "grammarPatterns",
+         "usageNotes", "pronunciationNote")
 
 
 def load_curated(path: str = CURATED) -> dict:

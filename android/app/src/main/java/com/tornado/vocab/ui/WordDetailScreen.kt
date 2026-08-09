@@ -237,24 +237,12 @@ fun WordDetailScreen(vm: WordDetailViewModel, onBack: () -> Unit) {
             pairSection("Differences", shown.differences)
             pairSection("Grammar patterns", e?.grammarPatterns.orEmpty())
 
-            e?.pronunciationNote?.takeIf { it.isNotEmpty() }?.let { note ->
-                item {
-                    SectionHeader("Pronunciation note")
-                    note.forEach {
-                        Text(it, style = MaterialTheme.typography.bodyMedium)
-                    }
-                }
-            }
+            pairSection("Pronunciation note", e?.pronunciationNote.orEmpty())
 
             phraseSection("Phrasal verbs", e?.phrasalVerbs)
             phraseSection("Idioms", e?.idioms)
 
-            e?.usageNotes?.takeIf { it.isNotEmpty() }?.let { notes ->
-                item {
-                    SectionHeader("Usage notes")
-                    notes.forEach { Text(it, style = MaterialTheme.typography.bodyLarge) }
-                }
-            }
+            pairSection("Usage notes", e?.usageNotes.orEmpty())
             e?.register?.takeIf { it.isNotEmpty() }?.let { reg ->
                 item {
                     SectionHeader("Register")
