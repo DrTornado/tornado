@@ -40,13 +40,17 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.tornado.vocab.audio.PlaybackBus
+import com.tornado.vocab.data.Enrichment
 import com.tornado.vocab.data.LangPair
+import com.tornado.vocab.data.Phrase
 import com.tornado.vocab.data.Word
 import com.tornado.vocab.tornado
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -57,6 +61,27 @@ class WordDetailViewModel(app: Application) : AndroidViewModel(app) {
 
     val word: StateFlow<Word?> = id
         .flatMapLatest { repo.observeWord(it) }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), null)
+
+    /*
+     * الإثراء يتبع الكلمة المفتوحة وحدها.
+     *
+     * بطاقةٌ واحدة تُقرأ حين تُفتح، فلا تحمّل القائمةُ مئةً وستّين بطاقةً
+     * لا تُعرض. و`null` تعني «لم يصل إثراء بعد» — فتظهر البطاقة كما كانت
+     * تماماً، بلا نقص ولا رسالة خطأ.
+     *
+     * والمفتاح نصُّ الكلمة لا الصفّ كلّه: الصفّ يتغيّر مع كل إجابة في
+     * الاختبار، والإثراء لا علاقة له بذلك.
+     */
+    val enrichment: StateFlow<Enrichment?> = word
+        .map { it?.word.orEmpty() }
+        .distinctUntilChanged()
+        .map { w ->
+            if (w.isBlank()) null
+            else runCatching {
+                getApplication<Application>().tornado.enrichSync.forWord(w)
+            }.getOrNull()
+        }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), null)
 
     fun load(wordId: Long) { id.value = wordId }
@@ -93,7 +118,9 @@ class WordDetailViewModel(app: Application) : AndroidViewModel(app) {
 @Composable
 fun WordDetailScreen(vm: WordDetailViewModel, onBack: () -> Unit) {
     val word by vm.word.collectAsStateWithLifecycle()
+    val enrichment by vm.enrichment.collectAsStateWithLifecycle()
     val w = word
+    val e = enrichment
 
     Scaffold(
         topBar = {
@@ -123,18 +150,20 @@ fun WordDetailScreen(vm: WordDetailViewModel, onBack: () -> Unit) {
             Box(Modifier.fillMaxSize().padding(pad), Alignment.Center) { Text("Loading…") }
             return@Scaffold
         }
+        // نسخةٌ للعرض وحده — لا تُحفظ ولا تُرفع، فخطأ العرض لا يمسّ بياناته
+        val shown = w.withEnrichment(e)
 
         LazyColumn(
             Modifier.fillMaxSize().padding(pad).padding(horizontal = 20.dp)
         ) {
             item {
                 VSpace(8)
-                Text(w.word, fontSize = 34.sp, fontWeight = FontWeight.ExtraBold)
+                Text(shown.word, fontSize = 34.sp, fontWeight = FontWeight.ExtraBold)
 
                 val prons = listOfNotNull(
-                    w.ipaUS.takeIf { it.isNotBlank() },
-                    w.ipaUK.takeIf { it.isNotBlank() },
-                    w.ipa.takeIf { it.isNotBlank() && w.ipaUS.isBlank() && w.ipaUK.isBlank() }
+                    shown.ipaUS.takeIf { it.isNotBlank() },
+                    shown.ipaUK.takeIf { it.isNotBlank() },
+                    shown.ipa.takeIf { it.isNotBlank() && shown.ipaUS.isBlank() && shown.ipaUK.isBlank() }
                 )
                 if (prons.isNotEmpty()) {
                     Text(
@@ -143,9 +172,9 @@ fun WordDetailScreen(vm: WordDetailViewModel, onBack: () -> Unit) {
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
-                if (w.arabicPron.isNotBlank()) {
+                if (shown.arabicPron.isNotBlank()) {
                     Text(
-                        w.arabicPron,
+                        shown.arabicPron,
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.primary
                     )
@@ -155,13 +184,13 @@ fun WordDetailScreen(vm: WordDetailViewModel, onBack: () -> Unit) {
                 PronunciationRow(w, vm)
 
                 VSpace(12)
-                BadgeRow(w)
+                BadgeRow(shown)
                 VSpace(4)
             }
 
-            if (w.meanings.isNotEmpty()) {
+            if (shown.meanings.isNotEmpty()) {
                 item { SectionHeader("Meanings") }
-                items(w.meanings) { m ->
+                items(shown.meanings) { m ->
                     Column(Modifier.fillMaxWidth().padding(vertical = 6.dp)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             m.pos?.takeIf { it.isNotBlank() }?.let {
@@ -184,23 +213,139 @@ fun WordDetailScreen(vm: WordDetailViewModel, onBack: () -> Unit) {
                 }
             }
 
-            if (w.inflections.isNotEmpty()) {
+            if (shown.inflections.isNotEmpty()) {
                 item {
                     SectionHeader("Word forms")
-                    Text(w.inflections.joinToString("  ·  "), style = MaterialTheme.typography.bodyMedium)
+                    Text(shown.inflections.joinToString("  ·  "), style = MaterialTheme.typography.bodyMedium)
                 }
             }
 
-            pairSection("Related words", w.derivatives)
-            pairSection("Synonyms", w.synonyms)
-            pairSection("Common combinations", w.collocations)
-            pairSection("Examples", w.examples)
-            pairSection("Differences", w.differences)
+            pairSection("Related words", merged(shown.derivatives, e?.derivatives))
+            pairSection("Synonyms", merged(shown.synonyms, e?.synonyms))
+            pairSection("Antonyms", merged(emptyList(), e?.antonyms))
+            pairSection(
+                "Common combinations",
+                if (shown.collocations.isNotEmpty()) shown.collocations
+                else e?.collocations.orEmpty()
+            )
+            pairSection("Examples", mergedPairs(shown.examples, e?.examples))
+            pairSection("Differences", shown.differences)
+
+            phraseSection("Phrasal verbs", e?.phrasalVerbs)
+            phraseSection("Idioms", e?.idioms)
+
+            e?.usageNotes?.takeIf { it.isNotEmpty() }?.let { notes ->
+                item {
+                    SectionHeader("Usage notes")
+                    notes.forEach { Text(it, style = MaterialTheme.typography.bodyLarge) }
+                }
+            }
+            e?.register?.takeIf { it.isNotEmpty() }?.let { reg ->
+                item {
+                    SectionHeader("Register")
+                    Text(reg.joinToString("  ·  "), style = MaterialTheme.typography.bodyMedium)
+                }
+            }
+
+            /*
+             * الغائب يُقال، ولا يُترك للتخمين.
+             *
+             * قسمٌ بلا معلومةٍ موثوقة يُذكر اسمه صراحةً، فيعرف القارئ أن
+             * المصدر خالٍ لا أن التطبيق أهمل — والاختلاق ليس بديلاً.
+             */
+            e?.absent?.takeIf { it.isNotEmpty() }?.let { gaps ->
+                item {
+                    VSpace(14)
+                    Text(
+                        "لا توجد معلومة موثوقة في المصادر لـ: " +
+                            gaps.joinToString("  ·  ") { Enrichment.absentLabel(it) },
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
 
             item {
                 SectionHeader("Your progress")
                 ProgressPanel(w)
                 VSpace(40)
+            }
+        }
+    }
+}
+
+/*
+ * الدمج: القائم أوّلاً، والإثراء يزيد ولا يزيح.
+ *
+ * ما بناه التطبيق لنفسه يبقى في مكانه — قد يكون فيه ترجمةٌ عربية ليست في
+ * القاعدة. والإثراء يُلحق ما ليس عنده، بلا تكرار.
+ */
+private fun norm(s: String) = s.trim().lowercase()
+
+/**
+ * البطاقة كما تُعرض: القائم أوّلاً، والإثراء يملأ الفراغ.
+ *
+ * نسخةٌ لا تُحفظ: `Word` تُرفع إلى المستودع، فالكتابة فيها تنقل خطأ العرض
+ * إلى بيانات المستخدم. وما لا يُكتب لا يُفسد.
+ *
+ * والفراغ وحده يُملأ — ما بناه التطبيق لنفسه لا يُزاح، لأن فيه أحياناً
+ * ترجمةً عربية ليست في القاعدة.
+ */
+private fun Word.withEnrichment(e: Enrichment?): Word {
+    if (e == null) return this
+    val extraMeanings = e.meanings.filter { m ->
+        m.en.isNotBlank() && meanings.none { norm(it.en) == norm(m.en) }
+    }
+    return copy(
+        ipaUS = ipaUS.ifBlank { e.ipaUS },
+        ipaUK = ipaUK.ifBlank { e.ipaUK },
+        ipa = if (ipaUS.isBlank() && ipaUK.isBlank() && e.ipaUS.isBlank() &&
+            e.ipaUK.isBlank()
+        ) ipa.ifBlank { e.ipaGen } else ipa,
+        arabicPron = arabicPron.ifBlank { e.arabicPron },
+        oxford = oxford.ifBlank { e.oxford },
+        cefr = cefr.ifBlank { e.cefr },
+        estCefr = if (cefr.isBlank() && e.cefr.isBlank()) {
+            estCefr.ifBlank { e.cefrEst }
+        } else estCefr,
+        pos = pos + e.pos.filterNot { p -> pos.any { norm(it) == norm(p) } },
+        meanings = meanings + extraMeanings,
+        inflections = inflections +
+            e.inflections.filterNot { f -> inflections.any { norm(it) == norm(f) } }
+    )
+}
+
+private fun merged(base: List<LangPair>, extra: List<String>?): List<LangPair> {
+    if (extra.isNullOrEmpty()) return base
+    val seen = base.mapTo(HashSet()) { norm(it.en) }
+    return base + extra.filter { seen.add(norm(it)) }.map { LangPair(it, "") }
+}
+
+private fun mergedPairs(base: List<LangPair>, extra: List<LangPair>?): List<LangPair> {
+    if (extra.isNullOrEmpty()) return base
+    val seen = base.mapTo(HashSet()) { norm(it.en) }
+    return base + extra.filter { it.en.isNotBlank() && seen.add(norm(it.en)) }
+}
+
+private fun androidx.compose.foundation.lazy.LazyListScope.phraseSection(
+    title: String,
+    items: List<Phrase>?
+) {
+    if (items.isNullOrEmpty()) return
+    item { SectionHeader(title) }
+    items(items) { p ->
+        Column(Modifier.fillMaxWidth().padding(vertical = 5.dp)) {
+            Text(
+                p.phrase,
+                style = MaterialTheme.typography.bodyLarge,
+                fontWeight = FontWeight.Medium
+            )
+            if (p.gloss.isNotBlank()) {
+                Text(
+                    p.gloss,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
             }
         }
     }

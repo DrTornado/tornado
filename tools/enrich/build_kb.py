@@ -1562,18 +1562,31 @@ def curated() -> dict:
     if _CURATED_CACHE is not None:
         return _CURATED_CACHE
     path = os.environ.get("TORNADO_CURATED") or os.path.join(
-        os.path.dirname(os.path.abspath(__file__)), "curated.json")
+        os.path.dirname(os.path.abspath(__file__)), "curated")
+
+    # مجلّد دفعات أو ملفٌّ واحد — وكان يقرأ الملف وحده، فلمّا صار المصدر
+    # مجلّداً مرّ التنقيح صامتاً ومحا مسارُ البناء ثماني عشرة بطاقةً
+    # مكتوبةً بيد. الصمت هنا أخطر من الخطأ.
+    if os.path.isdir(path):
+        files = sorted(glob.glob(os.path.join(path, "*.json")))
+    else:
+        files = [path] if os.path.exists(path) else []
+        if not files and os.path.exists(path + ".json"):
+            files = [path + ".json"]
+
     data = {}
-    try:
-        with open(path, encoding="utf-8") as f:
-            data = {k: v for k, v in json.load(f).items()
-                    if not k.startswith("_") and isinstance(v, dict)}
-        print(f"  منقّحٌ بيد: {len(data)} كلمة من {os.path.basename(path)}",
-              flush=True)
-    except FileNotFoundError:
-        pass
-    except Exception as e:                                       # noqa: BLE001
-        print(f"  تعذّرت قراءة التنقيح ({e}) — أتابع بلا", flush=True)
+    for f_path in files:
+        try:
+            with open(f_path, encoding="utf-8") as f:
+                data.update({k: v for k, v in json.load(f).items()
+                             if not k.startswith("_") and isinstance(v, dict)})
+        except Exception as e:                                   # noqa: BLE001
+            print(f"  تعذّرت قراءة {os.path.basename(f_path)} ({e})",
+                  flush=True)
+    if files:
+        print(f"  منقّحٌ بيد: {len(data)} كلمة من {len(files)} ملف", flush=True)
+    else:
+        print(f"  ⚠ لا تنقيح في {path} — البطاقات آليةٌ كلّها", flush=True)
     _CURATED_CACHE = data
     return data
 

@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.tornado.vocab.data.AudioLibrarySync
 import com.tornado.vocab.data.DictionaryService
+import com.tornado.vocab.data.EnrichSync
 import com.tornado.vocab.data.GitHubSync
 import com.tornado.vocab.data.LibraryEnricher
 import com.tornado.vocab.data.NoteRepository
@@ -50,6 +51,15 @@ class TornadoApp : Application() {
     /** الملاحظات الصوتية — نصوص طويلة تُسمع بنفس المشغّل */
     val notes: NoteRepository by lazy { NoteRepository(this) }
     val noteSync: NoteSync by lazy { NoteSync(notes, SecureKeyStore(this)) }
+
+    /**
+     * بطاقات الإثراء — تصل جاهزةً من المستودع.
+     *
+     * نفس المستودع ونفس الرمز الذي ينقل الكلمات والملاحظات: المستخدم أعدّ
+     * المزامنة مرّةً، فليس من حقّنا أن نطلب إعداداً ثانياً لأننا أضفنا
+     * نوع محتوى جديد.
+     */
+    val enrichSync: EnrichSync by lazy { EnrichSync(this, SecureKeyStore(this)) }
 
     /** المحرك الصوتي الأساسي — نسخة واحدة يشاركها التطبيق كله */
     val kokoro: com.tornado.vocab.audio.KokoroEngine by lazy {
@@ -130,6 +140,14 @@ class TornadoApp : Application() {
                 // الملاحظات مع الكلمات في نفس الجولة — إعداد واحد لمحتويين
                 noteSync.repo = repo
                 if (noteSync.canPull) noteSync.sync(push = noteSync.canPush)
+                /*
+                 * الإثراء بعد الكلمات: بطاقةٌ لكلمةٍ ليست عندنا لا تُعرض.
+                 *
+                 * وهو سحبٌ فقط، فلا يزاحم رفع الكلمات ولا الملاحظات على أي
+                 * ملف — ولا يُنزّل إلا الشرائح التي تغيّرت بصماتها.
+                 */
+                enrichSync.repo = repo
+                enrichSync.sync()
             }
             /*
              * إثراء تدريجي بعد كل شيء آخر.

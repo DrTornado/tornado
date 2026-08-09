@@ -44,14 +44,18 @@ class Converters {
 }
 
 @Database(
-    entities = [Word::class, WordFts::class, Tombstone::class, Note::class, NoteTombstone::class],
-    version = 3,
-    exportSchema = false
+    entities = [
+        Word::class, WordFts::class, Tombstone::class, Note::class,
+        NoteTombstone::class, EnrichCard::class, EnrichShard::class
+    ],
+    version = 4,
+    exportSchema = true
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun wordDao(): WordDao
     abstract fun noteDao(): NoteDao
+    abstract fun enrichDao(): EnrichDao
 
     companion object {
         @Volatile private var INSTANCE: AppDatabase? = null
@@ -85,6 +89,37 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
+        /**
+         * جدولا الإثراء.
+         *
+         * ترحيلٌ مكتوب كسابقيه: البطاقات تصل من المستودع ويمكن إعادة
+         * تنزيلها، لكن مكتبة المستخدم وتقدّمه وملاحظاته لا يمكن. وقد كانت
+         * القاعدة على `fallbackToDestructiveMigration` يوماً — فأي إغفالٍ
+         * هنا يمسح كل شيء بلا إنذار.
+         */
+        private val MIGRATION_3_4 = object : Migration(3, 4) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    """
+                    CREATE TABLE IF NOT EXISTS `enrich_cards` (
+                        `word` TEXT NOT NULL,
+                        `json` TEXT NOT NULL,
+                        PRIMARY KEY(`word`)
+                    )
+                    """.trimIndent()
+                )
+                db.execSQL(
+                    """
+                    CREATE TABLE IF NOT EXISTS `enrich_shards` (
+                        `key` TEXT NOT NULL,
+                        `hash` TEXT NOT NULL,
+                        PRIMARY KEY(`key`)
+                    )
+                    """.trimIndent()
+                )
+            }
+        }
+
         private val MIGRATION_1_2 = object : Migration(1, 2) {
             override fun migrate(db: SupportSQLiteDatabase) {
                 db.execSQL(
@@ -108,7 +143,7 @@ abstract class AppDatabase : RoomDatabase() {
             INSTANCE ?: Room.databaseBuilder(
                 context.applicationContext, AppDatabase::class.java, "tornado.db"
             )
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
                 .build()
                 .also { INSTANCE = it }
         }

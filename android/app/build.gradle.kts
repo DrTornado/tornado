@@ -32,6 +32,16 @@ plugins {
     id("org.jetbrains.kotlin.plugin.serialization")
 }
 
+/*
+ * مخطّط Room يُصدَّر إلى ملف.
+ *
+ * الترحيل المكتوب بيدٍ يجب أن يُنتج بنيةً تطابق ما يتوقّعه Room حرفاً
+ * بحرف، وإلا رمى عند الإقلاع «Migration didn't properly handle». وذلك
+ * يقع على جهاز المستخدم لا عندنا، ومكتبته هي الثمن. فيُصدَّر المخطّط
+ * ويُقارَن قبل الشحن.
+ */
+ksp { arg("room.schemaLocation", "$projectDir/schemas") }
+
 android {
     namespace = "com.tornado.vocab"
     compileSdk = 35
@@ -88,6 +98,17 @@ android {
              */
             signingConfig = signingConfigs.findByName("tornado")
                 ?: signingConfigs.getByName("debug")
+        }
+        /*
+         * نسخة التطوير تُثبَّت بجانب المنشورة لا فوقها.
+         *
+         * توقيعُهما مختلف، فالتثبيت فوق المنشورة يستلزم حذفها — وحذفُها
+         * يمحو مكتبة المستخدم وتقدّمه وملاحظاته. ولاحقةُ المعرِّف تجعلهما
+         * تطبيقين مستقلّين، فنجرّب على واحدة ولا نمسّ الأخرى.
+         */
+        debug {
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-debug"
         }
     }
     compileOptions {
