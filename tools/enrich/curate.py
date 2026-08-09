@@ -119,13 +119,30 @@ def build_card(word: str, c: dict) -> dict:
     return card
 
 
+# الأقسام التي يجب أن تحملها كل بطاقة مكتوبة بيد. لا استثناء.
+REQUIRED = ("ipa", "arabicPron", "pos", "meanings", "inflections",
+            "derivatives", "synonyms", "antonyms", "examples",
+            "collocations", "differences", "usageNotes")
+
+
+def missing_of(card: dict) -> list:
+    """أي الأقسام المطلوبة لم تُكتب بعد."""
+    return [k for k in REQUIRED if not card.get(k)]
+
+
 def absent_of(card: dict) -> list:
     """
-    ما لا معلومة له يُقال صراحةً.
+    «لا توجد معلومة» تُقال عن البطاقة الآلية وحدها.
 
-    البطاقةُ الصامتة عن نقصها توهم أنه لا نقص، فيظنّ القارئ أن الكلمة بلا
-    أضداد حين يكون الغائب هو الكتابة لا المعلومة.
+    كانت تُقال عن المكتوبة بيدٍ أيضاً، فقرأها صاحب المشروع فقال: أنت ذكاء
+    اصطناعي وتقول لا يوجد؟ وهو محقّ. `cope` لها أضداد وأفعال مركّبة،
+    وغيابُها كان كسلي لا نقصاً في المعلومة — وإعلانُ كسلٍ في ثوب أمانة
+    أسوأ من الكسل وحده.
+
+    فالبطاقة المكتوبة بيدٍ لا تُعلن نقصاً: إمّا تكتمل، وإمّا تُعاد كتابتها.
     """
+    if card.get("curated"):
+        return []
     return [k for k in ("antonyms", "collocations", "phrasalVerbs",
                         "idioms", "usageNotes", "differences", "examples")
             if not card.get(k)]

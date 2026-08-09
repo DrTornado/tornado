@@ -22,17 +22,36 @@ _ROOT = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
 WORDS = os.path.join(_ROOT, "tornado-data", "tornado-words.json")
 
 
-def curated_words(path: str = CURATED) -> set:
-    done = set()
+# كل قسمٍ في البطاقة إلزامي. الكلمة التي ينقصها قسمٌ ليست منتهية.
+REQUIRED = ("ipa", "arabicPron", "pos", "meanings", "inflections",
+            "derivatives", "synonyms", "antonyms", "examples",
+            "collocations", "differences", "usageNotes")
+
+
+def curated_words(path: str = CURATED) -> tuple:
+    """
+    يفرّق بين المكتمل والناقص.
+
+    كانت الكلمة تُعدّ منتهيةً لمجرّد وجود اسمها في الملف، فبقيت بطاقاتٌ
+    بلا أضداد ولا متلازمات ولا فروق — ثم طبع العارض تحتها «لا توجد معلومة
+    موثوقة»، وهو إعلانُ كسلٍ في ثوب أمانة. فما ينقصه قسمٌ يعود إلى الطابور.
+    """
+    done, partial = set(), {}
     for f_path in sorted(glob.glob(os.path.join(path, "*.json"))):
         try:
             with open(f_path, encoding="utf-8") as f:
                 raw = json.load(f)
         except Exception:                                        # noqa: BLE001
             continue
-        done |= {k.lower() for k in raw
-                 if not k.startswith("_") and isinstance(raw[k], dict)}
-    return done
+        for k, v in raw.items():
+            if k.startswith("_") or not isinstance(v, dict):
+                continue
+            gaps = [r for r in REQUIRED if not v.get(r)]
+            if gaps:
+                partial[k.lower()] = (os.path.basename(f_path), gaps)
+            else:
+                done.add(k.lower())
+    return done, partial
 
 
 def library(path: str = WORDS) -> list:
@@ -64,19 +83,32 @@ def main() -> None:
     ap.add_argument("--curated", default=CURATED)
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--done", action="store_true")
+    ap.add_argument("--incomplete", action="store_true",
+                    help="الناقصة وحدها، ومعها ما ينقصها")
     a = ap.parse_args()
 
-    done = curated_words(a.curated)
+    done, partial = curated_words(a.curated)
     all_words = library(a.words)
-    todo = [w for w in all_words if w.lower() not in done]
 
     if a.done:
         for w in sorted(done):
             print(w)
         return
 
-    print(f"# المكتبة {len(all_words)} · مراجَعة {len(all_words)-len(todo)} "
-          f"· باقٍ {len(todo)}")
+    if a.incomplete:
+        for w, (src, gaps) in sorted(partial.items()):
+            print(f"{w}  [{src}]  ينقصها: {' · '.join(gaps)}")
+        if not partial:
+            print("لا ناقصة — كل المكتوب مكتمل")
+        return
+
+    # الناقصة أوّلاً: إكمالُ بطاقةٍ بدأناها أولى من بدء أخرى
+    todo = ([w for w in all_words if w.lower() in partial]
+            + [w for w in all_words
+               if w.lower() not in done and w.lower() not in partial])
+
+    print(f"# المكتبة {len(all_words)} · مكتملة {len(done)} "
+          f"· ناقصة {len(partial)} · لم تُكتب {len(todo)-len(partial)}")
     for w in (todo[:a.limit] if a.limit else todo):
         print(w)
 
