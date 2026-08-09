@@ -1,0 +1,139 @@
+#!/usr/bin/env python3
+"""
+يفحص كل بطاقة مكتوبة بيد على المواصفة — بالقياس لا بالزعم.
+
+كُتب بعد أن قرأ صاحب المشروع بطاقة `abide` فرأى تحت «الأضداد» كلمة
+`violate` فسأل: أبايد تساوي فايوليت؟ وكان محقّاً: `violate` ضدّ
+`abide by` لا ضدّ `abide` بمعنى «يطيق»، والبطاقة لم تقل لأي معنى ينتمي
+الضدّ. فالخطأ ليس في المعلومة بل في عرضها بلا نسبة.
+
+ما يُفحص:
+  ١ الأقسام الاثنا عشر موجودة كلّها
+  ٢ لكل قسم حدٌّ أدنى — قسمٌ بعنصرٍ واحد ليس قسماً
+  ٣ لا تصريفات مهجورة (copest · apothecarie · beholdeth)
+  ٤ كل زوج له إنجليزيّ وعربيّ — لا نصف زوج
+  ٥ العربية عربيةٌ فعلاً — لا لاتينية تسرّبت
+  ٦ الكلمة متعدّدة المعاني تنسب مرادفاتها وأضدادها إلى معناها
+
+    python audit_cards.py            تقرير
+    python audit_cards.py --strict   يخرج بخطأ إن وُجد خلل (للمهمّة المجدولة)
+"""
+
+import argparse
+import glob
+import json
+import os
+import re
+import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+CURATED = os.path.join(HERE, "curated")
+
+ARABIC = re.compile(r"[؀-ۿ]")
+ARCHAIC = re.compile(r"(est|eth|edst|dst)$", re.I)
+
+# الحدّ الأدنى لكل قسم. اثنان ليسا قائمة، والواحد ليس قسماً.
+MINIMUM = {
+    "meanings": 2, "inflections": 2, "derivatives": 3, "synonyms": 4,
+    "antonyms": 3, "examples": 4, "collocations": 5, "differences": 3,
+    "usageNotes": 2,
+}
+SCALAR = ("ipa", "arabicPron", "pos")
+PAIRED = ("derivatives", "synonyms", "antonyms", "examples",
+          "collocations", "differences")
+
+
+def faults(word: str, c: dict) -> list:
+    out = []
+
+    for k in SCALAR:
+        if not c.get(k):
+            out.append(f"ينقص {k}")
+
+    for k, least in MINIMUM.items():
+        v = c.get(k) or []
+        if not v:
+            out.append(f"ينقص {k}")
+        elif len(v) < least:
+            out.append(f"{k}: {len(v)} والمطلوب {least} فأكثر")
+
+    for f in c.get("inflections") or []:
+        if ARCHAIC.search(f) and f.lower() != word.lower():
+            out.append(f"تصريف مهجور: {f}")
+
+    for k in PAIRED:
+        for i, x in enumerate(c.get(k) or []):
+            if not isinstance(x, dict):
+                out.append(f"{k}[{i}] ليس زوجاً")
+                continue
+            if not x.get("en"):
+                out.append(f"{k}[{i}] بلا إنجليزي")
+            if not x.get("ar"):
+                out.append(f"{k}[{i}] بلا عربي: {x.get('en')}")
+            elif not ARABIC.search(x["ar"]):
+                out.append(f"{k}[{i}] «العربي» ليس عربياً: {x['ar'][:30]}")
+
+    for i, m in enumerate(c.get("meanings") or []):
+        if not m.get("en"):
+            out.append(f"meanings[{i}] بلا إنجليزي")
+        if not m.get("ar") or not ARABIC.search(m.get("ar", "")):
+            out.append(f"meanings[{i}] بلا عربي صحيح")
+        if not m.get("pos"):
+            out.append(f"meanings[{i}] بلا قسم كلام")
+
+    for i, n in enumerate(c.get("usageNotes") or []):
+        if not ARABIC.search(str(n)):
+            out.append(f"usageNotes[{i}] ليست بالعربية")
+
+    # الكلمة ذات المعنيين فأكثر: مرادفها وضدّها يجب أن يُنسبا إلى معناهما،
+    # وإلا قرأ المتعلّم «abide → violate» فظنّهما مترادفين. النسبة تُكتب في
+    # العربية بعد شرطة: «يخالف — ضدّ abide by».
+    if len({(m.get("pos") or "") + (m.get("en") or "")[:12]
+            for m in c.get("meanings") or []}) > 1:
+        for k in ("synonyms", "antonyms"):
+            items = c.get(k) or []
+            if items and not any("—" in (x.get("ar") or "") for x in items):
+                out.append(f"{k}: بلا نسبة إلى المعنى (الكلمة متعدّدة المعاني)")
+
+    return out
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--curated", default=CURATED)
+    ap.add_argument("--strict", action="store_true")
+    ap.add_argument("--word")
+    a = ap.parse_args()
+
+    cards = {}
+    for path in sorted(glob.glob(os.path.join(a.curated, "*.json"))):
+        with open(path, encoding="utf-8") as f:
+            raw = json.load(f)
+        for k, v in raw.items():
+            if not k.startswith("_") and isinstance(v, dict):
+                cards[k] = (os.path.basename(path), v)
+
+    if a.word:
+        cards = {k: v for k, v in cards.items() if k.lower() == a.word.lower()}
+
+    bad, clean = {}, 0
+    for w, (src, c) in sorted(cards.items()):
+        f = faults(w, c)
+        if f:
+            bad[w] = (src, f)
+        else:
+            clean += 1
+
+    print(f"فُحصت {len(cards)} بطاقة · سليمة {clean} · فيها خلل {len(bad)}")
+    print("=" * 62)
+    for w, (src, f) in bad.items():
+        print(f"\n  {w}   [{src}]")
+        for x in f:
+            print(f"      ✗ {x}")
+
+    if a.strict and bad:
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

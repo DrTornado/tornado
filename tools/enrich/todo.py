@@ -14,6 +14,7 @@ import argparse
 import glob
 import json
 import os
+import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CURATED = os.path.join(HERE, "curated")
@@ -22,10 +23,14 @@ _ROOT = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
 WORDS = os.path.join(_ROOT, "tornado-data", "tornado-words.json")
 
 
-# كل قسمٍ في البطاقة إلزامي. الكلمة التي ينقصها قسمٌ ليست منتهية.
-REQUIRED = ("ipa", "arabicPron", "pos", "meanings", "inflections",
-            "derivatives", "synonyms", "antonyms", "examples",
-            "collocations", "differences", "usageNotes")
+# معيار الاكتمال واحدٌ لا اثنان.
+#
+# كان هنا معيارٌ مرخٍ — «القسم موجود» — فمرّت بطاقاتٌ بمشتقٍّ واحد وضدٍّ
+# بلا نسبة. والمدقّق يفرض المواصفة كاملة: حدوداً دنيا، ونسبةَ المرادف إلى
+# معناه، ومنعَ التصريف المهجور. فيُستدعى هو نفسه بدل معيارٍ ثانٍ يتراخى.
+# المهمّة المجدولة قد تشغّله من أي مجلد، فلا نتّكل على مجلد العمل
+sys.path.insert(0, HERE)
+from audit_cards import faults                                  # noqa: E402
 
 
 def curated_words(path: str = CURATED) -> tuple:
@@ -46,7 +51,7 @@ def curated_words(path: str = CURATED) -> tuple:
         for k, v in raw.items():
             if k.startswith("_") or not isinstance(v, dict):
                 continue
-            gaps = [r for r in REQUIRED if not v.get(r)]
+            gaps = faults(k, v)
             if gaps:
                 partial[k.lower()] = (os.path.basename(f_path), gaps)
             else:

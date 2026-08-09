@@ -97,14 +97,22 @@ class WordDetailViewModel(app: Application) : AndroidViewModel(app) {
         PlaybackBus.submit(getApplication()) { it.playPronunciation(url, w.word, british) }
     }
 
+    /*
+     * الصوت يقرأ البطاقة المُثراة، لا المحفوظة في الجهاز.
+     *
+     * كان يقرأ الخام: تُعرض على الشاشة معانٍ مكتوبةٌ بيد ويُسمَع غيرها.
+     * والمتعلّم يسمع أكثر ممّا يقرأ، فيحفظ ما تركناه لا ما كتبناه.
+     */
+    private fun spoken(): Word? = word.value?.withEnrichment(enrichment.value)
+
     fun readFull() {
-        val w = word.value ?: return
+        val w = spoken() ?: return
         PlaybackBus.submit(getApplication()) { it.speakCard(w, full = true) }
     }
 
     /** المعاني وحدها بلا مرادفات ولا متلازمات ولا مشتقات */
     fun readShort() {
-        val w = word.value ?: return
+        val w = spoken() ?: return
         PlaybackBus.submit(getApplication()) { it.speakCard(w, full = false) }
     }
 }
@@ -220,13 +228,13 @@ fun WordDetailScreen(vm: WordDetailViewModel, onBack: () -> Unit) {
                 }
             }
 
-            pairSection("Related words", mergedPairs(shown.derivatives, e?.derivatives))
-            pairSection("Synonyms", mergedPairs(shown.synonyms, e?.synonyms))
+            // الدمج تمّ في withEnrichment — الشاشة والصوت يقرآن المصدر نفسه
+            pairSection("Related words", shown.derivatives)
+            pairSection("Synonyms", shown.synonyms)
             pairSection("Antonyms", e?.antonyms.orEmpty())
-            pairSection("Common combinations",
-                mergedPairs(shown.collocations, e?.collocations))
-            pairSection("Examples", mergedPairs(shown.examples, e?.examples))
-            pairSection("Differences", mergedPairs(shown.differences, e?.differences))
+            pairSection("Common combinations", shown.collocations)
+            pairSection("Examples", shown.examples)
+            pairSection("Differences", shown.differences)
 
             phraseSection("Phrasal verbs", e?.phrasalVerbs)
             phraseSection("Idioms", e?.idioms)
@@ -308,7 +316,18 @@ private fun Word.withEnrichment(e: Enrichment?): Word {
         pos = pos + e.pos.filterNot { p -> pos.any { norm(it) == norm(p) } },
         meanings = meanings + extraMeanings,
         inflections = inflections +
-            e.inflections.filterNot { f -> inflections.any { norm(it) == norm(f) } }
+            e.inflections.filterNot { f -> inflections.any { norm(it) == norm(f) } },
+        /*
+         * القوائم تُدمج هنا لا عند الرسم.
+         *
+         * كان الدمج في الشاشة وحدها، فقرأ الصوتُ الخام: يُعرض ما كتبناه
+         * ويُسمَع ما لم نكتبه. ونقطةُ دمجٍ واحدة تمنع افتراقهما مستقبلاً.
+         */
+        derivatives = mergedPairs(derivatives, e.derivatives),
+        synonyms = mergedPairs(synonyms, e.synonyms),
+        collocations = mergedPairs(collocations, e.collocations),
+        examples = mergedPairs(examples, e.examples),
+        differences = mergedPairs(differences, e.differences)
     )
 }
 

@@ -24257,6 +24257,7 @@ async function ghRequest(opts, attempt = 0) {
  */
 const ENRICH_DB = 'tornado-enrich';
 let enrichCache = null;          // ذاكرة الجلسة — قراءةٌ واحدة من القرص
+let enrichHashes = {};           // بصمات الشرائح — تُبطِل الصوت المخزَّن عند التغيّر
 
 function enrichOpen() {
   return new Promise((res, rej) => {
@@ -24343,6 +24344,7 @@ async function enrichSync() {
   // البصمات تُحفظ بعد البطاقات: لو انقطع بينهما أُعيد التنزيل لا فُقد
   await enrichPut('cards', 'all', cards);
   await enrichPut('meta', 'hashes', have);
+  enrichHashes = have;             // الصوت المبنيّ على القديم يسقط من الذاكرة
   enrichCache = cards;
   return got;
 }
@@ -26488,7 +26490,20 @@ const AUDIO_VERSION = 6;
  * يتغيّر المفتاح.
  */
 function voiceKeyPart() { return kokoroOn() && !kokoroBroken ? 'k' + kokoroVoice() : 'p'; }
-function cacheKey(card) { return card.id + '|' + (detailedAudio?'d':'s') + '|' + wordRepeat + '|' + ENGINE_VERSION + '|a' + AUDIO_VERSION + '|' + voiceKeyPart(); }
+/*
+ * بصمة الصوت تشمل الإثراء.
+ *
+ * الصوت يُخزَّن ويُخدَم من الذاكرة، ومفتاحه كان بلا أثرٍ من البطاقة
+ * المُثراة. فلو أُعيدت كتابة البطاقة بقي المتعلّم يسمع القديم إلى الأبد
+ * ولا يظهر خطأ — صمتٌ يوهم أن شيئاً لم يتغيّر.
+ *
+ * وبصمة الشريحة تكفي: تتغيّر كلّما تغيّرت أي بطاقة فيها.
+ */
+function enrichStamp(card) {
+  const k = String((card && card.word) || '').slice(0, 2).toLowerCase();
+  return (enrichHashes && enrichHashes[k]) || '0';
+}
+function cacheKey(card) { return card.id + '|' + (detailedAudio?'d':'s') + '|' + wordRepeat + '|' + ENGINE_VERSION + '|a' + AUDIO_VERSION + '|' + voiceKeyPart() + '|e' + enrichStamp(card); }
 
 // ===== تخزين دائم للصوت المولَّد =====
 // جوهر الحل النهائي للتأخير: كل كلمة تُولَّد مرة واحدة فقط في عمر التطبيق، ثم تُحفظ في قاعدة
@@ -26857,7 +26872,18 @@ function jumpTo(i) {
 }
 
 // ===== تصدير القائمة كنص سردي لتشغيله في تطبيقات القراءة الصوتية (تعمل بالخلفية والشاشة مطفأة) =====
-function narrationSegments(card, rep, detailed) {
+function narrationSegments(rawCard, rep, detailed) {
+  /*
+   * الصوت يقرأ البطاقة المُثراة، لا المحفوظة في الجهاز.
+   *
+   * كان يقرأ الخام: فتُعرض على الشاشة معانٍ مكتوبةٌ بيد ويُسمَع غيرها —
+   * والمتعلّم يسمع أكثر ممّا يقرأ، فيحفظ ما تركناه. والدمج هنا هو نفسه
+   * الذي يمرّ عليه العرض، فلا يفترقان.
+   *
+   * والبصمة تشمل المُثرى: `cacheKey` تُحسب على `card` نفسها، فلو تغيّرت
+   * البطاقة أُعيد توليد الصوت ولم يُخدَم القديم من الذاكرة.
+   */
+  const card = enrichMerge(rawCard);
   rep = Math.max(1, rep || 1);
   if (detailed == null) detailed = true; // التصدير النصي/الصوتي يشمل كل شيء دائماً؛ التشغيل المباشر وحده يمرّر إعداد المستخدم الفعلي
   const L = [];
@@ -27482,6 +27508,7 @@ load().then(async () => {
    */
   try {
     enrichCache = (await enrichGet('cards', 'all')) || {};
+    enrichHashes = (await enrichGet('meta', 'hashes')) || {};
     if (Object.keys(enrichCache).length) renderList();
   } catch(e) { enrichCache = {}; }   // متصفّح بلا IndexedDB — التطبيق يعمل بدونه
 
