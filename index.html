@@ -23830,10 +23830,26 @@ function renderNotes() {
 }
 
 // ===== Card entry rendering (shared by Add preview & My Words) =====
+/*
+ * كلُّ سطرٍ بلغةٍ واحدة واتّجاهٍ واحد.
+ *
+ * كان السطر يجمعهما: «يخالف — ضدّ abide by». فيقفز البصر بين اتّجاهين في
+ * السطر الواحد، وتصير القراءة مُتعِبة — وهو ما اشتكى منه صاحب المشروع.
+ *
+ *   violate                ← الإنجليزيّ
+ *   يخالف                  ← العربيّ
+ *   ضدّ «abide by»          ← التوضيح، أصغر وأخفت
+ *   He violated the rule.  ← المثال، إن وُجد
+ *   خالف القاعدة.
+ */
 function pairHtml(p) {
   if (!p) return '';
   if (typeof p === 'string') return `<div class="pair">${esc(p)}</div>`;
-  return `<div class="pair">${esc(p.en||'')}${p.ar ? `<div class="arline ar">${esc(p.ar)}</div>` : ''}</div>`;
+  return `<div class="pair">${esc(p.en || '')}${
+    p.ar ? `<div class="arline ar">${esc(p.ar)}</div>` : ''}${
+    p.note ? `<div class="ar" style="color:#8A93A3;font-size:12px;margin-top:2px;">${esc(p.note)}</div>` : ''}${
+    p.ex ? `<div style="color:#B9C2D0;font-size:13px;margin-top:4px;">${esc(p.ex)}</div>` : ''}${
+    p.exAr ? `<div class="ar" style="color:#8A93A3;font-size:12px;">${esc(p.exAr)}</div>` : ''}</div>`;
 }
 function firstMeaningLine(card) {
   const m = arr(card.meanings)[0];

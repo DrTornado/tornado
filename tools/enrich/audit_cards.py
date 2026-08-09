@@ -31,6 +31,8 @@ CURATED = os.path.join(HERE, "curated")
 
 ARABIC = re.compile(r"[؀-ۿ]")
 ARCHAIC = re.compile(r"(est|eth|edst|dst)$", re.I)
+# حروفٌ لاتينية داخل خانة العربية — علامةُ سطرٍ مختلط
+LATIN = re.compile(r"[A-Za-z]{2,}")
 
 # الحدّ الأدنى لكل قسم. اثنان ليسا قائمة، والواحد ليس قسماً.
 MINIMUM = {
@@ -72,6 +74,13 @@ def faults(word: str, c: dict) -> list:
                 out.append(f"{k}[{i}] بلا عربي: {x.get('en')}")
             elif not ARABIC.search(x["ar"]):
                 out.append(f"{k}[{i}] «العربي» ليس عربياً: {x['ar'][:30]}")
+            elif LATIN.search(x["ar"]):
+                # سطرٌ يجمع اللغتين يُتعب البصر: يقفز بين اتّجاهين في سطرٍ
+                # واحد. والتوضيح يذهب إلى `note`، والمثال إلى `ex`/`exAr`.
+                out.append(f"{k}[{i}] العربيّ فيه إنجليزيّ — افصله في note: "
+                           f"{x['ar'][:40]}")
+            if ARABIC.search(x.get("en") or ""):
+                out.append(f"{k}[{i}] الإنجليزيّ فيه عربيّ: {x['en'][:40]}")
 
     for i, m in enumerate(c.get("meanings") or []):
         if not m.get("en"):

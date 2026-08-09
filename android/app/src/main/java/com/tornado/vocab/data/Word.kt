@@ -11,9 +11,21 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Meaning(val pos: String? = null, val en: String = "", val ar: String = "")
 
-/** زوج إنجليزي/عربي — يُستخدم للمرادفات والمتلازمات والأمثلة والمشتقات والفروق */
+/**
+ * زوج إنجليزي/عربي — وكلُّ حقلٍ سطرٌ مستقلّ عند العرض.
+ *
+ * `note` و`ex`/`exAr` أُضيفت لأن السطر كان يجمع اللغتين: «يخالف — ضدّ
+ * abide by». فيقفز البصر بين اتّجاهين في السطر الواحد وتتعب القراءة.
+ * فصار التوضيح سطراً، والمثال سطرين — كلٌّ بلغةٍ واحدة.
+ */
 @Serializable
-data class LangPair(val en: String = "", val ar: String = "")
+data class LangPair(
+    val en: String = "",
+    val ar: String = "",
+    val note: String = "",
+    val ex: String = "",
+    val exAr: String = ""
+)
 
 /**
  * حالة الكلمة في نظام التكرار المتباعد.

@@ -131,7 +131,9 @@ data class Enrichment(
                 a.optJSONObject(i)?.let {
                     val en = it.optString("en").ifBlank { it.optString("col") }
                     val ar = it.optString("ar").ifBlank { it.optString("pat") }
-                    if (en.isBlank() && ar.isBlank()) null else LangPair(en, ar)
+                    if (en.isBlank() && ar.isBlank()) null
+                    else LangPair(en, ar, it.optString("note"),
+                                  it.optString("ex"), it.optString("exAr"))
                 } ?: a.optString(i).takeIf { it.isNotBlank() }
                     ?.let { LangPair(it, "") }
             }

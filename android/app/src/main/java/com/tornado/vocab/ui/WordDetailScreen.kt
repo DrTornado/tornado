@@ -394,12 +394,36 @@ private fun androidx.compose.foundation.lazy.LazyListScope.pairSection(
     if (items.isEmpty()) return
     item { SectionHeader(title) }
     items(items) { p ->
+        /*
+         * كلُّ سطرٍ بلغةٍ واحدة واتّجاهٍ واحد.
+         *
+         * كان السطر يجمعهما: «يخالف — ضدّ abide by». فيقفز البصر بين
+         * اتّجاهين في السطر الواحد، وتصير القراءة مُتعِبة.
+         */
         Column(Modifier.fillMaxWidth().padding(vertical = 5.dp)) {
             if (p.en.isNotBlank()) Text(p.en, style = MaterialTheme.typography.bodyLarge)
             if (p.ar.isNotBlank()) {
                 Text(
                     p.ar,
                     style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+            if (p.note.isNotBlank()) {
+                Text(
+                    p.note,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+            if (p.ex.isNotBlank()) {
+                VSpace(3)
+                Text(p.ex, style = MaterialTheme.typography.bodyMedium)
+            }
+            if (p.exAr.isNotBlank()) {
+                Text(
+                    p.exAr,
+                    style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }

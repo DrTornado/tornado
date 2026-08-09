@@ -66,19 +66,28 @@ def load_curated(path: str = CURATED) -> dict:
     return out
 
 
-def _pairs(val) -> list:
-    """
-    يقبل الشكلين: نصّاً مفرداً أو زوجاً.
+# حقول الزوج الواحد، وكلٌّ منها سطرٌ مستقلّ عند العرض.
+#
+# كان السطر يجمع اللغتين: «يخالف — ضدّ abide by، لا ضدّ يطيق». فيقفز
+# البصر بين اتّجاهين في السطر الواحد، وتصير القراءة مُتعِبة. والفصل يجعل
+# كلَّ سطرٍ بلغةٍ واحدة واتّجاهٍ واحد:
+#
+#     violate            ← en   إنجليزيّ خالص
+#     يخالف              ← ar   عربيّ خالص
+#     ضدّ «abide by»      ← note توضيحٌ صغير
+#     He violated the rule.   ← ex   مثالٌ إن لزم
+#     خالف القاعدة.           ← exAr
+PAIR_FIELDS = ("en", "ar", "note", "ex", "exAr")
 
-    الكتابة بيدٍ تميل إلى الاختصار حين لا عربية — فـ«manage» وحدها أسهل من
-    {"en": "manage", "ar": ""} — والشكلان يخرجان واحداً.
-    """
+
+def _pairs(val) -> list:
+    """يقبل النصّ المفرد والزوج — ويخرج الكلّ بالشكل نفسه."""
     out = []
     for x in val or []:
         if isinstance(x, str):
             out.append({"en": x, "ar": ""})
         elif isinstance(x, dict) and (x.get("en") or x.get("ar")):
-            out.append({"en": x.get("en", ""), "ar": x.get("ar", "")})
+            out.append({k: x[k] for k in PAIR_FIELDS if x.get(k)})
     return out
 
 
