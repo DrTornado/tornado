@@ -23895,6 +23895,7 @@ function enrichMerge(card) {
   c.collocations = _union(c.collocations, arr(e.collocations).map(x =>
     x && x.col ? { en: x.col, ar: x.pat || '' } : x));
   c.differences  = _union(c.differences, e.differences);
+  c.grammarPatterns = _union(c.grammarPatterns, e.grammarPatterns);
   c._e = e;                                   // للأقسام التي لا مكان لها أصلاً
   return c;
 }
@@ -23955,6 +23956,9 @@ function entryHtml(rawCard) {
     ${arr(card.collocations).length ? `<div class="sect"><b class="h">Collocations</b>${card.collocations.map(pairHtml).join('')}</div>` : ''}
     ${arr(card.examples).length ? `<div class="sect"><b class="h">Examples</b>${card.examples.map(pairHtml).join('')}</div>` : ''}
     ${arr(card.differences).length ? `<div class="sect"><b class="h">Differences</b>${arr(card.differences).map(pairHtml).join('')}</div>` : ''}
+    ${arr(card.grammarPatterns).length ? `<div class="sect"><b class="h">Grammar patterns</b>${arr(card.grammarPatterns).map(pairHtml).join('')}</div>` : ''}
+    ${arr(card._e && card._e.pronunciationNote).length ? `<div class="sect" style="border-left:2px solid #E8B04B;padding-left:10px;"><b class="h">Pronunciation note</b>${card._e.pronunciationNote.map(t =>
+      `<div class="pair" style="font-family:monospace;font-size:13px;">${esc(t)}</div>`).join('')}</div>` : ''}
     ${enrichExtraHtml(card)}`;
 }
 

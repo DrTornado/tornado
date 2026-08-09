@@ -31,9 +31,10 @@ CARD_SCHEMA = 1
 # الحقول التي تنتقل من البطاقة المنقّحة إلى الشريحة، وأشكالها.
 # نصوصٌ مفردة، أو قوائم نصوص، أو قوائم أزواج {en, ar}.
 TEXT = ("word", "arabicPron", "oxford", "cefr", "cefrEst")
-LISTS = ("pos", "inflections", "usageNotes", "register")
+LISTS = ("pos", "inflections", "usageNotes", "register",
+         "pronunciationNote")
 PAIRS = ("derivatives", "synonyms", "antonyms", "examples",
-         "collocations", "differences")
+         "collocations", "differences", "grammarPatterns")
 
 
 def load_curated(path: str = CURATED) -> dict:
@@ -144,7 +145,8 @@ def absent_of(card: dict) -> list:
     if card.get("curated"):
         return []
     return [k for k in ("antonyms", "collocations", "phrasalVerbs",
-                        "idioms", "usageNotes", "differences", "examples")
+                        "idioms", "usageNotes", "differences", "examples",
+                        "grammarPatterns")
             if not card.get(k)]
 
 

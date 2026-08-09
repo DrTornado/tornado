@@ -446,6 +446,17 @@ class NarrationRepository(
     /** حدّ التوازي — أعلى منه يزاحم خيط التشغيل على المعالج فيتقطّع الصوت */
     private val MAX_PARALLEL_SEGMENTS = 4
 
+    /*
+     * المفتاح يغطّي كلَّ ما يُنطق، لا المعاني والأمثلة وحدها.
+     *
+     * كان يقتصر عليهما، والسرد ينطق المرادفات والمتلازمات والمشتقّات
+     * أيضاً. فإذا أُعيدت كتابة بطاقةٍ بمرادفاتٍ جديدة بقي الملفّ المخزَّن
+     * مطابقاً في المفتاح، فيُخدَم القديم إلى الأبد بلا رسالة خطأ — ويسمع
+     * المتعلّم شرحاً أزلناه.
+     *
+     * وما لا يُنطق لا يدخل المفتاح: إدخالُه يُبطل صوتاً صحيحاً بلا سبب،
+     * وإعادةُ التوليد دقائق على الجهاز.
+     */
     private fun cardKey(word: Word, spec: NarrationSpec): String = hash(
         buildString {
             append("v").append(pipelineVersion).append('|')
@@ -453,10 +464,19 @@ class NarrationRepository(
             append(spec.repeat).append('|').append(spec.mode.name).append('|')
             append(spec.detail.name).append('|').append(spec.speakArabic).append('|')
             append(spec.voiceTag).append('|')
+            append(word.arabicPron).append('|')
+            append(word.pos.joinToString(",")).append('|')
             append(word.meanings.size).append(':')
-            append(word.meanings.joinToString("~") { it.en })
+            append(word.meanings.joinToString("~") { it.en + ">" + it.ar })
             append(word.examples.size).append(':')
             append(word.examples.joinToString("~") { it.en })
+            append(word.synonyms.size).append(':')
+            append(word.synonyms.joinToString("~") { it.en })
+            append(word.collocations.size).append(':')
+            append(word.collocations.joinToString("~") { it.en })
+            append(word.derivatives.size).append(':')
+            append(word.derivatives.joinToString("~") { it.en })
+            append(word.inflections.joinToString("~"))
         }
     )
 

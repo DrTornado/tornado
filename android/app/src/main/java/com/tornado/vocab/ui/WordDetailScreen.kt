@@ -235,6 +235,16 @@ fun WordDetailScreen(vm: WordDetailViewModel, onBack: () -> Unit) {
             pairSection("Common combinations", shown.collocations)
             pairSection("Examples", shown.examples)
             pairSection("Differences", shown.differences)
+            pairSection("Grammar patterns", e?.grammarPatterns.orEmpty())
+
+            e?.pronunciationNote?.takeIf { it.isNotEmpty() }?.let { note ->
+                item {
+                    SectionHeader("Pronunciation note")
+                    note.forEach {
+                        Text(it, style = MaterialTheme.typography.bodyMedium)
+                    }
+                }
+            }
 
             phraseSection("Phrasal verbs", e?.phrasalVerbs)
             phraseSection("Idioms", e?.idioms)

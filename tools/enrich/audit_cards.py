@@ -40,7 +40,7 @@ MINIMUM = {
 }
 SCALAR = ("ipa", "arabicPron", "pos")
 PAIRED = ("derivatives", "synonyms", "antonyms", "examples",
-          "collocations", "differences")
+          "collocations", "differences", "grammarPatterns")
 
 
 def faults(word: str, c: dict) -> list:

@@ -87,6 +87,15 @@ data class Enrichment(
     val collocations: List<LangPair> = emptyList(),
     /** الفروق: ما يميّز الكلمة عمّا يُخلَط بها */
     val differences: List<LangPair> = emptyList(),
+    /*
+     * أنماط التركيب: حرف الجرّ الصحيح وما يتبعه.
+     *
+     * أهمّ ما يحتاجه المتعلّم عملياً — «be patient with + شخص» تمنع
+     * خطأً يتكرّر أكثر ممّا يمنعه أي تعريف. وكانت غائبةً عن البطاقات كلّها.
+     */
+    val grammarPatterns: List<LangPair> = emptyList(),
+    /** تنبيه نطقٍ يفرّق بين متشابهين: patient ≠ patience */
+    val pronunciationNote: List<String> = emptyList(),
     val phrasalVerbs: List<Phrase> = emptyList(),
     val idioms: List<Phrase> = emptyList(),
     val usageNotes: List<String> = emptyList(),
@@ -155,6 +164,8 @@ data class Enrichment(
                 examples = pairs(o, "examples"),
                 collocations = pairs(o, "collocations"),
                 differences = pairs(o, "differences"),
+                grammarPatterns = pairs(o, "grammarPatterns"),
+                pronunciationNote = strings(o, "pronunciationNote"),
                 phrasalVerbs = objects(o, "phrasalVerbs").map {
                     Phrase(it.optString("phrase"), it.optString("gloss"))
                 },
@@ -173,6 +184,7 @@ data class Enrichment(
             "idioms" -> "التعابير"
             "usageNotes" -> "ملاحظات الاستعمال"
             "collocations" -> "المتلازمات"
+            "grammarPatterns" -> "أنماط التركيب"
             "phrasalVerbs" -> "الأفعال المركّبة"
             "examples" -> "الأمثلة"
             "derivatives" -> "المشتقّات"
