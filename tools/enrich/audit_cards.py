@@ -98,7 +98,10 @@ def faults(word: str, c: dict) -> list:
             for m in c.get("meanings") or []}) > 1:
         for k in ("synonyms", "antonyms"):
             items = c.get(k) or []
-            if items and not any("—" in (x.get("ar") or "") for x in items):
+            # النسبة موضعها `note` بعد فصل اللغتين، وكانت تُكتب داخل العربية
+            # بشرطة. فنقبل الموضعين: القديم لم يُهجر بعد في كل البطاقات.
+            if items and not any(
+                    x.get("note") or "—" in (x.get("ar") or "") for x in items):
                 out.append(f"{k}: بلا نسبة إلى المعنى (الكلمة متعدّدة المعاني)")
 
     return out
