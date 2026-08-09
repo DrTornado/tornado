@@ -1542,6 +1542,75 @@ def _compact(card: dict) -> dict:
     return out
 
 
+# تصريفاتٌ لا يقولها أحد منذ أربعة قرون: copest · copeth · beheldst.
+# ويكاموس يوردها لأنها في شكسبير والكتاب المقدّس، والمتعلّم يظنّها صيغةً
+# يلزمه حفظها. قِسته: في خمس عشرة بطاقة.
+ARCHAIC_FORM = re.compile(r"(est|eth|edst|dst)$", re.I)
+
+_CURATED_CACHE = None
+
+
+def curated() -> dict:
+    """
+    البطاقات المنقّحة بيد — تعلو على القاعدة وعلى الترجمة الآلية.
+
+    تُقرأ من `curated.json` بجوار هذا الملف، ومن متغيّر البيئة
+    `TORNADO_CURATED` إن أراد أحدٌ ملفاً آخر. وغيابُها ليس خطأً: البطاقات
+    تخرج كما كانت، آليّةَ الترجمة، حتى تُنقَّح.
+    """
+    global _CURATED_CACHE
+    if _CURATED_CACHE is not None:
+        return _CURATED_CACHE
+    path = os.environ.get("TORNADO_CURATED") or os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), "curated.json")
+    data = {}
+    try:
+        with open(path, encoding="utf-8") as f:
+            data = {k: v for k, v in json.load(f).items()
+                    if not k.startswith("_") and isinstance(v, dict)}
+        print(f"  منقّحٌ بيد: {len(data)} كلمة من {os.path.basename(path)}",
+              flush=True)
+    except FileNotFoundError:
+        pass
+    except Exception as e:                                       # noqa: BLE001
+        print(f"  تعذّرت قراءة التنقيح ({e}) — أتابع بلا", flush=True)
+    _CURATED_CACHE = data
+    return data
+
+
+def apply_curation(word: str, card: dict) -> dict:
+    """
+    يضع المنقَّح فوق المبنيّ.
+
+    `meanings` تحلّ محلّ ما خرج من القاعدة كلّه، لأن العيب فيها ليس نقصاً
+    بل ازدحاماً: ستّة معانٍ أحدها ما يحتاجه المتعلّم والخمسة حشو. وبقية
+    الحقول تُستبدل بالمسمّى وحده، فلا يضيع ما لم يُذكر.
+    """
+    c = curated().get(word.lower())
+    if not c:
+        return card
+    for key, val in c.items():
+        if key == "drop":
+            for what in val:
+                if what == "inflections_archaic":
+                    card["inflections"] = [
+                        f for f in card.get("inflections") or []
+                        if not ARCHAIC_FORM.search(f)
+                    ]
+                else:
+                    card.pop(what, None)
+        elif key == "meanings":
+            card["meanings"] = [
+                {"en": m.get("en", ""), "ar": m.get("ar", ""),
+                 "pos": m.get("pos"), "src": "curated", "arSrc": None}
+                for m in val
+            ]
+        else:
+            card[key] = val
+    card["curated"] = True     # ليعلم القارئ أنها مراجَعة لا آلية
+    return card
+
+
 def _existing_arabic(out_dir: str) -> dict:
     """
     يلتقط الترجمات الموجودة قبل أن تُمحى الشرائح.
@@ -1618,6 +1687,8 @@ def export_shards(out_dir: str = "/content/enrich", words=None,
         if original != head:
             card["resolvedFrom"] = original    # «glaciers» ← «glacier»
         _restore_arabic(card, kept_ar)
+        # التنقيح آخر ما يُطبَّق: يعلو على القاعدة وعلى الترجمة المحفوظة معاً
+        card = apply_curation(original, apply_curation(head, card))
         shards[(head[:2] or "_").ljust(2, "_")][original] = card
     db.close()
 

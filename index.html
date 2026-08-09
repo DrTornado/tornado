@@ -23885,6 +23885,16 @@ function enrichMerge(card) {
   c.derivatives  = _union(c.derivatives, e.derivatives);
   c.synonyms     = _union(c.synonyms, e.synonyms);
   c.examples     = _union(c.examples, e.examples);
+  /*
+   * المتلازمات والفروق بشكلَيهما.
+   *
+   * القديم من القاعدة {col, pat} — كلمةٌ مصاحبة ونمطُ علاقتها. والجديد
+   * المكتوب بيد {en, ar} — عبارةٌ كاملة بمعناها. فالأول يُحوَّل إلى الثاني
+   * ليمرّ على نفس العارض، بدل عارضَين لشيءٍ واحد.
+   */
+  c.collocations = _union(c.collocations, arr(e.collocations).map(x =>
+    x && x.col ? { en: x.col, ar: x.pat || '' } : x));
+  c.differences  = _union(c.differences, e.differences);
   c._e = e;                                   // للأقسام التي لا مكان لها أصلاً
   return c;
 }
@@ -23905,12 +23915,9 @@ const _ABSENT_AR = {
 function enrichExtraHtml(c) {
   const e = c && c._e;
   if (!e) return '';
-  const cols = arr(e.collocations).filter(x => x && x.col);
   const absent = arr(e.absent).map(k => _ABSENT_AR[k] || k);
   return `
     ${arr(e.antonyms).length ? `<div class="sect"><b class="h">Antonyms</b>${e.antonyms.map(pairHtml).join('')}</div>` : ''}
-    ${cols.length && !arr(c.collocations).length ? `<div class="sect"><b class="h">Collocations</b>${cols.map(x =>
-      `<div class="pair">${esc(x.col)}<span style="color:#8A93A3;font-size:11px;"> · ${esc(x.pat || '')}</span></div>`).join('')}</div>` : ''}
     ${arr(e.phrasalVerbs).length ? `<div class="sect"><b class="h">Phrasal verbs</b>${e.phrasalVerbs.map(p =>
       `<div class="pair"><b>${esc(p.phrase || '')}</b>${p.gloss ? `<div style="color:#8A93A3;">${esc(p.gloss)}</div>` : ''}</div>`).join('')}</div>` : ''}
     ${arr(e.idioms).length ? `<div class="sect"><b class="h">Idioms</b>${e.idioms.map(p =>
