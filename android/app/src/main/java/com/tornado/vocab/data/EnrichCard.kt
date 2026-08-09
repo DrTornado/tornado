@@ -100,7 +100,9 @@ data class Enrichment(
     val idioms: List<Phrase> = emptyList(),
     val usageNotes: List<String> = emptyList(),
     val register: List<String> = emptyList(),
-    val absent: List<String> = emptyList()
+    val absent: List<String> = emptyList(),
+    /** مكتوبةٌ بيدٍ ومكتملة — لا تُضمّ إليها بطاقة التطبيق القديمة */
+    val curated: Boolean = false
 ) {
     companion object {
 
@@ -174,7 +176,8 @@ data class Enrichment(
                 },
                 usageNotes = strings(o, "usageNotes"),
                 register = strings(o, "register"),
-                absent = strings(o, "absent")
+                absent = strings(o, "absent"),
+                curated = o.optBoolean("curated", false)
             )
         }
 

@@ -323,23 +323,39 @@ private fun Word.withEnrichment(e: Enrichment?): Word {
         estCefr = if (cefr.isBlank() && e.cefr.isBlank()) {
             estCefr.ifBlank { e.cefrEst }
         } else estCefr,
-        pos = pos + e.pos.filterNot { p -> pos.any { norm(it) == norm(p) } },
-        meanings = meanings + extraMeanings,
-        inflections = inflections +
-            e.inflections.filterNot { f -> inflections.any { norm(it) == norm(f) } },
+        pos = if (e.curated && e.pos.isNotEmpty()) e.pos
+              else pos + e.pos.filterNot { p -> pos.any { norm(it) == norm(p) } },
+        meanings = if (e.curated && e.meanings.isNotEmpty()) e.meanings
+                   else meanings + extraMeanings,
+        inflections = if (e.curated && e.inflections.isNotEmpty()) e.inflections
+                      else inflections + e.inflections
+                          .filterNot { f -> inflections.any { norm(it) == norm(f) } },
         /*
          * القوائم تُدمج هنا لا عند الرسم.
          *
          * كان الدمج في الشاشة وحدها، فقرأ الصوتُ الخام: يُعرض ما كتبناه
          * ويُسمَع ما لم نكتبه. ونقطةُ دمجٍ واحدة تمنع افتراقهما مستقبلاً.
          */
-        derivatives = mergedPairs(derivatives, e.derivatives),
-        synonyms = mergedPairs(synonyms, e.synonyms),
-        collocations = mergedPairs(collocations, e.collocations),
-        examples = mergedPairs(examples, e.examples),
-        differences = mergedPairs(differences, e.differences)
+        derivatives = take(derivatives, e.derivatives, e.curated),
+        synonyms = take(synonyms, e.synonyms, e.curated),
+        collocations = take(collocations, e.collocations, e.curated),
+        examples = take(examples, e.examples, e.curated),
+        differences = take(differences, e.differences, e.curated)
     )
 }
+
+/*
+ * المراجَعة تحلّ محلّ القديمة، ولا تُضاف إليها.
+ *
+ * كان الدمج ضمّاً، وبطاقة التطبيق القديمة جاءت من قاموسٍ آليّ كثيرٌ من
+ * معانيها وأمثلتها بلا عربية. فتتصدّر سطورٌ إنجليزية عارية ما كُتب
+ * كاملاً، فيظنّ القارئ البطاقة ناقصة — وهي مسبوقة بما لا ينفع لا ناقصة.
+ *
+ * وغير المراجَعة تبقى على الضمّ: فيها ما ليس عندنا، وحذفُه خسارة.
+ */
+private fun take(base: List<LangPair>, extra: List<LangPair>,
+                 curated: Boolean): List<LangPair> =
+    if (curated && extra.isNotEmpty()) extra else mergedPairs(base, extra)
 
 private fun mergedPairs(base: List<LangPair>, extra: List<LangPair>?): List<LangPair> {
     if (extra.isNullOrEmpty()) return base

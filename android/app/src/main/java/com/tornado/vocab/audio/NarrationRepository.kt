@@ -441,44 +441,45 @@ class NarrationRepository(
      * الخفض، الدمج). بدونه تبقى البطاقات المبنية بالمعالجة القديمة في التخزين
      * ويظل المستخدم يسمع الخشخشة رغم إصلاحها — فالمفتاح لا يعرف أن المعالجة تغيّرت.
      */
-    private val pipelineVersion = 7
+    /*
+     * ٨: البطاقة المراجَعة صارت تحلّ محلّ القديمة لا تُضمّ إليها، فما
+     * وُلّد قبلها يحمل الشرح القديم. ورفعُ الرقم يُسقط المخزون كلّه مرّةً
+     * واحدة — أرخص من تتبّع أيّ ملفٍّ بُني قبل الإصلاح وأيّها بعده.
+     */
+    private val pipelineVersion = 8
 
     /** حدّ التوازي — أعلى منه يزاحم خيط التشغيل على المعالج فيتقطّع الصوت */
     private val MAX_PARALLEL_SEGMENTS = 4
 
     /*
-     * المفتاح يغطّي كلَّ ما يُنطق، لا المعاني والأمثلة وحدها.
+     * المفتاح هو النصّ المنطوق نفسه — لا قائمةُ حقولٍ أصونها بيدي.
      *
-     * كان يقتصر عليهما، والسرد ينطق المرادفات والمتلازمات والمشتقّات
-     * أيضاً. فإذا أُعيدت كتابة بطاقةٍ بمرادفاتٍ جديدة بقي الملفّ المخزَّن
-     * مطابقاً في المفتاح، فيُخدَم القديم إلى الأبد بلا رسالة خطأ — ويسمع
-     * المتعلّم شرحاً أزلناه.
+     * كان يُبنى من حقولٍ مُعدَّدة: المعاني والأمثلة. ثم أُضيفت المرادفات
+     * والمتلازمات إلى السرد ولم تُضَف إلى المفتاح، فبقي الصوت القديم
+     * يُخدَم بعد إعادة كتابة البطاقة — بلا خطأ ولا أثر. وكلّما زاد السرد
+     * حقلاً لزم أن يتذكّر أحدٌ تحديثَ هذه القائمة، ونسيانُه صامتٌ.
      *
-     * وما لا يُنطق لا يدخل المفتاح: إدخالُه يُبطل صوتاً صحيحاً بلا سبب،
-     * وإعادةُ التوليد دقائق على الجهاز.
+     * فصار المفتاح بصمةَ المقاطع التي سيقرؤها المحرّك فعلاً: إن تغيّر
+     * حرفٌ ممّا يُسمَع تغيّر المفتاح، وإن لم يتغيّر شيء أُعيد استعمال
+     * الملفّ. لا رقمَ إصدارٍ يُرفع يدوياً، ولا حقلَ يُنسى.
      */
-    private fun cardKey(word: Word, spec: NarrationSpec): String = hash(
-        buildString {
-            append("v").append(pipelineVersion).append('|')
-            append(word.id).append('|').append(word.word).append('|')
-            append(spec.repeat).append('|').append(spec.mode.name).append('|')
-            append(spec.detail.name).append('|').append(spec.speakArabic).append('|')
-            append(spec.voiceTag).append('|')
-            append(word.arabicPron).append('|')
-            append(word.pos.joinToString(",")).append('|')
-            append(word.meanings.size).append(':')
-            append(word.meanings.joinToString("~") { it.en + ">" + it.ar })
-            append(word.examples.size).append(':')
-            append(word.examples.joinToString("~") { it.en })
-            append(word.synonyms.size).append(':')
-            append(word.synonyms.joinToString("~") { it.en })
-            append(word.collocations.size).append(':')
-            append(word.collocations.joinToString("~") { it.en })
-            append(word.derivatives.size).append(':')
-            append(word.derivatives.joinToString("~") { it.en })
-            append(word.inflections.joinToString("~"))
-        }
-    )
+    private fun spokenKey(word: Word, spec: NarrationSpec): String {
+        val segs = NarrationBuilder.build(
+            word, spec.repeat, spec.mode, spec.detail, spec.speakArabic
+        )
+        return hash(
+            buildString {
+                append("v").append(pipelineVersion).append('|')
+                append(spec.voiceTag).append('|')
+                segs.forEach {
+                    append(it.lang.name).append('>').append(it.text).append('\n')
+                }
+            }
+        )
+    }
+
+    private fun cardKey(word: Word, spec: NarrationSpec): String =
+        spokenKey(word, spec)
 
     private fun hash(s: String): String =
         MessageDigest.getInstance("SHA-1").digest(s.toByteArray())

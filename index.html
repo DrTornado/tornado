@@ -23879,12 +23879,28 @@ function enrichMerge(card) {
   if (!c.oxford && e.oxford) c.oxford = e.oxford;
   if (!c.cefr && e.cefr) c.cefr = e.cefr;
   if (!c.cefr && !c.estCefr && e.cefrEst) c.estCefr = e.cefrEst;
-  c.pos          = _union(c.pos, e.pos);
-  c.meanings     = _union(c.meanings, e.meanings);
-  c.inflections  = _union(c.inflections, e.inflections);
-  c.derivatives  = _union(c.derivatives, e.derivatives);
-  c.synonyms     = _union(c.synonyms, e.synonyms);
-  c.examples     = _union(c.examples, e.examples);
+  /*
+   * المراجَعة تحلّ محلّ القديمة، ولا تُضاف إليها.
+   *
+   * كان الدمج ضمّاً: بطاقة التطبيق القديمة أوّلاً ثم المكتوبة بيد. وتلك
+   * القديمة جاءت من قاموسٍ آليّ، كثيرٌ من معانيها وأمثلتها بلا عربية —
+   * فيرى القارئ سطوراً إنجليزية عارية تتصدّر ما كُتب له كاملاً، ويظنّ
+   * البطاقة ناقصة. وهي ليست ناقصة، بل مسبوقة بما لا ينفع.
+   *
+   * فالبطاقة الموسومة `curated` كاملةٌ بحكم المدقّق: كل قسمٍ فيها له
+   * حدٌّ أدنى وعربيّةٌ لكل سطر. والضمّ إليها إفسادٌ لا إثراء.
+   *
+   * وغير المراجَعة تبقى على الضمّ: فيها ما ليس عندنا، وحذفُه خسارة.
+   */
+  const whole = !!e.curated;
+  const take = (base, extra) => whole ? (arr(extra).length ? extra : base)
+                                      : _union(base, extra);
+  c.pos          = take(c.pos, e.pos);
+  c.meanings     = take(c.meanings, e.meanings);
+  c.inflections  = take(c.inflections, e.inflections);
+  c.derivatives  = take(c.derivatives, e.derivatives);
+  c.synonyms     = take(c.synonyms, e.synonyms);
+  c.examples     = take(c.examples, e.examples);
   /*
    * المتلازمات والفروق بشكلَيهما.
    *
@@ -23892,10 +23908,10 @@ function enrichMerge(card) {
    * المكتوب بيد {en, ar} — عبارةٌ كاملة بمعناها. فالأول يُحوَّل إلى الثاني
    * ليمرّ على نفس العارض، بدل عارضَين لشيءٍ واحد.
    */
-  c.collocations = _union(c.collocations, arr(e.collocations).map(x =>
+  c.collocations = take(c.collocations, arr(e.collocations).map(x =>
     x && x.col ? { en: x.col, ar: x.pat || '' } : x));
-  c.differences  = _union(c.differences, e.differences);
-  c.grammarPatterns = _union(c.grammarPatterns, e.grammarPatterns);
+  c.differences  = take(c.differences, e.differences);
+  c.grammarPatterns = take(c.grammarPatterns, e.grammarPatterns);
   c._e = e;                                   // للأقسام التي لا مكان لها أصلاً
   return c;
 }
@@ -26484,7 +26500,8 @@ const AUDIO_CACHE = new Map(); // ذاكرة سريعة داخل الجلسة
 // بدونه يبقى الصوت القديم المخزَّن يُشغَّل للأبد ولا يظهر أي إصلاح إطلاقاً.
 // ⚠️ لا تُرفع هذه القيمة إلا لضرورة قصوى: رفعها يمسح كل الأصوات المولَّدة ويجبر
 // المستخدم على انتظار توليدها كاملة من جديد. مثبَّتة عمداً.
-const AUDIO_VERSION = 6;
+// ٧: المراجَعة تحلّ محلّ القديمة — فما وُلّد قبلها يحمل الشرح القديم
+const AUDIO_VERSION = 7;
 /*
  * هوية الصوت جزء من المفتاح.
  *
@@ -26503,11 +26520,31 @@ function voiceKeyPart() { return kokoroOn() && !kokoroBroken ? 'k' + kokoroVoice
  *
  * وبصمة الشريحة تكفي: تتغيّر كلّما تغيّرت أي بطاقة فيها.
  */
-function enrichStamp(card) {
-  const k = String((card && card.word) || '').slice(0, 2).toLowerCase();
-  return (enrichHashes && enrichHashes[k]) || '0';
+/*
+ * المفتاح هو النصّ المنطوق نفسه — لا قائمةُ حقولٍ تُصان بيد.
+ *
+ * كان يُبنى من مُعرِّف البطاقة وإعداداتِ الصوت، فلا يتغيّر حين تُعاد
+ * كتابة البطاقة. أضفتُ بصمة الشريحة فعالج الحالة، لكنه علاجٌ يعتمد على
+ * أن يتذكّر أحدٌ إضافةَ كل مصدرٍ جديد للنصّ إلى المفتاح — ونسيانُه صامت:
+ * يبقى المتعلّم يسمع شرحاً أُزيل، بلا رسالة ولا أثر.
+ *
+ * فصار المفتاح بصمةَ المقاطع التي سيقرؤها المحرّك فعلاً. إن تغيّر حرفٌ
+ * ممّا يُسمَع تغيّر المفتاح، وإن لم يتغيّر شيء أُعيد استعمال الملفّ.
+ * لا رقمَ إصدارٍ يُرفع، ولا حقلَ يُنسى.
+ */
+function fnv1a(str) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = (h + ((h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24))) >>> 0;
+  }
+  return h.toString(36);
 }
-function cacheKey(card) { return card.id + '|' + (detailedAudio?'d':'s') + '|' + wordRepeat + '|' + ENGINE_VERSION + '|a' + AUDIO_VERSION + '|' + voiceKeyPart() + '|e' + enrichStamp(card); }
+function cacheKey(card) {
+  const segs = narrationSegments(card, wordRepeat, detailedAudio);
+  const spoken = segs.map(s => (s.lang || '') + '>' + s.text).join('\n');
+  return card.id + '|a' + AUDIO_VERSION + '|' + voiceKeyPart() + '|s' + fnv1a(spoken);
+}
 
 // ===== تخزين دائم للصوت المولَّد =====
 // جوهر الحل النهائي للتأخير: كل كلمة تُولَّد مرة واحدة فقط في عمر التطبيق، ثم تُحفظ في قاعدة
