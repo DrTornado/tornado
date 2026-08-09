@@ -220,16 +220,13 @@ fun WordDetailScreen(vm: WordDetailViewModel, onBack: () -> Unit) {
                 }
             }
 
-            pairSection("Related words", merged(shown.derivatives, e?.derivatives))
-            pairSection("Synonyms", merged(shown.synonyms, e?.synonyms))
-            pairSection("Antonyms", merged(emptyList(), e?.antonyms))
-            pairSection(
-                "Common combinations",
-                if (shown.collocations.isNotEmpty()) shown.collocations
-                else e?.collocations.orEmpty()
-            )
+            pairSection("Related words", mergedPairs(shown.derivatives, e?.derivatives))
+            pairSection("Synonyms", mergedPairs(shown.synonyms, e?.synonyms))
+            pairSection("Antonyms", e?.antonyms.orEmpty())
+            pairSection("Common combinations",
+                mergedPairs(shown.collocations, e?.collocations))
             pairSection("Examples", mergedPairs(shown.examples, e?.examples))
-            pairSection("Differences", shown.differences)
+            pairSection("Differences", mergedPairs(shown.differences, e?.differences))
 
             phraseSection("Phrasal verbs", e?.phrasalVerbs)
             phraseSection("Idioms", e?.idioms)
@@ -313,12 +310,6 @@ private fun Word.withEnrichment(e: Enrichment?): Word {
         inflections = inflections +
             e.inflections.filterNot { f -> inflections.any { norm(it) == norm(f) } }
     )
-}
-
-private fun merged(base: List<LangPair>, extra: List<String>?): List<LangPair> {
-    if (extra.isNullOrEmpty()) return base
-    val seen = base.mapTo(HashSet()) { norm(it.en) }
-    return base + extra.filter { seen.add(norm(it)) }.map { LangPair(it, "") }
 }
 
 private fun mergedPairs(base: List<LangPair>, extra: List<LangPair>?): List<LangPair> {

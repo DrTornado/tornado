@@ -73,11 +73,20 @@ data class Enrichment(
     val pos: List<String> = emptyList(),
     val meanings: List<Meaning> = emptyList(),
     val inflections: List<String> = emptyList(),
-    val derivatives: List<String> = emptyList(),
-    val synonyms: List<String> = emptyList(),
-    val antonyms: List<String> = emptyList(),
+    /*
+     * أزواج لا نصوص.
+     *
+     * القاعدة كانت تكتب «coping» وحدها، والمكتوب بيدٍ يكتب
+     * «coping (noun)» ومعه «التأقلم». والقارئ العربي يحتاج الثاني —
+     * ومشتقٌّ بلا معنىً نصفُ فائدة.
+     */
+    val derivatives: List<LangPair> = emptyList(),
+    val synonyms: List<LangPair> = emptyList(),
+    val antonyms: List<LangPair> = emptyList(),
     val examples: List<LangPair> = emptyList(),
     val collocations: List<LangPair> = emptyList(),
+    /** الفروق: ما يميّز الكلمة عمّا يُخلَط بها */
+    val differences: List<LangPair> = emptyList(),
     val phrasalVerbs: List<Phrase> = emptyList(),
     val idioms: List<Phrase> = emptyList(),
     val usageNotes: List<String> = emptyList(),
@@ -96,6 +105,25 @@ data class Enrichment(
         private fun objects(o: JSONObject, key: String): List<JSONObject> {
             val a: JSONArray = o.optJSONArray(key) ?: return emptyList()
             return (0 until a.length()).mapNotNull { a.optJSONObject(it) }
+        }
+
+        /**
+         * يقبل الشكلين معاً: نصّاً مفرداً أو زوجاً.
+         *
+         * البطاقات القديمة تكتب «coping»، والجديدة {en, ar}. وهما في
+         * المستودع جنباً إلى جنب ما دامت المراجعة لم تكتمل — فقارئٌ
+         * يعرف أحدهما وحده يُفرغ نصف البطاقات بلا أن يشتكي.
+         */
+        private fun pairs(o: JSONObject, key: String): List<LangPair> {
+            val a: JSONArray = o.optJSONArray(key) ?: return emptyList()
+            return (0 until a.length()).mapNotNull { i ->
+                a.optJSONObject(i)?.let {
+                    val en = it.optString("en").ifBlank { it.optString("col") }
+                    val ar = it.optString("ar").ifBlank { it.optString("pat") }
+                    if (en.isBlank() && ar.isBlank()) null else LangPair(en, ar)
+                } ?: a.optString(i).takeIf { it.isNotBlank() }
+                    ?.let { LangPair(it, "") }
+            }
         }
 
         /** لا يرمي أبداً: بطاقةٌ معطوبة تعني كلمةً بلا إثراء، لا شاشةً ساقطة */
@@ -121,17 +149,12 @@ data class Enrichment(
                     )
                 },
                 inflections = strings(o, "inflections"),
-                derivatives = strings(o, "derivatives"),
-                synonyms = strings(o, "synonyms"),
-                antonyms = strings(o, "antonyms"),
-                examples = objects(o, "examples").map {
-                    LangPair(it.optString("en"), it.optString("ar"))
-                },
-                // المتلازمة نمطٌ ومصاحب: «soil · compound» — والنمط يوضّح العلاقة
-                collocations = objects(o, "collocations").mapNotNull {
-                    val col = it.optString("col")
-                    if (col.isBlank()) null else LangPair(col, it.optString("pat"))
-                },
+                derivatives = pairs(o, "derivatives"),
+                synonyms = pairs(o, "synonyms"),
+                antonyms = pairs(o, "antonyms"),
+                examples = pairs(o, "examples"),
+                collocations = pairs(o, "collocations"),
+                differences = pairs(o, "differences"),
                 phrasalVerbs = objects(o, "phrasalVerbs").map {
                     Phrase(it.optString("phrase"), it.optString("gloss"))
                 },
