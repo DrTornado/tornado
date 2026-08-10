@@ -40,6 +40,20 @@ class LibraryEnricher(
      *   ومحدودة الطلبات، والإثراء عمل خلفي لا يستحق أن يزاحم ما يفعله المستخدم.
      */
     suspend fun runPass(budget: Int = 8): Int = withContext(Dispatchers.IO) {
+        /*
+         * أُوقف — القاموس الآليّ لم يعد مصدراً لشيء في هذا التطبيق.
+         *
+         * كان يملأ الفراغات من قاموسٍ مفتوح: معنىً بلا عربيّة، ومرادفاتٍ
+         * كذلك، وأمثلةً مترجمة آلياً. وصاحب المكتبة حكم عليها فوجدها لا
+         * تُوثق، وطلب إلغاءها نهائياً. والبطاقة تُكتب بيدٍ وتمرّ على مدقّقٍ
+         * بسبعة عشر بنداً، أو لا تكون.
+         *
+         * ويبقى الكود لأن `pendingCount` يخدم العرض، ولأن إعادته يوماً أهون
+         * من كتابته من جديد. وهو لا يعمل.
+         */
+        if (true) return@withContext 0
+
+        @Suppress("UNREACHABLE_CODE")
         var filled = 0
         val written = runCatching { writtenByHand() }.getOrDefault(emptySet())
         val candidates = repository.allWords()
@@ -80,12 +94,39 @@ class LibraryEnricher(
         filled
     }
 
-    /** كم بطاقة ما زالت ناقصة — يخدم العرض والاختبار معاً */
-    suspend fun pendingCount(): Int = withContext(Dispatchers.IO) {
-        val written = runCatching { writtenByHand() }.getOrDefault(emptySet())
-        repository.allWords().count {
-            it.isEligible() && it.word.trim().lowercase() !in written
+    /** لا شيء ينتظر القاموس — أُلغي */
+    suspend fun pendingCount(): Int = 0
+
+    /**
+     * يمسح ما خزّنه القاموس الآليّ في المكتبة قبل إلغائه.
+     *
+     * الإلغاء لا يكتمل بمنع الجديد وحده: مكتبة صاحبها فيها مئةٌ وثلاث عشرة
+     * كلمة كُتبت بطاقاتها من قاموسٍ آليّ — معانٍ بلا عربيّة ومرادفاتٌ كذلك.
+     * وتبقى في القاعدة وتُرفع مع المزامنة إلى كل جهاز.
+     *
+     * والكلمة التي كُتبت بطاقتها بيدٍ لا تُمسّ: الإثراء يحمل نصّها، وما في
+     * `Word` منها لا يُعرض أصلاً. والمسّ هنا يقع على الشرح وحده — لا على
+     * الكلمة ولا نطقها ولا تقدّم مراجعتها.
+     */
+    suspend fun purgeMachineContent(): Int = withContext(Dispatchers.IO) {
+        var cleaned = 0
+        for (w in repository.allWords()) {
+            val hasText = w.meanings.isNotEmpty() || w.synonyms.isNotEmpty() ||
+                w.collocations.isNotEmpty() || w.examples.isNotEmpty() ||
+                w.differences.isNotEmpty() || w.derivatives.isNotEmpty()
+            if (!hasText) continue
+            runCatching {
+                repository.update(
+                    w.copy(
+                        meanings = emptyList(), synonyms = emptyList(),
+                        collocations = emptyList(), examples = emptyList(),
+                        differences = emptyList(), derivatives = emptyList()
+                    )
+                )
+                cleaned++
+            }
         }
+        cleaned
     }
 
     /**

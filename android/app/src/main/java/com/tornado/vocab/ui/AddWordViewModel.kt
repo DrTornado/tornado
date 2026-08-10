@@ -78,22 +78,56 @@ class AddWordViewModel(app: Application) : AndroidViewModel(app) {
             }
             update { it.copy(busy = true, statusText = "Looking up \"$w\"…", error = null, manualPrompt = null) }
             when (val result = dict.lookup(w)) {
+                /*
+                 * نأخذ النطق ونترك الشرح.
+                 *
+                 * كان القاموس يُخزَّن كاملاً ثم يُحجب عند العرض — وذلك نصفُ
+                 * إلغاء: النصّ يبقى في القاعدة، ويظهر في سطر القائمة وفي شاشة
+                 * الإضافة، ويُرفع مع المزامنة إلى بقيّة الأجهزة. والمنع عند
+                 * الباب أصدق من المنع عند النافذة.
+                 *
+                 * ويبقى ما ليس شرحاً: الرمز الصوتيّ وروابط النطق البشريّ —
+                 * تلك تُسمَع ولا تُقرأ، ولا تزاحم بطاقةً مكتوبة.
+                 */
                 is LookupResult.Success -> {
-                    repo.addWord(result.word)
+                    val bare = Word(
+                        id = result.word.id,
+                        word = result.word.word,
+                        ipa = result.word.ipa,
+                        ipaUS = result.word.ipaUS,
+                        ipaUK = result.word.ipaUK,
+                        audioUS = result.word.audioUS,
+                        audioUK = result.word.audioUK,
+                        audioGen = result.word.audioGen
+                    )
+                    repo.addWord(bare)
                     pushToComputer()
                     update {
                         it.copy(
                             busy = false, input = "", statusText = "",
-                            lastAdded = result.word, manualPrompt = null
+                            lastAdded = bare, manualPrompt = null
                         )
                     }
                 }
-                is LookupResult.NotFound -> update {
-                    it.copy(
-                        busy = false, statusText = "",
-                        error = "Could not recognise \"${result.query}\" — check the spelling",
-                        manualPrompt = result.query
-                    )
+                /*
+                 * الكلمة تُقبل ولو لم يعرفها القاموس.
+                 *
+                 * كان القاموس بوّاباً: «Could not recognise "zeal"» فتُردّ
+                 * الكلمة. وقد أُلغي القاموس مصدراً للبطاقة، فبقاؤه بوّاباً
+                 * عبثٌ ومنعٌ بلا سبب — والبطاقة تُكتب بيدٍ بعد حين، والكلمة
+                 * تنتظر في الطابور حتى تُكتب.
+                 */
+                is LookupResult.NotFound -> {
+                    // المعرّف طابعٌ زمنيّ كما في تطبيق الويب، فلا يتصادمان
+                    val bare = Word(id = System.currentTimeMillis(), word = result.query)
+                    repo.addWord(bare)
+                    pushToComputer()
+                    update {
+                        it.copy(
+                            busy = false, input = "", statusText = "",
+                            lastAdded = bare, manualPrompt = null, error = null
+                        )
+                    }
                 }
                 /*
                  * نفرّق بين «لا إنترنت» و«الخدمة تعطّلت».

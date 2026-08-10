@@ -50,8 +50,8 @@ android {
         applicationId = "com.tornado.vocab"
         minSdk = 26
         targetSdk = 35
-        versionCode = 11
-        versionName = "2.9"
+        versionCode = 13
+        versionName = "3.1"
     }
 
     /*

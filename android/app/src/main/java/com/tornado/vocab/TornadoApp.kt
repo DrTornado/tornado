@@ -178,7 +178,53 @@ class TornadoApp : Application() {
              *
              * والعملان مستقلان: الكلمات لا تنتظر الصوت، والصوت لا ينتظرها.
              */
-            appScope.launch { runCatching { enricher.runUntilComplete() } }
+            /*
+             * مسحُ ما خزّنه القاموس الآليّ قبل إلغائه — مرّةً واحدة.
+             *
+             * منعُ الجديد لا يكفي: المكتبة القائمة فيها بطاقاتٌ كُتبت من ذلك
+             * القاموس، وتبقى في القاعدة وتُرفع مع المزامنة. والمسح يقع على
+             * الشرح وحده — لا على الكلمة ولا نطقها ولا تقدّم مراجعتها.
+             */
+            appScope.launch {
+                runCatching {
+                    if (!settings.machinePurged()) {
+                        val n = enricher.purgeMachineContent()
+                        settings.setMachinePurged(true)
+                        android.util.Log.i("Tornado", "مُسح شرحٌ آليّ من $n كلمة")
+                    }
+                }
+            }
+
+            /*
+             * البطاقة تنزل حين تجهز، لا حين يتذكّر صاحبها أن يضغط Sync.
+             *
+             * الكلمة تُرفع في ثوانٍ، ويكتب المسار بطاقتها على خوادم GitHub في
+             * دقائق. وكان وصولها إلى الجهاز يتوقّف على مزامنةٍ يبدؤها المستخدم
+             * — فيضيف كلمةً ويمضي، ثم يفتح التطبيق بعد يومين فلا يجدها وقد
+             * كُتبت من أوّل ساعة.
+             *
+             * والاستطلاع مربوطٌ بالحاجة لا بالساعة: يسأل كل دقيقتين ما دامت
+             * كلمةٌ تنتظر بطاقتها، ويسكت تماماً حين تكتمل المكتبة. فلا يستهلك
+             * بطاريةً ولا باقةً في حالةٍ لا جديد فيها — وسؤالُه فهرسٌ صغير،
+             * والشرائح لا تُنزَّل إلا إن تغيّرت بصماتها.
+             */
+            appScope.launch {
+                while (true) {
+                    kotlinx.coroutines.delay(2 * 60_000L)
+                    val waiting = runCatching {
+                        val written = enrichSync.curatedWordSet()
+                        repository.allWords().count {
+                            it.word.trim().lowercase() !in written
+                        }
+                    }.getOrDefault(0)
+                    if (waiting == 0) continue
+                    runCatching {
+                        if (enrichSync.sync() > 0) {
+                            android.util.Log.i("Tornado", "وصلت بطاقاتٌ جديدة")
+                        }
+                    }
+                }
+            }
         }
     }
 }

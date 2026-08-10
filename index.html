@@ -23886,6 +23886,36 @@ function _union(base, add) {
   return out;
 }
 
+/*
+ * سطرٌ عربيّ بلا نقطةٍ لاتينية في آخره.
+ *
+ * النقطة محايدة الاتّجاه فتصير جرياً مستقلاً في فقرةٍ من اليمين إلى اليسار،
+ * فينزل معها آخر الكلام سطراً. ونظّفتُ منها البطاقات المكتوبة، فبقي ما يبنيه
+ * التطبيق لنفسه من قاموسه الآليّ عند إضافة كلمةٍ جديدة — وهو أكثر ما يراه
+ * المستخدم قبل أن تُكتب بطاقتها. فالتنظيف عند العرض ليشمل كل مصدر.
+ */
+const _AR_RE = /[؀-ۿ]/;
+function arLine(s) {
+  return (typeof s === 'string' && _AR_RE.test(s)) ? s.replace(/[  ]*\.\s*$/, '') : s;
+}
+function _tidyPair(p) {
+  if (!p || typeof p !== 'object') return p;
+  const o = Object.assign({}, p);
+  if (o.ar) o.ar = arLine(o.ar);
+  if (o.exAr) o.exAr = arLine(o.exAr);
+  if (o.note) o.note = arLine(o.note);
+  if (o.gloss) o.gloss = arLine(o.gloss);
+  return o;
+}
+function _tidyCard(c) {
+  ['meanings','derivatives','synonyms','antonyms','collocations','examples',
+   'differences','grammarPatterns','usageNotes','pronunciationNote',
+   'phrasalVerbs','idioms'].forEach(k => {
+    if (Array.isArray(c[k])) c[k] = c[k].map(_tidyPair);
+  });
+  return c;
+}
+
 function enrichMerge(card) {
   const e = enrichCache && card && card.word
           ? enrichCache[String(card.word).trim().toLowerCase()] : null;
@@ -26079,7 +26109,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 121;
+const BUILD = 122;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.

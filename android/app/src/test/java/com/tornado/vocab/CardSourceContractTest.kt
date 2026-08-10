@@ -200,18 +200,50 @@ class CardSourceContractTest {
         assertEquals("بايد", raw.withEnrichment(machine).arabicPron)
     }
 
-    /** غير المراجَعة تُضاف ولا تُزيح — فيها ما ليس عندنا وحذفه خسارة */
+    /**
+     * ما لم يُكتب بيدٍ لا يُعرض — لا من القاموس الآليّ ولا من بطاقةٍ آلية.
+     *
+     * كان القاموس يملأ البطاقة عند إضافة الكلمة: مرادفاتٌ بلا عربيّة، وأمثلةٌ
+     * مترجمة آلياً. وطلب صاحب المكتبة إلغاءه نهائياً — وبطاقةٌ فارغة تقول
+     * «لم تُكتب بعد» أصدق من بطاقةٍ ممتلئة بما لا يُوثق به.
+     */
     @Test
-    fun `machine card is added not substituted`() {
+    fun `machine content is never shown`() {
         val raw = Word(
-            id = 2, word = "cope",
-            meanings = listOf(Meaning(en = "to manage", ar = "يتدبّر"))
+            id = 2, word = "actual",
+            arabicPron = "أكتشوال",
+            meanings = listOf(Meaning(en = "existing in fact", ar = "فعليّ")),
+            synonyms = listOf(LangPair(en = "present", ar = ""),
+                              LangPair(en = "true", ar = "")),
+            examples = listOf(LangPair(en = "the actual cost", ar = "التكلفة الفعلية."))
         )
+
+        // لا إثراء أصلاً
+        raw.withEnrichment(null).let {
+            assertTrue("معانٍ آلية معروضة", it.meanings.isEmpty())
+            assertTrue("مرادفات آلية معروضة", it.synonyms.isEmpty())
+            assertTrue("أمثلة آلية معروضة", it.examples.isEmpty())
+            assertEquals("ما ليس من القاموس يبقى", "أكتشوال", it.arabicPron)
+        }
+
+        // بطاقةٌ آلية وصلت من المستودع — حكمها حكم القاموس
         val machine = Enrichment.parse(
             """{"curated":false,"meanings":[{"en":"to deal with","ar":"يتعامل"}]}"""
         )
-        val shown = raw.withEnrichment(machine)
-        assertEquals(2, shown.meanings.size)
-        assertEquals("to manage", shown.meanings.first().en)
+        assertTrue(raw.withEnrichment(machine).meanings.isEmpty())
+    }
+
+    /** والنقطة اللاتينية تُحذف عند العرض — لا في الملفّ وحده */
+    @Test
+    fun `a trailing latin dot is stripped from arabic at display time`() {
+        val raw = Word(id = 5, word = "actual")
+        val curated = Enrichment.parse(
+            """{"curated":true,
+                "meanings":[{"en":"real","ar":"فعليّ.","pos":"adjective"}],
+                "examples":[{"en":"the actual cost","ar":"التكلفة الفعلية."}]}"""
+        )
+        val shown = raw.withEnrichment(curated)
+        assertEquals("فعليّ", shown.meanings.first().ar)
+        assertEquals("التكلفة الفعلية", shown.examples.first().ar)
     }
 }

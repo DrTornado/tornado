@@ -46,6 +46,27 @@ data class DisplayCard(val word: Word, val extra: Enrichment?)
 
 private fun norm(s: String) = s.trim().lowercase()
 
+private val ARABIC = Regex("[\\u0600-\\u06FF]")
+private val TAIL_DOT = Regex("[ \\u00A0]*\\.\\s*$")
+
+/**
+ * سطرٌ عربيّ بلا نقطةٍ لاتينية في آخره.
+ *
+ * النقطة محايدة الاتّجاه، فتصير جرياً مستقلاً في فقرةٍ من اليمين إلى اليسار
+ * فينزل معها آخر الكلام سطراً — قيس على الجهاز: ١٢٧ بكسل مقابل ٦٧.
+ *
+ * ونظّفتُ منها بطاقاتي المكتوبة، فبقي ما يبنيه التطبيق لنفسه من قاموسه
+ * الآليّ حين تُضاف كلمةٌ جديدة: «تتجاوز النفقات الحكومية الفعلية الميزانية
+ * بشكل كبير.» — وهي أكثر ما يراه المستخدم قبل أن تُكتب بطاقتها. فالتنظيف
+ * موضعه العرض لا الملفّ، ليشمل كل مصدرٍ حاضرٍ ومستقبَل.
+ */
+internal fun arLine(s: String): String =
+    if (s.isNotBlank() && ARABIC.containsMatchIn(s)) TAIL_DOT.replace(s, "") else s
+
+private fun Meaning.tidy() = copy(ar = arLine(ar))
+private fun LangPair.tidy() = copy(ar = arLine(ar), exAr = arLine(exAr), note = arLine(note))
+private fun List<LangPair>.tidy() = map { it.tidy() }
+
 /**
  * البطاقة كما تُعرض: القائم أوّلاً، والإثراء يملأ الفراغ.
  *
@@ -55,8 +76,24 @@ private fun norm(s: String) = s.trim().lowercase()
  * والفراغ وحده يُملأ — ما بناه التطبيق لنفسه لا يُزاح، لأن فيه أحياناً
  * ترجمةً عربية ليست في القاعدة.
  */
+/**
+ * ما لم يُكتب بيدٍ لا يُعرض ولا يُنطق.
+ *
+ * القاموس الآليّ كان يملأ البطاقة عند إضافة الكلمة: مرادفاتٌ بلا عربيّة
+ * («present · true · genuine»)، ومتلازماتٌ بلا ترجمة، وأمثلةٌ مترجمة آلياً.
+ * وصاحب المكتبة طلب إلغاءه نهائياً — وهو محقّ: بطاقةٌ فارغة تقول «لم تُكتب
+ * بعد» أصدق من بطاقةٍ ممتلئة بما لا يُوثق به.
+ *
+ * ويبقى ما ليس من القاموس: الكلمة ورمزها الصوتيّ وتسجيلاتُ نطقها وتقدّم
+ * مراجعتها — تلك ليست شرحاً يُقرأ.
+ */
+private fun Word.withoutMachineContent(): Word = copy(
+    meanings = emptyList(), derivatives = emptyList(), synonyms = emptyList(),
+    collocations = emptyList(), examples = emptyList(), differences = emptyList()
+)
+
 internal fun Word.withEnrichment(e: Enrichment?): Word {
-    if (e == null) return this
+    if (e == null || !e.curated) return withoutMachineContent()
     val extraMeanings = e.meanings.filter { m ->
         m.en.isNotBlank() && meanings.none { norm(it.en) == norm(m.en) }
     }
@@ -90,24 +127,21 @@ internal fun Word.withEnrichment(e: Enrichment?): Word {
             e.cefrEst,
             if (cefr.isBlank() && e.cefr.isBlank()) estCefr.ifBlank { e.cefrEst } else estCefr
         ),
-        pos = if (e.curated && e.pos.isNotEmpty()) e.pos
-              else pos + e.pos.filterNot { p -> pos.any { norm(it) == norm(p) } },
-        meanings = if (e.curated && e.meanings.isNotEmpty()) e.meanings
-                   else meanings + extraMeanings,
-        inflections = if (e.curated && e.inflections.isNotEmpty()) e.inflections
-                      else inflections + e.inflections
-                          .filterNot { f -> inflections.any { norm(it) == norm(f) } },
+        // البطاقة المكتوبة تحلّ محلّ ما بناه التطبيق لنفسه، لا تُضاف إليه
+        pos = e.pos.ifEmpty { pos },
+        meanings = e.meanings.map { it.tidy() },
+        inflections = e.inflections.ifEmpty { inflections },
         /*
          * القوائم تُدمج هنا لا عند الرسم.
          *
          * كان الدمج في الشاشة وحدها، فقرأ الصوتُ الخام: يُعرض ما كتبناه
          * ويُسمَع ما لم نكتبه. ونقطةُ دمجٍ واحدة تمنع افتراقهما مستقبلاً.
          */
-        derivatives = take(derivatives, e.derivatives, e.curated),
-        synonyms = take(synonyms, e.synonyms, e.curated),
-        collocations = take(collocations, e.collocations, e.curated),
-        examples = take(examples, e.examples, e.curated),
-        differences = take(differences, e.differences, e.curated)
+        derivatives = e.derivatives.tidy(),
+        synonyms = e.synonyms.tidy(),
+        collocations = e.collocations.tidy(),
+        examples = e.examples.tidy(),
+        differences = e.differences.tidy()
     )
 }
 

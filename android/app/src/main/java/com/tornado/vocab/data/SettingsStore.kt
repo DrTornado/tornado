@@ -165,6 +165,8 @@ class SettingsStore(private val context: Context) {
         val QUIZ_LIMIT = intPreferencesKey("quiz_limit")
         val AR_FIRST = booleanPreferencesKey("quiz_arabic_first")
         val SEEDED = booleanPreferencesKey("seeded")
+        /** مسحُ ما خزّنه القاموس الآليّ قبل إلغائه — يقع مرّةً واحدة */
+        val MACHINE_PURGED = booleanPreferencesKey("machine_content_purged")
         val WELCOMED = booleanPreferencesKey("welcomed")
         val STREAK = intPreferencesKey("streak_days")
         val LAST_DAY = longPreferencesKey("last_study_day")
@@ -282,6 +284,11 @@ class SettingsStore(private val context: Context) {
     suspend fun setQuizLimit(v: Int) = edit { it[K.QUIZ_LIMIT] = v }
     suspend fun setArabicFirst(v: Boolean) = edit { it[K.AR_FIRST] = v }
     suspend fun setSeeded(v: Boolean) = edit { it[K.SEEDED] = v }
+
+    suspend fun machinePurged(): Boolean =
+        context.dataStore.data.first()[K.MACHINE_PURGED] ?: false
+
+    suspend fun setMachinePurged(v: Boolean) = edit { it[K.MACHINE_PURGED] = v }
     suspend fun setWelcomed() = edit { it[K.WELCOMED] = true }
 
     /**
