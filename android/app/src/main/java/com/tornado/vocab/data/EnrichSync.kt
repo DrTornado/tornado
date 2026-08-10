@@ -120,6 +120,11 @@ class EnrichSync(
     /** الكلمات التي وصلتها بطاقةٌ مكتوبة بيد — ما عداها ينتظر في الطابور */
     fun curatedWords(): Flow<List<String>> = dao.curatedWords()
 
+    /** نفسها مجموعةً لقراءةٍ واحدة */
+    suspend fun curatedWordSet(): Set<String> = withContext(Dispatchers.IO) {
+        dao.curatedWordsOnce().toHashSet()
+    }
+
     private companion object {
         const val DIR = "enrich"
     }

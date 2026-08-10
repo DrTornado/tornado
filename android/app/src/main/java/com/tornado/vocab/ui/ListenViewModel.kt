@@ -180,7 +180,7 @@ class ListenViewModel(app: Application) : AndroidViewModel(app) {
     /** ينطق المعنى العربي للبطاقة الحالية — ضغطة واعية تسمح بالتوليد */
     fun speakArabicCurrent() = viewModelScope.launch {
         val id = playback.value.current?.id ?: return@launch
-        val w = repo.word(id) ?: return@launch
+        val w = getApplication<Application>().tornado.cards.card(id) ?: return@launch
         val text = w.meanings.firstOrNull()?.ar?.takeIf { it.isNotBlank() }
             ?: w.arabicPron.takeIf { it.isNotBlank() }
             ?: return@launch

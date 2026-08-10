@@ -3,6 +3,7 @@ package com.tornado.vocab
 import android.app.Application
 import android.content.Context
 import com.tornado.vocab.data.AudioLibrarySync
+import com.tornado.vocab.data.CardSource
 import com.tornado.vocab.data.DictionaryService
 import com.tornado.vocab.data.EnrichSync
 import com.tornado.vocab.data.GitHubSync
@@ -46,7 +47,10 @@ class TornadoApp : Application() {
     }
 
 
-    val enricher: LibraryEnricher by lazy { LibraryEnricher(repository, dictionary) }
+    val enricher: LibraryEnricher by lazy {
+        LibraryEnricher(repository, dictionary,
+            writtenByHand = { enrichSync.curatedWordSet() })
+    }
 
     /** الملاحظات الصوتية — نصوص طويلة تُسمع بنفس المشغّل */
     val notes: NoteRepository by lazy { NoteRepository(this) }
@@ -60,6 +64,14 @@ class TornadoApp : Application() {
      * نوع محتوى جديد.
      */
     val enrichSync: EnrichSync by lazy { EnrichSync(this, SecureKeyStore(this)) }
+
+    /**
+     * البطاقة كما تُقرأ وتُسمع — نقطة الدمج الوحيدة.
+     *
+     * من طلب نصّ بطاقةٍ ليعرضه أو ينطقه يطلبه من هنا لا من المستودع مباشرة،
+     * فلا يبقى في التطبيق طريقٌ يتجاوز ما كُتب بيد.
+     */
+    val cards: CardSource by lazy { CardSource(repository, enrichSync) }
 
     /** المحرك الصوتي الأساسي — نسخة واحدة يشاركها التطبيق كله */
     val kokoro: com.tornado.vocab.audio.KokoroEngine by lazy {

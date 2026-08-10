@@ -88,6 +88,15 @@ def faults(word: str, c: dict) -> list:
             out.append(f"meanings[{i}] بلا إنجليزي")
         if not m.get("ar") or not ARABIC.search(m.get("ar", "")):
             out.append(f"meanings[{i}] بلا عربي صحيح")
+        # المعاني كانت خارج فحص الخلط، وهي أوّل ما يُقرأ في البطاقة.
+        # ومرّت منها واحدة: «يطيق · يحتمل — تُستعمل بالنفي غالباً: can't abide»
+        # فانكسر السطر بين اتّجاهين وتدلّت «abide» وحدها في سطرٍ تالٍ. ولا
+        # موضع هنا لـ `note`، فالإنجليزيّ يعود إلى خانته: `en`.
+        elif LATIN.search(m["ar"]):
+            out.append(f"meanings[{i}] العربيّ فيه إنجليزيّ — أعِده إلى en: "
+                       f"{m['ar'][:40]}")
+        if ARABIC.search(m.get("en") or ""):
+            out.append(f"meanings[{i}] الإنجليزيّ فيه عربيّ: {m['en'][:40]}")
         if not m.get("pos"):
             out.append(f"meanings[{i}] بلا قسم كلام")
 

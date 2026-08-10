@@ -81,6 +81,15 @@ class PlaybackService : MediaSessionService() {
     private lateinit var narration: NarrationRepository
     private lateinit var settings: SettingsStore
     private lateinit var repository: WordRepository
+
+    /**
+     * البطاقة المنطوقة تأتي من نقطة الدمج، لا من المستودع خاماً.
+     *
+     * كان الصوت يُبنى من `repository.word` مباشرة، فيسمع المستخدم شرحاً
+     * قديماً بينما على شاشته شرحٌ مكتوبٌ بيد. والمتعلّم يسمع أكثر ممّا يقرأ.
+     */
+    private val cards: com.tornado.vocab.data.CardSource
+        get() = (applicationContext as com.tornado.vocab.TornadoApp).cards
     private lateinit var notes: com.tornado.vocab.data.NoteRepository
     private var wakeLock: PowerManager.WakeLock? = null
 
@@ -583,7 +592,7 @@ class PlaybackService : MediaSessionService() {
                 coroutineContext.ensureActive()
                 if (session.isNotEmpty()) return@launch   // بدأ التشغيل فعلاً — ننسحب
                 if (row.kind != RowKind.WORD) return@forEach
-                val word = withContext(Dispatchers.IO) { repository.word(row.id) } ?: return@forEach
+                val word = withContext(Dispatchers.IO) { cards.card(row.id) } ?: return@forEach
                 if (narration.isCached(word, spec)) return@forEach
                 runCatching {
                     withContext(Dispatchers.IO) { narration.getOrBuild(word, spec) }
@@ -651,7 +660,7 @@ class PlaybackService : MediaSessionService() {
             val result = withContext(Dispatchers.IO) {
                 when (row.kind) {
                     RowKind.WORD -> {
-                        val full = repository.word(row.id) ?: return@withContext null
+                        val full = cards.card(row.id) ?: return@withContext null
                         narration.getOrBuild(full, spec) { done, total ->
                             PlaybackBus.update { it.copy(prepareDone = done, prepareTotal = total) }
                         }

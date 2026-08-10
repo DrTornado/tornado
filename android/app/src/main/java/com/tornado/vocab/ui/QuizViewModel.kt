@@ -221,7 +221,7 @@ class QuizViewModel(app: Application) : AndroidViewModel(app) {
     fun toggleFavorite() = viewModelScope.launch {
         val w = _state.value.current ?: return@launch
         repo.toggleFavorite(w.id, !w.favorite)
-        val updated = repo.word(w.id) ?: return@launch
+        val updated = repo.word(w.id) ?: return@launch   // RAW-OK: تقدّم المراجعة لا نصّ البطاقة
         _state.value = _state.value.copy(
             queue = _state.value.queue.map { if (it.id == w.id) updated else it }
         )

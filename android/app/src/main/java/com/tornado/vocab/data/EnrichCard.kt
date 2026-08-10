@@ -63,6 +63,10 @@ interface EnrichDao {
     /** الكلمات التي وصلتها بطاقةٌ مكتوبة بيد — ما عداها ينتظر في الطابور */
     @Query("SELECT word FROM enrich_cards WHERE curated = 1")
     fun curatedWords(): Flow<List<String>>
+
+    /** نفسها لقراءةٍ واحدة — لمن لا يراقب التغيّر */
+    @Query("SELECT word FROM enrich_cards WHERE curated = 1")
+    suspend fun curatedWordsOnce(): List<String>
 }
 
 /** زوجٌ بعنوان — للأفعال المركّبة والتعابير: العبارة وشرحها */

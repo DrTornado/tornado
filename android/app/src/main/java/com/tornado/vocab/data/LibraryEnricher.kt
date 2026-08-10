@@ -22,7 +22,17 @@ import kotlin.coroutines.coroutineContext
 class LibraryEnricher(
     private val repository: WordRepository,
     private val dictionary: DictionaryService,
-    private val examples: ExampleSource = ExampleSource()
+    private val examples: ExampleSource = ExampleSource(),
+    /**
+     * الكلمات التي كُتبت بطاقتها بيد — لا يمسّها القاموس الآليّ.
+     *
+     * وُضعت هذه المواكبة يوم كان القاموس مصدر البطاقة الوحيد. وقد صارت
+     * البطاقات تُكتب بيدٍ وتحلّ محلّ ما بناه التطبيق لنفسه، فبقاء المواكبة
+     * عليها يعني طلباتٍ بلا فائدة وكتابةً آليّةً في مكتبة المستخدم تُرفع
+     * إلى المستودع. والجديدة التي لم تُكتب بعد تبقى عليها: تعطيه معنىً
+     * ونطقاً في الحال ريثما تُكتب بطاقتها.
+     */
+    private val writtenByHand: suspend () -> Set<String> = { emptySet() }
 ) {
 
     /**
@@ -31,7 +41,10 @@ class LibraryEnricher(
      */
     suspend fun runPass(budget: Int = 8): Int = withContext(Dispatchers.IO) {
         var filled = 0
-        val candidates = repository.allWords().filter { it.isEligible() }.take(budget)
+        val written = runCatching { writtenByHand() }.getOrDefault(emptySet())
+        val candidates = repository.allWords()
+            .filter { it.isEligible() && it.word.trim().lowercase() !in written }
+            .take(budget)
 
         for (word in candidates) {
             coroutineContext.ensureActive()
@@ -68,8 +81,12 @@ class LibraryEnricher(
     }
 
     /** كم بطاقة ما زالت ناقصة — يخدم العرض والاختبار معاً */
-    suspend fun pendingCount(): Int =
-        withContext(Dispatchers.IO) { repository.allWords().count { it.isEligible() } }
+    suspend fun pendingCount(): Int = withContext(Dispatchers.IO) {
+        val written = runCatching { writtenByHand() }.getOrDefault(emptySet())
+        repository.allWords().count {
+            it.isEligible() && it.word.trim().lowercase() !in written
+        }
+    }
 
     /**
      * يواصل الإثراء ما دام التطبيق حيّاً.

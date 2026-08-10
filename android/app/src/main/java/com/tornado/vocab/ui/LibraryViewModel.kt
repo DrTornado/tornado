@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.tornado.vocab.audio.PlayScope
 import com.tornado.vocab.audio.PlaybackBus
 import com.tornado.vocab.tornado
+import com.tornado.vocab.data.DisplayCard
 import com.tornado.vocab.data.LibraryStats
 import com.tornado.vocab.data.SortOrder
 import com.tornado.vocab.data.Word
@@ -98,8 +99,8 @@ class LibraryViewModel(app: Application) : AndroidViewModel(app) {
     private val _expanded = MutableStateFlow<Set<Long>>(emptySet())
     val expanded: StateFlow<Set<Long>> = _expanded.asStateFlow()
 
-    private val _expandedWords = MutableStateFlow<Map<Long, Word>>(emptyMap())
-    val expandedWords: StateFlow<Map<Long, Word>> = _expandedWords.asStateFlow()
+    private val _expandedWords = MutableStateFlow<Map<Long, DisplayCard>>(emptyMap())
+    val expandedWords: StateFlow<Map<Long, DisplayCard>> = _expandedWords.asStateFlow()
 
     fun toggleExpanded(id: Long) {
         val now = _expanded.value
@@ -109,8 +110,9 @@ class LibraryViewModel(app: Application) : AndroidViewModel(app) {
             _expanded.value = now + id
             if (!_expandedWords.value.containsKey(id)) {
                 viewModelScope.launch {
-                    repo.word(id)?.let { w ->
-                        _expandedWords.value = _expandedWords.value + (id to w)
+                    // البطاقة المدموجة لا الخام — القائمة هي ما ينظر فيه المستخدم فعلاً
+                    container.cards.full(id)?.let { c ->
+                        _expandedWords.value = _expandedWords.value + (id to c)
                     }
                 }
             }
@@ -125,7 +127,7 @@ class LibraryViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             val missing = ids.filterNot { _expandedWords.value.containsKey(it) }
             if (missing.isEmpty()) return@launch
-            val loaded = missing.mapNotNull { repo.word(it) }.associateBy { it.id }
+            val loaded = missing.mapNotNull { container.cards.full(it) }.associateBy { it.word.id }
             _expandedWords.value = _expandedWords.value + loaded
         }
     }
@@ -169,7 +171,8 @@ class LibraryViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun speakCard(id: Long) = viewModelScope.launch {
-        val w: Word = repo.word(id) ?: return@launch
+        // يُنطق ما يُقرأ — لا الخام الذي بناه التطبيق لنفسه
+        val w: Word = container.cards.card(id) ?: return@launch
         PlaybackBus.submit(getApplication()) { it.speakCard(w) }
     }
 
@@ -191,14 +194,22 @@ class LibraryViewModel(app: Application) : AndroidViewModel(app) {
      * ويُحفَظ ويُرفع مع المزامنة، فتعمل الكلمة مرّةً بانتظار ثوانٍ وكل مرّة
      * بعدها فوراً — ويسمعها كروم أيضاً.
      */
-    fun speakArabic(w: Word) = viewModelScope.launch {
-        val ready = w.meanings.firstOrNull { it.ar.isNotBlank() }?.ar
+    /*
+     * يقرأ المدموج ويكتب في الخام.
+     *
+     * لو قرأ الخام لترجم معنىً قديماً بينما في البطاقة المكتوبة عربيّةٌ
+     * أدقّ منه. ولو كتب المدموج لانتقل الإثراء إلى بيانات المستخدم ثم رُفع
+     * إلى المستودع — والإثراء نسخةٌ للعرض لا مِلكٌ للبطاقة.
+     */
+    fun speakArabic(id: Long) = viewModelScope.launch {
+        val shown = container.cards.card(id) ?: return@launch
+        val ready = shown.meanings.firstOrNull { it.ar.isNotBlank() }?.ar
         if (ready != null) {
             PlaybackBus.submit(getApplication()) { it.speakText(ready, arabic = true) }
             return@launch
         }
 
-        val source = w.meanings.firstOrNull { it.en.isNotBlank() }?.en
+        val source = shown.meanings.firstOrNull { it.en.isNotBlank() }?.en
         if (source.isNullOrBlank()) {
             _notice.value = "لا يوجد معنى لهذه الكلمة بعد — اضغط Sync"
             return@launch
@@ -212,12 +223,18 @@ class LibraryViewModel(app: Application) : AndroidViewModel(app) {
         }
 
         // نحفظه في البطاقة فلا يُطلب مرّتين، ويسافر مع المزامنة إلى بقية الأجهزة
-        val updated = w.copy(
-            meanings = w.meanings.mapIndexed { i, m ->
-                if (i == w.meanings.indexOfFirst { it.en == source }) m.copy(ar = ar) else m
+        val raw = repo.word(id)   // RAW-OK: الكتابة تقع على الخام لا على المدموج
+        if (raw != null) {
+            val at = raw.meanings.indexOfFirst { it.en == source }
+            if (at >= 0) {
+                val updated = raw.copy(
+                    meanings = raw.meanings.mapIndexed { i, m ->
+                        if (i == at) m.copy(ar = ar) else m
+                    }
+                )
+                runCatching { repo.update(updated) }
             }
-        )
-        runCatching { repo.update(updated) }
+        }
         _notice.value = null
         PlaybackBus.submit(getApplication()) { it.speakText(ar, arabic = true) }
         runCatching { com.tornado.vocab.data.SyncCoordinator.syncNow(getApplication()) }

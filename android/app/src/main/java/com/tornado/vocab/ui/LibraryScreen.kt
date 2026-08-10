@@ -209,11 +209,12 @@ fun LibraryScreen(
                             }
                         } else {
                             InlineWordCard(
-                                word = full,
+                                word = full.word,
+                                extra = full.extra,
                                 onOpenFull = { onOpenWord(row.id) },
                                 onPlayFull = { vm.speakCard(row.id) },
-                                onPronounce = { british -> vm.pronounce(full, british) },
-                                onArabic = { vm.speakArabic(full) }
+                                onPronounce = { british -> vm.pronounce(full.word, british) },
+                                onArabic = { vm.speakArabic(row.id) }
                             )
                         }
                     }
@@ -275,6 +276,7 @@ private fun LibraryFilterChips(
 @Composable
 private fun InlineWordCard(
     word: com.tornado.vocab.data.Word,
+    extra: com.tornado.vocab.data.Enrichment?,
     onOpenFull: () -> Unit,
     onPlayFull: () -> Unit,
     onPronounce: (Boolean) -> Unit,
@@ -344,11 +346,23 @@ private fun InlineWordCard(
             Text(word.inflections.joinToString("  ·  "), style = MaterialTheme.typography.bodyMedium)
         }
 
+        /*
+         * نفس أقسام الشاشة الكاملة وبنفس ترتيبها.
+         *
+         * كانت البطاقة المنسدلة تعرض خمسة أقسام من `Word` وحدها، فلا أضداد
+         * ولا ملاحظات استعمال ولا نطق ولا أنماط تركيب — وهي أقسامٌ لا موضع
+         * لها في `Word` أصلاً، تسكن الإثراء. فمن قرأ من القائمة قرأ نصف
+         * البطاقة وهو يحسبها كلّها.
+         */
         InlinePairs("Related words", word.derivatives)
         InlinePairs("Synonyms", word.synonyms)
+        InlinePairs("Antonyms", extra?.antonyms.orEmpty())
         InlinePairs("Common combinations", word.collocations)
         InlinePairs("Examples", word.examples)
         InlinePairs("Differences", word.differences)
+        InlinePairs("Grammar patterns", extra?.grammarPatterns.orEmpty())
+        InlinePairs("Pronunciation note", extra?.pronunciationNote.orEmpty())
+        InlinePairs("Usage notes", extra?.usageNotes.orEmpty())
 
         VSpace(8)
         TextButton(onClick = onOpenFull) { Text("Open full card →", fontSize = 13.sp) }
@@ -386,12 +400,37 @@ private fun InlinePairs(title: String, items: List<com.tornado.vocab.data.LangPa
     if (items.isEmpty()) return
     SectionHeader(title)
     items.forEach { p ->
+        /*
+         * كلُّ سطرٍ بلغةٍ واحدة واتّجاهٍ واحد — كما في الشاشة الكاملة.
+         *
+         * وكانت `note` و`ex` و`exAr` تسقط هنا كلّها: فيها نسبةُ المرادف إلى
+         * معناه ومثالُه وترجمته، وبإسقاطها يقرأ صاحب المكتبة «violate» تحت
+         * أضداد `abide` بلا ما يقيّدها بمعناها.
+         */
         Column(Modifier.fillMaxWidth().padding(bottom = 6.dp)) {
             if (p.en.isNotBlank()) Text(p.en, style = MaterialTheme.typography.bodyMedium)
             if (p.ar.isNotBlank()) {
                 Text(
                     p.ar,
                     style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+            if (p.note.isNotBlank()) {
+                Text(
+                    p.note,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+            if (p.ex.isNotBlank()) {
+                VSpace(3)
+                Text(p.ex, style = MaterialTheme.typography.bodyMedium)
+            }
+            if (p.exAr.isNotBlank()) {
+                Text(
+                    p.exAr,
+                    style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
