@@ -24548,8 +24548,24 @@ async function doSync() {
 let bgUpgradeActive = false, bgUpgradeAbort = false;
 async function backgroundUpgrade() {
   if (bgUpgradeActive || upgrading || syncing) return;
-  const outdated = words.filter(w => w.engineVersion !== ENGINE_VERSION);
-  if (!outdated.length) return;
+  /*
+   * الكلمة التي كُتبت بطاقتها بيدٍ لا يمسّها القاموس الآليّ.
+   *
+   * هذه المواكبة وُضعت يوم كان القاموس هو مصدر البطاقة الوحيد، فكانت تملأ
+   * ما نقص. وقد صارت البطاقات تُكتب بيدٍ وتحلّ محلّ ما بناه التطبيق لنفسه،
+   * فبقاؤها يعني: تنزيلاً بلا فائدة، وكتابةً آليّةً في مكتبة المستخدم
+   * تُرفع إلى المستودع، وسطراً أخضر يومض «٣ من ١٧» فيظنّ صاحبها أن شيئاً
+   * ناقصٌ يُستدرك — وليس ناقصاً.
+   *
+   * والجديدة التي لم تُكتب بطاقتها بعد تبقى على المواكبة: تعطيه معنىً
+   * ونطقاً في الحال، ريثما تُكتب بطاقتها.
+   */
+  const written = w => {
+    const e = enrichCache && enrichCache[String(w.word || '').trim().toLowerCase()];
+    return !!(e && e.curated);
+  };
+  const outdated = words.filter(w => w.engineVersion !== ENGINE_VERSION && !written(w));
+  if (!outdated.length) { const s = document.getElementById('bg-upgrade-status'); if (s) s.textContent = ''; return; }
   bgUpgradeActive = true; bgUpgradeAbort = false;
   const statusEl = document.getElementById('bg-upgrade-status');
   const total = outdated.length;
@@ -26037,7 +26053,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 117;
+const BUILD = 118;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.
