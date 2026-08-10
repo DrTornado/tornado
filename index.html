@@ -24004,10 +24004,11 @@ function entryHtml(rawCard) {
       (!card.ipaUS && !card.ipaUK && card.ipa) ? `<span style="color:#8A93A3;">${esc(card.ipa)}</span>` : ''}${
       card.arabicPron ? `<span class="ar">${esc(card.arabicPron)}</span>` : ''}</div>
     <div class="meta">
-      ${card.oxford ? `<span class="badge">Oxford ${esc(card.oxford)}</span>` : ''}
+      ${card.oxford === 'none'
+          ? `<span class="badge" style="background:#2A3140;color:#8A93A3;border:1px solid #3A4453;">Not in Oxford 5000</span>`
+          : (card.oxford ? `<span class="badge">Oxford ${esc(card.oxford)}</span>` : '')}
       ${card.cefr ? `<span class="badge">CEFR ${esc(card.cefr)}</span>` : ''}
-      ${card.freqLabel ? `<span class="badge" style="background:#2A3140;color:#8A93A3;border:1px solid #3A4453;">📊 ${esc(card.freqLabel)}</span>` : ''}
-      ${card.estCefr ? `<span class="badge" style="background:#2A3140;color:#8A93A3;border:1px dashed #5B8DD9;" title="Estimated from usage frequency — not an official Oxford/Cambridge rating">≈ CEFR ${esc(card.estCefr)} (est.)</span>` : ''}
+      ${(!card.cefr && card.estCefr) ? `<span class="badge" style="background:#2A3140;color:#8A93A3;border:1px dashed #5B8DD9;" title="تقديرٌ من الشيوع — ليس تصنيفاً رسمياً">≈ CEFR ${esc(card.estCefr)} (est.)</span>` : ''}
       ${arr(card.pos).length ? `<span class="badge">${esc(arr(card.pos).join(', '))}</span>` : ''}
     </div>
     ${ms.length ? `<div class="sect"><b class="h">Core meanings</b>${ms.map((m,i) =>
@@ -25785,10 +25786,10 @@ function renderReview() {
           <span class="facelabel">Word ${position}/${queue.length}</span>
           <div class="bigword">${esc(c.word)}</div>
           ${(c.oxford || c.cefr || c.freqLabel || arr(c.pos).length) ? `<div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:10px;z-index:1;">${
-            c.oxford ? `<span class="facebadge">Oxford ${esc(c.oxford)}</span>` : ''}${
+            c.oxford === 'none' ? `<span class="facebadge">Not in Oxford 5000</span>`
+              : (c.oxford ? `<span class="facebadge">Oxford ${esc(c.oxford)}</span>` : '')}${
             c.cefr ? `<span class="facebadge">CEFR ${esc(c.cefr)}</span>` : ''}${
-            (!c.oxford && c.freqLabel) ? `<span class="facebadge">📊 ${esc(c.freqLabel)}</span>` : ''}${
-            (!c.oxford && c.estCefr) ? `<span class="facebadge" style="border-style:dashed;">≈ CEFR ${esc(c.estCefr)}</span>` : ''}${
+            (!c.cefr && c.estCefr) ? `<span class="facebadge" style="border-style:dashed;">≈ CEFR ${esc(c.estCefr)}</span>` : ''}${
             arr(c.pos).length ? `<span class="facebadge" style="font-style:italic;">${esc(arr(c.pos).join(', '))}</span>` : ''}</div>` : ''}
           ${(c.ipaUS || c.ipaUK) ? `<div style="font-size:14px;margin-top:12px;z-index:1;">${c.ipaUS ? `<span style="color:#D96A5B;">${esc(c.ipaUS)}</span>` : ''}${c.ipaUS && c.ipaUK ? ' · ' : ''}${c.ipaUK ? `<span style="color:#5B8DD9;">${esc(c.ipaUK)}</span>` : ''}</div>` : (c.ipa ? `<div style="font-size:15px;color:#6B7280;margin-top:12px;z-index:1;">${esc(c.ipa)}</div>` : '')}
           <div style="margin-top:12px;z-index:1;">${pronBtns(c, true)}</div>
@@ -26078,7 +26079,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 120;
+const BUILD = 121;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.

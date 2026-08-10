@@ -318,7 +318,12 @@ private fun InlineWordCard(
         androidx.compose.foundation.layout.FlowRow(
             horizontalArrangement = Arrangement.spacedBy(6.dp)
         ) {
-            if (word.oxford.isNotBlank()) InfoBadge("Oxford ${word.oxford}", MaterialTheme.colorScheme.primary)
+            // الحكم قائمةُ أوكسفورد الرسمية — والخارج عنها يُقال صراحةً
+            when {
+                word.oxford == "none" -> InfoBadge("Not in Oxford 5000")
+                word.oxford.isNotBlank() ->
+                    InfoBadge("Oxford ${word.oxford}", MaterialTheme.colorScheme.primary)
+            }
             if (word.cefr.isNotBlank()) InfoBadge("CEFR ${word.cefr}", MaterialTheme.colorScheme.primary)
             if (word.cefr.isBlank() && word.estCefr.isNotBlank()) {
                 InfoBadge("≈ ${word.estCefr}", StatusColors.New, dashed = true)

@@ -67,6 +67,9 @@ MINIMUM = {
     "meanings": 2, "inflections": 2, "derivatives": 3, "synonyms": 4,
     "antonyms": 3, "examples": 4, "collocations": 5, "differences": 3,
     "usageNotes": 2, "pronunciationNote": 1,
+    # كانت خارج الحدود الدنيا فمرّت ستٌّ وعشرون بطاقة بلا نمطٍ واحد،
+    # وهي في مواصفة صاحب المكتبة منذ أوّل بطاقة أرسلها.
+    "grammarPatterns": 2,
 }
 SCALAR = ("ipa", "arabicPron", "pos")
 PAIRED = ("derivatives", "synonyms", "antonyms", "examples",
@@ -153,10 +156,57 @@ def line_faults(c: dict) -> list:
     return bad
 
 
+def _oxford_list() -> dict:
+    """
+    قائمة أوكسفورد ٥٠٠٠ الرسمية التي تُشحن داخل التطبيق — هي الحكم.
+
+    كتبتُ «Oxford 3000» و«5000» في أربعٍ وثلاثين بطاقة من تقديري، والقائمة
+    لا تسندها. والقائمة هنا منذ البداية ولم أرجع إليها.
+    """
+    global _OX
+    if _OX is not None:
+        return _OX
+    path = os.path.join(
+        os.path.dirname(os.path.dirname(HERE)),
+        "android", "app", "src", "main", "assets", "oxford.txt"
+    )
+    m = {}
+    if os.path.isfile(path):
+        with open(path, encoding="utf-8") as f:
+            for line in f:
+                p = line.rstrip("\n").split("|")
+                if len(p) >= 2 and p[0].strip():
+                    m[p[0].strip().lower()] = p[1].strip()
+    _OX = m
+    return m
+
+
+_OX = None
+
+
 def faults(word: str, c: dict) -> list:
     out = []
 
     out.extend(line_faults(c))
+
+    # التصنيف والمستوى من القائمة لا من التقدير
+    ox = _oxford_list()
+    if ox:
+        lvl = ox.get(word.lower())
+        got = (c.get("oxford") or "").strip()
+        if not got:
+            out.append("ينقص oxford — لكل كلمةٍ تصنيف، ولو كان «none»")
+        elif lvl and got != "3000/5000":
+            out.append(f"oxford «{got}» والكلمة في القائمة — الصواب 3000/5000")
+        elif not lvl and got != "none":
+            out.append(f"oxford «{got}» بلا سندٍ من القائمة — الصواب none")
+        if lvl:
+            if (c.get("cefr") or "").strip() != lvl:
+                out.append(f"cefr «{c.get('cefr')}» وأوكسفورد تقول {lvl}")
+            if (c.get("cefrEst") or "").strip():
+                out.append("cefrEst مع تصنيفٍ رسميّ — التقدير للخارج عن القائمة")
+        elif (c.get("cefr") or "").strip():
+            out.append("cefr رسميّ لكلمةٍ خارج القائمة — اجعله cefrEst")
 
     for k in SCALAR:
         if not c.get(k):

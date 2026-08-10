@@ -169,9 +169,14 @@ fun WordDetailScreen(vm: WordDetailViewModel, onBack: () -> Unit) {
                 VSpace(8)
                 Text(shown.word, fontSize = 34.sp, fontWeight = FontWeight.ExtraBold)
 
+                /*
+                 * نطقٌ واحد حين لا تفترق اللهجتان.
+                 *
+                 * كان يُطبع «/əˈbaɪd/ · /əˈbaɪd/» — نسبةٌ لهجية بلا فرقٍ تنسبه.
+                 */
                 val prons = listOfNotNull(
                     shown.ipaUS.takeIf { it.isNotBlank() },
-                    shown.ipaUK.takeIf { it.isNotBlank() },
+                    shown.ipaUK.takeIf { it.isNotBlank() && it != shown.ipaUS },
                     shown.ipa.takeIf { it.isNotBlank() && shown.ipaUS.isBlank() && shown.ipaUK.isBlank() }
                 )
                 if (prons.isNotEmpty()) {
@@ -440,11 +445,30 @@ private fun PronButton(
 @Composable
 private fun BadgeRow(w: Word) {
     FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-        if (w.oxford.isNotBlank()) InfoBadge("Oxford ${w.oxford}", MaterialTheme.colorScheme.primary)
+        /*
+         * تصنيف أوكسفورد على كل كلمة — والقائمة هي الحكم لا التقدير.
+         *
+         * كانت أربعٌ وثلاثون بطاقة تحمل «Oxford 3000» أو «5000» بلا سندٍ من
+         * القائمة الرسمية التي تُشحن داخل التطبيق. والكلمة خارج القائمة يُقال
+         * فيها ذلك صراحةً بدل السكوت — فالسكوت يُقرأ نقصاً في البطاقة وهو
+         * حقيقةٌ عن الكلمة.
+         */
+        when {
+            w.oxford == "none" -> InfoBadge("Not in Oxford 5000")
+            w.oxford.isNotBlank() ->
+                InfoBadge("Oxford ${w.oxford}", MaterialTheme.colorScheme.primary)
+        }
         if (w.cefr.isNotBlank()) InfoBadge("CEFR ${w.cefr}", MaterialTheme.colorScheme.primary)
-        if (w.oxford.isBlank() && w.freqLabel.isNotBlank()) InfoBadge("📊 ${w.freqLabel}")
-        // الحدّ المنقّط يميّز التقدير عن التصنيف الرسمي — فرق جوهري لا يصح طمسه
-        if (w.oxford.isBlank() && w.estCefr.isNotBlank()) {
+        /*
+         * التقدير يظهر حين لا يوجد تصنيفٌ رسميّ — لا حين لا يوجد أوكسفورد.
+         *
+         * كان الشرط معلّقاً بـ `oxford`، وهما حقلان مختلفان: كلمةٌ بتصنيفٍ
+         * رسميّ B2 وبلا رقم أوكسفورد كانت تعرض «CEFR B2» و«≈ CEFR C1 (est.)»
+         * معاً — رقمان متناقضان لنفس الكلمة في شاشةٍ واحدة.
+         *
+         * والحدّ المنقّط يميّز التقدير عن التصنيف الرسمي، وذلك فرقٌ يبقى.
+         */
+        if (w.cefr.isBlank() && w.estCefr.isNotBlank()) {
             InfoBadge("≈ CEFR ${w.estCefr} (est.)", StatusColors.New, dashed = true)
         }
         w.pos.forEach { InfoBadge(it) }
