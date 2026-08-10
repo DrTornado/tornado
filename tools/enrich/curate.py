@@ -21,10 +21,15 @@ import glob
 import hashlib
 import json
 import os
+import sys
 import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-CURATED = os.path.join(HERE, "curated")   # مجلّد دفعات
+# مجلّد الدفعات في المستودع الخاصّ — الشرح في audit_cards.curated_dir
+sys.path.insert(0, HERE)
+from audit_cards import curated_dir                             # noqa: E402
+
+CURATED = curated_dir()
 
 CARD_SCHEMA = 1
 

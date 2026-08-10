@@ -27,7 +27,28 @@ import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-CURATED = os.path.join(HERE, "curated")
+
+
+def curated_dir() -> str:
+    """
+    البطاقات في المستودع الخاصّ لا العامّ.
+
+    فيها كلمات صاحب المكتبة وأمثلتها، ومستودع التطبيق عامٌّ لأن صفحات
+    GitHub تقتضي ذلك. والأدوات وحدها تبقى هناك: هي شيفرة لا محتوى.
+
+    وتُقبَل الوجهةُ القديمة إن وُجدت — فمن نسخ المشروع بلا المستودع الخاصّ
+    لا ينكسر عنده شيء.
+    """
+    env = os.environ.get("TORNADO_CURATED")
+    if env:
+        return env
+    # tools/enrich → tools → tornado → GitHub → tornado-data/curated
+    root = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
+    private = os.path.join(root, "tornado-data", "curated")
+    return private if os.path.isdir(private) else os.path.join(HERE, "curated")
+
+
+CURATED = curated_dir()
 
 ARABIC = re.compile(r"[؀-ۿ]")
 # نقطةٌ لاتينية في آخر سطرٍ عربيّ.
@@ -84,9 +105,16 @@ def line_faults(c: dict) -> list:
         # المصطلح الإنجليزيّ داخل الملاحظة العربية مقصود ولا يُمنع: نسبةُ
         # المرادف إلى معناه تحتاجه — «ضدّ abide by، لا ضدّ يطيق». والممنوع
         # جملةٌ إنجليزية كاملة تسكن ملاحظةً عربية، فتلك سطرٌ يقفز بين اتّجاهين.
-        if isinstance(note, str) and ARABIC.search(note) \
-                and re.search(r"(?:[A-Za-z][\w'-]*\s+){3,}[A-Za-z]", note):
-            bad.append(f"{path}.note فيه جملة إنجليزية كاملة — انقلها إلى ex: «{note[:34]}»")
+        if isinstance(note, str) and ARABIC.search(note):
+            # المقتبَس بين «» صيغةٌ يُشار إليها لا جملةٌ تُقرأ — «لا تقل
+            # «discourage him to go»» ملاحظةٌ عربية سليمة. فيُنزع المقتبَس
+            # قبل الفحص، ويبقى الممنوع: إنجليزيّةٌ سائبةٌ داخل نصٍّ عربيّ.
+            loose = re.sub(r"«[^»]*»", " ", note)
+            if re.search(r"(?:[A-Za-z][\w'-]*\s+){3,}[A-Za-z]", loose):
+                bad.append(
+                    f"{path}.note فيه جملة إنجليزية سائبة — اقتبسها أو انقلها إلى ex: "
+                    f"«{note[:34]}»"
+                )
         if _same(ar or "", exar or ""):
             bad.append(f"{path}: ar و exAr سطرٌ واحد مكرَّر: «{(ar or '')[:30]}»")
         for k, v in o.items():
@@ -182,13 +210,20 @@ def main() -> None:
     ap.add_argument("--word")
     a = ap.parse_args()
 
-    cards = {}
+    cards, seen = {}, {}
+    dupes = []
     for path in sorted(glob.glob(os.path.join(a.curated, "*.json"))):
         with open(path, encoding="utf-8") as f:
             raw = json.load(f)
         for k, v in raw.items():
             if not k.startswith("_") and isinstance(v, dict):
-                cards[k] = (os.path.basename(path), v)
+                # الكلمة في ملفّين: الأخيرة تُلغي الأولى صامتةً عند التحميل،
+                # فتُكتب بطاقةٌ ولا تُعرض أبداً — ولا يُنبّه أحدٌ إلى ذلك.
+                base = os.path.basename(path)
+                if k in seen:
+                    dupes.append((k, seen[k], base))
+                seen[k] = base
+                cards[k] = (base, v)
 
     if a.word:
         cards = {k: v for k, v in cards.items() if k.lower() == a.word.lower()}
@@ -202,13 +237,17 @@ def main() -> None:
             clean += 1
 
     print(f"فُحصت {len(cards)} بطاقة · سليمة {clean} · فيها خلل {len(bad)}")
+    if dupes:
+        print(f"وكلماتٌ مكرّرة في ملفّين — الأخيرة تُلغي الأولى صامتةً: {len(dupes)}")
+        for w, first, second in dupes:
+            print(f"   {w}   [{first}] · [{second}]")
     print("=" * 62)
     for w, (src, f) in bad.items():
         print(f"\n  {w}   [{src}]")
         for x in f:
             print(f"      ✗ {x}")
 
-    if a.strict and bad:
+    if a.strict and (bad or dupes):
         sys.exit(1)
 
 

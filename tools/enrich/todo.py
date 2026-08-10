@@ -17,7 +17,8 @@ import os
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-CURATED = os.path.join(HERE, "curated")
+# البطاقات في المستودع الخاصّ — الشرح في audit_cards.curated_dir.
+# ويُؤجَّل الإسناد إلى ما بعد استيراد المدقّق أدناه.
 # tools/enrich → tools → tornado → GitHub → tornado-data
 _ROOT = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
 WORDS = os.path.join(_ROOT, "tornado-data", "tornado-words.json")
@@ -30,7 +31,9 @@ WORDS = os.path.join(_ROOT, "tornado-data", "tornado-words.json")
 # معناه، ومنعَ التصريف المهجور. فيُستدعى هو نفسه بدل معيارٍ ثانٍ يتراخى.
 # المهمّة المجدولة قد تشغّله من أي مجلد، فلا نتّكل على مجلد العمل
 sys.path.insert(0, HERE)
-from audit_cards import faults                                  # noqa: E402
+from audit_cards import curated_dir, faults                     # noqa: E402
+
+CURATED = curated_dir()
 
 
 def curated_words(path: str = CURATED) -> tuple:
