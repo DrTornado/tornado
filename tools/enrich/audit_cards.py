@@ -53,32 +53,60 @@ PAIRED = ("derivatives", "synonyms", "antonyms", "examples",
           "usageNotes", "pronunciationNote")
 
 
-def arabic_tail_dots(c: dict) -> list:
-    """كلّ سطرٍ عربيّ ينتهي بنقطةٍ لاتينية — يُعرض في سطرين بلا داعٍ."""
+def _same(a: str, b: str) -> bool:
+    """تسويةٌ خفيفة: الفروق في التشكيل والفواصل لا تجعل السطرين مختلفين."""
+    strip = re.compile(r"[\s‏…·,،.()«»]+")
+    return bool(a) and bool(b) and strip.sub(" ", a).strip() == strip.sub(" ", b).strip()
+
+
+def line_faults(c: dict) -> list:
+    """
+    قواعد السطر الواحد — تُفحص في كل حقلٍ من كل قسم، لا في أقسامٍ منتقاة.
+
+    كلُّ خللٍ منها ظهر فعلاً على الشاشة ثم صار قاعدة:
+      • نقطةٌ لاتينية في آخر سطرٍ عربيّ  ⇦ ينكسر السطر سطرين قبل كلمته الأخيرة
+      • عربيّ في `ex`، أو إنجليزيّ في `exAr` ⇦ سطرٌ يقفز بين اتّجاهين
+      • `ar` تساوي `exAr` ⇦ يُقرأ السطر مرّتين بلا فائدة
+      • «» فارغة ⇦ بقيّةُ فصلٍ آليّ أتلف النصّ
+    """
     bad = []
 
-    def walk(path, node):
-        if isinstance(node, dict):
-            for k, v in node.items():
-                if k in ("ar", "exAr") and isinstance(v, str) \
-                        and ARABIC.search(v) and AR_TAIL_DOT.search(v):
-                    bad.append(f"{path}.{k}: «{v[-24:]}»")
-                else:
-                    walk(path if path.endswith(k) else f"{path}.{k}".strip("."), v)
-        elif isinstance(node, list):
-            for it in node:
-                walk(path, it)
+    def check(path, o):
+        ar, ex, exar = o.get("ar"), o.get("ex"), o.get("exAr")
+        note = o.get("note")
+        for k, v in (("ar", ar), ("exAr", exar)):
+            if isinstance(v, str) and ARABIC.search(v) and AR_TAIL_DOT.search(v):
+                bad.append(f"{path}.{k} ينتهي بنقطة لاتينية (ينكسر سطرين): «{v[-22:]}»")
+        if isinstance(ex, str) and ARABIC.search(ex):
+            bad.append(f"{path}.ex فيه عربيّ — ضع الإنجليزيّ وحده: «{ex[:34]}»")
+        if isinstance(exar, str) and LATIN.search(exar):
+            bad.append(f"{path}.exAr فيه إنجليزيّ: «{exar[:34]}»")
+        # المصطلح الإنجليزيّ داخل الملاحظة العربية مقصود ولا يُمنع: نسبةُ
+        # المرادف إلى معناه تحتاجه — «ضدّ abide by، لا ضدّ يطيق». والممنوع
+        # جملةٌ إنجليزية كاملة تسكن ملاحظةً عربية، فتلك سطرٌ يقفز بين اتّجاهين.
+        if isinstance(note, str) and ARABIC.search(note) \
+                and re.search(r"(?:[A-Za-z][\w'-]*\s+){3,}[A-Za-z]", note):
+            bad.append(f"{path}.note فيه جملة إنجليزية كاملة — انقلها إلى ex: «{note[:34]}»")
+        if _same(ar or "", exar or ""):
+            bad.append(f"{path}: ar و exAr سطرٌ واحد مكرَّر: «{(ar or '')[:30]}»")
+        for k, v in o.items():
+            if isinstance(v, str) and "«»" in v:
+                bad.append(f"{path}.{k} فيه اقتباس فارغ — نصٌّ أتلفه فصلٌ آليّ")
 
     for section, val in c.items():
-        walk(section, val)
+        if isinstance(val, list):
+            for i, o in enumerate(val):
+                if isinstance(o, dict):
+                    check(f"{section}[{i}]", o)
+        elif isinstance(val, dict):
+            check(section, val)
     return bad
 
 
 def faults(word: str, c: dict) -> list:
     out = []
 
-    for hit in arabic_tail_dots(c):
-        out.append(f"سطرٌ عربيّ ينتهي بنقطة لاتينية (ينكسر سطرين) — {hit}")
+    out.extend(line_faults(c))
 
     for k in SCALAR:
         if not c.get(k):
