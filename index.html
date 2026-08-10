@@ -24603,6 +24603,16 @@ async function doSync() {
 // ===== مواكبة خلفية صامتة: تحدّث الكلمات القديمة تدريجياً أثناء استخدام التطبيق العادي، بلا أي ضغطة أو انتظار =====
 let bgUpgradeActive = false, bgUpgradeAbort = false;
 async function backgroundUpgrade() {
+  /*
+   * أُوقفت — القاموس الآليّ لم يعد مصدراً لشيء.
+   *
+   * كانت تملأ الفراغات من قاموسٍ مفتوح، فتكتب في مكتبة المستخدم ما لا
+   * يُوثق به وتُرفع مع المزامنة. وقد أُلغي القاموس نهائياً بطلبه.
+   */
+  const s0 = document.getElementById('bg-upgrade-status');
+  if (s0) s0.textContent = '';
+  return;
+
   if (bgUpgradeActive || upgrading || syncing) return;
   /*
    * الكلمة التي كُتبت بطاقتها بيدٍ لا يمسّها القاموس الآليّ.
@@ -25622,20 +25632,31 @@ async function fetchEntryOnce(w, timeoutMs, _depth) {
   // شارة "Common word" الموسّعة (١٨,٠٠٠ كلمة) — تُعرض فقط عند غياب Oxford لتفادي ازدواج الشارات، وتحمل مستوى تقديرياً معها
   const freq = !oxford ? freqLookup(lemma || finalWord) : null;
 
+  /*
+   * نأخذ النطق ونترك الشرح.
+   *
+   * القاموس الآليّ ألغاه صاحب المكتبة نهائياً: كان يكتب معانيَ بلا عربيّة
+   * ومرادفاتٍ كذلك وأمثلةً مترجمة آلياً، فتمتلئ البطاقة بما لا يُوثق به
+   * وتُرفع مع المزامنة إلى كل جهاز. والبطاقة تُكتب بيدٍ وتمرّ على مدقّقٍ
+   * بسبعة عشر بنداً، أو تبقى فارغة حتى تُكتب — والفراغ أصدق.
+   *
+   * ويبقى ما ليس شرحاً: الرمز الصوتيّ وروابط النطق البشريّ والتصريفات —
+   * تلك تُسمَع أو تُشتقّ، ولا تزاحم بطاقةً مكتوبة.
+   */
   return {
     word: finalWord,
     ipa: ipa, ipaUS: ipaUS, ipaUK: ipaUK,
     audioUS: audioUS, audioUK: audioUK, audioGen: audioGen,
     arabicPron: ipaToArabic(ipaUS || ipa || ipaUK), oxford: oxford, cefr: cefr,
-    freqLabel: freq ? freq.label : '', estCefr: freq ? freq.estCefr : '',
+    freqLabel: '', estCefr: freq ? freq.estCefr : '',
     engineVersion: ENGINE_VERSION,
     pos: posSet,
-    meanings: meanings,
+    meanings: [],
     inflections: inflect(lemma || finalWord, posSet),
-    derivatives: derivs,
-    synonyms: synPairs,
-    collocations: collPairs,
-    examples: examples.slice(0, 3),
+    derivatives: [],
+    synonyms: [],
+    collocations: [],
+    examples: [],
     differences: [],
   };
 }
@@ -26109,7 +26130,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 122;
+const BUILD = 123;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.
@@ -27747,6 +27768,49 @@ load().then(async () => {
     if (Object.keys(enrichCache).length) renderList();
   } catch(e) { enrichCache = {}; }   // متصفّح بلا IndexedDB — التطبيق يعمل بدونه
   setCardQueue();                    // ولو كانت الذاكرة فارغة: الطابور حينها كل الكلمات
+
+  /*
+   * مسحُ ما خزّنه القاموس الآليّ قبل إلغائه — مرّةً واحدة.
+   *
+   * منعُ الجديد لا يكفي: المكتبة القائمة فيها بطاقاتٌ كُتبت من ذلك القاموس،
+   * وتبقى في المتصفّح وتُرفع مع المزامنة. والمسح يقع على الشرح وحده — لا على
+   * الكلمة ولا نطقها ولا تقدّم مراجعتها. والبطاقة المكتوبة بيدٍ لا تُمسّ
+   * لأن نصّها في الإثراء لا في الكلمة.
+   */
+  try {
+    if (!localStorage.getItem('tornado-machine-purged')) {
+      let cleaned = 0;
+      words.forEach(w => {
+        const had = (w.meanings || []).length || (w.synonyms || []).length ||
+                    (w.collocations || []).length || (w.examples || []).length ||
+                    (w.differences || []).length || (w.derivatives || []).length;
+        if (!had) return;
+        w.meanings = []; w.synonyms = []; w.collocations = [];
+        w.examples = []; w.differences = []; w.derivatives = [];
+        w.freqLabel = '';
+        cleaned++;
+      });
+      localStorage.setItem('tornado-machine-purged', '1');
+      if (cleaned) { save(); renderList(); }
+      console.log('مُسح شرحٌ آليّ من ' + cleaned + ' كلمة');
+    }
+  } catch (e) { /* لا يمنع الإقلاع */ }
+
+  /*
+   * البطاقة تنزل حين تجهز، لا حين يتذكّر صاحبها أن يضغط Sync.
+   *
+   * الكلمة تُرفع في ثوانٍ، ويكتب المسار بطاقتها على خوادم GitHub في دقائق.
+   * والاستطلاع مربوطٌ بالحاجة لا بالساعة: يسأل كل دقيقتين ما دامت كلمةٌ
+   * تنتظر بطاقتها، ويسكت تماماً حين تكتمل المكتبة — وسؤالُه فهرسٌ صغير،
+   * والشرائح لا تُنزَّل إلا إن تغيّرت بصماتها.
+   */
+  setInterval(async () => {
+    if (syncing || autoSyncBusy) return;
+    if (!pendingCards().length) return;
+    try {
+      if (await enrichSync()) { renderList(); flash('📚 وصلت بطاقاتٌ جديدة'); }
+    } catch (e) { /* انقطاع — نعيد بعد دقيقتين */ }
+  }, 120000);
 
   await autoSyncOnStartup(); // سحبٌ ورفعٌ معاً قبل أي إثراء — فلا نُثري نسخة قديمة
   backgroundUpgrade(); // إثراء المعاني يبدأ بصمت بلا أي ضغطة — لا await حتى لا تؤخر ظهور الصفحة
