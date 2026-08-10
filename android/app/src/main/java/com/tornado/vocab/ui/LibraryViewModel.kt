@@ -108,12 +108,22 @@ class LibraryViewModel(app: Application) : AndroidViewModel(app) {
             _expanded.value = now - id
         } else {
             _expanded.value = now + id
-            if (!_expandedWords.value.containsKey(id)) {
-                viewModelScope.launch {
-                    // البطاقة المدموجة لا الخام — القائمة هي ما ينظر فيه المستخدم فعلاً
-                    container.cards.full(id)?.let { c ->
-                        _expandedWords.value = _expandedWords.value + (id to c)
-                    }
+            /*
+             * تُقرأ في كل فتحة، ولا تُحفظ مرّةً واحدة إلى الأبد.
+             *
+             * كان الشرط `if (!containsKey(id))`، فالبطاقة التي فُتحت مرّةً
+             * تبقى في الذاكرة كما قُرئت أوّل مرّة. فيضغط المستخدم Sync وتصل
+             * البطاقة المصحَّحة إلى القاعدة، ثم يفتحها فيرى القديمة — ويظنّ
+             * المزامنة لم تعمل. رأيتها بعيني: صحّحتُ سطراً ودفعته، وزامن
+             * الجهاز، وبقي السطر القديم حتى أُغلق التطبيق وفُتح.
+             *
+             * والقراءة من Room رخيصة، والنسخة القديمة تبقى معروضة ريثما
+             * تصل الجديدة — فلا دوّارة انتظارٍ ولا وميض.
+             */
+            viewModelScope.launch {
+                // البطاقة المدموجة لا الخام — القائمة هي ما ينظر فيه المستخدم فعلاً
+                container.cards.full(id)?.let { c ->
+                    _expandedWords.value = _expandedWords.value + (id to c)
                 }
             }
         }
@@ -125,9 +135,8 @@ class LibraryViewModel(app: Application) : AndroidViewModel(app) {
         val ids = rows.value.map { it.id }
         _expanded.value = ids.toSet()
         viewModelScope.launch {
-            val missing = ids.filterNot { _expandedWords.value.containsKey(it) }
-            if (missing.isEmpty()) return@launch
-            val loaded = missing.mapNotNull { container.cards.full(it) }.associateBy { it.word.id }
+            // كلّها تُقرأ من جديد — لا تُستثنى المحفوظة، فقد تكون تغيّرت بمزامنة
+            val loaded = ids.mapNotNull { container.cards.full(it) }.associateBy { it.word.id }
             _expandedWords.value = _expandedWords.value + loaded
         }
     }

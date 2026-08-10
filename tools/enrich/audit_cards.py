@@ -30,6 +30,13 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 CURATED = os.path.join(HERE, "curated")
 
 ARABIC = re.compile(r"[؀-ۿ]")
+# نقطةٌ لاتينية في آخر سطرٍ عربيّ.
+#
+# قيس على الجهاز: كلّ سطرٍ عربيّ ينتهي بها يأخذ سطرين — ارتفاعه ١٢٧ بكسل
+# مقابل ٤٧ للإنجليزيّ — وينكسر قبل كلمته الأخيرة مهما اتّسع ما حوله. لأنها
+# محايدة الاتّجاه فتصير جرياً مستقلاً في فقرةٍ من اليمين إلى اليسار.
+# والأسطر العربية التي بلا نقطة تُعرض في سطرٍ واحد ولو بلغت أربعين حرفاً.
+AR_TAIL_DOT = re.compile(r"[  ]*\.\s*$")
 ARCHAIC = re.compile(r"(est|eth|edst|dst)$", re.I)
 # حروفٌ لاتينية داخل خانة العربية — علامةُ سطرٍ مختلط
 LATIN = re.compile(r"[A-Za-z]{2,}")
@@ -46,8 +53,32 @@ PAIRED = ("derivatives", "synonyms", "antonyms", "examples",
           "usageNotes", "pronunciationNote")
 
 
+def arabic_tail_dots(c: dict) -> list:
+    """كلّ سطرٍ عربيّ ينتهي بنقطةٍ لاتينية — يُعرض في سطرين بلا داعٍ."""
+    bad = []
+
+    def walk(path, node):
+        if isinstance(node, dict):
+            for k, v in node.items():
+                if k in ("ar", "exAr") and isinstance(v, str) \
+                        and ARABIC.search(v) and AR_TAIL_DOT.search(v):
+                    bad.append(f"{path}.{k}: «{v[-24:]}»")
+                else:
+                    walk(path if path.endswith(k) else f"{path}.{k}".strip("."), v)
+        elif isinstance(node, list):
+            for it in node:
+                walk(path, it)
+
+    for section, val in c.items():
+        walk(section, val)
+    return bad
+
+
 def faults(word: str, c: dict) -> list:
     out = []
+
+    for hit in arabic_tail_dots(c):
+        out.append(f"سطرٌ عربيّ ينتهي بنقطة لاتينية (ينكسر سطرين) — {hit}")
 
     for k in SCALAR:
         if not c.get(k):
