@@ -23893,13 +23893,27 @@ function enrichMerge(card) {
   const c = Object.assign({}, card);          // نسخة للعرض — الأصل لا يُمسّ
   // النطق يأتي بثلاث صيغ: أمريكية وبريطانية و«عامّة» بلا لهجة محدّدة.
   // والعامّة تُعرض وحدها إن لم تكن الاثنتان — لا تُنسب إلى لهجة لم تُذكر.
-  if (!c.ipaUS && e.ipa && e.ipa.us) c.ipaUS = e.ipa.us;
-  if (!c.ipaUK && e.ipa && e.ipa.uk) c.ipaUK = e.ipa.uk;
-  if (!c.ipaUS && !c.ipaUK && !c.ipa && e.ipa && e.ipa.gen) c.ipa = e.ipa.gen;
-  if (!c.arabicPron && e.arabicPron) c.arabicPron = e.arabicPron;
-  if (!c.oxford && e.oxford) c.oxford = e.oxford;
-  if (!c.cefr && e.cefr) c.cefr = e.cefr;
-  if (!c.cefr && !c.estCefr && e.cefrEst) c.estCefr = e.cefrEst;
+  /*
+   * المراجَعة تغلب في المفردات كما تغلب في القوائم.
+   *
+   * كان القديم يفوز ما دام غير فارغ. وذلك صحيحٌ للبطاقة الآليّة، وخطأٌ
+   * للمكتوبة بيد: نطق `abide` في القاموس الآليّ «بايد» بمقطعٍ واحد،
+   * وفي البطاقة المكتوبة «أَبايْد» بمقطعين كما يقتضي /əˈbaɪd/. فكان
+   * القارئ يرى الخطأ ويسمعه، والصواب مكتوبٌ لا يصل إليه.
+   * قيس: مئةٌ وأربعون بطاقة كان نطقها المكتوب محجوباً بالقديم.
+   */
+  const mine = !!e.curated;
+  const pick = (base, written) => (mine && written) ? written : (base || written || '');
+  if (e.ipa) {
+    c.ipaUS = pick(c.ipaUS, e.ipa.us);
+    c.ipaUK = pick(c.ipaUK, e.ipa.uk);
+    if (!c.ipaUS && !c.ipaUK) c.ipa = pick(c.ipa, e.ipa.gen);
+  }
+  c.arabicPron = pick(c.arabicPron, e.arabicPron);
+  c.oxford     = pick(c.oxford, e.oxford);
+  c.cefr       = pick(c.cefr, e.cefr);
+  // التقدير لا يُعرض مع مستوىً رسميّ — رقمان في شاشةٍ واحدة يتناقضان
+  c.estCefr    = c.cefr ? '' : pick(c.estCefr, e.cefrEst);
   /*
    * المراجَعة تحلّ محلّ القديمة، ولا تُضاف إليها.
    *
@@ -26053,7 +26067,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 118;
+const BUILD = 119;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.
@@ -27066,6 +27080,52 @@ function narrationSegments(rawCard, rep, detailed) {
     exs.forEach(ex => pushPair(ex));
   }
   arr(card.differences).forEach(d => { push('Note the difference: ' + (d.en || d) + '.', 'en-US'); if (d.ar) push(d.ar + '.', 'ar-SA'); });
+
+  /*
+   * بقيّة البطاقة — أقسامٌ لا مكان لها في بطاقة الجهاز وتسكن الإثراء.
+   *
+   * كان الصوت يقف عند «الفروق»، فيسمع المتعلّم نصف ما يقرأ: لا اشتقاقات،
+   * ولا أضداد، ولا نمط تركيبٍ واحد، ولا ملاحظة نطقٍ ولا استعمال. والترتيب
+   * هنا ترتيب الشاشة نفسه، فما يُقرأ هو ما يُسمَع.
+   *
+   * والبصمة تشمل هذا كلّه لأن `cacheKey` تُحسب على المقاطع المنطوقة نفسها،
+   * فيُعاد بناء الصوت وحده حين يتغيّر ما يُقال.
+   */
+  if (arr(card.derivatives).length) {
+    push('Related words.', 'en-US', 500, true);
+    card.derivatives.forEach(d => { push((d.en || d) + '.', 'en-US'); if (d.ar) push(d.ar + '.', 'ar-SA'); });
+  }
+  const e = card._e || {};
+  if (arr(e.antonyms).length) {
+    push('Opposites.', 'en-US', 500, true);
+    e.antonyms.forEach(a => { push((a.en || a) + '.', 'en-US'); if (a.ar) push(a.ar + '.', 'ar-SA'); });
+  }
+  if (arr(card.grammarPatterns).length) {
+    push('Grammar patterns.', 'en-US', 500, true);
+    card.grammarPatterns.forEach(p => {
+      push((p.en || p) + '.', 'en-US'); if (p.ar) push(p.ar + '.', 'ar-SA');
+      if (p.ex) { push(p.ex + '.', 'en-US', 900); if (p.exAr) push(p.exAr + '.', 'ar-SA'); }
+    });
+  }
+  if (arr(e.phrasalVerbs).length) {
+    push('Phrasal verbs.', 'en-US', 500, true);
+    e.phrasalVerbs.forEach(p => { push((p.phrase || '') + '.', 'en-US'); if (p.gloss) push(p.gloss + '.', 'ar-SA'); });
+  }
+  if (arr(e.idioms).length) {
+    push('Idioms.', 'en-US', 500, true);
+    e.idioms.forEach(p => { push((p.phrase || '') + '.', 'en-US'); if (p.gloss) push(p.gloss + '.', 'ar-SA'); });
+  }
+  if (arr(e.pronunciationNote).length) {
+    push('A note on pronunciation.', 'en-US', 500, true);
+    e.pronunciationNote.forEach(p => { push((p.en || p) + '.', 'en-US'); if (p.ar) push(p.ar + '.', 'ar-SA'); });
+  }
+  if (arr(e.usageNotes).length) {
+    push('How it is used.', 'en-US', 500, true);
+    e.usageNotes.forEach(n => {
+      if (n.ar) push(n.ar + '.', 'ar-SA');
+      if (n.ex) { push(n.ex + '.', 'en-US', 900); if (n.exAr) push(n.exAr + '.', 'ar-SA'); }
+    });
+  }
   return L;
 }
 function narrationText(card, rep) {
