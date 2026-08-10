@@ -50,8 +50,8 @@ android {
         applicationId = "com.tornado.vocab"
         minSdk = 26
         targetSdk = 35
-        versionCode = 7
-        versionName = "2.5"
+        versionCode = 10
+        versionName = "2.8"
     }
 
     /*
@@ -189,4 +189,7 @@ dependencies {
 
 // Robolectric ÙŠØ­ØªØ§Ø¬ Ù…ÙˆØ§Ø±Ø¯ Ø£Ù†Ø¯Ø±ÙˆÙŠØ¯ Ø§Ù„Ø­Ù‚ÙŠÙ‚ÙŠØ© Ù„ØªØ´ØºÙŠÙ„ Ø§Ù„Ø§Ø®ØªØ¨Ø§Ø±Ø§Øª Ø¹Ù„Ù‰ JVM
 android.testOptions.unitTests.isIncludeAndroidResources = true
+
+
+
 

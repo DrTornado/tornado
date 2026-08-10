@@ -1,5 +1,6 @@
 package com.tornado.vocab.audio
 
+import com.tornado.vocab.data.Enrichment
 import com.tornado.vocab.data.Linguistics
 import com.tornado.vocab.data.Meaning
 import com.tornado.vocab.data.Word
@@ -84,15 +85,24 @@ enum class NarrationDetail { BRIEF, FULL }
  */
 object NarrationBuilder {
 
+    /**
+     * @param extra أقسامٌ لا موضع لها في `Word` أصلاً: الأضداد وملاحظات
+     *   الاستعمال وأنماط التركيب وملاحظة النطق والأفعال المركّبة والتعابير.
+     *
+     *   كان البنّاء يقرأ `Word` وحدها، فيقرأ الصوتُ نصفَ البطاقة ويسكت عن
+     *   نصفها — لا لأن النصف الآخر ناقص بل لأنه في جدولٍ آخر لا يصل إليه.
+     *   والمتعلّم يسمع أكثر ممّا يقرأ، فما لا يُقال لا يُحفَظ.
+     */
     fun build(
         word: Word,
         repeat: Int,
         mode: NarrationMode,
         detail: NarrationDetail,
-        speakArabic: Boolean
+        speakArabic: Boolean,
+        extra: Enrichment? = null
     ): List<Segment> = when (mode) {
         NarrationMode.HUMAN_ONLY -> buildHumanOnly(word, repeat)
-        NarrationMode.RICH -> buildRich(word, repeat, detail, speakArabic)
+        NarrationMode.RICH -> buildRich(word, repeat, detail, speakArabic, extra)
     }
 
     /**
@@ -119,7 +129,8 @@ object NarrationBuilder {
         word: Word,
         repeat: Int,
         detail: NarrationDetail,
-        speakArabic: Boolean
+        speakArabic: Boolean,
+        extra: Enrichment? = null
     ): List<Segment> {
         val rep = repeat.coerceAtLeast(1)
         val detailed = detail == NarrationDetail.FULL
@@ -213,6 +224,52 @@ object NarrationBuilder {
             push("Note the difference: ${it.en}.", SegLang.EN)
             if (it.ar.isNotBlank()) push("${it.ar}.", SegLang.AR)
         }
+
+        /*
+         * بقيّة البطاقة — ما لا يحمله `Word` ويسكن الإثراء.
+         *
+         * كان الصوت يقف عند «الفروق»، فيسمع المتعلّم نصف ما يقرأ: لا أضداد،
+         * ولا نمط تركيبٍ واحد، ولا ملاحظة نطقٍ ولا استعمال. والترتيب هنا هو
+         * ترتيب الشاشة نفسه، فما يُقرأ هو ما يُسمَع بلا اختلاف.
+         */
+        extra?.let { e ->
+            if (e.antonyms.isNotEmpty()) {
+                push("Opposites.", SegLang.EN, 500)
+                e.antonyms.forEach { pushPair(it.en, it.ar) }
+            }
+            if (e.grammarPatterns.isNotEmpty()) {
+                push("Grammar patterns.", SegLang.EN, 500)
+                e.grammarPatterns.forEach { p ->
+                    pushPair(p.en, p.ar)
+                    if (p.ex.isNotBlank()) {
+                        push(p.ex.trim(), SegLang.EN, 900, SegRole.EXAMPLE)
+                        if (p.exAr.isNotBlank()) push("${p.exAr}.", SegLang.AR)
+                    }
+                }
+            }
+            e.phrasalVerbs.orEmpty().takeIf { it.isNotEmpty() }?.let { list ->
+                push("Phrasal verbs.", SegLang.EN, 500)
+                list.forEach { pushPair(it.phrase, it.gloss) }
+            }
+            e.idioms.orEmpty().takeIf { it.isNotEmpty() }?.let { list ->
+                push("Idioms.", SegLang.EN, 500)
+                list.forEach { pushPair(it.phrase, it.gloss) }
+            }
+            if (e.pronunciationNote.isNotEmpty()) {
+                push("A note on pronunciation.", SegLang.EN, 500)
+                e.pronunciationNote.forEach { pushPair(it.en, it.ar) }
+            }
+            if (e.usageNotes.isNotEmpty()) {
+                push("How it is used.", SegLang.EN, 500)
+                e.usageNotes.forEach { n ->
+                    if (n.ar.isNotBlank()) push("${n.ar}.", SegLang.AR)
+                    if (n.ex.isNotBlank()) {
+                        push(n.ex.trim(), SegLang.EN, 900, SegRole.EXAMPLE)
+                        if (n.exAr.isNotBlank()) push("${n.exAr}.", SegLang.AR)
+                    }
+                }
+            }
+        }
         return out
     }
 
@@ -222,6 +279,8 @@ object NarrationBuilder {
         repeat: Int,
         mode: NarrationMode,
         detail: NarrationDetail,
-        speakArabic: Boolean
-    ): String = build(word, repeat, mode, detail, speakArabic).joinToString("\n") { it.text }
+        speakArabic: Boolean,
+        extra: Enrichment? = null
+    ): String =
+        build(word, repeat, mode, detail, speakArabic, extra).joinToString("\n") { it.text }
 }

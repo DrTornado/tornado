@@ -32,8 +32,22 @@ data class EnrichCard(
      * يُحسب عند كل عرضٍ للقائمة، وتحليل مئةٍ وسبعين بطاقة في كل مرّة ليقرأ
      * منها حقلاً واحداً عبثٌ يُدفع ثمنه في كل تمرير.
      */
-    val curated: Boolean = false
+    val curated: Boolean = false,
+    /**
+     * المستوى كما في البطاقة المكتوبة — الرسميّ إن وُجد، وإلا التقدير.
+     *
+     * صفُّ القائمة خفيف: مشروعٌ من جدول الكلمات لا بطاقةٌ كاملة، فلا يمرّ
+     * بنقطة الدمج. فكان يعرض مستوى القاموس القديم بينما تعرض البطاقة
+     * المفتوحة تحته المستوى المكتوب — «≈ C1» فوق و«CEFR B2» تحت، في شاشةٍ
+     * واحدة. وخانةٌ صغيرة هنا أرخص من قراءة ستّمائة كيلوبايت لتُرسم شارة.
+     */
+    val level: String = "",
+    /** true إن كان `level` مستوىً رسمياً لا تقديراً — فتُرسم الشارة بلا «≈» */
+    val levelExact: Boolean = false
 )
+
+/** مستوى كلمةٍ مكتوبة — مشروعٌ صغير لا بطاقةٌ كاملة */
+data class CardLevel(val word: String, val level: String, val levelExact: Boolean)
 
 /** بصمة شريحة — بها نعرف ما تغيّر فلا ننزّل ما لم يتغيّر */
 @Entity(tableName = "enrich_shards")
@@ -67,6 +81,10 @@ interface EnrichDao {
     /** نفسها لقراءةٍ واحدة — لمن لا يراقب التغيّر */
     @Query("SELECT word FROM enrich_cards WHERE curated = 1")
     suspend fun curatedWordsOnce(): List<String>
+
+    /** مستويات البطاقات المكتوبة — خريطةٌ صغيرة تخدم شارة صفّ القائمة */
+    @Query("SELECT word, level, levelExact FROM enrich_cards WHERE curated = 1 AND level != ''")
+    fun curatedLevels(): Flow<List<CardLevel>>
 }
 
 /** زوجٌ بعنوان — للأفعال المركّبة والتعابير: العبارة وشرحها */

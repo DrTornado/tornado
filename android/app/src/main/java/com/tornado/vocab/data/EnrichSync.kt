@@ -91,11 +91,15 @@ class EnrichSync(
                     while (words.hasNext()) {
                         val w = words.next()
                         cards.optJSONObject(w)?.let {
+                            val exact = it.optString("cefr").orEmpty()
+                            val est = it.optString("cefrEst").orEmpty()
                             rows.add(
                                 EnrichCard(
                                     word = w.lowercase(),
                                     json = it.toString(),
-                                    curated = it.optBoolean("curated", false)
+                                    curated = it.optBoolean("curated", false),
+                                    level = exact.ifBlank { est },
+                                    levelExact = exact.isNotBlank()
                                 )
                             )
                         }
@@ -124,6 +128,9 @@ class EnrichSync(
     suspend fun curatedWordSet(): Set<String> = withContext(Dispatchers.IO) {
         dao.curatedWordsOnce().toHashSet()
     }
+
+    /** مستويات البطاقات المكتوبة — لشارة صفّ القائمة */
+    fun curatedLevels(): Flow<List<CardLevel>> = dao.curatedLevels()
 
     private companion object {
         const val DIR = "enrich"

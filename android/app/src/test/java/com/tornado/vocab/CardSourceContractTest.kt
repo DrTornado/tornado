@@ -1,11 +1,15 @@
 package com.tornado.vocab
 
+import com.tornado.vocab.audio.NarrationBuilder
+import com.tornado.vocab.audio.NarrationDetail
+import com.tornado.vocab.audio.NarrationMode
 import com.tornado.vocab.data.Enrichment
 import com.tornado.vocab.data.LangPair
 import com.tornado.vocab.data.Meaning
 import com.tornado.vocab.data.Word
 import com.tornado.vocab.data.withEnrichment
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -126,6 +130,74 @@ class CardSourceContractTest {
         assertEquals(listOf("stand"), shown.synonyms.map { it.en })
         // الأضداد لا موضع لها في Word — تبقى في الإثراء وتُقرأ منه
         assertEquals(listOf("violate"), curated?.antonyms?.map { it.en })
+    }
+
+    /**
+     * الصوت يقرأ البطاقة كاملة، لا نصفها.
+     *
+     * الأضداد وأنماط التركيب وملاحظتا النطق والاستعمال لا موضع لها في `Word`
+     * أصلاً — تسكن الإثراء. وكان البنّاء يقرأ `Word` وحدها فيقف عند «الفروق»،
+     * فيسمع المتعلّم نصف ما يقرأ ولا يدري أن ثمّة نصفاً آخر.
+     */
+    @Test
+    fun `full narration speaks the sections that live only in the enrichment`() {
+        val w = Word(
+            id = 3, word = "abide",
+            meanings = listOf(Meaning(en = "to tolerate", ar = "يطيق"))
+        )
+        val e = Enrichment.parse(
+            """
+            {"curated":true,
+             "antonyms":[{"en":"violate","ar":"يخالف"}],
+             "grammarPatterns":[{"en":"abide by + a rule","ar":"يلتزم بقاعدة",
+                                 "ex":"You must abide by the rules","exAr":"يجب أن تلتزم"}],
+             "pronunciationNote":[{"en":"abide","ar":"النبر على المقطع الثاني"}],
+             "usageNotes":[{"ar":"تكاد تقتصر على النفي","ex":"can't abide",
+                            "exAr":"لا يطيق"}]}
+            """.trimIndent()
+        )
+
+        fun spoken(extra: Enrichment?) = NarrationBuilder.build(
+            w, repeat = 1, mode = NarrationMode.RICH,
+            detail = NarrationDetail.FULL, speakArabic = true, extra = extra
+        ).joinToString("\n") { it.text }
+
+        val withExtra = spoken(e)
+        val without = spoken(null)
+
+        for (piece in listOf("violate", "abide by + a rule",
+                             "You must abide by the rules", "can't abide")) {
+            assertTrue("الصوت لا يقول: $piece", withExtra.contains(piece))
+            assertFalse("ظهر بلا إثراء — فالاختبار لا يثبت شيئاً: $piece",
+                        without.contains(piece))
+        }
+        assertTrue(withExtra.contains("النبر على المقطع الثاني"))
+    }
+
+    /**
+     * المفردات أيضاً: النطق والمستوى يأتيان من المراجَعة لا من القاموس الآليّ.
+     *
+     * `abide` نطقها في القاموس «بايد» بمقطعٍ واحد، وفي البطاقة المكتوبة
+     * «أَبايْد» بمقطعين كما يقتضي /əˈbaɪd/. وكان القديم يغلب لأنه غير فارغ.
+     */
+    @Test
+    fun `curated scalars win over what the app built for itself`() {
+        val raw = Word(
+            id = 4, word = "abide",
+            arabicPron = "بايد", cefr = "B2", estCefr = "B2",
+            meanings = listOf(Meaning(en = "to tolerate", ar = "يطيق"))
+        )
+        val curated = Enrichment.parse(
+            """{"curated":true,"arabicPron":"أَبايْد","cefrEst":"C1",
+                "meanings":[{"en":"to tolerate","ar":"يطيق","pos":"verb"}]}"""
+        )
+        val shown = raw.withEnrichment(curated)
+        assertEquals("أَبايْد", shown.arabicPron)
+        assertEquals("C1", shown.estCefr)
+
+        // والآليّة لا تُزيح شيئاً — فيها ما ليس عندنا وحذفه خسارة
+        val machine = Enrichment.parse("""{"curated":false,"arabicPron":"شيء آخر"}""")
+        assertEquals("بايد", raw.withEnrichment(machine).arabicPron)
     }
 
     /** غير المراجَعة تُضاف ولا تُزيح — فيها ما ليس عندنا وحذفه خسارة */

@@ -592,10 +592,12 @@ class PlaybackService : MediaSessionService() {
                 coroutineContext.ensureActive()
                 if (session.isNotEmpty()) return@launch   // بدأ التشغيل فعلاً — ننسحب
                 if (row.kind != RowKind.WORD) return@forEach
-                val word = withContext(Dispatchers.IO) { cards.card(row.id) } ?: return@forEach
-                if (narration.isCached(word, spec)) return@forEach
+                val card = withContext(Dispatchers.IO) { cards.full(row.id) } ?: return@forEach
+                if (narration.isCached(card.word, spec, card.extra)) return@forEach
                 runCatching {
-                    withContext(Dispatchers.IO) { narration.getOrBuild(word, spec) }
+                    withContext(Dispatchers.IO) {
+                        narration.getOrBuild(card.word, spec, extra = card.extra)
+                    }
                 }
             }
         }
@@ -660,10 +662,16 @@ class PlaybackService : MediaSessionService() {
             val result = withContext(Dispatchers.IO) {
                 when (row.kind) {
                     RowKind.WORD -> {
-                        val full = cards.card(row.id) ?: return@withContext null
-                        narration.getOrBuild(full, spec) { done, total ->
-                            PlaybackBus.update { it.copy(prepareDone = done, prepareTotal = total) }
-                        }
+                        val card = cards.full(row.id) ?: return@withContext null
+                        narration.getOrBuild(
+                            card.word, spec,
+                            onProgress = { done, total ->
+                                PlaybackBus.update {
+                                    it.copy(prepareDone = done, prepareTotal = total)
+                                }
+                            },
+                            extra = card.extra
+                        )
                     }
                     RowKind.NOTE_CHUNK -> {
                         val note = notes.byId(row.id) ?: return@withContext null

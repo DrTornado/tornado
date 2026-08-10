@@ -60,18 +60,36 @@ internal fun Word.withEnrichment(e: Enrichment?): Word {
     val extraMeanings = e.meanings.filter { m ->
         m.en.isNotBlank() && meanings.none { norm(it.en) == norm(m.en) }
     }
+    /*
+     * المراجَعة تغلب في المفردات كما تغلب في القوائم.
+     *
+     * كان الخام يفوز في هذه الحقول ما دام غير فارغ — «ما بناه التطبيق لنفسه
+     * لا يُزاح». وذلك صحيحٌ للبطاقة الآليّة، وخطأٌ للمكتوبة بيد: نطقُ `abide`
+     * في القاموس الآليّ «بايد» بمقطعٍ واحد، وفي البطاقة المكتوبة «أَبايْد»
+     * بمقطعين كما يقتضي /əˈbaɪd/. فكان القارئ يرى الخطأ ويسمعه، والصواب
+     * مكتوبٌ لا يصل إليه.
+     *
+     * وكذلك المستوى: يظهر «‏≈ C1» في سطر القائمة و«CEFR B2» داخل البطاقة —
+     * رقمان متناقضان في شاشةٍ واحدة، مصدرهما هذا التفضيل نفسه.
+     */
+    fun pick(mine: String, base: String) = if (e.curated && mine.isNotBlank()) mine else base
+
     return copy(
-        ipaUS = ipaUS.ifBlank { e.ipaUS },
-        ipaUK = ipaUK.ifBlank { e.ipaUK },
-        ipa = if (ipaUS.isBlank() && ipaUK.isBlank() && e.ipaUS.isBlank() &&
-            e.ipaUK.isBlank()
-        ) ipa.ifBlank { e.ipaGen } else ipa,
-        arabicPron = arabicPron.ifBlank { e.arabicPron },
-        oxford = oxford.ifBlank { e.oxford },
-        cefr = cefr.ifBlank { e.cefr },
-        estCefr = if (cefr.isBlank() && e.cefr.isBlank()) {
-            estCefr.ifBlank { e.cefrEst }
-        } else estCefr,
+        ipaUS = pick(e.ipaUS, ipaUS.ifBlank { e.ipaUS }),
+        ipaUK = pick(e.ipaUK, ipaUK.ifBlank { e.ipaUK }),
+        ipa = pick(
+            e.ipaGen,
+            if (ipaUS.isBlank() && ipaUK.isBlank() && e.ipaUS.isBlank() &&
+                e.ipaUK.isBlank()
+            ) ipa.ifBlank { e.ipaGen } else ipa
+        ),
+        arabicPron = pick(e.arabicPron, arabicPron.ifBlank { e.arabicPron }),
+        oxford = pick(e.oxford, oxford.ifBlank { e.oxford }),
+        cefr = pick(e.cefr, cefr.ifBlank { e.cefr }),
+        estCefr = pick(
+            e.cefrEst,
+            if (cefr.isBlank() && e.cefr.isBlank()) estCefr.ifBlank { e.cefrEst } else estCefr
+        ),
         pos = if (e.curated && e.pos.isNotEmpty()) e.pos
               else pos + e.pos.filterNot { p -> pos.any { norm(it) == norm(p) } },
         meanings = if (e.curated && e.meanings.isNotEmpty()) e.meanings

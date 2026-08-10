@@ -75,6 +75,7 @@ fun LibraryScreen(
     val stats by vm.stats.collectAsStateWithLifecycle()
     val pendingGaps by vm.pendingGaps.collectAsStateWithLifecycle()
     val cardQueue by vm.cardQueue.collectAsStateWithLifecycle()
+    val levels by vm.levels.collectAsStateWithLifecycle()
     val expanded by vm.expanded.collectAsStateWithLifecycle()
     val expandedWords by vm.expandedWords.collectAsStateWithLifecycle()
     var pendingDelete by remember { mutableStateOf<WordRow?>(null) }
@@ -192,6 +193,7 @@ fun LibraryScreen(
                     val isOpen = expanded.contains(row.id)
                     WordListRow(
                         row = row,
+                        levels = levels,
                         expanded = isOpen,
                         onOpen = { vm.toggleExpanded(row.id) },
                         onFavorite = { vm.toggleFavorite(row) },
@@ -441,6 +443,7 @@ private fun InlinePairs(title: String, items: List<com.tornado.vocab.data.LangPa
 @Composable
 private fun WordListRow(
     row: WordRow,
+    levels: Map<String, Pair<String, Boolean>>,
     expanded: Boolean,
     onOpen: () -> Unit,
     onFavorite: () -> Unit,
@@ -477,13 +480,18 @@ private fun WordListRow(
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.weight(1f, fill = false)
                 )
-                val level = row.cefr.ifBlank { row.estCefr }
+                /*
+                 * المكتوبة أوّلاً، ثم ما بناه التطبيق لنفسه.
+                 *
+                 * كان الصفّ يقرأ الخام وحده، فيعرض «≈ C1» بينما تعرض البطاقة
+                 * المفتوحة تحته «CEFR B2» — رقمان متناقضان في شاشةٍ واحدة.
+                 */
+                val written = levels[row.word.trim().lowercase()]
+                val level = written?.first ?: row.cefr.ifBlank { row.estCefr }
+                val exact = written?.second ?: row.cefr.isNotBlank()
                 if (level.isNotBlank()) {
                     HSpace(8)
-                    InfoBadge(
-                        if (row.cefr.isNotBlank()) level else "≈ $level",
-                        dashed = row.cefr.isBlank()
-                    )
+                    InfoBadge(if (exact) level else "≈ $level", dashed = !exact)
                 }
             }
             val subtitle = row.primaryAr.ifBlank { row.primaryEn }

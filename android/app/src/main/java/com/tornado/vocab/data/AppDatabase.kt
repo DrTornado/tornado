@@ -48,7 +48,7 @@ class Converters {
         Word::class, WordFts::class, Tombstone::class, Note::class,
         NoteTombstone::class, EnrichCard::class, EnrichShard::class
     ],
-    version = 5,
+    version = 6,
     exportSchema = true
 )
 @TypeConverters(Converters::class)
@@ -154,6 +154,33 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
+        /**
+         * خانتا المستوى.
+         *
+         * ونفس علاج الترحيل السابق: الجدول يُعاد إنشاؤه لا يُضاف إليه عمود،
+         * فيطابق نصُّ إنشائه ما تولّده Room حرفاً بحرف. والبطاقات نسخةٌ من
+         * المستودع، ومسحُ البصمات يعيدها كلّها في أوّل مزامنة فتُملأ الخانتان
+         * من مصدرهما.
+         */
+        private val MIGRATION_5_6 = object : Migration(5, 6) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("DROP TABLE IF EXISTS `enrich_cards`")
+                db.execSQL(
+                    """
+                    CREATE TABLE IF NOT EXISTS `enrich_cards` (
+                        `word` TEXT NOT NULL,
+                        `json` TEXT NOT NULL,
+                        `curated` INTEGER NOT NULL,
+                        `level` TEXT NOT NULL,
+                        `levelExact` INTEGER NOT NULL,
+                        PRIMARY KEY(`word`)
+                    )
+                    """.trimIndent()
+                )
+                db.execSQL("DELETE FROM `enrich_shards`")
+            }
+        }
+
         private val MIGRATION_1_2 = object : Migration(1, 2) {
             override fun migrate(db: SupportSQLiteDatabase) {
                 db.execSQL(
@@ -177,7 +204,10 @@ abstract class AppDatabase : RoomDatabase() {
             INSTANCE ?: Room.databaseBuilder(
                 context.applicationContext, AppDatabase::class.java, "tornado.db"
             )
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
+                .addMigrations(
+                    MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4,
+                    MIGRATION_4_5, MIGRATION_5_6
+                )
                 .build()
                 .also { INSTANCE = it }
         }

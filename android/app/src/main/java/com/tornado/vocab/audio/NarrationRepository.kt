@@ -1,6 +1,7 @@
 package com.tornado.vocab.audio
 
 import android.content.Context
+import com.tornado.vocab.data.Enrichment
 import com.tornado.vocab.data.Word
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -65,20 +66,21 @@ class NarrationRepository(
 
     init { cardDir.mkdirs(); segDir.mkdirs(); tmpDir.mkdirs() }
 
-    fun cachedFile(word: Word, spec: NarrationSpec): File =
-        File(cardDir, "${word.id}-${cardKey(word, spec)}.${AudioEncoder.EXTENSION}")
+    fun cachedFile(word: Word, spec: NarrationSpec, extra: Enrichment? = null): File =
+        File(cardDir, "${word.id}-${cardKey(word, spec, extra)}.${AudioEncoder.EXTENSION}")
 
-    fun isCached(word: Word, spec: NarrationSpec): Boolean {
-        val f = cachedFile(word, spec)
+    fun isCached(word: Word, spec: NarrationSpec, extra: Enrichment? = null): Boolean {
+        val f = cachedFile(word, spec, extra)
         return f.exists() && f.length() > 128
     }
 
     suspend fun getOrBuild(
         word: Word,
         spec: NarrationSpec,
-        onProgress: ((done: Int, total: Int) -> Unit)? = null
+        onProgress: ((done: Int, total: Int) -> Unit)? = null,
+        extra: Enrichment? = null
     ): NarrationResult? = withContext(Dispatchers.IO) {
-        val target = cachedFile(word, spec)
+        val target = cachedFile(word, spec, extra)
         if (target.exists() && target.length() > 128) {
             target.setLastModified(System.currentTimeMillis())
             val meta = readMeta(target)
@@ -93,7 +95,7 @@ class NarrationRepository(
                     target, storedDuration(target), meta.source, meta.human, meta.total
                 )
             }
-            build(word, spec, target, onProgress)
+            build(word, spec, target, onProgress, extra)
         }
     }
 
@@ -227,9 +229,12 @@ class NarrationRepository(
         word: Word,
         spec: NarrationSpec,
         target: File,
-        onProgress: ((Int, Int) -> Unit)?
+        onProgress: ((Int, Int) -> Unit)?,
+        extra: Enrichment? = null
     ): NarrationResult? {
-        val segments = NarrationBuilder.build(word, spec.repeat, spec.mode, spec.detail, spec.speakArabic)
+        val segments = NarrationBuilder.build(
+            word, spec.repeat, spec.mode, spec.detail, spec.speakArabic, extra
+        )
         if (segments.isEmpty()) return null
         return buildSegments(segments, target, word.word, onProgress, spec, word.id)
     }
@@ -463,9 +468,9 @@ class NarrationRepository(
      * حرفٌ ممّا يُسمَع تغيّر المفتاح، وإن لم يتغيّر شيء أُعيد استعمال
      * الملفّ. لا رقمَ إصدارٍ يُرفع يدوياً، ولا حقلَ يُنسى.
      */
-    private fun spokenKey(word: Word, spec: NarrationSpec): String {
+    private fun spokenKey(word: Word, spec: NarrationSpec, extra: Enrichment?): String {
         val segs = NarrationBuilder.build(
-            word, spec.repeat, spec.mode, spec.detail, spec.speakArabic
+            word, spec.repeat, spec.mode, spec.detail, spec.speakArabic, extra
         )
         return hash(
             buildString {
@@ -478,8 +483,8 @@ class NarrationRepository(
         )
     }
 
-    private fun cardKey(word: Word, spec: NarrationSpec): String =
-        spokenKey(word, spec)
+    private fun cardKey(word: Word, spec: NarrationSpec, extra: Enrichment?): String =
+        spokenKey(word, spec, extra)
 
     private fun hash(s: String): String =
         MessageDigest.getInstance("SHA-1").digest(s.toByteArray())

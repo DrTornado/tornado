@@ -24,6 +24,7 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -77,6 +78,17 @@ class LibraryViewModel(app: Application) : AndroidViewModel(app) {
         val have = written.toHashSet()
         all.map { it.word }.filter { it.trim().lowercase() !in have }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+
+    /**
+     * مستويات البطاقات المكتوبة — لشارة صفّ القائمة.
+     *
+     * الصفّ مشروعٌ خفيف من جدول الكلمات لا يمرّ بنقطة الدمج، فكان يعرض
+     * مستوى القاموس القديم بينما تعرض البطاقة المفتوحة تحته المستوى المكتوب.
+     */
+    val levels: StateFlow<Map<String, Pair<String, Boolean>>> =
+        container.enrichSync.curatedLevels()
+            .map { list -> list.associate { it.word to (it.level to it.levelExact) } }
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyMap())
 
     /**
      * تهدئة ٢٠٠ ملي ثانية على نص البحث وحده.
