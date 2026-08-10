@@ -128,6 +128,28 @@ def line_faults(c: dict) -> list:
                     check(f"{section}[{i}]", o)
         elif isinstance(val, dict):
             check(section, val)
+
+    # الأفعال المركّبة والتعابير بشكلٍ آخر: {phrase, en, gloss}.
+    #
+    # وكان الشرح فيها حقلاً واحداً للغتين — «to follow a rule — يلتزم بقاعدة»
+    # — فسقطت من الفحص كلّه لأن مفاتيحها ليست `ar`/`en`. فيُفحص `gloss`:
+    # عربيٌّ خالص، بلا نقطةٍ لاتينية في آخره.
+    for sec in ("phrasalVerbs", "idioms"):
+        for i, p in enumerate(c.get(sec) or []):
+            if not isinstance(p, dict):
+                continue
+            g = p.get("gloss") or ""
+            if not g:
+                bad.append(f"{sec}[{i}] بلا شرح عربيّ")
+            elif not ARABIC.search(g):
+                bad.append(f"{sec}[{i}] الشرح ليس عربياً: «{g[:34]}»")
+            elif LATIN.search(g):
+                bad.append(f"{sec}[{i}] الشرح يخلط اللغتين — الإنجليزيّ إلى en: "
+                           f"«{g[:34]}»")
+            elif AR_TAIL_DOT.search(g):
+                bad.append(f"{sec}[{i}] الشرح ينتهي بنقطة لاتينية: «{g[-22:]}»")
+            if ARABIC.search(p.get("phrase") or ""):
+                bad.append(f"{sec}[{i}] العبارة فيها عربيّ: «{p['phrase'][:30]}»")
     return bad
 
 

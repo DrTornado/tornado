@@ -23909,6 +23909,9 @@ function enrichMerge(card) {
     c.ipaUK = pick(c.ipaUK, e.ipa.uk);
     if (!c.ipaUS && !c.ipaUK) c.ipa = pick(c.ipa, e.ipa.gen);
   }
+  // نطقان متطابقان يُطبعان مرّتين: «/əˈbaɪd/ · /əˈbaɪd/». وتساويهما يعني
+  // أن اللهجتين لا تفترقان في هذه الكلمة، فيُقال مرّةً واحدة بلا نسبةٍ لهجية.
+  if (c.ipaUS && c.ipaUS === c.ipaUK) { c.ipa = c.ipaUS; c.ipaUS = ''; c.ipaUK = ''; }
   c.arabicPron = pick(c.arabicPron, e.arabicPron);
   c.oxford     = pick(c.oxford, e.oxford);
   c.cefr       = pick(c.cefr, e.cefr);
@@ -23971,9 +23974,17 @@ function enrichExtraHtml(c) {
   return `
     ${arr(e.antonyms).length ? `<div class="sect"><b class="h">Antonyms</b>${e.antonyms.map(pairHtml).join('')}</div>` : ''}
     ${arr(e.phrasalVerbs).length ? `<div class="sect"><b class="h">Phrasal verbs</b>${e.phrasalVerbs.map(p =>
-      `<div class="pair"><b>${esc(p.phrase || '')}</b>${p.gloss ? `<div style="color:#8A93A3;">${esc(p.gloss)}</div>` : ''}</div>`).join('')}</div>` : ''}
+      `<div class="pair"><b>${esc(p.phrase || '')}</b>${
+        p.en ? `<div>${esc(p.en)}</div>` : ''}${
+        p.gloss ? `<div class="ar" style="color:#8A93A3;">${esc(p.gloss)}</div>` : ''}${
+        p.ex ? `<div style="color:#B9C2D0;font-size:13px;margin-top:4px;">${esc(p.ex)}</div>` : ''}${
+        p.exAr ? `<div class="ar" style="color:#8A93A3;font-size:12px;">${esc(p.exAr)}</div>` : ''}</div>`).join('')}</div>` : ''}
     ${arr(e.idioms).length ? `<div class="sect"><b class="h">Idioms</b>${e.idioms.map(p =>
-      `<div class="pair"><b>${esc(p.phrase || '')}</b>${p.gloss ? `<div style="color:#8A93A3;">${esc(p.gloss)}</div>` : ''}</div>`).join('')}</div>` : ''}
+      `<div class="pair"><b>${esc(p.phrase || '')}</b>${
+        p.en ? `<div>${esc(p.en)}</div>` : ''}${
+        p.gloss ? `<div class="ar" style="color:#8A93A3;">${esc(p.gloss)}</div>` : ''}${
+        p.ex ? `<div style="color:#B9C2D0;font-size:13px;margin-top:4px;">${esc(p.ex)}</div>` : ''}${
+        p.exAr ? `<div class="ar" style="color:#8A93A3;font-size:12px;">${esc(p.exAr)}</div>` : ''}</div>`).join('')}</div>` : ''}
     ${arr(e.usageNotes).length ? `<div class="sect"><b class="h">Usage notes</b>${e.usageNotes.map(pairHtml).join('')}</div>` : ''}
     ${arr(e.register).length ? `<div class="sect"><b class="h">Register</b><span class="badge">${esc(e.register.join(' · '))}</span></div>` : ''}
     ${e.word && _norm(e.word) !== _norm(c.word)
@@ -26067,7 +26078,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 119;
+const BUILD = 120;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.
@@ -27109,11 +27120,11 @@ function narrationSegments(rawCard, rep, detailed) {
   }
   if (arr(e.phrasalVerbs).length) {
     push('Phrasal verbs.', 'en-US', 500, true);
-    e.phrasalVerbs.forEach(p => { push((p.phrase || '') + '.', 'en-US'); if (p.gloss) push(p.gloss + '.', 'ar-SA'); });
+    e.phrasalVerbs.forEach(p => { push((p.phrase || '') + '.', 'en-US'); if (p.en) push(p.en + '.', 'en-US'); if (p.gloss) push(p.gloss + '.', 'ar-SA'); if (p.ex) push(p.ex + '.', 'en-US'); if (p.exAr) push(p.exAr + '.', 'ar-SA'); });
   }
   if (arr(e.idioms).length) {
     push('Idioms.', 'en-US', 500, true);
-    e.idioms.forEach(p => { push((p.phrase || '') + '.', 'en-US'); if (p.gloss) push(p.gloss + '.', 'ar-SA'); });
+    e.idioms.forEach(p => { push((p.phrase || '') + '.', 'en-US'); if (p.en) push(p.en + '.', 'en-US'); if (p.gloss) push(p.gloss + '.', 'ar-SA'); if (p.ex) push(p.ex + '.', 'en-US'); if (p.exAr) push(p.exAr + '.', 'ar-SA'); });
   }
   if (arr(e.pronunciationNote).length) {
     push('A note on pronunciation.', 'en-US', 500, true);
