@@ -48,7 +48,7 @@ class Converters {
         Word::class, WordFts::class, Tombstone::class, Note::class,
         NoteTombstone::class, EnrichCard::class, EnrichShard::class
     ],
-    version = 4,
+    version = 5,
     exportSchema = true
 )
 @TypeConverters(Converters::class)
@@ -120,6 +120,40 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
+        /**
+         * خانة `curated` في بطاقات الإثراء.
+         *
+         * جدولٌ يُعاد إنشاؤه لا عمودٌ يُضاف. و`ALTER TABLE ADD COLUMN` مع
+         * `NOT NULL` يوجب SQLite معه قيمةً افتراضية، بينما المخطّط الذي
+         * تولّده Room للتثبيت الجديد بلا افتراضية — فيختلف الجدولان في نصّ
+         * إنشائهما، ويبقى قبولُ Room لذلك رهنَ تفصيلٍ في تنفيذها لا ضمانةً
+         * مكتوبة. والإنشاء من جديد يجعل النصّ مطابقاً حرفاً بحرف لما تولّده
+         * هي، فيسقط السؤال كلّه.
+         *
+         * وحذف البطاقات هنا لا يفقد شيئاً: هي نسخةٌ من المستودع لا مصدرٌ،
+         * ومسحُ بصمات الشرائح يعيدها كلّها في أوّل مزامنة — وبها تُملأ الخانة
+         * الجديدة من مصدرها لا باستخراجٍ نصّيّ من JSON مخزَّن.
+         *
+         * الكلفة ستّمائة كيلوبايت مرّةً واحدة. ومكتبة المستخدم وتقدّمه
+         * وملاحظاته لا يمسّها هذا الترحيل بحرف.
+         */
+        private val MIGRATION_4_5 = object : Migration(4, 5) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("DROP TABLE IF EXISTS `enrich_cards`")
+                db.execSQL(
+                    """
+                    CREATE TABLE IF NOT EXISTS `enrich_cards` (
+                        `word` TEXT NOT NULL,
+                        `json` TEXT NOT NULL,
+                        `curated` INTEGER NOT NULL,
+                        PRIMARY KEY(`word`)
+                    )
+                    """.trimIndent()
+                )
+                db.execSQL("DELETE FROM `enrich_shards`")
+            }
+        }
+
         private val MIGRATION_1_2 = object : Migration(1, 2) {
             override fun migrate(db: SupportSQLiteDatabase) {
                 db.execSQL(
@@ -143,7 +177,7 @@ abstract class AppDatabase : RoomDatabase() {
             INSTANCE ?: Room.databaseBuilder(
                 context.applicationContext, AppDatabase::class.java, "tornado.db"
             )
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
                 .build()
                 .also { INSTANCE = it }
         }

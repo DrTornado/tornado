@@ -3,6 +3,7 @@ package com.tornado.vocab.data
 import android.content.Context
 import com.tornado.vocab.tornado
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -90,7 +91,13 @@ class EnrichSync(
                     while (words.hasNext()) {
                         val w = words.next()
                         cards.optJSONObject(w)?.let {
-                            rows.add(EnrichCard(w.lowercase(), it.toString()))
+                            rows.add(
+                                EnrichCard(
+                                    word = w.lowercase(),
+                                    json = it.toString(),
+                                    curated = it.optBoolean("curated", false)
+                                )
+                            )
                         }
                     }
                     if (rows.isNotEmpty()) {
@@ -109,6 +116,9 @@ class EnrichSync(
     suspend fun forWord(word: String): Enrichment? = withContext(Dispatchers.IO) {
         Enrichment.parse(dao.cardJson(word.trim().lowercase()))
     }
+
+    /** الكلمات التي وصلتها بطاقةٌ مكتوبة بيد — ما عداها ينتظر في الطابور */
+    fun curatedWords(): Flow<List<String>> = dao.curatedWords()
 
     private companion object {
         const val DIR = "enrich"

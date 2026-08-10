@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
@@ -57,6 +58,24 @@ class LibraryViewModel(app: Application) : AndroidViewModel(app) {
             kotlinx.coroutines.delay(30_000)
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), 0)
+
+    /**
+     * طابور البطاقات: الكلمات التي لم تُكتب بطاقتها المراجَعة بعد.
+     *
+     * البطاقات تُكتب بيد لا بمسارٍ تلقائي، فالكلمة الجديدة تبقى بلا بطاقةٍ
+     * كاملة حتى تُكتب. وإخفاء ذلك هو ما جعل صاحب المكتبة يظنّ البطاقة الفقيرة
+     * سقفَ ما نقدر عليه. فالطابور معروض: كم كلمة، وأيّها.
+     *
+     * ويتتبّع القاعدة لا الساعة: `curatedWords` تدفق من Room، فأول مزامنة
+     * تُنقص العدد في اللحظة نفسها بلا استطلاع.
+     */
+    val cardQueue: StateFlow<List<String>> = combine(
+        repo.rows(null, favOnly = false, sort = SortOrder.ALPHA),
+        container.enrichSync.curatedWords()
+    ) { all, written ->
+        val have = written.toHashSet()
+        all.map { it.word }.filter { it.trim().lowercase() !in have }
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
 
     /**
      * تهدئة ٢٠٠ ملي ثانية على نص البحث وحده.

@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.PrimaryKey
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -23,7 +24,15 @@ import org.json.JSONObject
 @Entity(tableName = "enrich_cards")
 data class EnrichCard(
     @PrimaryKey val word: String,
-    val json: String
+    val json: String,
+    /*
+     * مكتوبةٌ بيدٍ ومكتملة.
+     *
+     * خانةٌ مستقلّة لا قراءةٌ من داخل النصّ: طابور الكلمات التي تنتظر بطاقة
+     * يُحسب عند كل عرضٍ للقائمة، وتحليل مئةٍ وسبعين بطاقة في كل مرّة ليقرأ
+     * منها حقلاً واحداً عبثٌ يُدفع ثمنه في كل تمرير.
+     */
+    val curated: Boolean = false
 )
 
 /** بصمة شريحة — بها نعرف ما تغيّر فلا ننزّل ما لم يتغيّر */
@@ -50,6 +59,10 @@ interface EnrichDao {
 
     @Query("SELECT COUNT(*) FROM enrich_cards")
     suspend fun count(): Int
+
+    /** الكلمات التي وصلتها بطاقةٌ مكتوبة بيد — ما عداها ينتظر في الطابور */
+    @Query("SELECT word FROM enrich_cards WHERE curated = 1")
+    fun curatedWords(): Flow<List<String>>
 }
 
 /** زوجٌ بعنوان — للأفعال المركّبة والتعابير: العبارة وشرحها */

@@ -129,6 +129,11 @@
     <button class="btn" id="top-sync-btn" style="display:inline-block;width:auto;background:linear-gradient(135deg,#E8B04B,#D9973A);color:#242B36;font-size:14px;font-weight:700;padding:9px 22px;border:none;border-radius:20px;box-shadow:0 3px 10px rgba(232,176,75,.25);">🔄 Sync</button>
   </div>
   <div id="top-link-status" style="font-size:11.5px;color:#8A93A3;margin-top:6px;text-align:center;"></div>
+  <!--
+    طابور البطاقات: الكلمات التي لم تُكتب بطاقتها بعد.
+    ظاهرٌ لا مدفون — فالمكتبة التي لا تُظهر نقصها تُفقد الثقة بها كلّها.
+  -->
+  <div id="card-queue" class="hidden" style="font-size:11.5px;color:#E8B04B;margin-top:6px;text-align:center;cursor:pointer;"></div>
   <div id="bg-upgrade-status" style="font-size:11px;color:#5B9E6F;margin-top:4px;text-align:center;"></div>
   <div id="piper-status" style="font-size:11px;color:#E8B04B;margin-top:4px;text-align:center;"></div>
   <div id="audio-prep-status" style="font-size:11px;color:#5B8DD9;margin-top:2px;text-align:center;"></div>
@@ -24814,6 +24819,52 @@ function setSyncBadge() {
   }
 }
 
+/*
+ * ===== طابور البطاقات =====
+ *
+ * البطاقات تُكتب بيد، لا بمسارٍ تلقائي. ومعنى ذلك أن الكلمة الجديدة تبقى
+ * بلا بطاقةٍ مراجَعة حتى تُكتب. فإن لم يَرَ صاحبُ المكتبة هذا النقص ظنّ
+ * البطاقة الفقيرة هي كلّ ما لدينا — وهو ما أفقده الثقة أوّل مرّة.
+ *
+ * فالطابور مرئيّ: كم كلمة تنتظر، وأيّها، ونسخةٌ جاهزة تُلصق في المحادثة.
+ */
+function pendingCards() {
+  if (!enrichCache) return [];
+  return words
+    .filter(w => {
+      const e = enrichCache[String(w.word || '').trim().toLowerCase()];
+      return !(e && e.curated);
+    })
+    .map(w => w.word);
+}
+
+let cardQueueOpen = false;
+
+function setCardQueue() {
+  const el = document.getElementById('card-queue');
+  if (!el) return;
+  const p = pendingCards();
+  if (!p.length) { el.classList.add('hidden'); cardQueueOpen = false; return; }
+  el.classList.remove('hidden');
+  const head = '📝 ' + p.length + ' word' + (p.length > 1 ? 's' : '') + ' awaiting a written card';
+  el.innerHTML = cardQueueOpen
+    ? head + '<div style="color:#B9C2D0;font-size:12px;margin-top:5px;line-height:1.8;">' +
+      p.map(esc).join(' · ') + '</div>' +
+      '<button id="card-queue-copy" class="btn" style="display:inline-block;width:auto;margin-top:7px;background:#3A4453;color:#E8E4DA;font-size:11.5px;padding:5px 12px;">📋 Copy list</button>'
+    : head + ' — tap to list';
+  el.onclick = e => {
+    if (e.target.id === 'card-queue-copy') {
+      e.stopPropagation();
+      const text = p.join(' ');
+      if (navigator.clipboard) navigator.clipboard.writeText(text).then(() => flash('📋 Copied')).catch(() => flash(text));
+      else flash(text);
+      return;
+    }
+    cardQueueOpen = !cardQueueOpen;
+    setCardQueue();
+  };
+}
+
 function hasAutoSaveTarget() {
   return !!ghConf() || !!(fsSupported && linkedHandle);
 }
@@ -25596,6 +25647,7 @@ function updateCount() { document.getElementById('count').textContent = words.le
 
 // ===== My Words =====
 function renderList() {
+  setCardQueue();                     // قبل أي خروجٍ مبكّر — الطابور يُحدَّث دائماً
   const counts = { all:words.length, new:0, wrong:0, right:0 };
   words.forEach(x => counts[statusOf(x)]++);
   document.getElementById('chips').innerHTML =
@@ -25985,7 +26037,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 116;
+const BUILD = 117;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.
@@ -27476,6 +27528,7 @@ async function autoSyncOnStartup() {
     try {
       const fresh = await enrichSync();
       if (fresh) { renderList(); flash('📚 ' + fresh + ' enriched card' + (fresh > 1 ? 's' : '') + ' updated'); }
+      else setCardQueue();           // لا جديد، لكن قد تكون كلمةٌ أُضيفت للتوّ
     } catch(e) { /* الإثراء زيادةٌ لا شرط — البطاقة تظهر بدونه كما كانت */ }
 
     /*
@@ -27575,6 +27628,7 @@ load().then(async () => {
     enrichHashes = (await enrichGet('meta', 'hashes')) || {};
     if (Object.keys(enrichCache).length) renderList();
   } catch(e) { enrichCache = {}; }   // متصفّح بلا IndexedDB — التطبيق يعمل بدونه
+  setCardQueue();                    // ولو كانت الذاكرة فارغة: الطابور حينها كل الكلمات
 
   await autoSyncOnStartup(); // سحبٌ ورفعٌ معاً قبل أي إثراء — فلا نُثري نسخة قديمة
   backgroundUpgrade(); // إثراء المعاني يبدأ بصمت بلا أي ضغطة — لا await حتى لا تؤخر ظهور الصفحة

@@ -1,5 +1,6 @@
 package com.tornado.vocab.ui
 
+import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -44,6 +45,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -70,6 +74,7 @@ fun LibraryScreen(
     val filters by vm.filters.collectAsStateWithLifecycle()
     val stats by vm.stats.collectAsStateWithLifecycle()
     val pendingGaps by vm.pendingGaps.collectAsStateWithLifecycle()
+    val cardQueue by vm.cardQueue.collectAsStateWithLifecycle()
     val expanded by vm.expanded.collectAsStateWithLifecycle()
     val expandedWords by vm.expandedWords.collectAsStateWithLifecycle()
     var pendingDelete by remember { mutableStateOf<WordRow?>(null) }
@@ -168,6 +173,9 @@ fun LibraryScreen(
                 }
             }
         }
+
+        // ===== طابور البطاقات =====
+        CardQueueRow(cardQueue)
 
         if (rows.isEmpty()) {
             EmptyState(
@@ -472,6 +480,51 @@ private fun WordListRow(
                     onClick = { menu = false; onDelete() },
                     leadingIcon = { Icon(Icons.Filled.Delete, null) }
                 )
+            }
+        }
+    }
+}
+
+/**
+ * طابور البطاقات — الكلمات التي لم تُكتب بطاقتها بعد.
+ *
+ * ساكنٌ حين لا شيء ينتظر، ظاهرٌ حين ينتظر شيء. لا إشعار ولا مقاطعة: من فقد
+ * الثقة في بطاقةٍ فقيرة إنما فقدها لأنه لم يعرف أهي كلّ ما نقدر عليه أم
+ * بطاقةٌ لم تُكتب بعد — وهذا السطر يفرّق بين الاثنين.
+ *
+ * والنسخ لأن الطلب يُكتب في المحادثة: كلماتٌ مفصولة بمسافات، جاهزةٌ للّصق.
+ */
+@Composable
+private fun CardQueueRow(queue: List<String>) {
+    if (queue.isEmpty()) return
+    var open by remember { mutableStateOf(false) }
+    val clipboard = LocalClipboardManager.current
+    val ctx = LocalContext.current
+
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .clickable { open = !open }
+            .padding(horizontal = 20.dp, vertical = 4.dp)
+    ) {
+        Text(
+            "📝 ${queue.size} " + (if (queue.size == 1) "word" else "words") +
+                " awaiting a written card" + (if (open) "" else "  ·  tap to list"),
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.primary
+        )
+        AnimatedVisibility(open) {
+            Column {
+                Text(
+                    queue.joinToString("  ·  "),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(top = 4.dp)
+                )
+                TextButton(onClick = {
+                    clipboard.setText(AnnotatedString(queue.joinToString(" ")))
+                    Toast.makeText(ctx, "Copied", Toast.LENGTH_SHORT).show()
+                }) { Text("📋 Copy list", fontSize = 12.sp) }
             }
         }
     }
