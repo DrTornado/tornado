@@ -31,8 +31,9 @@ import kotlinx.coroutines.launch
 /**
  * الكلمات المنتظرة بطاقتها، ومدّة أقدمها.
  *
- * @param oldestMs منذ متى تنتظر أقدمُها. البطاقة تُكتب في دقيقتين، فما
- *   تجاوز الساعة عطلٌ لا بطء.
+ * @param oldestMs منذ متى تنتظر أقدمُها. البطاقة تُكتب في دقائق، والمسار
+ *   يستدعي نفسه حتى يفرغ الطابور — فساعتان مهلةٌ تسع دفعةً كبيرة، وما
+ *   تجاوزها عطلٌ لا بطء.
  * @param synced أمربوطةٌ النسخة بمستودع؟ بلا مزامنة لا شيء ينتظر، فلا
  *   إنذار — والإنذار الكاذب يُفقد الصادقَ معناه.
  */
@@ -41,7 +42,9 @@ data class CardQueue(
     val oldestMs: Long = 0L,
     val synced: Boolean = false
 ) {
-    val stalled: Boolean get() = synced && words.isNotEmpty() && oldestMs > 60 * 60_000L
+    val stalled: Boolean get() = synced && words.isNotEmpty() && oldestMs > STALL_MS
+
+    companion object { const val STALL_MS = 2 * 60 * 60_000L }
 }
 
 data class LibraryFilters(

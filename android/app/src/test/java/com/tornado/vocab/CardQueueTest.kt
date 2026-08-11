@@ -27,14 +27,19 @@ class CardQueueTest {
     @Test
     fun `انتظارٌ قصير ليس عطلاً`() {
         assertFalse(CardQueue(listOf("abide"), 5 * 60_000L, synced = true).stalled)
-        assertFalse(CardQueue(listOf("abide"), 59 * 60_000L, synced = true).stalled)
+        assertFalse(CardQueue(listOf("abide"), 119 * 60_000L, synced = true).stalled)
     }
 
+    /*
+     * والمهلة ساعتان لا ساعة: المسار يكتب كلمتين في الجولة ثم يستدعي نفسه،
+     * فالدفعة الكبيرة تُفرَّغ على جولاتٍ متتابعة. وساعةٌ واحدة كانت ستصرخ
+     * على طابورٍ يعمل كما صُمّم.
+     */
     @Test
-    fun `ما تجاوز الساعة عطلٌ يُقال`() {
-        assertFalse(CardQueue(listOf("abide"), HOUR, synced = true).stalled)
-        assertTrue(CardQueue(listOf("abide"), HOUR + 1, synced = true).stalled)
-        assertTrue(CardQueue(listOf("abide"), 3 * HOUR, synced = true).stalled)
+    fun `ما تجاوز الساعتين عطلٌ يُقال`() {
+        assertFalse(CardQueue(listOf("abide"), 2 * HOUR, synced = true).stalled)
+        assertTrue(CardQueue(listOf("abide"), 2 * HOUR + 1, synced = true).stalled)
+        assertTrue(CardQueue(listOf("abide"), 9 * HOUR, synced = true).stalled)
     }
 
     /*
