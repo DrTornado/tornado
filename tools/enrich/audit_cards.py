@@ -202,10 +202,57 @@ def _oxford_list() -> dict:
 _OX = None
 
 
+def _label(s: str) -> str:
+    """يسوّي وسم قسم الكلام: «(adj.)» و«(adjective)» واحد."""
+    s = (s or "").strip().lower()
+    for short, full in (("adj.", "adjective"), ("n.", "noun"),
+                        ("v.", "verb"), ("adv.", "adverb")):
+        s = s.replace("(%s)" % short, "(%s)" % full)
+    return re.sub(r"\s+", " ", s)
+
+
+def entry_faults(word: str, c: dict) -> list:
+    """
+    مدخلٌ يتكرّر في قسمه، أو مرادفٌ هو الكلمة نفسها.
+
+    وُجد ثمانيةٌ وعشرون مدخلاً مكرّراً حرفياً — «originate from» مرّتين في
+    المتلازمات، و«insignificant (adj.)» و«(adjective)» في المشتقّات. يقرؤها
+    صاحب المكتبة فيظنّ أنّ ثمّة فرقاً بينهما ويبحث عنه فلا يجده. وواحدٌ
+    كان مرادف نفسه: `duller` مرادفها `duller`.
+
+    والحدّ الأدنى لا يُخفَّض ليمرّ التكرار: القسم الناقص يُكمَّل بمدخلٍ
+    حقيقيّ لا بنسخةٍ ثانية ممّا فيه.
+    """
+    out = []
+    sections = ("meanings", "derivatives", "synonyms", "antonyms", "examples",
+                "collocations", "differences", "grammarPatterns",
+                "usageNotes", "pronunciationNote")
+
+    for sec in sections:
+        seen = {}
+        for i, o in enumerate(c.get(sec) or []):
+            if not isinstance(o, dict):
+                continue
+            k = _label(o.get("en"))
+            if not k:
+                continue
+            if k in seen:
+                out.append(f"{sec}[{i}] مكرَّر — نفسه في [{seen[k]}]: «{k[:34]}»")
+            else:
+                seen[k] = i
+
+    for i, o in enumerate(c.get("synonyms") or []):
+        if isinstance(o, dict) and _label(o.get("en")) == _label(word):
+            out.append(f"synonyms[{i}] هو الكلمة نفسها — لا يعلّم شيئاً")
+
+    return out
+
+
 def faults(word: str, c: dict) -> list:
     out = []
 
     out.extend(line_faults(c))
+    out.extend(entry_faults(word, c))
 
     # التصنيف والمستوى من القائمة لا من التقدير
     ox = _oxford_list()

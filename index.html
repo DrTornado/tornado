@@ -25213,7 +25213,9 @@ function ttsSay(word, accent) {
     window.speechSynthesis.speak(u);
   };
   if (neuralReady()) {
-    piperSpeak(word, lang, 'pron').then(ok => { if (!ok) fallback(); }).catch(fallback);
+    // زرّ اللهجة يفرض صوتها: سارة للأمريكيّ وجورج للبريطانيّ
+    piperSpeak(word, lang, 'pron', KOKORO_ACCENT[lang])
+      .then(ok => { if (!ok) fallback(); }).catch(fallback);
     return;
   }
   fallback();
@@ -26116,7 +26118,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 126;
+const BUILD = 127;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.
@@ -26177,19 +26179,33 @@ function kokoroRefreshUi() {
 let kokoroLastEngine = '—';
 
 /** يولّد إنجليزيةً بصوت Kokoro، أو null فيتولّى ما بعده */
-async function kokoroGenerate(text, lang) {
+/*
+ * زرّ اللهجة يفرض صوتها، ولا يتبع الصوت المختار في الإعدادات.
+ *
+ * كان `US` و`UK` كلاهما ينطق بـ `kokoroVoice()` — أي بصوت الإعدادات، وهو
+ * جورج البريطانيّ عند صاحب المكتبة. فيضغط «أمريكي» فيسمع بريطانياً، ولا
+ * فرق بين الزرّين إطلاقاً. والزرّ الذي يَعِد بلهجةٍ ولا يعطيها أسوأ من
+ * غيابه: يظنّ المتعلّم أن هذا هو النطق الأمريكيّ.
+ *
+ * فالنطق المفروض يُمرَّر صراحةً: سارة للأمريكيّ وجورج للبريطانيّ، وقراءةُ
+ * البطاقة كاملةً تبقى على صوت الإعدادات كما اختاره.
+ */
+const KOKORO_ACCENT = { 'en-US': 'af_sarah', 'en-GB': 'bm_george' };
+
+async function kokoroGenerate(text, lang, forceVoice) {
   if (!kokoroOn()) { kokoroLastEngine = 'off'; return null; }
   if (kokoroBroken) { kokoroLastEngine = 'broken'; return null; }
   if (!text) return null;
   if (!String(lang || '').toLowerCase().startsWith('en')) return null; // العربية ليست من اختصاصه
+  const voice = forceVoice || kokoroVoice();
   try {
     if (!kokoroWorker) kokoroStatus('⏳ Downloading the neural voice once — this can take a minute…');
     await kokoroBoot();
     if (!kokoroWorker) { kokoroLastEngine = 'no-worker'; return null; }
-    const { pcm, rate } = await kokoroSend({ cmd: 'gen', text, voice: kokoroVoice() }, 180000);
+    const { pcm, rate } = await kokoroSend({ cmd: 'gen', text, voice }, 180000);
     if (!pcm || !pcm.length) { kokoroLastEngine = 'empty'; return null; }
-    kokoroLastEngine = 'kokoro:' + kokoroVoice();
-    kokoroStatus('🗣️ ' + kokoroVoice() + ' · neural voice');
+    kokoroLastEngine = 'kokoro:' + voice;
+    kokoroStatus('🗣️ ' + voice + ' · neural voice');
     return kokoroWav(pcm, rate);
   } catch (e) {
     const why = String((e && e.message) || e);
@@ -26449,7 +26465,7 @@ function piperLock(fn) {
   piperQueue = run.catch(() => {});
   return run;
 }
-async function piperGenerate(text, lang) {
+async function piperGenerate(text, lang, forceVoice) {
   /*
    * Kokoro أولاً، وما بعده شبكة أمان لا بديل.
    *
@@ -26458,7 +26474,7 @@ async function piperGenerate(text, lang) {
    * دفعةً واحدة، ويجعل سقوطه إلى Piper ثم إلى صوت الجهاز تلقائياً في كل موضع
    * كذلك. ولا صمت في أي حال.
    */
-  const k = await kokoroGenerate(text, lang);
+  const k = await kokoroGenerate(text, lang, forceVoice);
   if (k) return k;
   return piperLock(() => piperGenerateInner(text, lang));
 }
@@ -26537,8 +26553,8 @@ function unlockPiperAudio() {
     unlockEl.play().catch(() => {});
   } catch(e) {}
 }
-async function piperSpeak(text, lang, channel) {
-  const wav = await piperGenerate(text, lang);
+async function piperSpeak(text, lang, channel, forceVoice) {
+  const wav = await piperGenerate(text, lang, forceVoice);
   if (!wav) return false;
   const el = getPiperAudioEl(channel);
   el.src = URL.createObjectURL(wav);
