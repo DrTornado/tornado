@@ -25698,21 +25698,36 @@ async function lookup() {
          * القادمة من الأصل تبقى معها، فلا تخسر شيئاً.
          */
         word: w,
+        /*
+         * نأخذ النطق ونترك الشرح.
+         *
+         * القاموس الآليّ أُلغي مصدراً للبطاقة: معانيه بلا عربيّة، ومرادفاته
+         * كذلك، وأمثلته مترجمة آلياً. والبطاقة تُكتب بيدٍ وتمرّ على مدقّقٍ
+         * بسبعة عشر بنداً ثم تصل بالمزامنة. فما يبقى منه هنا ما يُسمَع لا
+         * ما يُقرأ: الرمز الصوتيّ وروابط النطق البشريّ.
+         */
         ipa: parsed.ipa || '', arabicPron: parsed.arabicPron || '',
+        ipaUS: parsed.ipaUS || '', ipaUK: parsed.ipaUK || '',
+        audioUS: parsed.audioUS || '', audioUK: parsed.audioUK || '',
+        audioGen: parsed.audioGen || '',
         oxford: parsed.oxford || '', cefr: parsed.cefr || '',
-        pos: arr(parsed.pos),
-        meanings: arr(parsed.meanings),
-        inflections: arr(parsed.inflections),
-        derivatives: arr(parsed.derivatives),
-        synonyms: arr(parsed.synonyms),
-        collocations: arr(parsed.collocations),
-        examples: arr(parsed.examples),
-        differences: arr(parsed.differences),
         right:0, wrong:0, last:null,
       });
       inp.value = '';
     } else {
-      flash('Could not recognize this word — check the spelling');
+      /*
+       * الكلمة تُقبل ولو لم يعرفها القاموس.
+       *
+       * كان القاموس بوّاباً: «Could not recognize this word» فتُردّ الكلمة —
+       * ورُدّت `recreational` و`zeal` وهما إنجليزيّتان فصيحتان. وقد أُلغي
+       * القاموس مصدراً للبطاقة، فبقاؤه بوّاباً منعٌ بلا سبب.
+       *
+       * فتُحفظ الكلمة عاريةً وتدخل الطابور، وتُكتب بطاقتها على خوادم GitHub
+       * وتعود بالمزامنة.
+       */
+      await addCard({ id: Date.now(), word: w, right: 0, wrong: 0, last: null });
+      inp.value = '';
+      flash('📝 أُضيفت — بطاقتها تُكتب الآن وتصل بعد دقائق');
     }
     pendingWord = '';
     document.getElementById('manual-box').classList.add('hidden');
@@ -26130,7 +26145,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 124;
+const BUILD = 125;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.
