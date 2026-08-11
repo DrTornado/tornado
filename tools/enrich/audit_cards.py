@@ -64,7 +64,11 @@ LATIN = re.compile(r"[A-Za-z]{2,}")
 
 # الحدّ الأدنى لكل قسم. اثنان ليسا قائمة، والواحد ليس قسماً.
 MINIMUM = {
-    "meanings": 2, "inflections": 2, "derivatives": 3, "synonyms": 4,
+    # `inflections` واحدٌ لا اثنان: الظرف لا يُصرَّف، والاسم الذي لا يُعدّ لا
+    # يُجمع، والصفة غير المتدرّجة لا تُفضَّل. وكان الحدُّ اثنين فحُشيت تسع
+    # بطاقاتٍ بمشتقّ — `punctual` تحت تصريف `punctuality` — مكرّرةً حرفياً
+    # ما في `derivatives` تحتها بسطرين. الحدُّ الذي يُجبر على الحشو يُفسد.
+    "meanings": 2, "inflections": 1, "derivatives": 3, "synonyms": 4,
     "antonyms": 3, "examples": 4, "collocations": 5, "differences": 3,
     "usageNotes": 2, "pronunciationNote": 1,
     # كانت خارج الحدود الدنيا فمرّت ستٌّ وعشرون بطاقة بلا نمطٍ واحد،
@@ -81,6 +85,74 @@ def _same(a: str, b: str) -> bool:
     """تسويةٌ خفيفة: الفروق في التشكيل والفواصل لا تجعل السطرين مختلفين."""
     strip = re.compile(r"[\s‏…·,،.()«»]+")
     return bool(a) and bool(b) and strip.sub(" ", a).strip() == strip.sub(" ", b).strip()
+
+
+# نوى المقاطع في الأبجدية الصوتية — كلُّ نواةٍ مقطع، والحروف الساكنة لا تُعدّ
+IPA_VOWELS = set("iɪeɛæaɑɒɔoʊuʌəɜyøɵ")
+IPA_PRIMARY = "ˈ"      # نبرٌ رئيس
+IPA_SECONDARY = "ˌ"    # نبرٌ ثانويّ — لا يُحسب
+IPA_IN_NOTE = re.compile(r"(/[^/]+/)")
+ORDINALS = ["الأول", "الثاني", "الثالث", "الرابع", "الخامس", "السادس"]
+STRESS_CLAIM = re.compile(
+    r"النبر\s+على\s+(?:المقطع\s+)?(" + "|".join(ORDINALS) + r")")
+
+
+def _stress_index(ipa: str) -> int:
+    """
+    ترتيبُ المقطع المنبور في نسخةٍ صوتية، أو صفرٌ إن لم تُعلَّم.
+
+    تُعدّ نوى الحركات لا الحروف: `/ˌrekriˈeɪʃənəl/` خمسُ نوى، والعلامة `ˈ`
+    قبل الثالثة. والحركة المركّبة `eɪ` نواةٌ واحدة لأن حرفيها متجاوران.
+    """
+    s = ipa.replace("/", "").replace("[", "").replace("]", "")
+    s = s.replace(IPA_SECONDARY, "")
+    nuclei = 0
+    found = 0
+    in_vowel = False
+    for ch in s:
+        if ch == IPA_PRIMARY:
+            found = nuclei + 1
+            in_vowel = False
+        elif ch in ".- ":
+            in_vowel = False
+        elif ch in IPA_VOWELS:
+            if not in_vowel:
+                nuclei += 1
+                in_vowel = True
+        else:
+            in_vowel = False
+    return found
+
+
+def stress_faults(c: dict) -> list:
+    """
+    ادّعاءُ النبر يجب أن يوافق ما في `ipa`.
+
+    كُتب في البطاقة النموذج «خمسة مقاطع، والنبر على الرابع» و`ipa` تقول
+    الثالث — `/ˌpʌŋktʃuˈæləti/` نبرُها على `æ`. ثم نسخت بطاقةٌ تالية الخطأ
+    نفسه حرفياً، لأن النموذج هو ما يُقتدى به. والدارس يصدّق ما يقرأ فينطق
+    الكلمة منبورةً في غير موضعها ولا يعرف.
+
+    ولا تنطق القاعدة إلا حين تكون كلُّ عناصر الحكم حاضرة: عبارةٌ صريحة
+    «النبر على المقطع كذا»، ونسخةٌ صوتية تحمل `ˈ`. وما عدا ذلك تسكت — إذ
+    خيرٌ أن يفوتها خللٌ من أن تردَّ بطاقةً صحيحة.
+    """
+    bad = []
+    for i, pn in enumerate(c.get("pronunciationNote") or []):
+        if not isinstance(pn, dict):
+            continue
+        m = STRESS_CLAIM.search(pn.get("ar") or "")
+        if not m:
+            continue
+        claimed = ORDINALS.index(m.group(1)) + 1
+        hit = IPA_IN_NOTE.search(pn.get("en") or "")
+        ipa = hit.group(1) if hit else (c.get("ipa") or "")
+        real = _stress_index(ipa)
+        if real and real != claimed:
+            bad.append(
+                f"pronunciationNote[{i}] النبر: تقول {m.group(1)} و{ipa} "
+                f"تقول المقطع {real}")
+    return bad
 
 
 def line_faults(c: dict) -> list:
@@ -298,6 +370,8 @@ def faults(word: str, c: dict) -> list:
     for f in c.get("inflections") or []:
         if ARCHAIC.search(f) and f.lower() != word.lower():
             out.append(f"تصريف مهجور: {f}")
+
+    out += stress_faults(c)
 
     for k in PAIRED:
         for i, x in enumerate(c.get(k) or []):

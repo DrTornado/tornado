@@ -1,0 +1,73 @@
+# اختبارُ أدوات البطاقات — يعمل هنا لأن هذا المستودع عامّ
+#
+# المدقّق يقرّر أيّ بطاقةٍ تُدفع وأيّها تُردّ، فعطلٌ فيه يوقف كلّ بطاقةٍ
+# قادمة. وليس على جهاز صاحب المشروع بايثون، فكانت التعديلات تُراجَع بالعين
+# ثم تُختبر أوّل مرّة على بطاقةٍ حقيقية — أي بعد فوات الأوان.
+#
+# ودقائق هذا المستودع مجانية لأنه عامّ، والجولة ثوانٍ: تستورد المدقّق
+# فيظهر أيُّ خطأٍ في الصياغة فوراً، ثم تفحص حساباته على أمثلةٍ معلومة.
+
+name: اختبار الأدوات
+
+on:
+  push:
+    paths:
+      - "tools/enrich/**"
+      - ".github/workflows/tools-test.yml"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: يستورد المدقّق؟
+        run: python3 -c "import sys; sys.path.insert(0, 'tools/enrich'); import audit_cards; print('ok')"
+
+      - name: حسابُ النبر
+        run: |
+          python3 - <<'PY'
+          import sys
+          sys.path.insert(0, "tools/enrich")
+          from audit_cards import _stress_index, stress_faults
+
+          # (نسخة صوتية، ترتيب المقطع المنبور)
+          cases = [
+              ("/ˌpʌŋktʃuˈæləti/", 3),   # pʌŋk · tʃu · ˈæ · lə · ti
+              ("/ˌrekriˈeɪʃənəl/", 3),   # rek · ri · ˈeɪ · ʃə · nəl
+              ("/təˈnæs.ɪ.ti/",    2),   # tə · ˈnæs · ɪ · ti
+              ("/ˈpʌŋktʃuəl/",     1),
+              ("/rekriˈeɪʃn/",     3),
+              ("/nosuchthing/",    0),   # بلا علامة نبر — تسكت القاعدة
+          ]
+          for ipa, want in cases:
+              got = _stress_index(ipa)
+              assert got == want, f"{ipa}: {got} والمتوقّع {want}"
+
+          # الادّعاء الموافق لا يُشتكى منه، والمخالف يُردّ
+          ok = {"ipa": "/ˌpʌŋktʃuˈæləti/", "pronunciationNote": [
+              {"en": "punctuality /ˌpʌŋktʃuˈæləti/",
+               "ar": "خمسة مقاطع، والنبر على الثالث"}]}
+          bad = {"ipa": "/ˌpʌŋktʃuˈæləti/", "pronunciationNote": [
+              {"en": "punctuality /ˌpʌŋktʃuˈæləti/",
+               "ar": "خمسة مقاطع، والنبر على الرابع"}]}
+          quiet = {"ipa": "/ˌpʌŋktʃuˈæləti/", "pronunciationNote": [
+              {"en": "punctuality", "ar": "كلمةٌ طويلة، والياء في آخرها خفيفة"}]}
+
+          assert stress_faults(ok) == [], stress_faults(ok)
+          assert len(stress_faults(bad)) == 1, stress_faults(bad)
+          assert stress_faults(quiet) == [], stress_faults(quiet)
+          print("النبر: كل الحالات صحيحة")
+          PY
+
+      - name: الحدود الدنيا كما في المواصفة
+        run: |
+          python3 - <<'PY'
+          import sys
+          sys.path.insert(0, "tools/enrich")
+          from audit_cards import MINIMUM
+          # الظرف لا يُصرَّف — فحدُّ التصريف واحد، وإلا حُشيت الخانة بمشتقّ
+          assert MINIMUM["inflections"] == 1, MINIMUM["inflections"]
+          print("الحدود الدنيا: صحيحة")
+          PY
