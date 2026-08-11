@@ -24604,75 +24604,46 @@ async function doSync() {
 let bgUpgradeActive = false, bgUpgradeAbort = false;
 async function backgroundUpgrade() {
   /*
-   * أُوقفت — القاموس الآليّ لم يعد مصدراً لشيء.
+   * حُذفت — القاموس الآليّ لم يعد مصدراً لشيء في هذا التطبيق.
    *
-   * كانت تملأ الفراغات من قاموسٍ مفتوح، فتكتب في مكتبة المستخدم ما لا
-   * يُوثق به وتُرفع مع المزامنة. وقد أُلغي القاموس نهائياً بطلبه.
+   * كانت تمرّ على المكتبة فتملأ نواقصها من قاموسٍ مفتوح: معنىً بلا عربيّة،
+   * ومرادفاتٍ كذلك، وأمثلةً مترجمة آلياً — وتكتبها في مكتبة صاحبها وتُرفع
+   * مع المزامنة إلى كل جهاز. وقد حكم عليها فوجدها لا تُوثق وطلب إلغاءها.
+   *
+   * والبطاقة تُكتب بيدٍ على خوادم GitHub وتمرّ على مدقّقٍ بسبعة عشر بنداً،
+   * أو لا تكون. والدالة باقيةٌ اسماً لأن مواضع نداءٍ عدّة تستدعيها.
    */
-  const s0 = document.getElementById('bg-upgrade-status');
-  if (s0) s0.textContent = '';
-  return;
-
-  if (bgUpgradeActive || upgrading || syncing) return;
-  /*
-   * الكلمة التي كُتبت بطاقتها بيدٍ لا يمسّها القاموس الآليّ.
-   *
-   * هذه المواكبة وُضعت يوم كان القاموس هو مصدر البطاقة الوحيد، فكانت تملأ
-   * ما نقص. وقد صارت البطاقات تُكتب بيدٍ وتحلّ محلّ ما بناه التطبيق لنفسه،
-   * فبقاؤها يعني: تنزيلاً بلا فائدة، وكتابةً آليّةً في مكتبة المستخدم
-   * تُرفع إلى المستودع، وسطراً أخضر يومض «٣ من ١٧» فيظنّ صاحبها أن شيئاً
-   * ناقصٌ يُستدرك — وليس ناقصاً.
-   *
-   * والجديدة التي لم تُكتب بطاقتها بعد تبقى على المواكبة: تعطيه معنىً
-   * ونطقاً في الحال، ريثما تُكتب بطاقتها.
-   */
-  const written = w => {
-    const e = enrichCache && enrichCache[String(w.word || '').trim().toLowerCase()];
-    return !!(e && e.curated);
-  };
-  const outdated = words.filter(w => w.engineVersion !== ENGINE_VERSION && !written(w));
-  if (!outdated.length) { const s = document.getElementById('bg-upgrade-status'); if (s) s.textContent = ''; return; }
-  bgUpgradeActive = true; bgUpgradeAbort = false;
-  const statusEl = document.getElementById('bg-upgrade-status');
-  const total = outdated.length;
-  let done = 0;
-  for (const w0 of outdated) {
-    if (bgUpgradeAbort) break; // ضغط المستخدم Sync؟ نتوقف فوراً ونفسح له الأولوية
-    const idx = words.findIndex(x => x.id === w0.id);
-    if (idx === -1) { done++; continue; } // الكلمة اتحذفت أثناء الانتظار
-    if (statusEl) statusEl.textContent = `🔄 Improving saved words in the background… ${done + 1}/${total}`;
-    /*
-     * الفشل يُعدّ، ولا يُبتلع.
-     *
-     * كان `catch` فارغاً: تفشل الشبكة أو تنفد حصّة المترجم فلا تُعلَّم الكلمة،
-     * فتبقى «قديمة» إلى الأبد وتُعاد المحاولة عليها في كل فتحة. ورأى المستخدم
-     * الرقم نفسه — خمس عشرة — في كل مرّة وسأل محقّاً: «هل هذا الزرّ مزيّف؟».
-     * وكان محقّاً: العمل لا ينتهي لأن الفشل لا يُسجَّل.
-     *
-     * وثلاث محاولات تكفي: ما لم يُجب المصدر بعدها لن يجيب، وإصرارنا عليه يمنع
-     * بقيّة المكتبة من دورها.
-     */
-    try {
-      const fresh = await fetchEntryOnce(words[idx].word, 20000);
-      words[idx] = arr(fresh.meanings).length
-        ? { ...mergeCards(words[idx], fresh), engineVersion: ENGINE_VERSION, upgradeTries: 0 }
-        : { ...words[idx], engineVersion: ENGINE_VERSION };
-    } catch(e) {
-      const tries = (words[idx].upgradeTries || 0) + 1;
-      words[idx] = tries >= 3
-        ? { ...words[idx], engineVersion: ENGINE_VERSION, upgradeTries: tries }
-        : { ...words[idx], upgradeTries: tries };
-    }
-    await persist();
-    done++;
-    await new Promise(r => setTimeout(r, 600)); // نفس مبدأ الرفق بالخدمات المجانية، بس دون ما يعطّل المستخدم بشيء
-  }
-  bgUpgradeActive = false;
-  if (statusEl) statusEl.textContent = '';
-  if (tab === 'list') renderList();
-  // ما جمعته الجولة يُرفع الآن دفعةً واحدة، لا كلمةً كلمة
-  if (syncDirty) scheduleBackup();
+  const s = document.getElementById('bg-upgrade-status');
+  if (s) s.textContent = '';
 }
+
+/*
+ * البطاقة تنزل حين تجهز، لا حين يتذكّر صاحبها أن يضغط Sync.
+ *
+ * الكلمة تُرفع في ثوانٍ، ويكتب المسار بطاقتها على خوادم GitHub في دقائق.
+ * وكان وصولها إلى المتصفّح يتوقّف على مزامنةٍ يبدؤها المستخدم — فيضيف كلمةً
+ * ويمضي، ثم يفتح الصفحة بعد يومين فلا يجدها وقد كُتبت من أوّل ساعة.
+ *
+ * والسؤال مربوطٌ بالحاجة لا بالساعة: يسأل كل نصف دقيقة ما دامت كلمةٌ تنتظر
+ * بطاقتها، ويسكت تماماً حين تكتمل المكتبة. وسؤالُه فهرسٌ صغير، والشرائح لا
+ * تُنزَّل إلا إن تغيّرت بصماتها — فلا كلفة على من لا جديد عنده.
+ */
+setInterval(async () => {
+  if (syncing || upgrading || document.hidden) return;
+  if (!enrichCache) return;
+  const waiting = words.some(w => {
+    const e = enrichCache[String(w.word || '').trim().toLowerCase()];
+    return !(e && e.curated);
+  });
+  if (!waiting) return;
+  try {
+    if (await enrichSync()) {
+      renderList();
+      flash('📚 وصلت بطاقاتٌ جديدة');
+    }
+  } catch (e) { /* انقطاعٌ عابر — نعيد بعد نصف دقيقة */ }
+}, 30000);
+
 document.getElementById('top-sync-btn').onclick = doSync;
 document.getElementById('expand-all-btn').onclick = () => {
   const visible = filter === 'all' ? words : words.filter(x => statusOf(x) === filter);
@@ -26145,7 +26116,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 125;
+const BUILD = 126;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.
