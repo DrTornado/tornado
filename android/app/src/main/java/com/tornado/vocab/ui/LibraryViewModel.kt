@@ -47,19 +47,12 @@ class LibraryViewModel(app: Application) : AndroidViewModel(app) {
     val stats: StateFlow<LibraryStats> = repo.stats()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), LibraryStats())
 
-    /**
-     * كم بطاقة ما زالت تُكمَّل بالخلفية.
+    /*
+     * حُذف عدّاد «يُكمَّل بالخلفية» مع القاموس الآليّ الذي كان يعدّه.
      *
-     * القياس كل نصف دقيقة لا لحظياً: العدد يتناقص على مدى أيام بمعدّل ثماني
-     * كلمات في كل فتحة، ومراقبته لحظياً استعلامٌ متكرر بلا ما يقابله على
-     * الشاشة.
+     * ولا بديل له: الطابور المعروض أصدق منه — يقول أيّ كلمةٍ تنتظر بطاقتها
+     * بالاسم، لا رقماً يتناقص بلا أن يُعرف ما وراءه.
      */
-    val pendingGaps: StateFlow<Int> = flow {
-        while (true) {
-            emit(runCatching { app.tornado.enricher.pendingCount() }.getOrDefault(0))
-            kotlinx.coroutines.delay(30_000)
-        }
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), 0)
 
     /**
      * طابور البطاقات: الكلمات التي لم تُكتب بطاقتها المراجَعة بعد.

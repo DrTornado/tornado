@@ -56,7 +56,7 @@ class AddWordViewModel(app: Application) : AndroidViewModel(app) {
             com.tornado.vocab.data.SyncCoordinator.syncNow(getApplication())
         }
         // الكلمة المضافة للتوّ قد تكون وصلت ناقصة — تدخل طابور الإثراء فوراً
-        container.appScope.launch { runCatching { container.enricher.runUntilComplete() } }
+        // لا مُثرٍ آليّ — البطاقة تُكتب بيدٍ على خوادم GitHub وتصل بالمزامنة
     }
 
     private val _state = MutableStateFlow(AddState())

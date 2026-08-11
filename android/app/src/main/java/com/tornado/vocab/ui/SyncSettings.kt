@@ -413,29 +413,4 @@ fun KokoroSection(
     }
 }
 
-@Composable
-fun ExampleSourceSection(pendingGaps: Int) {
-    Column(Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(
-                Icons.Filled.CheckCircle, null, Modifier.size(18.dp),
-                tint = if (pendingGaps == 0) StatusColors.Known
-                else MaterialTheme.colorScheme.onSurfaceVariant
-            )
-            HSpace(8)
-            Text(
-                if (pendingGaps > 0) "$pendingGaps cards still incomplete"
-                else "Every card is complete",
-                style = MaterialTheme.typography.bodyMedium
-            )
-        }
-        VSpace(6)
-        Text(
-            "Missing examples, pronunciations and levels are filled in quietly " +
-                "while you use the app — from Tatoeba, whose sentences are written " +
-                "by volunteers and sometimes carry a real human recording.",
-            style = MaterialTheme.typography.labelMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-    }
-}
+

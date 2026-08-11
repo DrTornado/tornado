@@ -3,11 +3,11 @@ package com.tornado.vocab
 import android.app.Application
 import android.content.Context
 import com.tornado.vocab.data.AudioLibrarySync
+import com.tornado.vocab.data.CardFetchWorker
 import com.tornado.vocab.data.CardSource
 import com.tornado.vocab.data.DictionaryService
 import com.tornado.vocab.data.EnrichSync
 import com.tornado.vocab.data.GitHubSync
-import com.tornado.vocab.data.LibraryEnricher
 import com.tornado.vocab.data.NoteRepository
 import com.tornado.vocab.data.NoteSync
 import java.io.File
@@ -47,10 +47,14 @@ class TornadoApp : Application() {
     }
 
 
-    val enricher: LibraryEnricher by lazy {
-        LibraryEnricher(repository, dictionary,
-            writtenByHand = { enrichSync.curatedWordSet() })
-    }
+    /*
+     * لا مُثرٍ آليّ.
+     *
+     * كان `LibraryEnricher` يمرّ على المكتبة فيملأ نواقصها من قاموسٍ مفتوح:
+     * معنىً بلا عربيّة، ومرادفاتٍ كذلك، وأمثلةً مترجمة آلياً. وصاحب المكتبة
+     * حكم عليها فوجدها لا تُوثق، وطلب إلغاءها نهائياً — فحُذف الصنف كلّه لا
+     * أُوقف. والبطاقة تُكتب بيدٍ وتمرّ على مدقّقٍ بسبعة عشر بنداً، أو لا تكون.
+     */
 
     /** الملاحظات الصوتية — نصوص طويلة تُسمع بنفس المشغّل */
     val notes: NoteRepository by lazy { NoteRepository(this) }
@@ -80,6 +84,18 @@ class TornadoApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        /*
+         * عاملٌ مجدول يجلب البطاقات والتطبيق مغلق.
+         *
+         * حلقةُ الاستطلاع أدناه تعمل ما دام التطبيق مفتوحاً، وأندرويد يوقفها
+         * حين تُطفأ الشاشة — فتبقى البطاقة في المستودع حتى يُفتح التطبيق.
+         * وهذا يوقظه النظام دورياً فيجلبها بلا فتح.
+         *
+         * ويُجدول هنا لا في الكوروتين أدناه: تسجيله رخيص، وتأخيره خلف
+         * الاستيراد الأولي يعني ألّا يُجدول أصلاً عند أوّل تشغيل.
+         */
+        runCatching { CardFetchWorker.schedule(this) }
         // الاستيراد الأولي خارج الخيط الرئيسي — الشاشة الأولى تظهر فوراً
         appScope.launch {
             runCatching {
@@ -188,7 +204,7 @@ class TornadoApp : Application() {
             appScope.launch {
                 runCatching {
                     if (!settings.machinePurged()) {
-                        val n = enricher.purgeMachineContent()
+                        val n = repository.purgeMachineText()
                         settings.setMachinePurged(true)
                         android.util.Log.i("Tornado", "مُسح شرحٌ آليّ من $n كلمة")
                     }
@@ -203,14 +219,17 @@ class TornadoApp : Application() {
              * — فيضيف كلمةً ويمضي، ثم يفتح التطبيق بعد يومين فلا يجدها وقد
              * كُتبت من أوّل ساعة.
              *
-             * والاستطلاع مربوطٌ بالحاجة لا بالساعة: يسأل كل دقيقتين ما دامت
+             * والاستطلاع مربوطٌ بالحاجة لا بالساعة: يسأل كل نصف دقيقة ما دامت
              * كلمةٌ تنتظر بطاقتها، ويسكت تماماً حين تكتمل المكتبة. فلا يستهلك
              * بطاريةً ولا باقةً في حالةٍ لا جديد فيها — وسؤالُه فهرسٌ صغير،
              * والشرائح لا تُنزَّل إلا إن تغيّرت بصماتها.
+             *
+             * وكان كل دقيقتين، فكان يضيف إلى الانتظار الظاهر دقيقةً ونصفاً بلا
+             * سبب: البطاقة جاهزةٌ في المستودع وصاحبها ينتظر سؤالاً لم يحن.
              */
             appScope.launch {
                 while (true) {
-                    kotlinx.coroutines.delay(2 * 60_000L)
+                    kotlinx.coroutines.delay(30_000L)
                     val waiting = runCatching {
                         val written = enrichSync.curatedWordSet()
                         repository.allWords().count {

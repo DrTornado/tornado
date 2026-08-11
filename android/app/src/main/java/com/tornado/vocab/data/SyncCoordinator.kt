@@ -106,7 +106,7 @@ object SyncCoordinator {
                 }
 
                 // الإثراء يتبع كل مزامنة — المعاني الناقصة تُملأ بلا ضغطة
-                c.appScope.launch { runCatching { c.enricher.runUntilComplete() } }
+                // لا مُثرٍ آليّ — المزامنة تجلب البطاقات المكتوبة لا تبني غيرها
 
                 if (announce) _lastResult.value = when (r) {
                     is SyncResult.Success ->

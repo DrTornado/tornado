@@ -84,7 +84,6 @@ data class SettingsUi(
     val syncing: Boolean = false,
     val syncStatus: String? = null,
     // ===== مصدر جمل الأمثلة =====
-    val pendingGaps: Int = 0,
     val kokoroMb: Long = 0
 )
 
@@ -226,8 +225,6 @@ class SettingsViewModel(app: Application) : AndroidViewModel(app) {
             syncRepo = settings.syncRepo(),
             hasSyncToken = keyStore.hasKey(com.tornado.vocab.data.GitHubSync.PROVIDER),
             maskedSyncToken = keyStore.maskedKey(com.tornado.vocab.data.GitHubSync.PROVIDER),
-            pendingGaps = runCatching { getApplication<Application>().tornado.enricher.pendingCount() }
-                .getOrDefault(0),
             kokoroMb = runCatching { kokoro.installedBytes() / 1_048_576 }.getOrDefault(0),
             voices = voices, engines = engines,
             cacheMb = stats[0] / (1024 * 1024),
@@ -502,9 +499,8 @@ fun SettingsScreen(
                 onTest = vm::testKokoro
             )
 
-            // ===== مصدر الأمثلة =====
-            SettingsSection("Example sentences")
-            ExampleSourceSection(pendingGaps = ui.pendingGaps)
+            // قسم «Example sentences» حُذف مع القاموس الآليّ: كان يعِد بأن
+            // النواقص «تُملأ بهدوء أثناء الاستعمال»، ولم يعد شيءٌ يُملأ آلياً.
 
             SettingsSection("Your words")
             ActionRow("Export backup", "Saves a .json file compatible with the web version.") {

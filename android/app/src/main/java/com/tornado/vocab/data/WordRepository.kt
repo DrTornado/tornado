@@ -172,8 +172,39 @@ class WordRepository(private val context: Context) {
     suspend fun rememberDeletion(id: Long, word: String, deletedAt: Long) =
         dao.addTombstone(Tombstone(id, word, deletedAt))
 
-    /** يحدّث بطاقة كاملة — يخدم الإثراء الذي يملأ نواقص البطاقات القديمة */
+    /** يحدّث بطاقة كاملة */
     suspend fun update(word: Word) = dao.update(word.derive())
+
+    /**
+     * يمسح ما خزّنه القاموس الآليّ قبل إلغائه.
+     *
+     * الإلغاء لا يكتمل بمنع الجديد وحده: المكتبة القائمة فيها بطاقاتٌ كُتبت
+     * من قاموسٍ مفتوح — معانٍ بلا عربيّة ومرادفاتٌ كذلك — وتبقى في القاعدة
+     * وتُرفع مع المزامنة إلى كل جهاز.
+     *
+     * والمسّ على الشرح وحده: لا على الكلمة ولا نطقها ولا تقدّم مراجعتها.
+     * والبطاقة المكتوبة بيدٍ لا تُمسّ أصلاً لأن نصّها في الإثراء لا هنا.
+     */
+    suspend fun purgeMachineText(): Int = withContext(Dispatchers.IO) {
+        var cleaned = 0
+        for (w in allWords()) {
+            val hasText = w.meanings.isNotEmpty() || w.synonyms.isNotEmpty() ||
+                w.collocations.isNotEmpty() || w.examples.isNotEmpty() ||
+                w.differences.isNotEmpty() || w.derivatives.isNotEmpty()
+            if (!hasText) continue
+            runCatching {
+                update(
+                    w.copy(
+                        meanings = emptyList(), synonyms = emptyList(),
+                        collocations = emptyList(), examples = emptyList(),
+                        differences = emptyList(), derivatives = emptyList()
+                    )
+                )
+                cleaned++
+            }
+        }
+        cleaned
+    }
 
     suspend fun resetAllProgress() = dao.resetAllProgress()
 

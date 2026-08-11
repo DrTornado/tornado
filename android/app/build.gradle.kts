@@ -50,8 +50,8 @@ android {
         applicationId = "com.tornado.vocab"
         minSdk = 26
         targetSdk = 35
-        versionCode = 13
-        versionName = "3.1"
+        versionCode = 16
+        versionName = "3.4"
     }
 
     /*
@@ -150,6 +150,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.7")
     implementation("androidx.navigation:navigation-compose:2.8.4")
     implementation("androidx.datastore:datastore-preferences:1.1.1")
+    // عاملٌ مجدول يجلب البطاقات والتطبيق مغلق — أندرويد يوقظه ولو أُغلق
+    implementation("androidx.work:work-runtime-ktx:2.9.1")
 
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
