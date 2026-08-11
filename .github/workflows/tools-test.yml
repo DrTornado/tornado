@@ -61,6 +61,37 @@ jobs:
           print("النبر: كل الحالات صحيحة")
           PY
 
+      - name: مقارنة البطاقة النموذج
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/t/curated
+          cat > /tmp/t/spec.md <<'MD'
+          نصٌّ قبل الكتلة.
+
+          ```json
+          {
+           "punctuality": {
+            "ipa": "/x/",
+            "meanings": [{"en": "a", "ar": "أ"}]
+           }
+          }
+          ```
+          MD
+          cat > /tmp/t/curated/00.json <<'JSON'
+          {"punctuality": {"ipa": "/x/", "meanings": [{"en": "a", "ar": "أ"}]}}
+          JSON
+          python3 tools/enrich/spec_sync.py --spec /tmp/t/spec.md --curated /tmp/t/curated
+
+          # ثم تُدرّج المكتبة عن المواصفة — يجب أن يُردّ
+          cat > /tmp/t/curated/00.json <<'JSON'
+          {"punctuality": {"ipa": "/y/", "meanings": [{"en": "a", "ar": "أ"}]}}
+          JSON
+          if python3 tools/enrich/spec_sync.py --spec /tmp/t/spec.md --curated /tmp/t/curated; then
+            echo "::error::التدرّج لم يُكتشف"
+            exit 1
+          fi
+          echo "التدرّج يُكتشف"
+
       - name: الحدود الدنيا كما في المواصفة
         run: |
           python3 - <<'PY'
