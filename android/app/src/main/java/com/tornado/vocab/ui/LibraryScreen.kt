@@ -536,13 +536,18 @@ private fun WordListRow(
  * بطاقةٌ لم تُكتب بعد — وهذا السطر يفرّق بين الاثنين.
  *
  * والنسخ لأن الطلب يُكتب في المحادثة: كلماتٌ مفصولة بمسافات، جاهزةٌ للّصق.
+ *
+ * وينقلب السطر تحذيراً بعد ساعة: البطاقة تصل في دقيقتين، فالساعة تعني عطلاً
+ * — رمزاً انتهى، أو مساراً سقط، أو دقائق نفدت. وكان يقول «تنتظر» إلى الأبد
+ * بنفس اللهجة الهادئة، فيظنّها صاحبها بطيئةً ولا يعرف أن شيئاً انكسر.
  */
 @Composable
-private fun CardQueueRow(queue: List<String>) {
-    if (queue.isEmpty()) return
+private fun CardQueueRow(queue: CardQueue) {
+    if (queue.words.isEmpty()) return
     var open by remember { mutableStateOf(false) }
     val clipboard = LocalClipboardManager.current
     val ctx = LocalContext.current
+    val stalled = queue.stalled
 
     Column(
         Modifier
@@ -550,25 +555,41 @@ private fun CardQueueRow(queue: List<String>) {
             .clickable { open = !open }
             .padding(horizontal = 20.dp, vertical = 4.dp)
     ) {
+        val count = "${queue.words.size} " + (if (queue.words.size == 1) "word" else "words")
         Text(
-            "📝 ${queue.size} " + (if (queue.size == 1) "word" else "words") +
-                " awaiting a written card" + (if (open) "" else "  ·  tap to list"),
+            (if (stalled) "⚠️ $count still waiting after ${waited(queue.oldestMs)}  ·  check GitHub Actions"
+             else "📝 $count awaiting a written card") +
+                (if (open) "" else "  ·  tap to list"),
             style = MaterialTheme.typography.labelMedium,
-            color = MaterialTheme.colorScheme.primary
+            color = if (stalled) MaterialTheme.colorScheme.error
+                    else MaterialTheme.colorScheme.primary
         )
         AnimatedVisibility(open) {
             Column {
                 Text(
-                    queue.joinToString("  ·  "),
+                    queue.words.joinToString("  ·  "),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(top = 4.dp)
                 )
+                if (stalled) Text(
+                    "A card normally arrives within minutes. Open the tornado-data " +
+                        "repository → Actions to see what failed.",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.error,
+                    modifier = Modifier.padding(top = 4.dp)
+                )
                 TextButton(onClick = {
-                    clipboard.setText(AnnotatedString(queue.joinToString(" ")))
+                    clipboard.setText(AnnotatedString(queue.words.joinToString(" ")))
                     Toast.makeText(ctx, "Copied", Toast.LENGTH_SHORT).show()
                 }) { Text("📋 Copy list", fontSize = 12.sp) }
             }
         }
     }
+}
+
+/** مدّة الانتظار بأخشن وحدةٍ تصفها: «1h» ثم «3h» ثم «2d». */
+internal fun waited(ms: Long): String {
+    val h = ms / 3_600_000L
+    return if (h < 24) "${h}h" else "${h / 24}d"
 }

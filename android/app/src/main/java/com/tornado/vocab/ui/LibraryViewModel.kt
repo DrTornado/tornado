@@ -28,6 +28,22 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
+/**
+ * الكلمات المنتظرة بطاقتها، ومدّة أقدمها.
+ *
+ * @param oldestMs منذ متى تنتظر أقدمُها. البطاقة تُكتب في دقيقتين، فما
+ *   تجاوز الساعة عطلٌ لا بطء.
+ * @param synced أمربوطةٌ النسخة بمستودع؟ بلا مزامنة لا شيء ينتظر، فلا
+ *   إنذار — والإنذار الكاذب يُفقد الصادقَ معناه.
+ */
+data class CardQueue(
+    val words: List<String> = emptyList(),
+    val oldestMs: Long = 0L,
+    val synced: Boolean = false
+) {
+    val stalled: Boolean get() = synced && words.isNotEmpty() && oldestMs > 60 * 60_000L
+}
+
 data class LibraryFilters(
     val query: String = "",
     val status: WordStatus? = null,
@@ -64,13 +80,30 @@ class LibraryViewModel(app: Application) : AndroidViewModel(app) {
      * ويتتبّع القاعدة لا الساعة: `curatedWords` تدفق من Room، فأول مزامنة
      * تُنقص العدد في اللحظة نفسها بلا استطلاع.
      */
-    val cardQueue: StateFlow<List<String>> = combine(
+    val cardQueue: StateFlow<CardQueue> = combine(
         repo.rows(null, favOnly = false, sort = SortOrder.ALPHA),
         container.enrichSync.curatedWords()
     ) { all, written ->
         val have = written.toHashSet()
-        all.map { it.word }.filter { it.trim().lowercase() !in have }
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+        val waiting = all.filter { it.word.trim().lowercase() !in have }
+        /*
+         * الانتظارُ الطويل يُقال، ولا يُترك للتخمين.
+         *
+         * البطاقة تُكتب في دقيقتين. فإن مضت ساعةٌ ولم تصل فثمّة عطل: رمزٌ
+         * انتهت صلاحيته، أو مسارٌ سقط، أو دقائق نفدت. وكان التطبيق يقول
+         * «تنتظر بطاقة» إلى الأبد بنفس اللهجة — فيظنّ صاحبها أن الكتابة
+         * بطيئة، ولا يعرف أن شيئاً انكسر إلا بإيميلٍ قد لا يقرؤه.
+         *
+         * والمعرّف طابعٌ زمنيّ لوقت الإضافة، فمنه تُقاس المدّة بلا حقلٍ جديد.
+         *
+         * ولا يُقال «تعثّر» إلا لمن يملك مزامنة. فعلى نسخةٍ لم تُربط بمستودع
+         * لا شيء ينتظر أصلاً — ولو صرخ السطر «تنتظر منذ ٢٤ يوماً» على مكتبة
+         * البداية لكان إنذاراً كاذباً، وكذبةُ الإنذار تُفقده معناه حين يصدق.
+         */
+        val now = System.currentTimeMillis()
+        val oldest = waiting.minOfOrNull { it.id }?.let { now - it } ?: 0L
+        CardQueue(waiting.map { it.word }, oldest, container.enrichSync.canPull)
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), CardQueue())
 
     /**
      * مستويات البطاقات المكتوبة — لشارة صفّ القائمة.

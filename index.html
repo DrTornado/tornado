@@ -24891,6 +24891,33 @@ function pendingCards() {
     .map(w => w.word);
 }
 
+/*
+ * منذ متى تنتظر أقدمُ كلمة.
+ *
+ * المعرّف هو `Date.now()` ساعةَ الإضافة، فالعمر منه بلا حقلٍ جديد. والبطاقة
+ * تصل في دقيقتين، فما تجاوز الساعة عطلٌ لا بطء: رمزٌ انتهت صلاحيته، أو
+ * مسارٌ سقط، أو دقائق حسابٍ نفدت. وكان السطر يقول «تنتظر» إلى الأبد بنفس
+ * اللهجة الهادئة فلا يعرف صاحبها أن شيئاً انكسر.
+ */
+function oldestPendingMs() {
+  if (!enrichCache) return 0;
+  const ids = words
+    .filter(w => {
+      const e = enrichCache[String(w.word || '').trim().toLowerCase()];
+      return !(e && e.curated);
+    })
+    .map(w => Number(w.id) || 0)
+    .filter(id => id > 0);
+  return ids.length ? Date.now() - Math.min(...ids) : 0;
+}
+
+const CARD_STALL_MS = 60 * 60 * 1000;
+
+function waitedLabel(ms) {
+  const h = Math.floor(ms / 3600000);
+  return h < 24 ? h + 'h' : Math.floor(h / 24) + 'd';
+}
+
 let cardQueueOpen = false;
 
 function setCardQueue() {
@@ -24899,10 +24926,21 @@ function setCardQueue() {
   const p = pendingCards();
   if (!p.length) { el.classList.add('hidden'); cardQueueOpen = false; return; }
   el.classList.remove('hidden');
-  const head = '📝 ' + p.length + ' word' + (p.length > 1 ? 's' : '') + ' awaiting a written card';
+  const waited = oldestPendingMs();
+  // ولا إنذار على نسخةٍ بلا مستودع: لا شيء ينتظر أصلاً، والإنذار الكاذب
+  // يُعلّم صاحبَه تجاهلَه فيضيع حين يصدق.
+  const stalled = !!ghConf() && waited > CARD_STALL_MS;
+  el.style.color = stalled ? '#E86A5A' : '#E8B04B';
+  const count = p.length + ' word' + (p.length > 1 ? 's' : '');
+  const head = stalled
+    ? '⚠️ ' + count + ' still waiting after ' + waitedLabel(waited) + ' — check GitHub Actions'
+    : '📝 ' + count + ' awaiting a written card';
+  const note = stalled
+    ? '<div style="color:#E86A5A;font-size:11.5px;margin-top:5px;line-height:1.7;">A card normally arrives within minutes. Open tornado-data → Actions to see what failed.</div>'
+    : '';
   el.innerHTML = cardQueueOpen
     ? head + '<div style="color:#B9C2D0;font-size:12px;margin-top:5px;line-height:1.8;">' +
-      p.map(esc).join(' · ') + '</div>' +
+      p.map(esc).join(' · ') + '</div>' + note +
       '<button id="card-queue-copy" class="btn" style="display:inline-block;width:auto;margin-top:7px;background:#3A4453;color:#E8E4DA;font-size:11.5px;padding:5px 12px;">📋 Copy list</button>'
     : head + ' — tap to list';
   el.onclick = e => {
@@ -26118,7 +26156,7 @@ function kokoroStatus(msg) {
  * فيجد العطل نفسه، ويظنّ الإصلاح كذباً. ورقمٌ صغير في الزاوية يحسم السؤال في
  * ثانية: أعندك الجديدة أم لا؟
  */
-const BUILD = 127;
+const BUILD = 129;
 
 /*
  * الصفحة تتحقّق من نفسها وتُجدّد نفسها.
@@ -27831,6 +27869,7 @@ load().then(async () => {
   setInterval(async () => {
     if (syncing || autoSyncBusy) return;
     if (!pendingCards().length) return;
+    setCardQueue();   // يُعيد رسم السطر ليقلب لهجته إلى تحذيرٍ حين تمضي الساعة
     try {
       if (await enrichSync()) { renderList(); flash('📚 وصلت بطاقاتٌ جديدة'); }
     } catch (e) { /* انقطاع — نعيد بعد دقيقتين */ }
