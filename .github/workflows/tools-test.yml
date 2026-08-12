@@ -92,6 +92,32 @@ jobs:
           fi
           echo "التدرّج يُكتشف"
 
+      - name: رموزُ النطق ممنوعةٌ في الخانة العربية
+        run: |
+          python3 - <<'PY'
+          import sys
+          sys.path.insert(0, "tools/enrich")
+          from audit_cards import IPA_IN_ARABIC, ARABIC
+
+          # نصٌّ أتلفته معالجةٌ آلية — بقي في `abide` شهوراً
+          bad = [
+              "əˈɪ— النبر على",
+              "يختلف عن /ˈθɜː",
+          ]
+          for t in bad:
+              assert ARABIC.search(t) and IPA_IN_ARABIC.search(t), t
+
+          # وسطورٌ عربيةٌ سليمة لا تُمَسّ
+          ok = [
+              "مقطعان، والنبر على الثاني",
+              "رافد · نهر يصبّ في نهرٍ أكبر",
+              "الفرق بريطانيّ/أمريكيّ جوهريّ",
+          ]
+          for t in ok:
+              assert not IPA_IN_ARABIC.search(t), t
+          print("رموز النطق: تُكتشف في المتلف، ولا تُنذر على السليم")
+          PY
+
       - name: دورة المراجعة تختار الأقدم عهداً
         run: |
           set -euo pipefail
