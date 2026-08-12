@@ -92,6 +92,60 @@ jobs:
           fi
           echo "التدرّج يُكتشف"
 
+      - name: دورة المراجعة تختار الأقدم عهداً
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/rv/curated
+          cat > /tmp/rv/curated/a.json <<'JSON'
+          {"_batch": "x", "alpha": {"ipa": "/a/"}, "beta": {"ipa": "/b/"},
+           "gamma": {"ipa": "/g/"}, "delta": {"ipa": "/d/"}}
+          JSON
+          cat > /tmp/rv/state.json <<'JSON'
+          {"reviewed": {"alpha": "2026-01-01", "beta": "2026-06-01"}}
+          JSON
+          got=$(python3 tools/enrich/review_pick.py --curated /tmp/rv/curated \
+                  --state /tmp/rv/state.json --limit 3 | grep -v '^#' | tr '\n' ' ')
+          echo "اختار: $got"
+          # ما لم يُراجَع قطّ يسبق، ثم الأقدم تاريخاً
+          [ "$got" = "delta gamma alpha " ] || { echo "::error::ترتيب خاطئ: $got"; exit 1; }
+          python3 tools/enrich/review_pick.py --curated /tmp/rv/curated \
+            --state /tmp/rv/state.json --commit delta gamma
+          again=$(python3 tools/enrich/review_pick.py --curated /tmp/rv/curated \
+                    --state /tmp/rv/state.json --limit 1 | grep -v '^#')
+          [ "$again" = "alpha" ] || { echo "::error::التسجيل لم يُغيّر الدور: $again"; exit 1; }
+          echo "الدورة صحيحة"
+
+      - name: حارس النطاق يمنع مسّ ما لم يُؤذن به
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/sg/before /tmp/sg/after
+          cat > /tmp/sg/before/a.json <<'JSON'
+          {"one": {"ipa": "/1/"}, "two": {"ipa": "/2/"}, "three": {"ipa": "/3/"}}
+          JSON
+
+          # تغييرٌ داخل الإذن — يمرّ
+          cat > /tmp/sg/after/a.json <<'JSON'
+          {"one": {"ipa": "/ONE/"}, "two": {"ipa": "/2/"}, "three": {"ipa": "/3/"}}
+          JSON
+          python3 tools/enrich/scope_guard.py --before /tmp/sg/before \
+            --after /tmp/sg/after --allow one
+
+          # تغييرٌ خارج الإذن — يُردّ
+          if python3 tools/enrich/scope_guard.py --before /tmp/sg/before \
+               --after /tmp/sg/after --allow two; then
+            echo "::error::التغيير خارج الإذن لم يُكتشف"; exit 1
+          fi
+
+          # بطاقةٌ اختفت — تُردّ ولو كانت في الإذن
+          cat > /tmp/sg/after/a.json <<'JSON'
+          {"one": {"ipa": "/1/"}, "two": {"ipa": "/2/"}}
+          JSON
+          if python3 tools/enrich/scope_guard.py --before /tmp/sg/before \
+               --after /tmp/sg/after --allow one two three; then
+            echo "::error::الحذف لم يُكتشف"; exit 1
+          fi
+          echo "حارس النطاق يعمل"
+
       - name: الحدود الدنيا كما في المواصفة
         run: |
           python3 - <<'PY'
