@@ -76,6 +76,9 @@ class ListenViewModel(app: Application) : AndroidViewModel(app) {
     private fun reload() = viewModelScope.launch {
         val s = _source.value
         _loadedPlaylist.value = repo.playlistRows(s.status, s.favOnly)
+        _glosses.value = runCatching {
+            getApplication<Application>().tornado.enrichSync.curatedGlosses()
+        }.getOrDefault(emptyMap())
         prebuildHead()
     }
 
@@ -97,6 +100,43 @@ class ListenViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     // ===== تشغيل أي قائمة =====
+
+    /*
+     * ===== معاني البطاقات لعرض القائمة =====
+     *
+     * صفُّ القائمة كان يعرض `primaryAr` — وهي خانةٌ أفرغها حذفُ القاموس
+     * الآليّ، فبقيت الكلمات عاريةً في شاشة الاستماع كما بقيت في المشغّل.
+     */
+    private val _glosses = MutableStateFlow<Map<String, String>>(emptyMap())
+    val glosses: StateFlow<Map<String, String>> = _glosses.asStateFlow()
+
+    /*
+     * ===== اختيارُ كلماتٍ بعينها =====
+     *
+     * نفس الاختيار الذي في شاشة الكلمات: ضغطةٌ مطوّلة تبدأه، والعادية
+     * تُضيف وتحذف. وطلبُ صاحب المكتبة أن يكون في كل قائمةٍ يُشغّل منها —
+     * فالوظيفة التي تعمل في شاشةٍ وتغيب عن أختها تُقرأ عطلاً لا تصميماً.
+     */
+    private val _selected = MutableStateFlow<Set<Long>>(emptySet())
+    val selected: StateFlow<Set<Long>> = _selected.asStateFlow()
+
+    fun toggleSelect(id: Long) {
+        _selected.value = _selected.value.let { if (id in it) it - id else it + id }
+    }
+
+    fun clearSelection() { _selected.value = emptySet() }
+
+    fun selectAll() { _selected.value = _loadedPlaylist.value.map { it.id }.toSet() }
+
+    /** يشغّل المختارة وحدها بترتيب ظهورها */
+    fun playSelected() {
+        val ids = _selected.value
+        if (ids.isEmpty()) return
+        val chosen = _loadedPlaylist.value.filter { it.id in ids }
+        if (chosen.isEmpty()) return
+        _selected.value = emptySet()
+        playWords(chosen, 0)
+    }
 
     /** يشغّل أي مجموعة كلمات جاهزة — الطريق الموحّد لكل القوائم في التطبيق */
     fun playWords(words: List<WordRow>, startIndex: Int = 0) {

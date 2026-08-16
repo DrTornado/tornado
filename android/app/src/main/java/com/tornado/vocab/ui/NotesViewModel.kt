@@ -88,8 +88,37 @@ class NotesViewModel(app: Application) : AndroidViewModel(app) {
      * لأنها وحدها في الطابور. ومن يستمع وهو يمشي أو يقود لا يستطيع أن يلتقط
      * جواله عند نهاية كل نصّ.
      */
-    fun playAll(startId: Long? = null) = viewModelScope.launch {
+    /*
+     * ===== اختيارُ ملاحظاتٍ بعينها =====
+     *
+     * نفس الاختيار الذي في الكلمات والاستماع. وطلبُ صاحب المكتبة أن يكون
+     * في كل قائمةٍ يُشغّل منها — فالوظيفة التي تعمل في شاشةٍ وتغيب عن
+     * أختها تُقرأ عطلاً لا تصميماً.
+     */
+    private val _selected = MutableStateFlow<Set<Long>>(emptySet())
+    val selected: StateFlow<Set<Long>> = _selected.asStateFlow()
+
+    fun toggleSelect(id: Long) {
+        _selected.value = _selected.value.let { if (id in it) it - id else it + id }
+    }
+
+    fun clearSelection() { _selected.value = emptySet() }
+
+    fun selectAll() = viewModelScope.launch {
+        _selected.value = notes.all().map { it.id }.toSet()
+    }
+
+    /** يشغّل الملاحظات المختارة وحدها */
+    fun playSelected() = viewModelScope.launch {
+        val ids = _selected.value
+        if (ids.isEmpty()) return@launch
+        _selected.value = emptySet()
+        playAll(only = ids)
+    }
+
+    fun playAll(startId: Long? = null, only: Set<Long>? = null) = viewModelScope.launch {
         val all = notes.all().sortedByDescending { it.updatedAt }
+            .let { list -> if (only.isNullOrEmpty()) list else list.filter { it.id in only } }
         /*
          * التكرار يُبنى في الطابور لا في الملف.
          *

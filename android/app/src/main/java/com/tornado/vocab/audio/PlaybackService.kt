@@ -118,6 +118,20 @@ class PlaybackService : MediaSessionService() {
 
     private var scopeMode = PlayScope.LIST
     private var loopsLeft = 0
+
+    /**
+     * ترتيبُ القائمة كما يراها صاحبها — لا كما دُوّرت الجلسة.
+     *
+     * من بدأ التشغيل من الكلمة ١٢٠ تُدوَّر القائمة لتبدأ بها، فيكمل ما
+     * بعدها — وهو الصواب. لكن العدّاد كان يعيد الترقيم من واحد، فيقرأ
+     * «1/191» ويظنّ أن المشغّل عاد إلى أوّلها.
+     *
+     * والجلسة تُدوَّر في خمسة مواضع (بدءٌ من منتصف، وإعادةُ بناء، وقفزٌ
+     * إلى عنصر، وحذفٌ منها) — فإزاحةٌ محفوظة تسهو عن أحدها يوماً. أما
+     * البحث عن المعرّف في الترتيب الأصليّ فلا يسهو: الموضع يُشتقّ ولا
+     * يُتتبّع.
+     */
+    private var displayOrder: List<Long> = emptyList()
     private var renderJob: Job? = null
     private var tickerJob: Job? = null
     private var sleepJob: Job? = null
@@ -948,11 +962,30 @@ class PlaybackService : MediaSessionService() {
             planCursor.coerceAtMost((session.size - 1).coerceAtLeast(0))
         }
 
+        /*
+         * الطابور والعدّاد بترتيب القائمة كما يراها صاحبها.
+         *
+         * الجلسة تُدوَّر ليبدأ التشغيل من حيث ضغط، فيكمل ما بعدها — وهو
+         * الصواب. لكن العرض كان يتبع الجلسة، فمن بدأ من الكلمة ١٢٠ قرأ
+         * «1/191» فظنّ المشغّل عاد إلى أوّل القائمة. والاثنان يُعادان إلى
+         * الترتيب الأصليّ معاً، فلا يتناقض رقمٌ مع قائمة.
+         */
+        val position = displayOrder.withIndex().associate { (i, id) -> id to i }
+        val currentId = items.getOrNull(
+            displayIndex.coerceIn(0, (items.size - 1).coerceAtLeast(0))
+        )?.id
+        val shownQueue =
+            if (position.isEmpty()) items
+            else items.sortedBy { position[it.id] ?: Int.MAX_VALUE }
+        val shownIndex = currentId?.let { id -> shownQueue.indexOfFirst { it.id == id } }
+            ?.takeIf { it >= 0 }
+            ?: displayIndex.coerceIn(0, (items.size - 1).coerceAtLeast(0))
+
         PlaybackBus.update {
             it.copy(
                 spokenLine = spoken,
-                queue = items,
-                index = displayIndex.coerceIn(0, (items.size - 1).coerceAtLeast(0)),
+                queue = shownQueue,
+                index = shownIndex,
                 readyCount = rendered.size,
                 skippedCount = skipped,
                 isPlaying = player.isPlaying,
@@ -983,6 +1016,13 @@ class PlaybackService : MediaSessionService() {
                 shuffle -> rows.shuffled()
                 else -> rows
             }
+            /*
+             * البدء من منتصف القائمة يُدوّرها فيكمل ما بعدها — وهو الصواب.
+             * لكن العدّاد كان يعيد الترقيم من واحد، فمن بدأ من الكلمة ١٢٠
+             * يقرأ «1/191» فيظنّ المشغّل عاد إلى أول القائمة. فيُحفظ مقدارُ
+             * التدوير ليُعرض الموضع الحقيقيّ في القائمة كما يراها صاحبها.
+             */
+            displayOrder = ordered.map { it.id }
             session = if (scope == PlayScope.LIST && ordered.isNotEmpty() && !shuffle &&
                 startIndex in ordered.indices
             ) ordered.drop(startIndex) + ordered.take(startIndex) else ordered

@@ -1,6 +1,7 @@
 package com.tornado.vocab.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -64,6 +65,7 @@ fun NotesScreen(
 ) {
     val rows by vm.rows.collectAsStateWithLifecycle()
     val ui by vm.ui.collectAsStateWithLifecycle()
+    val selected by vm.selected.collectAsStateWithLifecycle()
     val playback by vm.playback.collectAsStateWithLifecycle()
 
     var pasting by remember { mutableStateOf(false) }
@@ -116,6 +118,32 @@ fun NotesScreen(
             }
         }
 
+        // شريط الاختيار — لا يظهر إلا حين تُختار ملاحظة
+        if (selected.isNotEmpty()) {
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.10f))
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    "${selected.size} selected",
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.weight(1f)
+                )
+                TextButton(onClick = { vm.selectAll() }) { Text("All", fontSize = 13.sp) }
+                TextButton(onClick = { vm.clearSelection() }) { Text("Clear", fontSize = 13.sp) }
+                TextButton(onClick = { vm.playSelected(); onOpenPlayer() }) {
+                    Text(
+                        "▶ Play", fontSize = 14.sp, fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
+        }
+
         if (rows.isEmpty()) {
             Column(
                 Modifier.fillMaxSize().padding(32.dp),
@@ -161,7 +189,10 @@ fun NotesScreen(
                     onOpen = { onOpenNote(row.id) },
                     // يشغّل من هذه الملاحظة ثم يواصل لما بعدها، ويفتح المشغّل
                     onPlay = { vm.playAll(row.id); onOpenPlayer() },
-                    onDelete = { confirmDelete = row }
+                    onDelete = { confirmDelete = row },
+                    selecting = selected.isNotEmpty(),
+                    selected = row.id in selected,
+                    onToggleSelect = { vm.toggleSelect(row.id) }
                 )
             }
         }
@@ -191,18 +222,30 @@ fun NotesScreen(
     }
 }
 
+@OptIn(androidx.compose.foundation.ExperimentalFoundationApi::class)
 @Composable
 private fun NoteRowItem(
     row: NoteRow,
     playing: Boolean,
     onOpen: () -> Unit,
     onPlay: () -> Unit,
-    onDelete: () -> Unit
+    onDelete: () -> Unit,
+    selecting: Boolean = false,
+    selected: Boolean = false,
+    onToggleSelect: () -> Unit = {}
 ) {
     Row(
         Modifier
             .fillMaxWidth()
-            .clickable(onClick = onOpen)
+            .background(
+                if (selected) MaterialTheme.colorScheme.primary.copy(alpha = 0.14f)
+                else androidx.compose.ui.graphics.Color.Transparent
+            )
+            // ضغطةٌ مطوّلة تبدأ الاختيار — كما في الكلمات والاستماع
+            .combinedClickable(
+                onClick = { if (selecting) onToggleSelect() else onOpen() },
+                onLongClick = onToggleSelect
+            )
             .padding(horizontal = 16.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {

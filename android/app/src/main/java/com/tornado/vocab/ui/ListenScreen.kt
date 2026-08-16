@@ -2,6 +2,7 @@ package com.tornado.vocab.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -56,6 +57,8 @@ fun ListenScreen(vm: ListenViewModel, onOpenPlayer: () -> Unit) {
     val source by vm.source.collectAsStateWithLifecycle()
     val scope by vm.scope.collectAsStateWithLifecycle()
     val playlist by vm.loadedPlaylist.collectAsStateWithLifecycle()
+    val selected by vm.selected.collectAsStateWithLifecycle()
+    val glosses by vm.glosses.collectAsStateWithLifecycle()
 
     if (stats.total == 0) {
         EmptyState(
@@ -141,16 +144,65 @@ fun ListenScreen(vm: ListenViewModel, onOpenPlayer: () -> Unit) {
                     )
                 }
             }
+            // شريط الاختيار — لا يظهر إلا حين تُختار كلمة
+            if (selected.isNotEmpty()) {
+                item {
+                    Row(
+                        Modifier
+                            .fillMaxWidth()
+                            .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.10f))
+                            .padding(horizontal = 16.dp, vertical = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            "${selected.size} selected",
+                            style = MaterialTheme.typography.labelLarge,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.weight(1f)
+                        )
+                        Text(
+                            "All",
+                            Modifier.clip(RoundedCornerShape(10.dp))
+                                .clickable { vm.selectAll() }
+                                .padding(horizontal = 10.dp, vertical = 6.dp),
+                            fontSize = 13.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Text(
+                            "Clear",
+                            Modifier.clip(RoundedCornerShape(10.dp))
+                                .clickable { vm.clearSelection() }
+                                .padding(horizontal = 10.dp, vertical = 6.dp),
+                            fontSize = 13.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Text(
+                            "▶ Play",
+                            Modifier.clip(RoundedCornerShape(10.dp))
+                                .clickable { vm.playSelected(); onOpenPlayer() }
+                                .padding(horizontal = 12.dp, vertical = 6.dp),
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                }
+            }
             itemsIndexed(playlist, key = { _, w -> w.id }) { i, w ->
                 val isCurrent = playback.current?.id == w.id
                 TrackRow(
                     index = i,
                     word = w.word,
-                    subtitle = w.primaryAr.ifBlank { w.primaryEn },
+                    // المعنى من البطاقة المكتوبة — `primaryAr` أفرغها حذف القاموس
+                    subtitle = glosses[w.word.trim().lowercase()]
+                        ?: w.primaryAr.ifBlank { w.primaryEn },
                     status = w.status,
                     isCurrent = isCurrent,
                     isPlaying = isCurrent && playback.isPlaying,
-                    onClick = { vm.playFrom(i); onOpenPlayer() }
+                    onClick = { vm.playFrom(i); onOpenPlayer() },
+                    selecting = selected.isNotEmpty(),
+                    selected = w.id in selected,
+                    onToggleSelect = { vm.toggleSelect(w.id) }
                 )
             }
         }
@@ -312,6 +364,7 @@ private fun NowPlayingCard(vm: ListenViewModel, onExpand: () -> Unit) {
     }
 }
 
+@OptIn(androidx.compose.foundation.ExperimentalFoundationApi::class)
 @Composable
 private fun TrackRow(
     index: Int,
@@ -320,13 +373,26 @@ private fun TrackRow(
     status: WordStatus,
     isCurrent: Boolean,
     isPlaying: Boolean,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    selecting: Boolean = false,
+    selected: Boolean = false,
+    onToggleSelect: () -> Unit = {}
 ) {
     Row(
         Modifier
             .fillMaxWidth()
-            .background(if (isCurrent) MaterialTheme.colorScheme.surfaceVariant else Color.Transparent)
-            .clickable(onClick = onClick)
+            .background(
+                when {
+                    selected -> MaterialTheme.colorScheme.primary.copy(alpha = 0.14f)
+                    isCurrent -> MaterialTheme.colorScheme.surfaceVariant
+                    else -> Color.Transparent
+                }
+            )
+            // ضغطةٌ مطوّلة تبدأ الاختيار — كما في شاشة الكلمات سواءً بسواء
+            .combinedClickable(
+                onClick = { if (selecting) onToggleSelect() else onClick() },
+                onLongClick = onToggleSelect
+            )
             .padding(horizontal = 16.dp, vertical = 11.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
