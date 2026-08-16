@@ -93,6 +93,8 @@ def main() -> None:
     ap.add_argument("--done", action="store_true")
     ap.add_argument("--incomplete", action="store_true",
                     help="الناقصة وحدها، ومعها ما ينقصها")
+    ap.add_argument("--new-only", action="store_true",
+                    help="ما لا بطاقة له أصلاً — طابور الكاتب")
     a = ap.parse_args()
 
     done, partial = curated_words(a.curated)
@@ -110,10 +112,25 @@ def main() -> None:
             print("لا ناقصة — كل المكتوب مكتمل")
         return
 
-    # الناقصة أوّلاً: إكمالُ بطاقةٍ بدأناها أولى من بدء أخرى
-    todo = ([w for w in all_words if w.lower() in partial]
-            + [w for w in all_words
-               if w.lower() not in done and w.lower() not in partial])
+    """
+    الناقصة أوّلاً — إلا لطابور الكاتب.
+
+    كان الترتيب واحداً للجميع: الناقص أوّلاً لأن إكمال بطاقةٍ بدأناها أولى
+    من بدء أخرى. لكن الكاتب مأمورٌ ألّا يفتح ملفّاً قائماً — والبطاقة
+    الناقصة قائمة. فكان يُعطى `beleaguer` فيجدها موجودةً فيتركها، فتسقط
+    الجولة، فيُعاد إعطاؤه إيّاها في الجولة التالية… إلى الأبد. وخلفها ثلاث
+    عشرة كلمةً بلا بطاقةٍ إطلاقاً لا تصل أبداً.
+
+    فطابور الكاتب ما لا بطاقة له، وطابور المراجع ما نقص — وهو وحده
+    المأذون بتعديل القائم، ومعه حارسُ نطاقٍ يمنعه من تجاوز إذنه.
+    """
+    if a.new_only:
+        todo = [w for w in all_words
+                if w.lower() not in done and w.lower() not in partial]
+    else:
+        todo = ([w for w in all_words if w.lower() in partial]
+                + [w for w in all_words
+                   if w.lower() not in done and w.lower() not in partial])
 
     print(f"# المكتبة {len(all_words)} · مكتملة {len(done)} "
           f"· ناقصة {len(partial)} · لم تُكتب {len(todo)-len(partial)}")

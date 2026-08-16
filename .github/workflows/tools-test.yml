@@ -97,26 +97,48 @@ jobs:
           python3 - <<'PY'
           import sys
           sys.path.insert(0, "tools/enrich")
-          from audit_cards import IPA_IN_ARABIC, ARABIC
+          from audit_cards import ipa_damage
 
           # نصٌّ أتلفته معالجةٌ آلية — بقي في `abide` شهوراً
           bad = [
               "əˈɪ— النبر على",
-              "يختلف عن /ˈθɜː",
+              "يختلف عن /ˈθɜː",          # شرطةٌ مفتوحة لم تُغلق
+              "əˈəʊ= مسكن — ماضٍ قديم",
           ]
           for t in bad:
-              assert ARABIC.search(t) and IPA_IN_ARABIC.search(t), t
+              assert ipa_damage(t), f"لم يُكتشف: {t}"
 
-          # وسطورٌ عربيةٌ سليمة لا تُمَسّ
+          # وسطورٌ سليمة — والنسخة الصوتية بين شَرطتين شرحٌ مقصود
           ok = [
               "مقطعان، والنبر على الثاني",
-              "رافد · نهر يصبّ في نهرٍ أكبر",
+              "النبر على المقطع الثاني، وتُنطق /iː/ طويلة",
+              "النطق ينتهي بـ /-reɪt/",
               "الفرق بريطانيّ/أمريكيّ جوهريّ",
           ]
           for t in ok:
-              assert not IPA_IN_ARABIC.search(t), t
-          print("رموز النطق: تُكتشف في المتلف، ولا تُنذر على السليم")
+              assert not ipa_damage(t), f"إنذارٌ كاذب: {t}"
+          print("رموز النطق: تُكتشف في المتلف، ولا تُنذر على الصحيح")
           PY
+
+      - name: طابور الكاتب لا يحمل بطاقةً قائمة
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/nq/curated
+          # بطاقةٌ ناقصة (لا تجتاز المدقّق) وكلمتان بلا بطاقة إطلاقاً
+          cat > /tmp/nq/curated/a.json <<'JSON'
+          {"beleaguer": {"ipa": "/x/", "arabicPron": "ب", "pos": ["verb"]}}
+          JSON
+          cat > /tmp/nq/words.json <<'JSON'
+          {"words": [{"word": "beleaguer"}, {"word": "stumble"}, {"word": "transcend"}]}
+          JSON
+          all=$(python3 tools/enrich/todo.py --words /tmp/nq/words.json \
+                  --curated /tmp/nq/curated --limit 1 | grep -v '^#')
+          new=$(python3 tools/enrich/todo.py --words /tmp/nq/words.json \
+                  --curated /tmp/nq/curated --limit 1 --new-only | grep -v '^#')
+          echo "الطابور العامّ: $all · طابور الكاتب: $new"
+          [ "$all" = "beleaguer" ] || { echo "::error::الترتيب العامّ تغيّر: $all"; exit 1; }
+          [ "$new" = "stumble" ]   || { echo "::error::الكاتب أُعطي بطاقةً قائمة: $new"; exit 1; }
+          echo "الكاتب لا يُعطى إلا ما لا بطاقة له"
 
       - name: دورة المراجعة تختار الأقدم عهداً
         run: |
