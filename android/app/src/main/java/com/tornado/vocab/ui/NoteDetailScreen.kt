@@ -2,6 +2,7 @@ package com.tornado.vocab.ui
 
 import android.app.Application
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -106,10 +107,19 @@ fun NoteDetailScreen(
         topBar = {
             TopAppBar(
                 title = {
+                    /*
+                     * الاسم نفسه يفتح تحريره.
+                     *
+                     * كان التحرير خلف زرّ ✏️ وحده، والاسمُ نصّاً لا يستجيب.
+                     * فضغطه صاحبُ الملاحظة مراراً ولم يحدث شيء، فاستنتج أن
+                     * التسمية غير ممكنة أصلاً — وهي ممكنة منذ البداية.
+                     * والوظيفة التي لا تُكتشف كالوظيفة الغائبة.
+                     */
                     Text(
                         note?.title ?: "Note",
                         maxLines = 1,
-                        style = MaterialTheme.typography.titleMedium
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier.clickable { if (!editing) editing = true }
                     )
                 },
                 navigationIcon = {

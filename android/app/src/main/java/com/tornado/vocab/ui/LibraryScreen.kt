@@ -4,6 +4,7 @@ import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -75,6 +76,7 @@ fun LibraryScreen(
     val stats by vm.stats.collectAsStateWithLifecycle()
     val cardQueue by vm.cardQueue.collectAsStateWithLifecycle()
     val levels by vm.levels.collectAsStateWithLifecycle()
+    val selected by vm.selected.collectAsStateWithLifecycle()
     val expanded by vm.expanded.collectAsStateWithLifecycle()
     val expandedWords by vm.expandedWords.collectAsStateWithLifecycle()
     var pendingDelete by remember { mutableStateOf<WordRow?>(null) }
@@ -169,6 +171,34 @@ fun LibraryScreen(
         // ===== طابور البطاقات =====
         CardQueueRow(cardQueue)
 
+        // ===== شريط الاختيار — لا يظهر إلا حين يُطلب =====
+        if (selected.isNotEmpty()) {
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.10f))
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    "${selected.size} selected",
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.weight(1f)
+                )
+                TextButton(onClick = { vm.selectAllVisible() }) { Text("All", fontSize = 13.sp) }
+                TextButton(onClick = { vm.clearSelection() }) { Text("Clear", fontSize = 13.sp) }
+                TextButton(onClick = { vm.playSelected() }) {
+                    Text(
+                        "▶ Play",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
+        }
+
         if (rows.isEmpty()) {
             EmptyState(
                 icon = if (filters.query.isBlank()) "📚" else "🔍",
@@ -189,7 +219,10 @@ fun LibraryScreen(
                         onOpen = { vm.toggleExpanded(row.id) },
                         onFavorite = { vm.toggleFavorite(row) },
                         onPlay = { vm.speakCard(row.id) },
-                        onDelete = { pendingDelete = row }
+                        onDelete = { pendingDelete = row },
+                        selecting = selected.isNotEmpty(),
+                        selected = row.id in selected,
+                        onToggleSelect = { vm.toggleSelect(row.id) }
                     )
                     // البطاقة تنسدل في مكانها — والبطاقات الأخرى المفتوحة تبقى مفتوحة
                     androidx.compose.animation.AnimatedVisibility(visible = isOpen) {
@@ -436,6 +469,7 @@ private fun InlinePairs(title: String, items: List<com.tornado.vocab.data.LangPa
     }
 }
 
+@OptIn(androidx.compose.foundation.ExperimentalFoundationApi::class)
 @Composable
 private fun WordListRow(
     row: WordRow,
@@ -444,7 +478,10 @@ private fun WordListRow(
     onOpen: () -> Unit,
     onFavorite: () -> Unit,
     onPlay: () -> Unit,
-    onDelete: () -> Unit
+    onDelete: () -> Unit,
+    selecting: Boolean = false,
+    selected: Boolean = false,
+    onToggleSelect: () -> Unit = {}
 ) {
     var menu by remember { mutableStateOf(false) }
     val statusColor = StatusColors.of(row.status)
@@ -452,7 +489,20 @@ private fun WordListRow(
     Row(
         Modifier
             .fillMaxWidth()
-            .clickable(onClick = onOpen)
+            /*
+             * ضغطةٌ مطوّلة تبدأ الاختيار، ثم الضغطة العادية تُضيف وتحذف.
+             *
+             * وطلبُ صاحب المكتبة صريح: «خلّيني أقدر أشغّل كلمات معيّنة».
+             * وكان التشغيل كلَّ شيءٍ أو كلمةً واحدة، ولا شيء بينهما.
+             */
+            .combinedClickable(
+                onClick = { if (selecting) onToggleSelect() else onOpen() },
+                onLongClick = onToggleSelect
+            )
+            .background(
+                if (selected) MaterialTheme.colorScheme.primary.copy(alpha = 0.14f)
+                else androidx.compose.ui.graphics.Color.Transparent
+            )
             .padding(start = 0.dp, end = 8.dp, top = 10.dp, bottom = 10.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {

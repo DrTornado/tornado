@@ -212,12 +212,59 @@ class LibraryViewModel(app: Application) : AndroidViewModel(app) {
      * يشغّل الكلمات المعروضة حالياً — ما يراه المستخدم هو ما يسمعه.
      * الصفوف المعروضة تُمرَّر كما هي: لا حاجة لقراءة بطاقات كاملة هنا إطلاقاً.
      */
+    /*
+     * ===== اختيارُ كلماتٍ بعينها =====
+     *
+     * كان التشغيل كلَّ القائمة أو كلمةً واحدة، ولا شيء بينهما. وصاحب
+     * المكتبة يريد أن يجمع خمساً تعثّر فيها ويُسمعها وحدها.
+     *
+     * والاختيار يبدأ بضغطةٍ مطوّلة فلا يعترض طريق من لا يريده: من يفتح
+     * الشاشة ليقرأ لا يرى شيئاً جديداً حتى يطلبه.
+     */
+    private val _selected = MutableStateFlow<Set<Long>>(emptySet())
+    val selected: StateFlow<Set<Long>> = _selected.asStateFlow()
+
+    fun toggleSelect(id: Long) {
+        _selected.value = _selected.value.let { if (id in it) it - id else it + id }
+    }
+
+    fun clearSelection() { _selected.value = emptySet() }
+
+    fun selectAllVisible() { _selected.value = rows.value.map { it.id }.toSet() }
+
+    /** يشغّل المختارة وحدها، بترتيب ظهورها على الشاشة */
+    fun playSelected() {
+        val ids = _selected.value
+        if (ids.isEmpty()) return
+        val chosen = rows.value.filter { it.id in ids }
+        if (chosen.isEmpty()) return
+        viewModelScope.launch {
+            val gloss = runCatching { container.enrichSync.curatedGlosses() }
+                .getOrDefault(emptyMap())
+            PlaybackBus.submit(getApplication()) {
+                it.setQueue(
+                    chosen.map { r -> r.toPlayItem(gloss[r.word.trim().lowercase()].orEmpty()) },
+                    0, PlayScope.LIST, autoPlay = true
+                )
+            }
+            _selected.value = emptySet()
+        }
+    }
+
     fun playVisible(startId: Long?) {
         val visible = rows.value
         if (visible.isEmpty()) return
         val start = startId?.let { id -> visible.indexOfFirst { it.id == id } }?.coerceAtLeast(0) ?: 0
-        PlaybackBus.submit(getApplication()) {
-            it.setQueue(visible.map { r -> r.toPlayItem() }, start, PlayScope.LIST, autoPlay = true)
+        // المعنى من البطاقة المكتوبة لا من `primaryAr` التي أفرغها حذف القاموس
+        viewModelScope.launch {
+            val gloss = runCatching { container.enrichSync.curatedGlosses() }
+                .getOrDefault(emptyMap())
+            PlaybackBus.submit(getApplication()) {
+                it.setQueue(
+                    visible.map { r -> r.toPlayItem(gloss[r.word.trim().lowercase()].orEmpty()) },
+                    start, PlayScope.LIST, autoPlay = true
+                )
+            }
         }
     }
 

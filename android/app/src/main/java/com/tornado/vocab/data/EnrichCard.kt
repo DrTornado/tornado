@@ -49,6 +49,9 @@ data class EnrichCard(
 /** مستوى كلمةٍ مكتوبة — مشروعٌ صغير لا بطاقةٌ كاملة */
 data class CardLevel(val word: String, val level: String, val levelExact: Boolean)
 
+/** كلمةٌ ونصُّ بطاقتها — لاستخراج المعنى بلا تحميل الجدول كلِّه ككيانات */
+data class CardJson(val word: String, val json: String)
+
 /** بصمة شريحة — بها نعرف ما تغيّر فلا ننزّل ما لم يتغيّر */
 @Entity(tableName = "enrich_shards")
 data class EnrichShard(
@@ -85,6 +88,10 @@ interface EnrichDao {
     /** مستويات البطاقات المكتوبة — خريطةٌ صغيرة تخدم شارة صفّ القائمة */
     @Query("SELECT word, level, levelExact FROM enrich_cards WHERE curated = 1 AND level != ''")
     fun curatedLevels(): Flow<List<CardLevel>>
+
+    /** نصُّ البطاقات المكتوبة — منه يُستخرج المعنى الأوّل لسطر المشغّل */
+    @Query("SELECT word, json FROM enrich_cards WHERE curated = 1")
+    suspend fun curatedCardsJson(): List<CardJson>
 }
 
 /** زوجٌ بعنوان — للأفعال المركّبة والتعابير: العبارة وشرحها */

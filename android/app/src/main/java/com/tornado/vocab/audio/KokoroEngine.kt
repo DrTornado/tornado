@@ -121,6 +121,8 @@ class KokoroEngine(private val context: Context) {
      * كل بطاقة تُبنى في تلك اللحظة — والبناء يجري بالخلفية دائماً.
      */
     suspend fun synthesize(text: String, target: File, voiceSid: Int? = null): Boolean = genLock.withLock {
+        // نصٌّ لا ينطقه المحرّك يُسقط التطبيق كلَّه، لا يفشل وحده
+        if (!speakable(text)) return@withLock false
         withContext(Dispatchers.Default) {
             val engine = ensureLoaded() ?: return@withContext false
             runCatching {
@@ -374,5 +376,25 @@ class KokoroEngine(private val context: Context) {
 
         fun voiceName(sid: Int): String =
             VOICES.firstOrNull { it.sid == sid }?.let { "${it.name} · ${it.accent}" } ?: "Voice $sid"
+
+        /**
+         * أينطق كوكورو هذا النصّ؟
+         *
+         * نصٌّ بلا حرفٍ لاتينيّ لا يُخرج منه espeak رمزاً واحداً، فيقرأ
+         * onnxruntime مؤشّراً فارغاً ويسقط بإشارة SIGSEGV. وسقوطُه ليس
+         * فشلَ نطقٍ واحد — بل موتُ العملية كلّها: يتوقّف المشغّل في منتصف
+         * القائمة، وتُظهر سامسونج إشعار «التطبيق يتوقّف مراراً».
+         *
+         * وقع اثنتا عشرة مرّة على جهاز صاحب المكتبة، كلُّها في هذا الموضع
+         * بعينه. والسلسلة كلها بلا فحصٍ واحد: النصّ يمرّ من `VoiceChain`
+         * إلى المحرّك كما هو.
+         *
+         * فالحدُّ هنا لأنه نقطة الاختناق الوحيدة — كلُّ نداءٍ يمرّ بها.
+         */
+        fun speakable(text: String?): Boolean {
+            val t = text?.trim().orEmpty()
+            if (t.isEmpty()) return false
+            return t.any { it in 'a'..'z' || it in 'A'..'Z' }
+        }
     }
 }

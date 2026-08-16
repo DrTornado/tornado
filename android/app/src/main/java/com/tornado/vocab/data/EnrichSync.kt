@@ -106,6 +106,7 @@ class EnrichSync(
                     }
                     if (rows.isNotEmpty()) {
                         dao.putCards(rows)
+                        glossCache = null   // بطاقاتٌ جديدة — تسقط خريطة المعاني
                         // البصمة بعد البطاقات: لو انقطع بينهما أُعيد التنزيل لا فُقد
                         dao.putShard(EnrichShard(key, want))
                         fresh++
@@ -131,6 +132,29 @@ class EnrichSync(
 
     /** مستويات البطاقات المكتوبة — لشارة صفّ القائمة */
     fun curatedLevels(): Flow<List<CardLevel>> = dao.curatedLevels()
+
+    /**
+     * المعنى الأوّل لكل بطاقةٍ مكتوبة — سطرُ المشغّل تحت الكلمة.
+     *
+     * كان المشغّل يقرأ المعنى من `primaryAr` في صفّ الكلمة، وهي خانةٌ
+     * أفرغها حذفُ القاموس الآليّ. فبقي المشغّل يعرض الكلمة عاريةً بلا معنى،
+     * وزرُّ العين يتبدّل شكله بلا أثر لأنه لا يجد نصّاً يُخفيه — والمستخدم
+     * يظنّ الزرَّ معطوباً وهو سليم، والمعنى هو الغائب.
+     *
+     * والخريطة تُبنى مرّةً وتُحفظ: مئتا بطاقةٍ تُفكّ في جزءٍ من ثانية، ولا
+     * داعي لتكرارها مع كل جلسة تشغيل. وتسقط الذاكرة عند وصول بطاقاتٍ جديدة.
+     */
+    @Volatile private var glossCache: Map<String, String>? = null
+
+    suspend fun curatedGlosses(): Map<String, String> = withContext(Dispatchers.IO) {
+        glossCache ?: dao.curatedCardsJson()
+            .associate { row ->
+                row.word to (Enrichment.parse(row.json)?.meanings
+                    ?.firstOrNull()?.ar.orEmpty())
+            }
+            .filterValues { it.isNotBlank() }
+            .also { glossCache = it }
+    }
 
     private companion object {
         const val DIR = "enrich"

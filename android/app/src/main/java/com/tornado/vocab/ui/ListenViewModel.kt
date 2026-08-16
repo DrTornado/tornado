@@ -101,8 +101,19 @@ class ListenViewModel(app: Application) : AndroidViewModel(app) {
     /** يشغّل أي مجموعة كلمات جاهزة — الطريق الموحّد لكل القوائم في التطبيق */
     fun playWords(words: List<WordRow>, startIndex: Int = 0) {
         if (words.isEmpty()) return
-        PlaybackBus.submit(getApplication()) {
-            it.setQueue(words.map { r -> r.toPlayItem() }, startIndex.coerceIn(0, words.lastIndex), _scope.value, autoPlay = true)
+        // المعنى من البطاقة المكتوبة: `primaryAr` أفرغها حذفُ القاموس الآليّ
+        viewModelScope.launch {
+            val gloss = runCatching {
+                getApplication<Application>().tornado.enrichSync.curatedGlosses()
+            }.getOrDefault(emptyMap())
+            PlaybackBus.submit(getApplication()) {
+                it.setQueue(
+                    words.map { r -> r.toPlayItem(gloss[r.word.trim().lowercase()].orEmpty()) },
+                    startIndex.coerceIn(0, words.lastIndex),
+                    _scope.value,
+                    autoPlay = true
+                )
+            }
         }
     }
 

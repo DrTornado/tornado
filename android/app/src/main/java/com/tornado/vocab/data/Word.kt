@@ -144,11 +144,18 @@ data class PlayItem(
     val favorite: Boolean = false
 )
 
-/** يحوّل صفّ كلمة إلى عنصر تشغيل — الجسر بين طبقة البيانات والمشغّل */
-fun WordRow.toPlayItem(): PlayItem = PlayItem(
+/**
+ * يحوّل صفّ كلمة إلى عنصر تشغيل — الجسر بين طبقة البيانات والمشغّل.
+ *
+ * @param gloss معنى البطاقة المكتوبة إن وُجد. و`primaryAr` خانةٌ أفرغها
+ *   حذفُ القاموس الآليّ، فبقي المشغّل يعرض الكلمة عاريةً بلا معنى — وزرُّ
+ *   العين يتبدّل بلا أثر لأنه لا يجد نصّاً يُخفيه. فالبطاقة أوّلاً، والخام
+ *   بعدها لمن لا بطاقة له.
+ */
+fun WordRow.toPlayItem(gloss: String = ""): PlayItem = PlayItem(
     id = id,
     title = word,
-    subtitle = primaryAr.ifBlank { primaryEn },
+    subtitle = gloss.ifBlank { primaryAr.ifBlank { primaryEn } },
     kind = RowKind.WORD,
     status = status.name,
     favorite = favorite
