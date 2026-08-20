@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-20T16:07:21.144Z",
+ "exportedAt": "2026-08-20T16:07:35.019Z",
  "words": [
   {
    "id": 1785705257083,
@@ -183,7 +183,8 @@
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/d/dis/disco/discourage__gb_3.mp3",
    "engineVersion": 2,
    "ipaUK": "/dɪsˈkʌɹɪd͡ʒ/",
-   "upgradeTries": 0
+   "upgradeTries": 0,
+   "freqLabel": ""
   },
   {
    "id": 1784999975523,
@@ -383,7 +384,8 @@
    "engineVersion": 2,
    "ipaUS": "/ˈɹɪp(ə)l/",
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/ripple-us.mp3",
-   "upgradeTries": 0
+   "upgradeTries": 0,
+   "freqLabel": ""
   },
   {
    "id": 1784991696190,
@@ -675,7 +677,8 @@
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/i/inf/influ/influential__gb_1.mp3",
    "engineVersion": 2,
    "ipaUS": "/ˌɪnfluˈɛnʃəl/",
-   "ipaUK": "/ɪnflʊˈɛnʃəl/"
+   "ipaUK": "/ɪnflʊˈɛnʃəl/",
+   "freqLabel": ""
   },
   {
    "id": 1784899135706,
@@ -756,7 +759,8 @@
    "interval": 0,
    "due": 0,
    "engineVersion": 3,
-   "upgradeTries": 0
+   "upgradeTries": 0,
+   "freqLabel": ""
   },
   {
    "id": 1784898512946,
@@ -875,7 +879,8 @@
    "due": 0,
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/u/und/under/underlying__us_1.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/u/und/under/underlying__gb_3.mp3",
-   "engineVersion": 3
+   "engineVersion": 3,
+   "freqLabel": ""
   },
   {
    "id": 1784737860691,
@@ -1222,7 +1227,8 @@
    "audioUK": "-uk",
    "engineVersion": 3,
    "ipaUS": "/dɪˈlɪb.ɚ.ət/",
-   "ipaUK": "/dɪˈlɪb.(ə.)ɹət/"
+   "ipaUK": "/dɪˈlɪb.(ə.)ɹət/",
+   "freqLabel": ""
   },
   {
    "id": 1784662047598,
@@ -1330,7 +1336,8 @@
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cre/creat/creature__us_2.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/cre/creat/creature__gb_1.mp3",
    "engineVersion": 2,
-   "ipaUK": "/ˈkɹiː.tʃə/"
+   "ipaUK": "/ˈkɹiː.tʃə/",
+   "freqLabel": ""
   },
   {
    "id": 1784646739633,
@@ -1596,7 +1603,8 @@
    "due": 0,
    "engineVersion": 3,
    "ipaUS": "/ˌkæləˈɹɪmɪtɚ/",
-   "audioUS": "-us"
+   "audioUS": "-us",
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -1749,7 +1757,8 @@
    "interval": 0,
    "due": 0,
    "engineVersion": 3,
-   "ipaUK": "/ˈpɒvəti/"
+   "ipaUK": "/ˈpɒvəti/",
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -2563,7 +2572,8 @@
    "due": 0,
    "engineVersion": 3,
    "ipaUS": "/pɹɪˈlɪmɪnɛɹi/",
-   "ipaUK": "/pɹɪˈlɪmɪn(ə)ɹi/"
+   "ipaUK": "/pɹɪˈlɪmɪn(ə)ɹi/",
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -3109,7 +3119,8 @@
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/t/thr/threa/threaten__gb_1.mp3",
    "interval": 0,
    "due": 0,
-   "engineVersion": 3
+   "engineVersion": 3,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -3405,7 +3416,8 @@
    "interval": 0,
    "due": 0,
    "engineVersion": 3,
-   "ipaUK": "/ˌəʊ.vəˈkʌm/"
+   "ipaUK": "/ˌəʊ.vəˈkʌm/",
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -3546,7 +3558,8 @@
    "due": 0,
    "ipaUS": "/ˈɡɑ.ɡəlz/",
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/goggles-us.mp3",
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -3691,7 +3704,8 @@
    "due": 0,
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cul/culti/cultivate__us_1.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/cul/culti/cultivate__gb_1.mp3",
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -3724,7 +3738,8 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -3943,7 +3958,8 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -4135,7 +4151,8 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -4209,7 +4226,8 @@
    "interval": 0,
    "due": 0,
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/flume-us.mp3",
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -4357,7 +4375,8 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -4610,7 +4629,8 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -4711,7 +4731,8 @@
    "due": 0,
    "ipaUK": "/ɪˈlɛktəɹət/",
    "audioUK": "https://api.dictionaryapi.dev/media/pronunciations/en/electorate-uk.mp3",
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -4790,7 +4811,8 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -5043,7 +5065,8 @@
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/l/lau/laugh/laughter__gb_1.mp3",
    "engineVersion": 2,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -5401,7 +5424,8 @@
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/a/aft/after/afterwards__gb_3.mp3",
    "engineVersion": 2,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -5558,7 +5582,8 @@
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/i/ind/induc/induce__gb_1.mp3",
    "engineVersion": 2,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -5731,7 +5756,8 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -5835,7 +5861,8 @@
    "due": 0,
    "ipaUS": "/ˌɪŋkəmˈpætɪbəl/",
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/incompatible-us.mp3",
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -5896,7 +5923,8 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -6083,7 +6111,8 @@
    "due": 0,
    "ipaUS": "/kənˈdɛns/",
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/condense-us.mp3",
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -6228,7 +6257,8 @@
    "ipaUS": "/pɹɑˈspɛɹ.ɪ.ti/",
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pro/prosp/prosperity__us_1.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/p/pro/prosp/prosperity__gb_1.mp3",
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -6318,7 +6348,8 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -6389,7 +6420,8 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -6484,7 +6516,8 @@
    "due": 0,
    "ipaUS": "/ˈdeɪnti/",
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/dainty-us.mp3",
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -6694,7 +6727,8 @@
    "ipaUS": "/ˈdɑktɹɪnz/",
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/d/doc/doctr/doctrine__us_1.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/d/doc/doctr/doctrine__gb_2.mp3",
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -6764,7 +6798,8 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -6848,7 +6883,8 @@
    "due": 0,
    "ipaUK": "/ɹiːmz/",
    "audioUK": "https://api.dictionaryapi.dev/media/pronunciations/en/reams-uk.mp3",
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -7030,7 +7066,8 @@
    "ipaUS": "/ɪnˈfæ.lə.bəl/",
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/infallible-us.mp3",
    "audioGen": "https://api.dictionaryapi.dev/media/pronunciations/en/infallible-au.mp3",
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -7242,7 +7279,8 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -7478,7 +7516,8 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -7548,7 +7587,8 @@
    "ipaUS": "/ˈfjɝ.i.əs/",
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/f/fur/furio/furious__us_1.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/f/fur/furio/furious__gb_1.mp3",
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -7620,7 +7660,8 @@
    "audioGen": "https://api.dictionaryapi.dev/media/pronunciations/en/articulation-au.mp3",
    "engineVersion": 2,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -8016,7 +8057,8 @@
    "differences": [],
    "engineVersion": 2,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -8083,7 +8125,8 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -8211,7 +8254,8 @@
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/showmanship-us.mp3",
    "engineVersion": 2,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -8413,7 +8457,8 @@
    "differences": [],
    "engineVersion": 2,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -8503,7 +8548,8 @@
    "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/conflate-us.mp3",
    "engineVersion": 2,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "freqLabel": ""
   },
   {
    "right": 1,
@@ -8753,7 +8799,8 @@
    "differences": [],
    "engineVersion": 2,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -8902,7 +8949,8 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -8948,7 +8996,8 @@
    "differences": [],
    "interval": 0,
    "due": 0,
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -9065,7 +9114,8 @@
    "due": 0,
    "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/ski/skiin/skiing__us_1.mp3",
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/s/ski/skiin/skiing__gb_3.mp3",
-   "engineVersion": 2
+   "engineVersion": 2,
+   "freqLabel": ""
   },
   {
    "right": 0,
@@ -9150,7 +9200,8 @@
    "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/com/compu/compulsory__gb_1.mp3",
    "engineVersion": 2,
    "interval": 0,
-   "due": 0
+   "due": 0,
+   "freqLabel": ""
   },
   {
    "right": 0,
