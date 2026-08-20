@@ -1,7 +1,7 @@
 {
  "app": "tornado",
  "version": 1,
- "exportedAt": "2026-08-20T16:07:13.680Z",
+ "exportedAt": "2026-08-20T16:07:21.144Z",
  "words": [
   {
    "id": 1785705257083,
@@ -297,33 +297,23 @@
      "ar": "صوت مشابه لصوت الماء المتموج."
     },
     {
-     "pos": "noun",
-     "en": "A style of ice cream in which flavors have been coarsely blended together.",
-     "ar": "نمط من الآيس كريم تمتزج فيه النكهات بشكل خشن معًا."
+     "pos": "verb",
+     "en": "To move like the undulating surface of a body of water; to undulate.",
+     "ar": "للتحرك مثل السطح المتموج لجسم مائي ؛ للتموج."
     },
     {
      "pos": "verb",
-     "en": "(intransitive) To propagate like a moving wave.",
-     "ar": "(غير متعدية) للانتشار مثل موجة متحركة."
-    },
-    {
-     "pos": "verb",
-     "en": "(intransitive) To make a sound as of water running gently over a rough bottom, or the breaking of ripples on the shore.",
-     "ar": "(غير متعدية) لإصدار صوت مثل الماء الجاري برفق فوق قاع خشن، أو كسر التموجات على الشاطئ."
-    },
-    {
-     "pos": "verb",
-     "en": "(transitive) To shape into a series of ripples.",
-     "ar": ""
-    },
-    {
-     "pos": "verb",
-     "en": "(transitive) To scratch, tear, or break slightly; graze",
-     "ar": ""
+     "en": "To propagate like a moving wave.",
+     "ar": "للانتشار مثل موجة متحركة."
     },
     {
      "pos": "noun",
-     "en": "(textiles) An implement, with teeth like those of a comb, for removing the seeds and seed vessels from flax, broom corn, etc.",
+     "en": "One of a series of corrugations in flat surface.",
+     "ar": "واحدة من سلسلة من التموجات في سطح مستو."
+    },
+    {
+     "pos": "verb",
+     "en": "To make a sound as of water running gently over a rough bottom, or the breaking of ripples on the shore.",
      "ar": ""
     }
    ],
@@ -382,10 +372,6 @@
     {
      "en": "The ebbing tide had left ripples in the sand.",
      "ar": "كان المد والجزر قد ترك تموجات في الرمال."
-    },
-    {
-     "en": "I enjoy fudge ripple ice cream, but I especially like to dig through the carton to get at the ripple part and eat only that.",
-     "ar": "أنا أستمتع بالآيس كريم المموج، لكنني أحب بشكل خاص الحفر في الكرتون للوصول إلى جزء المموج وتناول ذلك فقط."
     }
    ],
    "differences": [],
@@ -394,9 +380,9 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "engineVersion": 3,
+   "engineVersion": 2,
    "ipaUS": "/ˈɹɪp(ə)l/",
-   "audioUS": "-us",
+   "audioUS": "https://api.dictionaryapi.dev/media/pronunciations/en/ripple-us.mp3",
    "upgradeTries": 0
   },
   {
@@ -604,7 +590,7 @@
   {
    "id": 1784899215964,
    "word": "influential",
-   "ipa": "/ˌənflʉˈenʃəl/",
+   "ipa": "/ɪnfluˈɛnʃəl/",
    "arabicPron": "ينفلوينشل",
    "oxford": "5000",
    "cefr": "C1",
@@ -614,14 +600,14 @@
    ],
    "meanings": [
     {
-     "pos": "adjective",
-     "en": "Having or exerting influence.",
-     "ar": "وجود أو ممارسة النفوذ."
-    },
-    {
      "pos": "noun",
      "en": "A person who has influence",
      "ar": "الشخص الذي له تأثير"
+    },
+    {
+     "pos": "adjective",
+     "en": "Having or exerting influence.",
+     "ar": "وجود أو ممارسة النفوذ."
     }
    ],
    "inflections": [
@@ -671,12 +657,12 @@
    ],
    "examples": [
     {
-     "en": "John Lennon was a very influential person in music, as well as in politics, fashion and general culture.",
-     "ar": "كان جون لينون شخصًا مؤثرًا جدًا في الموسيقى، وكذلك في السياسة والأزياء والثقافة العامة."
-    },
-    {
      "en": "Jane was very influential in getting the motion passed.",
      "ar": "كان لجين تأثير كبير في تمرير الاقتراح."
+    },
+    {
+     "en": "John Lennon was a very influential person in music, as well as in politics, fashion and general culture.",
+     "ar": "كان جون لينون شخصًا مؤثرًا جدًا في الموسيقى، وكذلك في السياسة والأزياء والثقافة العامة."
     }
    ],
    "differences": [],
@@ -685,9 +671,9 @@
    "last": null,
    "interval": 0,
    "due": 0,
-   "audioUS": "-us",
-   "audioUK": "-uk",
-   "engineVersion": 3,
+   "audioUS": "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/i/inf/influ/influential__us_1.mp3",
+   "audioUK": "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/i/inf/influ/influential__gb_1.mp3",
+   "engineVersion": 2,
    "ipaUS": "/ˌɪnfluˈɛnʃəl/",
    "ipaUK": "/ɪnflʊˈɛnʃəl/"
   },
